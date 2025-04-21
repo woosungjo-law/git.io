@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>트립어드바이저 디커플링 시각화</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, #00a2cc 0%, #007299 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 2.2em;
+    }
+    
+    .subtitle {
+      font-size: 1.2em;
+      font-weight: 300;
+      margin-top: 10px;
+    }
+    
+    .section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    h2 {
+      color: #00a2cc;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    h2 .emoji {
+      margin-right: 10px;
+      font-size: 1.5em;
+    }
+    
+    .decoupling-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    
+    .traditional, .decoupled {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .traditional {
+      background-color: #ffeeee;
+      border-radius: 10px;
+      margin-right: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .decoupled {
+      background-color: #eeffee;
+      border-radius: 10px;
+    }
+    
+    .box {
+      border: 2px solid #ccc;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      background-color: white;
+    }
+    
+    .box.coupled {
+      border-color: #ff9999;
+    }
+    
+    .box.info {
+      border-color: #99ccff;
+    }
+    
+    .box.booking {
+      border-color: #ffcc99;
+    }
+    
+    .arrow {
+      font-size: 2em;
+      margin: 10px 0;
+      color: #666;
+    }
+    
+    .conclusion {
+      font-weight: bold;
+      padding: 15px;
+      background-color: #f0f7ff;
+      border-left: 5px solid #00a2cc;
+      margin-top: 20px;
+    }
+    
+    .emoji-big {
+      font-size: 2.5em;
+      margin: 10px 0;
+    }
+    
+    .value-chain {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    
+    .chain-item {
+      text-align: center;
+      padding: 10px;
+      min-width: 100px;
+    }
+    
+    .chain-emoji {
+      font-size: 2em;
+      margin-bottom: 5px;
+    }
+    
+    .chain-connect {
+      height: 5px;
+      background-color: #ddd;
+      flex-grow: 1;
+      margin-top: 25px;
+    }
+    
+    .highlight {
+      background-color: #fffacd;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🌟 트립어드바이저의 디커플링 전략 🌟</h1>
+    <div class="subtitle">고객 가치 사슬의 혁신적 재구성</div>
+  </div>
+  
+  <div class="section">
+    <h2><span class="emoji">🔍</span> 디커플링이란?</h2>
+    <p>
+      <b>디커플링(Decoupling)</b>은 고객 가치 사슬을 면밀히 분석하여, 
+      <span class="highlight">가치를 더하는 활동</span>과 
+      <span class="highlight">가치를 깎아내리는 활동</span>을 분리하는 혁신 전략입니다.
+      이를 통해 기업은 비용 효율성을 높이고 고객 경험을 극대화하며 새로운 시장 기회를 포착할 수 있습니다.
+    </p>
+    
+    <div class="value-chain">
+      <div class="chain-item">
+        <div class="chain-emoji">🔎</div>
+        <div>정보 탐색</div>
+      </div>
+      <div class="chain-connect"></div>
+      <div class="chain-item">
+        <div class="chain-emoji">💬</div>
+        <div>상담</div>
+      </div>
+      <div class="chain-connect"></div>
+      <div class="chain-item">
+        <div class="chain-emoji">📝</div>
+        <div>예약</div>
+      </div>
+      <div class="chain-connect"></div>
+      <div class="chain-item">
+        <div class="chain-emoji">💰</div>
+        <div>결제</div>
+      </div>
+      <div class="chain-connect"></div>
+      <div class="chain-item">
+        <div class="chain-emoji">✈️</div>
+        <div>여행 경험</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2><span class="emoji">🌍</span> 여행 산업의 문제점</h2>
+    <p>
+      여행 산업은 전통적으로 <b>정보 비대칭성</b>이 극심했습니다. 
+      여행자들은 호텔이나 관광지에 대한 객관적 정보를 얻기 어려웠고, 
+      여행사의 일방적 추천에 의존해야 했습니다.
+    </p>
+    <div class="emoji-big" style="text-align: center;">
+      😕 → 🏨❓ → 🤷‍♀️
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2><span class="emoji">⛓️</span> 기존 비즈니스 모델의 한계</h2>
+    <p>
+      기존 여행 비즈니스 모델에서는 정보 제공, 상담, 예약, 결제가 
+      하나의 패키지로 묶여 있었습니다. 이는 소비자 의사결정 여정에 
+      상당한 비효율과 불확실성을 초래했습니다.
+    </p>
+    
+    <div class="decoupling-visual">
+      <div class="traditional">
+        <h3>🔗 전통적 모델</h3>
+        <div class="box coupled">
+          정보 탐색 + 상담 + 예약 + 결제
+          <div class="emoji-big">
+            🔍 + 💬 + 📝 + 💰
+          </div>
+        </div>
+        <div class="arrow">⬇️</div>
+        <div>
+          <p>제한된 정보 → 불확실한 결정</p>
+          <div class="emoji-big">
+            📊 → 😟
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2><span class="emoji">✂️</span> 트립어드바이저의 디커플링 전략</h2>
+    <p>
+      트립어드바이저는 <b>'여행 정보 탐색'</b>과 <b>'예약/결제'</b>라는 
+      두 가지 활동을 과감히 분리했습니다. 양질의 사용자 생성 콘텐츠(UGC)에 
+      집중 투자하며 전 세계 여행자의 솔직한 리뷰와 사진을 한곳에 모았습니다.
+    </p>
+    
+    <div class="decoupling-visual">
+      <div class="decoupled">
+        <h3>✂️ 디커플링 모델</h3>
+        <div class="box info">
+          정보 탐색 전문화
+          <div class="emoji-big">
+            🔍 + 📸 + 📊 + ⭐
+          </div>
+          <p>사용자 리뷰 중심</p>
+        </div>
+        <div class="arrow">➕</div>
+        <div class="box booking">
+          예약/결제 연결
+          <div class="emoji-big">
+            📝 + 💰 → 🔄
+          </div>
+          <p>파트너십 활용</p>
+        </div>
+        <div class="arrow">⬇️</div>
+        <div>
+          <p>투명한 정보 → 확신 있는 결정</p>
+          <div class="emoji-big">
+            📈 → 😀
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2><span class="emoji">🚀</span> 디커플링의 효과</h2>
+    <p>
+      이 전략은 트립어드바이저에게 독보적 경쟁력을 가져다 주었습니다. 
+      여행자들은 광고가 아닌 진짜 경험에 기반한 정보를 얻게 되었고, 
+      플랫폼의 신뢰도는 급상승했습니다.
+    </p>
+    
+    <div style="display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap;">
+      <div style="margin: 10px; padding: 15px; background: #e6f7ff; border-radius: 10px; width: 180px;">
+        <div class="emoji-big">👥</div>
+        <h3>커뮤니티 형성</h3>
+        <p>사용자 리뷰 중심의 신뢰 구축</p>
+      </div>
+      
+      <div style="margin: 10px; padding: 15px; background: #e6ffe6; border-radius: 10px; width: 180px;">
+        <div class="emoji-big">📊</div>
+        <h3>네트워크 효과</h3>
+        <p>더 많은 리뷰 → 더 많은 사용자</p>
+      </div>
+      
+      <div style="margin: 10px; padding: 15px; background: #fff9e6; border-radius: 10px; width: 180px;">
+        <div class="emoji-big">🔄</div>
+        <h3>진화</h3>
+        <p>정보 제공자 → 필수 여행 플랫폼</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2><span class="emoji">💡</span> 비즈니스 교훈</h2>
+    <p>
+      트립어드바이저의 사례는 가치 사슬 내 활동을 재구성하는 것만으로도 
+      산업 판도를 바꿀 수 있음을 보여줍니다.
+    </p>
+    
+    <div class="conclusion">
+      기업들은 자사의 고객 가치 사슬을 면밀히 분석하여, 어떤 요소가 분리 가능한지, 
+      어떤 부분에 집중해야 최대 가치를 창출할 수 있는지 고민해야 합니다. 
+      디커플링은 단순한 비즈니스 모델 변화가 아닌, 고객 관점에서의 근본적 재설계입니다.
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+      <div class="emoji-big">💯</div>
+    </div>
+  </div>
+</body>
+</html>
