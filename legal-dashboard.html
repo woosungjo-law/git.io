@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채무자 재무상태 악화 시 법적 대응 대시보드</title>
+    <style>
+        :root {
+            --dark-gray: #4B444B;
+            --medium-gray: #736E66;
+            --light-beige: #D9C5AC;
+            --pale-beige: #F2E1C2;
+            --accent-red: #8C2C16;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--pale-beige);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--dark-gray);
+            color: var(--pale-beige);
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--accent-red);
+        }
+        
+        header h1 {
+            color: var(--pale-beige);
+            margin-bottom: 10px;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .highlight {
+            background-color: var(--light-beige);
+            border-left: 4px solid var(--accent-red);
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th {
+            background-color: var(--medium-gray);
+            color: white;
+            text-align: left;
+            padding: 12px;
+        }
+        
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--light-beige);
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: var(--pale-beige);
+        }
+        
+        .recommendation {
+            background-color: var(--accent-red);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .recommendation h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .chart-container {
+            height: 300px;
+            position: relative;
+            margin: 30px 0;
+        }
+        
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 100px;
+            background-color: var(--accent-red);
+            color: white;
+            text-align: center;
+            padding-top: 10px;
+            transition: height 1s ease;
+        }
+        
+        .chart-label {
+            position: absolute;
+            bottom: -30px;
+            width: 100px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--pale-beige);
+            text-align: center;
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>채무자 재무상태 악화 시 법적 대응 대시보드</h1>
+            <p>강제집행 vs. 담보설정 후 변제기 연장의 비교 분석</p>
+        </header>
+        
+        <div class="grid-container">
+            <div class="card full-width">
+                <h2>사안 개요</h2>
+                <p>㈜몬스터유니온은 ㈜비브스튜디오스와의 합의서에 따라 991,591,247원의 채권을 보유(변제기: 2025년 3월 31일)하고 있으나, 현재 채무자의 재무상태가 악화되어 변제기 도래 시 채무 이행이 곤란할 것으로 예상됩니다.</p>
+                
+                <div class="highlight">
+                    <p><strong>주목할 점:</strong></p>
+                    <ul>
+                        <li>채무자는 4월부터 40억~50억 원의 용역 대금을 확보할 예정</li>
+                        <li>채무자 대표 김세규의 개인 부동산: 실거래가 120억 원</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>강제집행 옵션</h2>
+                <h3>장점</h3>
+                <ul>
+                    <li>신속한 채권 회수 가능성</li>
+                    <li>다른 채권자보다 우선적 지위 확보</li>
+                </ul>
+                
+                <h3>단점</h3>
+                <ul>
+                    <li>채무자의 영업 중단으로 기업 가치 하락</li>
+                    <li>경매 매각 시 시장가치 이하 매각 위험</li>
+                    <li>다른 채권자들의 배당 참여로 인한 회수율 저하</li>
+                    <li>사해행위 취소소송 위험</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>담보설정 후 변제기 연장</h2>
+                <h3>장점</h3>
+                <ul>
+                    <li>채무자의 사업 계속을 통한 변제 가능성 증대</li>
+                    <li>담보를 통한 채권 보전</li>
+                    <li>경매 절차에 따른 가치 하락 방지</li>
+                    <li>대표이사 부동산의 충분한 담보가치</li>
+                </ul>
+                
+                <h3>단점</h3>
+                <ul>
+                    <li>변제기 연장에 따른 회수 지연</li>
+                    <li>채무자의 재무상태 추가 악화 가능성</li>
+                    <li>용역대금 확보의 불확실성</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>법적 근거 및 판례</h2>
+            <table class="comparison-table">
+                <tr>
+                    <th>구분</th>
+                    <th>내용</th>
+                </tr>
+                <tr>
+                    <td>강제집행</td>
+                    <td>
+                        <p>민사집행법 제40조 제1항: "집행을 받을 사람이 일정한 시일에 이르러야 그 채무를 이행하게 되어 있는 때에는 그 시일이 지난 뒤에 강제집행을 개시할 수 있다"</p>
+                        <p><em>청주지방법원 2004. 10. 21. 선고 2004나2404 판결</em></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>사해행위 위험</td>
+                    <td>
+                        <p><em>대법원 2009. 1. 15. 선고 2007다61618 판결</em>: 채무자가 특정 채권자로 하여금 강제집행의 형식을 빌려 압류·전부받게 할 목적으로 채무부담행위를 한 경우 사해행위가 성립할 수 있음</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>담보권 설정</td>
+                    <td>
+                        <p>동산·채권 등의 담보에 관한 법률 제8조: 담보권자는 담보목적물에 대해 다른 채권자보다 우선하여 변제받을 권리를 가짐</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>변제기 연장</td>
+                    <td>
+                        <p><em>서울민사지방법원 1987. 10. 29. 선고 87가합2252 판결</em>: 변제기 연장은 채무내용변경행위로 채무의 동일성이 유지됨</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>담보제공과 사해행위</td>
+                    <td>
+                        <p><em>대법원 2001. 10. 26. 선고 2001다19134 판결</em>: 자금난 상황에서 사업 계속을 위해 부동산을 담보로 제공하는 행위는 특별한 사정이 없는 한 사해행위에 해당하지 않음</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>부동산 담보가치 분석</h2>
+            <div class="chart-container">
+                <div class="chart-bar" style="left: 100px; height: 100%; width: 150px;">
+                    120억
+                    <div class="chart-label">부동산 실거래가</div>
+                </div>
+                <div class="chart-bar" style="left: 300px; height: 67%; width: 150px;">
+                    80.9억
+                    <div class="chart-label">기존 근저당권</div>
+                </div>
+                <div class="chart-bar" style="left: 500px; height: 33%; width: 150px;">
+                    39.1억
+                    <div class="chart-label">담보여력</div>
+                </div>
+                <div class="chart-bar" style="left: 700px; height: 8%; width: 150px;">
+                    9.9억
+                    <div class="chart-label">의뢰인 채권액</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="recommendation">
+            <h2>최종 권고사항</h2>
+            <p>강제집행보다 <strong>담보 설정 후 변제기 연장</strong>이 더 유리합니다.</p>
+            <ol>
+                <li><strong>복합적 담보권 설정:</strong> 대표이사 부동산에 대한 후순위 저당권 설정과 함께 채무자의 임차보증금, 동산, 특허권 등 다양한 자산에 대해 복합적으로 담보권을 설정</li>
+                <li><strong>용역대금에 대한 채권양도 또는 질권 설정:</strong> 채무자가 4월부터 확보할 예정인 용역대금에 대해 채권양도 또는 질권 설정</li>
+                <li><strong>변제계획 구체화:</strong> 변제기 연장 시 구체적인 변제계획(분할 상환 일정, 이자율 등)을 수립하여 법률문서화</li>
+                <li><strong>정기적 모니터링:</strong> 채무자의 재무상태 및 용역대금 확보 상황을 정기적으로 모니터링</li>
+                <li><strong>가압류 병행 검토:</strong> 담보 설정과 함께 채무자의 주요 재산에 대한 가압류를 병행하여 채권을 이중으로 보전</li>
+            </ol>
+        </div>
+        
+        <footer>
+            <p>© 2025 법률 의견서 대시보드 | 본 문서는 법률 자문 목적으로 작성되었으며, 실제 적용 시 전문가의 추가 검토가 필요합니다.</p>
+        </footer>
+    </div>
+</body>
+</html>
