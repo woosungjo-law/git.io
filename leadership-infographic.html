@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한비자 리더십: 지혜를 버려야 총명해진다</title>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            font-weight: 300;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #4e4376;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .event {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .event-content {
+            width: 45%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .event-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #4e4376;
+            border-radius: 50%;
+            top: 20px;
+        }
+        
+        .left {
+            margin-right: 55%;
+        }
+        
+        .left::after {
+            right: -60px;
+        }
+        
+        .right {
+            margin-left: 55%;
+        }
+        
+        .right::after {
+            left: -60px;
+        }
+        
+        .quote-box {
+            background-color: #f0f0f0;
+            border-left: 5px solid #4e4376;
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .quote-author {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .wisdom-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+        
+        .wisdom-card {
+            width: 30%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .wisdom-card h3 {
+            color: #4e4376;
+            border-bottom: 2px solid #4e4376;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .conclusion {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        
+        .conclusion h2 {
+            color: #4e4376;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #4e4376;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .event {
+                flex-direction: column;
+            }
+            
+            .event-content {
+                width: auto;
+                margin: 0 0 20px 60px;
+            }
+            
+            .event-content::after {
+                left: -45px;
+            }
+            
+            .left, .right {
+                margin: 0 0 20px 60px;
+            }
+            
+            .wisdom-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>한비자 리더십</h1>
+            <div class="subtitle">지혜를 버려야 총명해진다 – 현자를 활용하는 리더의 지혜</div>
+        </div>
+        
+        <div class="timeline">
+            <div class="event">
+                <div class="event-content left">
+                    <h3>문제 상황</h3>
+                    <p>서울대 출신 정민호는 자신의 AI 알고리즘으로 '비전테크'를 창업했으나, 그의 뛰어난 지식이 오히려 회사 분위기를 숨막히게 만들었다.</p>
+                    <p>매일 새로운 아이디어를 내놓지만 다른 의견은 무시하고, 자신의 방식만 강요했다.</p>
+                </div>
+            </div>
+            
+            <div class="event">
+                <div class="event-content right">
+                    <h3>위기 발생</h3>
+                    <p>핵심 개발자들이 회사를 떠나고 회사의 성장이 정체되었다.</p>
+                    <p>마지막 창업 멤버 강유진이 퇴사 의사를 밝히며 '한비자'라는 책을 건넸다.</p>
+                </div>
+            </div>
+            
+            <div class="event">
+                <div class="event-content left">
+                    <h3>깨달음</h3>
+                    <div class="quote-box">
+                        <p>"하급의 군주는 자기의 능력을 다하고, 중급의 군주는 다른 사람의 힘을 다하게 하고, 상급의 군주는 다른 사람의 지혜를 다하게 한다."</p>
+                        <p class="quote-author">- 한비자</p>
+                    </div>
+                    <p>정민호는 자신이 '하급 군주'임을 깨닫고 충격에 빠졌다. 자신의 천재성에 취해 다른 사람의 지혜를 무시했던 것이다.</p>
+                </div>
+            </div>
+            
+            <div class="event">
+                <div class="event-content right">
+                    <h3>변화</h3>
+                    <p>정민호는 리더십 스타일을 바꾸기로 결심했다.</p>
+                    <div class="quote-box">
+                        <p>"지혜를 버려야 총명해질 수 있고, 슬기를 버려야 공적을 세울 수 있으며, 용맹을 버려야 강해질 수 있다."</p>
+                        <p class="quote-author">- 한비자</p>
+                    </div>
+                    <p>자신의 지혜를 내세우지 않을 때, 다른 이들의 지혜가 꽃피고 더 큰 총명함을 이룰 수 있다는 의미를 깨달았다.</p>
+                </div>
+            </div>
+            
+            <div class="event">
+                <div class="event-content left">
+                    <h3>성공의 열쇠</h3>
+                    <p>정민호는 아침 회의에서 자신의 아이디어를 강요하는 대신 팀원들의 의견을 물었다.</p>
+                    <p>"여러분은 어떻게 생각하나요? 이 문제를 해결할 방법을 제안해 주세요."</p>
+                    <p>팀원들이 점차 자신의 의견을 개진하기 시작했고, 6개월 후 비전테크의 AI 엔진은 업계 최고 수준에 도달했다.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="wisdom-container">
+            <div class="wisdom-card">
+                <div class="icon">📚</div>
+                <h3>한비자</h3>
+                <p>"윗사람이 장기를 부리기 시작하면 모든 일은 균형을 잃는다."</p>
+                <p>"지혜를 버려야 총명해진다."</p>
+            </div>
+            
+            <div class="wisdom-card">
+                <div class="icon">📜</div>
+                <h3>마키아벨리</h3>
+                <p>"어떤 군주의 두뇌의 우열을 측정하려면 먼저 그 군주의 측근을 보면 된다. 측근이 유능하고 성실하면 그 군주가 총명하다고 평가해도 틀림이 없다."</p>
+            </div>
+            
+            <div class="wisdom-card">
+                <div class="icon">📊</div>
+                <h3>피터 드러커</h3>
+                <p>"전문성의 함정에 빠져서는 안 된다. 전문 자체는 단편에 불과하여 성과를 생산하지 못한다. 다양한 전문가들의 산출물이 결합될 때 비로소 전체로서의 성과를 낼 수 있다."</p>
+            </div>
+        </div>
+        
+        <div class="conclusion">
+            <h2>리더십의 본질</h2>
+            <p>한비자와 마키아벨리, 그리고 피터 드러커는 서로 다른 시대, 다른 문화에서 같은 진리를 발견했다. <strong>진정한 리더의 힘은 자신의 능력을 과시하는 데 있지 않고, 조직원들의 능력과 지혜를 끌어내는 데 있다</strong>는 것을.</p>
+            <p>정민호는 이제 '개발자들의 개발자'가 되었다. 자신의 기술력을 과시하는 대신, 뛰어난 인재들이 역량을 최대한 발휘하도록 이끄는 리더가 된 것이다.</p>
+            <p>그의 사무실 벽에는 이제 한비자의 말이 걸려있다: <strong>"지혜를 버려야 총명해진다."</strong></p>
+        </div>
+    </div>
+</body>
+</html>
