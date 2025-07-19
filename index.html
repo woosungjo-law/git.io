@@ -3,311 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>동신렌탈주식회사 vs 브이산업 & 더브러건설 소송 요약</title>
+    <title>카카오톡 이모티콘의 승부수: 명암의 비즈니스학</title>
     <style>
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            line-height: 1.6;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa; /* 부드러운 파스텔톤 배경 */
             color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
-        h2 {
-            margin-top: 30px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #bdc3c7;
-        }
-        h3 {
-            margin-top: 20px;
-            padding-left: 10px;
-            border-left: 4px solid #3498db;
-        }
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 40px auto;
-        }
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background-color: #3498db;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-        }
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 44%;
-        }
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: white;
-            border: 4px solid #3498db;
-            border-radius: 50%;
-            top: 15px;
-            z-index: 1;
-        }
-        .left {
-            left: 0;
-        }
-        .right {
-            left: 50%;
-        }
-        .left::after {
-            right: -13px;
-        }
-        .right::after {
-            left: -13px;
-        }
-        .timeline-content {
-            padding: 15px;
-            background-color: white;
-            border-radius: 6px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        .timeline-item .date {
-            font-weight: bold;
-            color: #3498db;
-        }
-        .claim-box {
-            margin: 20px 0;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .claim-box h4 {
-            margin-top: 0;
-            color: #3498db;
-        }
-        .claim-amount {
-            font-weight: bold;
-            color: #e74c3c;
-        }
-        .issue-box {
-            margin: 20px 0;
-            padding: 15px;
-            border-left: 4px solid #e74c3c;
-            background-color: #fff5f5;
-        }
-        .argument-section {
+            line-height: 1.6;
             display: flex;
-            margin: 30px 0;
-            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        .plaintiff, .defendant {
-            flex: 1;
-            padding: 15px;
-            border-radius: 6px;
-        }
-        .plaintiff {
-            background-color: #e8f4fc;
-            border: 1px solid #a4d3f0;
-        }
-        .defendant {
-            background-color: #fcf0e8;
-            border: 1px solid #f0c8a4;
-        }
-        .plaintiff h4, .defendant h4 {
-            margin-top: 0;
-            text-align: center;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #ccc;
-        }
-        .amount-table {
+        .infographic-container {
             width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
+            max-width: 1200px; /* 16:9 비율을 고려한 최대 너비 */
+            background-color: #ffffff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.15); /* 더 강한 그림자 */
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
         }
-        .amount-table th, .amount-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+        .header {
+            background: linear-gradient(135deg, #00c3ff 0%, #0066ff 100%); /* 그라데이션 헤더 */
+            color: white;
+            text-align: center;
+            padding: 50px 30px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px; /* 헤더 높이 확보 */
         }
-        .amount-table th {
-            background-color: #f2f2f2;
+        .header h1 {
+            font-size: 3.8em;
+            margin: 0;
+            line-height: 1.1;
+            font-weight: 900;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* 텍스트 그림자 */
         }
-        .amount-table tr:nth-child(even) {
-            background-color: #f9f9f9;
+        .header h2 {
+            font-size: 1.9em;
+            margin-top: 15px;
+            font-weight: 700;
+            opacity: 0.95;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
         }
-        .total-row {
-            font-weight: bold;
-            background-color: #e8f4fc !important;
+        .content {
+            padding: 60px 50px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            align-items: flex-start;
+        }
+        .section {
+            background-color: #f8f9fa; /* 각 섹션 배경 */
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* 부드러운 효과 */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* 내용이 적을 경우 공간 분배 */
+        }
+        .section:hover {
+            transform: translateY(-5px); /* 살짝 떠오르는 효과 */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        .section h3 {
+            font-size: 2.4em;
+            color: #007bff;
+            margin-top: 0;
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 20px;
+            font-weight: 800;
+        }
+        .section h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 75%;
+            background-color: #007bff;
+            border-radius: 4px;
+        }
+        .section p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #444;
+            font-weight: 500;
+        }
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+        .highlight {
+            background-color: #fff3b0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            display: inline-block; /* 형광펜 블록으로 */
+        }
+        .visual-element {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .visual-element img {
+            max-width: 150px; /* 아이콘 크기 키움 */
+            height: auto;
+            opacity: 0.8;
+        }
+        .stat-box {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .stat-box .number {
+            font-size: 3em;
+            font-weight: 900;
+            color: #00c3ff;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .stat-box .label {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #555;
+        }
+        .summary-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); /* 녹색 계열 요약 */
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .summary-section h3 {
+            color: #28a745;
+            font-size: 2.6em;
+        }
+        .summary-section h3::before {
+            background-color: #28a745;
+        }
+        .summary-section p {
+            font-size: 1.3em;
+            max-width: 800px; /* 요약 텍스트 너비 제한 */
+            color: #333;
+            font-weight: 600;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 1em;
+            border-radius: 0 0 20px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer a {
+            color: #00bcd4;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer span {
+            opacity: 0.8;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                padding: 40px 25px;
+                gap: 30px;
+            }
+            .header h1 {
+                font-size: 2.8em;
+            }
+            .header h2 {
+                font-size: 1.5em;
+            }
+            .section h3 {
+                font-size: 2em;
+            }
+            .section p {
+                font-size: 1.1em;
+            }
+            .summary-section p {
+                font-size: 1.2em;
+            }
+            .header {
+                padding: 40px 20px;
+                min-height: 180px;
+            }
+            .section {
+                padding: 25px;
+            }
+        }
+        /* 폰트 적용 (Pretendard) */
+        @font-face {
+            font-family: 'Pretendard';
+            src: url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;900&display=swap');
+            font-weight: normal;
+            font-style: normal;
         }
     </style>
 </head>
 <body>
-    <h1>동신렌탈주식회사 vs 브이산업 & 더브러건설 소송 요약</h1>
-    
-    <h2>1. 당사자 관계 및 사건 개요</h2>
-    <div class="timeline">
-        <div class="timeline-item left">
-            <div class="timeline-content">
-                <div class="date">하도급 및 임대차 계약 체결</div>
-                <p>• 피고1 브이산업(원청사): 정동진 숙박시설 신축공사 진행</p>
-                <p>• 피고2 더브러건설(하도급사): 철근콘크리트 공사 수행</p>
-                <p>• 원고 동신렌탈: 피고2와 가설기자재 임대차계약 체결</p>
-            </div>
+
+    <div class="infographic-container">
+
+        <div class="header">
+            <h1>[명암의 비즈니스학]</h1>
+            <h2>카카오톡 이모티콘: <span class="highlight" style="background-color: #ffdd88;">감정의 시각화, 새로운 시장</span></h2>
         </div>
-        <div class="timeline-item right">
-            <div class="timeline-content">
-                <div class="date">2022. 10. 31.</div>
-                <p>피고1 브이산업이 공정율 약 30% 상태에서 피고2 더브러건설과의 하도급계약 타절</p>
+
+        <div class="content">
+
+            <div class="section">
+                <div>
+                    <h3>새로운 언어, <span class="highlight">시장의 탄생</span></h3>
+                    <p>
+                        감정을 시각적 언어로 전환, <strong>수백억 원 시장</strong> 창조.
+                        한국인의 섬세한 감정을 담아내며 <strong>문화적 혁신</strong>을 이끌었습니다.
+                    </p>
+                </div>
+                <div class="visual-element">
+                    <img src="https://img.icons8.com/external-outline-juicy-fish/100/0066ff/external-chat-bubble-interface-outline-outline-juicy-fish.png" alt="Chat Bubble">
+                    <img src="https://img.icons8.com/ios-glyphs/100/0066ff/happy-face.png" alt="Happy Face">
+                    <img src="https://img.icons8.com/ios-glyphs/100/0066ff/sad-face.png" alt="Sad Face">
+                </div>
+                <div class="stat-box">
+                    <span class="number">100억</span>
+                    <span class="label">첫 해 매출 (카카오프렌즈)</span>
+                </div>
             </div>
-        </div>
-        <div class="timeline-item left">
-            <div class="timeline-content">
-                <div class="date">2022. 11. 8.</div>
-                <p>원고가 내용증명을 통해 피고2 더브러건설과의 임대계약을 2022. 11. 1.자로 해지</p>
+
+            <div class="section">
+                <div>
+                    <h3><span class="highlight">무료에서 유료</span>로, <span class="highlight">가치 전환</span></h3>
+                    <p>
+                        <strong>무료 서비스 수익 창출</strong>의 어려운 과제 해결.
+                        감정 표현 욕구 충족을 위해 <strong>사용자는 기꺼이 지불</strong>합니다.
+                    </p>
+                </div>
+                <div class="visual-element">
+                    <img src="https://img.icons8.com/ios-filled/100/007bff/buy.png" alt="Buy Icon">
+                    <img src="https://img.icons8.com/ios-filled/100/007bff/repeat.png" alt="Repeat Icon">
+                </div>
+                <div class="stat-box">
+                    <span class="number">70%</span>
+                    <span class="label">이상 재구매율</span>
+                </div>
             </div>
-        </div>
-        <div class="timeline-item right">
-            <div class="timeline-content">
-                <div class="date">2022. 11. 15.</div>
-                <p>원고와 피고1 브이산업이 '원도급사 지급 보증약정'(1차 약정) 체결</p>
-                <p>• 피고1이 피고2의 채무 인수</p>
-                <p>• 원고와 피고1이 직접 임대거래 진행</p>
+
+            <div class="summary-section">
+                <h3>핵심 요약 & 인사이트</h3>
+                <p>
+                    한국적 정서에 특화되어 <strong>글로벌 진출에는 한계</strong>가 있었으나,
+                    <strong>로컬 시장의 깊이 있는 이해</strong>로 독보적인 지위를 구축했습니다.
+                </p>
+                <p>
+                    이는 <strong>인간의 본질적 욕구</strong>(소통, 자기 표현)를 상품화한 성공 사례로,
+                    <span class="highlight" style="background-color: #a5d6a7;">디지털 비즈니스의 핵심</span>을 보여줍니다.
+                </p>
             </div>
+
         </div>
-        <div class="timeline-item left">
-            <div class="timeline-content">
-                <div class="date">2022. 11. ~ 2024. 3. 5.</div>
-                <p>피고1 브이산업이 원고에게 12회에 걸쳐 총 359,197,947원 지급</p>
-            </div>
+
+        <div class="footer">
+            <span>작성 : 조우성 / 로펌 머스트노우 /</span> <a href="mailto:law@mustknow.co.kr">law@mustknow.co.kr</a>
         </div>
-        <div class="timeline-item right">
-            <div class="timeline-content">
-                <div class="date">2023. 11. 29.</div>
-                <p>원고와 피고1 브이산업이 2차 약정 체결</p>
-                <p>• 피고1, 채무인수금 1차 지급분 33,612,000원 즉시 지급</p>
-                <p>• 2차 지급분 33,612,333원 2024. 1. 31.까지 지급 약속</p>
-                <p>• 가설재 멸실료 38,679,190원에 대한 정산 약속</p>
-            </div>
-        </div>
+
     </div>
 
-    <h2>2. 원고의 청구 내용</h2>
-    <div class="claim-box">
-        <h4>피고1 브이산업에 대한 청구</h4>
-        <table class="amount-table">
-            <tr>
-                <th>항목</th>
-                <th>금액</th>
-            </tr>
-            <tr>
-                <td>채무인수 잔금</td>
-                <td class="claim-amount">33,612,333원</td>
-            </tr>
-            <tr>
-                <td>가설재 멸실료</td>
-                <td class="claim-amount">38,679,190원</td>
-            </tr>
-            <tr>
-                <td>BT자재 대여료(2023년 10월, 11월)</td>
-                <td class="claim-amount">325,882원</td>
-            </tr>
-            <tr>
-                <td>BT자재 대여료 및 멸실료(2023년 12월~2024년 3월 5일)</td>
-                <td class="claim-amount">516,748원</td>
-            </tr>
-            <tr class="total-row">
-                <td>합계</td>
-                <td class="claim-amount">73,134,153원 및 지연손해금</td>
-            </tr>
-        </table>
-    </div>
-    <div class="claim-box">
-        <h4>피고2 더브러건설에 대한 청구</h4>
-        <ul>
-            <li>금 <span class="claim-amount">11,863,118원</span> 지급</li>
-            <li>피고1 브이산업과 연대하여 <span class="claim-amount">33,612,333원</span> 지급</li>
-        </ul>
-    </div>
-
-    <h2>3. 주요 쟁점</h2>
-    <div class="issue-box">
-        <h4>1) 이 사건 1차 약정의 유효성</h4>
-        <p>• 피고1 현장소장의 약정 체결이 무권대리 행위인지 여부</p>
-        <p>• 표현대리 성립 여부(민법 제126조)</p>
-    </div>
-    <div class="issue-box">
-        <h4>2) 이 사건 2차 약정의 유효성</h4>
-        <p>• 약정서 말미의 "위 약정한 사항이 성실히 수행되지 아니할 경우 본 약정은 무효로 하고..."라는 조항의 해석</p>
-        <p>• 소급적 무효인지 장래를 향한 실효 조항인지 여부</p>
-    </div>
-    <div class="issue-box">
-        <h4>3) 가설재 멸실료 및 BT자재 대여료 청구의 정당성</h4>
-        <p>• 가설재 멸실료 38,679,190원의 산출 근거 입증 여부</p>
-        <p>• BT자재 대여료 및 멸실료 842,630원의 정당성</p>
-    </div>
-
-    <h2>4. 양측 주장 비교</h2>
-    
-    <h3>첫 번째 쟁점: 1차 약정의 유효성</h3>
-    <div class="argument-section">
-        <div class="plaintiff">
-            <h4>원고 주장</h4>
-            <p>• 피고1 브이산업은 1차 약정에 따라 2년간 원고와 직접 임대거래 진행</p>
-            <p>• 12회에 걸쳐 총 359,197,947원 지급</p>
-            <p>• 현장소장의 무권대리 주장은 민법 제126조 표현대리 규정에 따라 효력 있음</p>
-        </div>
-        <div class="defendant">
-            <h4>피고1 브이산업 주장</h4>
-            <p>• 현장소장이 회사와 상의 없이 임의로 작성한 무권대리 행위</p>
-            <p>• 약정서에 법인인감이 아닌 사용인감 날인</p>
-            <p>• 현장소장에게 회사의 실질적인 채무부담 행위를 대표할 권한 없음</p>
-        </div>
-    </div>
-
-    <h3>두 번째 쟁점: 2차 약정의 유효성</h3>
-    <div class="argument-section">
-        <div class="plaintiff">
-            <h4>원고 주장</h4>
-            <p>• 2차 약정에 따라 피고1은 1차 지급분 33,612,000원 즉시 지급</p>
-            <p>• 2차 지급분 및 가설재 멸실료 지급 약속</p>
-            <p>• 약정서 말미 조항은 소급적 무효가 아닌 장래를 향한 실효 조항으로 해석되어야 함</p>
-        </div>
-        <div class="defendant">
-            <h4>피고1 브이산업 주장</h4>
-            <p>• "위 약정한 사항이 성실히 수행되지 아니할 경우 본 약정은 무효로 하고..."라는 조항에 근거해 약정 무효</p>
-        </div>
-    </div>
-
-    <h3>세 번째 쟁점: 가설재 멸실료 및 BT자재 대여료 청구</h3>
-    <div class="argument-section">
-        <div class="plaintiff">
-            <h4>원고 주장</h4>
-            <p>• 가설재 멸실료 38,679,190원은 입출고 수불내역서상 미반입 자재 수량과 멸실단가 적용하여 산출</p>
-            <p>• BT자재 대여료 및 멸실료 842,630원은 피고1이 준공심사를 위해 추가로 요청한 자재에 대한 것</p>
-            <p>• 일부는 세금계산서 발행됨</p>
-        </div>
-        <div class="defendant">
-            <h4>피고1 브이산업 주장</h4>
-            <p>• 가설재 멸실료에 대한 가액 입증되지 않음</p>
-            <p>• BT자재 대여료 325,882원 및 멸실료 516,748원도 입증되지 않음</p>
-        </div>
-    </div>
-
-    <h3>원고 추가 주장: 신의성실 원칙 위반 및 권리남용</h3>
-    <div class="claim-box">
-        <p>• 피고1 브이산업이 약정 체결 후 원고의 의무이행(민원 취하)은 수령하고 그 이익(사용승인)은 향유하면서, 자신의 채무이행은 거부하는 것은 신의성실 원칙 위반</p>
-        <p>• 피고1 브이산업이 자신의 의무 불이행을 근거로 약정 전체의 무효를 주장하는 것은 권리남용에 해당</p>
-    </div>
 </body>
 </html>
