@@ -3,231 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>카카오톡 이모티콘의 승부수: 명암의 비즈니스학</title>
+    <title>인포그래픽: 당신의 성공은 '거의 모르는 사람'이 만든다</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Gowun+Dodum&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4; /* 현대적인 배경색 */
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            padding: 2rem;
         }
-        .infographic-container {
+        .b5-paper {
             width: 100%;
-            max-width: 1200px; /* 16:9 비율을 고려한 최대 너비 */
-            background-color: #ffffff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-            overflow: hidden; /* 내부 요소가 넘어가지 않도록 */
-            position: relative;
+            max-width: 700px; /* B5 aspect ratio simulation */
+            aspect-ratio: 1 / 1.414;
+            background: white;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
         }
-        .header {
-            background-color: #00c3ff; /* 메인 컬러 */
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            position: relative;
-        }
-        .header h1 {
-            font-size: 3.5em;
-            margin: 0;
-            line-height: 1.2;
-            font-weight: 900; /* 굵은 글씨 */
-        }
-        .header h2 {
-            font-size: 1.8em;
-            margin-top: 10px;
-            font-weight: 600; /* 약간 굵게 */
-            opacity: 0.9;
-        }
-        .content {
-            padding: 50px 40px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 두 개의 컬럼으로 분할 */
-            gap: 40px;
-            align-items: flex-start;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        .section:last-child {
-            margin-bottom: 0;
-        }
-        .section h3 {
-            font-size: 2.2em;
-            color: #007bff; /* 섹션 제목 색상 */
-            margin-top: 0;
-            margin-bottom: 20px;
-            position: relative;
-            padding-left: 15px;
-        }
-        .section h3::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 5px;
-            height: 70%;
-            background-color: #007bff; /* 강조선 */
-            border-radius: 3px;
-        }
-        .section p {
-            font-size: 1.3em; /* 본문 글자 크기 */
-            margin-bottom: 20px;
-            color: #555;
+        h1, h2, h3 {
+            font-family: 'Gowun Dodum', serif;
+            font-weight: 700;
         }
         .highlight {
-            background-color: #fff3b0; /* 형광펜 효과 */
-            padding: 0 5px;
-            border-radius: 3px;
-            font-weight: 600; /* 형광펜 부분 굵게 */
+            background: linear-gradient(to top, rgba(255, 235, 59, 0.6) 50%, transparent 50%);
+            padding: 0 2px;
         }
-        .icon-placeholder {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #e9ecef; /* 아이콘 영역 구분 */
-            border-radius: 10px;
+        .section-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 900;
+            font-size: 1.25rem;
+            color: #1a73e8;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
         }
-        .icon-placeholder img {
-            max-width: 100px;
-            height: auto;
+        .section-title svg {
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+        .doodle-arrow {
+            position: absolute;
+            color: #4285f4;
             opacity: 0.7;
         }
-        .section.summary {
-            grid-column: 1 / -1; /* 요약 섹션은 전체 너비 사용 */
-            background-color: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            margin-top: 30px;
+        .icon-box {
+            background-color: #e8f0fe;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            margin-right: 1rem;
         }
-        .section.summary h3 {
-            color: #28a745; /* 요약 섹션 제목 색상 */
-        }
-        .section.summary h3::before {
-            background-color: #28a745;
-        }
-        .footer {
-            background-color: #343a40; /* 푸터 배경색 */
-            color: white;
+        .credit {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.8rem;
+            color: #6c757d;
             text-align: center;
-            padding: 25px 20px;
-            font-size: 0.9em;
-            border-radius: 0 0 15px 15px; /* 하단 모서리 둥글게 */
+            border-top: 1px solid #dee2e6;
+            padding-top: 1rem;
+            margin-top: auto;
         }
-        .footer a {
-            color: #00bcd4; /* 링크 색상 */
-            text-decoration: none;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* 반응형 디자인 */
-        @media (max-width: 768px) {
-            .content {
-                grid-template-columns: 1fr; /* 모바일에서는 한 컬럼으로 */
-                padding: 30px 20px;
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
             }
-            .header h1 {
-                font-size: 2.5em;
+            .b5-paper {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 1.5cm;
+                max-width: 100%;
+                height: 100vh;
             }
-            .header h2 {
-                font-size: 1.4em;
+            .highlight {
+                background-color: #fff59d !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
             }
-            .section h3 {
-                font-size: 1.8em;
+            .icon-box {
+                background-color: #e8f0fe !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
             }
-            .section p {
-                font-size: 1.1em;
-            }
-        }
-        /* 폰트 적용 (Pretendard) */
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;900&display=swap'); /* Google Fonts에서 Pretendard 사용 */
-            font-weight: normal;
-            font-style: normal;
         }
     </style>
 </head>
 <body>
+    <div class="b5-paper relative">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-black text-gray-800">당신의 성공은</h1>
+            <h2 class="text-4xl md:text-5xl font-black text-blue-600 leading-tight">'<span class="highlight">거의 모르는 사람</span>'이 만든다</h2>
+        </header>
 
-    <div class="infographic-container">
-
-        <div class="header">
-            <h1>[명암의 비즈니스학]</h1>
-            <h2>작은 그림이 만든 거대한 시장, 카카오톡 이모티콘의 승부수</h2>
-        </div>
-
-        <div class="content">
-
-            <div class="section">
-                <h3>감정의 디지털화, 새로운 언어의 탄생</h3>
-                <p>
-                    2012년 이모티콘 스토어 출시 이후, 카카오톡 이모티콘은 연간 수백억 원 규모의 시장을 창조한 <strong>문화적 혁신</strong>입니다.
-                    한국인들이 "ㅠㅠ", "^^" 등으로 표현하던 감정을 <strong>시각적 언어</strong>로 전환하며 새로운 소통 방식을 제시했습니다.
-                </p>
-                <div class="icon-placeholder">
-                    <img src="https://img.icons8.com/ios/100/000000/happy.png" alt="Happy Emotion Icon">
-                    <img src="https://img.icons8.com/ios/100/000000/sad.png" alt="Sad Emotion Icon">
-                    <img src="https://img.icons8.com/ios/100/000000/wink.png" alt="Wink Emotion Icon">
+        <!-- Main Content -->
+        <main class="flex-grow space-y-6">
+            <!-- Section 1: The Trap -->
+            <section>
+                <div class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 8l-4 4 4 4"></path><path d="M16 12H8"></path></svg>
+                    안락한 울타리의 함정
                 </div>
-                <p>
-                    라이언과 어피치로 대표되는 카카오프렌즈는 출시 첫해 <strong>100억 원의 매출</strong>을 기록했습니다.
-                    이는 단순한 캐릭터 상품을 넘어, <strong>한국인의 정서적 코드</strong>를 정확히 읽어낸 결과입니다.
-                    서구의 직설적 표현과 달리, 한국인의 우회적이고 섬세한 감정 표현 방식을 이모티콘에 성공적으로 녹여냈습니다.
+                <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+                    친한 친구, 가까운 동료는 심리적 안정감을 주지만, 당신과 비슷한 정보와 환경을 공유합니다. 이 <span class="highlight">견고한 네트워크는 성장의 통로가 아니라</span>, 현상 유지를 위한 울타리일 뿐입니다.
                 </p>
-            </div>
+            </section>
 
-            <div class="section">
-                <h3>무료에서 유료로, 패러다임의 전환</h3>
-                <p>
-                    카카오는 메신저 시장에서 가장 어려운 과제인 <strong>무료 서비스에서 수익 창출</strong>에 성공했습니다.
-                    이모티콘 유료화는 2013년부터 시작되었으며, 현재 개당 <strong>1,500-3,000원</strong> 가격대를 형성하고 있습니다.
-                    사용자들은 <strong>강렬한 감정 표현 욕구</strong> 때문에 기꺼이 비용을 지불합니다.
-                </p>
-                <div class="icon-placeholder">
-                    <img src="https://img.icons8.com/ios/100/000000/purchase-tag.png" alt="Price Tag Icon">
-                    <img src="https://img.icons8.com/ios/100/000000/star--v1.png" alt="Star Icon">
+            <!-- Section 2: The Power of Weak Ties -->
+            <section class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                <div class="section-title text-green-600">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+                    '약한 연결'의 놀라운 힘
                 </div>
-                <p>
-                    특히 주목할 점은 <strong>높은 반복 구매율</strong>입니다. 이모티콘 구매자의 <strong>70% 이상이 재구매</strong>합니다.
-                    이는 이모티콘이 단순한 소비재가 아닌, <strong>자아 표현의 도구</strong>로 인식되고 있음을 보여줍니다.
-                    BTS의 BT21, 디즈니 캐릭터와의 협업은 <strong>팬덤 문화와 결합</strong>하여 폭발적인 반응을 이끌어냈습니다.
+                <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+                    사회학자 마크 그라노베터는 증명했습니다. 새로운 직장, 혁신적 아이디어는 대부분 '<span class="highlight">가끔 연락하는 친구</span>'나 '<span class="highlight">지인의 지인</span>'처럼 약하게 연결된 관계에서 비롯됩니다. 당신의 세계와 다른 세계를 잇는 다리는 언제나 <span class="highlight">거의 모르는 사람</span>이 놓아줍니다.
+                </p>
+            </section>
+
+            <!-- Section 3: Call to Action & Practical Guide -->
+            <section>
+                 <div class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                    광장으로 나아가는 실천적 지혜
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">개인 (Individual)</h3>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span><span class="highlight">월 3명, 1년 이상</span> 연락 없던 이에게 안부 묻기</span></li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span><span class="highlight">무관한 분야의 모임</span>에 의도적으로 참석하기</span></li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span>"최근 가장 흥미로웠던 이야기는?" 질문하기</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">조직 (Organization)</h3>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span>부서 간 <span class="highlight">벽을 허무는 프로젝트</span> 의무화하기</span></li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span>외부 전문가와 <span class="highlight">격의 없는 티타임</span> 갖기</span></li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span>낯선 실패의 가능성에 투자하기</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Conclusion -->
+            <div class="text-center mt-6 p-4 bg-yellow-100 rounded-lg">
+                <p class="font-bold text-gray-800 text-base md:text-lg">
+                    당신이 애써 관리해온 '아는 사람' 리스트를 잠시 잊으세요.<br>
+                    당신의 다음 성공은, 전화번호부에 없는 <span class="highlight">바로 그 사람</span>이 가지고 있습니다.
                 </p>
             </div>
+        </main>
 
-            <div class="section summary">
-                <h3>로컬라이제이션의 정수, 글로벌 진출의 한계</h3>
-                <p>
-                    카카오톡 이모티콘의 성공은 역설적으로 <strong>해외 진출의 한계</strong>를 드러냅니다.
-                    한국적 정서에 특화된 만큼, 글로벌 시장에서의 어려움은 라인(LINE)의 성공과 대비됩니다.
-                </p>
-                <p>
-                    하지만 이는 중요한 교훈을 제시합니다. <strong>로컬 시장에서의 깊이 있는 이해</strong>가 때로는 글로벌 확장보다 더 큰 가치를 창출할 수 있습니다.
-                    카카오톡 이모티콘은 한국 시장에서 <strong>절대적 지위</strong>를 구축했으며, 이를 바탕으로 다양한 라이선싱 사업으로 확장하고 있습니다.
-                </p>
-                <p>
-                    디지털 시대의 비즈니스는 결국 <strong>인간의 본질적 욕구</strong>를 얼마나 정확히 파악하느냐에 달려 있습니다.
-                    카카오톡 이모티콘은 <strong>소통에 대한 인간의 원초적 욕구를 상품화</strong>한 대표적인 성공 사례입니다.
-                </p>
-            </div>
-
-        </div>
-
-        <div class="footer">
-            작성 : 조우성 / 로펌 머스트노우 / <a href="mailto:law@mustknow.co.kr">law@mustknow.co.kr</a>
-        </div>
-
+        <!-- Footer -->
+        <footer class="credit">
+            작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr
+        </footer>
     </div>
-
 </body>
 </html>
