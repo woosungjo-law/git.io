@@ -1,298 +1,276 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>카카오톡 이모티콘의 승부수: 명암의 비즈니스학</title>
+    <title>병법 36계 - 제8계 암도진창</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #e0f7fa; /* 부드러운 파스텔톤 배경 */
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f4f7f6;
             color: #333;
-            line-height: 1.6;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .infographic-container {
-            width: 100%;
-            max-width: 1200px; /* 16:9 비율을 고려한 최대 너비 */
-            background-color: #ffffff;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.15); /* 더 강한 그림자 */
-            border-radius: 20px;
             overflow: hidden;
-            position: relative;
+            box-sizing: border-box;
         }
-        .header {
-            background: linear-gradient(135deg, #00c3ff 0%, #0066ff 100%); /* 그라데이션 헤더 */
-            color: white;
-            text-align: center;
-            padding: 50px 30px;
+
+        .infographic-container {
             position: relative;
+            width: 100%;
+            max-width: 960px; /* 16:9 비율의 기본 너비 (예시) */
+            height: 540px; /* 16:9 비율 */
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+            box-sizing: border-box;
+            position: relative; /* for absolute positioning of elements */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header h2 {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-top: 0;
+            font-weight: 400;
+        }
+
+        .content {
+            display: flex;
+            flex-grow: 1;
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-concept {
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            min-height: 250px; /* 헤더 높이 확보 */
+            padding-right: 20px;
         }
-        .header h1 {
-            font-size: 3.8em;
-            margin: 0;
-            line-height: 1.1;
-            font-weight: 900;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* 텍스트 그림자 */
-        }
-        .header h2 {
-            font-size: 1.9em;
-            margin-top: 15px;
-            font-weight: 700;
-            opacity: 0.95;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-        }
-        .content {
-            padding: 60px 50px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 50px;
-            align-items: flex-start;
-        }
-        .section {
-            background-color: #f8f9fa; /* 각 섹션 배경 */
-            padding: 30px;
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* 부드러운 효과 */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* 내용이 적을 경우 공간 분배 */
-        }
-        .section:hover {
-            transform: translateY(-5px); /* 살짝 떠오르는 효과 */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-        }
-        .section h3 {
-            font-size: 2.4em;
-            color: #007bff;
-            margin-top: 0;
-            margin-bottom: 25px;
-            position: relative;
-            padding-left: 20px;
-            font-weight: 800;
-        }
-        .section h3::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 6px;
-            height: 75%;
-            background-color: #007bff;
-            border-radius: 4px;
-        }
-        .section p {
-            font-size: 1.2em;
+
+        .main-concept h3 {
+            font-size: 1.8em;
+            color: #2c3e50;
             margin-bottom: 15px;
-            color: #444;
-            font-weight: 500;
-        }
-        .section p:last-child {
-            margin-bottom: 0;
-        }
-        .highlight {
-            background-color: #fff3b0;
-            padding: 2px 8px;
-            border-radius: 4px;
+            line-height: 1.3;
             font-weight: 700;
-            display: inline-block; /* 형광펜 블록으로 */
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
         }
-        .visual-element {
-            text-align: center;
-            margin-top: 30px;
+
+        .main-concept p {
+            font-size: 0.95em;
+            line-height: 1.7;
             margin-bottom: 20px;
-        }
-        .visual-element img {
-            max-width: 150px; /* 아이콘 크기 키움 */
-            height: auto;
-            opacity: 0.8;
-        }
-        .stat-box {
-            background-color: #e9ecef;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .stat-box .number {
-            font-size: 3em;
-            font-weight: 900;
-            color: #00c3ff;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .stat-box .label {
-            font-size: 1.1em;
-            font-weight: 700;
             color: #555;
         }
-        .summary-section {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); /* 녹색 계열 요약 */
-            padding: 40px;
-            border-radius: 15px;
-            margin-top: 40px;
+
+        .highlight {
+            background-color: #f1c40f; /* 형광펜 효과 */
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 700;
+        }
+
+        .visual-representation {
+            flex: 1;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            text-align: center;
+            background-color: #eaf2f8;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
         }
-        .summary-section h3 {
-            color: #28a745;
-            font-size: 2.6em;
+
+        .visual-representation .path-diagram {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            transform: rotate(10deg); /* 약간의 기울기 */
         }
-        .summary-section h3::before {
-            background-color: #28a745;
+
+        .path-diagram .path {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1em;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
         }
-        .summary-section p {
-            font-size: 1.3em;
-            max-width: 800px; /* 요약 텍스트 너비 제한 */
-            color: #333;
-            font-weight: 600;
+
+        .path-diagram .path.visible {
+            background-color: #3498db; /* 드러난 길 */
+            z-index: 1;
+        }
+
+        .path-diagram .path.hidden {
+            background-color: #e67e22; /* 숨겨진 길 */
+            transform: translate(-30px, 40px) scale(1.1); /* 이동 및 확대 */
+            z-index: 3; /* 더 위에 표시 */
+        }
+
+        .path-diagram .path:hover {
+            transform: scale(1.1);
+        }
+
+        .path-diagram .path.hidden:hover {
+            transform: translate(-30px, 40px) scale(1.2);
+        }
+
+        .path-diagram .path span {
+            position: absolute;
+            bottom: -30px;
+            font-size: 0.8em;
+            font-weight: 400;
+            color: #555;
+            white-space: nowrap;
+        }
+
+        .path-diagram .path.hidden span {
+            color: #e67e22;
+            font-weight: 700;
+        }
+
+        .path-diagram .connector {
+            position: absolute;
+            width: 80px;
+            height: 5px;
+            background-color: #95a5a6;
+            transform: rotate(-30deg);
+            opacity: 0.7;
+            z-index: 0;
         }
 
         .footer {
-            background-color: #343a40;
-            color: white;
             text-align: center;
-            padding: 30px 20px;
-            font-size: 1em;
-            border-radius: 0 0 20px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+            margin-top: 30px;
+            font-size: 0.8em;
+            color: #95a5a6;
+            position: relative;
+            z-index: 2;
         }
+
         .footer a {
-            color: #00bcd4;
+            color: #3498db;
             text-decoration: none;
             font-weight: 700;
         }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        .footer span {
-            opacity: 0.8;
-        }
 
-        /* 반응형 디자인 */
+        /* Responsive adjustments */
         @media (max-width: 768px) {
+            .infographic-container {
+                flex-direction: column;
+                height: auto; /* Allow height to adjust */
+                max-width: 90%;
+                padding: 20px;
+            }
             .content {
-                grid-template-columns: 1fr;
-                padding: 40px 25px;
-                gap: 30px;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .main-concept {
+                padding-right: 0;
+                order: 2; /* Content below visual */
+            }
+            .visual-representation {
+                order: 1; /* Visual on top */
+                height: 300px; /* Fixed height for visual on mobile */
             }
             .header h1 {
-                font-size: 2.8em;
+                font-size: 1.8em;
             }
             .header h2 {
-                font-size: 1.5em;
+                font-size: 1em;
             }
-            .section h3 {
-                font-size: 2em;
+            .main-concept h3 {
+                font-size: 1.4em;
             }
-            .section p {
-                font-size: 1.1em;
+            .path-diagram {
+                width: 100%;
+                height: 100%;
             }
-            .summary-section p {
-                font-size: 1.2em;
-            }
-            .header {
-                padding: 40px 20px;
-                min-height: 180px;
-            }
-            .section {
-                padding: 25px;
-            }
-        }
-        /* 폰트 적용 (Pretendard) */
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;900&display=swap');
-            font-weight: normal;
-            font-style: normal;
         }
     </style>
 </head>
 <body>
-
     <div class="infographic-container">
-
         <div class="header">
-            <h1>[명암의 비즈니스학]</h1>
-            <h2>카카오톡 이모티콘: <span class="highlight" style="background-color: #ffdd88;">감정의 시각화, 새로운 시장</span></h2>
+            <h1>병법 36계</h1>
+            <h2>제8계: 암도진창 (暗渡陳倉)</h2>
         </div>
 
         <div class="content">
-
-            <div class="section">
-                <div>
-                    <h3>새로운 언어, <span class="highlight">시장의 탄생</span></h3>
-                    <p>
-                        감정을 시각적 언어로 전환, <strong>수백억 원 시장</strong> 창조.
-                        한국인의 섬세한 감정을 담아내며 <strong>문화적 혁신</strong>을 이끌었습니다.
-                    </p>
-                </div>
-                <div class="visual-element">
-                    <img src="https://img.icons8.com/external-outline-juicy-fish/100/0066ff/external-chat-bubble-interface-outline-outline-juicy-fish.png" alt="Chat Bubble">
-                    <img src="https://img.icons8.com/ios-glyphs/100/0066ff/happy-face.png" alt="Happy Face">
-                    <img src="https://img.icons8.com/ios-glyphs/100/0066ff/sad-face.png" alt="Sad Face">
-                </div>
-                <div class="stat-box">
-                    <span class="number">100억</span>
-                    <span class="label">첫 해 매출 (카카오프렌즈)</span>
-                </div>
-            </div>
-
-            <div class="section">
-                <div>
-                    <h3><span class="highlight">무료에서 유료</span>로, <span class="highlight">가치 전환</span></h3>
-                    <p>
-                        <strong>무료 서비스 수익 창출</strong>의 어려운 과제 해결.
-                        감정 표현 욕구 충족을 위해 <strong>사용자는 기꺼이 지불</strong>합니다.
-                    </p>
-                </div>
-                <div class="visual-element">
-                    <img src="https://img.icons8.com/ios-filled/100/007bff/buy.png" alt="Buy Icon">
-                    <img src="https://img.icons8.com/ios-filled/100/007bff/repeat.png" alt="Repeat Icon">
-                </div>
-                <div class="stat-box">
-                    <span class="number">70%</span>
-                    <span class="label">이상 재구매율</span>
-                </div>
-            </div>
-
-            <div class="summary-section">
-                <h3>핵심 요약 & 인사이트</h3>
+            <div class="main-concept">
+                <h3>정면의 이면에 숨겨진 승리의 길</h3>
                 <p>
-                    한국적 정서에 특화되어 <strong>글로벌 진출에는 한계</strong>가 있었으나,
-                    <strong>로컬 시장의 깊이 있는 이해</strong>로 독보적인 지위를 구축했습니다.
+                    상대가 예측하는 길은 <span class="highlight">미끼</span>일 뿐.
+                    모두가 주목하는 곳이 아닌, 아무도 예상치 못한 <span class="highlight">숨겨진 길</span>에서 승부는 결정된다.
+                    이는 단순한 속임수를 넘어, 상대의 인식을 지배하고 승리의 공간을 창조하는 고도의 심리 전략이다.
                 </p>
                 <p>
-                    이는 <strong>인간의 본질적 욕구</strong>(소통, 자기 표현)를 상품화한 성공 사례로,
-                    <span class="highlight" style="background-color: #a5d6a7;">디지털 비즈니스의 핵심</span>을 보여줍니다.
+                    <strong>암도진창의 본질:</strong>
+                    <br>
+                    <strong>양동(陽動) + 기습(奇襲)</strong>
+                    <br><br>
+                    <strong>핵심</strong>: 얼마나 대담하고 집요하게 상대를 <span class="highlight">속일 수 있느냐</span>에 달렸다.
                 </p>
             </div>
 
+            <div class="visual-representation">
+                <div class="path-diagram">
+                    <div class="path visible">
+                        <span style="left: 50%; transform: translateX(-50%);">드러난 길 (잔도)</span>
+                    </div>
+                    <div class="connector"></div>
+                    <div class="path hidden">
+                        <span style="left: 50%; transform: translateX(-50%);">숨겨진 길 (진창)</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="footer">
-            <span>작성 : 조우성 / 로펌 머스트노우 /</span> <a href="mailto:law@mustknow.co.kr">law@mustknow.co.kr</a>
+            작성 : 조우성 / 로펌 머스트노우 / <a href="mailto:law@mustknow.co.kr">law@mustknow.co.kr</a>
         </div>
-
     </div>
-
 </body>
 </html>
