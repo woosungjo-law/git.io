@@ -3,174 +3,517 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>인포그래픽: 당신의 성공은 '거의 모르는 사람'이 만든다</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <title>미수금 회수 법적 대응방안</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 2rem;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .b5-paper {
-            width: 100%;
-            max-width: 700px; /* B5 aspect ratio simulation */
-            aspect-ratio: 1 / 1.414;
-            background: white;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+        body {
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            aspect-ratio: 1/1.7;
+            padding: 40px;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #FF5733, #D4AF37);
+            border-radius: 2px;
+        }
+
+        .main-title {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #1A2A57;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #0D5D56;
+            font-weight: 500;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section-card {
+            background: #ffffff;
+            border: 2px solid #f0f4f8;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: #17A2B8;
+            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f4f8;
+        }
+
+        .section-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #FF5733, #D4AF37);
             border-radius: 8px;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+            font-size: 16px;
         }
-        h1, h2, h3 {
-            font-family: 'Gowun Dodum', serif;
+
+        .section-title {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A2A57;
+        }
+
+        .section-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
+            background-size: 100% 40%;
+            background-repeat: no-repeat;
+            background-position: 0 70%;
+            font-weight: 700;
+            color: #1A2A57;
+        }
+
+        .amount {
+            font-size: 20px;
+            font-weight: 900;
+            color: #FF5733;
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        .strategy-flow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .flow-step {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -22px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #7D3C98;
+            font-weight: bold;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #7D3C98, #17A2B8);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 8px;
+            font-size: 14px;
+        }
+
+        .step-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1A2A57;
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .priority-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .priority-item {
+            background: #f8f9fa;
+            border-left: 4px solid #FF5733;
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        .priority-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1A2A57;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .priority-icon {
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        .priority-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .key-facts {
+            background: linear-gradient(135deg, #0D5D56, #1A2A57);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .key-facts-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .key-facts-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .fact-item {
+            text-align: center;
+        }
+
+        .fact-number {
+            font-size: 24px;
+            font-weight: 900;
+            color: #D4AF37;
+            display: block;
+        }
+
+        .fact-label {
+            font-size: 12px;
+            margin-top: 4px;
+            opacity: 0.9;
+        }
+
+        .conclusion {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 6px solid #D4AF37;
+            margin: 20px 0;
+        }
+
+        .conclusion-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1A2A57;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .conclusion-content {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f4f8;
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .footer-highlight {
+            color: #1A2A57;
             font-weight: 700;
         }
-        .highlight {
-            background: linear-gradient(to top, rgba(255, 235, 59, 0.6) 50%, transparent 50%);
-            padding: 0 2px;
+
+        .small-text {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
         }
-        .section-title {
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: 900;
-            font-size: 1.25rem;
-            color: #1a73e8;
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
+
+        .bold {
+            font-weight: 700;
+            color: #1A2A57;
         }
-        .section-title svg {
-            margin-right: 0.5rem;
-            flex-shrink: 0;
+
+        .underline {
+            text-decoration: underline;
+            text-decoration-color: #FF5733;
+            text-decoration-thickness: 2px;
         }
-        .doodle-arrow {
-            position: absolute;
-            color: #4285f4;
-            opacity: 0.7;
-        }
-        .icon-box {
-            background-color: #e8f0fe;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            margin-right: 1rem;
-        }
-        .credit {
-            font-family: 'Noto Sans KR', sans-serif;
-            font-size: 0.8rem;
-            color: #6c757d;
-            text-align: center;
-            border-top: 1px solid #dee2e6;
-            padding-top: 1rem;
-            margin-top: auto;
-        }
-        @media print {
-            body {
-                background-color: white;
-                padding: 0;
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+                aspect-ratio: 1/1.4;
             }
-            .b5-paper {
-                box-shadow: none;
-                border-radius: 0;
-                padding: 1.5cm;
-                max-width: 100%;
-                height: 100vh;
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
-            .highlight {
-                background-color: #fff59d !important;
-                -webkit-print-color-adjust: exact;
-                color-adjust: exact;
+            
+            .strategy-flow {
+                grid-template-columns: repeat(2, 1fr);
             }
-            .icon-box {
-                background-color: #e8f0fe !important;
-                -webkit-print-color-adjust: exact;
-                color-adjust: exact;
+            
+            .main-title {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="b5-paper relative">
-        <!-- Header -->
-        <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-black text-gray-800">당신의 성공은</h1>
-            <h2 class="text-4xl md:text-5xl font-black text-blue-600 leading-tight">'<span class="highlight">거의 모르는 사람</span>'이 만든다</h2>
-        </header>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
+            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
+        </div>
 
-        <!-- Main Content -->
-        <main class="flex-grow space-y-6">
-            <!-- Section 1: The Trap -->
-            <section>
-                <div class="section-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 8l-4 4 4 4"></path><path d="M16 12H8"></path></svg>
-                    안락한 울타리의 함정
-                </div>
-                <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-                    친한 친구, 가까운 동료는 심리적 안정감을 주지만, 당신과 비슷한 정보와 환경을 공유합니다. 이 <span class="highlight">견고한 네트워크는 성장의 통로가 아니라</span>, 현상 유지를 위한 울타리일 뿐입니다.
-                </p>
-            </section>
-
-            <!-- Section 2: The Power of Weak Ties -->
-            <section class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                <div class="section-title text-green-600">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
-                    '약한 연결'의 놀라운 힘
-                </div>
-                <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-                    사회학자 마크 그라노베터는 증명했습니다. 새로운 직장, 혁신적 아이디어는 대부분 '<span class="highlight">가끔 연락하는 친구</span>'나 '<span class="highlight">지인의 지인</span>'처럼 약하게 연결된 관계에서 비롯됩니다. 당신의 세계와 다른 세계를 잇는 다리는 언제나 <span class="highlight">거의 모르는 사람</span>이 놓아줍니다.
-                </p>
-            </section>
-
-            <!-- Section 3: Call to Action & Practical Guide -->
-            <section>
-                 <div class="section-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
-                    광장으로 나아가는 실천적 지혜
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-gray-800 mb-2">개인 (Individual)</h3>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span><span class="highlight">월 3명, 1년 이상</span> 연락 없던 이에게 안부 묻기</span></li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span><span class="highlight">무관한 분야의 모임</span>에 의도적으로 참석하기</span></li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span>"최근 가장 흥미로웠던 이야기는?" 질문하기</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-lg text-gray-800 mb-2">조직 (Organization)</h3>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span>부서 간 <span class="highlight">벽을 허무는 프로젝트</span> 의무화하기</span></li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span>외부 전문가와 <span class="highlight">격의 없는 티타임</span> 갖기</span></li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">✓</span><span>낯선 실패의 가능성에 투자하기</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Conclusion -->
-            <div class="text-center mt-6 p-4 bg-yellow-100 rounded-lg">
-                <p class="font-bold text-gray-800 text-base md:text-lg">
-                    당신이 애써 관리해온 '아는 사람' 리스트를 잠시 잊으세요.<br>
-                    당신의 다음 성공은, 전화번호부에 없는 <span class="highlight">바로 그 사람</span>이 가지고 있습니다.
-                </p>
+        <!-- 핵심 사실관계 -->
+        <div class="key-facts">
+            <div class="key-facts-title">
+                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+                핵심 사실관계
             </div>
-        </main>
+            <div class="key-facts-content">
+                <div class="fact-item">
+                    <span class="fact-number">3억원</span>
+                    <div class="fact-label">총 미수금액</div>
+                </div>
+                <div class="fact-item">
+                    <span class="fact-number">1억원</span>
+                    <div class="fact-label">보증보험 가입액</div>
+                </div>
+                <div class="fact-item">
+                    <span class="fact-number">2024.2월</span>
+                    <div class="fact-label">대금지급 중단</div>
+                </div>
+            </div>
+        </div>
 
-        <!-- Footer -->
-        <footer class="credit">
-            작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr
-        </footer>
+        <!-- 4단계 대응 전략 -->
+        <div class="strategy-flow">
+            <div class="flow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">초기 대응</div>
+                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
+            </div>
+            <div class="flow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">법적 조치</div>
+                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
+            </div>
+            <div class="flow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">추가 조치</div>
+                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
+            </div>
+            <div class="flow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">강제집행</div>
+                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
+            </div>
+        </div>
+
+        <!-- 주요 대응방안 -->
+        <div class="content-grid">
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="section-title">보증보험 청구</div>
+                </div>
+                <div class="section-content">
+                    <div class="bold">최우선 진행사항</div><br>
+                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
+                    • 보증보험 약관 면밀 검토<br>
+                    • 상대방 방해행위 대응<br>
+                    • 필요 증빙서류 완비
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="section-title">민사소송 & 가압류</div>
+                </div>
+                <div class="section-content">
+                    <div class="bold">집행권원 확보</div><br>
+                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
+                    • 채무자 재산 가압류 동시 진행<br>
+                    • 부동산·차량·예금계좌 압류<br>
+                    • 프랜차이즈 매출채권 확보
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <div class="section-title">사해행위 취소</div>
+                </div>
+                <div class="section-content">
+                    <div class="bold">책임재산 회복</div><br>
+                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
+                    • 채무자 무자력 상태 증명<br>
+                    • 가공공장 직거래 원상회복<br>
+                    • 모든 채권자 이익 보장
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="section-title">형사고소 검토</div>
+                </div>
+                <div class="section-content">
+                    <div class="bold">심리적 압박</div><br>
+                    • 사기죄 성립요건 검토<br>
+                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
+                    • 자발적 변제 유도 효과<br>
+                    • 보조적 수단으로 활용
+                </div>
+            </div>
+        </div>
+
+        <!-- 우선순위별 대응방안 -->
+        <div class="priority-grid">
+            <div class="priority-item">
+                <div class="priority-title">
+                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
+                    최우선 (즉시)
+                </div>
+                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
+            </div>
+            <div class="priority-item">
+                <div class="priority-title">
+                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
+                    단기 (1-2주)
+                </div>
+                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
+            </div>
+            <div class="priority-item">
+                <div class="priority-title">
+                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
+                    중기 (상황따라)
+                </div>
+                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
+            </div>
+            <div class="priority-item">
+                <div class="priority-title">
+                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
+                    최종 (판결후)
+                </div>
+                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
+            </div>
+        </div>
+
+        <!-- 결론 -->
+        <div class="conclusion">
+            <div class="conclusion-title">
+                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
+                핵심 제언
+            </div>
+            <div class="conclusion-content">
+                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
+                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
+                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
+        </div>
     </div>
 </body>
 </html>
