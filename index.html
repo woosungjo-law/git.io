@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>월량대표아적심 - 버려질 뻔한 선율이 영원이 되기까지</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;600;900&display=swap" rel="stylesheet">
+    <title>거울 앞에 선 인간, 그 '똑똑함'의 민낯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,50 +13,40 @@
         }
 
         :root {
-            --night-sky: #0A0E27;
-            --deep-blue: #1A1F3A;
-            --moon-gold: #FFD700;
-            --moon-silver: #E8E8E8;
-            --text-light: #C5C9D8;
-            --accent-pink: #FF6B9D;
-            --accent-blue: #4A90E2;
+            --primary: #667EEA;
+            --secondary: #764BA2;
+            --accent: #F093FB;
+            --dark: #1a1a2e;
+            --darker: #0f0f1e;
+            --text-light: #e0e0e0;
+            --text-dim: #a0a0b0;
         }
 
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background: linear-gradient(180deg, #0A0E27 0%, #1A1F3A 50%, #2D1B3D 100%);
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, #2a1a3e 100%);
             color: var(--text-light);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* 별똥별 배경 */
-        .stars {
+        /* 배경 애니메이션 */
+        .bg-pattern {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            opacity: 0.03;
+            background-image:
+                repeating-linear-gradient(45deg, transparent, transparent 35px, var(--primary) 35px, var(--primary) 36px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, var(--accent) 35px, var(--accent) 36px);
             pointer-events: none;
             z-index: 0;
         }
 
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
@@ -66,69 +56,81 @@
         /* 헤더 */
         .header {
             text-align: center;
-            padding: 60px 20px 40px;
+            padding: 80px 20px 60px;
             position: relative;
             opacity: 0;
-            animation: fadeInDown 1.2s ease forwards;
+            animation: fadeIn 1s ease forwards;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
 
-        .moon-icon {
-            font-size: 80px;
+        .mirror-icon {
+            font-size: 70px;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px var(--moon-gold));
-            animation: moonRise 2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.5));
+            animation: float 3s ease-in-out infinite;
         }
 
-        @keyframes moonRise {
-            from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
 
         .main-title {
             font-family: 'Noto Serif KR', serif;
-            font-size: clamp(28px, 6vw, 48px);
+            font-size: clamp(28px, 5.5vw, 52px);
             font-weight: 900;
-            color: var(--moon-gold);
-            margin-bottom: 15px;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
             letter-spacing: -1px;
+            line-height: 1.3;
         }
 
-        .subtitle {
-            font-size: clamp(14px, 3vw, 18px);
-            color: var(--moon-silver);
-            font-weight: 300;
-            line-height: 1.8;
+        .quote-box {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            padding: 30px 40px;
+            margin: 40px auto;
             max-width: 700px;
-            margin: 0 auto 20px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 80px;
+            color: rgba(102, 126, 234, 0.2);
+            font-family: serif;
+        }
+
+        .quote-text {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(18px, 3.5vw, 28px);
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            position: relative;
         }
 
         .divider {
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--moon-gold), transparent);
-            margin: 30px auto;
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+            margin: 50px auto;
         }
 
         /* 섹션 공통 스타일 */
         .section {
-            margin: 60px 0;
-            padding: 40px 30px;
-            background: rgba(26, 31, 58, 0.6);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.1);
+            margin: 80px 0;
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.8s ease;
@@ -141,216 +143,278 @@
 
         .section-title {
             font-family: 'Noto Serif KR', serif;
-            font-size: clamp(22px, 4vw, 32px);
+            font-size: clamp(24px, 4vw, 36px);
             font-weight: 700;
-            color: var(--moon-gold);
-            margin-bottom: 25px;
+            color: white;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
         .section-icon {
-            font-size: 28px;
+            font-size: 32px;
+            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
         }
 
-        .section-content {
-            font-size: clamp(14px, 2.5vw, 16px);
-            line-height: 1.9;
-            color: var(--text-light);
-        }
-
-        /* 타임라인 */
-        .timeline {
-            position: relative;
-            padding: 40px 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--moon-gold), var(--accent-pink));
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 40px 0;
-            position: relative;
-        }
-
-        .timeline-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        .timeline-year {
-            flex: 0 0 45%;
-            text-align: right;
-            padding-right: 40px;
-            font-size: clamp(24px, 5vw, 36px);
-            font-weight: 900;
-            color: var(--moon-gold);
-            font-family: 'Noto Serif KR', serif;
-        }
-
-        .timeline-item:nth-child(even) .timeline-year {
-            text-align: left;
-            padding-left: 40px;
-            padding-right: 0;
-        }
-
-        .timeline-content {
-            flex: 0 0 45%;
-            background: rgba(74, 144, 226, 0.1);
-            padding: 20px 25px;
-            border-radius: 15px;
-            border-left: 4px solid var(--accent-blue);
-            position: relative;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            border-left: none;
-            border-right: 4px solid var(--accent-pink);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            background: var(--moon-gold);
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--moon-gold);
-            z-index: 2;
-        }
-
-        .timeline-title {
-            font-weight: 700;
-            font-size: clamp(16px, 3vw, 18px);
-            color: white;
-            margin-bottom: 8px;
-        }
-
-        .timeline-desc {
-            font-size: clamp(13px, 2.5vw, 15px);
-            color: var(--text-light);
-            line-height: 1.7;
-        }
-
-        /* 하이라이트 박스 */
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(74, 144, 226, 0.15));
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .highlight-box::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            font-size: 120px;
-            color: rgba(255, 215, 0, 0.1);
-            font-family: serif;
-            line-height: 1;
-        }
-
-        .highlight-text {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(16px, 3.5vw, 22px);
-            font-weight: 600;
-            color: white;
-            line-height: 1.8;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 통계 그리드 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .stat-card {
-            background: rgba(255, 215, 0, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 15px;
-            padding: 30px 20px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
-        }
-
-        .stat-number {
-            font-size: clamp(32px, 6vw, 48px);
-            font-weight: 900;
-            color: var(--moon-gold);
-            font-family: 'Noto Serif KR', serif;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: clamp(13px, 2.5vw, 15px);
-            color: var(--text-light);
-            font-weight: 400;
-        }
-
-        /* 스토리 카드 */
-        .story-card {
-            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8), rgba(45, 27, 61, 0.6));
+        /* 카드 스타일 */
+        .card {
+            background: rgba(26, 26, 46, 0.6);
+            border: 1px solid rgba(102, 126, 234, 0.2);
             border-radius: 20px;
             padding: 35px;
             margin: 25px 0;
-            border: 1px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(15px);
             position: relative;
             overflow: hidden;
         }
 
-        .story-card::after {
-            content: '♪';
+        .card::before {
+            content: '';
             position: absolute;
-            bottom: -20px;
-            right: 20px;
-            font-size: 120px;
-            color: rgba(255, 215, 0, 0.05);
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
         }
 
-        .story-title {
-            font-size: clamp(18px, 3.5vw, 22px);
-            font-weight: 700;
-            color: var(--moon-gold);
-            margin-bottom: 15px;
-        }
-
-        .story-text {
-            font-size: clamp(14px, 2.5vw, 16px);
+        .card-content {
+            font-size: clamp(15px, 2.5vw, 17px);
             line-height: 1.9;
             color: var(--text-light);
         }
 
-        .story-text strong {
+        .card-content strong {
             color: white;
             font-weight: 700;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(240, 147, 251, 0.3) 0%, rgba(102, 126, 234, 0.3) 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* 대시보드 비교 섹션 */
+        .dashboard {
+            background: rgba(15, 15, 30, 0.8);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 25px;
+            padding: 50px 30px;
+            margin: 60px 0;
+            backdrop-filter: blur(20px);
+        }
+
+        .dashboard-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(26px, 4.5vw, 40px);
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 50px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .comparison-card {
+            background: rgba(26, 26, 46, 0.5);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .comparison-card.ai {
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .comparison-card.human {
+            border-color: rgba(240, 147, 251, 0.4);
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .comparison-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
+        }
+
+        .comparison-label {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .comparison-items {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .comparison-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 12px 0;
+            font-size: clamp(14px, 2.5vw, 16px);
+            color: var(--text-light);
+        }
+
+        .comparison-item::before {
+            content: '•';
+            color: var(--accent);
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .vs-divider {
+            text-align: center;
+            font-size: clamp(40px, 8vw, 60px);
+            font-weight: 900;
+            color: rgba(102, 126, 234, 0.3);
+            margin: 30px 0;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        /* 키 포인트 */
+        .key-point {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(240, 147, 251, 0.15));
+            border-left: 5px solid var(--accent);
+            border-radius: 15px;
+            padding: 30px 35px;
+            margin: 30px 0;
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(17px, 3vw, 22px);
+            font-weight: 600;
+            color: white;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .key-point::before {
+            content: '💡';
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 40px;
+            opacity: 0.3;
+        }
+
+        /* 지성의 재정의 - 타임라인 */
+        .evolution {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .evolution-item {
+            background: rgba(26, 26, 46, 0.6);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 25px 30px;
+            text-align: center;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .evolution-old {
+            opacity: 0.6;
+            border-color: rgba(160, 160, 176, 0.3);
+        }
+
+        .evolution-label {
+            font-size: clamp(12px, 2vw, 14px);
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .evolution-text {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(20px, 3.5vw, 28px);
+            font-weight: 700;
+            color: white;
+        }
+
+        .evolution-arrow {
+            font-size: 40px;
+            color: var(--accent);
+        }
+
+        /* 리스트 스타일 */
+        .styled-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .styled-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin: 15px 0;
+            font-size: clamp(15px, 2.5vw, 17px);
+            color: var(--text-light);
+        }
+
+        .styled-list li::before {
+            content: '▸';
+            color: var(--primary);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        /* 결론 섹션 */
+        .conclusion {
+            background: linear-gradient(135deg, rgba(118, 75, 162, 0.2), rgba(102, 126, 234, 0.2));
+            border: 2px solid rgba(240, 147, 251, 0.4);
+            border-radius: 25px;
+            padding: 50px 40px;
+            margin: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conclusion::before {
+            content: '🪞';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 200px;
+            opacity: 0.05;
+            transform: rotate(15deg);
+        }
+
+        .conclusion-text {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(18px, 3.5vw, 24px);
+            font-weight: 600;
+            color: white;
+            line-height: 1.9;
+            position: relative;
+            z-index: 1;
         }
 
         /* 푸터 */
@@ -358,368 +422,276 @@
             text-align: center;
             padding: 60px 20px 40px;
             margin-top: 80px;
-            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
         }
 
-        .footer-quote {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(16px, 3vw, 20px);
-            font-weight: 600;
-            color: var(--moon-silver);
+        .footer-text {
+            font-size: clamp(14px, 2.5vw, 16px);
+            color: var(--text-dim);
             line-height: 1.8;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .footer-info {
-            font-size: clamp(12px, 2vw, 14px);
-            color: rgba(197, 201, 216, 0.6);
-            margin-top: 20px;
         }
 
         /* 모바일 최적화 */
         @media (max-width: 768px) {
             .header {
-                padding: 40px 15px 30px;
+                padding: 60px 15px 40px;
             }
 
-            .moon-icon {
-                font-size: 60px;
+            .mirror-icon {
+                font-size: 50px;
             }
 
-            .section {
-                padding: 30px 20px;
-                margin: 40px 0;
+            .quote-box {
+                padding: 25px 30px;
             }
 
-            .timeline::before {
-                left: 30px;
+            .card {
+                padding: 25px 20px;
             }
 
-            .timeline-item {
-                flex-direction: column !important;
-                align-items: flex-start;
-                padding-left: 60px;
+            .dashboard {
+                padding: 40px 20px;
             }
 
-            .timeline-year {
-                text-align: left !important;
-                padding: 0 !important;
-                margin-bottom: 15px;
-            }
-
-            .timeline-content {
-                width: 100%;
-            }
-
-            .timeline-item:nth-child(even) .timeline-content {
-                border-right: none;
-                border-left: 4px solid var(--accent-pink);
-            }
-
-            .timeline-dot {
-                left: 30px;
-            }
-
-            .stats-grid {
+            .comparison-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
 
-            .highlight-box {
-                padding: 25px 20px;
+            .vs-divider {
+                margin: 20px 0;
+                transform: rotate(90deg);
             }
 
-            .story-card {
-                padding: 25px 20px;
+            .evolution {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .evolution-arrow {
+                transform: rotate(90deg);
+            }
+
+            .conclusion {
+                padding: 35px 25px;
+            }
+
+            .section {
+                margin: 50px 0;
             }
         }
 
-        /* 스크롤 애니메이션 준비 */
-        .fade-in {
+        /* 스크롤 애니메이션 */
+        .fade-up {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease;
         }
 
-        .fade-in.visible {
+        .fade-up.visible {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- 별 배경 -->
-    <div class="stars" id="stars"></div>
+    <div class="bg-pattern"></div>
 
     <div class="container">
         <!-- 헤더 -->
         <header class="header">
-            <div class="moon-icon">🌙</div>
-            <h1 class="main-title">월량대표아적심</h1>
-            <p class="subtitle">
-                버려질 뻔한 선율이 영원이 되기까지<br>
-                등려군이 남긴 50년의 달빛
-            </p>
+            <div class="mirror-icon">🪞</div>
+            <h1 class="main-title">거울 앞에 선 인간,<br>그 '똑똑함'의 민낯</h1>
+            <div class="quote-box">
+                <p class="quote-text">그애는 똑똑한 게 아니라<br>많이 알 뿐이야</p>
+            </div>
             <div class="divider"></div>
         </header>
 
-        <!-- 인트로 섹션 -->
-        <section class="section fade-in">
-            <div class="highlight-box">
-                <p class="highlight-text">
-                    가장 깊은 감정은 언어의 끝에서 시작되고,<br>
-                    침묵 속에서 비로소 완성된다.
-                </p>
-            </div>
-            <div class="section-content">
-                <p>
-                    밤하늘의 달을 올려다본 적이 있는가. 그냥 그렇게, 말없이. 사랑에는 이상한 순간들이 있다.
-                    천 마디를 늘어놓아도 모자란 것 같다가도, 어떤 순간엔 단 한 마디도 입 밖으로 나오지 않는다.
-                </p>
-                <p style="margin-top: 15px;">
-                    그럴 때 우리는 무언가를 가리킨다. 저 달처럼 변하지 않는 무엇을.
-                </p>
-            </div>
-        </section>
-
-        <!-- 스토리 1: 버려질 뻔한 악보 -->
-        <section class="section fade-in">
+        <!-- 섹션 1: AI의 능력 -->
+        <section class="section fade-up">
             <h2 class="section-title">
-                <span class="section-icon">🎼</span>
-                보스턴 공원에서 쓰레기통으로 향하던 악보
+                <span class="section-icon">🤖</span>
+                전지(全知)에 가까운 존재
             </h2>
-            <div class="story-card">
-                <p class="story-text">
-                    <strong>1970년대 초 보스턴.</strong> 버클리 음대에서 공부하던 젊은 작곡가 <strong>옹청희</strong>는
-                    캠퍼스 근처 공원을 자주 거닐었다. 그곳에서 그는 멜로디를 적었다. 많이. 너무 많이 적어서
-                    정작 본인도 그 가치를 몰랐다.
-                </p>
-            </div>
-            <div class="story-card">
-                <p class="story-text">
-                    타이완으로 돌아온 옹청희는 실망스러운 악보 더미를 버리려 했다. 그 속에 이 곡이 있었다.
-                    작사가 <strong>손의</strong>가 우연히 그 악보를 발견하지 않았다면, 우리는 이 노래를 영영 듣지 못했을 것이다.
-                </p>
-            </div>
-            <div class="highlight-box">
-                <p class="highlight-text">
-                    위대한 예술은 종종 작가 자신도 알아보지 못한 채<br>
-                    쓰레기통 앞에서 구조된다.
-                </p>
+            <div class="card">
+                <div class="card-content">
+                    <p>생성형 AI가 토해내는 문장은 유려하고 그 지식은 광대하다. 우리는 그 속도와 박식함에 경탄하고, 때로 현기증을 느낀다.</p>
+                    <p style="margin-top: 15px;">AI는 <strong>인류가 쌓아 올린 텍스트의 산을 모조리 삼켰다.</strong> 바다보다 깊은 데이터 속을 맹렬히 헤엄친다. 무엇을 물어도 답은 즉각이다. 그 모습은 전지에 가까워 보인다.</p>
+                </div>
             </div>
         </section>
 
-        <!-- 타임라인 섹션 -->
-        <section class="section fade-in">
+        <!-- 섹션 2: AI의 한계 -->
+        <section class="section fade-up">
             <h2 class="section-title">
-                <span class="section-icon">⏰</span>
-                침묵을 깬 3분 27초의 기적
+                <span class="section-icon">🚫</span>
+                거대한 저장소, 그러나
             </h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-year">1972</div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">진분란의 첫 도전</div>
-                        <div class="timeline-desc">
-                            진분란이 처음 이 노래를 불렀을 때, 사람들은 별 관심을 보이지 않았다.
-                            시대가 아직 준비되지 않았던 것일까.
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
+            <div class="card">
+                <div class="card-content">
+                    <p>하지만 그 안에는 <span class="highlight">'앎'의 주체가 없다.</span> 그것은 지식의 거대한 저장소이지, 지혜의 발원지가 아니다.</p>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">1977</div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">등려군의 목소리를 만나다</div>
-                        <div class="timeline-desc">
-                            3분 27초. 왈츠 리듬. 그게 전부였는데, 전부가 달라졌다.
-                            등려군의 목소리는 달빛처럼 투명했고, 속삭임처럼 부드러웠다.
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">1978</div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">중국 개방과 카세트테이프의 물결</div>
-                        <div class="timeline-desc">
-                            개방 정책이 시작되자, 카세트테이프들이 연안 도시에서 내륙으로 흘러갔다.
-                            "낮에는 덩샤오핑이 통치하고, 밤에는 덩(려군)이 통치한다."
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">1989</div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">천안문 광장의 노래</div>
-                        <div class="timeline-desc">
-                            민주화를 외치던 학생들을 위해 홍콩에서 30만 명 앞에 섰을 때도,
-                            등려군은 이 노래를 불렀다. 음악은 이념을 넘어섰다.
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">1995</div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">떠난 가수, 남은 달빛</div>
-                        <div class="timeline-desc">
-                            등려군은 42세의 나이로 세상을 떠났다. 하지만 이상하게도 그녀가 남긴
-                            이 노래는 여전히 살아 숨 쉰다.
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">2010</div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">지난 30년간 최고의 중국 음악 1위</div>
-                        <div class="timeline-desc">
-                            수백 명의 가수가 이 노래를 불렀다. 전 세계 어디든 중국인이 있는 곳에서
-                            이 멜로디가 울려 퍼진다.
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
+            </div>
+            <ul class="styled-list">
+                <li>스스로의 '왜'가 없다</li>
+                <li>가치를 재는 저울이 없다</li>
+                <li>맥락을 꿰뚫는 통찰이 없다</li>
+                <li>윤리적 고뇌도, 미학적 결단도 없다</li>
+            </ul>
+            <div class="key-point">
+                방대한 기억의 창고에서 가장 그럴듯한 확률의 조각을 엮어낼 뿐이다.<br>
+                그것은 지능의 정교한 흉내일 뿐, 지능 그 자체가 아니다. <strong>영혼 없는 메아리다.</strong>
             </div>
         </section>
 
-        <!-- 문화적 영향 -->
-        <section class="section fade-in">
+        <!-- 대시보드: AI vs 인간 -->
+        <section class="dashboard fade-up">
+            <h2 class="dashboard-title">많이 아는 것 vs 똑똑한 것</h2>
+
+            <div class="comparison-grid">
+                <div class="comparison-card ai">
+                    <div class="comparison-icon">🤖</div>
+                    <div class="comparison-label">AI: 많이 앎</div>
+                    <div class="comparison-items">
+                        <div class="comparison-item">방대한 지식의 저장소</div>
+                        <div class="comparison-item">즉각적인 답변 생성</div>
+                        <div class="comparison-item">높은 확률의 조합</div>
+                        <div class="comparison-item">주체 없는 앎</div>
+                        <div class="comparison-item">맥락 없는 정보</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card human">
+                    <div class="comparison-icon">🧠</div>
+                    <div class="comparison-label">인간: 똑똑함</div>
+                    <div class="comparison-items">
+                        <div class="comparison-item">질문을 던지는 능력</div>
+                        <div class="comparison-item">가치 판단의 저울</div>
+                        <div class="comparison-item">맥락의 통찰</div>
+                        <div class="comparison-item">윤리적 고뇌</div>
+                        <div class="comparison-item">책임을 지는 주체</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vs-divider">VS</div>
+
+            <div class="key-point" style="margin-top: 40px;">
+                AI는 맹목의 칼이다. 쥐는 자의 의도에 따라 춤춘다.<br>
+                칼이 날카롭다고 해서 칼잡이가 명인이 되는 것은 아니다.
+            </div>
+        </section>
+
+        <!-- 섹션 3: 인간의 역할 -->
+        <section class="section fade-up">
             <h2 class="section-title">
-                <span class="section-icon">🌏</span>
-                혁명 이후, 밤에 몰래 듣는 노래
+                <span class="section-icon">⚖️</span>
+                부리는 사람이 똑똑해야 한다
             </h2>
-            <div class="section-content">
-                <p>
-                    때는 1977년이었다. 중국 본토는 막 문화대혁명의 긴 터널을 빠져나오던 참이었다.
-                    30년 가까이 사람들은 혁명가요만 들었다. 개인의 감정 같은 건 '부르주아적 퇴폐'로 낙인찍히던 시절이었다.
-                </p>
+            <div class="card">
+                <div class="card-content">
+                    <p>여기서 문명의 무게추는 다시 인간에게로 세차게 기운다. 결국 <strong>'부리는 사람'이 똑똑해야 한다</strong>는 준엄한 명제에 다다른다.</p>
+                    <p style="margin-top: 15px;">명령하는 자, 즉 <span class="highlight">프롬프트를 입력하는 인간의 지성</span>이 이 도구의 한계와 효용을 결정한다.</p>
+                </div>
             </div>
-            <div class="highlight-box" style="margin-top: 25px;">
-                <p class="highlight-text">
-                    혁명은 대낮에 일어나지만,<br>
-                    진짜 변화는 사람들이 밤에 몰래 듣는 노래에서 시작된다.
-                </p>
+            <div class="card">
+                <div class="card-content">
+                    <ul class="styled-list">
+                        <li><strong>흐릿한 질문</strong>은 흐릿한 답을 낳을 뿐이다</li>
+                        <li><strong>깊이 없는 요구</strong>는 얕은 모방만을 가져온다</li>
+                        <li>AI는 스스로 질문을 던지지 못한다</li>
+                        <li>AI는 목적을 설정하지 못한다</li>
+                    </ul>
+                </div>
             </div>
-            <div class="section-content" style="margin-top: 25px;">
-                <p>
-                    달은 중국 문화에서 오래전부터 그리움의 상징이었다. 그런데 등려군은 그 오래된 은유를
-                    현대의 언어로 되살렸다. 그녀의 목소리는 마치 귀에 대고 직접 말을 거는 것 같았다.
-                </p>
+            <div class="key-point">
+                그것은 거대한 도서관이되, <strong>방향을 제시할 사서가 없는 도서관</strong>이다.<br>
+                그 사서의 역할이 바로 인간이다.
             </div>
         </section>
 
-        <!-- 통계 -->
-        <section class="section fade-in">
+        <!-- 섹션 4: 지성의 재정의 -->
+        <section class="section fade-up">
             <h2 class="section-title">
-                <span class="section-icon">📊</span>
-                숫자로 보는 영원
+                <span class="section-icon">🔄</span>
+                지성의 재정의
             </h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-number">50년</span>
-                    <div class="stat-label">사랑받은 시간</div>
+            <div class="card">
+                <div class="card-content">
+                    <p>우리는 오랫동안 <strong>'아는 것'</strong>을 지성의 척도로 삼았다. 암기하고, 기억하고, 인출하는 능력. AI는 이 영역에서 인간을 압도적으로 추월했다.</p>
+                    <p style="margin-top: 15px;"><span class="highlight">이제 지성의 정의가 바뀐다.</span></p>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-number">3:27</span>
-                    <div class="stat-label">노래 길이</div>
+            </div>
+
+            <div class="evolution">
+                <div class="evolution-item evolution-old">
+                    <div class="evolution-label">과거의 지성</div>
+                    <div class="evolution-text">앎<br>Knowing</div>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-number">수백명</span>
-                    <div class="stat-label">커버한 가수</div>
+                <div class="evolution-arrow">→</div>
+                <div class="evolution-item">
+                    <div class="evolution-label">새로운 지성</div>
+                    <div class="evolution-text">물음 + 판단<br>Questioning<br>Judging</div>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-number">수억명</span>
-                    <div class="stat-label">감동받은 청중</div>
+            </div>
+
+            <div class="card" style="margin-top: 40px;">
+                <div class="card-content">
+                    <p>AI라는 거대한 지식의 산 앞에서 인간이 해야 할 일:</p>
+                    <ul class="styled-list" style="margin-top: 20px;">
+                        <li><strong>방향을 가리키는 나침반</strong>이 되는 것</li>
+                        <li><strong>진실을 가려내는 체</strong>가 되는 것</li>
+                        <li>흩어진 정보를 엮어 <strong>새로운 가치를 창조</strong>하는 것</li>
+                        <li>그 결과에 <strong>책임을 지는 것</strong></li>
+                    </ul>
                 </div>
+            </div>
+
+            <div class="key-point">
+                그것이 '많이 아는 것'과 구별되는<br>
+                <strong>'진짜 똑똑함'의 본질</strong>이다.
             </div>
         </section>
 
-        <!-- 메시지 섹션 -->
-        <section class="section fade-in">
-            <h2 class="section-title">
-                <span class="section-icon">💫</span>
-                언어가 멈추는 곳에서 음악이 시작되다
-            </h2>
-            <div class="section-content">
-                <p>
-                    이 노래는 왜 50년 가까이 사랑받는 걸까. 생각해보면 사랑은 우리를 자꾸 말을 잃게 만든다.
-                    가장 깊은 감정일수록 언어는 공허해진다.
-                </p>
-                <p style="margin-top: 15px;">
-                    그럴 때 우리는 무언가에 기대고 싶어진다. 달처럼 영원한 것, 달처럼 변하지 않는 것,
-                    달처럼 어디서나 같은 빛을 내는 것에.
-                </p>
-            </div>
-            <div class="highlight-box" style="margin-top: 25px;">
-                <p class="highlight-text">
-                    진짜 사랑은 화려한 수사가 아니라 변하지 않는 존재에 있고,<br>
-                    밤하늘에 항상 그 자리에 있는 달처럼 조용히 빛나는 것이다.
-                </p>
-            </div>
-        </section>
+        <!-- 결론 -->
+        <section class="conclusion fade-up">
+            <div class="conclusion-text">
+                <p>"많이 아는 아이"는 강력한 부하다.<br>
+                그러나 현명한 주인을 만나지 못하면,<br>
+                그저 시끄러운 백과사전에 불과하다.</p>
 
-        <!-- 마무리 -->
-        <section class="section fade-in">
-            <div class="story-card" style="background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2));">
-                <h3 class="story-title">🎵 한 조각 달빛</h3>
-                <p class="story-text">
-                    버려질 뻔했던 선율. 우연히 건져진 악보 한 장. 그것이 수억 명의 가슴속에서 영원이 됐다.
+                <div class="divider" style="margin: 40px auto;"></div>
+
+                <p style="margin-top: 30px;">
+                    <strong>AI의 시대는 역설적으로<br>
+                    인간 고유의 지성, 그 '똑똑함'의 가치를 묻는 시대이다.</strong>
                 </p>
-                <p class="story-text" style="margin-top: 15px;">
-                    오늘 밤 당신이 사랑하는 누군가를 떠올리며 밤하늘을 올려다본다면,
-                    그 달빛 속에서 이 노래의 여운을 들을 수 있을 것이다.
-                </p>
-                <p class="story-text" style="margin-top: 15px;">
-                    <strong>말이 필요 없는 사랑. 시간이 흘러도 변하지 않는 진심.
-                    그리고 우리 모두의 가슴속에 언제나 떠 있는, 한 조각 달빛.</strong>
+
+                <p style="margin-top: 30px; font-size: clamp(20px, 4vw, 28px); font-weight: 700;">
+                    🪞 AI는 거울이다.<br>
+                    우리는 그 거울에 비친<br>
+                    우리 자신의 민낯을 직시해야 한다.
                 </p>
             </div>
         </section>
 
         <!-- 푸터 -->
         <footer class="footer">
-            <p class="footer-quote">
-                "월량대표아적심(月亮代表我的心)"<br>
-                달이 내 마음을 대변한다
-            </p>
-            <div class="divider"></div>
-            <p class="footer-info">
-                뮤직살롱 | 등려군의 이야기
+            <p class="footer-text">
+                생성형 AI 시대의 지성에 대한 성찰<br>
+                인포그래픽 포스터 + 대시보드 형식<br>
+                테크 그래디언트 색상 테마
             </p>
         </footer>
     </div>
 
     <script>
-        // 별 생성
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            const numberOfStars = 100;
-
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                star.style.opacity = Math.random() * 0.7 + 0.3;
-                starsContainer.appendChild(star);
-            }
-        }
-
         // Intersection Observer for scroll animations
         function setupScrollAnimations() {
             const options = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+                threshold: 0.15,
+                rootMargin: '0px 0px -80px 0px'
             };
 
             const observer = new IntersectionObserver((entries) => {
@@ -730,19 +702,18 @@
                 });
             }, options);
 
-            // Observe all fade-in elements
-            document.querySelectorAll('.fade-in, .section').forEach(el => {
+            // Observe all animated elements
+            document.querySelectorAll('.section, .fade-up, .dashboard').forEach(el => {
                 observer.observe(el);
             });
         }
 
-        // Initialize
+        // Initialize on DOM ready
         document.addEventListener('DOMContentLoaded', () => {
-            createStars();
             setupScrollAnimations();
         });
 
-        // Smooth scroll enhancement
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
