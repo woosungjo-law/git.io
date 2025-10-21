@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>거울 앞에 선 인간, 그 '똑똑함'의 민낯</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>[3분 뉴스브리핑] 미국은 지금 왕을 원하는가?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,40 +13,44 @@
         }
 
         :root {
-            --primary: #667EEA;
-            --secondary: #764BA2;
-            --accent: #F093FB;
-            --dark: #1a1a2e;
-            --darker: #0f0f1e;
-            --text-light: #e0e0e0;
-            --text-dim: #a0a0b0;
+            --primary: #3498DB;
+            --secondary: #2C3E50;
+            --light: #ECF0F1;
+            --accent: #5DADE2;
+            --dark-bg: #1A252F;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --border: #BDC3C7;
+            --success: #27AE60;
+            --warning: #E74C3C;
         }
 
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, #2a1a3e 100%);
-            color: var(--text-light);
+            font-family: 'Noto Sans KR', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
             line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* 배경 애니메이션 */
+        /* 배경 패턴 */
         .bg-pattern {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.03;
+            opacity: 0.05;
             background-image:
-                repeating-linear-gradient(45deg, transparent, transparent 35px, var(--primary) 35px, var(--primary) 36px),
-                repeating-linear-gradient(-45deg, transparent, transparent 35px, var(--accent) 35px, var(--accent) 36px);
+                linear-gradient(30deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary)),
+                linear-gradient(150deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary));
+            background-size: 80px 140px;
             pointer-events: none;
             z-index: 0;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
@@ -56,83 +60,143 @@
         /* 헤더 */
         .header {
             text-align: center;
-            padding: 80px 20px 60px;
-            position: relative;
+            padding: 60px 20px 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(52, 152, 219, 0.15);
+            margin-bottom: 40px;
             opacity: 0;
-            animation: fadeIn 1s ease forwards;
+            animation: fadeInDown 0.8s ease forwards;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .mirror-icon {
-            font-size: 70px;
+        .header-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: clamp(12px, 2vw, 14px);
+            font-weight: 700;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.5));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            letter-spacing: 1px;
         }
 
         .main-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(28px, 5.5vw, 52px);
+            font-size: clamp(28px, 5vw, 48px);
             font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 30px;
-            letter-spacing: -1px;
-            line-height: 1.3;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            line-height: 1.2;
         }
 
-        .quote-box {
-            background: rgba(102, 126, 234, 0.1);
-            border: 2px solid rgba(102, 126, 234, 0.3);
-            border-radius: 20px;
-            padding: 30px 40px;
-            margin: 40px auto;
-            max-width: 700px;
+        .title-highlight {
+            color: var(--primary);
             position: relative;
-            backdrop-filter: blur(10px);
+            display: inline-block;
         }
 
-        .quote-box::before {
-            content: '"';
+        .title-highlight::after {
+            content: '';
             position: absolute;
-            top: -10px;
-            left: 20px;
-            font-size: 80px;
-            color: rgba(102, 126, 234, 0.2);
-            font-family: serif;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
         }
 
-        .quote-text {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(18px, 3.5vw, 28px);
-            font-weight: 700;
-            color: white;
-            text-align: center;
-            position: relative;
+        .header-meta {
+            font-size: clamp(14px, 2.5vw, 16px);
+            color: var(--text-light);
+            margin-top: 20px;
         }
 
         .divider {
-            width: 120px;
+            width: 80px;
             height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
-            margin: 50px auto;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 30px auto;
         }
 
-        /* 섹션 공통 스타일 */
-        .section {
-            margin: 80px 0;
+        /* 대시보드 통계 */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(20px);
+        }
+
+        .stat-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 8px rgba(52, 152, 219, 0.3));
+        }
+
+        .stat-number {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 10px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .stat-label {
+            font-size: clamp(14px, 2.5vw, 16px);
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .stat-sublabel {
+            font-size: clamp(12px, 2vw, 14px);
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+
+        /* 섹션 */
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 35px;
+            margin: 30px 0;
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
             transition: all 0.8s ease;
         }
 
@@ -141,232 +205,61 @@
             transform: translateY(0);
         }
 
-        .section-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(24px, 4vw, 36px);
-            font-weight: 700;
-            color: white;
-            margin-bottom: 30px;
+        .section-header {
             display: flex;
             align-items: center;
             gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--light);
         }
 
-        .section-icon {
-            font-size: 32px;
-            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
-        }
-
-        /* 카드 스타일 */
-        .card {
-            background: rgba(26, 26, 46, 0.6);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            border-radius: 20px;
-            padding: 35px;
-            margin: 25px 0;
-            backdrop-filter: blur(15px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-        }
-
-        .card-content {
-            font-size: clamp(15px, 2.5vw, 17px);
-            line-height: 1.9;
-            color: var(--text-light);
-        }
-
-        .card-content strong {
-            color: white;
-            font-weight: 700;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, rgba(240, 147, 251, 0.3) 0%, rgba(102, 126, 234, 0.3) 100%);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-            color: white;
-        }
-
-        /* 대시보드 비교 섹션 */
-        .dashboard {
-            background: rgba(15, 15, 30, 0.8);
-            border: 2px solid rgba(102, 126, 234, 0.3);
-            border-radius: 25px;
-            padding: 50px 30px;
-            margin: 60px 0;
-            backdrop-filter: blur(20px);
-        }
-
-        .dashboard-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(26px, 4.5vw, 40px);
-            font-weight: 900;
-            text-align: center;
+        .section-number {
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 50px;
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .comparison-card {
-            background: rgba(26, 26, 46, 0.5);
-            border-radius: 20px;
-            padding: 35px 25px;
-            text-align: center;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .comparison-card.ai {
-            border-color: rgba(102, 126, 234, 0.4);
-        }
-
-        .comparison-card.human {
-            border-color: rgba(240, 147, 251, 0.4);
-        }
-
-        .comparison-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
-        }
-
-        .comparison-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
-        }
-
-        .comparison-label {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(22px, 4vw, 28px);
-            font-weight: 700;
             color: white;
-            margin-bottom: 20px;
-        }
-
-        .comparison-items {
-            text-align: left;
-            margin-top: 20px;
-        }
-
-        .comparison-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin: 12px 0;
-            font-size: clamp(14px, 2.5vw, 16px);
-            color: var(--text-light);
-        }
-
-        .comparison-item::before {
-            content: '•';
-            color: var(--accent);
-            font-size: 24px;
-            line-height: 1;
-        }
-
-        .vs-divider {
-            text-align: center;
-            font-size: clamp(40px, 8vw, 60px);
-            font-weight: 900;
-            color: rgba(102, 126, 234, 0.3);
-            margin: 30px 0;
-            font-family: 'Noto Serif KR', serif;
-        }
-
-        /* 키 포인트 */
-        .key-point {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(240, 147, 251, 0.15));
-            border-left: 5px solid var(--accent);
-            border-radius: 15px;
-            padding: 30px 35px;
-            margin: 30px 0;
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(17px, 3vw, 22px);
-            font-weight: 600;
-            color: white;
-            line-height: 1.8;
-            position: relative;
-        }
-
-        .key-point::before {
-            content: '💡';
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 40px;
-            opacity: 0.3;
-        }
-
-        /* 지성의 재정의 - 타임라인 */
-        .evolution {
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 30px;
-            margin: 40px 0;
-            flex-wrap: wrap;
+            font-size: 24px;
+            font-weight: 900;
+            flex-shrink: 0;
         }
 
-        .evolution-item {
-            background: rgba(26, 26, 46, 0.6);
-            border: 2px solid rgba(102, 126, 234, 0.3);
-            border-radius: 15px;
-            padding: 25px 30px;
-            text-align: center;
-            min-width: 200px;
-            position: relative;
-        }
-
-        .evolution-old {
-            opacity: 0.6;
-            border-color: rgba(160, 160, 176, 0.3);
-        }
-
-        .evolution-label {
-            font-size: clamp(12px, 2vw, 14px);
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .evolution-text {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(20px, 3.5vw, 28px);
+        .section-title {
+            font-size: clamp(22px, 4vw, 32px);
             font-weight: 700;
-            color: white;
+            color: var(--secondary);
         }
 
-        .evolution-arrow {
-            font-size: 40px;
-            color: var(--accent);
+        .section-content {
+            font-size: clamp(15px, 2.5vw, 17px);
+            line-height: 1.9;
+            color: var(--text-dark);
         }
 
-        /* 리스트 스타일 */
+        .section-content p {
+            margin-bottom: 15px;
+        }
+
+        /* 하이라이트 박스 */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(93, 173, 226, 0.1));
+            border-left: 5px solid var(--primary);
+            border-radius: 10px;
+            padding: 25px 30px;
+            margin: 25px 0;
+            font-size: clamp(16px, 3vw, 18px);
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* 리스트 */
         .styled-list {
             list-style: none;
-            margin: 25px 0;
+            margin: 20px 0;
         }
 
         .styled-list li {
@@ -374,8 +267,7 @@
             align-items: flex-start;
             gap: 15px;
             margin: 15px 0;
-            font-size: clamp(15px, 2.5vw, 17px);
-            color: var(--text-light);
+            padding-left: 10px;
         }
 
         .styled-list li::before {
@@ -385,99 +277,206 @@
             flex-shrink: 0;
         }
 
-        /* 결론 섹션 */
-        .conclusion {
-            background: linear-gradient(135deg, rgba(118, 75, 162, 0.2), rgba(102, 126, 234, 0.2));
-            border: 2px solid rgba(240, 147, 251, 0.4);
+        .styled-list strong {
+            color: var(--secondary);
+        }
+
+        /* 전문가 카드 */
+        .expert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .expert-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid var(--light);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .expert-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 60px;
+            color: rgba(52, 152, 219, 0.15);
+            font-family: serif;
+        }
+
+        .expert-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .expert-name {
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .expert-title {
+            font-size: clamp(13px, 2.5vw, 15px);
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .expert-quote {
+            font-size: clamp(14px, 2.5vw, 16px);
+            color: var(--text-dark);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 타임라인 스타일 (날짜 표시) */
+        .timeline-marker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--secondary);
+            color: white;
+            padding: 10px 20px;
             border-radius: 25px;
+            font-size: clamp(14px, 2.5vw, 16px);
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .timeline-marker::before {
+            content: '📅';
+            font-size: 20px;
+        }
+
+        /* 키 포인트 */
+        .key-point {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 15px;
+            padding: 30px 35px;
+            margin: 30px 0;
+            font-size: clamp(17px, 3vw, 20px);
+            font-weight: 600;
+            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+        }
+
+        /* 결론/전망 섹션 */
+        .conclusion {
+            background: linear-gradient(135deg, var(--secondary), #34495e);
+            color: white;
+            border-radius: 20px;
             padding: 50px 40px;
-            margin: 60px 0;
+            margin: 40px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
         .conclusion::before {
-            content: '🪞';
+            content: '⚖️';
             position: absolute;
             top: -30px;
-            right: -30px;
-            font-size: 200px;
+            right: -20px;
+            font-size: 180px;
             opacity: 0.05;
-            transform: rotate(15deg);
+            transform: rotate(-15deg);
+        }
+
+        .conclusion-title {
+            font-size: clamp(24px, 4.5vw, 36px);
+            font-weight: 900;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
         }
 
         .conclusion-text {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(18px, 3.5vw, 24px);
-            font-weight: 600;
-            color: white;
+            font-size: clamp(16px, 3vw, 18px);
             line-height: 1.9;
             position: relative;
             z-index: 1;
         }
 
+        /* 뱃지 */
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: clamp(12px, 2vw, 14px);
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .badge-blue {
+            background: rgba(52, 152, 219, 0.15);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .badge-red {
+            background: rgba(231, 76, 60, 0.15);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
         /* 푸터 */
         .footer {
             text-align: center;
-            padding: 60px 20px 40px;
-            margin-top: 80px;
-            border-top: 1px solid rgba(102, 126, 234, 0.2);
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 2px solid var(--light);
+            background: white;
+            border-radius: 20px;
         }
 
         .footer-text {
             font-size: clamp(14px, 2.5vw, 16px);
-            color: var(--text-dim);
+            color: var(--text-light);
             line-height: 1.8;
+        }
+
+        .footer-author {
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 10px;
         }
 
         /* 모바일 최적화 */
         @media (max-width: 768px) {
             .header {
-                padding: 60px 15px 40px;
+                padding: 40px 20px 30px;
             }
 
-            .mirror-icon {
-                font-size: 50px;
+            .section {
+                padding: 30px 20px;
             }
 
-            .quote-box {
-                padding: 25px 30px;
-            }
-
-            .card {
-                padding: 25px 20px;
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
             }
 
             .dashboard {
-                padding: 40px 20px;
-            }
-
-            .comparison-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
             }
 
-            .vs-divider {
-                margin: 20px 0;
-                transform: rotate(90deg);
-            }
-
-            .evolution {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .evolution-arrow {
-                transform: rotate(90deg);
+            .expert-grid {
+                grid-template-columns: 1fr;
             }
 
             .conclusion {
                 padding: 35px 25px;
-            }
-
-            .section {
-                margin: 50px 0;
             }
         }
 
@@ -492,6 +491,13 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* 인용 스타일 */
+        .quote-mark {
+            color: var(--primary);
+            font-size: 1.3em;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -500,178 +506,186 @@
     <div class="container">
         <!-- 헤더 -->
         <header class="header">
-            <div class="mirror-icon">🪞</div>
-            <h1 class="main-title">거울 앞에 선 인간,<br>그 '똑똑함'의 민낯</h1>
-            <div class="quote-box">
-                <p class="quote-text">그애는 똑똑한 게 아니라<br>많이 알 뿐이야</p>
-            </div>
+            <div class="header-badge">3분 뉴스브리핑</div>
+            <h1 class="main-title">
+                미국은 지금 <span class="title-highlight">"왕"</span>을 원하는가?
+            </h1>
             <div class="divider"></div>
+            <div class="timeline-marker">2025년 10월 18일</div>
+            <p class="header-meta">미국 역사상 최대 규모의 평화 시위 'No Kings'</p>
         </header>
 
-        <!-- 섹션 1: AI의 능력 -->
-        <section class="section fade-up">
-            <h2 class="section-title">
-                <span class="section-icon">🤖</span>
-                전지(全知)에 가까운 존재
-            </h2>
-            <div class="card">
-                <div class="card-content">
-                    <p>생성형 AI가 토해내는 문장은 유려하고 그 지식은 광대하다. 우리는 그 속도와 박식함에 경탄하고, 때로 현기증을 느낀다.</p>
-                    <p style="margin-top: 15px;">AI는 <strong>인류가 쌓아 올린 텍스트의 산을 모조리 삼켰다.</strong> 바다보다 깊은 데이터 속을 맹렬히 헤엄친다. 무엇을 물어도 답은 즉각이다. 그 모습은 전지에 가까워 보인다.</p>
-                </div>
+        <!-- 대시보드: 핵심 통계 -->
+        <section class="dashboard">
+            <div class="stat-card fade-up">
+                <div class="stat-icon">👥</div>
+                <span class="stat-number">700만</span>
+                <div class="stat-label">시위 참여자</div>
+                <div class="stat-sublabel">조직위원회 발표</div>
+            </div>
+            <div class="stat-card fade-up" style="animation-delay: 0.1s;">
+                <div class="stat-icon">📍</div>
+                <span class="stat-number">2,700+</span>
+                <div class="stat-label">시위 장소</div>
+                <div class="stat-sublabel">전국 규모</div>
+            </div>
+            <div class="stat-card fade-up" style="animation-delay: 0.2s;">
+                <div class="stat-icon">🕊️</div>
+                <span class="stat-number">0</span>
+                <div class="stat-label">체포자 (뉴욕)</div>
+                <div class="stat-sublabel">평화 시위</div>
+            </div>
+            <div class="stat-card fade-up" style="animation-delay: 0.3s;">
+                <div class="stat-icon">📊</div>
+                <span class="stat-number">3.5%</span>
+                <div class="stat-label">변화의 임계점</div>
+                <div class="stat-sublabel">약 1,100만 명</div>
             </div>
         </section>
 
-        <!-- 섹션 2: AI의 한계 -->
+        <!-- 섹션 1: 무슨 일? -->
         <section class="section fade-up">
-            <h2 class="section-title">
-                <span class="section-icon">🚫</span>
-                거대한 저장소, 그러나
-            </h2>
-            <div class="card">
-                <div class="card-content">
-                    <p>하지만 그 안에는 <span class="highlight">'앎'의 주체가 없다.</span> 그것은 지식의 거대한 저장소이지, 지혜의 발원지가 아니다.</p>
-                </div>
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">무슨 일?</h2>
             </div>
-            <ul class="styled-list">
-                <li>스스로의 '왜'가 없다</li>
-                <li>가치를 재는 저울이 없다</li>
-                <li>맥락을 꿰뚫는 통찰이 없다</li>
-                <li>윤리적 고뇌도, 미학적 결단도 없다</li>
-            </ul>
-            <div class="key-point">
-                방대한 기억의 창고에서 가장 그럴듯한 확률의 조각을 엮어낼 뿐이다.<br>
-                그것은 지능의 정교한 흉내일 뿐, 지능 그 자체가 아니다. <strong>영혼 없는 메아리다.</strong>
+            <div class="section-content">
+                <p>10월 18일 토요일, 조직위원회 발표에 따르면 약 <strong>700만 명</strong>이 전국 <strong>2,700개 이상의 장소</strong>에서 'No Kings' 시위에 참여했습니다.</p>
+
+                <div class="highlight-box">
+                    <strong>규모 비교:</strong> 이는 4개월 전인 6월 14일에 열렸던 첫 번째 No Kings 시위(약 500만 명 참여, 2,100개 이상 장소)보다 훨씬 큰 규모입니다.
+                </div>
+
+                <ul class="styled-list">
+                    <li><strong>뉴욕시:</strong> 5개 자치구에서 약 10만 명 참여, 체포자 0명</li>
+                    <li><strong>샌디에이고:</strong> 수만 명 참여</li>
+                    <li><strong>로스앤젤레스:</strong> 살사 밴드 연주와 함께 축제 분위기</li>
+                    <li><strong>테네시주:</strong> 33개 도시, 내슈빌 7,000명, 멤피스 7,000명</li>
+                    <li><strong>텍사스 사이프러스:</strong> 1,000명 이상, 성조기를 흔들며 애국심 표현</li>
+                </ul>
+
+                <p style="margin-top: 20px;">수백만 명의 미국인들이 거리로 나섰습니다. 그들이 외치는 구호는 단 하나, <span class="quote-mark">"No Kings(왕은 안 돼)"</span>.</p>
             </div>
         </section>
 
-        <!-- 대시보드: AI vs 인간 -->
-        <section class="dashboard fade-up">
-            <h2 class="dashboard-title">많이 아는 것 vs 똑똑한 것</h2>
+        <!-- 섹션 2: 왜 중요? -->
+        <section class="section fade-up">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">왜 중요?</h2>
+            </div>
+            <div class="section-content">
+                <p>시위대가 거리로 나선 이유는 명확합니다:</p>
 
-            <div class="comparison-grid">
-                <div class="comparison-card ai">
-                    <div class="comparison-icon">🤖</div>
-                    <div class="comparison-label">AI: 많이 앎</div>
-                    <div class="comparison-items">
-                        <div class="comparison-item">방대한 지식의 저장소</div>
-                        <div class="comparison-item">즉각적인 답변 생성</div>
-                        <div class="comparison-item">높은 확률의 조합</div>
-                        <div class="comparison-item">주체 없는 앎</div>
-                        <div class="comparison-item">맥락 없는 정보</div>
+                <div class="highlight-box">
+                    트럼프 대통령이 수백 건의 행정명령을 통해 행정권을 확대하고, 캘리포니아 주지사의 반대에도 불구하고 주 방위군을 연방화하는 등 <strong>전례 없는 대통령 권한 행사</strong>를 해왔다는 우려
+                </div>
+
+                <p><strong>주요 동인:</strong></p>
+                <ul class="styled-list">
+                    <li>이민 단속 강화</li>
+                    <li>메디케이드를 포함한 연방 프로그램 삭감</li>
+                    <li>연방정부 셧다운 (18일째 지속)</li>
+                </ul>
+
+                <div style="margin: 25px 0; padding: 20px; background: #fff3cd; border-left: 5px solid #ffc107; border-radius: 10px;">
+                    <p style="margin: 0; font-weight: 600; color: #856404;">
+                        시위 조직위원회: "트럼프 대통령이 공개적으로 3선을 원한다고 말했으며, 이미 군주처럼 행동하고 있다"
+                    </p>
+                </div>
+
+                <p><strong>하버드 대학 연구 결과:</strong></p>
+                <ul class="styled-list">
+                    <li>2025년 시위는 2017년 트럼프 1기 행정부 때보다 훨씬 광범위하고 지속적</li>
+                    <li>트럼프가 승리한 보수 지역에서도 활발하게 발생</li>
+                    <li><strong>사례:</strong> 테네시주 킹스포트 - 인구의 약 10%인 2,000명 참여 (트럼프가 54%포인트 차이로 승리한 지역)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 섹션 3: 전문가들은? -->
+        <section class="section fade-up">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">전문가들은?</h2>
+            </div>
+
+            <div class="expert-grid">
+                <div class="expert-card">
+                    <div class="expert-name">에리카 체노웨스</div>
+                    <div class="expert-title">하버드대 비폭력행동연구소 소장</div>
+                    <div class="expert-quote">
+                        <p><strong>평화적 저항이 폭력적 저항보다 성공 확률이 두 배 높다</strong>는 연구 결과를 발표했습니다.</p>
+                        <p style="margin-top: 12px;">인구의 <span class="badge badge-blue">3.5%</span>가 지속적인 시민 저항에 참여하면 극적인 정치적 변화가 가능 (미국의 경우 약 1,100만 명).</p>
+                        <p style="margin-top: 12px; font-size: 0.95em; color: var(--text-light);">※ 다만 3.5%는 하나의 기준점일 뿐, 조직력, 전략적 리더십, 지속가능성 등도 운동 성공에 중요</p>
                     </div>
                 </div>
 
-                <div class="comparison-card human">
-                    <div class="comparison-icon">🧠</div>
-                    <div class="comparison-label">인간: 똑똑함</div>
-                    <div class="comparison-items">
-                        <div class="comparison-item">질문을 던지는 능력</div>
-                        <div class="comparison-item">가치 판단의 저울</div>
-                        <div class="comparison-item">맥락의 통찰</div>
-                        <div class="comparison-item">윤리적 고뇌</div>
-                        <div class="comparison-item">책임을 지는 주체</div>
+                <div class="expert-card">
+                    <div class="expert-name">에즈라 레빈</div>
+                    <div class="expert-title">Indivisible 공동설립자</div>
+                    <div class="expert-quote">
+                        <p><span class="quote-mark">"</span>이번 동원은 트럼프의 상승이 막을 수 없다는 신화를 깨뜨리는 것입니다.</p>
+                        <p style="margin-top: 12px;"><strong>민주주의는 이를 지키려는 사람들만큼만 강합니다</strong><span class="quote-mark">"</span></p>
+                    </div>
+                </div>
+
+                <div class="expert-card">
+                    <div class="expert-name">마이크 존슨</div>
+                    <div class="expert-title">공화당 하원의장</div>
+                    <div class="expert-quote">
+                        <p>시위를 <span class="badge badge-red">"미국 증오 집회"</span>라고 비난하며, 참가자들을 "공산주의자", "마르크스주의자"로 규정했습니다.</p>
+                        <p style="margin-top: 12px;"><span class="quote-mark">"</span>antifa 유형, 자본주의를 싫어하는 사람들이 나올 것<span class="quote-mark">"</span></p>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="vs-divider">VS</div>
-
-            <div class="key-point" style="margin-top: 40px;">
-                AI는 맹목의 칼이다. 쥐는 자의 의도에 따라 춤춘다.<br>
-                칼이 날카롭다고 해서 칼잡이가 명인이 되는 것은 아니다.
+        <!-- 섹션 4: 요약 -->
+        <section class="section fade-up">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">요약</h2>
+            </div>
+            <div class="key-point">
+                미국 역사상 최대 규모의 평화 시위 중 하나인 'No Kings' 운동은 행정권 확대에 대한 우려를 표현하며, <strong>좌우를 막론하고 민주주의 수호에 대한 미국인들의 열망</strong>을 보여주고 있다.
             </div>
         </section>
 
-        <!-- 섹션 3: 인간의 역할 -->
+        <!-- 섹션 5: 전망 -->
         <section class="section fade-up">
-            <h2 class="section-title">
-                <span class="section-icon">⚖️</span>
-                부리는 사람이 똑똑해야 한다
-            </h2>
-            <div class="card">
-                <div class="card-content">
-                    <p>여기서 문명의 무게추는 다시 인간에게로 세차게 기운다. 결국 <strong>'부리는 사람'이 똑똑해야 한다</strong>는 준엄한 명제에 다다른다.</p>
-                    <p style="margin-top: 15px;">명령하는 자, 즉 <span class="highlight">프롬프트를 입력하는 인간의 지성</span>이 이 도구의 한계와 효용을 결정한다.</p>
-                </div>
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="section-title">전망</h2>
             </div>
-            <div class="card">
-                <div class="card-content">
-                    <ul class="styled-list">
-                        <li><strong>흐릿한 질문</strong>은 흐릿한 답을 낳을 뿐이다</li>
-                        <li><strong>깊이 없는 요구</strong>는 얕은 모방만을 가져온다</li>
-                        <li>AI는 스스로 질문을 던지지 못한다</li>
-                        <li>AI는 목적을 설정하지 못한다</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="key-point">
-                그것은 거대한 도서관이되, <strong>방향을 제시할 사서가 없는 도서관</strong>이다.<br>
-                그 사서의 역할이 바로 인간이다.
-            </div>
-        </section>
+            <div class="section-content">
+                <p>이번 시위의 진정한 영향은 앞으로 몇 주 동안 드러날 것입니다.</p>
 
-        <!-- 섹션 4: 지성의 재정의 -->
-        <section class="section fade-up">
-            <h2 class="section-title">
-                <span class="section-icon">🔄</span>
-                지성의 재정의
-            </h2>
-            <div class="card">
-                <div class="card-content">
-                    <p>우리는 오랫동안 <strong>'아는 것'</strong>을 지성의 척도로 삼았다. 암기하고, 기억하고, 인출하는 능력. AI는 이 영역에서 인간을 압도적으로 추월했다.</p>
-                    <p style="margin-top: 15px;"><span class="highlight">이제 지성의 정의가 바뀐다.</span></p>
+                <div class="highlight-box">
+                    <strong>주목해야 할 점:</strong> 이 운동이 단발성 이벤트로 끝날지, 아니면 지속적인 유권자 등록, 로비 활동, 지역사회 조직화로 이어질지
                 </div>
-            </div>
 
-            <div class="evolution">
-                <div class="evolution-item evolution-old">
-                    <div class="evolution-label">과거의 지성</div>
-                    <div class="evolution-text">앎<br>Knowing</div>
-                </div>
-                <div class="evolution-arrow">→</div>
-                <div class="evolution-item">
-                    <div class="evolution-label">새로운 지성</div>
-                    <div class="evolution-text">물음 + 판단<br>Questioning<br>Judging</div>
-                </div>
-            </div>
+                <ul class="styled-list">
+                    <li>하버드-코네티컷대 Crowd Counting Consortium은 몇 주 내에 <strong>독립적인 참가자 추정치</strong>를 발표할 예정</li>
+                    <li>역사가 증명하듯, 다양한 배경의 평범한 사람들이 함께할 때 - 간호사, 교사, 퇴직자, 경찰까지 - <strong>역사의 전환점</strong>이 만들어집니다</li>
+                    <li>정치적 양극화가 심화된 상황에서 이 운동이 실질적 정치 변화로 이어질지, 아니면 표현의 자유 행사로 남을지는 여전히 불확실</li>
+                </ul>
 
-            <div class="card" style="margin-top: 40px;">
-                <div class="card-content">
-                    <p>AI라는 거대한 지식의 산 앞에서 인간이 해야 할 일:</p>
-                    <ul class="styled-list" style="margin-top: 20px;">
-                        <li><strong>방향을 가리키는 나침반</strong>이 되는 것</li>
-                        <li><strong>진실을 가려내는 체</strong>가 되는 것</li>
-                        <li>흩어진 정보를 엮어 <strong>새로운 가치를 창조</strong>하는 것</li>
-                        <li>그 결과에 <strong>책임을 지는 것</strong></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="key-point">
-                그것이 '많이 아는 것'과 구별되는<br>
-                <strong>'진짜 똑똑함'의 본질</strong>이다.
+                <p style="margin-top: 25px; font-style: italic; color: var(--text-light);">
+                    이번 시위는 미국 민주주의의 회복력과 시민들의 참여 의지를 시험하는 중요한 순간이 될 것입니다.
+                </p>
             </div>
         </section>
 
         <!-- 결론 -->
         <section class="conclusion fade-up">
+            <div class="conclusion-title">⚖️ 민주주의의 가치</div>
             <div class="conclusion-text">
-                <p>"많이 아는 아이"는 강력한 부하다.<br>
-                그러나 현명한 주인을 만나지 못하면,<br>
-                그저 시끄러운 백과사전에 불과하다.</p>
-
-                <div class="divider" style="margin: 40px auto;"></div>
-
-                <p style="margin-top: 30px;">
-                    <strong>AI의 시대는 역설적으로<br>
-                    인간 고유의 지성, 그 '똑똑함'의 가치를 묻는 시대이다.</strong>
-                </p>
-
-                <p style="margin-top: 30px; font-size: clamp(20px, 4vw, 28px); font-weight: 700;">
-                    🪞 AI는 거울이다.<br>
-                    우리는 그 거울에 비친<br>
-                    우리 자신의 민낯을 직시해야 한다.
+                <p>700만 명의 목소리는 단순한 숫자가 아닙니다.</p>
+                <p style="margin-top: 20px;">그것은 민주주의를 지키려는 시민들의 의지이며,<br>
+                권력의 견제와 균형이라는 건국 정신에 대한 재확인입니다.</p>
+                <p style="margin-top: 20px; font-size: 1.2em; font-weight: 700;">
+                    "No Kings" - 왕은 없다, 오직 국민만이 있다.
                 </p>
             </div>
         </section>
@@ -679,10 +693,10 @@
         <!-- 푸터 -->
         <footer class="footer">
             <p class="footer-text">
-                생성형 AI 시대의 지성에 대한 성찰<br>
                 인포그래픽 포스터 + 대시보드 형식<br>
-                테크 그래디언트 색상 테마
+                프로페셔널 블루 색상 테마
             </p>
+            <p class="footer-author">(2025. 10. 19. 조우성 변호사 작성)</p>
         </footer>
     </div>
 
@@ -695,22 +709,36 @@
             };
 
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
+                entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                        // 순차적 애니메이션을 위한 지연
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 100);
                     }
                 });
             }, options);
 
             // Observe all animated elements
-            document.querySelectorAll('.section, .fade-up, .dashboard').forEach(el => {
+            document.querySelectorAll('.section, .fade-up, .stat-card').forEach(el => {
                 observer.observe(el);
+            });
+        }
+
+        // Stat cards sequential animation
+        function animateStatCards() {
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, 200 + (index * 150));
             });
         }
 
         // Initialize on DOM ready
         document.addEventListener('DOMContentLoaded', () => {
             setupScrollAnimations();
+            animateStatCards();
         });
 
         // Smooth scroll for anchor links
