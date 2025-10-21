@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>월량대표아적심 - 버려질 뻔한 선율이 영원이 되기까지</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,507 +12,749 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --night-sky: #0A0E27;
+            --deep-blue: #1A1F3A;
+            --moon-gold: #FFD700;
+            --moon-silver: #E8E8E8;
+            --text-light: #C5C9D8;
+            --accent-pink: #FF6B9D;
+            --accent-blue: #4A90E2;
+        }
+
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(180deg, #0A0E27 0%, #1A1F3A 50%, #2D1B3D 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 별똥별 배경 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
+            padding: 20px;
             position: relative;
-            overflow-y: auto;
+            z-index: 1;
         }
 
+        /* 헤더 */
         .header {
             text-align: center;
-            margin-bottom: 35px;
+            padding: 60px 20px 40px;
             position: relative;
+            opacity: 0;
+            animation: fadeInDown 1.2s ease forwards;
         }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .moon-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px var(--moon-gold));
+            animation: moonRise 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes moonRise {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
         }
 
         .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(28px, 6vw, 48px);
             font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            color: var(--moon-gold);
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            letter-spacing: -1px;
         }
 
         .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
+            font-size: clamp(14px, 3vw, 18px);
+            color: var(--moon-silver);
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 20px;
         }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
+        .divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--moon-gold), transparent);
+            margin: 30px auto;
         }
 
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s ease;
+        /* 섹션 공통 스타일 */
+        .section {
+            margin: 60px 0;
+            padding: 40px 30px;
+            background: rgba(26, 31, 58, 0.6);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
         }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
-        }
-
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(22px, 4vw, 32px);
             font-weight: 700;
-            color: #1A2A57;
+            color: var(--moon-gold);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 28px;
         }
 
         .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
+            font-size: clamp(14px, 2.5vw, 16px);
+            line-height: 1.9;
+            color: var(--text-light);
         }
 
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
+        /* 타임라인 */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
         }
 
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--moon-gold), var(--accent-pink));
+            transform: translateX(-50%);
         }
 
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
             position: relative;
         }
 
-        .flow-step::after {
-            content: '→';
-            position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
         }
 
-        .flow-step:last-child::after {
-            display: none;
-        }
-
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
-        }
-
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
-
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
-
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
-
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .fact-item {
-            text-align: center;
-        }
-
-        .fact-number {
-            font-size: 24px;
+        .timeline-year {
+            flex: 0 0 45%;
+            text-align: right;
+            padding-right: 40px;
+            font-size: clamp(24px, 5vw, 36px);
             font-weight: 900;
-            color: #D4AF37;
-            display: block;
+            color: var(--moon-gold);
+            font-family: 'Noto Serif KR', serif;
         }
 
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
+        .timeline-item:nth-child(even) .timeline-year {
+            text-align: left;
+            padding-left: 40px;
+            padding-right: 0;
         }
 
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
+        .timeline-content {
+            flex: 0 0 45%;
+            background: rgba(74, 144, 226, 0.1);
+            padding: 20px 25px;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-blue);
+            position: relative;
         }
 
-        .conclusion-title {
-            font-size: 16px;
+        .timeline-item:nth-child(even) .timeline-content {
+            border-left: none;
+            border-right: 4px solid var(--accent-pink);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: var(--moon-gold);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--moon-gold);
+            z-index: 2;
+        }
+
+        .timeline-title {
             font-weight: 700;
-            color: #1A2A57;
+            font-size: clamp(16px, 3vw, 18px);
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: clamp(13px, 2.5vw, 15px);
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* 하이라이트 박스 */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(74, 144, 226, 0.15));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 120px;
+            color: rgba(255, 215, 0, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .highlight-text {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(16px, 3.5vw, 22px);
+            font-weight: 600;
+            color: white;
+            line-height: 1.8;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 통계 그리드 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 900;
+            color: var(--moon-gold);
+            font-family: 'Noto Serif KR', serif;
+            display: block;
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
         }
 
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
+        .stat-label {
+            font-size: clamp(13px, 2.5vw, 15px);
+            color: var(--text-light);
+            font-weight: 400;
         }
 
+        /* 스토리 카드 */
+        .story-card {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8), rgba(45, 27, 61, 0.6));
+            border-radius: 20px;
+            padding: 35px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card::after {
+            content: '♪';
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            font-size: 120px;
+            color: rgba(255, 215, 0, 0.05);
+        }
+
+        .story-title {
+            font-size: clamp(18px, 3.5vw, 22px);
+            font-weight: 700;
+            color: var(--moon-gold);
+            margin-bottom: 15px;
+        }
+
+        .story-text {
+            font-size: clamp(14px, 2.5vw, 16px);
+            line-height: 1.9;
+            color: var(--text-light);
+        }
+
+        .story-text strong {
+            color: white;
+            font-weight: 700;
+        }
+
+        /* 푸터 */
         .footer {
             text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
+            padding: 60px 20px 40px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
         }
 
-        .footer-highlight {
-            color: #1A2A57;
-            font-weight: 700;
+        .footer-quote {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(16px, 3vw, 20px);
+            font-weight: 600;
+            color: var(--moon-silver);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-style: italic;
         }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
+        .footer-info {
+            font-size: clamp(12px, 2vw, 14px);
+            color: rgba(197, 201, 216, 0.6);
+            margin-top: 20px;
         }
 
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
-        }
-
+        /* 모바일 최적화 */
         @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
+            .header {
+                padding: 40px 15px 30px;
             }
-            
-            .content-grid {
+
+            .moon-icon {
+                font-size: 60px;
+            }
+
+            .section {
+                padding: 30px 20px;
+                margin: 40px 0;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+                padding-left: 60px;
+            }
+
+            .timeline-year {
+                text-align: left !important;
+                padding: 0 !important;
+                margin-bottom: 15px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                border-right: none;
+                border-left: 4px solid var(--accent-pink);
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .stats-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: 20px;
             }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
+
+            .highlight-box {
+                padding: 25px 20px;
             }
-            
-            .main-title {
-                font-size: 24px;
+
+            .story-card {
+                padding: 25px 20px;
             }
+        }
+
+        /* 스크롤 애니메이션 준비 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
+    <!-- 별 배경 -->
+    <div class="stars" id="stars"></div>
+
     <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
-        </div>
+        <!-- 헤더 -->
+        <header class="header">
+            <div class="moon-icon">🌙</div>
+            <h1 class="main-title">월량대표아적심</h1>
+            <p class="subtitle">
+                버려질 뻔한 선율이 영원이 되기까지<br>
+                등려군이 남긴 50년의 달빛
+            </p>
+            <div class="divider"></div>
+        </header>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
+        <!-- 인트로 섹션 -->
+        <section class="section fade-in">
+            <div class="highlight-box">
+                <p class="highlight-text">
+                    가장 깊은 감정은 언어의 끝에서 시작되고,<br>
+                    침묵 속에서 비로소 완성된다.
+                </p>
             </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
+            <div class="section-content">
+                <p>
+                    밤하늘의 달을 올려다본 적이 있는가. 그냥 그렇게, 말없이. 사랑에는 이상한 순간들이 있다.
+                    천 마디를 늘어놓아도 모자란 것 같다가도, 어떤 순간엔 단 한 마디도 입 밖으로 나오지 않는다.
+                </p>
+                <p style="margin-top: 15px;">
+                    그럴 때 우리는 무언가를 가리킨다. 저 달처럼 변하지 않는 무엇을.
+                </p>
             </div>
-        </div>
+        </section>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
+        <!-- 스토리 1: 버려질 뻔한 악보 -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <span class="section-icon">🎼</span>
+                보스턴 공원에서 쓰레기통으로 향하던 악보
+            </h2>
+            <div class="story-card">
+                <p class="story-text">
+                    <strong>1970년대 초 보스턴.</strong> 버클리 음대에서 공부하던 젊은 작곡가 <strong>옹청희</strong>는
+                    캠퍼스 근처 공원을 자주 거닐었다. 그곳에서 그는 멜로디를 적었다. 많이. 너무 많이 적어서
+                    정작 본인도 그 가치를 몰랐다.
+                </p>
             </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
+            <div class="story-card">
+                <p class="story-text">
+                    타이완으로 돌아온 옹청희는 실망스러운 악보 더미를 버리려 했다. 그 속에 이 곡이 있었다.
+                    작사가 <strong>손의</strong>가 우연히 그 악보를 발견하지 않았다면, 우리는 이 노래를 영영 듣지 못했을 것이다.
+                </p>
             </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
+            <div class="highlight-box">
+                <p class="highlight-text">
+                    위대한 예술은 종종 작가 자신도 알아보지 못한 채<br>
+                    쓰레기통 앞에서 구조된다.
+                </p>
             </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
+        </section>
 
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
+        <!-- 타임라인 섹션 -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <span class="section-icon">⏰</span>
+                침묵을 깬 3분 27초의 기적
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1972</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">진분란의 첫 도전</div>
+                        <div class="timeline-desc">
+                            진분란이 처음 이 노래를 불렀을 때, 사람들은 별 관심을 보이지 않았다.
+                            시대가 아직 준비되지 않았던 것일까.
+                        </div>
                     </div>
-                    <div class="section-title">보증보험 청구</div>
+                    <div class="timeline-dot"></div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
+                <div class="timeline-item">
+                    <div class="timeline-year">1977</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">등려군의 목소리를 만나다</div>
+                        <div class="timeline-desc">
+                            3분 27초. 왈츠 리듬. 그게 전부였는데, 전부가 달라졌다.
+                            등려군의 목소리는 달빛처럼 투명했고, 속삭임처럼 부드러웠다.
+                        </div>
                     </div>
-                    <div class="section-title">민사소송 & 가압류</div>
+                    <div class="timeline-dot"></div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
+                <div class="timeline-item">
+                    <div class="timeline-year">1978</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">중국 개방과 카세트테이프의 물결</div>
+                        <div class="timeline-desc">
+                            개방 정책이 시작되자, 카세트테이프들이 연안 도시에서 내륙으로 흘러갔다.
+                            "낮에는 덩샤오핑이 통치하고, 밤에는 덩(려군)이 통치한다."
+                        </div>
                     </div>
-                    <div class="section-title">사해행위 취소</div>
+                    <div class="timeline-dot"></div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
+                <div class="timeline-item">
+                    <div class="timeline-year">1989</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">천안문 광장의 노래</div>
+                        <div class="timeline-desc">
+                            민주화를 외치던 학생들을 위해 홍콩에서 30만 명 앞에 섰을 때도,
+                            등려군은 이 노래를 불렀다. 음악은 이념을 넘어섰다.
+                        </div>
                     </div>
-                    <div class="section-title">형사고소 검토</div>
+                    <div class="timeline-dot"></div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
-                </div>
-            </div>
-        </div>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
+                <div class="timeline-item">
+                    <div class="timeline-year">1995</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">떠난 가수, 남은 달빛</div>
+                        <div class="timeline-desc">
+                            등려군은 42세의 나이로 세상을 떠났다. 하지만 이상하게도 그녀가 남긴
+                            이 노래는 여전히 살아 숨 쉰다.
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
                 </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
+                <div class="timeline-item">
+                    <div class="timeline-year">2010</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">지난 30년간 최고의 중국 음악 1위</div>
+                        <div class="timeline-desc">
+                            수백 명의 가수가 이 노래를 불렀다. 전 세계 어디든 중국인이 있는 곳에서
+                            이 멜로디가 울려 퍼진다.
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
             </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
-        </div>
+        </section>
 
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
-        </div>
+        <!-- 문화적 영향 -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <span class="section-icon">🌏</span>
+                혁명 이후, 밤에 몰래 듣는 노래
+            </h2>
+            <div class="section-content">
+                <p>
+                    때는 1977년이었다. 중국 본토는 막 문화대혁명의 긴 터널을 빠져나오던 참이었다.
+                    30년 가까이 사람들은 혁명가요만 들었다. 개인의 감정 같은 건 '부르주아적 퇴폐'로 낙인찍히던 시절이었다.
+                </p>
+            </div>
+            <div class="highlight-box" style="margin-top: 25px;">
+                <p class="highlight-text">
+                    혁명은 대낮에 일어나지만,<br>
+                    진짜 변화는 사람들이 밤에 몰래 듣는 노래에서 시작된다.
+                </p>
+            </div>
+            <div class="section-content" style="margin-top: 25px;">
+                <p>
+                    달은 중국 문화에서 오래전부터 그리움의 상징이었다. 그런데 등려군은 그 오래된 은유를
+                    현대의 언어로 되살렸다. 그녀의 목소리는 마치 귀에 대고 직접 말을 거는 것 같았다.
+                </p>
+            </div>
+        </section>
+
+        <!-- 통계 -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <span class="section-icon">📊</span>
+                숫자로 보는 영원
+            </h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">50년</span>
+                    <div class="stat-label">사랑받은 시간</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">3:27</span>
+                    <div class="stat-label">노래 길이</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">수백명</span>
+                    <div class="stat-label">커버한 가수</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">수억명</span>
+                    <div class="stat-label">감동받은 청중</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 메시지 섹션 -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <span class="section-icon">💫</span>
+                언어가 멈추는 곳에서 음악이 시작되다
+            </h2>
+            <div class="section-content">
+                <p>
+                    이 노래는 왜 50년 가까이 사랑받는 걸까. 생각해보면 사랑은 우리를 자꾸 말을 잃게 만든다.
+                    가장 깊은 감정일수록 언어는 공허해진다.
+                </p>
+                <p style="margin-top: 15px;">
+                    그럴 때 우리는 무언가에 기대고 싶어진다. 달처럼 영원한 것, 달처럼 변하지 않는 것,
+                    달처럼 어디서나 같은 빛을 내는 것에.
+                </p>
+            </div>
+            <div class="highlight-box" style="margin-top: 25px;">
+                <p class="highlight-text">
+                    진짜 사랑은 화려한 수사가 아니라 변하지 않는 존재에 있고,<br>
+                    밤하늘에 항상 그 자리에 있는 달처럼 조용히 빛나는 것이다.
+                </p>
+            </div>
+        </section>
+
+        <!-- 마무리 -->
+        <section class="section fade-in">
+            <div class="story-card" style="background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2));">
+                <h3 class="story-title">🎵 한 조각 달빛</h3>
+                <p class="story-text">
+                    버려질 뻔했던 선율. 우연히 건져진 악보 한 장. 그것이 수억 명의 가슴속에서 영원이 됐다.
+                </p>
+                <p class="story-text" style="margin-top: 15px;">
+                    오늘 밤 당신이 사랑하는 누군가를 떠올리며 밤하늘을 올려다본다면,
+                    그 달빛 속에서 이 노래의 여운을 들을 수 있을 것이다.
+                </p>
+                <p class="story-text" style="margin-top: 15px;">
+                    <strong>말이 필요 없는 사랑. 시간이 흘러도 변하지 않는 진심.
+                    그리고 우리 모두의 가슴속에 언제나 떠 있는, 한 조각 달빛.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- 푸터 -->
+        <footer class="footer">
+            <p class="footer-quote">
+                "월량대표아적심(月亮代表我的心)"<br>
+                달이 내 마음을 대변한다
+            </p>
+            <div class="divider"></div>
+            <p class="footer-info">
+                뮤직살롱 | 등려군의 이야기
+            </p>
+        </footer>
     </div>
+
+    <script>
+        // 별 생성
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 100;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Intersection Observer for scroll animations
+        function setupScrollAnimations() {
+            const options = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, options);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in, .section').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            setupScrollAnimations();
+        });
+
+        // Smooth scroll enhancement
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
