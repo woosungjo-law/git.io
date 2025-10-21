@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[3분 뉴스브리핑] 미국은 지금 왕을 원하는가?</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>취직 제안에 대한 점괘 - 코넬노트</title>
     <style>
         * {
             margin: 0;
@@ -12,67 +11,242 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #3498DB;
-            --secondary: #2C3E50;
-            --light: #ECF0F1;
-            --accent: #5DADE2;
-            --dark-bg: #1A252F;
-            --text-dark: #2C3E50;
-            --text-light: #7F8C8D;
-            --border: #BDC3C7;
-            --success: #27AE60;
-            --warning: #E74C3C;
-        }
-
         body {
-            font-family: 'Noto Sans KR', 'Roboto', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #2C3E50;
             line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* 배경 패턴 */
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.05;
-            background-image:
-                linear-gradient(30deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary)),
-                linear-gradient(150deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary));
-            background-size: 80px 140px;
-            pointer-events: none;
-            z-index: 0;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 480px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
         }
 
-        /* 헤더 */
         .header {
             text-align: center;
-            padding: 60px 20px 40px;
+            margin-bottom: 30px;
+            padding: 30px 20px;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(52, 152, 219, 0.15);
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeInDown 0.8s ease forwards;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        @keyframes fadeInDown {
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: #7F8C8D;
+            font-weight: 500;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        .card-header {
+            background: linear-gradient(to bottom, #2C3E50, #34495E);
+            color: #FFFFFF;
+            padding: 18px 20px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .card-header:hover {
+            background: linear-gradient(to bottom, #34495E, #3d5569);
+        }
+
+        .card-header:active {
+            transform: scale(0.98);
+        }
+
+        .card-header .icon {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+            color: #E74C3C;
+        }
+
+        .card-header.active .icon {
+            transform: rotate(90deg);
+        }
+
+        .card-body {
+            background: #ECF0F1;
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card-body.expanded {
+            max-height: 2000px;
+            padding: 20px;
+        }
+
+        .card-body h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2C3E50;
+            margin: 15px 0 10px 0;
+        }
+
+        .card-body p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #2C3E50;
+            margin-bottom: 12px;
+        }
+
+        .card-body ul {
+            margin: 10px 0 15px 20px;
+            list-style: none;
+        }
+
+        .card-body ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .card-body ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #E74C3C;
+            font-weight: 700;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(231, 76, 60, 0.15) 0%, rgba(231, 76, 60, 0.1) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+
+        .quote {
+            border-left: 4px solid #E74C3C;
+            padding: 12px 15px;
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 6px;
+            font-style: italic;
+            color: #34495E;
+        }
+
+        .summary-section {
+            background: linear-gradient(to bottom, #FFE5B4, #FFD89B);
+            border-radius: 12px;
+            padding: 25px 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .summary-section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .summary-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2C3E50;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .summary-item {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #E74C3C;
+        }
+
+        .summary-item strong {
+            color: #E74C3C;
+            font-size: 15px;
+        }
+
+        .summary-item p {
+            font-size: 14px;
+            margin: 5px 0 0 0;
+            font-weight: 400;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #E74C3C;
+            color: white;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+
+        .emoji {
+            font-size: 20px;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 5px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .card-header {
+                font-size: 17px;
+                padding: 16px 18px;
+            }
+
+            .card-body p,
+            .card-body ul li {
+                font-size: 14px;
+            }
+        }
+
+        /* 애니메이션 */
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
@@ -80,679 +254,269 @@
             }
         }
 
-        .header-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: clamp(12px, 2vw, 14px);
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-
-        .main-title {
-            font-size: clamp(28px, 5vw, 48px);
-            font-weight: 900;
-            color: var(--secondary);
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-
-        .title-highlight {
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
-        }
-
-        .title-highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-
-        .header-meta {
-            font-size: clamp(14px, 2.5vw, 16px);
-            color: var(--text-light);
-            margin-top: 20px;
-        }
-
-        .divider {
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            margin: 30px auto;
-        }
-
-        /* 대시보드 통계 */
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px 25px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.1);
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
+        .card {
+            animation: fadeIn 0.4s ease forwards;
             opacity: 0;
-            transform: translateY(20px);
         }
 
-        .stat-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+        .card:nth-child(8) { animation-delay: 0.8s; }
 
-        .stat-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .stat-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 4px 8px rgba(52, 152, 219, 0.3));
-        }
-
-        .stat-number {
-            font-size: clamp(32px, 5vw, 48px);
-            font-weight: 900;
-            color: var(--primary);
-            display: block;
-            margin-bottom: 10px;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .stat-label {
-            font-size: clamp(14px, 2.5vw, 16px);
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-
-        .stat-sublabel {
-            font-size: clamp(12px, 2vw, 14px);
-            color: var(--text-light);
-            margin-top: 8px;
-        }
-
-        /* 섹션 */
-        .section {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 35px;
-            margin: 30px 0;
-            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.1);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid var(--light);
-        }
-
-        .section-number {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 900;
-            flex-shrink: 0;
-        }
-
-        .section-title {
-            font-size: clamp(22px, 4vw, 32px);
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        .section-content {
-            font-size: clamp(15px, 2.5vw, 17px);
-            line-height: 1.9;
-            color: var(--text-dark);
-        }
-
-        .section-content p {
-            margin-bottom: 15px;
-        }
-
-        /* 하이라이트 박스 */
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(93, 173, 226, 0.1));
-            border-left: 5px solid var(--primary);
-            border-radius: 10px;
-            padding: 25px 30px;
-            margin: 25px 0;
-            font-size: clamp(16px, 3vw, 18px);
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-
-        /* 리스트 */
-        .styled-list {
-            list-style: none;
-            margin: 20px 0;
-        }
-
-        .styled-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin: 15px 0;
-            padding-left: 10px;
-        }
-
-        .styled-list li::before {
-            content: '▸';
-            color: var(--primary);
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .styled-list strong {
-            color: var(--secondary);
-        }
-
-        /* 전문가 카드 */
-        .expert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .expert-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border: 2px solid var(--light);
-            border-radius: 15px;
-            padding: 30px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .expert-card::before {
-            content: '"';
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            font-size: 60px;
-            color: rgba(52, 152, 219, 0.15);
-            font-family: serif;
-        }
-
-        .expert-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .expert-name {
-            font-size: clamp(18px, 3vw, 22px);
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .expert-title {
-            font-size: clamp(13px, 2.5vw, 15px);
-            color: var(--text-light);
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .expert-quote {
-            font-size: clamp(14px, 2.5vw, 16px);
-            color: var(--text-dark);
-            line-height: 1.8;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 타임라인 스타일 (날짜 표시) */
-        .timeline-marker {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--secondary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: clamp(14px, 2.5vw, 16px);
-            font-weight: 600;
-            margin: 10px 0;
-        }
-
-        .timeline-marker::before {
-            content: '📅';
-            font-size: 20px;
-        }
-
-        /* 키 포인트 */
-        .key-point {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            border-radius: 15px;
-            padding: 30px 35px;
-            margin: 30px 0;
-            font-size: clamp(17px, 3vw, 20px);
-            font-weight: 600;
-            line-height: 1.8;
-            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
-        }
-
-        /* 결론/전망 섹션 */
-        .conclusion {
-            background: linear-gradient(135deg, var(--secondary), #34495e);
-            color: white;
-            border-radius: 20px;
-            padding: 50px 40px;
-            margin: 40px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .conclusion::before {
-            content: '⚖️';
-            position: absolute;
-            top: -30px;
-            right: -20px;
-            font-size: 180px;
-            opacity: 0.05;
-            transform: rotate(-15deg);
-        }
-
-        .conclusion-title {
-            font-size: clamp(24px, 4.5vw, 36px);
-            font-weight: 900;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .conclusion-text {
-            font-size: clamp(16px, 3vw, 18px);
-            line-height: 1.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 뱃지 */
-        .badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: clamp(12px, 2vw, 14px);
-            font-weight: 600;
-            margin: 5px;
-        }
-
-        .badge-blue {
-            background: rgba(52, 152, 219, 0.15);
-            color: var(--primary);
-            border: 1px solid var(--primary);
-        }
-
-        .badge-red {
-            background: rgba(231, 76, 60, 0.15);
-            color: var(--warning);
-            border: 1px solid var(--warning);
-        }
-
-        /* 푸터 */
         .footer {
             text-align: center;
-            padding: 40px 20px;
-            margin-top: 60px;
-            border-top: 2px solid var(--light);
-            background: white;
-            border-radius: 20px;
-        }
-
-        .footer-text {
-            font-size: clamp(14px, 2.5vw, 16px);
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        .footer-author {
-            font-weight: 700;
-            color: var(--primary);
-            margin-top: 10px;
-        }
-
-        /* 모바일 최적화 */
-        @media (max-width: 768px) {
-            .header {
-                padding: 40px 20px 30px;
-            }
-
-            .section {
-                padding: 30px 20px;
-            }
-
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-
-            .expert-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .conclusion {
-                padding: 35px 25px;
-            }
-        }
-
-        /* 스크롤 애니메이션 */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* 인용 스타일 */
-        .quote-mark {
-            color: var(--primary);
-            font-size: 1.3em;
-            font-weight: 700;
+            margin-top: 30px;
+            padding: 20px;
+            color: #7F8C8D;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-
     <div class="container">
-        <!-- 헤더 -->
-        <header class="header">
-            <div class="header-badge">3분 뉴스브리핑</div>
-            <h1 class="main-title">
-                미국은 지금 <span class="title-highlight">"왕"</span>을 원하는가?
-            </h1>
-            <div class="divider"></div>
-            <div class="timeline-marker">2025년 10월 18일</div>
-            <p class="header-meta">미국 역사상 최대 규모의 평화 시위 'No Kings'</p>
-        </header>
+        <div class="header">
+            <h1>📿 취직 제안에 대한 점괘</h1>
+            <p class="subtitle">풍산점(風山漸) 초효(初爻) - 점진적 전진의 때</p>
+        </div>
 
-        <!-- 대시보드: 핵심 통계 -->
-        <section class="dashboard">
-            <div class="stat-card fade-up">
-                <div class="stat-icon">👥</div>
-                <span class="stat-number">700만</span>
-                <div class="stat-label">시위 참여자</div>
-                <div class="stat-sublabel">조직위원회 발표</div>
+        <!-- 카드 1: 점괘 기본 정보 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <span><span class="emoji">📿</span>점괘 기본 정보</span>
+                <span class="icon">▶</span>
             </div>
-            <div class="stat-card fade-up" style="animation-delay: 0.1s;">
-                <div class="stat-icon">📍</div>
-                <span class="stat-number">2,700+</span>
-                <div class="stat-label">시위 장소</div>
-                <div class="stat-sublabel">전국 규모</div>
-            </div>
-            <div class="stat-card fade-up" style="animation-delay: 0.2s;">
-                <div class="stat-icon">🕊️</div>
-                <span class="stat-number">0</span>
-                <div class="stat-label">체포자 (뉴욕)</div>
-                <div class="stat-sublabel">평화 시위</div>
-            </div>
-            <div class="stat-card fade-up" style="animation-delay: 0.3s;">
-                <div class="stat-icon">📊</div>
-                <span class="stat-number">3.5%</span>
-                <div class="stat-label">변화의 임계점</div>
-                <div class="stat-sublabel">약 1,100만 명</div>
-            </div>
-        </section>
+            <div class="card-body">
+                <h3>본괘(本卦): 풍산점(風山漸) ䷴ 53번</h3>
+                <p><span class="highlight">점진하면 길하다</span> - 여자가 시집가니 길하다(女歸吉)</p>
 
-        <!-- 섹션 1: 무슨 일? -->
-        <section class="section fade-up">
-            <div class="section-header">
-                <div class="section-number">1</div>
-                <h2 class="section-title">무슨 일?</h2>
-            </div>
-            <div class="section-content">
-                <p>10월 18일 토요일, 조직위원회 발표에 따르면 약 <strong>700만 명</strong>이 전국 <strong>2,700개 이상의 장소</strong>에서 'No Kings' 시위에 참여했습니다.</p>
-
-                <div class="highlight-box">
-                    <strong>규모 비교:</strong> 이는 4개월 전인 6월 14일에 열렸던 첫 번째 No Kings 시위(약 500만 명 참여, 2,100개 이상 장소)보다 훨씬 큰 규모입니다.
+                <h3>초효 효사</h3>
+                <div class="quote">
+                    "기러기가 물가에 이르니, 어린아이는 위태로우나 말이 있으면 허물이 없다"<br>
+                    鴻漸于干, 小子厲, 有言無咎
                 </div>
 
-                <ul class="styled-list">
-                    <li><strong>뉴욕시:</strong> 5개 자치구에서 약 10만 명 참여, 체포자 0명</li>
-                    <li><strong>샌디에이고:</strong> 수만 명 참여</li>
-                    <li><strong>로스앤젤레스:</strong> 살사 밴드 연주와 함께 축제 분위기</li>
-                    <li><strong>테네시주:</strong> 33개 도시, 내슈빌 7,000명, 멤피스 7,000명</li>
-                    <li><strong>텍사스 사이프러스:</strong> 1,000명 이상, 성조기를 흔들며 애국심 표현</li>
-                </ul>
-
-                <p style="margin-top: 20px;">수백만 명의 미국인들이 거리로 나섰습니다. 그들이 외치는 구호는 단 하나, <span class="quote-mark">"No Kings(왕은 안 돼)"</span>.</p>
+                <h3>핵심 의미</h3>
+                <p>서두르지 않고 단계를 밟는 것이 중요합니다. 육례(六禮)를 차근차근 밟듯이 급하게 결정할 때가 아닙니다.</p>
             </div>
-        </section>
+        </div>
 
-        <!-- 섹션 2: 왜 중요? -->
-        <section class="section fade-up">
-            <div class="section-header">
-                <div class="section-number">2</div>
-                <h2 class="section-title">왜 중요?</h2>
+        <!-- 카드 2: 명확한 답변 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <span><span class="emoji">🎯</span>명확한 답변</span>
+                <span class="icon">▶</span>
             </div>
-            <div class="section-content">
-                <p>시위대가 거리로 나선 이유는 명확합니다:</p>
+            <div class="card-body">
+                <h3>권장 사항</h3>
+                <p><span class="highlight">퇴직임원 혜택 1년을 마저 누리시는 것을 권합니다.</span></p>
 
-                <div class="highlight-box">
-                    트럼프 대통령이 수백 건의 행정명령을 통해 행정권을 확대하고, 캘리포니아 주지사의 반대에도 불구하고 주 방위군을 연방화하는 등 <strong>전례 없는 대통령 권한 행사</strong>를 해왔다는 우려
-                </div>
-
-                <p><strong>주요 동인:</strong></p>
-                <ul class="styled-list">
-                    <li>이민 단속 강화</li>
-                    <li>메디케이드를 포함한 연방 프로그램 삭감</li>
-                    <li>연방정부 셧다운 (18일째 지속)</li>
-                </ul>
-
-                <div style="margin: 25px 0; padding: 20px; background: #fff3cd; border-left: 5px solid #ffc107; border-radius: 10px;">
-                    <p style="margin: 0; font-weight: 600; color: #856404;">
-                        시위 조직위원회: "트럼프 대통령이 공개적으로 3선을 원한다고 말했으며, 이미 군주처럼 행동하고 있다"
-                    </p>
-                </div>
-
-                <p><strong>하버드 대학 연구 결과:</strong></p>
-                <ul class="styled-list">
-                    <li>2025년 시위는 2017년 트럼프 1기 행정부 때보다 훨씬 광범위하고 지속적</li>
-                    <li>트럼프가 승리한 보수 지역에서도 활발하게 발생</li>
-                    <li><strong>사례:</strong> 테네시주 킹스포트 - 인구의 약 10%인 2,000명 참여 (트럼프가 54%포인트 차이로 승리한 지역)</li>
+                <h3>이유</h3>
+                <ul>
+                    <li><strong>초효의 위치:</strong> 아직 "물가(干)"에 막 이른 단계. 기러기 여정의 초입이므로 성급하게 움직이면 준비 없이 뛰어드는 격</li>
+                    <li><strong>점(漸)의 의미:</strong> 서두르지 않고 단계를 밟는 것이 핵심. 육례를 차근차근 밟듯이 진행</li>
+                    <li><strong>현실적 판단:</strong> 1억 연봉 3년(3억) vs 퇴직혜택 1년(1.5억) + 자유시간 1년. 이 1년의 여유가 다음 단계 준비 시간</li>
+                    <li><strong>유언무구(有言無咎):</strong> 제안을 정중히 거절하되, 미래 가능성은 열어두라는 의미</li>
                 </ul>
             </div>
-        </section>
+        </div>
 
-        <!-- 섹션 3: 전문가들은? -->
-        <section class="section fade-up">
-            <div class="section-header">
-                <div class="section-number">3</div>
-                <h2 class="section-title">전문가들은?</h2>
+        <!-- 카드 3: 행동 지침 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <span><span class="emoji">🦢</span>행동 지침</span>
+                <span class="icon">▶</span>
             </div>
+            <div class="card-body">
+                <h3>지금 당장</h3>
+                <p>MD 제안은 감사히 정중히 거절합니다. "지금은 개인적 정리 시간이 필요하지만, 추후 더 좋은 타이밍에 다시 인연이 되었으면 한다"고 전달하세요.</p>
 
-            <div class="expert-grid">
-                <div class="expert-card">
-                    <div class="expert-name">에리카 체노웨스</div>
-                    <div class="expert-title">하버드대 비폭력행동연구소 소장</div>
-                    <div class="expert-quote">
-                        <p><strong>평화적 저항이 폭력적 저항보다 성공 확률이 두 배 높다</strong>는 연구 결과를 발표했습니다.</p>
-                        <p style="margin-top: 12px;">인구의 <span class="badge badge-blue">3.5%</span>가 지속적인 시민 저항에 참여하면 극적인 정치적 변화가 가능 (미국의 경우 약 1,100만 명).</p>
-                        <p style="margin-top: 12px; font-size: 0.95em; color: var(--text-light);">※ 다만 3.5%는 하나의 기준점일 뿐, 조직력, 전략적 리더십, 지속가능성 등도 운동 성공에 중요</p>
-                    </div>
-                </div>
+                <h3>향후 1년</h3>
+                <p>진정으로 하고 싶은 일과 전략적 방향을 고민하며 재충전하는 시간을 가지세요.</p>
 
-                <div class="expert-card">
-                    <div class="expert-name">에즈라 레빈</div>
-                    <div class="expert-title">Indivisible 공동설립자</div>
-                    <div class="expert-quote">
-                        <p><span class="quote-mark">"</span>이번 동원은 트럼프의 상승이 막을 수 없다는 신화를 깨뜨리는 것입니다.</p>
-                        <p style="margin-top: 12px;"><strong>민주주의는 이를 지키려는 사람들만큼만 강합니다</strong><span class="quote-mark">"</span></p>
-                    </div>
-                </div>
+                <h3>1년 후</h3>
+                <p>풍지관(觀)의 괘처럼 "높은 곳에서 조망하듯" 더 넓은 시야로 다음 커리어를 선택할 수 있습니다.</p>
 
-                <div class="expert-card">
-                    <div class="expert-name">마이크 존슨</div>
-                    <div class="expert-title">공화당 하원의장</div>
-                    <div class="expert-quote">
-                        <p>시위를 <span class="badge badge-red">"미국 증오 집회"</span>라고 비난하며, 참가자들을 "공산주의자", "마르크스주의자"로 규정했습니다.</p>
-                        <p style="margin-top: 12px;"><span class="quote-mark">"</span>antifa 유형, 자본주의를 싫어하는 사람들이 나올 것<span class="quote-mark">"</span></p>
-                    </div>
+                <div class="quote">
+                    결론: 급할 것 없습니다. 기러기도 한 걸음씩 나아갑니다. 1년의 자유와 안정을 누리며 다음을 준비하세요.
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- 섹션 4: 요약 -->
-        <section class="section fade-up">
-            <div class="section-header">
-                <div class="section-number">4</div>
-                <h2 class="section-title">요약</h2>
+        <!-- 카드 4: 왕필의 해석 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <span><span class="emoji">🏛️</span>왕필 - 위치론적 해석</span>
+                <span class="icon">▶</span>
             </div>
-            <div class="key-point">
-                미국 역사상 최대 규모의 평화 시위 중 하나인 'No Kings' 운동은 행정권 확대에 대한 우려를 표현하며, <strong>좌우를 막론하고 민주주의 수호에 대한 미국인들의 열망</strong>을 보여주고 있다.
-            </div>
-        </section>
+            <div class="card-body">
+                <h3>핵심 통찰</h3>
+                <p class="highlight">아직 시작 단계, 준비가 미흡한 시점</p>
 
-        <!-- 섹션 5: 전망 -->
-        <section class="section fade-up">
-            <div class="section-header">
-                <div class="section-number">5</div>
-                <h2 class="section-title">전망</h2>
-            </div>
-            <div class="section-content">
-                <p>이번 시위의 진정한 영향은 앞으로 몇 주 동안 드러날 것입니다.</p>
-
-                <div class="highlight-box">
-                    <strong>주목해야 할 점:</strong> 이 운동이 단발성 이벤트로 끝날지, 아니면 지속적인 유권자 등록, 로비 활동, 지역사회 조직화로 이어질지
+                <div class="quote">
+                    "간(干)은 물가이니 아직 깊은 곳에 이르지 못했다. 초효는 점(漸)의 시작이요, 기러기가 막 여정을 시작한 때이다."
                 </div>
 
-                <ul class="styled-list">
-                    <li>하버드-코네티컷대 Crowd Counting Consortium은 몇 주 내에 <strong>독립적인 참가자 추정치</strong>를 발표할 예정</li>
-                    <li>역사가 증명하듯, 다양한 배경의 평범한 사람들이 함께할 때 - 간호사, 교사, 퇴직자, 경찰까지 - <strong>역사의 전환점</strong>이 만들어집니다</li>
-                    <li>정치적 양극화가 심화된 상황에서 이 운동이 실질적 정치 변화로 이어질지, 아니면 표현의 자유 행사로 남을지는 여전히 불확실</li>
+                <h3>적용</h3>
+                <ul>
+                    <li>아직 "깊은 물(본격적 커리어)"로 들어갈 준비가 안 됨</li>
+                    <li>상무 퇴임 후 1년은 "전환기의 초입"일 뿐</li>
+                    <li><span class="highlight">신중한 거절의 말(有言)</span>로 관계를 유지하되, 성급한 진입은 피하라</li>
                 </ul>
+            </div>
+        </div>
 
-                <p style="margin-top: 25px; font-style: italic; color: var(--text-light);">
-                    이번 시위는 미국 민주주의의 회복력과 시민들의 참여 의지를 시험하는 중요한 순간이 될 것입니다.
+        <!-- 카드 5: 주희의 해석 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <span><span class="emoji">📖</span>주희 - 점진의 덕</span>
+                <span class="icon">▶</span>
+            </div>
+            <div class="card-body">
+                <h3>핵심 통찰</h3>
+                <p class="highlight">순서를 지켜야 덕이 완성됨</p>
+
+                <div class="quote">
+                    "점(漸)은 여자의 혼례와 같으니, 반드시 납채(納采)에서 친영(親迎)까지 순서를 밟아야 한다."
+                </div>
+
+                <h3>적용</h3>
+                <ul>
+                    <li><strong>1년의 퇴직혜택:</strong> "납채(納采)" 단계 - 다음을 준비하는 예의범절의 시간</li>
+                    <li><strong>MD직:</strong> "친영(親迎)" - 모든 준비가 완료된 후의 마지막 단계</li>
+                    <li>순서를 건너뛰면 근본이 흔들림. 지금은 내적 준비와 전략 수립의 때</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 카드 6: 정약용의 해석 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <span><span class="emoji">🇰🇷</span>정약용 - 마음의 준비</span>
+                <span class="icon">▶</span>
+            </div>
+            <div class="card-body">
+                <h3>핵심 통찰</h3>
+                <p class="highlight">마음의 준비가 먼저다 - 진심 여부를 탐구하라</p>
+
+                <div class="quote">
+                    "기러기는 물을 보고도 바로 들어가지 않고 물가에서 먼저 살핀다. 이것이 지혜로운 새의 도리다."
+                </div>
+
+                <h3>적용</h3>
+                <ul>
+                    <li><strong>현재 상태:</strong> "기러기가 물을 살피는 단계" - 관찰과 성찰의 시간</li>
+                    <li><strong>마음의 준비 미완:</strong> 돈 때문? 명예 때문? 진심으로 원하는가? 아직 불명확</li>
+                    <li><strong>유언(有言)의 실천:</strong> "나는 지금 ○○○를 준비하고 싶다"는 명확한 소신 정립이 우선</li>
+                    <li>1년 후에는 "물가에서 충분히 살핀 기러기"처럼 확신을 갖고 선택 가능</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 카드 7: 빌헬름의 해석 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <span><span class="emoji">🌍</span>빌헬름 - 내적 성숙</span>
+                <span class="icon">▶</span>
+            </div>
+            <div class="card-body">
+                <h3>핵심 통찰</h3>
+                <p class="highlight">내적 성숙이 외적 기회보다 우선</p>
+
+                <div class="quote">
+                    "At this initial stage, one must not be seduced by external opportunities but must first establish inner clarity."
+                    <br><br>
+                    초기 단계에서는 외부 기회에 유혹되지 말고 먼저 내적 명확성을 확립해야 한다.
+                </div>
+
+                <h3>적용</h3>
+                <ul>
+                    <li><strong>변화의 여정은 이제 시작:</strong> 상무 퇴임은 끝이 아니라 새로운 개성화 과정의 출발점</li>
+                    <li><strong>충동적 자아 vs 성숙한 자아:</strong> "1억 연봉"에 반응하는 것은 미성숙한 자아의 충동</li>
+                    <li><strong>내적 명확성 우선:</strong> "나는 누구인가? 진정 무엇을 원하는가?"를 1년간 탐구</li>
+                    <li>외부 제안은 언제든 다시 올 수 있지만, 내적 성숙의 시간은 지금이 최적기</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 요약 섹션 -->
+        <div class="summary-section">
+            <h2>💎 4대 현자의 통합 결론</h2>
+
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <strong>🏛️ 왕필</strong>
+                    <p>위치상 아직 시작, 준비 미흡 → 신중한 거절로 관계 유지</p>
+                </div>
+
+                <div class="summary-item">
+                    <strong>📖 주희</strong>
+                    <p>순서를 지켜야 덕이 완성됨 → 1년의 예의를 다하라</p>
+                </div>
+
+                <div class="summary-item">
+                    <strong>🇰🇷 정약용</strong>
+                    <p>마음의 준비가 먼저다 → 진심 여부를 1년간 탐구</p>
+                </div>
+
+                <div class="summary-item">
+                    <strong>🌍 빌헬름</strong>
+                    <p>내적 성숙이 외적 기회보다 우선 → 개성화 과정에 집중</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 20px; font-size: 18px; text-align: center;">최종 조언</h3>
+            <div class="quote" style="margin-top: 15px; background: rgba(255,255,255,0.7);">
+                <strong>"기러기가 물가에 이르렀다"</strong>는 것은 "좋은 기회가 보인다"는 뜻이지만,<br>
+                <strong>"아직 물에 들어가지 않았다"</strong>는 것은 "지금은 그 때가 아니다"는 뜻입니다.
+            </div>
+
+            <p style="margin-top: 15px;"><strong>지금:</strong> MD 제안은 정중히 거절하되 미래 가능성 열어두기</p>
+            <p><strong>1년간:</strong> 진정한 자기 탐구 - "다음 20년을 어떻게 살 것인가?"</p>
+            <p><strong>1년 후:</strong> 내적 확신을 가지고 더 좋은 선택할 수 있는 준비된 상태</p>
+
+            <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(231, 76, 60, 0.1); border-radius: 8px;">
+                <p style="font-weight: 700; color: #E74C3C; font-size: 16px;">
+                    돈은 다시 벌 수 있지만,<br>자기 성찰의 시간은 다시 오지 않습니다.
                 </p>
             </div>
-        </section>
+        </div>
 
-        <!-- 결론 -->
-        <section class="conclusion fade-up">
-            <div class="conclusion-title">⚖️ 민주주의의 가치</div>
-            <div class="conclusion-text">
-                <p>700만 명의 목소리는 단순한 숫자가 아닙니다.</p>
-                <p style="margin-top: 20px;">그것은 민주주의를 지키려는 시민들의 의지이며,<br>
-                권력의 견제와 균형이라는 건국 정신에 대한 재확인입니다.</p>
-                <p style="margin-top: 20px; font-size: 1.2em; font-weight: 700;">
-                    "No Kings" - 왕은 없다, 오직 국민만이 있다.
-                </p>
-            </div>
-        </section>
-
-        <!-- 푸터 -->
-        <footer class="footer">
-            <p class="footer-text">
-                인포그래픽 포스터 + 대시보드 형식<br>
-                프로페셔널 블루 색상 테마
-            </p>
-            <p class="footer-author">(2025. 10. 19. 조우성 변호사 작성)</p>
-        </footer>
+        <div class="footer">
+            <p>코넬노트 방식 인포그래픽</p>
+            <p>각 카드를 클릭하여 상세 내용을 확인하세요</p>
+        </div>
     </div>
 
     <script>
-        // Intersection Observer for scroll animations
-        function setupScrollAnimations() {
-            const options = {
-                threshold: 0.15,
-                rootMargin: '0px 0px -80px 0px'
-            };
+        function toggleCard(header) {
+            const body = header.nextElementSibling;
+            const icon = header.querySelector('.icon');
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        // 순차적 애니메이션을 위한 지연
-                        setTimeout(() => {
-                            entry.target.classList.add('visible');
-                        }, index * 100);
-                    }
-                });
-            }, options);
-
-            // Observe all animated elements
-            document.querySelectorAll('.section, .fade-up, .stat-card').forEach(el => {
-                observer.observe(el);
-            });
+            // 현재 카드의 상태 토글
+            if (body.classList.contains('expanded')) {
+                body.classList.remove('expanded');
+                header.classList.remove('active');
+                icon.textContent = '▶';
+            } else {
+                body.classList.add('expanded');
+                header.classList.add('active');
+                icon.textContent = '▼';
+            }
         }
 
-        // Stat cards sequential animation
-        function animateStatCards() {
-            const statCards = document.querySelectorAll('.stat-card');
-            statCards.forEach((card, index) => {
+        // 페이지 로드 시 첫 번째 카드 자동 확장
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstCard = document.querySelector('.card-header');
+            if (firstCard) {
                 setTimeout(() => {
-                    card.classList.add('visible');
-                }, 200 + (index * 150));
-            });
-        }
-
-        // Initialize on DOM ready
-        document.addEventListener('DOMContentLoaded', () => {
-            setupScrollAnimations();
-            animateStatCards();
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+                    toggleCard(firstCard);
+                }, 500);
+            }
         });
     </script>
 </body>
