@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>성공이라는 소화불량 - 서른의 나에게</title>
+    <title>성공이라는 소화불량 - 전문가 분석</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-            background: #f8f9fa;
+            background: #f5f7fa;
             color: #2d3748;
             line-height: 1.8;
             padding: 0;
@@ -24,39 +24,62 @@
             max-width: 600px;
             margin: 0 auto;
             background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        /* 크레딧 헤더 */
+        /* 블록 0: 크레딧 헤더 */
         .credit-header {
-            background: linear-gradient(135deg, #1a3a52 0%, #2c5f77 100%);
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
             color: #ffffff;
-            text-align: center;
-            padding: 12px 20px;
+            padding: 16px 24px;
             font-size: 14px;
             font-weight: 500;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            border-bottom: 3px solid #4299e1;
+        }
+
+        .credit-header .author {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .credit-header .source {
+            font-size: 13px;
+            opacity: 0.85;
         }
 
         /* 공통 카드 스타일 */
         .card {
-            padding: 32px 24px;
+            padding: 36px 28px;
             margin-bottom: 0;
-            border-bottom: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         /* 블록 1: 타이틀 */
         .title-block {
-            background: linear-gradient(135deg, #1a3a52 0%, #2c5f77 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
             color: #ffffff;
-            padding: 48px 24px 40px;
+            padding: 52px 28px 44px;
             text-align: center;
             border-bottom: none;
         }
 
-        .title-block h1 {
-            font-size: 32px;
-            font-weight: 900;
+        .title-block .category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
             margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .title-block h1 {
+            font-size: 34px;
+            font-weight: 900;
+            margin-bottom: 18px;
             line-height: 1.3;
             word-break: keep-all;
             overflow-wrap: break-word;
@@ -65,219 +88,369 @@
         .title-block .subtitle {
             font-size: 17px;
             font-weight: 400;
-            opacity: 0.9;
+            opacity: 0.92;
             line-height: 1.6;
             word-break: keep-all;
         }
 
-        /* 블록 2: 핵심 질문 */
-        .question-block {
-            background: #fef8f0;
-            padding: 36px 24px;
-            border-left: 5px solid #f4a261;
+        /* 블록 2: 주요 상황 */
+        .context-block {
+            background: #ffffff;
+            padding: 38px 28px;
         }
 
-        .question-block .icon {
+        .context-block .icon {
             font-size: 32px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             display: block;
         }
 
-        .question-block h2 {
+        .context-block h2 {
             font-size: 22px;
             font-weight: 700;
-            color: #1a3a52;
-            line-height: 1.5;
-            word-break: keep-all;
-            overflow-wrap: break-word;
-        }
-
-        /* 블록 3: 핵심 통찰 */
-        .insight-block {
-            background: linear-gradient(135deg, #f4a261 0%, #ffd166 100%);
-            padding: 40px 28px;
-            text-align: center;
-        }
-
-        .insight-block .icon {
-            font-size: 40px;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .insight-block h2 {
-            font-size: 24px;
-            font-weight: 800;
-            color: #1a3a52;
-            line-height: 1.6;
-            word-break: keep-all;
-            overflow-wrap: break-word;
-        }
-
-        /* 블록 4: 경험/사례 */
-        .story-block {
-            background: #ffffff;
-            padding: 36px 24px;
-        }
-
-        .story-block .icon {
-            font-size: 28px;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .story-block h3 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #1a3a52;
-            margin-bottom: 20px;
-            word-break: keep-all;
-        }
-
-        .story-item {
+            color: #1e3a8a;
             margin-bottom: 24px;
+            word-break: keep-all;
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
         }
 
-        .story-item h4 {
+        .context-item {
+            background: #f7fafc;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            border-left: 3px solid #cbd5e0;
+        }
+
+        .context-item h3 {
             font-size: 17px;
             font-weight: 700;
-            color: #2c5f77;
+            color: #2d3748;
             margin-bottom: 10px;
             word-break: keep-all;
         }
 
-        .story-item p {
+        .context-item p {
             font-size: 16px;
             line-height: 1.8;
             color: #4a5568;
             word-break: keep-all;
         }
 
-        .highlight {
-            background: linear-gradient(180deg, transparent 60%, #ffd166 60%);
-            font-weight: 600;
-            color: #1a3a52;
+        .stat-highlight {
+            background: linear-gradient(180deg, transparent 60%, #bee3f8 60%);
+            font-weight: 700;
+            color: #1e3a8a;
         }
 
-        /* 블록 5: 실천 가이드 */
-        .action-block {
-            background: #f0fdf4;
-            padding: 36px 24px;
+        /* 블록 3: 핵심 통찰 */
+        .insight-block {
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            padding: 44px 32px;
+            text-align: center;
         }
 
-        .action-block .icon {
-            font-size: 28px;
-            margin-bottom: 16px;
+        .insight-block .icon {
+            font-size: 44px;
+            margin-bottom: 18px;
             display: block;
         }
 
-        .action-block h3 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #1a3a52;
-            margin-bottom: 24px;
+        .insight-block h2 {
+            font-size: 25px;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.6;
             word-break: keep-all;
+            overflow-wrap: break-word;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .action-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .action-list li {
-            margin-bottom: 20px;
-            padding-left: 32px;
-            position: relative;
+        .insight-block .subtitle {
+            margin-top: 16px;
             font-size: 16px;
-            line-height: 1.8;
-            color: #2d3748;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
             word-break: keep-all;
         }
 
-        .action-list li::before {
-            content: '🌱';
-            position: absolute;
-            left: 0;
-            font-size: 20px;
+        /* 블록 4: 핵심 근거 */
+        .evidence-block {
+            background: #ffffff;
+            padding: 38px 28px;
         }
 
-        .action-list li strong {
-            color: #1a3a52;
-            font-weight: 700;
-        }
-
-        /* 블록 6: 인용 */
-        .quote-block {
-            background: #fef8f0;
-            padding: 40px 28px;
-            border-left: 5px solid #2c5f77;
-        }
-
-        .quote-block .icon {
+        .evidence-block .icon {
             font-size: 32px;
             margin-bottom: 16px;
             display: block;
-            opacity: 0.7;
         }
 
-        .quote-block blockquote {
+        .evidence-block h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 28px;
+            word-break: keep-all;
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+        }
+
+        .evidence-item {
+            margin-bottom: 28px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .evidence-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .evidence-item .number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            color: #ffffff;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .evidence-item h3 {
             font-size: 18px;
-            line-height: 1.8;
-            color: #1a3a52;
-            font-style: italic;
-            margin: 0;
-            padding: 0;
-            font-family: 'Georgia', serif;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
             word-break: keep-all;
         }
 
-        .quote-block .author {
-            margin-top: 16px;
-            font-size: 15px;
+        .evidence-item p {
+            font-size: 16px;
+            line-height: 1.8;
             color: #4a5568;
+            word-break: keep-all;
+        }
+
+        .quote-box {
+            background: #edf2f7;
+            padding: 20px 24px;
+            margin-top: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #4299e1;
+        }
+
+        .quote-box p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2d3748;
+            font-style: italic;
+            word-break: keep-all;
+        }
+
+        .quote-box .author {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #718096;
             font-style: normal;
             text-align: right;
         }
 
-        /* 블록 7: 독자 질문 */
-        .reflection-block {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px 24px;
-            text-align: center;
-            border-bottom: none;
+        /* 블록 5: 전문가 실천 팁 */
+        .tips-block {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 38px 28px;
         }
 
-        .reflection-block .icon {
-            font-size: 36px;
+        .tips-block .icon {
+            font-size: 32px;
             margin-bottom: 16px;
             display: block;
         }
 
-        .reflection-block h3 {
-            font-size: 20px;
+        .tips-block h2 {
+            font-size: 22px;
             font-weight: 700;
-            color: #1a3a52;
+            color: #1e3a8a;
+            margin-bottom: 28px;
+            word-break: keep-all;
+        }
+
+        .tip-card {
+            background: #ffffff;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 2px solid #bfdbfe;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        .tip-card .tip-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .tip-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 12px;
+            word-break: keep-all;
+        }
+
+        .tip-card p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            word-break: keep-all;
+            margin-bottom: 12px;
+        }
+
+        .tip-card .action {
+            background: #f0f9ff;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .tip-card .action strong {
+            font-size: 15px;
+            color: #1e3a8a;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .tip-card .action span {
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.7;
+            word-break: keep-all;
+        }
+
+        /* 블록 6: Q&A 및 참고자료 */
+        .qa-block {
+            background: #ffffff;
+            padding: 38px 28px;
+            border-bottom: none;
+        }
+
+        .qa-block .icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .qa-block h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 28px;
+            word-break: keep-all;
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+        }
+
+        .qa-item {
+            margin-bottom: 24px;
+            padding: 20px 24px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .qa-item .question {
+            font-size: 17px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+            word-break: keep-all;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .qa-item .question::before {
+            content: 'Q';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: #3b82f6;
+            color: #ffffff;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .qa-item .answer {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            word-break: keep-all;
+            padding-left: 40px;
+        }
+
+        .references {
+            margin-top: 36px;
+            padding-top: 32px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .references h3 {
+            font-size: 19px;
+            font-weight: 700;
+            color: #1e3a8a;
             margin-bottom: 20px;
             word-break: keep-all;
         }
 
-        .reflection-questions {
-            margin-top: 20px;
+        .references ul {
+            list-style: none;
+            padding: 0;
         }
 
-        .reflection-questions p {
-            font-size: 18px;
+        .references li {
+            font-size: 15px;
             line-height: 1.7;
-            color: #2c5f77;
-            font-weight: 600;
-            margin: 12px 0;
+            color: #4a5568;
+            margin-bottom: 14px;
+            padding-left: 24px;
+            position: relative;
             word-break: keep-all;
+        }
+
+        .references li::before {
+            content: '📚';
+            position: absolute;
+            left: 0;
+            font-size: 16px;
         }
 
         /* 반응형 */
         @media (max-width: 414px) {
             .title-block h1 {
-                font-size: 28px;
+                font-size: 29px;
             }
 
             .title-block .subtitle {
@@ -285,21 +458,31 @@
             }
 
             .card {
-                padding: 28px 20px;
+                padding: 32px 22px;
             }
 
-            .question-block h2,
-            .insight-block h2 {
+            .context-block h2,
+            .evidence-block h2,
+            .tips-block h2,
+            .qa-block h2 {
                 font-size: 20px;
             }
 
-            .action-list li,
-            .story-item p {
-                font-size: 15px;
+            .insight-block h2 {
+                font-size: 22px;
             }
 
-            .quote-block blockquote {
-                font-size: 17px;
+            .tip-card,
+            .qa-item,
+            .context-item {
+                padding: 18px 20px;
+            }
+
+            .evidence-item p,
+            .tip-card p,
+            .qa-item .answer,
+            .context-item p {
+                font-size: 15px;
             }
         }
 
@@ -307,7 +490,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(25px);
             }
             to {
                 opacity: 1;
@@ -316,110 +499,154 @@
         }
 
         .card {
-            animation: fadeIn 0.6s ease forwards;
+            animation: fadeIn 0.7s ease forwards;
             opacity: 0;
         }
 
         .title-block { animation-delay: 0s; opacity: 1; }
-        .question-block { animation-delay: 0.1s; }
+        .context-block { animation-delay: 0.1s; }
         .insight-block { animation-delay: 0.2s; }
-        .story-block { animation-delay: 0.3s; }
-        .action-block { animation-delay: 0.4s; }
-        .quote-block { animation-delay: 0.5s; }
-        .reflection-block { animation-delay: 0.6s; }
+        .evidence-block { animation-delay: 0.3s; }
+        .tips-block { animation-delay: 0.4s; }
+        .qa-block { animation-delay: 0.5s; }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- 블록 0: 크레딧 헤더 -->
         <div class="credit-header">
-            글: 서른의 나에게
+            <div class="author">저자: 서른의 나에게</div>
+            <div class="source">자기계발 · 성찰 칼럼</div>
         </div>
 
         <!-- 블록 1: 타이틀 & 문제 정의 -->
         <div class="title-block">
+            <div class="category">전문가 분석</div>
             <h1>성공이라는<br>소화불량</h1>
-            <p class="subtitle">과거의 영광이 오늘을 가두는 순간</p>
+            <p class="subtitle">과거의 성취가 현재의 발목을 잡는 메커니즘과 해결책</p>
         </div>
 
-        <!-- 블록 2: 핵심 질문 -->
-        <div class="card question-block">
-            <span class="icon">💭</span>
-            <h2>당신의 성공은 앞으로 나아가게 하는가,<br>과거에 주저앉히는가?</h2>
+        <!-- 블록 2: 주요 상황 -->
+        <div class="card context-block">
+            <span class="icon">🔍</span>
+            <h2>The Context: 익숙함의 중력</h2>
+
+            <div class="context-item">
+                <h3>현대인의 역설</h3>
+                <p>책상 한구석의 상패, SNS의 좋아요, 완벽한 보고서. <span class="stat-highlight">작은 성취들이 주는 즉각적 보상</span>은 우리를 안심시키지만, 동시에 안락한 궤도에 묶어둔다. 세상이 다른 방향으로 흘러가는 줄도 모르게 만드는 것이다.</p>
+            </div>
+
+            <div class="context-item">
+                <h3>세대 간 패러다임 전환</h3>
+                <p>부모님 세대는 정해진 사다리를 빨리 오르는 경쟁이었다. 지금은 하룻밤 사이 지도가 바뀌는 거대한 미로다. 그 미로에서 정답을 찾는 일은 AI가 더 잘한다. <span class="stat-highlight">우리의 역할은 길 없는 길을 감각으로 더듬어 나가는 것</span>이어야 한다.</p>
+            </div>
+
+            <div class="context-item">
+                <h3>화석화되는 성공</h3>
+                <p>한때 밤을 새워 얻어낸 환호와 젊음을 증명하는 훈장이었던 성취들. 이제는 먼지를 그러모으는 묵직한 장식품이 되어, 우리를 과거에 고정시킨다.</p>
+            </div>
         </div>
 
         <!-- 블록 3: 핵심 통찰 -->
         <div class="card insight-block">
-            <span class="icon">💡</span>
+            <span class="icon">💎</span>
             <h2>성공은 영양분이 아니라 때로는 소화되지 않는 음식처럼 우리를 정체시킨다</h2>
+            <p class="subtitle">익숙함의 중력이 가장 무섭다. 안락한 오늘의 궤도에 단단히 묶여, 변화의 필요성을 느끼지 못하게 된다.</p>
         </div>
 
-        <!-- 블록 4: 경험/사례 -->
-        <div class="card story-block">
-            <span class="icon">📖</span>
-            <h3>익숙함이라는 중력</h3>
+        <!-- 블록 4: 핵심 근거 -->
+        <div class="card evidence-block">
+            <span class="icon">📊</span>
+            <h2>핵심 근거 & 분석</h2>
 
-            <div class="story-item">
-                <h4>빛바랜 상패</h4>
-                <p>책상 한구석의 상패는 한때 밤을 새워 얻어낸 환호였고, 내 젊음을 증명하는 훈장이었다. 이제는 먼지를 그러모으는 묵직한 장식품일 뿐이다. <span class="highlight">성공은 아름다운 화석이 될 수 있다.</span></p>
+            <div class="evidence-item">
+                <div class="number">1</div>
+                <h3>심리학적 근거: 안락함 편향</h3>
+                <p>행동경제학에서는 이를 '현상유지 편향(Status Quo Bias)'이라 부른다. 인간은 변화가 주는 불확실성보다 현재의 안정을 선택하는 경향이 있다. 과거의 성공 경험은 이 편향을 더욱 강화시켜, 새로운 시도를 가로막는 심리적 장벽이 된다.</p>
             </div>
 
-            <div class="story-item">
-                <h4>안락한 궤도의 함정</h4>
-                <p>SNS 좋아요, 긍정적 피드백, 완벽한 보고서. 작은 성취들이 주는 즉각적이고 달콤한 보상은 우리를 안심시킨다. 하지만 그 <span class="highlight">익숙함의 중력</span>이 가장 무섭다. 안락한 오늘의 궤도에 단단히 묶여, 세상이 저만치 다른 방향으로 흘러간 줄도 모르게 된다.</p>
+            <div class="evidence-item">
+                <div class="number">2</div>
+                <h3>철학적 관점: 헤라클레이토스의 변화론</h3>
+                <div class="quote-box">
+                    <p>"같은 강물에 두 번 발 담글 수는 없다."</p>
+                    <p class="author">— 헤라클레이토스</p>
+                </div>
+                <p>세상도, 나도 어제와 다른데, 빛나는 성공의 기억만이 우리를 어제의 그 자리에 붙잡아두고 놓아주지 않는다. 그것은 위안인 동시에 가장 교묘한 감옥이다.</p>
             </div>
 
-            <div class="story-item">
-                <h4>변화하는 세상</h4>
-                <p>부모님 세대는 정해진 사다리를 누가 더 빨리 오르느냐의 경쟁이었다. 지금은 하룻밤 사이에 지도가 바뀌는 거대한 미로다. 그 미로에서 정답을 찾는 일은 이제 인공지능이 더 잘한다. <span class="highlight">우리의 역할은 길 없는 길을 감각으로 더듬어 나가는 것</span>이어야 한다.</p>
+            <div class="evidence-item">
+                <div class="number">3</div>
+                <h3>사회학적 분석: 급변하는 환경</h3>
+                <p>현대사회는 기하급수적 변화의 시대다. 과거 50년에 걸쳐 일어났던 기술 혁신이 지금은 5년 안에 일어난다. 10년 전의 성공 공식은 오늘날 오히려 실패의 원인이 될 수 있다. 지속적인 학습과 적응이 생존의 조건이 되었다.</p>
             </div>
         </div>
 
-        <!-- 블록 5: 실천 가이드 -->
-        <div class="card action-block">
+        <!-- 블록 5: 전문가 실천 팁 -->
+        <div class="card tips-block">
             <span class="icon">🎯</span>
-            <h3>소화불량에서 벗어나는 3가지 방법</h3>
+            <h2>전문가가 제안하는 3가지 실천 전략</h2>
 
-            <ul class="action-list">
-                <li><strong>가장 환한 순간에 찬물을 끼얹어라</strong><br>
-                샴페인을 터뜨린 바로 그 순간, 스스로에게 질문을 던져보자. '이게 정말 내 실력일까, 아니면 운이 좋았을 뿐일까?', '이 성공 때문에 나는 무엇을 보지 못하게 될까?' 가장 달콤한 순간에 가장 쓴 약을 삼키는 일이 성공을 화석으로 굳히지 않는다.</li>
-
-                <li><strong>일부러 길을 잃어라</strong><br>
-                늘 가던 길이 아닌 낯선 골목으로 들어서고, 평소라면 거들떠보지 않았을 분야의 책을 들춰보자. 그런 무용한 시간들이 익숙한 생각의 근육을 비틀고, 예상치 못한 발견을 선물한다. 견고한 성벽이 아니라 바람이 드나드는 집을 지어라.</li>
-
-                <li><strong>나와 다른 세계에 귀 기울여라</strong><br>
-                나와 생각이 전혀 다른 사람의 이야기에 반박하기보다 끝까지 귀 기울여 보자. 그의 세계는 어떤 논리로 이루어져 있는지 가만히 들여다보자. 기꺼이 나의 견고한 세계에 균열을 내줄 때, 새로운 생각은 그 틈을 비집고 싹을 틔운다.</li>
-            </ul>
-        </div>
-
-        <!-- 블록 6: 인용 -->
-        <div class="card quote-block">
-            <span class="icon">📜</span>
-            <blockquote>
-                "같은 강물에 두 번 발 담글 수는 없다."
-            </blockquote>
-            <p class="author">— 헤라클레이토스</p>
-            <p style="margin-top: 20px; font-size: 16px; line-height: 1.8; color: #4a5568; word-break: keep-all;">
-                세상도, 나도 어제와 다른데, 빛나는 성공의 기억만이 우리를 어제의 그 자리에 붙잡아두고 놓아주지 않는다. 그것은 위안인 동시에 가장 교묘한 감옥이다.
-            </p>
-        </div>
-
-        <!-- 블록 7: 독자 질문 -->
-        <div class="card reflection-block">
-            <span class="icon">🤔</span>
-            <h3>스스로에게 던지는 질문</h3>
-
-            <div class="reflection-questions">
-                <p>어제의 영광을 되새김질하며 살 것인가?</p>
-                <p>내일의 질문을 향해 걸을 것인가?</p>
-                <p style="margin-top: 24px; font-size: 20px; font-weight: 700; color: #1a3a52;">
-                    당신은 흐를 것인가,<br>아니면 고여있을 것인가?
-                </p>
+            <div class="tip-card">
+                <div class="tip-number">TIP 1</div>
+                <h3>가장 환한 순간에 찬물을 끼얹어라</h3>
+                <p>샴페인을 터뜨린 바로 그 순간, 스스로에게 질문을 던져보자. 가장 달콤한 순간에 가장 쓴 약을 삼키는 일이 성공을 화석으로 굳히지 않는다.</p>
+                <div class="action">
+                    <strong>실천 방법:</strong>
+                    <span>'이게 정말 내 실력일까, 아니면 운이 좋았을 뿐일까?', '이 성공 때문에 나는 무엇을 보지 못하게 될까?' 라는 질문을 성취 직후 노트에 기록하고 답변하기</span>
+                </div>
             </div>
 
-            <p style="margin-top: 32px; font-size: 16px; color: #4a5568; line-height: 1.8; word-break: keep-all;">
-                그 신진대사의 속도가, 결국 우리의 생존 속도다.
-            </p>
+            <div class="tip-card">
+                <div class="tip-number">TIP 2</div>
+                <h3>일부러 길을 잃어라</h3>
+                <p>늘 가던 길이 아닌 낯선 골목으로 들어서고, 평소라면 거들떠보지 않았을 분야의 책을 들춰보자. 그런 무용한 시간들이 익숙한 생각의 근육을 비틀고, 예상치 못한 발견을 선물한다.</p>
+                <div class="action">
+                    <strong>실천 방법:</strong>
+                    <span>매주 1회, 의도적으로 전혀 모르는 분야의 콘텐츠 접하기 (다큐멘터리, 학술지, 낯선 장르의 책). 견고한 성벽이 아니라 바람이 드나드는 집을 지어라.</span>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">TIP 3</div>
+                <h3>나와 다른 세계에 귀 기울여라</h3>
+                <p>나와 생각이 전혀 다른 사람의 이야기에 반박하기보다 끝까지 귀 기울여 보자. 그의 세계는 어떤 논리로 이루어져 있는지 가만히 들여다보자.</p>
+                <div class="action">
+                    <strong>실천 방법:</strong>
+                    <span>한 달에 1회, 자신과 정반대 견해를 가진 사람과 1시간 대화하기. 기꺼이 나의 견고한 세계에 균열을 내줄 때, 새로운 생각은 그 틈을 비집고 싹을 틔운다.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 블록 6: Q&A 및 참고자료 -->
+        <div class="card qa-block">
+            <span class="icon">💬</span>
+            <h2>Q&A 및 참고자료</h2>
+
+            <div class="qa-item">
+                <div class="question">성공의 소화불량을 어떻게 알 수 있나요?</div>
+                <div class="answer">세 가지 신호가 있습니다. ① 과거 성취를 자주 언급하며 현재를 정당화할 때 ② 새로운 시도가 두렵고 현재 방식을 고집할 때 ③ 주변의 변화를 인정하지 않고 '예전에는 이랬는데'라는 말이 늘어날 때. 이런 신호가 보인다면 의도적으로 안락함을 벗어날 시간입니다.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">과거 성공을 버리라는 것인가요?</div>
+                <div class="answer">아닙니다. 과거의 성공을 부정하는 것이 아니라, 그것에 '고정'되지 않는 것입니다. 성공은 디딤돌이지 안락의자가 아닙니다. 과거의 경험을 존중하되, 그것이 현재의 유일한 기준이 되지 않도록 경계해야 합니다.</div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">안정적인 커리어를 추구하는 것도 잘못인가요?</div>
+                <div class="answer">안정 자체는 문제가 아닙니다. 문제는 '정적인 안정'을 추구하는 것입니다. 현대사회에서 진정한 안정은 '지속적으로 배우고 적응하는 능력'에서 나옵니다. 움직이는 안정, 흐르는 안정을 만들어가야 합니다.</div>
+            </div>
+
+            <div class="references">
+                <h3>참고자료</h3>
+                <ul>
+                    <li>Kahneman, D. & Tversky, A. (1979). "Prospect Theory: Status Quo Bias" - 현상유지 편향에 관한 행동경제학 연구</li>
+                    <li>Heraclitus. "단편들(Fragments)" - 만물유전(萬物流轉)의 철학적 기초</li>
+                    <li>Dweck, C. (2006). "Mindset: The New Psychology of Success" - 성장형 사고방식에 관한 연구</li>
+                    <li>Taleb, N. N. (2012). "Antifragile" - 불확실성 속에서 성장하는 시스템에 관한 고찰</li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>
