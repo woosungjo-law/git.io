@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도망치지 않는 자만이 돌아갈 수 있다 - 삼양라면 1963</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #263238;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 24px 20px;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 2px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #263238;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: #607D8B;
+            font-weight: 500;
+        }
+
+        .card {
+            background: white;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: linear-gradient(to bottom, #E0F2F7, #B2EBF2);
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .card-header:active {
+            background: linear-gradient(to bottom, #B2EBF2, #80DEEA);
+        }
+
+        .card-header h2 {
+            font-size: 19px;
+            font-weight: 700;
+            color: #263238;
+            flex: 1;
+        }
+
+        .card-icon {
+            color: #26C6DA;
+            font-size: 20px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin-left: 12px;
+        }
+
+        .card-icon.expanded {
+            transform: rotate(90deg);
+        }
+
+        .card-content {
+            background: #FFFFFF;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .card-content.expanded {
+            max-height: 800px;
+            padding: 20px;
+        }
+
+        .card-content p {
+            font-size: 15px;
+            color: #263238;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .card-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-content strong {
+            color: #26C6DA;
+            font-weight: 600;
+        }
+
+        .summary {
+            background: linear-gradient(to bottom, #FFF3E0, #FFE0B2);
+            padding: 24px 20px;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            margin-top: 2px;
+        }
+
+        .summary h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #263238;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .summary-icon {
+            color: #FF6F00;
+            margin-right: 8px;
+            font-size: 22px;
+        }
+
+        .summary p {
+            font-size: 16px;
+            font-weight: 600;
+            color: #263238;
+            line-height: 1.7;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            padding: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+        }
+
+        @media (max-width: 380px) {
+            .header h1 {
+                font-size: 21px;
+            }
+
+            .card-header h2 {
+                font-size: 17px;
+            }
+
+            .card-content p {
+                font-size: 14px;
+            }
+        }
+
+        /* 접근성 개선 */
+        .card-header:focus {
+            outline: 3px solid #26C6DA;
+            outline-offset: 2px;
+        }
+
+        /* 스크롤바 스타일링 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>도망치지 않는 자만이 돌아갈 수 있다</h1>
+            <div class="subtitle">삼양라면 1963의 전략적 용기</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false">
+                <h2>🔥 1989 우지 파동</h2>
+                <span class="card-icon">▶</span>
+            </div>
+            <div class="card-content">
+                <p><strong>재앙의 시작:</strong> 공업용 우지 사용 의혹으로 시장점유율 추락, 국민 식품의 신뢰 붕괴</p>
+                <p><strong>8년의 싸움:</strong> 보건사회부는 무해 판단했으나 1심 유죄(1994) → 항소심 무죄(1995) → 대법원 최종 무죄 확정(1997)</p>
+                <p><strong>깊은 상처:</strong> 법정 판결이 시장의 기억을 지우지 못함. 우지는 금기가 되고 36년간 침묵만 이어짐</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false">
+                <h2>⏳ 시간의 역설</h2>
+                <span class="card-icon">▶</span>
+            </div>
+            <div class="card-content">
+                <p><strong>기억의 변화:</strong> 소비자들이 우지로 튀긴 면의 고소함과 깊은 국물 맛을 그리워하며 재출시 요청</p>
+                <p><strong>과학의 진보:</strong> "우지가 건강의 적"이라는 담론 약화. 오히려 팜유보다 포화지방산이 낮다는 연구 발표</p>
+                <p><strong>인식의 전환:</strong> 트라우마는 희미해지고 향수는 선명해짐. 독이 전통이 되고, 금기가 자산이 되는 순간</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false">
+                <h2>🎯 1963 전략</h2>
+                <span class="card-icon">▶</span>
+            </div>
+            <div class="card-content">
+                <p><strong>정교한 작명:</strong> 재앙의 해(1989)가 아닌 영광의 원년(1963.9.15)으로 회귀. 한국 최초 라면의 혁신 지점으로 귀환</p>
+                <p><strong>프리미엄 복각:</strong> 기존 700원 → 1500원대(2배 이상). 우지 튀김면 + 우골 액상스프가 프리미엄의 증표</p>
+                <p><strong>과거의 재해석:</strong> 단순 복고가 아닌 브랜드 유산의 재구축. 62년 시간의 무게를 프리미엄 서사로 전환</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false">
+                <h2>🌊 K-라면 열풍</h2>
+                <span class="card-icon">▶</span>
+            </div>
+            <div class="card-content">
+                <p><strong>글로벌 신드롬:</strong> 불닭볶음면 세계적 열풍, 한국 라면 132개국 수출(2023년 9억5천만 달러)</p>
+                <p><strong>프리미엄 시장:</strong> 소비자들의 가치 소비 증가. 700원에서 1500~2000원대로 기꺼이 지불</p>
+                <p><strong>완벽한 타이밍:</strong> 시장 환경, 소비자 인식, 건강 담론, 프리미엄 트렌드 모든 조건 충족. 과거의 상처를 자산으로 전환</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false">
+                <h2>💡 비즈니스 교훈</h2>
+                <span class="card-icon">▶</span>
+            </div>
+            <div class="card-content">
+                <p><strong>1. 투명성:</strong> 은폐와 회피는 전략이 아님. 과거를 정면으로 마주하고 객관적 근거로 재해석하는 것이 진정한 용기</p>
+                <p><strong>2. 스토리텔링:</strong> 트라우마도 시간과 맥락이 주어지면 자산이 됨. 1989년의 독은 2025년의 전통이자 프리미엄</p>
+                <p><strong>3. 전략적 타이밍:</strong> 2000년대 초반 재출시는 실패했을 것. 성급함은 재앙, 기다림은 미덕. 시장 환경 포착이 핵심</p>
+                <p><strong>4. 재창조:</strong> 회피가 아닌 재해석으로 브랜드 유산 재구축. 과거로의 도피가 아닌 과거를 통한 혁신</p>
+            </div>
+        </div>
+
+        <div class="summary">
+            <h2><span class="summary-icon">✨</span>핵심 요약</h2>
+            <p>
+                삼양식품은 36년 전 자신을 무너뜨린 <span class="highlight">우지를 프리미엄으로 부활</span>시켰다.
+                도망치지 않고 기다렸으며, 시장이 준비되자 과거로 돌아갔다.
+                1989년이 아닌 <span class="highlight">1963년으로</span>.
+                상처는 지워지지 않지만 변할 수 있다.
+                때로는 그 상처가 가장 강력한 무기가 된다.
+                이것이 시간의 힘이고, 전략의 승리이며, <span class="highlight">용기의 결실</span>이다.
+            </p>
+        </div>
+
+        <div class="footer">
+            조우성 변호사 | 2025.10.25<br>
+            Cornell Note Method - Mobile Optimized
+        </div>
+    </div>
+
+    <script>
+        function toggleCard(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.card-icon');
+            const isExpanded = content.classList.contains('expanded');
+
+            // 접근성을 위한 aria-expanded 속성 업데이트
+            header.setAttribute('aria-expanded', !isExpanded);
+
+            if (isExpanded) {
+                content.classList.remove('expanded');
+                icon.classList.remove('expanded');
+                icon.textContent = '▶';
+            } else {
+                content.classList.add('expanded');
+                icon.classList.add('expanded');
+                icon.textContent = '▼';
+            }
+        }
+
+        // 키보드 접근성: Enter 또는 Space 키로 토글
+        document.querySelectorAll('.card-header').forEach(header => {
+            header.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleCard(this);
+                }
+            });
+        });
+
+        // 첫 번째 카드 자동 열기 (선택사항)
+        // window.addEventListener('load', function() {
+        //     const firstCard = document.querySelector('.card-header');
+        //     if (firstCard) toggleCard(firstCard);
+        // });
+    </script>
+</body>
+</html>
