@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법률 의견서 - 코넬노트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #263238;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            background: linear-gradient(to bottom, #E0F2F7, #B2EBF2);
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+
+        .card-header:hover {
+            background: linear-gradient(to bottom, #B2EBF2, #80DEEA);
+        }
+
+        .card-header:active {
+            transform: scale(0.98);
+        }
+
+        .card-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: #263238;
+            flex: 1;
+            padding-right: 12px;
+        }
+
+        .card-icon {
+            color: #26C6DA;
+            font-size: 20px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .card-icon.expanded {
+            transform: rotate(90deg);
+        }
+
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #FFFFFF;
+        }
+
+        .card-content.active {
+            max-height: 2000px;
+            padding: 20px;
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-content li {
+            padding: 8px 0 8px 24px;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .card-content li:before {
+            content: "•";
+            color: #26C6DA;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+
+        .card-content strong {
+            color: #26C6DA;
+            font-weight: 600;
+        }
+
+        .subsection {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 2px solid #E0F2F7;
+        }
+
+        .subsection-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #26C6DA;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .subsection-title:before {
+            content: "▸";
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .summary {
+            background: linear-gradient(to bottom, #FFF3E0, #FFE0B2);
+            border-radius: 12px;
+            padding: 24px 20px;
+            margin-top: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #263238;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .summary-title:before {
+            content: "★";
+            color: #FF9800;
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .summary-content {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.8;
+            color: #263238;
+        }
+
+        .summary-content p {
+            margin-bottom: 12px;
+        }
+
+        .highlight {
+            background: linear-gradient(transparent 60%, #FFE082 60%);
+            padding: 2px 4px;
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #26C6DA;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px 8px;
+            }
+
+            .header {
+                padding: 20px 16px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .card-title {
+                font-size: 17px;
+            }
+
+            .card-content.active {
+                padding: 16px;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: slideIn 0.4s ease forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>법률 의견서 분석</h1>
+            <p>배우자 명의 업체 운영 관련 형사법적 쟁점</p>
+        </div>
+
+        <!-- Card 1: 즉각 조치 필요 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title">즉각 조치 필요</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-content">
+                <ul>
+                    <li><strong>증거 충분:</strong> 인사위 진술, 관련자 확인서, 자재 입출고 내역, 세금계산서로 즉시 고소 가능</li>
+                    <li><strong>금융자료 미제출:</strong> 고소 장애가 아닌 범의 은폐 증거로 활용 → 압수수색 영장 청구 근거</li>
+                    <li><strong>최우선 과제:</strong> 범죄 수익 은닉 전 <span class="highlight">재산 가압류</span>로 즉시 동결</li>
+                    <li><strong>동시 진행:</strong> 형사고소와 민사 보전조치를 병행하여 신속 대응</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card 2: 범죄 혐의 분석 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title">범죄 혐의 (3중 구조)</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-content">
+                <div class="subsection-title">업무상 횡령</div>
+                <ul>
+                    <li>회사 보관 자재를 '더시스템' 현장에 무단 사용</li>
+                    <li>사적 업체에 재산상 이익 편취</li>
+                </ul>
+
+                <div class="subsection">
+                    <div class="subsection-title">업무상 배임</div>
+                    <ul>
+                        <li>회사 자재·신용·영업기회 이용한 공사 수행</li>
+                        <li>시공비를 회사가 아닌 배우자 명의 업체로 수령</li>
+                        <li>회사에 막대한 재산상 손해 발생</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">사기죄</div>
+                    <ul>
+                        <li>거래처에 '더시스템'을 독립 정상 업체로 기망</li>
+                        <li>공사대금 편취 (회사 및 거래처 대상 별개 범죄)</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">배우자 최진희 책임</div>
+                    <ul>
+                        <li><span class="highlight">공동정범</span> 성립: 단순 명의대여 아님</li>
+                        <li>사업자 명의 제공 + 범죄수익 계좌 관리</li>
+                        <li>범행 핵심 역할 수행 → 형사 처벌 가능</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: 피해액 산정 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title">피해액 산정 범위</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-content">
+                <ul>
+                    <li><strong>자재 원가만 아님:</strong> 전체 공사가 회사 자산·신용 기반으로 발생</li>
+                    <li><strong>시공비 전액:</strong> '더시스템'이 부당 수령한 <span class="highlight">시공비 전액</span>이 배임·사기 피해액</li>
+                    <li><strong>미수채권 포함:</strong> 세금계산서 미발행건도 실제 출고·공사 이뤄진 회사 자산</li>
+                    <li><strong>법적 논리:</strong> 회사가 상실한 이익 = 총 피해액</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card 4: 수사 범위 확장 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title">제2·3의 '더시스템' 추적</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-content">
+                <ul>
+                    <li><strong>의심 업체:</strong> 삼진비계, 두진비계, 원주시스템</li>
+                    <li><strong>의심 근거:</strong> 유사 시기·동일 업종·인적 연관성 (김영일 등)</li>
+                    <li><strong>범행 패턴:</strong> 은폐·지속 목적의 동일 수법 <span class="highlight">외피(껍데기) 업체</span></li>
+                    <li><strong>고소 전략:</strong> 실질 동일인 운영 주장 (포괄일죄/연속범)</li>
+                    <li><strong>수사 요청:</strong> 관련 업체 전체 계좌추적 및 참고인 조사로 범죄수익 흐름 완전 파악</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card 5: 형사 대응 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title">형사 고소 전략</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-content">
+                <div>
+                    <span class="badge">피고소인</span>
+                    <span style="font-weight: 600;">정○○ + 배우자 최진희 (공동정범)</span>
+                </div>
+                <div style="margin-top: 12px;">
+                    <span class="badge">혐의</span>
+                    <span style="font-weight: 600;">특경가법위반(횡령·배임), 사기</span>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">고소장 핵심 구성</div>
+                    <ul>
+                        <li>'더시스템' 범행 사실을 육하원칙 기반 명확히 서술</li>
+                        <li>'삼진비계' 등 유사 업체 의혹 구체적 적시</li>
+                        <li>범행 전체 포괄 수사 강력 요청</li>
+                        <li>금융자료 미제출 근거로 <span class="highlight">압수수색·계좌추적</span> 필요성 강조</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 6: 민사·세무·인사 대응 -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title">민사·세무·인사 종합 대응</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-content">
+                <div class="subsection-title">민사: 재산 보전</div>
+                <ul>
+                    <li><strong>즉시 실행:</strong> 고소와 동시에 가압류 신청</li>
+                    <li><strong>대상:</strong> 피징계자·배우자 명의 부동산, 예금, 급여채권 등 모든 재산</li>
+                    <li><strong>본안:</strong> 횡령 자재대금 + 시공비 전액 + 미수채권 + 세무 가산세 포함 손해배상 소송</li>
+                </ul>
+
+                <div class="subsection">
+                    <div class="subsection-title">세무: 전략적 정정신고</div>
+                    <ul>
+                        <li><strong>위험:</strong> '더시스템'발 허위세금계산서로 즉각 세무 리스크</li>
+                        <li><strong>순서:</strong> ① 형사고소 → ② 수사 개시 통보 → ③ 세무서 자진신고</li>
+                        <li><strong>목적:</strong> "조직적 사기 범죄 피해자" 소명으로 회사 책임 최소화 및 가산세 감면</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">인사: 징계 완료</div>
+                    <ul>
+                        <li>확보된 명백 증거와 본인 자백성 진술로 신속 해고 처리</li>
+                        <li>향후 부당해고 구제신청 대비 정당성 확보</li>
+                        <li>형사고소가 징계 정당성 강력 뒷받침</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary">
+            <div class="summary-title">핵심 요약</div>
+            <div class="summary-content">
+                <p><strong>1. 즉각 실행:</strong> 충분한 증거로 <span class="highlight">형사고소 + 재산가압류</span>를 동시 진행하여 범죄수익 은닉 차단</p>
+
+                <p><strong>2. 범죄 구조:</strong> 횡령·배임·사기 3중 범죄 성립, 배우자는 공동정범으로 함께 처벌</p>
+
+                <p><strong>3. 피해 범위:</strong> 자재 원가가 아닌 <span class="highlight">시공비 전액 + 미수채권</span>이 실제 피해액</p>
+
+                <p><strong>4. 확장 수사:</strong> '삼진비계' 등 외피 업체들의 범죄수익 흐름 완전 추적 요청</p>
+
+                <p><strong>5. 종합 대응:</strong> 형사(고소) → 민사(가압류·손해배상) → 세무(전략적 정정) → 인사(징계 완료) 4단계 동시 진행으로 피해 최소화 및 완전 회복 도모</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCard(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.card-icon');
+
+            // Toggle active class
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('expanded');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('expanded');
+            }
+        }
+
+        // Keyboard accessibility
+        document.querySelectorAll('.card-header').forEach(header => {
+            header.setAttribute('role', 'button');
+            header.setAttribute('tabindex', '0');
+            header.setAttribute('aria-expanded', 'false');
+
+            header.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleCard(header);
+                    const isExpanded = header.nextElementSibling.classList.contains('active');
+                    header.setAttribute('aria-expanded', isExpanded);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
