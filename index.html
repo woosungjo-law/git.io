@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>취직 제안에 대한 점괘 - 코넬노트</title>
+    <title>성공이라는 소화불량 - 서른의 나에게</title>
     <style>
         * {
             margin: 0;
@@ -12,233 +12,294 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 20px 10px;
-            color: #2C3E50;
-            line-height: 1.7;
+            font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background: #f8f9fa;
+            color: #2d3748;
+            line-height: 1.8;
+            padding: 0;
+            margin: 0;
         }
 
         .container {
-            max-width: 480px;
+            max-width: 600px;
             margin: 0 auto;
+            background: #ffffff;
         }
 
-        .header {
+        /* 크레딧 헤더 */
+        .credit-header {
+            background: linear-gradient(135deg, #1a3a52 0%, #2c5f77 100%);
+            color: #ffffff;
             text-align: center;
-            margin-bottom: 30px;
-            padding: 30px 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .header h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #2C3E50;
-            margin-bottom: 10px;
-        }
-
-        .header .subtitle {
+            padding: 12px 20px;
             font-size: 14px;
-            color: #7F8C8D;
             font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
+        /* 공통 카드 스타일 */
         .card {
-            background: white;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-            overflow: hidden;
-            transition: all 0.3s ease;
+            padding: 32px 24px;
+            margin-bottom: 0;
+            border-bottom: 1px solid #e8e8e8;
         }
 
-        .card:hover {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        /* 블록 1: 타이틀 */
+        .title-block {
+            background: linear-gradient(135deg, #1a3a52 0%, #2c5f77 100%);
+            color: #ffffff;
+            padding: 48px 24px 40px;
+            text-align: center;
+            border-bottom: none;
         }
 
-        .card-header {
-            background: linear-gradient(to bottom, #2C3E50, #34495E);
-            color: #FFFFFF;
-            padding: 18px 20px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.2s ease;
+        .title-block h1 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            line-height: 1.3;
+            word-break: keep-all;
+            overflow-wrap: break-word;
         }
 
-        .card-header:hover {
-            background: linear-gradient(to bottom, #34495E, #3d5569);
-        }
-
-        .card-header:active {
-            transform: scale(0.98);
-        }
-
-        .card-header .icon {
-            font-size: 16px;
-            transition: transform 0.3s ease;
-            color: #E74C3C;
-        }
-
-        .card-header.active .icon {
-            transform: rotate(90deg);
-        }
-
-        .card-body {
-            background: #ECF0F1;
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .card-body.expanded {
-            max-height: 2000px;
-            padding: 20px;
-        }
-
-        .card-body h3 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #2C3E50;
-            margin: 15px 0 10px 0;
-        }
-
-        .card-body p {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #2C3E50;
-            margin-bottom: 12px;
-        }
-
-        .card-body ul {
-            margin: 10px 0 15px 20px;
-            list-style: none;
-        }
-
-        .card-body ul li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 10px;
-            font-size: 15px;
+        .title-block .subtitle {
+            font-size: 17px;
+            font-weight: 400;
+            opacity: 0.9;
             line-height: 1.6;
+            word-break: keep-all;
         }
 
-        .card-body ul li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: #E74C3C;
+        /* 블록 2: 핵심 질문 */
+        .question-block {
+            background: #fef8f0;
+            padding: 36px 24px;
+            border-left: 5px solid #f4a261;
+        }
+
+        .question-block .icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .question-block h2 {
+            font-size: 22px;
             font-weight: 700;
+            color: #1a3a52;
+            line-height: 1.5;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        /* 블록 3: 핵심 통찰 */
+        .insight-block {
+            background: linear-gradient(135deg, #f4a261 0%, #ffd166 100%);
+            padding: 40px 28px;
+            text-align: center;
+        }
+
+        .insight-block .icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .insight-block h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a3a52;
+            line-height: 1.6;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        /* 블록 4: 경험/사례 */
+        .story-block {
+            background: #ffffff;
+            padding: 36px 24px;
+        }
+
+        .story-block .icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .story-block h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a3a52;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .story-item {
+            margin-bottom: 24px;
+        }
+
+        .story-item h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #2c5f77;
+            margin-bottom: 10px;
+            word-break: keep-all;
+        }
+
+        .story-item p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            word-break: keep-all;
         }
 
         .highlight {
-            background: linear-gradient(120deg, rgba(231, 76, 60, 0.15) 0%, rgba(231, 76, 60, 0.1) 100%);
-            padding: 2px 6px;
-            border-radius: 4px;
+            background: linear-gradient(180deg, transparent 60%, #ffd166 60%);
             font-weight: 600;
-            color: #2C3E50;
+            color: #1a3a52;
         }
 
-        .quote {
-            border-left: 4px solid #E74C3C;
-            padding: 12px 15px;
-            margin: 15px 0;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 6px;
-            font-style: italic;
-            color: #34495E;
+        /* 블록 5: 실천 가이드 */
+        .action-block {
+            background: #f0fdf4;
+            padding: 36px 24px;
         }
 
-        .summary-section {
-            background: linear-gradient(to bottom, #FFE5B4, #FFD89B);
-            border-radius: 12px;
-            padding: 25px 20px;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        .action-block .icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+            display: block;
         }
 
-        .summary-section h2 {
+        .action-block h3 {
             font-size: 20px;
             font-weight: 700;
-            color: #2C3E50;
-            margin-bottom: 15px;
-            text-align: center;
+            color: #1a3a52;
+            margin-bottom: 24px;
+            word-break: keep-all;
         }
 
-        .summary-section p {
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .action-list li {
+            margin-bottom: 20px;
+            padding-left: 32px;
+            position: relative;
             font-size: 16px;
             line-height: 1.8;
-            color: #2C3E50;
-            margin-bottom: 12px;
-            font-weight: 500;
+            color: #2d3748;
+            word-break: keep-all;
         }
 
-        .summary-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin: 15px 0;
-        }
-
-        .summary-item {
-            background: rgba(255, 255, 255, 0.5);
-            padding: 12px 15px;
-            border-radius: 8px;
-            border-left: 4px solid #E74C3C;
-        }
-
-        .summary-item strong {
-            color: #E74C3C;
-            font-size: 15px;
-        }
-
-        .summary-item p {
-            font-size: 14px;
-            margin: 5px 0 0 0;
-            font-weight: 400;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            background: #E74C3C;
-            color: white;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            margin: 5px 5px 5px 0;
-        }
-
-        .emoji {
+        .action-list li::before {
+            content: '🌱';
+            position: absolute;
+            left: 0;
             font-size: 20px;
-            margin-right: 8px;
         }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 5px;
+        .action-list li strong {
+            color: #1a3a52;
+            font-weight: 700;
+        }
+
+        /* 블록 6: 인용 */
+        .quote-block {
+            background: #fef8f0;
+            padding: 40px 28px;
+            border-left: 5px solid #2c5f77;
+        }
+
+        .quote-block .icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            display: block;
+            opacity: 0.7;
+        }
+
+        .quote-block blockquote {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #1a3a52;
+            font-style: italic;
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', serif;
+            word-break: keep-all;
+        }
+
+        .quote-block .author {
+            margin-top: 16px;
+            font-size: 15px;
+            color: #4a5568;
+            font-style: normal;
+            text-align: right;
+        }
+
+        /* 블록 7: 독자 질문 */
+        .reflection-block {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 40px 24px;
+            text-align: center;
+            border-bottom: none;
+        }
+
+        .reflection-block .icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .reflection-block h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a3a52;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .reflection-questions {
+            margin-top: 20px;
+        }
+
+        .reflection-questions p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #2c5f77;
+            font-weight: 600;
+            margin: 12px 0;
+            word-break: keep-all;
+        }
+
+        /* 반응형 */
+        @media (max-width: 414px) {
+            .title-block h1 {
+                font-size: 28px;
             }
 
-            .header h1 {
-                font-size: 22px;
+            .title-block .subtitle {
+                font-size: 16px;
             }
 
-            .card-header {
+            .card {
+                padding: 28px 20px;
+            }
+
+            .question-block h2,
+            .insight-block h2 {
+                font-size: 20px;
+            }
+
+            .action-list li,
+            .story-item p {
+                font-size: 15px;
+            }
+
+            .quote-block blockquote {
                 font-size: 17px;
-                padding: 16px 18px;
-            }
-
-            .card-body p,
-            .card-body ul li {
-                font-size: 14px;
             }
         }
 
@@ -246,7 +307,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -255,269 +316,111 @@
         }
 
         .card {
-            animation: fadeIn 0.4s ease forwards;
+            animation: fadeIn 0.6s ease forwards;
             opacity: 0;
         }
 
-        .card:nth-child(1) { animation-delay: 0.1s; }
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.3s; }
-        .card:nth-child(4) { animation-delay: 0.4s; }
-        .card:nth-child(5) { animation-delay: 0.5s; }
-        .card:nth-child(6) { animation-delay: 0.6s; }
-        .card:nth-child(7) { animation-delay: 0.7s; }
-        .card:nth-child(8) { animation-delay: 0.8s; }
-
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: #7F8C8D;
-            font-size: 13px;
-        }
+        .title-block { animation-delay: 0s; opacity: 1; }
+        .question-block { animation-delay: 0.1s; }
+        .insight-block { animation-delay: 0.2s; }
+        .story-block { animation-delay: 0.3s; }
+        .action-block { animation-delay: 0.4s; }
+        .quote-block { animation-delay: 0.5s; }
+        .reflection-block { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>📿 취직 제안에 대한 점괘</h1>
-            <p class="subtitle">풍산점(風山漸) 초효(初爻) - 점진적 전진의 때</p>
+        <!-- 블록 0: 크레딧 헤더 -->
+        <div class="credit-header">
+            글: 서른의 나에게
         </div>
 
-        <!-- 카드 1: 점괘 기본 정보 -->
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span><span class="emoji">📿</span>점괘 기본 정보</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <h3>본괘(本卦): 풍산점(風山漸) ䷴ 53번</h3>
-                <p><span class="highlight">점진하면 길하다</span> - 여자가 시집가니 길하다(女歸吉)</p>
-
-                <h3>초효 효사</h3>
-                <div class="quote">
-                    "기러기가 물가에 이르니, 어린아이는 위태로우나 말이 있으면 허물이 없다"<br>
-                    鴻漸于干, 小子厲, 有言無咎
-                </div>
-
-                <h3>핵심 의미</h3>
-                <p>서두르지 않고 단계를 밟는 것이 중요합니다. 육례(六禮)를 차근차근 밟듯이 급하게 결정할 때가 아닙니다.</p>
-            </div>
+        <!-- 블록 1: 타이틀 & 문제 정의 -->
+        <div class="title-block">
+            <h1>성공이라는<br>소화불량</h1>
+            <p class="subtitle">과거의 영광이 오늘을 가두는 순간</p>
         </div>
 
-        <!-- 카드 2: 명확한 답변 -->
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span><span class="emoji">🎯</span>명확한 답변</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <h3>권장 사항</h3>
-                <p><span class="highlight">퇴직임원 혜택 1년을 마저 누리시는 것을 권합니다.</span></p>
-
-                <h3>이유</h3>
-                <ul>
-                    <li><strong>초효의 위치:</strong> 아직 "물가(干)"에 막 이른 단계. 기러기 여정의 초입이므로 성급하게 움직이면 준비 없이 뛰어드는 격</li>
-                    <li><strong>점(漸)의 의미:</strong> 서두르지 않고 단계를 밟는 것이 핵심. 육례를 차근차근 밟듯이 진행</li>
-                    <li><strong>현실적 판단:</strong> 1억 연봉 3년(3억) vs 퇴직혜택 1년(1.5억) + 자유시간 1년. 이 1년의 여유가 다음 단계 준비 시간</li>
-                    <li><strong>유언무구(有言無咎):</strong> 제안을 정중히 거절하되, 미래 가능성은 열어두라는 의미</li>
-                </ul>
-            </div>
+        <!-- 블록 2: 핵심 질문 -->
+        <div class="card question-block">
+            <span class="icon">💭</span>
+            <h2>당신의 성공은 앞으로 나아가게 하는가,<br>과거에 주저앉히는가?</h2>
         </div>
 
-        <!-- 카드 3: 행동 지침 -->
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span><span class="emoji">🦢</span>행동 지침</span>
-                <span class="icon">▶</span>
+        <!-- 블록 3: 핵심 통찰 -->
+        <div class="card insight-block">
+            <span class="icon">💡</span>
+            <h2>성공은 영양분이 아니라 때로는 소화되지 않는 음식처럼 우리를 정체시킨다</h2>
+        </div>
+
+        <!-- 블록 4: 경험/사례 -->
+        <div class="card story-block">
+            <span class="icon">📖</span>
+            <h3>익숙함이라는 중력</h3>
+
+            <div class="story-item">
+                <h4>빛바랜 상패</h4>
+                <p>책상 한구석의 상패는 한때 밤을 새워 얻어낸 환호였고, 내 젊음을 증명하는 훈장이었다. 이제는 먼지를 그러모으는 묵직한 장식품일 뿐이다. <span class="highlight">성공은 아름다운 화석이 될 수 있다.</span></p>
             </div>
-            <div class="card-body">
-                <h3>지금 당장</h3>
-                <p>MD 제안은 감사히 정중히 거절합니다. "지금은 개인적 정리 시간이 필요하지만, 추후 더 좋은 타이밍에 다시 인연이 되었으면 한다"고 전달하세요.</p>
 
-                <h3>향후 1년</h3>
-                <p>진정으로 하고 싶은 일과 전략적 방향을 고민하며 재충전하는 시간을 가지세요.</p>
+            <div class="story-item">
+                <h4>안락한 궤도의 함정</h4>
+                <p>SNS 좋아요, 긍정적 피드백, 완벽한 보고서. 작은 성취들이 주는 즉각적이고 달콤한 보상은 우리를 안심시킨다. 하지만 그 <span class="highlight">익숙함의 중력</span>이 가장 무섭다. 안락한 오늘의 궤도에 단단히 묶여, 세상이 저만치 다른 방향으로 흘러간 줄도 모르게 된다.</p>
+            </div>
 
-                <h3>1년 후</h3>
-                <p>풍지관(觀)의 괘처럼 "높은 곳에서 조망하듯" 더 넓은 시야로 다음 커리어를 선택할 수 있습니다.</p>
-
-                <div class="quote">
-                    결론: 급할 것 없습니다. 기러기도 한 걸음씩 나아갑니다. 1년의 자유와 안정을 누리며 다음을 준비하세요.
-                </div>
+            <div class="story-item">
+                <h4>변화하는 세상</h4>
+                <p>부모님 세대는 정해진 사다리를 누가 더 빨리 오르느냐의 경쟁이었다. 지금은 하룻밤 사이에 지도가 바뀌는 거대한 미로다. 그 미로에서 정답을 찾는 일은 이제 인공지능이 더 잘한다. <span class="highlight">우리의 역할은 길 없는 길을 감각으로 더듬어 나가는 것</span>이어야 한다.</p>
             </div>
         </div>
 
-        <!-- 카드 4: 왕필의 해석 -->
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span><span class="emoji">🏛️</span>왕필 - 위치론적 해석</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <h3>핵심 통찰</h3>
-                <p class="highlight">아직 시작 단계, 준비가 미흡한 시점</p>
+        <!-- 블록 5: 실천 가이드 -->
+        <div class="card action-block">
+            <span class="icon">🎯</span>
+            <h3>소화불량에서 벗어나는 3가지 방법</h3>
 
-                <div class="quote">
-                    "간(干)은 물가이니 아직 깊은 곳에 이르지 못했다. 초효는 점(漸)의 시작이요, 기러기가 막 여정을 시작한 때이다."
-                </div>
+            <ul class="action-list">
+                <li><strong>가장 환한 순간에 찬물을 끼얹어라</strong><br>
+                샴페인을 터뜨린 바로 그 순간, 스스로에게 질문을 던져보자. '이게 정말 내 실력일까, 아니면 운이 좋았을 뿐일까?', '이 성공 때문에 나는 무엇을 보지 못하게 될까?' 가장 달콤한 순간에 가장 쓴 약을 삼키는 일이 성공을 화석으로 굳히지 않는다.</li>
 
-                <h3>적용</h3>
-                <ul>
-                    <li>아직 "깊은 물(본격적 커리어)"로 들어갈 준비가 안 됨</li>
-                    <li>상무 퇴임 후 1년은 "전환기의 초입"일 뿐</li>
-                    <li><span class="highlight">신중한 거절의 말(有言)</span>로 관계를 유지하되, 성급한 진입은 피하라</li>
-                </ul>
-            </div>
+                <li><strong>일부러 길을 잃어라</strong><br>
+                늘 가던 길이 아닌 낯선 골목으로 들어서고, 평소라면 거들떠보지 않았을 분야의 책을 들춰보자. 그런 무용한 시간들이 익숙한 생각의 근육을 비틀고, 예상치 못한 발견을 선물한다. 견고한 성벽이 아니라 바람이 드나드는 집을 지어라.</li>
+
+                <li><strong>나와 다른 세계에 귀 기울여라</strong><br>
+                나와 생각이 전혀 다른 사람의 이야기에 반박하기보다 끝까지 귀 기울여 보자. 그의 세계는 어떤 논리로 이루어져 있는지 가만히 들여다보자. 기꺼이 나의 견고한 세계에 균열을 내줄 때, 새로운 생각은 그 틈을 비집고 싹을 틔운다.</li>
+            </ul>
         </div>
 
-        <!-- 카드 5: 주희의 해석 -->
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span><span class="emoji">📖</span>주희 - 점진의 덕</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <h3>핵심 통찰</h3>
-                <p class="highlight">순서를 지켜야 덕이 완성됨</p>
-
-                <div class="quote">
-                    "점(漸)은 여자의 혼례와 같으니, 반드시 납채(納采)에서 친영(親迎)까지 순서를 밟아야 한다."
-                </div>
-
-                <h3>적용</h3>
-                <ul>
-                    <li><strong>1년의 퇴직혜택:</strong> "납채(納采)" 단계 - 다음을 준비하는 예의범절의 시간</li>
-                    <li><strong>MD직:</strong> "친영(親迎)" - 모든 준비가 완료된 후의 마지막 단계</li>
-                    <li>순서를 건너뛰면 근본이 흔들림. 지금은 내적 준비와 전략 수립의 때</li>
-                </ul>
-            </div>
+        <!-- 블록 6: 인용 -->
+        <div class="card quote-block">
+            <span class="icon">📜</span>
+            <blockquote>
+                "같은 강물에 두 번 발 담글 수는 없다."
+            </blockquote>
+            <p class="author">— 헤라클레이토스</p>
+            <p style="margin-top: 20px; font-size: 16px; line-height: 1.8; color: #4a5568; word-break: keep-all;">
+                세상도, 나도 어제와 다른데, 빛나는 성공의 기억만이 우리를 어제의 그 자리에 붙잡아두고 놓아주지 않는다. 그것은 위안인 동시에 가장 교묘한 감옥이다.
+            </p>
         </div>
 
-        <!-- 카드 6: 정약용의 해석 -->
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span><span class="emoji">🇰🇷</span>정약용 - 마음의 준비</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <h3>핵심 통찰</h3>
-                <p class="highlight">마음의 준비가 먼저다 - 진심 여부를 탐구하라</p>
+        <!-- 블록 7: 독자 질문 -->
+        <div class="card reflection-block">
+            <span class="icon">🤔</span>
+            <h3>스스로에게 던지는 질문</h3>
 
-                <div class="quote">
-                    "기러기는 물을 보고도 바로 들어가지 않고 물가에서 먼저 살핀다. 이것이 지혜로운 새의 도리다."
-                </div>
-
-                <h3>적용</h3>
-                <ul>
-                    <li><strong>현재 상태:</strong> "기러기가 물을 살피는 단계" - 관찰과 성찰의 시간</li>
-                    <li><strong>마음의 준비 미완:</strong> 돈 때문? 명예 때문? 진심으로 원하는가? 아직 불명확</li>
-                    <li><strong>유언(有言)의 실천:</strong> "나는 지금 ○○○를 준비하고 싶다"는 명확한 소신 정립이 우선</li>
-                    <li>1년 후에는 "물가에서 충분히 살핀 기러기"처럼 확신을 갖고 선택 가능</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 카드 7: 빌헬름의 해석 -->
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span><span class="emoji">🌍</span>빌헬름 - 내적 성숙</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <h3>핵심 통찰</h3>
-                <p class="highlight">내적 성숙이 외적 기회보다 우선</p>
-
-                <div class="quote">
-                    "At this initial stage, one must not be seduced by external opportunities but must first establish inner clarity."
-                    <br><br>
-                    초기 단계에서는 외부 기회에 유혹되지 말고 먼저 내적 명확성을 확립해야 한다.
-                </div>
-
-                <h3>적용</h3>
-                <ul>
-                    <li><strong>변화의 여정은 이제 시작:</strong> 상무 퇴임은 끝이 아니라 새로운 개성화 과정의 출발점</li>
-                    <li><strong>충동적 자아 vs 성숙한 자아:</strong> "1억 연봉"에 반응하는 것은 미성숙한 자아의 충동</li>
-                    <li><strong>내적 명확성 우선:</strong> "나는 누구인가? 진정 무엇을 원하는가?"를 1년간 탐구</li>
-                    <li>외부 제안은 언제든 다시 올 수 있지만, 내적 성숙의 시간은 지금이 최적기</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 요약 섹션 -->
-        <div class="summary-section">
-            <h2>💎 4대 현자의 통합 결론</h2>
-
-            <div class="summary-grid">
-                <div class="summary-item">
-                    <strong>🏛️ 왕필</strong>
-                    <p>위치상 아직 시작, 준비 미흡 → 신중한 거절로 관계 유지</p>
-                </div>
-
-                <div class="summary-item">
-                    <strong>📖 주희</strong>
-                    <p>순서를 지켜야 덕이 완성됨 → 1년의 예의를 다하라</p>
-                </div>
-
-                <div class="summary-item">
-                    <strong>🇰🇷 정약용</strong>
-                    <p>마음의 준비가 먼저다 → 진심 여부를 1년간 탐구</p>
-                </div>
-
-                <div class="summary-item">
-                    <strong>🌍 빌헬름</strong>
-                    <p>내적 성숙이 외적 기회보다 우선 → 개성화 과정에 집중</p>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 20px; font-size: 18px; text-align: center;">최종 조언</h3>
-            <div class="quote" style="margin-top: 15px; background: rgba(255,255,255,0.7);">
-                <strong>"기러기가 물가에 이르렀다"</strong>는 것은 "좋은 기회가 보인다"는 뜻이지만,<br>
-                <strong>"아직 물에 들어가지 않았다"</strong>는 것은 "지금은 그 때가 아니다"는 뜻입니다.
-            </div>
-
-            <p style="margin-top: 15px;"><strong>지금:</strong> MD 제안은 정중히 거절하되 미래 가능성 열어두기</p>
-            <p><strong>1년간:</strong> 진정한 자기 탐구 - "다음 20년을 어떻게 살 것인가?"</p>
-            <p><strong>1년 후:</strong> 내적 확신을 가지고 더 좋은 선택할 수 있는 준비된 상태</p>
-
-            <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(231, 76, 60, 0.1); border-radius: 8px;">
-                <p style="font-weight: 700; color: #E74C3C; font-size: 16px;">
-                    돈은 다시 벌 수 있지만,<br>자기 성찰의 시간은 다시 오지 않습니다.
+            <div class="reflection-questions">
+                <p>어제의 영광을 되새김질하며 살 것인가?</p>
+                <p>내일의 질문을 향해 걸을 것인가?</p>
+                <p style="margin-top: 24px; font-size: 20px; font-weight: 700; color: #1a3a52;">
+                    당신은 흐를 것인가,<br>아니면 고여있을 것인가?
                 </p>
             </div>
-        </div>
 
-        <div class="footer">
-            <p>코넬노트 방식 인포그래픽</p>
-            <p>각 카드를 클릭하여 상세 내용을 확인하세요</p>
+            <p style="margin-top: 32px; font-size: 16px; color: #4a5568; line-height: 1.8; word-break: keep-all;">
+                그 신진대사의 속도가, 결국 우리의 생존 속도다.
+            </p>
         </div>
     </div>
-
-    <script>
-        function toggleCard(header) {
-            const body = header.nextElementSibling;
-            const icon = header.querySelector('.icon');
-
-            // 현재 카드의 상태 토글
-            if (body.classList.contains('expanded')) {
-                body.classList.remove('expanded');
-                header.classList.remove('active');
-                icon.textContent = '▶';
-            } else {
-                body.classList.add('expanded');
-                header.classList.add('active');
-                icon.textContent = '▼';
-            }
-        }
-
-        // 페이지 로드 시 첫 번째 카드 자동 확장
-        document.addEventListener('DOMContentLoaded', function() {
-            const firstCard = document.querySelector('.card-header');
-            if (firstCard) {
-                setTimeout(() => {
-                    toggleCard(firstCard);
-                }, 500);
-            }
-        });
-    </script>
 </body>
 </html>
