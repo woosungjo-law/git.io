@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>성공이라는 소화불량</title>
+    <title>'갑'은 어떻게 무너지는가</title>
+    <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,8 +14,8 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: #f8f9fa;
+            font-family: 'SUIT', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background: #f5f7fa;
             color: #2d3748;
             line-height: 1.8;
             padding: 0;
@@ -24,19 +26,19 @@
             max-width: 600px;
             margin: 0 auto;
             background: #ffffff;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         /* 블록 0: 크레딧 헤더 */
         .credit-header {
-            background: linear-gradient(135deg, #1a3a52 0%, #2d5166 100%);
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a7b 100%);
             color: #ffffff;
-            padding: 14px 24px;
+            padding: 16px 24px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             text-align: center;
             letter-spacing: 0.5px;
-            border-bottom: 3px solid #f4a261;
+            border-bottom: 4px solid #d4af37;
         }
 
         /* 공통 카드 스타일 */
@@ -46,16 +48,16 @@
         }
 
         .section-divider {
-            height: 1px;
+            height: 2px;
             background: linear-gradient(90deg, transparent 0%, #e2e8f0 50%, transparent 100%);
             margin: 0;
         }
 
-        /* 블록 1: 타이틀 & 문제 정의 */
+        /* 블록 1: 타이틀 */
         .title-block {
-            background: linear-gradient(135deg, #1a3a52 0%, #2d5166 100%);
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a7b 100%);
             color: #ffffff;
-            padding: 56px 28px 48px;
+            padding: 48px 28px 40px;
             text-align: center;
             position: relative;
         }
@@ -67,26 +69,20 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #f4a261 0%, #e9c46a 100%);
+            background: linear-gradient(90deg, #d4af37 0%, #f4d03f 100%);
         }
 
         .title-block .icon {
-            font-size: 48px;
-            margin-bottom: 20px;
+            font-size: 44px;
+            margin-bottom: 18px;
             display: block;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
         }
 
         .title-block h1 {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 900;
-            margin-bottom: 20px;
-            line-height: 1.3;
+            margin-bottom: 18px;
+            line-height: 1.4;
             word-break: keep-all;
             overflow-wrap: break-word;
             letter-spacing: -0.5px;
@@ -95,53 +91,47 @@
         .title-block .subtitle {
             font-size: 17px;
             font-weight: 400;
-            opacity: 0.92;
+            opacity: 0.93;
             line-height: 1.7;
             word-break: keep-all;
-            overflow-wrap: break-word;
-            max-width: 500px;
-            margin: 0 auto;
         }
 
-        /* 블록 2: 핵심 질문/딜레마 */
+        /* 블록 2: 핵심 질문 */
         .question-block {
             background: #ffffff;
-            padding: 40px 28px;
+            padding: 34px 28px;
         }
 
         .question-block .icon {
-            font-size: 40px;
-            margin-bottom: 20px;
+            font-size: 38px;
+            margin-bottom: 18px;
             display: block;
             text-align: center;
         }
 
         .question-block .main-question {
-            font-size: 21px;
-            font-weight: 700;
-            color: #1a3a52;
+            font-size: 20px;
+            font-weight: 800;
+            color: #1e3a5f;
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             line-height: 1.6;
             word-break: keep-all;
-            overflow-wrap: break-word;
-            padding: 0 8px;
         }
 
         .question-block .context {
-            background: linear-gradient(135deg, #fef8f0 0%, #fff5eb 100%);
-            padding: 24px 24px;
-            border-radius: 12px;
-            border-left: 4px solid #f4a261;
+            background: linear-gradient(135deg, #fef9f3 0%, #fff8eb 100%);
+            padding: 22px 24px;
+            border-radius: 10px;
+            border-left: 4px solid #d4af37;
         }
 
         .question-block .context p {
-            font-size: 16px;
+            font-size: 17px;
             line-height: 1.8;
             color: #4a5568;
             word-break: keep-all;
-            overflow-wrap: break-word;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .question-block .context p:last-child {
@@ -149,35 +139,40 @@
         }
 
         .highlight {
-            background: linear-gradient(180deg, transparent 60%, #f4a261 60%);
+            background: linear-gradient(180deg, transparent 65%, #f4d03f 65%);
             font-weight: 700;
-            color: #1a3a52;
-            padding: 0 4px;
+            color: #1e3a5f;
+            padding: 0 3px;
+        }
+
+        .underline {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-decoration-color: #d4af37;
+            font-weight: 700;
         }
 
         /* 블록 3: 핵심 통찰 */
         .insight-block {
-            background: linear-gradient(135deg, #f4a261 0%, #e9c46a 100%);
-            padding: 48px 32px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            padding: 40px 30px;
             text-align: center;
-            position: relative;
         }
 
         .insight-block .icon {
-            font-size: 52px;
-            margin-bottom: 24px;
+            font-size: 48px;
+            margin-bottom: 20px;
             display: block;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
         }
 
         .insight-block .insight-text {
-            font-size: 24px;
+            font-size: 23px;
             font-weight: 900;
-            color: #1a3a52;
+            color: #1e3a5f;
             line-height: 1.6;
             word-break: keep-all;
-            overflow-wrap: break-word;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             text-shadow: 0 1px 2px rgba(255,255,255,0.5);
         }
 
@@ -193,249 +188,206 @@
         /* 블록 4: 경험/사례 */
         .story-block {
             background: #ffffff;
-            padding: 40px 28px;
+            padding: 34px 28px;
         }
 
         .story-block .icon {
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: 34px;
+            margin-bottom: 18px;
             display: block;
             text-align: center;
         }
 
         .story-block h2 {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1a3a52;
-            margin-bottom: 24px;
+            font-size: 21px;
+            font-weight: 800;
+            color: #1e3a5f;
+            margin-bottom: 22px;
             text-align: center;
             word-break: keep-all;
         }
 
-        .story-item {
-            background: #f8f9fa;
-            padding: 24px 24px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            border-left: 4px solid #e9c46a;
+        .story-box {
+            background: #f7fafc;
+            padding: 22px 24px;
+            border-radius: 10px;
+            border-left: 4px solid #d4af37;
         }
 
-        .story-item p {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #4a5568;
-            word-break: keep-all;
-            overflow-wrap: break-word;
-            font-style: italic;
-        }
-
-        .story-item .story-label {
+        .story-box .label {
             display: inline-block;
-            background: #1a3a52;
+            background: #1e3a5f;
             color: #ffffff;
             font-size: 13px;
             font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 12px;
+            padding: 4px 14px;
+            border-radius: 14px;
             margin-bottom: 12px;
-            font-style: normal;
         }
 
-        .quote-box {
-            background: linear-gradient(135deg, #1a3a52 0%, #2d5166 100%);
-            color: #ffffff;
-            padding: 28px 28px;
-            border-radius: 12px;
-            margin-top: 20px;
-            position: relative;
-        }
-
-        .quote-box::before {
-            content: '"';
-            font-size: 64px;
-            font-family: Georgia, serif;
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            opacity: 0.2;
-            line-height: 1;
-        }
-
-        .quote-box p {
+        .story-box p {
             font-size: 17px;
             line-height: 1.8;
-            font-style: italic;
+            color: #4a5568;
             word-break: keep-all;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 10px;
         }
 
-        .quote-box .author {
-            margin-top: 12px;
-            font-size: 14px;
-            opacity: 0.85;
-            font-style: normal;
-            text-align: right;
+        .story-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-box strong {
+            color: #1e3a5f;
+            font-weight: 700;
         }
 
         /* 블록 5: 실천 가이드 */
         .action-block {
-            background: linear-gradient(135deg, #fef8f0 0%, #ffffff 100%);
-            padding: 40px 28px;
+            background: linear-gradient(135deg, #fef9f3 0%, #ffffff 100%);
+            padding: 34px 28px;
         }
 
         .action-block .icon {
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: 34px;
+            margin-bottom: 18px;
             display: block;
             text-align: center;
         }
 
         .action-block h2 {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1a3a52;
-            margin-bottom: 28px;
+            font-size: 21px;
+            font-weight: 800;
+            color: #1e3a5f;
+            margin-bottom: 24px;
             text-align: center;
             word-break: keep-all;
         }
 
-        .action-item {
+        .trap-item {
             background: #ffffff;
-            padding: 24px 24px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            border: 2px solid #f4a261;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 20px 22px;
+            margin-bottom: 16px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border: 2px solid #d4af37;
         }
 
-        .action-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 16px rgba(244, 162, 97, 0.2);
-        }
-
-        .action-item .number {
+        .trap-item .number {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, #f4a261 0%, #e9c46a 100%);
-            color: #ffffff;
+            width: 26px;
+            height: 26px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            color: #1e3a5f;
             border-radius: 50%;
-            font-weight: 700;
+            font-weight: 900;
             font-size: 14px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        .action-item h3 {
+        .trap-item h3 {
             font-size: 18px;
-            font-weight: 700;
-            color: #1a3a52;
-            margin-bottom: 12px;
+            font-weight: 800;
+            color: #1e3a5f;
+            margin-bottom: 8px;
             word-break: keep-all;
-            overflow-wrap: break-word;
         }
 
-        .action-item p {
+        .trap-item p {
             font-size: 16px;
-            line-height: 1.8;
+            line-height: 1.7;
             color: #4a5568;
             word-break: keep-all;
-            overflow-wrap: break-word;
         }
 
         /* 블록 6: 마무리 메시지 */
         .closing-block {
-            background: linear-gradient(135deg, #1a3a52 0%, #2d5166 100%);
-            padding: 44px 32px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a7b 100%);
+            padding: 38px 30px;
             text-align: center;
             color: #ffffff;
         }
 
         .closing-block .icon {
-            font-size: 44px;
-            margin-bottom: 24px;
+            font-size: 42px;
+            margin-bottom: 22px;
             display: block;
         }
 
         .closing-block .message {
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 19px;
+            font-weight: 800;
             line-height: 1.7;
             word-break: keep-all;
-            overflow-wrap: break-word;
-            margin-bottom: 20px;
-        }
-
-        .closing-block .sub-message {
-            font-size: 17px;
-            font-weight: 600;
-            opacity: 0.9;
-            line-height: 1.7;
-            word-break: keep-all;
+            margin-bottom: 16px;
         }
 
         .closing-block .divider {
-            width: 60px;
+            width: 50px;
             height: 3px;
-            background: #f4a261;
-            margin: 20px auto;
+            background: #d4af37;
+            margin: 16px auto;
         }
 
         /* 블록 7: 독자 질문 */
         .reflection-block {
             background: #ffffff;
-            padding: 48px 28px;
+            padding: 38px 28px;
             text-align: center;
         }
 
         .reflection-block .icon {
-            font-size: 48px;
-            margin-bottom: 24px;
+            font-size: 44px;
+            margin-bottom: 20px;
             display: block;
         }
 
         .reflection-block h2 {
-            font-size: 19px;
-            font-weight: 600;
-            color: #718096;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
             font-size: 13px;
+            font-weight: 700;
+            color: #718096;
+            margin-bottom: 18px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
         .reflection-block .question {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1a3a52;
+            font-size: 20px;
+            font-weight: 800;
+            color: #1e3a5f;
             line-height: 1.6;
             word-break: keep-all;
-            overflow-wrap: break-word;
-            margin-bottom: 16px;
-            padding: 0 12px;
+            margin-bottom: 14px;
         }
 
-        .reflection-block .space {
-            height: 60px;
-            border: 2px dashed #e2e8f0;
-            border-radius: 8px;
-            margin-top: 28px;
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: #a0aec0;
-            font-style: italic;
+        /* 엔딩 크레딧 */
+        .credit-footer {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: #ffffff;
+            padding: 24px 28px;
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.8;
+            word-break: keep-all;
         }
 
-        /* 반응형 디자인 */
+        .credit-footer strong {
+            font-weight: 700;
+            color: #d4af37;
+        }
+
+        .credit-footer a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* 반응형 */
         @media (max-width: 414px) {
             .title-block h1 {
-                font-size: 32px;
+                font-size: 28px;
             }
 
             .title-block .subtitle {
@@ -443,35 +395,27 @@
             }
 
             .question-block .main-question {
-                font-size: 19px;
+                font-size: 18px;
             }
 
             .insight-block .insight-text {
-                font-size: 21px;
+                font-size: 20px;
             }
 
             .card {
                 padding: 28px 22px;
             }
 
-            .action-item,
-            .story-item,
+            .story-box,
+            .trap-item,
             .question-block .context {
-                padding: 20px 20px;
+                padding: 18px 20px;
             }
 
-            .action-item p,
-            .story-item p,
+            .story-box p,
+            .trap-item p,
             .question-block .context p {
-                font-size: 15px;
-            }
-
-            .closing-block .message {
-                font-size: 18px;
-            }
-
-            .reflection-block .question {
-                font-size: 20px;
+                font-size: 16px;
             }
         }
 
@@ -479,7 +423,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(25px);
             }
             to {
                 opacity: 1;
@@ -488,7 +432,7 @@
         }
 
         .card {
-            animation: fadeInUp 0.8s ease forwards;
+            animation: fadeInUp 0.7s ease forwards;
             opacity: 0;
         }
 
@@ -505,24 +449,24 @@
     <div class="container">
         <!-- 블록 0: 크레딧 헤더 -->
         <div class="credit-header">
-            글: 서른의 나에게
+            을의 생존 협상/설득법
         </div>
 
         <!-- 블록 1: 타이틀 & 문제 정의 -->
         <div class="card title-block">
-            <span class="icon">🏆</span>
-            <h1>성공이라는<br>소화불량</h1>
-            <p class="subtitle">과거의 성취가 때로는 아름다운 화석이 되어 우리를 정체시킨다</p>
+            <span class="icon">⚖️</span>
+            <h1>'갑'은 어떻게<br>무너지는가</h1>
+            <p class="subtitle">힘의 신화와 협상의 진실</p>
         </div>
 
-        <!-- 블록 2: 핵심 질문/딜레마 -->
+        <!-- 블록 2: 핵심 질문 -->
         <div class="card question-block">
             <span class="icon">💭</span>
-            <p class="main-question">작은 성취들에 안주하며 안락한 궤도에 묶여있는 것은 아닐까?</p>
+            <p class="main-question">권력의 본질은 무엇인가?</p>
 
             <div class="context">
-                <p>SNS에 찍히는 좋아요 숫자, 연말 평가의 긍정적 피드백, 흠잡을 데 없이 마무리한 보고서. 그 <span class="highlight">즉각적이고 달콤한 보상들</span>은 도파민처럼 터져 나와 우리를 안심시킨다.</p>
-                <p>하지만 익숙함의 중력이 가장 무섭다. 안락한 오늘의 궤도에 우리를 단단히 묶어두고는, <span class="highlight">거대한 세상의 강물이 다른 방향으로 흘러가버린 줄도 모르게 만든다.</span></p>
+                <p>협상 테이블에서 <span class="highlight">'갑'이 강해 보이는 이유</span>는 실제로 강해서가 아니라, <span class="underline">우리가 그렇게 믿기 때문</span>이다.</p>
+                <p><strong>인식이 현실을 만든다.</strong> 우리가 '을'로 존재하는 이유는 누군가 우리를 약자로 지정해서가 아니라, 스스로 그 역할을 받아들였기 때문이다.</p>
             </div>
         </div>
 
@@ -531,30 +475,22 @@
         <!-- 블록 3: 핵심 통찰 -->
         <div class="card insight-block">
             <span class="icon">💡</span>
-            <p class="insight-text">성공은 영양분이 아니라, 때로는 소화되지 않은 음식처럼 우리를 정체시킨다</p>
-            <p class="insight-sub">그것은 위안인 동시에 가장 교묘한 감옥이다</p>
+            <p class="insight-text">권력은 실체가 아니라 인식이다</p>
+            <p class="insight-sub">힘의 구조는 모래 위에 세워진 신기루에 가깝다</p>
         </div>
 
         <div class="section-divider"></div>
 
         <!-- 블록 4: 경험/사례 -->
         <div class="card story-block">
-            <span class="icon">📖</span>
-            <h2>우리를 과거에 묶어두는 것들</h2>
+            <span class="icon">📊</span>
+            <h2>L그룹의 몰락: 절대 강자는 일주일 만에 무너졌다</h2>
 
-            <div class="story-item">
-                <span class="story-label">빛바랜 상패</span>
-                <p>책상 한구석, 빛바랜 상패가 눈에 들어온다. 한때는 밤을 새워 얻어낸 환호였고, 내 젊음을 증명하는 훈장이었다. 이제는 먼지를 그러모으는 묵직한 장식품일 뿐이다.</p>
-            </div>
-
-            <div class="story-item">
-                <span class="story-label">변화하는 세상</span>
-                <p>부모님 세대의 세상은 정해진 사다리를 누가 더 빨리 오르느냐의 경쟁이었다. 지금은 하룻밤 사이에 지도가 바뀌는 거대한 미로다. 그 미로에서 정답을 찾는 일은 AI가 더 잘한다. 우리의 역할은 길 없는 길을 감각으로 더듬어 나가는 것이어야 한다.</p>
-            </div>
-
-            <div class="quote-box">
-                <p>같은 강물에 두 번 발 담글 수는 없다.</p>
-                <p class="author">— 헤라클레이토스</p>
+            <div class="story-box">
+                <span class="label">실제 사례</span>
+                <p><strong>2000년대 중반 업계 1위 L그룹.</strong> 시장점유율 40%, 300개 협력사. 분기마다 5% 가격 인하 요구. 협력사들은 "갑이니까" 불만을 삼켰다.</p>
+                <p><strong>2008년 금융위기.</strong> 10% 추가 인하 요구에 다섯 개 핵심 협력사가 동시 거절. 생산라인 중단.</p>
+                <p><strong>결과:</strong> 일주일 만에 L그룹이 먼저 협상 테이블로 복귀. 가격 원상복구, 대금 지급 120일→60일 단축. <span class="underline">그들의 힘은 복종에 기대어 있었다.</span></p>
             </div>
         </div>
 
@@ -562,25 +498,25 @@
 
         <!-- 블록 5: 실천 가이드 -->
         <div class="card action-block">
-            <span class="icon">🌱</span>
-            <h2>소화불량에서 벗어나는 세 가지 작은 의식</h2>
+            <span class="icon">🔑</span>
+            <h2>'을'이 스스로 만드는 세 가지 감옥</h2>
 
-            <div class="action-item">
+            <div class="trap-item">
                 <div class="number">1</div>
-                <h3>가장 환한 순간에 찬물을 끼얹어라</h3>
-                <p>샴페인을 터뜨린 바로 그 순간, 스스로에게 질문을 던져보자. '이게 정말 내 실력일까, 아니면 운이 좋았을 뿐일까?', '이 성공 때문에 나는 무엇을 보지 못하게 될까?' 가장 달콤한 순간에 가장 쓴 약을 삼키는 일이 성공을 화석으로 굳히지 않는다.</p>
+                <h3>선제적 굴복</h3>
+                <p>협상 시작 전 이미 패배 전제. "어차피 안 될 텐데". 상대는 아무 말 안 했는데 우리가 먼저 무릎 꿇는다.</p>
             </div>
 
-            <div class="action-item">
+            <div class="trap-item">
                 <div class="number">2</div>
-                <h3>일부러 길을 잃는 용기를 내라</h3>
-                <p>늘 가던 길이 아닌 낯선 골목으로 들어서고, 평소라면 거들떠보지 않았을 분야의 책을 들춰보자. 그런 무용한 시간들이 익숙한 생각의 근육을 비틀고, 예상치 못한 발견을 선물한다. 견고한 성벽이 아니라 바람이 드나드는 집을 지어라.</p>
+                <h3>단일 변수 사고</h3>
+                <p>모든 것을 '규모'로 환산. 저쪽은 크고 우리는 작다. 그러나 협상 변수는 무수히 많다. 정보, 시간, 전문성, 대안, 타이밍. 규모는 그중 하나일 뿐.</p>
             </div>
 
-            <div class="action-item">
+            <div class="trap-item">
                 <div class="number">3</div>
-                <h3>다른 세계에 귀 기울여라</h3>
-                <p>나와 생각이 전혀 다른 사람의 이야기에 반박하기보다 끝까지 귀 기울여 보자. 그의 세계는 어떤 논리로 이루어져 있는지 가만히 들여다보자. 기꺼이 나의 견고한 세계에 균열을 내줄 때, 새로운 생각은 그 틈을 비집고 싹을 틔운다.</p>
+                <h3>단기 시야의 덫</h3>
+                <p>당장 눈앞의 계약에만 집중. 상대는 3년 후를 보는데 우리는 3개월 후만 본다. 급한 자는 약하다.</p>
             </div>
         </div>
 
@@ -588,20 +524,25 @@
 
         <!-- 블록 6: 마무리 메시지 -->
         <div class="card closing-block">
-            <span class="icon">🚶</span>
-            <p class="message">어제의 영광을 되새김질하며 사는 존재가 될 것인가</p>
+            <span class="icon">🎯</span>
+            <p class="message">환상을 깨야 한다</p>
             <div class="divider"></div>
-            <p class="sub-message">내일의 질문을 향해 걷는 존재가 될 것인가</p>
+            <p class="message">'갑'이 강한 게 아니라 우리가 약하다고 믿었을 뿐이다</p>
             <div class="divider"></div>
-            <p class="sub-message">우리는 흐를 것인가, 아니면 고여있을 것인가</p>
+            <p class="message">그 믿음을 버리는 순간, 새로운 싸움이 시작된다</p>
         </div>
 
         <!-- 블록 7: 독자 질문 -->
         <div class="card reflection-block">
             <span class="icon">🤔</span>
-            <h2>Your Turn</h2>
-            <p class="question">당신의 성공은 당신을 앞으로 나아가게 하는가, 과거에 주저앉히는가?</p>
-            <div class="space">당신의 생각을 적어보세요</div>
+            <h2>Think About It</h2>
+            <p class="question">당신은 어떤 감옥에 스스로 갇혀 있는가?</p>
+        </div>
+
+        <!-- 엔딩 크레딧 -->
+        <div class="credit-footer">
+            <strong>작성</strong> : 조우성 / 로펌 머스트노우<br>
+            <a href="mailto:law@mustknow.co.kr">law@mustknow.co.kr</a>
         </div>
     </div>
 </body>
