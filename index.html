@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="말은 마음 뒤에 도착한다 - 설득은 정보가 아닌 통로를 여는 것">
-    <title>말은 마음 뒤에 도착한다</title>
+    <meta name="description" content="반환하는 척, 다시 압수? 적법절차 잠탈 판례 분석">
+    <title>위법수집증거 배제 원칙 | 대법원 2024도10062</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
     <style>
@@ -26,37 +26,40 @@
         }
 
         :root {
-            /* Color System - 신뢰(청록)와 공감(골드)의 조화 */
-            --color-primary: #0d9488;
-            --color-primary-light: #14b8a6;
-            --color-primary-dark: #0f766e;
-            --color-secondary: #d97706;
-            --color-secondary-light: #f59e0b;
-            --color-accent: #06b6d4;
+            /* Pastel Color Palette */
+            --color-pink: #FFE5E5;
+            --color-mint: #E0F7F4;
+            --color-lavender: #E8E4F3;
+            --color-peach: #FFE4D6;
+            --color-lemon: #FFF9E6;
 
-            /* Neutrals */
-            --color-bg-start: #0a0e27;
-            --color-bg-mid: #1a1d3a;
-            --color-bg-end: #0f1628;
-            --color-text: #f8fafc;
-            --color-text-muted: #cbd5e1;
-            --color-text-dim: #94a3b8;
+            /* Accent Colors */
+            --color-illegal: #FF6B6B;
+            --color-legal: #51CF66;
+            --color-warning: #FFB84D;
+            --color-primary: #5F72BE;
 
-            /* Glass Effect */
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-shadow: rgba(0, 0, 0, 0.3);
+            /* Text Colors */
+            --color-text-dark: #2C3E50;
+            --color-text-mid: #546E7A;
+            --color-text-light: #78909C;
 
             /* Spacing */
             --spacing-xs: 8px;
             --spacing-sm: 16px;
             --spacing-md: 24px;
             --spacing-lg: 40px;
-            --spacing-xl: 64px;
+            --spacing-xl: 60px;
 
-            /* Transitions */
-            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            /* Border Radius */
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 30px;
+
+            /* Shadows */
+            --shadow-sm: 4px 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-md: 6px 6px 20px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 10px 10px 30px rgba(0, 0, 0, 0.15);
         }
 
         html {
@@ -65,647 +68,51 @@
         }
 
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
-            background: linear-gradient(180deg, var(--color-bg-start) 0%, var(--color-bg-mid) 50%, var(--color-bg-end) 100%);
-            background-attachment: fixed;
-            color: var(--color-text);
-            line-height: 1.8;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #FFF9F0 0%, #F0F4FF 100%);
+            color: var(--color-text-dark);
+            line-height: 1.7;
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
         }
 
-        /* Animated Background Gradient Orbs */
-        body::before,
-        body::after {
+        /* Hand-drawn Background Doodles */
+        body::before {
             content: '';
             position: fixed;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.15;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 30%, var(--color-mint) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--color-lavender) 0%, transparent 50%),
+                radial-gradient(circle at 50% 90%, var(--color-peach) 0%, transparent 50%);
+            opacity: 0.3;
             pointer-events: none;
             z-index: 0;
         }
 
-        body::before {
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
-            top: -200px;
-            left: -200px;
-            animation: orbFloat1 20s ease-in-out infinite;
-        }
-
-        body::after {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
-            bottom: -150px;
-            right: -150px;
-            animation: orbFloat2 25s ease-in-out infinite;
-        }
-
-        @keyframes orbFloat1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(100px, -100px) scale(1.1); }
-            66% { transform: translate(-50px, 50px) scale(0.9); }
-        }
-
-        @keyframes orbFloat2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-80px, 80px) scale(0.95); }
-            66% { transform: translate(60px, -60px) scale(1.05); }
-        }
-
         /* ========================================
-           SCROLL PROGRESS BAR
-        ======================================== */
-        .progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.05);
-            z-index: 9999;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-secondary));
-            width: 0%;
-            transition: width 0.1s ease;
-            box-shadow: 0 0 20px var(--color-primary);
-        }
-
-        /* ========================================
-           LAYOUT CONTAINER
+           CONTAINER
         ======================================== */
         .container {
-            max-width: 680px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0;
+            padding: var(--spacing-md);
             position: relative;
             z-index: 1;
         }
 
         /* ========================================
-           HERO SECTION
+           HERO SECTION - Hand-drawn Style
         ======================================== */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            text-align: center;
             padding: var(--spacing-xl) var(--spacing-md);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--color-accent);
             margin-bottom: var(--spacing-lg);
-            animation: fadeInDown 1s ease 0.2s backwards;
-        }
-
-        .hero-icon {
-            font-size: 64px;
-            margin-bottom: var(--spacing-md);
-            animation: float 4s ease-in-out infinite, fadeInUp 1s ease 0.4s backwards;
-            filter: drop-shadow(0 10px 30px rgba(13, 148, 136, 0.4));
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(-5deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        .hero-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(36px, 8vw, 56px);
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: var(--spacing-md);
-            background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent), var(--color-secondary-light));
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 8s ease infinite, fadeInUp 1s ease 0.6s backwards;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .hero-subtitle {
-            font-size: clamp(16px, 4vw, 20px);
-            color: var(--color-text-muted);
-            line-height: 1.8;
-            max-width: 500px;
-            margin: 0 auto var(--spacing-lg);
-            animation: fadeInUp 1s ease 0.8s backwards;
-        }
-
-        .hero-divider {
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
-            margin: var(--spacing-lg) auto;
-            animation: fadeIn 1s ease 1s backwards;
-        }
-
-        /* ========================================
-           SECTION BASE STYLES
-        ======================================== */
-        section {
-            padding: var(--spacing-xl) var(--spacing-md);
-            position: relative;
-            opacity: 0;
-            transform: translateY(60px);
-            transition: opacity 1s var(--transition-smooth),
-                        transform 1s var(--transition-smooth);
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-header {
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .section-number {
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--color-accent);
-            text-transform: uppercase;
-            margin-bottom: var(--spacing-sm);
-            display: inline-block;
-        }
-
-        .section-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(28px, 6vw, 40px);
-            font-weight: 900;
-            line-height: 1.3;
-            margin-bottom: var(--spacing-md);
-            background: linear-gradient(135deg, #ffffff, var(--color-text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-intro {
-            font-size: clamp(16px, 3.5vw, 19px);
-            line-height: 1.9;
-            color: var(--color-text-muted);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        /* ========================================
-           GLASS CARD COMPONENTS
-        ======================================== */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: var(--spacing-lg) var(--spacing-md);
-            margin-bottom: var(--spacing-md);
-            box-shadow: 0 8px 32px var(--glass-shadow);
-            transition: transform 0.4s var(--transition-smooth),
-                        box-shadow 0.4s var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-            transition: left 0.6s;
-        }
-
-        .glass-card:hover::before {
-            left: 100%;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 48px rgba(13, 148, 136, 0.25);
-        }
-
-        .glass-card h3 {
-            font-size: clamp(19px, 4vw, 24px);
-            font-weight: 800;
-            margin-bottom: var(--spacing-sm);
-            color: var(--color-primary-light);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .glass-card p {
-            font-size: clamp(15px, 3.5vw, 17px);
-            line-height: 1.9;
-            color: var(--color-text);
-        }
-
-        /* ========================================
-           PATHWAY VISUALIZATION (핵심 비주얼)
-        ======================================== */
-        .pathway-visual {
-            position: relative;
-            height: 300px;
-            margin: var(--spacing-lg) 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pathway-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 10px 40px rgba(13, 148, 136, 0.3));
-        }
-
-        /* Animated SVG Path */
-        .pathway-line {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawPath 3s ease forwards;
-        }
-
-        @keyframes drawPath {
-            to { stroke-dashoffset: 0; }
-        }
-
-        .pathway-blocked .pathway-line {
-            stroke: var(--color-secondary);
-            stroke-dasharray: 10 10;
-        }
-
-        .pathway-open .pathway-line {
-            stroke: var(--color-primary-light);
-        }
-
-        /* ========================================
-           PILLARS (신뢰와 공감의 기둥)
-        ======================================== */
-        .pillars-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-md);
-            margin: var(--spacing-lg) 0;
-        }
-
-        .pillar-card {
-            background: linear-gradient(135deg,
-                rgba(13, 148, 136, 0.08) 0%,
-                rgba(6, 182, 212, 0.08) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: var(--spacing-lg) var(--spacing-md);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.4s var(--transition-bounce);
-        }
-
-        .pillar-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.6s var(--transition-smooth);
-        }
-
-        .pillar-card:hover::after {
-            transform: scaleX(1);
-        }
-
-        .pillar-card:hover {
-            transform: translateY(-10px) scale(1.02);
-        }
-
-        .pillar-icon {
-            font-size: 56px;
-            margin-bottom: var(--spacing-sm);
-            display: block;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        .pillar-card:nth-child(2) .pillar-icon {
-            animation-delay: -1s;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .pillar-title {
-            font-size: clamp(20px, 4vw, 26px);
-            font-weight: 800;
-            margin-bottom: var(--spacing-sm);
-            background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .pillar-desc {
-            font-size: clamp(14px, 3vw, 16px);
-            line-height: 1.8;
-            color: var(--color-text-muted);
-        }
-
-        /* ========================================
-           BIDIRECTIONAL FLOW (양방향 통로)
-        ======================================== */
-        .flow-visual {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: var(--spacing-lg) 0;
-            padding: var(--spacing-lg) var(--spacing-md);
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .flow-person {
-            font-size: 64px;
-            z-index: 2;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .flow-person:nth-child(3) {
-            animation-delay: -1s;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-
-        .flow-arrows {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-size: 32px;
-        }
-
-        .arrow-right {
-            animation: slideRight 2s ease-in-out infinite;
-        }
-
-        .arrow-left {
-            animation: slideLeft 2s ease-in-out infinite;
-        }
-
-        @keyframes slideRight {
-            0%, 100% { transform: translateX(-10px); opacity: 0.4; }
-            50% { transform: translateX(10px); opacity: 1; }
-        }
-
-        @keyframes slideLeft {
-            0%, 100% { transform: translateX(10px); opacity: 0.4; }
-            50% { transform: translateX(-10px); opacity: 1; }
-        }
-
-        /* ========================================
-           QUOTE BLOCK
-        ======================================== */
-        .quote-block {
-            position: relative;
-            padding: var(--spacing-lg) var(--spacing-md);
-            margin: var(--spacing-lg) 0;
-            background: linear-gradient(135deg,
-                rgba(13, 148, 136, 0.1) 0%,
-                rgba(217, 119, 6, 0.1) 100%);
-            backdrop-filter: blur(15px);
-            border-left: 4px solid var(--color-primary-light);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .quote-block::before {
-            content: '"';
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            font-family: Georgia, serif;
-            font-size: 140px;
-            color: rgba(255, 255, 255, 0.03);
-            line-height: 1;
-            pointer-events: none;
-        }
-
-        .quote-text {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(18px, 4vw, 24px);
-            font-weight: 700;
-            line-height: 1.7;
-            color: var(--color-text);
-            position: relative;
-            z-index: 1;
-            font-style: italic;
-        }
-
-        .quote-author {
-            margin-top: var(--spacing-sm);
-            font-size: clamp(13px, 3vw, 15px);
-            color: var(--color-text-dim);
-            text-align: right;
-            font-weight: 600;
-        }
-
-        /* ========================================
-           HIGHLIGHT TEXT
-        ======================================== */
-        .highlight {
-            background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            position: relative;
-        }
-
-        .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            opacity: 0.3;
-        }
-
-        /* ========================================
-           KEY INSIGHT CARD
-        ======================================== */
-        .insight-card {
-            background: linear-gradient(135deg,
-                rgba(13, 148, 136, 0.15) 0%,
-                rgba(6, 182, 212, 0.15) 100%);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--color-primary);
-            border-radius: 24px;
-            padding: var(--spacing-lg);
-            margin: var(--spacing-lg) 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 60px rgba(13, 148, 136, 0.3);
-        }
-
-        .insight-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                transparent,
-                rgba(13, 148, 136, 0.1),
-                transparent 30%
-            );
-            animation: rotate 8s linear infinite;
-        }
-
-        @keyframes rotate {
-            100% { transform: rotate(360deg); }
-        }
-
-        .insight-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .insight-icon {
-            font-size: 48px;
-            margin-bottom: var(--spacing-sm);
-            display: block;
-        }
-
-        .insight-text {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(18px, 4vw, 22px);
-            font-weight: 700;
-            line-height: 1.8;
-            color: var(--color-text);
-        }
-
-        /* ========================================
-           CTA SECTION
-        ======================================== */
-        .cta-section {
-            padding: var(--spacing-xl) var(--spacing-md);
-            text-align: center;
-            background: linear-gradient(135deg,
-                rgba(13, 148, 136, 0.2) 0%,
-                rgba(217, 119, 6, 0.2) 100%);
-            backdrop-filter: blur(30px);
-            border: 1px solid var(--glass-border);
-            border-radius: 32px;
-            margin: var(--spacing-xl) var(--spacing-md);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(24px, 5vw, 36px);
-            font-weight: 900;
-            line-height: 1.4;
-            margin-bottom: var(--spacing-md);
-            background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .cta-text {
-            font-size: clamp(15px, 3.5vw, 18px);
-            line-height: 1.9;
-            color: var(--color-text-muted);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* ========================================
-           FOOTER
-        ======================================== */
-        footer {
-            padding: var(--spacing-lg) var(--spacing-md);
-            text-align: center;
-            border-top: 1px solid var(--glass-border);
-            color: var(--color-text-dim);
-            font-size: 14px;
-        }
-
-        footer p {
-            line-height: 1.8;
-        }
-
-        /* ========================================
-           ANIMATION KEYFRAMES
-        ======================================== */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            animation: fadeInDown 0.8s ease;
         }
 
         @keyframes fadeInDown {
@@ -719,43 +126,440 @@
             }
         }
 
+        .badge {
+            display: inline-block;
+            background: var(--color-illegal);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+            transform: rotate(-2deg);
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .hero-title {
+            font-family: 'Gaegu', cursive;
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Hand-drawn underline */
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10'%3E%3Cpath d='M0,5 Q25,2 50,5 T100,5 T150,5 T200,5' stroke='%23FFB84D' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x;
+            background-size: 200px 10px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: clamp(20px, 5vw, 28px);
+            color: var(--color-text-mid);
+            margin-top: var(--spacing-md);
+            line-height: 1.5;
+        }
+
+        .hero-meta {
+            margin-top: var(--spacing-md);
+            font-size: 14px;
+            color: var(--color-text-light);
+            font-weight: 500;
+        }
+
         /* ========================================
-           RESPONSIVE DESIGN
+           TIMELINE - Story Flow
         ======================================== */
-        @media (max-width: 640px) {
-            :root {
-                --spacing-lg: 32px;
-                --spacing-xl: 48px;
+        .timeline {
+            position: relative;
+            margin: var(--spacing-xl) 0;
+        }
+
+        /* Hand-drawn timeline line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom,
+                var(--color-primary) 0%,
+                var(--color-illegal) 50%,
+                var(--color-warning) 100%);
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+
+        /* ========================================
+           CARD - Main Content Blocks
+        ======================================== */
+        .card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg) var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            border: 3px solid transparent;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+            transform: translateY(50px);
+            cursor: pointer;
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-8px) rotate(-1deg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-pink {
+            background: linear-gradient(135deg, white 0%, var(--color-pink) 100%);
+            border-color: var(--color-illegal);
+        }
+
+        .card-mint {
+            background: linear-gradient(135deg, white 0%, var(--color-mint) 100%);
+            border-color: var(--color-legal);
+        }
+
+        .card-lavender {
+            background: linear-gradient(135deg, white 0%, var(--color-lavender) 100%);
+            border-color: var(--color-primary);
+        }
+
+        .card-peach {
+            background: linear-gradient(135deg, white 0%, var(--color-peach) 100%);
+            border-color: var(--color-warning);
+        }
+
+        /* Card Number Badge */
+        .card-number {
+            position: absolute;
+            left: -40px;
+            top: var(--spacing-md);
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 4px solid currentColor;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Gaegu', cursive;
+            font-size: 28px;
+            font-weight: 700;
+            box-shadow: var(--shadow-sm);
+            transform: rotate(-5deg);
+        }
+
+        .card-pink .card-number {
+            color: var(--color-illegal);
+        }
+
+        .card-mint .card-number {
+            color: var(--color-legal);
+        }
+
+        .card-lavender .card-number {
+            color: var(--color-primary);
+        }
+
+        .card-peach .card-number {
+            color: var(--color-warning);
+        }
+
+        /* Icon */
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: var(--spacing-md);
+            filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Card Title */
+        .card-title {
+            font-family: 'Gaegu', cursive;
+            font-size: clamp(24px, 5vw, 32px);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text-dark);
+            line-height: 1.3;
+        }
+
+        /* Card Content */
+        .card-content {
+            font-size: clamp(15px, 3vw, 17px);
+            line-height: 1.8;
+            color: var(--color-text-mid);
+        }
+
+        .card-content strong {
+            color: var(--color-text-dark);
+            font-weight: 700;
+        }
+
+        .card-content em {
+            background: linear-gradient(transparent 60%, var(--color-warning) 60%);
+            font-style: normal;
+            padding: 2px 4px;
+        }
+
+        /* List in Card */
+        .card-list {
+            list-style: none;
+            margin-top: var(--spacing-sm);
+            padding-left: 0;
+        }
+
+        .card-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .card-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: currentColor;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        /* ========================================
+           QUOTE BOX - Emphasis
+        ======================================== */
+        .quote-box {
+            background: var(--color-lemon);
+            border-left: 6px solid var(--color-warning);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg) var(--spacing-md);
+            margin: var(--spacing-xl) 0;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            transform: rotate(-1deg);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .quote-box.visible {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-family: Georgia, serif;
+            font-size: 80px;
+            color: rgba(0, 0, 0, 0.05);
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-family: 'Gaegu', cursive;
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 700;
+            line-height: 1.5;
+            color: var(--color-text-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-source {
+            margin-top: var(--spacing-sm);
+            font-size: 14px;
+            color: var(--color-text-light);
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           VERDICT BOX - Final Decision
+        ======================================== */
+        .verdict-box {
+            background: linear-gradient(135deg, var(--color-illegal) 0%, #FF8787 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .verdict-box.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .verdict-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .verdict-icon {
+            font-size: 60px;
+            margin-bottom: var(--spacing-sm);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .verdict-title {
+            font-family: 'Gaegu', cursive;
+            font-size: clamp(28px, 6vw, 40px);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        .verdict-text {
+            font-size: clamp(16px, 3vw, 18px);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            margin-top: var(--spacing-xl);
+            border-top: 3px dashed var(--color-text-light);
+            opacity: 0.7;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        .footer-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid var(--color-primary);
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--color-illegal);
+            border-color: var(--color-illegal);
+        }
+
+        /* ========================================
+           EXPANDABLE DETAIL
+        ======================================== */
+        .card-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            margin-top: var(--spacing-md);
+            padding-top: 0;
+            border-top: 2px dashed transparent;
+        }
+
+        .card.expanded .card-detail {
+            max-height: 1000px;
+            padding-top: var(--spacing-md);
+            border-top-color: currentColor;
+        }
+
+        .expand-hint {
+            text-align: center;
+            margin-top: var(--spacing-sm);
+            font-size: 13px;
+            color: var(--color-text-light);
+            font-style: italic;
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 15px;
             }
 
-            .glass-card {
+            .card-number {
+                left: -25px;
+                width: 50px;
+                height: 50px;
+                font-size: 22px;
+            }
+
+            .card {
+                margin-left: 30px;
+            }
+
+            .hero {
+                padding: var(--spacing-lg) var(--spacing-sm);
+            }
+
+            .quote-box {
                 padding: var(--spacing-md) var(--spacing-sm);
-            }
-
-            .pillars-container {
-                grid-template-columns: 1fr;
-            }
-
-            .pathway-visual {
-                height: 250px;
-            }
-
-            .flow-person {
-                font-size: 48px;
-            }
-
-            .flow-arrows {
-                font-size: 24px;
             }
         }
 
-        @media (max-width: 375px) {
-            .hero-icon {
-                font-size: 56px;
+        @media (max-width: 480px) {
+            .card-icon {
+                width: 60px;
+                height: 60px;
             }
 
-            .pillar-icon {
-                font-size: 48px;
+            .badge {
+                font-size: 12px;
+                padding: 6px 16px;
             }
         }
 
@@ -772,352 +576,336 @@
             }
         }
 
-        /* Focus styles for keyboard navigation */
-        a:focus,
-        button:focus {
-            outline: 2px solid var(--color-primary);
+        /* Focus styles */
+        .card:focus {
+            outline: 3px solid var(--color-primary);
             outline-offset: 4px;
+        }
+
+        /* ========================================
+           UTILITY CLASSES
+        ======================================== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-lg {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .mt-xl {
+            margin-top: var(--spacing-xl);
         }
     </style>
 </head>
 <body>
-    <!-- Scroll Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
-
     <div class="container">
         <!-- Hero Section -->
-        <header class="hero" role="banner">
-            <div class="hero-badge">
-                <span aria-label="Communication">💬</span>
-                Communication & Persuasion
-            </div>
-
-            <div class="hero-icon" aria-hidden="true">🔗</div>
-
-            <h1 class="hero-title">말은 마음 뒤에<br>도착한다</h1>
-
+        <header class="hero">
+            <div class="badge">⚖️ 대법원 판례 분석</div>
+            <h1 class="hero-title">반환하는 척,<br>다시 압수?</h1>
             <p class="hero-subtitle">
-                설득은 정보를 전달하는 것이 아니라,<br>
-                마음과 마음을 잇는 통로를 여는 것이다
+                적법절차를 잠탈한 수사기관의 꼼수,<br>
+                대법원이 제동을 걸다
             </p>
-
-            <div class="hero-divider" aria-hidden="true"></div>
+            <p class="hero-meta">대법원 2024. 10. 8. 선고 2024도10062 판결</p>
         </header>
 
-        <main role="main">
-            <!-- Section 1: 통로 없는 말들의 무게 -->
-            <section class="section-content" id="section1">
-                <div class="section-header">
-                    <span class="section-number">01 — The Weight</span>
-                    <h2 class="section-title">통로 없는 말들의 무게</h2>
+        <!-- Timeline Cards -->
+        <section class="timeline">
+            <!-- Card 1: 사건의 발단 -->
+            <article class="card card-pink" tabindex="0" role="button" aria-label="카드 1: 사건의 발단. 클릭하여 상세보기">
+                <div class="card-number">1</div>
+
+                <svg class="card-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hand-drawn phone icon -->
+                    <rect x="25" y="10" width="50" height="80" rx="8" fill="#FFE5E5" stroke="#FF6B6B" stroke-width="3" stroke-linejoin="round"/>
+                    <rect x="30" y="20" width="40" height="50" fill="white" stroke="#FF6B6B" stroke-width="2"/>
+                    <circle cx="50" cy="80" r="5" fill="#FF6B6B"/>
+                    <line x1="40" y1="15" x2="60" y2="15" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+                    <!-- X mark -->
+                    <line x1="70" y1="30" x2="85" y2="45" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="85" y1="30" x2="70" y2="45" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+
+                <h2 class="card-title">🚨 사건의 발단: 영장 없는 압수</h2>
+
+                <div class="card-content">
+                    <p>
+                        <strong>2020년 10월 6일</strong>, 수사기관이 피고인의 영업소에서
+                        <em>영장 없이</em> 휴대전화를 압수했습니다.
+                        형사소송법 제216조 제3항(긴급압수)을 근거로 했지만...
+                    </p>
+                    <ul class="card-list">
+                        <li>장소: 서울 소재 피고인 영업소</li>
+                        <li>압수물: 피고인의 휴대전화</li>
+                        <li>근거: 형소법 제216조 제3항 (긴급압수)</li>
+                    </ul>
                 </div>
 
-                <p class="section-intro">
-                    회의실에서 완벽한 논리를 펼쳤는데 상대는 고개를 끄덕이지 않았다.
-                    데이터도 충분했고, 근거도 명확했다.
-                    그런데 그의 눈은 이미 다른 곳을 보고 있었다.
-                </p>
-
-                <!-- Blocked Pathway Visualization -->
-                <div class="pathway-visual pathway-blocked">
-                    <svg class="pathway-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-labelledby="blockedPathTitle">
-                        <title id="blockedPathTitle">막힌 통로를 나타내는 다이어그램</title>
-
-                        <!-- Left person -->
-                        <circle cx="50" cy="150" r="30" fill="rgba(13, 148, 136, 0.2)" stroke="var(--color-primary)" stroke-width="2"/>
-                        <text x="50" y="160" text-anchor="middle" fill="var(--color-text)" font-size="24">💬</text>
-
-                        <!-- Blocked path -->
-                        <path class="pathway-line" d="M 90 150 L 180 150" stroke="var(--color-secondary)" stroke-width="4" fill="none" stroke-linecap="round"/>
-
-                        <!-- Wall -->
-                        <rect x="180" y="100" width="10" height="100" fill="rgba(217, 119, 6, 0.3)" stroke="var(--color-secondary)" stroke-width="2"/>
-                        <text x="185" y="145" text-anchor="middle" fill="var(--color-secondary)" font-size="32">🚫</text>
-
-                        <!-- Bounced words -->
-                        <text x="140" y="120" fill="var(--color-text-dim)" font-size="14" opacity="0.6">논리</text>
-                        <text x="130" y="180" fill="var(--color-text-dim)" font-size="14" opacity="0.6">데이터</text>
-
-                        <!-- Right person (closed) -->
-                        <circle cx="350" cy="150" r="30" fill="rgba(217, 119, 6, 0.2)" stroke="var(--color-secondary)" stroke-width="2"/>
-                        <text x="350" y="160" text-anchor="middle" fill="var(--color-text)" font-size="24">🔒</text>
-                    </svg>
+                <div class="card-detail">
+                    <p style="font-size: 14px; color: var(--color-text-light);">
+                        <strong>💡 알아두기:</strong> 형소법 제216조 제3항은 긴급한 경우 영장 없이 압수할 수 있지만,
+                        <strong>지체 없이 영장을 청구</strong>해야 하며, 영장이 기각되면 <strong>즉시 반환</strong>해야 합니다.
+                    </p>
                 </div>
 
-                <div class="insight-card">
-                    <div class="insight-content">
-                        <span class="insight-icon" aria-hidden="true">⚠️</span>
-                        <p class="insight-text">
-                            막힌 마음에는 가장 정확한 논리도 미끄러진다
-                        </p>
+                <p class="expand-hint">👆 클릭하면 더 자세한 내용을 볼 수 있어요</p>
+            </article>
+
+            <!-- Card 2: 영장 기각 -->
+            <article class="card card-lavender" tabindex="0" role="button" aria-label="카드 2: 영장 기각. 클릭하여 상세보기">
+                <div class="card-number">2</div>
+
+                <svg class="card-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hand-drawn document icon -->
+                    <rect x="20" y="15" width="60" height="75" rx="5" fill="#E8E4F3" stroke="#5F72BE" stroke-width="3"/>
+                    <line x1="30" y1="30" x2="70" y2="30" stroke="#5F72BE" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="30" y1="40" x2="70" y2="40" stroke="#5F72BE" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="30" y1="50" x2="60" y2="50" stroke="#5F72BE" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Reject stamp -->
+                    <circle cx="70" cy="65" r="15" fill="none" stroke="#FF6B6B" stroke-width="3"/>
+                    <text x="70" y="72" text-anchor="middle" fill="#FF6B6B" font-size="12" font-weight="bold">기각</text>
+                </svg>
+
+                <h2 class="card-title">❌ 법원의 결정: 영장 기각!</h2>
+
+                <div class="card-content">
+                    <p>
+                        <strong>2020년 10월 8일</strong>, 법원은 수사기관이 청구한 사후 압수영장을
+                        <strong style="color: var(--color-illegal);">기각</strong>했습니다.
+                    </p>
+                    <ul class="card-list">
+                        <li>이유: 압수조서 및 압수목록 미작성</li>
+                        <li>결과: 압수영장 발부 거부</li>
+                        <li>원칙: 즉시 반환해야 함</li>
+                    </ul>
+                </div>
+
+                <div class="card-detail">
+                    <p style="font-size: 14px; color: var(--color-text-light);">
+                        법원이 영장을 기각했다는 것은 애초의 압수가 <strong>위법</strong>했다는 의미입니다.
+                        이 시점에서 수사기관은 휴대전화를 <em>즉시</em> 반환했어야 합니다.
+                    </p>
+                </div>
+
+                <p class="expand-hint">👆 탭하면 법적 의미를 확인할 수 있어요</p>
+            </article>
+
+            <!-- Card 3: 수사기관의 꼼수 -->
+            <article class="card card-peach" tabindex="0" role="button" aria-label="카드 3: 수사기관의 꼼수. 클릭하여 상세보기">
+                <div class="card-number">3</div>
+
+                <svg class="card-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hand-drawn loop arrow -->
+                    <path d="M 30 50 Q 30 20, 50 20 T 70 50" fill="none" stroke="#FFB84D" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M 70 50 Q 70 80, 50 80 T 30 50" fill="none" stroke="#FFB84D" stroke-width="4" stroke-linecap="round"/>
+                    <polygon points="25,45 30,50 25,55" fill="#FFB84D"/>
+                    <polygon points="75,45 70,50 75,55" fill="#FFB84D"/>
+                    <!-- Warning sign in center -->
+                    <circle cx="50" cy="50" r="15" fill="#FFF9E6" stroke="#FFB84D" stroke-width="2"/>
+                    <text x="50" y="56" text-anchor="middle" fill="#FFB84D" font-size="20" font-weight="bold">!</text>
+                </svg>
+
+                <h2 class="card-title">🎭 수사기관의 꼼수</h2>
+
+                <div class="card-content">
+                    <p>
+                        영장이 기각되었는데도 수사기관은 휴대전화를 <strong style="color: var(--color-illegal);">반환하지 않았습니다</strong>.
+                        그리고는 이렇게 말했습니다:
+                    </p>
+                    <blockquote style="border-left: 3px solid var(--color-warning); padding-left: 15px; margin: 15px 0; font-style: italic; color: var(--color-text-mid);">
+                        "반환받으러 오세요. 근데 받아가도 <strong>다시 압수할 거예요</strong>."
+                    </blockquote>
+                    <ul class="card-list">
+                        <li>피고인의 우편반환 요청 거절</li>
+                        <li>직접 출석 요구</li>
+                        <li>피고인 불출석 (2020. 10. 12.)</li>
+                        <li><strong>그 사이</strong> 새로운 압수영장 발부 (2020. 10. 13.)</li>
+                    </ul>
+                </div>
+
+                <div class="card-detail">
+                    <p style="font-size: 14px; color: var(--color-text-light); background: rgba(255, 184, 77, 0.1); padding: 12px; border-radius: 8px;">
+                        <strong>⚠️ 문제의 핵심:</strong> 수사기관이 미반환 상태를 이용해
+                        새로운 영장을 발부받은 뒤, 형식적으로 반환하고 즉시 재압수하려 한 것입니다.
+                        이는 <em>적법절차의 잠탈</em>입니다.
+                    </p>
+                </div>
+
+                <p class="expand-hint">👆 클릭해서 문제점을 확인하세요</p>
+            </article>
+
+            <!-- Card 4: 형식적 반환 후 즉시 재압수 -->
+            <article class="card card-pink" tabindex="0" role="button" aria-label="카드 4: 형식적 반환 후 재압수. 클릭하여 상세보기">
+                <div class="card-number">4</div>
+
+                <svg class="card-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Two hands passing phone -->
+                    <ellipse cx="30" cy="60" rx="15" ry="12" fill="#FFE4D6" stroke="#FF6B6B" stroke-width="2"/>
+                    <ellipse cx="70" cy="60" rx="15" ry="12" fill="#FFE4D6" stroke="#FF6B6B" stroke-width="2"/>
+                    <rect x="40" y="35" width="20" height="35" rx="3" fill="#FFE5E5" stroke="#FF6B6B" stroke-width="2"/>
+                    <!-- Arrow showing immediate seizure -->
+                    <path d="M 60 50 L 75 50" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+                    <polygon points="75,47 80,50 75,53" fill="#FF6B6B"/>
+                    <text x="68" y="44" fill="#FF6B6B" font-size="10" font-weight="bold">즉시</text>
+                </svg>
+
+                <h2 class="card-title">🔄 형식적 반환, 그리고...</h2>
+
+                <div class="card-content">
+                    <p>
+                        <strong>2020년 10월 19일</strong>, 수사기관은 피고인을 방문하여:
+                    </p>
+                    <ol style="list-style: decimal; padding-left: 25px; margin: 15px 0;">
+                        <li style="margin-bottom: 8px;">휴대전화를 <em>잠깐</em> 건네주고 👉</li>
+                        <li style="margin-bottom: 8px;">곧바로 새 압수영장으로 압수 📱</li>
+                        <li style="margin-bottom: 8px;">전자정보 복제·출력 💾</li>
+                        <li>증거로 제출 📄</li>
+                    </ol>
+                    <p style="margin-top: 15px; font-weight: 700; color: var(--color-illegal);">
+                        반환과 재압수 사이 시간 간격: <span style="font-size: 24px;">0초</span>
+                    </p>
+                </div>
+
+                <div class="card-detail">
+                    <p style="font-size: 14px; color: var(--color-text-light);">
+                        이건 마치 빌려준 물건을 돌려받자마자 다시 빼앗는 것과 같습니다.
+                        법적으로는 "반환"했다고 주장할 수 있지만,
+                        실질적으로는 <strong>계속 점유</strong>한 것이나 다름없습니다.
+                    </p>
+                </div>
+
+                <p class="expand-hint">👆 이게 왜 문제인지 알아보세요</p>
+            </article>
+        </section>
+
+        <!-- Quote Box - Legal Principle -->
+        <aside class="quote-box">
+            <p class="quote-text">
+                즉시 반환이란<br>
+                "불필요하게 지체 없이<br>
+                적극적으로 압수 이전의 상태로<br>
+                회복시켜주는 것"
+            </p>
+            <p class="quote-source">— 형사소송법 제216조 제3항 해석</p>
+        </aside>
+
+        <!-- Card 5: 대법원의 판단 -->
+        <section class="timeline mt-xl">
+            <article class="card card-mint" tabindex="0" role="button" aria-label="카드 5: 대법원의 판단. 클릭하여 상세보기">
+                <div class="card-number">5</div>
+
+                <svg class="card-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hand-drawn scale of justice -->
+                    <rect x="45" y="70" width="10" height="25" fill="#51CF66" stroke="#2F9E44" stroke-width="2"/>
+                    <line x1="50" y1="30" x2="50" y2="70" stroke="#2F9E44" stroke-width="3"/>
+                    <line x1="20" y1="30" x2="80" y2="30" stroke="#2F9E44" stroke-width="3"/>
+                    <!-- Left pan -->
+                    <path d="M 20 30 L 15 40 L 25 40 Z" fill="#E0F7F4" stroke="#2F9E44" stroke-width="2"/>
+                    <!-- Right pan -->
+                    <path d="M 80 30 L 75 40 L 85 40 Z" fill="#E0F7F4" stroke="#2F9E44" stroke-width="2"/>
+                    <!-- Check mark -->
+                    <path d="M 40 50 L 45 55 L 60 40" stroke="#51CF66" stroke-width="4" stroke-linecap="round" fill="none"/>
+                </svg>
+
+                <h2 class="card-title">⚖️ 대법원의 판단</h2>
+
+                <div class="card-content">
+                    <p>
+                        대법원은 이러한 수사기관의 행위를 <strong style="color: var(--color-illegal);">위법</strong>으로 판단했습니다.
+                    </p>
+
+                    <div style="background: rgba(81, 207, 102, 0.1); padding: 15px; border-radius: 12px; margin: 15px 0; border-left: 4px solid var(--color-legal);">
+                        <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--color-legal);">
+                            <strong>판결 요지</strong>
+                        </h3>
+                        <ul class="card-list" style="color: var(--color-text-dark);">
+                            <li><strong>적법절차</strong>와 <strong>영장주의</strong>를 잠탈하는 행위</li>
+                            <li>형식적 반환으로 위법성이 <em>희석·단절되지 않음</em></li>
+                            <li>휴대전화 및 증거들은 <strong>위법수집증거</strong></li>
+                            <li>결론: <span style="color: var(--color-illegal); font-size: 20px;">증거능력 없음</span></li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="glass-card">
-                    <p>
-                        설득이 실패하는 순간, 우리는 상대의 귀가 아니라
-                        <span class="highlight">마음이 닫혀 있었음</span>을 뒤늦게 깨닫는다.
-                    </p>
-                </div>
-            </section>
+                <div class="card-detail">
+                    <p style="font-size: 15px; line-height: 1.8; color: var(--color-text-mid);">
+                        <strong>🔍 왜 이런 판단을 내렸을까?</strong><br><br>
 
-            <!-- Section 2: 설득의 착각 -->
-            <section class="section-content" id="section2">
-                <div class="section-header">
-                    <span class="section-number">02 — The Illusion</span>
-                    <h2 class="section-title">설득의 착각</h2>
-                </div>
+                        수사기관이 영장 기각 후 즉시 반환하지 않은 것은 이미 위법입니다.
+                        그런데 그 위법한 상태를 이용해 새로운 영장을 발부받고,
+                        "형식적으로" 반환한 척하면서 즉시 재압수한 것은
+                        <strong>법의 취지를 완전히 무시한 것</strong>입니다.<br><br>
 
-                <p class="section-intro">
-                    우리는 설득을 정보의 전달로 착각한다.
-                    더 많은 근거를, 더 정확한 수치를, 더 논리적인 구조를 준비한다.
-                </p>
-
-                <div class="glass-card">
-                    <h3>📊 데이터의 한계</h3>
-                    <p>
-                        상대의 머리에 데이터를 집어넣으면 동의가 저절로 따라오리라 믿는다.
-                        하지만 인간의 마음은 그런 식으로 작동하지 않는다.
+                        만약 이런 방법을 허용한다면, 수사기관은 언제든지
+                        "반환 후 즉시 재압수"라는 편법으로 영장주의를 우회할 수 있게 됩니다.
+                        대법원은 이러한 <em>적법절차 잠탈</em>에 명확한 선을 그은 것입니다.
                     </p>
                 </div>
 
-                <div class="glass-card">
-                    <h3>🌊 정보의 흐름</h3>
-                    <p>
-                        정보는 <span class="highlight">통로를 통해서만 흐른다</span>.
-                        그 통로가 막혀 있으면, 아무리 옳은 말도 벽을 만날 뿐이다.
-                    </p>
-                </div>
+                <p class="expand-hint">👆 판결의 의미를 더 깊이 이해해보세요</p>
+            </article>
+        </section>
 
-                <div class="quote-block">
-                    <p class="quote-text">
-                        설득은 이기는 것이 아니라 닿는 것이다
-                    </p>
-                    <p class="quote-author">— 변호사 30년의 통찰</p>
-                </div>
+        <!-- Verdict Box -->
+        <section class="verdict-box">
+            <div class="verdict-icon">🚫</div>
+            <h2 class="verdict-title">위법수집증거 배제!</h2>
+            <p class="verdict-text">
+                아무리 중요한 증거라도,<br>
+                <strong>위법한 절차</strong>로 수집되었다면<br>
+                법정에서 사용할 수 없습니다.<br><br>
+                이것이 바로 <em>적법절차의 원칙</em>이자<br>
+                <strong>법치주의의 근간</strong>입니다.
+            </p>
+        </section>
 
-                <div class="glass-card">
-                    <p>
-                        법정에서 승소해도 상대의 마음에 닿지 못한 판결은 공허하다.
-                        반대로 패소해도 상대가 내 입장을 이해했다면, 그 소통은 성공이었다.
-                    </p>
-                </div>
-            </section>
+        <!-- Key Takeaways -->
+        <section class="timeline mt-xl">
+            <article class="card card-lavender text-center">
+                <h2 class="card-title" style="margin-bottom: 20px;">💡 핵심 포인트 정리</h2>
 
-            <!-- Section 3: 통로의 물리학 -->
-            <section class="section-content" id="section3">
-                <div class="section-header">
-                    <span class="section-number">03 — The Physics</span>
-                    <h2 class="section-title">통로의 물리학</h2>
-                </div>
+                <div class="card-content" style="text-align: left;">
+                    <div style="display: grid; gap: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 12px; border-left: 4px solid var(--color-illegal);">
+                            <strong style="color: var(--color-illegal);">1️⃣ 즉시 반환 의무</strong>
+                            <p style="margin-top: 8px; font-size: 15px;">
+                                영장이 기각되면 수사기관은 압수물을 <em>즉시</em> 반환해야 합니다.
+                                "즉시"란 불필요한 지체 없이 적극적으로 원상회복시키는 것을 의미합니다.
+                            </p>
+                        </div>
 
-                <p class="section-intro">
-                    마음의 통로는 신뢰와 공감이라는 두 기둥으로 세워진다.
-                </p>
+                        <div style="background: white; padding: 15px; border-radius: 12px; border-left: 4px solid var(--color-warning);">
+                            <strong style="color: var(--color-warning);">2️⃣ 형식적 반환 무효</strong>
+                            <p style="margin-top: 8px; font-size: 15px;">
+                                반환하는 척하면서 즉시 재압수하는 것은
+                                적법절차를 잠탈하는 행위로 허용되지 않습니다.
+                            </p>
+                        </div>
 
-                <!-- Two Pillars -->
-                <div class="pillars-container">
-                    <article class="pillar-card">
-                        <span class="pillar-icon" aria-hidden="true">🏛️</span>
-                        <h3 class="pillar-title">신뢰</h3>
-                        <p class="pillar-desc">
-                            시간이 쌓아 올린다. 한 번의 약속, 한 번의 일관성, 한 번의 솔직함이
-                            겹겹이 쌓여 만들어지는 단단한 지반.
-                        </p>
-                    </article>
-
-                    <article class="pillar-card">
-                        <span class="pillar-icon" aria-hidden="true">💫</span>
-                        <h3 class="pillar-title">공감</h3>
-                        <p class="pillar-desc">
-                            통로의 너비를 결정한다. 상대의 입장을 헤아리지 않은 채
-                            내 주장만 밀어붙이는 것은 좁은 골목에 트럭을 몰고 들어가는 것과 같다.
-                        </p>
-                    </article>
-                </div>
-
-                <div class="insight-card">
-                    <div class="insight-content">
-                        <span class="insight-icon" aria-hidden="true">🚪</span>
-                        <p class="insight-text">
-                            우리는 말을 건네기 전에 먼저 문을 두드려야 한다
-                        </p>
+                        <div style="background: white; padding: 15px; border-radius: 12px; border-left: 4px solid var(--color-legal);">
+                            <strong style="color: var(--color-legal);">3️⃣ 위법성 단절 불가</strong>
+                            <p style="margin-top: 8px; font-size: 15px;">
+                                새로운 영장을 발부받았다고 해서 이전의 위법성이
+                                사라지는 것은 아닙니다. 위법수집증거는 증거능력이 없습니다.
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="glass-card">
-                    <p>
-                        상대가 나를 신뢰하지 않는다면, 내 말은 그저 소음일 뿐이다.
-                        듣는다는 것은 단순히 소리를 받아들이는 게 아니다.
-                        <span class="highlight">그의 두려움을, 그의 기대를, 그의 상처를 감각하는 것</span>이다.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Section 4: 통로 만들기의 역설 -->
-            <section class="section-content" id="section4">
-                <div class="section-header">
-                    <span class="section-number">04 — The Paradox</span>
-                    <h2 class="section-title">통로 만들기의 역설</h2>
-                </div>
-
-                <div class="insight-card">
-                    <div class="insight-content">
-                        <span class="insight-icon" aria-hidden="true">🔄</span>
-                        <p class="insight-text">
-                            통로는 만들어지는 것이 아니라 허락되는 것이다
-                        </p>
-                    </div>
-                </div>
-
-                <p class="section-intro">
-                    내가 아무리 문을 두드려도, 상대가 문을 열지 않으면 소용없다.
-                    설득의 기술은 결국 상대가 자발적으로 문을 열도록 하는 것이다.
-                </p>
-
-                <div class="glass-card">
-                    <h3>🔓 먼저 여는 용기</h3>
-                    <p>
-                        그러려면 먼저 <span class="highlight">내가 문을 열어야 한다</span>.
-                        내 약점을, 내 불확실성을, 내 한계를 솔직히 드러낼 때,
-                        상대도 방어를 내려놓는다.
-                    </p>
-                </div>
-
-                <div class="quote-block">
-                    <p class="quote-text">
-                        완벽한 논리의 갑옷을 입은 사람과는 협상이 어렵다.
-                        틈이 있는 사람, 자기 약점을 숨기지 않는 사람과
-                        비로소 진짜 대화가 가능하다
-                    </p>
-                    <p class="quote-author">— 협상 테이블에서의 교훈</p>
-                </div>
-
-                <div class="glass-card">
-                    <p>
-                        계약 협상 테이블에서 "이 조건이 받아들여지지 않으면, 당신에게 가장 곤란한 부분이 무엇입니까?"라고 물을 때,
-                        질문이 바뀌면 분위기가 바뀐다.
-                        상대는 자신의 진짜 고민을 꺼내놓기 시작한다.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Section 5: 닿는 언어들 -->
-            <section class="section-content" id="section5">
-                <div class="section-header">
-                    <span class="section-number">05 — Connection</span>
-                    <h2 class="section-title">닿는 언어들</h2>
-                </div>
-
-                <p class="section-intro">
-                    설득은 언어의 문제가 아니라 존재의 문제이다.
-                    내가 어떤 사람인지, 상대를 어떻게 대하는지가 모든 말보다 먼저 전달된다.
-                </p>
-
-                <!-- Open Pathway Visualization -->
-                <div class="pathway-visual pathway-open">
-                    <svg class="pathway-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-labelledby="openPathTitle">
-                        <title id="openPathTitle">열린 통로를 나타내는 다이어그램</title>
-
-                        <!-- Left person -->
-                        <circle cx="50" cy="150" r="30" fill="rgba(13, 148, 136, 0.2)" stroke="var(--color-primary)" stroke-width="2"/>
-                        <text x="50" y="160" text-anchor="middle" fill="var(--color-text)" font-size="24">💬</text>
-
-                        <!-- Open path with gradient -->
-                        <defs>
-                            <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:var(--color-primary);stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:var(--color-accent);stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <path class="pathway-line" d="M 90 150 L 310 150" stroke="url(#pathGrad)" stroke-width="6" fill="none" stroke-linecap="round"/>
-
-                        <!-- Flow particles -->
-                        <circle cx="150" cy="150" r="4" fill="var(--color-primary-light)" opacity="0.8">
-                            <animate attributeName="cx" from="90" to="310" dur="2s" repeatCount="indefinite"/>
-                            <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="200" cy="150" r="4" fill="var(--color-accent)" opacity="0.8">
-                            <animate attributeName="cx" from="90" to="310" dur="2s" begin="0.5s" repeatCount="indefinite"/>
-                            <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"/>
-                        </circle>
-
-                        <!-- Right person (open) -->
-                        <circle cx="350" cy="150" r="30" fill="rgba(6, 182, 212, 0.2)" stroke="var(--color-accent)" stroke-width="2"/>
-                        <text x="350" y="160" text-anchor="middle" fill="var(--color-text)" font-size="24">✨</text>
-                    </svg>
-                </div>
-
-                <!-- Bidirectional Flow -->
-                <div class="flow-visual">
-                    <div class="flow-person" aria-label="Person A">🧑</div>
-                    <div class="flow-arrows">
-                        <span class="arrow-right" aria-hidden="true">→</span>
-                        <span class="arrow-left" aria-hidden="true">←</span>
-                    </div>
-                    <div class="flow-person" aria-label="Person B">👤</div>
-                </div>
-
-                <div class="insight-card">
-                    <div class="insight-content">
-                        <span class="insight-icon" aria-hidden="true">🎯</span>
-                        <p class="insight-text">
-                            설득의 기술은 말하기가 아니라 들려지기이다
-                        </p>
-                    </div>
-                </div>
-
-                <div class="glass-card">
-                    <p>
-                        상대의 마음에 들려지려면, 먼저 그의 세계에 들어가야 한다.
-                        <span class="highlight">그의 언어로, 그의 속도로, 그의 리듬으로</span> 말해야 한다.
-                    </p>
-                </div>
-
-                <div class="glass-card">
-                    <h3>🔗 상호성의 원리</h3>
-                    <p>
-                        마음의 통로는 일방통행로가 아니다.
-                        내가 상대에게 닿으려 하면, 상대도 나에게 닿으려 한다.
-                        그 상호성 속에서만 진짜 설득이 일어난다.
-                    </p>
-                </div>
-
-                <div class="quote-block">
-                    <p class="quote-text">
-                        설득은 승리가 아니라 연결이다.
-                        상대를 굴복시키는 것이 아니라,
-                        함께 새로운 지점에 도달하는 것이다
-                    </p>
-                </div>
-
-                <div class="glass-card">
-                    <p>
-                        우리가 법정에서, 회의실에서, 일상의 대화에서 진정으로 원하는 것은
-                        옳음의 증명이 아니라 <span class="highlight">이해받는 경험, 닿는 순간</span>이다.
-                    </p>
-                </div>
-            </section>
-
-            <!-- CTA Section -->
-            <section class="cta-section">
-                <h2 class="cta-title">당신의 통로는<br>열려 있습니까?</h2>
-                <p class="cta-text">
-                    상대에게 닿기 위해서는 먼저 내 마음의 문을 열어야 한다.
-                    완벽한 논리보다 진실한 연결이,
-                    설득의 기술보다 이해의 태도가 더 멀리 간다.
-                    오늘 당신은 누구와 통로를 열 것인가.
-                </p>
-            </section>
-        </main>
+            </article>
+        </section>
 
         <!-- Footer -->
-        <footer role="contentinfo">
-            <p>
-                말은 마음 뒤에 도착한다.<br>
-                마음이 열려야 말이 닿는다.
+        <footer class="footer">
+            <p class="footer-text">
+                📚 참고 판례: <a href="#" class="footer-link">대법원 2024. 10. 8. 선고 2024도10062 판결</a><br>
+                ⚖️ 관련 법조: 형사소송법 제216조 제3항<br><br>
+
+                <small style="opacity: 0.7;">
+                    본 자료는 판례를 쉽게 이해하기 위한 시각화 자료이며,
+                    법적 자문을 대체할 수 없습니다.
+                </small>
             </p>
         </footer>
     </div>
@@ -1125,38 +913,53 @@
     <!-- JavaScript -->
     <script>
         // ========================================
-        // SCROLL PROGRESS BAR
-        // ========================================
-        const progressBar = document.getElementById('progressBar');
-
-        function updateProgressBar() {
-            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (window.pageYOffset / windowHeight) * 100;
-            progressBar.style.width = scrolled + '%';
-            progressBar.setAttribute('aria-valuenow', Math.round(scrolled));
-        }
-
-        window.addEventListener('scroll', updateProgressBar);
-
-        // ========================================
-        // INTERSECTION OBSERVER FOR SECTIONS
+        // INTERSECTION OBSERVER - SCROLL ANIMATIONS
         // ========================================
         const observerOptions = {
             threshold: 0.2,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: '0px 0px -50px 0px'
         };
 
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
                 }
             });
         }, observerOptions);
 
-        // Observe all sections
-        document.querySelectorAll('.section-content, .cta-section').forEach(section => {
-            sectionObserver.observe(section);
+        // Observe all cards and quote boxes
+        document.querySelectorAll('.card, .quote-box, .verdict-box').forEach(element => {
+            observer.observe(element);
+        });
+
+        // ========================================
+        // EXPANDABLE CARDS - CLICK TO EXPAND
+        // ========================================
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+
+                // Smooth scroll to card if expanded
+                if (this.classList.contains('expanded')) {
+                    setTimeout(() => {
+                        this.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest'
+                        });
+                    }, 100);
+                }
+            });
+
+            // Keyboard accessibility
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
         });
 
         // ========================================
@@ -1176,43 +979,32 @@
         });
 
         // ========================================
-        // ENHANCED ACCESSIBILITY
+        // CONSOLE EASTER EGG
         // ========================================
-        // Add keyboard navigation for interactive elements
-        document.querySelectorAll('.glass-card, .pillar-card').forEach(card => {
-            card.setAttribute('tabindex', '0');
-
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    card.click();
-                }
-            });
-        });
+        console.log('%c⚖️ 적법절차의 원칙', 'font-size: 20px; color: #5F72BE; font-weight: bold;');
+        console.log('%c위법하게 수집된 증거는 아무리 중요해도 증거능력이 없습니다.', 'font-size: 12px; color: #FF6B6B;');
+        console.log('%c판례 출처: 대법원 2024도10062', 'font-size: 10px; color: #78909C;');
 
         // ========================================
-        // PERFORMANCE: LAZY LOAD ANIMATIONS
+        // PERFORMANCE: LAZY LOADING
         // ========================================
         if ('IntersectionObserver' in window) {
-            const animationObserver = new IntersectionObserver((entries) => {
+            const lazyObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.animationPlayState = 'running';
+                        const element = entry.target;
+                        if (element.dataset.src) {
+                            element.src = element.dataset.src;
+                        }
+                        lazyObserver.unobserve(element);
                     }
                 });
             });
 
-            document.querySelectorAll('[class*="pathway-line"]').forEach(el => {
-                el.style.animationPlayState = 'paused';
-                animationObserver.observe(el);
+            document.querySelectorAll('[data-src]').forEach(element => {
+                lazyObserver.observe(element);
             });
         }
-
-        // ========================================
-        // CONSOLE SIGNATURE
-        // ========================================
-        console.log('%c✨ Designed by Atelier Vision', 'font-size: 14px; color: #14b8a6; font-weight: bold;');
-        console.log('%c말은 마음 뒤에 도착한다', 'font-size: 12px; color: #cbd5e1;');
     </script>
 </body>
 </html>
