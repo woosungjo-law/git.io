@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한 점의 접촉이 궤도를 바꾸는 순간</title>
-    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+    <title>가장 가까운 사람이 가장 아픈 공격을 한다</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
     <style>
         * {
             margin: 0;
@@ -12,309 +15,432 @@
             box-sizing: border-box;
             word-break: keep-all;
             word-wrap: break-word;
-            overflow-wrap: break-word;
+        }
+
+        :root {
+            --color-bg-start: #0f0c29;
+            --color-bg-mid: #302b63;
+            --color-bg-end: #24243e;
+            --color-primary: #a78bfa;
+            --color-secondary: #fb7185;
+            --color-accent: #22d3ee;
+            --color-text: #f1f5f9;
+            --color-text-muted: #cbd5e1;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #fef9f3;
-            color: #3e2723;
+            font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--color-bg-start) 0%, var(--color-bg-mid) 50%, var(--color-bg-end) 100%);
+            background-attachment: fixed;
+            color: var(--color-text);
             line-height: 1.8;
-            padding: 0;
             overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Animated Background Gradient */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(167, 139, 250, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(251, 113, 133, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.1) 0%, transparent 50%);
+            animation: gradientShift 15s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-10%, -10%) rotate(180deg); }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.8);
         }
 
         .container {
-            max-width: 600px;
+            max-width: 428px;
             margin: 0 auto;
-            padding: 24px 20px;
+            padding: 0;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Header */
-        .header {
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 24px;
             text-align: center;
-            margin-bottom: 40px;
             position: relative;
         }
 
-        .category {
-            font-size: 14px;
-            color: #8d6e63;
-            font-weight: 600;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
-
-        .title {
-            font-size: 28px;
-            font-weight: 800;
-            color: #4e342e;
-            line-height: 1.4;
-            margin-bottom: 16px;
-            position: relative;
+        .hero-badge {
             display: inline-block;
+            padding: 8px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 32px;
+            animation: fadeInDown 1s ease;
         }
 
-        .title-underline {
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 100%;
-            height: 4px;
+        .hero-title {
+            font-size: 40px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.2s backwards;
         }
 
-        .subtitle {
-            font-size: 16px;
-            color: #6d4c41;
-            margin-top: 20px;
-            opacity: 0.9;
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            max-width: 360px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1s ease 0.4s backwards;
         }
 
-        /* Story Section */
-        .story-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 28px 24px;
-            margin-bottom: 28px;
-            box-shadow: 0 4px 16px rgba(62, 39, 35, 0.08);
-            border: 3px solid #ffa726;
+        .hero-icon {
+            font-size: 80px;
+            margin-bottom: 32px;
+            animation: float 3s ease-in-out infinite, fadeInUp 1s ease 0.6s backwards;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Section */
+        section {
+            padding: 80px 24px;
             position: relative;
             opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .story-card:nth-child(1) { animation-delay: 0.2s; }
-        .story-card:nth-child(2) { animation-delay: 0.4s; }
-        .story-card:nth-child(3) { animation-delay: 0.6s; }
-        .story-card:nth-child(4) { animation-delay: 0.8s; }
-        .story-card:nth-child(5) { animation-delay: 1s; }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        .story-label {
-            font-size: 18px;
+        .section-number {
+            font-size: 14px;
             font-weight: 700;
-            color: #ff6f00;
+            color: var(--color-accent);
+            letter-spacing: 3px;
             margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            line-height: 1.3;
+            background: linear-gradient(135deg, #ffffff, var(--color-text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px 28px;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(167, 139, 250, 0.3);
+        }
+
+        .glass-card h3 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--color-primary);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .story-icon {
-            font-size: 24px;
-        }
-
-        .story-text {
+        .glass-card p {
             font-size: 17px;
-            color: #4e342e;
             line-height: 1.8;
-            margin-bottom: 12px;
+            color: var(--color-text);
         }
 
-        .highlight {
-            background: linear-gradient(180deg, transparent 60%, #ffe0b2 60%);
-            padding: 2px 4px;
-            font-weight: 700;
-            color: #e65100;
+        /* Fortress Visualization */
+        .fortress-container {
+            position: relative;
+            height: 300px;
+            margin: 40px 0;
         }
 
-        .quote-box {
-            background: #fff3e0;
-            border-left: 4px solid #ff6f00;
-            padding: 16px 20px;
-            margin: 16px 0;
-            border-radius: 8px;
-            font-style: italic;
+        .fortress-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Map Exchange Animation */
+        .map-exchange {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 16px;
+            align-items: center;
+            margin: 40px 0;
+            padding: 32px 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .map-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 8px 24px rgba(167, 139, 250, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .map-arrow {
+            font-size: 32px;
+            animation: slideX 1.5s ease-in-out infinite;
+        }
+
+        @keyframes slideX {
+            0%, 100% { transform: translateX(-5px); opacity: 0.5; }
+            50% { transform: translateX(5px); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Hedgehog Dilemma */
+        .dilemma-visual {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            padding: 40px 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
             position: relative;
         }
 
-        .quote-box::before {
-            content: '"';
-            font-size: 48px;
-            color: #ffb74d;
+        .hedgehog {
+            font-size: 60px;
+            animation: hedgehogMove 3s ease-in-out infinite;
+        }
+
+        .hedgehog:nth-child(2) {
+            animation-delay: -1.5s;
+        }
+
+        .distance-indicator {
             position: absolute;
-            top: -10px;
-            left: 10px;
-            opacity: 0.3;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: var(--color-accent);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        @keyframes hedgehogMove {
+            0%, 100% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* Quote Block */
+        .quote-block {
+            padding: 40px 32px;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(251, 113, 133, 0.1));
+            backdrop-filter: blur(20px);
+            border-left: 4px solid var(--color-secondary);
+            border-radius: 16px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-block::before {
+            content: '"';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            font-size: 120px;
             font-family: Georgia, serif;
+            color: rgba(255, 255, 255, 0.05);
+            line-height: 1;
         }
 
         .quote-text {
-            font-size: 18px;
-            color: #e65100;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.7;
+            color: var(--color-text);
             position: relative;
             z-index: 1;
+            font-style: italic;
         }
 
-        /* Math Concept */
-        .concept-box {
-            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-            border-radius: 20px;
-            padding: 32px 24px;
-            margin: 32px 0;
-            border: 3px dashed #ffa726;
-            position: relative;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            animation-delay: 1.2s;
-        }
-
-        .concept-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #e65100;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .concept-text {
-            font-size: 17px;
-            color: #4e342e;
-            text-align: center;
-            line-height: 1.9;
-        }
-
-        /* SVG Container */
-        .svg-container {
-            width: 100%;
-            margin: 24px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        svg {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Key Points */
-        .key-points {
-            margin: 32px 0;
-        }
-
-        .point-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
-            border: 2px solid #ffcc80;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .point-card:nth-child(1) { animation-delay: 1.4s; }
-        .point-card:nth-child(2) { animation-delay: 1.6s; }
-        .point-card:nth-child(3) { animation-delay: 1.8s; }
-
-        .point-card:active {
-            transform: scale(0.98);
-            box-shadow: 0 2px 8px rgba(255, 111, 0, 0.2);
-        }
-
-        .point-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: #ff6f00;
-            color: #fff;
-            border-radius: 50%;
-            font-weight: 700;
-            font-size: 16px;
-            margin-right: 12px;
-        }
-
-        .point-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #e65100;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .point-content {
-            font-size: 16px;
-            color: #5d4037;
-            line-height: 1.8;
-            padding-left: 44px;
-        }
-
-        .point-detail {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding-left: 44px;
-            margin-top: 8px;
-        }
-
-        .point-card.active .point-detail {
-            max-height: 500px;
-        }
-
-        .point-detail-text {
+        .quote-author {
+            margin-top: 16px;
             font-size: 15px;
-            color: #6d4c41;
-            background: #fff3e0;
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-top: 8px;
-            border-left: 3px solid #ffa726;
+            color: var(--color-text-muted);
+            text-align: right;
         }
 
-        /* Conclusion */
-        .conclusion {
-            background: linear-gradient(135deg, #4e342e 0%, #6d4c41 100%);
-            color: #fff;
+        /* Highlight */
+        .highlight {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
             border-radius: 16px;
-            padding: 32px 24px;
-            margin-top: 40px;
+            padding: 24px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            animation-delay: 2s;
+            transition: transform 0.3s ease;
         }
 
-        .conclusion::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(255, 167, 38, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
+        .stat-card:hover {
+            transform: scale(1.05);
         }
 
-        .conclusion-icon {
+        .stat-icon {
             font-size: 48px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             display: block;
         }
 
-        .conclusion-text {
-            font-size: 19px;
-            font-weight: 700;
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
+        .stat-label {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-bottom: 8px;
         }
 
-        .conclusion-sub {
-            font-size: 16px;
-            margin-top: 16px;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
+        .stat-value {
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 60px 24px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(251, 113, 133, 0.15));
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            margin: 40px 24px 80px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .cta-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .cta-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--color-text-muted);
+            max-width: 340px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 24px;
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 14px;
+            border-top: 1px solid var(--glass-border);
         }
 
         /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -326,272 +452,319 @@
             }
         }
 
-        @keyframes drawLine {
-            from {
-                stroke-dashoffset: 1000;
-            }
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        @keyframes drawCircle {
-            from {
-                stroke-dashoffset: 314;
-            }
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        .animated-path {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawLine 2s ease-in-out forwards;
-        }
-
-        .animated-circle {
-            stroke-dasharray: 314;
-            stroke-dashoffset: 314;
-            animation: drawCircle 1.5s ease-in-out forwards;
-            animation-delay: 2s;
-        }
-
         /* Responsive */
-        @media (max-width: 414px) {
-            .title {
-                font-size: 24px;
+        @media (max-width: 375px) {
+            .hero-title {
+                font-size: 36px;
             }
 
-            .story-text,
-            .concept-text {
-                font-size: 16px;
+            .section-title {
+                font-size: 28px;
             }
 
-            .story-card,
-            .concept-box {
+            .glass-card {
                 padding: 24px 20px;
             }
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 32px 20px;
-            color: #8d6e63;
-            font-size: 14px;
-            border-top: 2px dashed #ffcc80;
-            margin-top: 40px;
+        /* Parallax Elements */
+        .parallax-element {
+            transition: transform 0.3s ease-out;
         }
 
-        .tap-hint {
-            font-size: 13px;
-            color: #ff6f00;
-            text-align: center;
-            margin-top: 16px;
-            animation: pulse 2s infinite;
+        /* 3D Card Effect */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.320, 1);
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .card-3d:hover {
+            transform: rotateY(5deg) rotateX(5deg);
+        }
+
+        /* Glow Effect */
+        .glow {
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.5),
+                        0 0 40px rgba(251, 113, 133, 0.3);
+        }
+
+        /* Interactive Micro-animation */
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .interactive-element:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
 <body>
+    <div class="progress-bar" id="progressBar"></div>
+
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="category">수학으로 푸는 인간관계 방정식</div>
-            <h1 class="title">
-                한 점의 접촉이<br>궤도를 바꾸는 순간
-                <svg class="title-underline" viewBox="0 0 200 10" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 5 Q 50 2, 100 5 T 195 5"
-                          stroke="#ffa726"
-                          stroke-width="4"
-                          fill="none"
-                          stroke-linecap="round"
-                          class="animated-path"/>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-badge">Psychology & Relationships</div>
+            <div class="hero-icon">💔</div>
+            <h1 class="hero-title">가장 가까운 사람이<br>가장 아픈 공격을 한다</h1>
+            <p class="hero-subtitle">
+                마음의 성채를 열고 건넨 설계도가<br>
+                어떻게 가장 치명적인 무기가 되는가
+            </p>
+        </section>
+
+        <!-- Section 1: The Paradox -->
+        <section class="section-content">
+            <div class="section-number">01 — THE PARADOX</div>
+            <h2 class="section-title">모르는 이의 돌은<br>둔탁할 뿐이다</h2>
+
+            <div class="glass-card card-3d">
+                <h3>🪨 외부의 공격</h3>
+                <p>
+                    모르는 이가 던진 돌은 그저 둔탁한 소음을 낼 뿐이다.
+                    스쳐 피멍이 들 순 있어도 <span class="highlight">영혼에 흉터를 새기진 못한다.</span>
+                </p>
+            </div>
+
+            <div class="glass-card card-3d">
+                <h3>⚔️ 내부의 배신</h3>
+                <p>
+                    가장 가까운 사람이 무심코 던지는 말 한마디가 유독 아픈 건,
+                    그 칼날이 내 심장의 <span class="highlight">가장 무르디무른 곳을 정확히 알고 있기 때문</span>이다.
+                </p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card interactive-element">
+                    <span class="stat-icon">🛡️</span>
+                    <div class="stat-label">외부 공격</div>
+                    <div class="stat-value">20%</div>
+                </div>
+                <div class="stat-card interactive-element">
+                    <span class="stat-icon">💘</span>
+                    <div class="stat-label">내부 배신</div>
+                    <div class="stat-value">80%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Fortress -->
+        <section class="section-content">
+            <div class="section-number">02 — THE FORTRESS</div>
+            <h2 class="section-title">마음의 성채와<br>설계도의 교환</h2>
+
+            <p style="font-size: 18px; line-height: 1.8; color: var(--color-text-muted); margin-bottom: 32px;">
+                우리의 마음은 저마다 하나의 성채와 같다.
+                평생 높은 성벽을 두르고 깊은 해자를 파며 스스로를 지킨다.
+            </p>
+
+            <div class="fortress-container">
+                <svg class="fortress-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Castle -->
+                    <rect x="100" y="120" width="100" height="80" fill="rgba(167, 139, 250, 0.3)" stroke="var(--color-primary)" stroke-width="2" rx="4"/>
+                    <rect x="110" y="100" width="20" height="100" fill="rgba(167, 139, 250, 0.3)" stroke="var(--color-primary)" stroke-width="2"/>
+                    <rect x="170" y="100" width="20" height="100" fill="rgba(167, 139, 250, 0.3)" stroke="var(--color-primary)" stroke-width="2"/>
+
+                    <!-- Walls -->
+                    <line x1="70" y1="200" x2="70" y2="150" stroke="var(--color-secondary)" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="230" y1="200" x2="230" y2="150" stroke="var(--color-secondary)" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="70" y1="150" x2="230" y2="150" stroke="var(--color-secondary)" stroke-width="2" stroke-dasharray="5,5"/>
+
+                    <!-- Gate (Open) -->
+                    <rect x="135" y="170" width="30" height="30" fill="rgba(251, 113, 133, 0.5)" stroke="var(--color-secondary)" stroke-width="2"/>
+                    <path d="M 150 170 L 150 140" stroke="var(--color-accent)" stroke-width="2" stroke-dasharray="3,3"/>
+
+                    <!-- Labels -->
+                    <text x="150" y="240" font-size="14" fill="var(--color-text)" text-anchor="middle" font-family="Pretendard">마음의 성채</text>
+                    <text x="150" y="260" font-size="12" fill="var(--color-accent)" text-anchor="middle" font-family="Pretendard">열린 성문</text>
                 </svg>
-            </h1>
-            <p class="subtitle">15분이 10년을 무너뜨린 이야기</p>
-        </div>
-
-        <!-- Story Cards -->
-        <div class="story-card">
-            <div class="story-label">
-                <span class="story-icon">🚌</span>
-                스쳐 지나간 만남
             </div>
-            <p class="story-text">
-                6호선 상왕십리역 버스. 퇴근길 직장인 옆에 노인이 앉았다.
-                건설 현장에서 평생을 보낸 거친 손의 노인.
+
+            <div class="glass-card glow">
+                <p style="font-size: 19px; font-weight: 700; text-align: center; line-height: 1.8;">
+                    누군가를 깊이 사랑하게 되면,<br>
+                    기꺼이 성문을 열고<br>
+                    <span class="highlight">'성채의 설계도'</span>를 건넨다
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: The Exchange -->
+        <section class="section-content">
+            <div class="section-number">03 — THE EXCHANGE</div>
+            <h2 class="section-title">생존을 위한<br>가장 오래된 계약</h2>
+
+            <div class="map-exchange">
+                <div class="map-card interactive-element">🗺️</div>
+                <div class="map-arrow">⇄</div>
+                <div class="map-card interactive-element">🗺️</div>
+            </div>
+
+            <p style="font-size: 17px; line-height: 1.8; color: var(--color-text-muted); text-align: center; margin-bottom: 32px;">
+                비밀 통로, 가장 얇은 벽, 아군만의 암호까지 전부.<br>
+                이 위험천만한 교환은 <span class="highlight">생존을 위한 가장 원초적인 본능</span>이다.
             </p>
-            <div class="quote-box">
+
+            <div class="glass-card">
+                <h3>🧬 인류학적 통찰</h3>
+                <p>
+                    인류는 명백한 적보다 <span class="highlight">변심한 아군</span>을 더 두려워했다.
+                    그래서 우리는 내 편을 가려내고 결속을 다지려 서로의 가장 깊은 곳을 공유했다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: Hedgehog's Dilemma -->
+        <section class="section-content">
+            <div class="section-number">04 — DILEMMA</div>
+            <h2 class="section-title">고슴도치의<br>비극적 딜레마</h2>
+
+            <div class="dilemma-visual">
+                <div class="hedgehog">🦔</div>
+                <div class="distance-indicator">← 온기 vs 상처 →</div>
+                <div class="hedgehog">🦔</div>
+            </div>
+
+            <div class="quote-block">
                 <p class="quote-text">
-                    요즘 젊은이들은 참 바빠 보여. 나도 그랬지. 근데 지금 생각해보니,
-                    그게 내 인생인지 회사 인생인지 모르겠더라고.
+                    멀어지면 춥고<br>
+                    다가서면 아프다
+                </p>
+                <p class="quote-author">— 쇼펜하우어, 고슴도치의 딜레마</p>
+            </div>
+
+            <div class="glass-card">
+                <p style="font-size: 18px; line-height: 1.8;">
+                    추위에 떠는 고슴도치들은 온기를 나누려 서로에게 다가서지만,
+                    가까워질수록 <span class="highlight">서로의 가시에 찔려 상처</span>를 입는다.
                 </p>
             </div>
-            <p class="story-text">
-                <span class="highlight">4정거장, 15분.</span> 노인은 내렸고, 다시는 만나지 않았다.
-            </p>
-        </div>
+        </section>
 
-        <div class="story-card">
-            <div class="story-label">
-                <span class="story-icon">⏱️</span>
-                시간의 역설
-            </div>
-            <p class="story-text">
-                그날 밤, 노인의 말이 맴돌았다. 한 달 후에도, 석 달 후에도.
-            </p>
-            <p class="story-text" style="text-align: center; font-size: 20px; font-weight: 800; color: #e65100; margin: 20px 0;">
-                6개월 뒤, 그는 사직서를 썼다.
-            </p>
-            <p class="story-text">
-                회사는 <strong>10년</strong>을 다녔다.<br>
-                노인과는 <strong>15분</strong>을 함께 있었다.
-            </p>
-            <p class="story-text" style="text-align: center; margin-top: 16px;">
-                <span class="highlight">15분이 10년을 무너뜨렸다.</span>
-            </p>
-        </div>
+        <!-- Section 5: The Truth -->
+        <section class="section-content">
+            <div class="section-number">05 — THE TRUTH</div>
+            <h2 class="section-title">상처의 깊이는<br>사랑의 깊이다</h2>
 
-        <!-- SVG Illustration -->
-        <div class="svg-container">
-            <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-                <!-- Curve (Life path) -->
-                <path d="M 20 180 Q 80 120, 150 100 T 280 80"
-                      stroke="#8d6e63"
-                      stroke-width="3"
-                      fill="none"
-                      stroke-linecap="round"
-                      class="animated-path"/>
-
-                <!-- Tangent line (15 min encounter) -->
-                <line x1="100" y1="140" x2="200" y2="60"
-                      stroke="#ff6f00"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      class="animated-path"
-                      style="animation-delay: 0.5s"/>
-
-                <!-- Point of contact -->
-                <circle cx="150" cy="100" r="8"
-                        fill="#e65100"
-                        class="animated-circle"/>
-
-                <!-- Labels -->
-                <text x="30" y="170" font-size="14" fill="#6d4c41" font-family="Pretendard">인생의 궤적</text>
-                <text x="180" y="50" font-size="14" fill="#ff6f00" font-family="Pretendard" font-weight="700">15분의 접선</text>
-                <text x="160" y="110" font-size="12" fill="#e65100" font-family="Pretendard">변화의 점</text>
-            </svg>
-        </div>
-
-        <!-- Math Concept -->
-        <div class="concept-box">
-            <h2 class="concept-title">📐 접선(Tangent Line)의 원리</h2>
-            <p class="concept-text">
-                곡선과 단 한 점에서만 만나는 직선.<br>
-                스쳐 지나갈 뿐이지만,<br>
-                <strong style="color: #e65100;">바로 그 점에서 곡선의 방향을 정확히 보여준다.</strong>
-            </p>
-        </div>
-
-        <!-- Key Points (Interactive) -->
-        <div class="key-points">
-            <div class="point-card" onclick="this.classList.toggle('active')">
-                <div class="point-title">
-                    <span class="point-number">1</span>
-                    만남의 길이가 아니라 타이밍
-                </div>
-                <p class="point-content">
-                    깊은 관계만이 삶을 바꾸는 게 아니다.
+            <div class="glass-card glow card-3d">
+                <h3>💔 역설의 진실</h3>
+                <p style="font-size: 19px; line-height: 1.9;">
+                    상처의 깊이는 증오의 크기가 아니다.<br><br>
+                    그것은 역설적이게도,<br>
+                    <span class="highlight">한때 존재했던 사랑의 깊이를 재는<br>가장 정밀한, 비극적 척도</span>다.
                 </p>
-                <div class="point-detail">
-                    <div class="point-detail-text">
-                        진화심리학의 '민감기' 개념처럼, 변화의 문턱에 서 있을 때
-                        사소한 말 한마디도 삶을 뒤흔든다.
-                        중요한 건 누가 말하느냐가 아니라 언제 들리느냐다.
-                    </div>
-                </div>
             </div>
 
-            <div class="point-card" onclick="this.classList.toggle('active')">
-                <div class="point-title">
-                    <span class="point-number">2</span>
-                    변화하려는 순간에 접선이 온다
-                </div>
-                <p class="point-content">
-                    접선이 의미를 갖는 건 곡선이 변화하려는 바로 그 순간에 닿기 때문.
+            <div style="padding: 40px 28px; text-align: center; margin: 32px 0;">
+                <p style="font-size: 20px; font-weight: 700; line-height: 1.8; color: var(--color-text);">
+                    사랑이란 '나'와 '너'의 경계를 허물어<br>
+                    '우리'를 빚어내는 일이다
                 </p>
-                <div class="point-detail">
-                    <div class="point-detail-text">
-                        그 직장인은 이미 변화의 지점에 있었다.
-                        회사를 그만둘지 말지, 이 삶을 계속할지 말지,
-                        내면에서 곡선이 휘어지고 있었다. 노인은 그 순간에 나타났다.
-                    </div>
-                </div>
             </div>
 
-            <div class="point-card" onclick="this.classList.toggle('active')">
-                <div class="point-title">
-                    <span class="point-number">3</span>
-                    접선은 예고 없이 온다
-                </div>
-                <p class="point-content">
-                    버스에서, 카페에서, 엘리베이터에서.
+            <div class="glass-card">
+                <p style="font-size: 17px; line-height: 1.8;">
+                    그러니 그 공격은 외부의 칼이 아니라,
+                    <span class="highlight">내 안에서 스스로를 찌르는 파편</span>처럼 아프다.
                 </p>
-                <div class="point-detail">
-                    <div class="point-detail-text">
-                        15분일 수도 있고, 단 한 문장일 수도 있다.
-                        중요한 건 그 순간 그 사람이 어디에 서 있느냐다.
-                        삶이 휘어지는 중이라면, 스쳐 지나가는 말 한마디가 10년을 무너뜨린다.
-                    </div>
-                </div>
             </div>
+        </section>
 
-            <p class="tap-hint">👆 카드를 탭하면 자세한 설명을 볼 수 있어요</p>
-        </div>
-
-        <!-- Conclusion -->
-        <div class="conclusion">
-            <span class="conclusion-icon">✨</span>
-            <p class="conclusion-text">
-                관계의 길이가 아니라,<br>
-                준비 상태가 변화를 결정한다.
-            </p>
-            <p class="conclusion-sub">
-                접선은 닿았다 떠나고, 흔적만 남긴다.<br>
-                그 흔적이 궤적을 바꾼다.
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="cta-title">당신의 손에 든<br>마음의 지도는?</h2>
+            <p class="cta-text">
+                지금 당신의 손에 들린 타인의 마음 지도는 얼마나 상세한가.
+                그리고 당신의 지도를 들고 있는 그 사람은,
+                그 지도의 신성한 무게를 알고 있는가.
             </p>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            수학으로 푸는 인간관계 방정식 시리즈
+            <p>그 성스럽고도 서늘한 교환 위에,<br>인간의 모든 관계는 위태롭게, 그러나 눈부시게 서 있다.</p>
         </div>
     </div>
 
     <script>
-        // 터치 친화적 인터랙션
-        document.querySelectorAll('.point-card').forEach(card => {
-            card.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.98)';
-            });
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
 
-            card.addEventListener('touchend', function() {
-                this.style.transform = 'scale(1)';
+        // Intersection Observer for Sections
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-content').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-element');
+
+            parallaxElements.forEach((element, index) => {
+                const speed = (index + 1) * 0.05;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
             });
         });
 
-        // 카드 클릭 시 다른 카드는 닫기
-        document.querySelectorAll('.point-card').forEach(card => {
-            card.addEventListener('click', function() {
-                if (!this.classList.contains('active')) {
-                    document.querySelectorAll('.point-card').forEach(c => {
-                        if (c !== this) c.classList.remove('active');
+        // 3D Card Tilt Effect
+        document.querySelectorAll('.card-3d').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+
+        // Interactive Elements Click Feedback
+        document.querySelectorAll('.interactive-element').forEach(element => {
+            element.addEventListener('click', function() {
+                this.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
