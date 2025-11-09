@@ -3,511 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메타의 대규모 감원, 그런데 천문학적 몸값의 인재는 영입?</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <title>한 점의 접촉이 궤도를 바꾸는 순간</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --color-primary: #0a1e3d;
-            --color-accent: #d4af37;
-            --color-danger: #c41e3a;
-            --color-success: #2d6a4f;
-            --color-gray-dark: #2d3748;
-            --color-gray-medium: #718096;
-            --color-gray-light: #e2e8f0;
-            --color-bg: #f7fafc;
-            --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            --font-serif: 'Noto Serif KR', serif;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         body {
-            font-family: var(--font-sans);
-            background: var(--color-bg);
-            color: var(--color-gray-dark);
-            line-height: 1.75;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fef9f3;
+            color: #3e2723;
+            line-height: 1.8;
+            padding: 0;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: #ffffff;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            padding: 24px 20px;
         }
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, var(--color-primary) 0%, #1a3a5f 100%);
-            padding: 20px 24px;
-            border-bottom: 4px solid var(--color-accent);
-        }
-
-        .header-label {
-            color: var(--color-accent);
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .header-title {
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        /* Hero */
-        .hero {
-            background: linear-gradient(180deg, var(--color-primary) 0%, #0d2847 100%);
-            padding: 44px 28px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .hero-title {
-            font-family: var(--font-serif);
-            font-size: 28px;
-            font-weight: 900;
-            color: #ffffff;
-            line-height: 1.35;
-            margin-bottom: 20px;
-            word-break: keep-all;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-subtitle {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.7;
-            word-break: keep-all;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Contrast Stats */
-        .contrast-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            margin: 0;
-        }
-
-        .stat-box {
-            padding: 32px 20px;
             text-align: center;
+            margin-bottom: 40px;
             position: relative;
         }
 
-        .stat-box-layoff {
-            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-            border-right: 2px solid var(--color-accent);
-        }
-
-        .stat-box-hire {
-            background: linear-gradient(135deg, var(--color-accent) 0%, #e9c46a 100%);
-        }
-
-        .stat-icon {
-            font-size: 36px;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            opacity: 0.9;
-        }
-
-        .stat-box-layoff .stat-label {
-            color: #e2e8f0;
-        }
-
-        .stat-box-hire .stat-label {
-            color: var(--color-primary);
-        }
-
-        .stat-number {
-            font-family: var(--font-serif);
-            font-size: 32px;
-            font-weight: 900;
-            margin-bottom: 4px;
-            line-height: 1;
-        }
-
-        .stat-box-layoff .stat-number {
-            color: #fc8181;
-        }
-
-        .stat-box-hire .stat-number {
-            color: var(--color-primary);
-        }
-
-        .stat-detail {
+        .category {
             font-size: 14px;
+            color: #8d6e63;
             font-weight: 600;
-            opacity: 0.85;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
         }
 
-        .stat-box-layoff .stat-detail {
-            color: #ffffff;
-        }
-
-        .stat-box-hire .stat-detail {
-            color: var(--color-primary);
-        }
-
-        /* Section */
-        .section {
-            padding: 36px 28px;
-            border-bottom: 1px solid var(--color-gray-light);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .section-icon {
+        .title {
             font-size: 28px;
-        }
-
-        .section-title {
-            font-family: var(--font-serif);
-            font-size: 22px;
-            font-weight: 900;
-            color: var(--color-primary);
-            word-break: keep-all;
-        }
-
-        .section-content {
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--color-gray-dark);
-            word-break: keep-all;
-        }
-
-        .section-content p {
-            margin-bottom: 14px;
-        }
-
-        .section-content p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Timeline */
-        .timeline {
-            padding: 36px 28px;
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-        }
-
-        .timeline-title {
-            font-family: var(--font-serif);
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--color-primary);
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .timeline-item {
-            background: #ffffff;
-            padding: 20px 22px;
-            border-radius: 12px;
+            font-weight: 800;
+            color: #4e342e;
+            line-height: 1.4;
             margin-bottom: 16px;
-            border-left: 4px solid var(--color-accent);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            position: relative;
+            display: inline-block;
         }
 
-        .timeline-item:last-child {
-            margin-bottom: 0;
+        .title-underline {
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 4px;
         }
 
-        .timeline-date {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--color-accent);
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        .timeline-event {
+        .subtitle {
             font-size: 16px;
+            color: #6d4c41;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Story Section */
+        .story-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 16px rgba(62, 39, 35, 0.08);
+            border: 3px solid #ffa726;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .story-card:nth-child(1) { animation-delay: 0.2s; }
+        .story-card:nth-child(2) { animation-delay: 0.4s; }
+        .story-card:nth-child(3) { animation-delay: 0.6s; }
+        .story-card:nth-child(4) { animation-delay: 0.8s; }
+        .story-card:nth-child(5) { animation-delay: 1s; }
+
+        .story-label {
+            font-size: 18px;
             font-weight: 700;
-            color: var(--color-primary);
-            margin-bottom: 6px;
-            line-height: 1.5;
-            word-break: keep-all;
-        }
-
-        .timeline-desc {
-            font-size: 15px;
-            color: var(--color-gray-medium);
-            line-height: 1.7;
-            word-break: keep-all;
-        }
-
-        /* Expert Opinions */
-        .expert-section {
-            padding: 36px 28px;
-            background: #ffffff;
-        }
-
-        .expert-title {
-            font-family: var(--font-serif);
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--color-primary);
-            margin-bottom: 24px;
-            text-align: center;
+            color: #ff6f00;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
         }
 
-        .expert-card {
-            background: linear-gradient(135deg, #f7fafc 0%, #ffffff 100%);
-            padding: 22px 24px;
-            border-radius: 12px;
-            margin-bottom: 18px;
-            border: 2px solid var(--color-gray-light);
+        .story-icon {
+            font-size: 24px;
         }
 
-        .expert-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .expert-category {
-            display: inline-block;
-            background: var(--color-primary);
-            color: #ffffff;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 12px;
+        .story-text {
+            font-size: 17px;
+            color: #4e342e;
+            line-height: 1.8;
             margin-bottom: 12px;
-            letter-spacing: 0.5px;
         }
 
-        .expert-quote {
-            font-size: 16px;
-            color: var(--color-gray-dark);
-            line-height: 1.75;
-            word-break: keep-all;
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, #ffe0b2 60%);
+            padding: 2px 4px;
+            font-weight: 700;
+            color: #e65100;
+        }
+
+        .quote-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff6f00;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 8px;
             font-style: italic;
             position: relative;
-            padding-left: 16px;
-            border-left: 3px solid var(--color-accent);
         }
 
-        /* Highlight Box */
-        .highlight-box {
-            background: linear-gradient(135deg, var(--color-primary) 0%, #1a3a5f 100%);
-            padding: 32px 28px;
-            margin: 0;
+        .quote-box::before {
+            content: '"';
+            font-size: 48px;
+            color: #ffb74d;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            opacity: 0.3;
+            font-family: Georgia, serif;
         }
 
-        .highlight-icon {
-            font-size: 40px;
-            text-align: center;
-            display: block;
-            margin-bottom: 16px;
-        }
-
-        .highlight-title {
-            font-family: var(--font-serif);
+        .quote-text {
             font-size: 18px;
-            font-weight: 700;
-            color: var(--color-accent);
-            text-align: center;
-            margin-bottom: 16px;
-            letter-spacing: 0.5px;
+            color: #e65100;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
         }
 
-        .highlight-text {
-            font-size: 17px;
-            color: #ffffff;
-            line-height: 1.8;
-            word-break: keep-all;
-            text-align: center;
+        /* Math Concept */
+        .concept-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border-radius: 20px;
+            padding: 32px 24px;
+            margin: 32px 0;
+            border: 3px dashed #ffa726;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: 1.2s;
         }
 
-        /* Stats Grid */
-        .stats-grid {
-            padding: 36px 28px;
-            background: #ffffff;
-        }
-
-        .stats-grid-title {
-            font-family: var(--font-serif);
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--color-primary);
+        .concept-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #e65100;
             margin-bottom: 20px;
             text-align: center;
         }
 
-        .stats-items {
-            display: grid;
-            gap: 14px;
+        .concept-text {
+            font-size: 17px;
+            color: #4e342e;
+            text-align: center;
+            line-height: 1.9;
         }
 
-        .stats-item {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            padding: 18px 20px;
-            border-radius: 10px;
+        /* SVG Container */
+        .svg-container {
+            width: 100%;
+            margin: 24px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Key Points */
+        .key-points {
+            margin: 32px 0;
+        }
+
+        .point-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 2px solid #ffcc80;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .point-card:nth-child(1) { animation-delay: 1.4s; }
+        .point-card:nth-child(2) { animation-delay: 1.6s; }
+        .point-card:nth-child(3) { animation-delay: 1.8s; }
+
+        .point-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(255, 111, 0, 0.2);
+        }
+
+        .point-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #ff6f00;
+            color: #fff;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 16px;
+            margin-right: 12px;
+        }
+
+        .point-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #e65100;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 14px;
-            border-left: 4px solid var(--color-accent);
         }
 
-        .stats-item-icon {
-            font-size: 28px;
-            flex-shrink: 0;
+        .point-content {
+            font-size: 16px;
+            color: #5d4037;
+            line-height: 1.8;
+            padding-left: 44px;
         }
 
-        .stats-item-content {
-            flex: 1;
+        .point-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 44px;
+            margin-top: 8px;
         }
 
-        .stats-item-label {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--color-primary);
-            margin-bottom: 4px;
+        .point-card.active .point-detail {
+            max-height: 500px;
         }
 
-        .stats-item-value {
+        .point-detail-text {
             font-size: 15px;
-            color: var(--color-gray-medium);
-            line-height: 1.6;
-            word-break: keep-all;
+            color: #6d4c41;
+            background: #fff3e0;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            border-left: 3px solid #ffa726;
         }
 
-        /* Call to Action */
-        .cta-section {
-            background: linear-gradient(135deg, var(--color-accent) 0%, #e9c46a 100%);
-            padding: 36px 28px;
+        /* Conclusion */
+        .conclusion {
+            background: linear-gradient(135deg, #4e342e 0%, #6d4c41 100%);
+            color: #fff;
+            border-radius: 16px;
+            padding: 32px 24px;
+            margin-top: 40px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: 2s;
         }
 
-        .cta-icon {
-            font-size: 44px;
-            display: block;
+        .conclusion::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 167, 38, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .conclusion-icon {
+            font-size: 48px;
             margin-bottom: 16px;
+            display: block;
         }
 
-        .cta-title {
-            font-family: var(--font-serif);
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--color-primary);
-            margin-bottom: 12px;
-            word-break: keep-all;
-        }
-
-        .cta-text {
-            font-size: 16px;
-            color: var(--color-primary);
+        .conclusion-text {
+            font-size: 19px;
+            font-weight: 700;
             line-height: 1.7;
-            word-break: keep-all;
-            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Footer */
-        .footer {
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-            padding: 28px 28px;
-            text-align: center;
-            color: #ffffff;
-        }
-
-        .footer-date {
-            font-size: 14px;
-            opacity: 0.7;
-            margin-bottom: 8px;
-        }
-
-        .footer-author {
+        .conclusion-sub {
             font-size: 16px;
-            font-weight: 700;
-            color: var(--color-accent);
-            margin-bottom: 6px;
-        }
-
-        .footer-org {
-            font-size: 14px;
-            opacity: 0.85;
-        }
-
-        /* Emphasis */
-        .em-strong {
-            font-weight: 700;
-            color: var(--color-primary);
-        }
-
-        .em-number {
-            font-family: var(--font-serif);
-            font-weight: 900;
-            color: var(--color-accent);
-        }
-
-        /* Responsive */
-        @media (max-width: 414px) {
-            .hero-title {
-                font-size: 24px;
-            }
-
-            .section-title {
-                font-size: 20px;
-            }
-
-            .stat-number {
-                font-size: 28px;
-            }
-
-            .section,
-            .expert-section,
-            .stats-grid,
-            .timeline {
-                padding: 28px 22px;
-            }
+            margin-top: 16px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -515,191 +326,276 @@
             }
         }
 
-        .section,
-        .timeline,
-        .expert-section,
-        .stats-grid,
-        .highlight-box,
-        .cta-section {
-            animation: fadeInUp 0.6s ease-out;
+        @keyframes drawLine {
+            from {
+                stroke-dashoffset: 1000;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
-        .timeline-item {
-            animation: fadeInUp 0.6s ease-out;
+        @keyframes drawCircle {
+            from {
+                stroke-dashoffset: 314;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
-        .timeline-item:nth-child(1) { animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards; }
-        .timeline-item:nth-child(2) { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
-        .timeline-item:nth-child(3) { animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards; }
-        .timeline-item:nth-child(4) { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
+        .animated-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 2s ease-in-out forwards;
+        }
+
+        .animated-circle {
+            stroke-dasharray: 314;
+            stroke-dashoffset: 314;
+            animation: drawCircle 1.5s ease-in-out forwards;
+            animation-delay: 2s;
+        }
+
+        /* Responsive */
+        @media (max-width: 414px) {
+            .title {
+                font-size: 24px;
+            }
+
+            .story-text,
+            .concept-text {
+                font-size: 16px;
+            }
+
+            .story-card,
+            .concept-box {
+                padding: 24px 20px;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 20px;
+            color: #8d6e63;
+            font-size: 14px;
+            border-top: 2px dashed #ffcc80;
+            margin-top: 40px;
+        }
+
+        .tap-hint {
+            font-size: 13px;
+            color: #ff6f00;
+            text-align: center;
+            margin-top: 16px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="header-label">3분 뉴스브리핑</div>
-            <div class="header-title">Tech Industry Paradox Report</div>
+            <div class="category">수학으로 푸는 인간관계 방정식</div>
+            <h1 class="title">
+                한 점의 접촉이<br>궤도를 바꾸는 순간
+                <svg class="title-underline" viewBox="0 0 200 10" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 5 Q 50 2, 100 5 T 195 5"
+                          stroke="#ffa726"
+                          stroke-width="4"
+                          fill="none"
+                          stroke-linecap="round"
+                          class="animated-path"/>
+                </svg>
+            </h1>
+            <p class="subtitle">15분이 10년을 무너뜨린 이야기</p>
         </div>
 
-        <!-- Hero -->
-        <div class="hero">
-            <h1 class="hero-title">메타의 대규모 감원,<br>그런데 천문학적 몸값의<br>인재는 영입?</h1>
-            <p class="hero-subtitle">AI 전쟁 속 불평등의 민낯</p>
-        </div>
-
-        <!-- Contrast Stats -->
-        <div class="contrast-section">
-            <div class="stat-box stat-box-layoff">
-                <span class="stat-icon">📉</span>
-                <div class="stat-label">Layoffs</div>
-                <div class="stat-number">4,200</div>
-                <div class="stat-detail">2025년 감원 인원</div>
+        <!-- Story Cards -->
+        <div class="story-card">
+            <div class="story-label">
+                <span class="story-icon">🚌</span>
+                스쳐 지나간 만남
             </div>
-            <div class="stat-box stat-box-hire">
-                <span class="stat-icon">💰</span>
-                <div class="stat-label">Investment</div>
-                <div class="stat-number">21조</div>
-                <div class="stat-detail">Scale AI 투자금</div>
+            <p class="story-text">
+                6호선 상왕십리역 버스. 퇴근길 직장인 옆에 노인이 앉았다.
+                건설 현장에서 평생을 보낸 거친 손의 노인.
+            </p>
+            <div class="quote-box">
+                <p class="quote-text">
+                    요즘 젊은이들은 참 바빠 보여. 나도 그랬지. 근데 지금 생각해보니,
+                    그게 내 인생인지 회사 인생인지 모르겠더라고.
+                </p>
             </div>
-        </div>
-
-        <!-- What Happened -->
-        <div class="section">
-            <div class="section-header">
-                <span class="section-icon">📌</span>
-                <h2 class="section-title">무슨 일이 일어났나?</h2>
-            </div>
-            <div class="section-content">
-                <p><span class="em-strong">2024년 10월 22일</span>, 메타가 AI 부서 직원 <span class="em-number">600명</span> 감원 통보. 불과 몇 달 전인 6월, <span class="em-number">21조원</span>을 투자하며 28세 CEO 알렉산드르 왕을 최고 AI 책임자로 영입했다.</p>
-                <p>칼날은 주로 <span class="em-strong">FAIR(기초 AI 연구팀)</span>를 향했다. 반면 올여름 영입한 엘리트가 모인 'TBD 랩'은 단 한 명도 빠지지 않았다.</p>
-                <p>OpenAI CEO 샘 알트만은 메타가 자기 직원들에게 "<span class="em-number">1억 달러 계약금</span>"을 제시했다고 주장했다. 엄청난 금액이 오갔다는 건 업계 공공연한 사실이다.</p>
-            </div>
-        </div>
-
-        <!-- Timeline -->
-        <div class="timeline">
-            <h3 class="timeline-title">타임라인으로 보는 메타의 선택</h3>
-
-            <div class="timeline-item">
-                <div class="timeline-date">2025년 2월 초</div>
-                <div class="timeline-event">"저성과자" 명목 3,600명 해고</div>
-                <div class="timeline-desc">전체 직원의 5% 규모</div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-date">2월 13일 (3일 후)</div>
-                <div class="timeline-event">임원 보너스 75% → 200% 인상</div>
-                <div class="timeline-desc">기본급 대비 보너스 비율 급증</div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-date">6월</div>
-                <div class="timeline-event">Scale AI에 21조원 투자</div>
-                <div class="timeline-desc">28세 CEO 알렉산드르 왕 영입</div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-date">10월 22일</div>
-                <div class="timeline-event">AI 부서 600명 추가 감원</div>
-                <div class="timeline-desc">FAIR 연구팀 집중 타격</div>
-            </div>
-        </div>
-
-        <!-- Why Important -->
-        <div class="section">
-            <div class="section-header">
-                <span class="section-icon">❗</span>
-                <h2 class="section-title">왜 중요한가?</h2>
-            </div>
-            <div class="section-content">
-                <p><span class="em-strong">돈이 없어서 자르는 게 아니다.</span> 10월에만 메타는 루이지애나 데이터 센터에 <span class="em-number">270억 달러</span>를 투자했다. 2025년 예상 지출은 <span class="em-number">1,140억~1,180억 달러</span>다.</p>
-                <p>문제는 방향이다. 누구를 남기고 누구를 내보내느냐가 회사의 미래를 결정한다. 해고된 전 콘텐츠 매니저는 말했다. "중간 평가에서 <span class="em-strong">'기대 초과' 등급</span>을 받았다. 잘하고 있다는 얘기만 들었다."</p>
-            </div>
-        </div>
-
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-            <h3 class="stats-grid-title">숫자로 보는 메타의 AI 투자</h3>
-            <div class="stats-items">
-                <div class="stats-item">
-                    <span class="stats-item-icon">💸</span>
-                    <div class="stats-item-content">
-                        <div class="stats-item-label">2025년 총 투자 예상액</div>
-                        <div class="stats-item-value">1,140억~1,180억 달러</div>
-                    </div>
-                </div>
-                <div class="stats-item">
-                    <span class="stats-item-icon">🏗️</span>
-                    <div class="stats-item-content">
-                        <div class="stats-item-label">루이지애나 데이터 센터</div>
-                        <div class="stats-item-value">270억 달러 (10월 투자)</div>
-                    </div>
-                </div>
-                <div class="stats-item">
-                    <span class="stats-item-icon">👥</span>
-                    <div class="stats-item-content">
-                        <div class="stats-item-label">2025년 총 감원 규모</div>
-                        <div class="stats-item-value">약 4,200명 이상</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Expert Opinions -->
-        <div class="expert-section">
-            <h3 class="expert-title">
-                <span>🎓</span>
-                전문가들은 뭐라고 할까?
-            </h3>
-
-            <div class="expert-card">
-                <span class="expert-category">비판적 시각</span>
-                <div class="expert-quote">
-                    "임원 급여를 업계 수준으로 맞추는 건 이해한다. 하지만 대량 해고 직후에? 이건 회사 이미지는 물론 남은 직원들의 사기까지 떨어뜨린다."
-                </div>
-            </div>
-
-            <div class="expert-card">
-                <span class="expert-category">산업 동향 분석</span>
-                <div class="expert-quote">
-                    "해고의 진짜 이유는 AI가 사람을 대체해서가 아니다. AI에 더 많은 돈을 쏟기 위해 어디선가 자본을 빼오는 것뿐이다."
-                    <br><em>— 디디 다스, Menlo Ventures</em>
-                </div>
-            </div>
-
-            <div class="expert-card">
-                <span class="expert-category">노동 전문가 우려</span>
-                <div class="expert-quote">
-                    "회사는 전략적 재조정이라고 말하지만, 사람들은 다르게 본다. 직원 안정성보다 임원 배불리기가 우선이라고."
-                </div>
-            </div>
-        </div>
-
-        <!-- Highlight -->
-        <div class="highlight-box">
-            <span class="highlight-icon">⚠️</span>
-            <h3 class="highlight-title">실리콘밸리의 새로운 현실</h3>
-            <p class="highlight-text">
-                꿈을 안고 스타트업에 들어갔다가 대기업에 인수되는 순간 잘릴 수 있다는 불안. "매입 후 인력 청산" 방식이 스타트업 인재 채용에 악영향을 미칠 것이라는 경고가 나온다.
+            <p class="story-text">
+                <span class="highlight">4정거장, 15분.</span> 노인은 내렸고, 다시는 만나지 않았다.
             </p>
         </div>
 
-        <!-- CTA -->
-        <div class="cta-section">
-            <span class="cta-icon">💡</span>
-            <h3 class="cta-title">한 줄 요약</h3>
-            <p class="cta-text">
-                메타는 AI 전쟁에서 이기겠다며 수백억 달러를 쏟아붓는다. 그 와중에 4,000명 넘는 직원을 내보내고, 고액 스타 영입과 임원 보너스는 멈추지 않는다. 테크 업계의 불평등과 기업 윤리에 대한 질문이 커지고 있다.
+        <div class="story-card">
+            <div class="story-label">
+                <span class="story-icon">⏱️</span>
+                시간의 역설
+            </div>
+            <p class="story-text">
+                그날 밤, 노인의 말이 맴돌았다. 한 달 후에도, 석 달 후에도.
+            </p>
+            <p class="story-text" style="text-align: center; font-size: 20px; font-weight: 800; color: #e65100; margin: 20px 0;">
+                6개월 뒤, 그는 사직서를 썼다.
+            </p>
+            <p class="story-text">
+                회사는 <strong>10년</strong>을 다녔다.<br>
+                노인과는 <strong>15분</strong>을 함께 있었다.
+            </p>
+            <p class="story-text" style="text-align: center; margin-top: 16px;">
+                <span class="highlight">15분이 10년을 무너뜨렸다.</span>
+            </p>
+        </div>
+
+        <!-- SVG Illustration -->
+        <div class="svg-container">
+            <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Curve (Life path) -->
+                <path d="M 20 180 Q 80 120, 150 100 T 280 80"
+                      stroke="#8d6e63"
+                      stroke-width="3"
+                      fill="none"
+                      stroke-linecap="round"
+                      class="animated-path"/>
+
+                <!-- Tangent line (15 min encounter) -->
+                <line x1="100" y1="140" x2="200" y2="60"
+                      stroke="#ff6f00"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      class="animated-path"
+                      style="animation-delay: 0.5s"/>
+
+                <!-- Point of contact -->
+                <circle cx="150" cy="100" r="8"
+                        fill="#e65100"
+                        class="animated-circle"/>
+
+                <!-- Labels -->
+                <text x="30" y="170" font-size="14" fill="#6d4c41" font-family="Pretendard">인생의 궤적</text>
+                <text x="180" y="50" font-size="14" fill="#ff6f00" font-family="Pretendard" font-weight="700">15분의 접선</text>
+                <text x="160" y="110" font-size="12" fill="#e65100" font-family="Pretendard">변화의 점</text>
+            </svg>
+        </div>
+
+        <!-- Math Concept -->
+        <div class="concept-box">
+            <h2 class="concept-title">📐 접선(Tangent Line)의 원리</h2>
+            <p class="concept-text">
+                곡선과 단 한 점에서만 만나는 직선.<br>
+                스쳐 지나갈 뿐이지만,<br>
+                <strong style="color: #e65100;">바로 그 점에서 곡선의 방향을 정확히 보여준다.</strong>
+            </p>
+        </div>
+
+        <!-- Key Points (Interactive) -->
+        <div class="key-points">
+            <div class="point-card" onclick="this.classList.toggle('active')">
+                <div class="point-title">
+                    <span class="point-number">1</span>
+                    만남의 길이가 아니라 타이밍
+                </div>
+                <p class="point-content">
+                    깊은 관계만이 삶을 바꾸는 게 아니다.
+                </p>
+                <div class="point-detail">
+                    <div class="point-detail-text">
+                        진화심리학의 '민감기' 개념처럼, 변화의 문턱에 서 있을 때
+                        사소한 말 한마디도 삶을 뒤흔든다.
+                        중요한 건 누가 말하느냐가 아니라 언제 들리느냐다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="point-card" onclick="this.classList.toggle('active')">
+                <div class="point-title">
+                    <span class="point-number">2</span>
+                    변화하려는 순간에 접선이 온다
+                </div>
+                <p class="point-content">
+                    접선이 의미를 갖는 건 곡선이 변화하려는 바로 그 순간에 닿기 때문.
+                </p>
+                <div class="point-detail">
+                    <div class="point-detail-text">
+                        그 직장인은 이미 변화의 지점에 있었다.
+                        회사를 그만둘지 말지, 이 삶을 계속할지 말지,
+                        내면에서 곡선이 휘어지고 있었다. 노인은 그 순간에 나타났다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="point-card" onclick="this.classList.toggle('active')">
+                <div class="point-title">
+                    <span class="point-number">3</span>
+                    접선은 예고 없이 온다
+                </div>
+                <p class="point-content">
+                    버스에서, 카페에서, 엘리베이터에서.
+                </p>
+                <div class="point-detail">
+                    <div class="point-detail-text">
+                        15분일 수도 있고, 단 한 문장일 수도 있다.
+                        중요한 건 그 순간 그 사람이 어디에 서 있느냐다.
+                        삶이 휘어지는 중이라면, 스쳐 지나가는 말 한마디가 10년을 무너뜨린다.
+                    </div>
+                </div>
+            </div>
+
+            <p class="tap-hint">👆 카드를 탭하면 자세한 설명을 볼 수 있어요</p>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="conclusion">
+            <span class="conclusion-icon">✨</span>
+            <p class="conclusion-text">
+                관계의 길이가 아니라,<br>
+                준비 상태가 변화를 결정한다.
+            </p>
+            <p class="conclusion-sub">
+                접선은 닿았다 떠나고, 흔적만 남긴다.<br>
+                그 흔적이 궤적을 바꾼다.
             </p>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            <div class="footer-date">2025. 10. 28.</div>
-            <div class="footer-author">조우성 변호사</div>
-            <div class="footer-org">로펌 머스트노우</div>
+            수학으로 푸는 인간관계 방정식 시리즈
         </div>
     </div>
+
+    <script>
+        // 터치 친화적 인터랙션
+        document.querySelectorAll('.point-card').forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+
+            card.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // 카드 클릭 시 다른 카드는 닫기
+        document.querySelectorAll('.point-card').forEach(card => {
+            card.addEventListener('click', function() {
+                if (!this.classList.contains('active')) {
+                    document.querySelectorAll('.point-card').forEach(c => {
+                        if (c !== this) c.classList.remove('active');
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
