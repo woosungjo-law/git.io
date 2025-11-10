@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="반환하는 척, 다시 압수? 적법절차 잠탈 판례 분석">
-    <title>위법수집증거 배제 원칙 | 대법원 2024도10062</title>
+    <meta name="description" content="KC 인증 분쟁 대응 전략 - 양동작전으로 계약을 지켜라">
+    <title>KC 인증 분쟁 대응 전략 | 조우성 변호사</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
     <style>
@@ -26,40 +26,46 @@
         }
 
         :root {
-            /* Pastel Color Palette */
-            --color-pink: #FFE5E5;
-            --color-mint: #E0F7F4;
-            --color-lavender: #E8E4F3;
-            --color-peach: #FFE4D6;
-            --color-lemon: #FFF9E6;
+            /* Professional Color Palette */
+            --color-primary: #1e40af;
+            --color-primary-light: #3b82f6;
+            --color-primary-dark: #1e3a8a;
 
-            /* Accent Colors */
-            --color-illegal: #FF6B6B;
-            --color-legal: #51CF66;
-            --color-warning: #FFB84D;
-            --color-primary: #5F72BE;
+            --color-danger: #dc2626;
+            --color-danger-light: #ef4444;
 
-            /* Text Colors */
-            --color-text-dark: #2C3E50;
-            --color-text-mid: #546E7A;
-            --color-text-light: #78909C;
+            --color-success: #16a34a;
+            --color-success-light: #22c55e;
+
+            --color-warning: #f59e0b;
+            --color-warning-light: #fbbf24;
+
+            /* Neutrals */
+            --color-bg: #f8fafc;
+            --color-bg-card: #ffffff;
+            --color-text: #0f172a;
+            --color-text-muted: #64748b;
+            --color-text-light: #94a3b8;
+            --color-border: #e2e8f0;
+
+            /* Glass Effect */
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(148, 163, 184, 0.2);
 
             /* Spacing */
             --spacing-xs: 8px;
             --spacing-sm: 16px;
             --spacing-md: 24px;
             --spacing-lg: 40px;
-            --spacing-xl: 60px;
-
-            /* Border Radius */
-            --radius-sm: 12px;
-            --radius-md: 20px;
-            --radius-lg: 30px;
+            --spacing-xl: 64px;
 
             /* Shadows */
-            --shadow-sm: 4px 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-md: 6px 6px 20px rgba(0, 0, 0, 0.12);
-            --shadow-lg: 10px 10px 30px rgba(0, 0, 0, 0.15);
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.08);
+            --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.12);
+            --shadow-lg: 0 8px 32px rgba(15, 23, 42, 0.16);
+
+            /* Transitions */
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         html {
@@ -69,15 +75,14 @@
 
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #FFF9F0 0%, #F0F4FF 100%);
-            color: var(--color-text-dark);
-            line-height: 1.7;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.8;
             overflow-x: hidden;
-            min-height: 100vh;
             position: relative;
         }
 
-        /* Hand-drawn Background Doodles */
+        /* Subtle Background Pattern */
         body::before {
             content: '';
             position: fixed;
@@ -85,11 +90,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                radial-gradient(circle at 20% 30%, var(--color-mint) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, var(--color-lavender) 0%, transparent 50%),
-                radial-gradient(circle at 50% 90%, var(--color-peach) 0%, transparent 50%);
-            opacity: 0.3;
+            background:
+                linear-gradient(135deg, transparent 0%, rgba(30, 64, 175, 0.02) 100%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 60px,
+                    rgba(30, 64, 175, 0.01) 60px,
+                    rgba(30, 64, 175, 0.01) 120px
+                );
             pointer-events: none;
             z-index: 0;
         }
@@ -98,7 +107,7 @@
            CONTAINER
         ======================================== */
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: var(--spacing-md);
             position: relative;
@@ -106,365 +115,579 @@
         }
 
         /* ========================================
-           HERO SECTION - Hand-drawn Style
+           HERO SECTION
         ======================================== */
         .hero {
-            text-align: center;
-            padding: var(--spacing-xl) var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
-            animation: fadeInDown 0.8s ease;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .badge {
-            display: inline-block;
-            background: var(--color-illegal);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: var(--spacing-md);
-            box-shadow: var(--shadow-sm);
-            transform: rotate(-2deg);
-            animation: wiggle 2s ease-in-out infinite;
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-2deg); }
-            50% { transform: rotate(2deg); }
-        }
-
-        .hero-title {
-            font-family: 'Gaegu', cursive;
-            font-size: clamp(32px, 8vw, 56px);
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--color-text-dark);
-            margin-bottom: var(--spacing-sm);
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Hand-drawn underline */
-        .hero-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10'%3E%3Cpath d='M0,5 Q25,2 50,5 T100,5 T150,5 T200,5' stroke='%23FFB84D' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x;
-            background-size: 200px 10px;
-        }
-
-        .hero-subtitle {
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: clamp(20px, 5vw, 28px);
-            color: var(--color-text-mid);
-            margin-top: var(--spacing-md);
-            line-height: 1.5;
-        }
-
-        .hero-meta {
-            margin-top: var(--spacing-md);
-            font-size: 14px;
-            color: var(--color-text-light);
-            font-weight: 500;
-        }
-
-        /* ========================================
-           TIMELINE - Story Flow
-        ======================================== */
-        .timeline {
-            position: relative;
-            margin: var(--spacing-xl) 0;
-        }
-
-        /* Hand-drawn timeline line */
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom,
-                var(--color-primary) 0%,
-                var(--color-illegal) 50%,
-                var(--color-warning) 100%);
-            border-radius: 2px;
-            opacity: 0.3;
-        }
-
-        /* ========================================
-           CARD - Main Content Blocks
-        ======================================== */
-        .card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-lg) var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
-            box-shadow: var(--shadow-md);
-            position: relative;
-            border: 3px solid transparent;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            opacity: 0;
-            transform: translateY(50px);
-            cursor: pointer;
-        }
-
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card:hover {
-            transform: translateY(-8px) rotate(-1deg);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card-pink {
-            background: linear-gradient(135deg, white 0%, var(--color-pink) 100%);
-            border-color: var(--color-illegal);
-        }
-
-        .card-mint {
-            background: linear-gradient(135deg, white 0%, var(--color-mint) 100%);
-            border-color: var(--color-legal);
-        }
-
-        .card-lavender {
-            background: linear-gradient(135deg, white 0%, var(--color-lavender) 100%);
-            border-color: var(--color-primary);
-        }
-
-        .card-peach {
-            background: linear-gradient(135deg, white 0%, var(--color-peach) 100%);
-            border-color: var(--color-warning);
-        }
-
-        /* Card Number Badge */
-        .card-number {
-            position: absolute;
-            left: -40px;
-            top: var(--spacing-md);
-            width: 60px;
-            height: 60px;
-            background: white;
-            border: 4px solid currentColor;
-            border-radius: 50%;
+            min-height: 70vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            font-family: 'Gaegu', cursive;
-            font-size: 28px;
-            font-weight: 700;
-            box-shadow: var(--shadow-sm);
-            transform: rotate(-5deg);
-        }
-
-        .card-pink .card-number {
-            color: var(--color-illegal);
-        }
-
-        .card-mint .card-number {
-            color: var(--color-legal);
-        }
-
-        .card-lavender .card-number {
-            color: var(--color-primary);
-        }
-
-        .card-peach .card-number {
-            color: var(--color-warning);
-        }
-
-        /* Icon */
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: var(--spacing-md);
-            filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.1));
-        }
-
-        /* Card Title */
-        .card-title {
-            font-family: 'Gaegu', cursive;
-            font-size: clamp(24px, 5vw, 32px);
-            font-weight: 700;
-            margin-bottom: var(--spacing-sm);
-            color: var(--color-text-dark);
-            line-height: 1.3;
-        }
-
-        /* Card Content */
-        .card-content {
-            font-size: clamp(15px, 3vw, 17px);
-            line-height: 1.8;
-            color: var(--color-text-mid);
-        }
-
-        .card-content strong {
-            color: var(--color-text-dark);
-            font-weight: 700;
-        }
-
-        .card-content em {
-            background: linear-gradient(transparent 60%, var(--color-warning) 60%);
-            font-style: normal;
-            padding: 2px 4px;
-        }
-
-        /* List in Card */
-        .card-list {
-            list-style: none;
-            margin-top: var(--spacing-sm);
-            padding-left: 0;
-        }
-
-        .card-list li {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .card-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: currentColor;
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        /* ========================================
-           QUOTE BOX - Emphasis
-        ======================================== */
-        .quote-box {
-            background: var(--color-lemon);
-            border-left: 6px solid var(--color-warning);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-lg) var(--spacing-md);
-            margin: var(--spacing-xl) 0;
-            position: relative;
-            box-shadow: var(--shadow-sm);
-            transform: rotate(-1deg);
-            opacity: 0;
-            transition: all 0.6s ease;
-        }
-
-        .quote-box.visible {
-            opacity: 1;
-            transform: rotate(0deg);
-        }
-
-        .quote-box::before {
-            content: '"';
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-family: Georgia, serif;
-            font-size: 80px;
-            color: rgba(0, 0, 0, 0.05);
-            line-height: 1;
-        }
-
-        .quote-text {
-            font-family: 'Gaegu', cursive;
-            font-size: clamp(20px, 4vw, 28px);
-            font-weight: 700;
-            line-height: 1.5;
-            color: var(--color-text-dark);
-            position: relative;
-            z-index: 1;
-        }
-
-        .quote-source {
-            margin-top: var(--spacing-sm);
-            font-size: 14px;
-            color: var(--color-text-light);
-            text-align: right;
-            font-weight: 600;
-        }
-
-        /* ========================================
-           VERDICT BOX - Final Decision
-        ======================================== */
-        .verdict-box {
-            background: linear-gradient(135deg, var(--color-illegal) 0%, #FF8787 100%);
-            color: white;
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-xl) var(--spacing-md);
+            align-items: center;
             text-align: center;
-            margin: var(--spacing-xl) 0;
-            box-shadow: var(--shadow-lg);
+            padding: var(--spacing-xl) var(--spacing-md);
             position: relative;
+            background: linear-gradient(135deg,
+                rgba(30, 64, 175, 0.05) 0%,
+                rgba(220, 38, 38, 0.05) 100%);
+            border-radius: 32px;
+            margin-bottom: var(--spacing-xl);
             overflow: hidden;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: fadeIn 0.8s ease;
         }
 
-        .verdict-box.visible {
-            opacity: 1;
-            transform: scale(1);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .verdict-box::before {
+        .hero::before {
             content: '';
             position: absolute;
             top: -50%;
-            right: -50%;
+            left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 10s linear infinite;
+            background: radial-gradient(
+                circle,
+                rgba(30, 64, 175, 0.1) 0%,
+                transparent 50%
+            );
+            animation: rotate 20s linear infinite;
         }
 
         @keyframes rotate {
             100% { transform: rotate(360deg); }
         }
 
-        .verdict-icon {
-            font-size: 60px;
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-danger);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-md);
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(36px, 7vw, 64px);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-danger));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 4vw, 24px);
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin: 0 auto var(--spacing-lg);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .meta-icon {
+            font-size: 20px;
+        }
+
+        /* ========================================
+           TIMELINE SECTION
+        ======================================== */
+        .timeline {
+            position: relative;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom,
+                var(--color-danger) 0%,
+                var(--color-warning) 50%,
+                var(--color-success) 100%);
+            border-radius: 2px;
+        }
+
+        /* ========================================
+           SECTION
+        ======================================== */
+        .section {
+            margin-bottom: var(--spacing-xl);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s var(--transition);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Noto Serif KR', serif;
+            font-size: 32px;
+            font-weight: 900;
+            box-shadow: var(--shadow-lg);
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 900;
+            line-height: 1.3;
+            color: var(--color-text);
+        }
+
+        /* ========================================
+           ATTACK DEFENSE GRID
+        ======================================== */
+        .attack-defense {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .attack-card,
+        .defense-card {
+            background: var(--color-bg-card);
+            border-radius: 20px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            border: 3px solid transparent;
+            transition: all 0.4s var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .attack-card {
+            border-color: var(--color-danger);
+            background: linear-gradient(135deg,
+                rgba(220, 38, 38, 0.05) 0%,
+                white 100%);
+        }
+
+        .defense-card {
+            border-color: var(--color-success);
+            background: linear-gradient(135deg,
+                rgba(22, 163, 74, 0.05) 0%,
+                white 100%);
+        }
+
+        .attack-card:hover,
+        .defense-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .attack-card::before {
+            content: '⚔️';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 48px;
+            opacity: 0.1;
+        }
+
+        .defense-card::before {
+            content: '🛡️';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 48px;
+            opacity: 0.1;
+        }
+
+        .card-icon {
+            font-size: 48px;
             margin-bottom: var(--spacing-sm);
+            display: block;
+        }
+
+        .card-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text);
+        }
+
+        .card-content {
+            font-size: clamp(15px, 3vw, 17px);
+            line-height: 1.8;
+            color: var(--color-text-muted);
+        }
+
+        .card-content strong {
+            color: var(--color-text);
+            font-weight: 700;
+        }
+
+        /* ========================================
+           STRATEGY BOXES
+        ======================================== */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .strategy-box {
+            background: var(--color-bg-card);
+            border-radius: 16px;
+            padding: var(--spacing-lg) var(--spacing-md);
+            border-left: 4px solid var(--color-primary);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s var(--transition);
+        }
+
+        .strategy-box:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .strategy-label {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .strategy-title {
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 800;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text);
+        }
+
+        .strategy-content {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--color-text-muted);
+        }
+
+        .strategy-content ul {
+            list-style: none;
+            margin-top: var(--spacing-sm);
+        }
+
+        .strategy-content li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 8px;
+        }
+
+        .strategy-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        /* ========================================
+           ROLE TABLE
+        ======================================== */
+        .role-table {
+            background: var(--color-bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .role-header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: white;
+            padding: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .role-header h3 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .role-header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .role-row {
+            display: grid;
+            grid-template-columns: 200px 1fr 1fr;
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border);
+            align-items: start;
+            transition: background 0.3s ease;
+        }
+
+        .role-row:last-child {
+            border-bottom: none;
+        }
+
+        .role-row:hover {
+            background: rgba(30, 64, 175, 0.02);
+        }
+
+        .role-name {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .role-icon {
+            font-size: 24px;
+        }
+
+        .role-duties {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--color-text-muted);
+        }
+
+        .role-duties ol {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .role-duties li {
+            margin-bottom: 6px;
+        }
+
+        .role-effect {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--color-text);
+            background: rgba(22, 163, 74, 0.05);
+            padding: var(--spacing-sm);
+            border-radius: 12px;
+            border-left: 3px solid var(--color-success);
+        }
+
+        /* ========================================
+           PRICING SECTION
+        ======================================== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .pricing-card {
+            background: var(--color-bg-card);
+            border-radius: 20px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            border: 2px solid var(--color-border);
+            transition: all 0.4s var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.05);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-badge {
+            background: var(--color-warning);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .pricing-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text);
+        }
+
+        .pricing-amount {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--color-primary);
+            margin: var(--spacing-md) 0;
+        }
+
+        .pricing-unit {
+            font-size: 16px;
+            color: var(--color-text-muted);
+            font-weight: 600;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-top: var(--spacing-md);
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 15px;
+            display: flex;
+            align-items: start;
+            gap: 8px;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features .check {
+            color: var(--color-success);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        /* ========================================
+           CTA SECTION
+        ======================================== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            border-radius: 32px;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle,
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 50%
+            );
+            animation: rotate 15s linear infinite;
+        }
+
+        .cta-icon {
+            font-size: 64px;
+            margin-bottom: var(--spacing-md);
             animation: bounce 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
         }
 
-        .verdict-title {
-            font-family: 'Gaegu', cursive;
-            font-size: clamp(28px, 6vw, 40px);
-            font-weight: 700;
-            margin-bottom: var(--spacing-sm);
+        .cta-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 900;
+            margin-bottom: var(--spacing-md);
             position: relative;
             z-index: 1;
         }
 
-        .verdict-text {
-            font-size: clamp(16px, 3vw, 18px);
+        .cta-text {
+            font-size: clamp(16px, 3vw, 20px);
             line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
             position: relative;
             z-index: 1;
-            max-width: 600px;
-            margin: 0 auto;
+            opacity: 0.95;
         }
 
         /* ========================================
@@ -473,93 +696,115 @@
         .footer {
             text-align: center;
             padding: var(--spacing-xl) var(--spacing-md);
+            border-top: 2px solid var(--color-border);
             margin-top: var(--spacing-xl);
-            border-top: 3px dashed var(--color-text-light);
-            opacity: 0.7;
+        }
+
+        .footer-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text);
         }
 
         .footer-text {
-            font-size: 14px;
-            color: var(--color-text-light);
+            font-size: 15px;
+            color: var(--color-text-muted);
             line-height: 1.6;
         }
 
-        .footer-link {
-            color: var(--color-primary);
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 2px solid var(--color-primary);
-            transition: all 0.3s ease;
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-md);
         }
 
-        .footer-link:hover {
-            color: var(--color-illegal);
-            border-color: var(--color-illegal);
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-bg-card);
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            font-size: 14px;
+            color: var(--color-text);
         }
 
         /* ========================================
-           EXPANDABLE DETAIL
+           QUOTE BOX
         ======================================== */
-        .card-detail {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-            margin-top: var(--spacing-md);
-            padding-top: 0;
-            border-top: 2px dashed transparent;
+        .quote-box {
+            background: linear-gradient(135deg,
+                rgba(245, 158, 11, 0.1) 0%,
+                rgba(251, 191, 36, 0.1) 100%);
+            border-left: 4px solid var(--color-warning);
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            position: relative;
         }
 
-        .card.expanded .card-detail {
-            max-height: 1000px;
-            padding-top: var(--spacing-md);
-            border-top-color: currentColor;
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: Georgia, serif;
+            font-size: 80px;
+            color: rgba(245, 158, 11, 0.1);
+            line-height: 1;
         }
 
-        .expand-hint {
-            text-align: center;
-            margin-top: var(--spacing-sm);
-            font-size: 13px;
-            color: var(--color-text-light);
-            font-style: italic;
+        .quote-text {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(18px, 4vw, 24px);
+            font-weight: 700;
+            line-height: 1.6;
+            color: var(--color-text);
+            position: relative;
+            z-index: 1;
         }
 
         /* ========================================
            RESPONSIVE
         ======================================== */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
+            .role-row {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-sm);
+            }
+
             .timeline::before {
-                left: 15px;
+                left: 20px;
             }
 
-            .card-number {
-                left: -25px;
-                width: 50px;
-                height: 50px;
-                font-size: 22px;
-            }
-
-            .card {
-                margin-left: 30px;
-            }
-
-            .hero {
-                padding: var(--spacing-lg) var(--spacing-sm);
-            }
-
-            .quote-box {
-                padding: var(--spacing-md) var(--spacing-sm);
+            .section-number {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
             }
         }
 
-        @media (max-width: 480px) {
-            .card-icon {
-                width: 60px;
-                height: 60px;
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 60vh;
+                padding: var(--spacing-lg) var(--spacing-md);
             }
 
-            .badge {
-                font-size: 12px;
-                padding: 6px 16px;
+            .attack-defense {
+                grid-template-columns: 1fr;
+            }
+
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -576,8 +821,8 @@
             }
         }
 
-        /* Focus styles */
-        .card:focus {
+        a:focus,
+        button:focus {
             outline: 3px solid var(--color-primary);
             outline-offset: 4px;
         }
@@ -585,6 +830,18 @@
         /* ========================================
            UTILITY CLASSES
         ======================================== */
+        .text-danger {
+            color: var(--color-danger);
+        }
+
+        .text-success {
+            color: var(--color-success);
+        }
+
+        .text-warning {
+            color: var(--color-warning);
+        }
+
         .text-center {
             text-align: center;
         }
@@ -602,310 +859,339 @@
     <div class="container">
         <!-- Hero Section -->
         <header class="hero">
-            <div class="badge">⚖️ 대법원 판례 분석</div>
-            <h1 class="hero-title">반환하는 척,<br>다시 압수?</h1>
+            <div class="badge">
+                <span>⚠️</span>
+                긴급 전략 제안
+            </div>
+
+            <h1 class="hero-title">
+                양동작전으로<br>
+                계약을 지켜라
+            </h1>
+
             <p class="hero-subtitle">
-                적법절차를 잠탈한 수사기관의 꼼수,<br>
-                대법원이 제동을 걸다
+                KC 인증 분쟁, 단기 방어와 중기 안정화를 동시에 실행하는<br>
+                전략적 대응 로드맵
             </p>
-            <p class="hero-meta">대법원 2024. 10. 8. 선고 2024도10062 판결</p>
+
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">📋</span>
+                    <span>클라이언트: 니브스코리아</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">📅</span>
+                    <span>마감: 11월 12일 (수)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">💰</span>
+                    <span>계약 규모: 약 15억 원</span>
+                </div>
+            </div>
         </header>
 
-        <!-- Timeline Cards -->
-        <section class="timeline">
-            <!-- Card 1: 사건의 발단 -->
-            <article class="card card-pink" tabindex="0" role="button" aria-label="카드 1: 사건의 발단. 클릭하여 상세보기">
-                <div class="card-number">1</div>
+        <!-- Section 1: 분쟁의 핵심 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">분쟁의 핵심:<br>이중 공격의 정확한 진단</h2>
+            </div>
 
-                <svg class="card-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Hand-drawn phone icon -->
-                    <rect x="25" y="10" width="50" height="80" rx="8" fill="#FFE5E5" stroke="#FF6B6B" stroke-width="3" stroke-linejoin="round"/>
-                    <rect x="30" y="20" width="40" height="50" fill="white" stroke="#FF6B6B" stroke-width="2"/>
-                    <circle cx="50" cy="80" r="5" fill="#FF6B6B"/>
-                    <line x1="40" y1="15" x2="60" y2="15" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
-                    <!-- X mark -->
-                    <line x1="70" y1="30" x2="85" y2="45" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
-                    <line x1="85" y1="30" x2="70" y2="45" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
-                </svg>
+            <p style="font-size: 18px; line-height: 1.8; color: var(--color-text-muted); margin-bottom: var(--spacing-lg);">
+                이번 분쟁은 단순 기술 논란을 넘어 <strong style="color: var(--color-danger);">'제품의 적격성'</strong>과
+                <strong style="color: var(--color-danger);">'인증 절차의 정당성'</strong>이라는
+                두 개의 취약한 고리를 동시에 공격받는 양상입니다.
+            </p>
 
-                <h2 class="card-title">🚨 사건의 발단: 영장 없는 압수</h2>
+            <div class="attack-defense">
+                <!-- Attack 1 -->
+                <article class="attack-card">
+                    <span class="card-icon">🎯</span>
+                    <h3 class="card-title">공격 1: 제품 정체성 의혹</h3>
+                    <div class="card-content">
+                        <p>
+                            <strong>경쟁사의 주장:</strong> 니브스코리아의 KC인증 모델(OFR/NK Radar-200)이
+                            실제로는 <span style="background: linear-gradient(transparent 60%, #fecaca 60%); padding: 2px 4px;">초음파 수위센서를 포함</span>하고 있어,
+                            레이더 통합 인증이라는 필수 규격에 미달한다.
+                        </p>
+                        <blockquote style="margin: 16px 0; padding: 12px 16px; border-left: 3px solid var(--color-danger); background: rgba(220, 38, 38, 0.05); font-style: italic;">
+                            "발주처가 요구한 최신 소재(레이더)로 만든 일체형 정장인데,
+                            당신이 보여준 라벨(KC 인증서)엔 구식 소재(초음파)가 섞여 있다!"
+                        </blockquote>
+                    </div>
+                </article>
 
-                <div class="card-content">
-                    <p>
-                        <strong>2020년 10월 6일</strong>, 수사기관이 피고인의 영업소에서
-                        <em>영장 없이</em> 휴대전화를 압수했습니다.
-                        형사소송법 제216조 제3항(긴급압수)을 근거로 했지만...
-                    </p>
-                    <ul class="card-list">
-                        <li>장소: 서울 소재 피고인 영업소</li>
-                        <li>압수물: 피고인의 휴대전화</li>
-                        <li>근거: 형소법 제216조 제3항 (긴급압수)</li>
-                    </ul>
-                </div>
+                <!-- Attack 2 -->
+                <article class="attack-card">
+                    <span class="card-icon">📄</span>
+                    <h3 class="card-title">공격 2: 인증 절차상 약점</h3>
+                    <div class="card-content">
+                        <p>
+                            <strong>내부 약점:</strong> B 모델이 기존 A 모델의 파생 모델로 인정받는 과정에서
+                            <span style="background: linear-gradient(transparent 60%, #fecaca 60%); padding: 2px 4px;">별도의 실물 시험을 거치지 않았고</span>,
+                            인증 기관에 제출된 서류와 실제 B 모델 간 차이 존재.
+                        </p>
+                        <p style="margin-top: 12px;">
+                            <strong class="text-danger">경쟁사의 요지:</strong>
+                            "B 모델은 A 모델의 단순 파생이 아니므로 새로운 기본 모델로 재인증 받았어야 했다.
+                            서류를 통해 부당하게 인증서를 획득했으니, 낙찰은 무효다."
+                        </p>
+                    </div>
+                </article>
+            </div>
 
-                <div class="card-detail">
-                    <p style="font-size: 14px; color: var(--color-text-light);">
-                        <strong>💡 알아두기:</strong> 형소법 제216조 제3항은 긴급한 경우 영장 없이 압수할 수 있지만,
-                        <strong>지체 없이 영장을 청구</strong>해야 하며, 영장이 기각되면 <strong>즉시 반환</strong>해야 합니다.
-                    </p>
-                </div>
-
-                <p class="expand-hint">👆 클릭하면 더 자세한 내용을 볼 수 있어요</p>
-            </article>
-
-            <!-- Card 2: 영장 기각 -->
-            <article class="card card-lavender" tabindex="0" role="button" aria-label="카드 2: 영장 기각. 클릭하여 상세보기">
-                <div class="card-number">2</div>
-
-                <svg class="card-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Hand-drawn document icon -->
-                    <rect x="20" y="15" width="60" height="75" rx="5" fill="#E8E4F3" stroke="#5F72BE" stroke-width="3"/>
-                    <line x1="30" y1="30" x2="70" y2="30" stroke="#5F72BE" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="30" y1="40" x2="70" y2="40" stroke="#5F72BE" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="30" y1="50" x2="60" y2="50" stroke="#5F72BE" stroke-width="2" stroke-linecap="round"/>
-                    <!-- Reject stamp -->
-                    <circle cx="70" cy="65" r="15" fill="none" stroke="#FF6B6B" stroke-width="3"/>
-                    <text x="70" y="72" text-anchor="middle" fill="#FF6B6B" font-size="12" font-weight="bold">기각</text>
-                </svg>
-
-                <h2 class="card-title">❌ 법원의 결정: 영장 기각!</h2>
-
-                <div class="card-content">
-                    <p>
-                        <strong>2020년 10월 8일</strong>, 법원은 수사기관이 청구한 사후 압수영장을
-                        <strong style="color: var(--color-illegal);">기각</strong>했습니다.
-                    </p>
-                    <ul class="card-list">
-                        <li>이유: 압수조서 및 압수목록 미작성</li>
-                        <li>결과: 압수영장 발부 거부</li>
-                        <li>원칙: 즉시 반환해야 함</li>
-                    </ul>
-                </div>
-
-                <div class="card-detail">
-                    <p style="font-size: 14px; color: var(--color-text-light);">
-                        법원이 영장을 기각했다는 것은 애초의 압수가 <strong>위법</strong>했다는 의미입니다.
-                        이 시점에서 수사기관은 휴대전화를 <em>즉시</em> 반환했어야 합니다.
-                    </p>
-                </div>
-
-                <p class="expand-hint">👆 탭하면 법적 의미를 확인할 수 있어요</p>
-            </article>
-
-            <!-- Card 3: 수사기관의 꼼수 -->
-            <article class="card card-peach" tabindex="0" role="button" aria-label="카드 3: 수사기관의 꼼수. 클릭하여 상세보기">
-                <div class="card-number">3</div>
-
-                <svg class="card-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Hand-drawn loop arrow -->
-                    <path d="M 30 50 Q 30 20, 50 20 T 70 50" fill="none" stroke="#FFB84D" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M 70 50 Q 70 80, 50 80 T 30 50" fill="none" stroke="#FFB84D" stroke-width="4" stroke-linecap="round"/>
-                    <polygon points="25,45 30,50 25,55" fill="#FFB84D"/>
-                    <polygon points="75,45 70,50 75,55" fill="#FFB84D"/>
-                    <!-- Warning sign in center -->
-                    <circle cx="50" cy="50" r="15" fill="#FFF9E6" stroke="#FFB84D" stroke-width="2"/>
-                    <text x="50" y="56" text-anchor="middle" fill="#FFB84D" font-size="20" font-weight="bold">!</text>
-                </svg>
-
-                <h2 class="card-title">🎭 수사기관의 꼼수</h2>
-
-                <div class="card-content">
-                    <p>
-                        영장이 기각되었는데도 수사기관은 휴대전화를 <strong style="color: var(--color-illegal);">반환하지 않았습니다</strong>.
-                        그리고는 이렇게 말했습니다:
-                    </p>
-                    <blockquote style="border-left: 3px solid var(--color-warning); padding-left: 15px; margin: 15px 0; font-style: italic; color: var(--color-text-mid);">
-                        "반환받으러 오세요. 근데 받아가도 <strong>다시 압수할 거예요</strong>."
-                    </blockquote>
-                    <ul class="card-list">
-                        <li>피고인의 우편반환 요청 거절</li>
-                        <li>직접 출석 요구</li>
-                        <li>피고인 불출석 (2020. 10. 12.)</li>
-                        <li><strong>그 사이</strong> 새로운 압수영장 발부 (2020. 10. 13.)</li>
-                    </ul>
-                </div>
-
-                <div class="card-detail">
-                    <p style="font-size: 14px; color: var(--color-text-light); background: rgba(255, 184, 77, 0.1); padding: 12px; border-radius: 8px;">
-                        <strong>⚠️ 문제의 핵심:</strong> 수사기관이 미반환 상태를 이용해
-                        새로운 영장을 발부받은 뒤, 형식적으로 반환하고 즉시 재압수하려 한 것입니다.
-                        이는 <em>적법절차의 잠탈</em>입니다.
-                    </p>
-                </div>
-
-                <p class="expand-hint">👆 클릭해서 문제점을 확인하세요</p>
-            </article>
-
-            <!-- Card 4: 형식적 반환 후 즉시 재압수 -->
-            <article class="card card-pink" tabindex="0" role="button" aria-label="카드 4: 형식적 반환 후 재압수. 클릭하여 상세보기">
-                <div class="card-number">4</div>
-
-                <svg class="card-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Two hands passing phone -->
-                    <ellipse cx="30" cy="60" rx="15" ry="12" fill="#FFE4D6" stroke="#FF6B6B" stroke-width="2"/>
-                    <ellipse cx="70" cy="60" rx="15" ry="12" fill="#FFE4D6" stroke="#FF6B6B" stroke-width="2"/>
-                    <rect x="40" y="35" width="20" height="35" rx="3" fill="#FFE5E5" stroke="#FF6B6B" stroke-width="2"/>
-                    <!-- Arrow showing immediate seizure -->
-                    <path d="M 60 50 L 75 50" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
-                    <polygon points="75,47 80,50 75,53" fill="#FF6B6B"/>
-                    <text x="68" y="44" fill="#FF6B6B" font-size="10" font-weight="bold">즉시</text>
-                </svg>
-
-                <h2 class="card-title">🔄 형식적 반환, 그리고...</h2>
-
-                <div class="card-content">
-                    <p>
-                        <strong>2020년 10월 19일</strong>, 수사기관은 피고인을 방문하여:
-                    </p>
-                    <ol style="list-style: decimal; padding-left: 25px; margin: 15px 0;">
-                        <li style="margin-bottom: 8px;">휴대전화를 <em>잠깐</em> 건네주고 👉</li>
-                        <li style="margin-bottom: 8px;">곧바로 새 압수영장으로 압수 📱</li>
-                        <li style="margin-bottom: 8px;">전자정보 복제·출력 💾</li>
-                        <li>증거로 제출 📄</li>
-                    </ol>
-                    <p style="margin-top: 15px; font-weight: 700; color: var(--color-illegal);">
-                        반환과 재압수 사이 시간 간격: <span style="font-size: 24px;">0초</span>
-                    </p>
-                </div>
-
-                <div class="card-detail">
-                    <p style="font-size: 14px; color: var(--color-text-light);">
-                        이건 마치 빌려준 물건을 돌려받자마자 다시 빼앗는 것과 같습니다.
-                        법적으로는 "반환"했다고 주장할 수 있지만,
-                        실질적으로는 <strong>계속 점유</strong>한 것이나 다름없습니다.
-                    </p>
-                </div>
-
-                <p class="expand-hint">👆 이게 왜 문제인지 알아보세요</p>
-            </article>
+            <div class="quote-box">
+                <p class="quote-text">
+                    이제부터는 법적 방어 논리와 기술적 입증 자료를 결합하여<br>
+                    발주처의 의구심을 완전히 해소하는 전략을 펼쳐야 합니다.
+                </p>
+            </div>
         </section>
 
-        <!-- Quote Box - Legal Principle -->
-        <aside class="quote-box">
-            <p class="quote-text">
-                즉시 반환이란<br>
-                "불필요하게 지체 없이<br>
-                적극적으로 압수 이전의 상태로<br>
-                회복시켜주는 것"
-            </p>
-            <p class="quote-source">— 형사소송법 제216조 제3항 해석</p>
-        </aside>
+        <!-- Section 2: 양동작전 전략 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">중점 대응 전략:<br>양동작전 (단기+중기)</h2>
+            </div>
 
-        <!-- Card 5: 대법원의 판단 -->
-        <section class="timeline mt-xl">
-            <article class="card card-mint" tabindex="0" role="button" aria-label="카드 5: 대법원의 판단. 클릭하여 상세보기">
-                <div class="card-number">5</div>
-
-                <svg class="card-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Hand-drawn scale of justice -->
-                    <rect x="45" y="70" width="10" height="25" fill="#51CF66" stroke="#2F9E44" stroke-width="2"/>
-                    <line x1="50" y1="30" x2="50" y2="70" stroke="#2F9E44" stroke-width="3"/>
-                    <line x1="20" y1="30" x2="80" y2="30" stroke="#2F9E44" stroke-width="3"/>
-                    <!-- Left pan -->
-                    <path d="M 20 30 L 15 40 L 25 40 Z" fill="#E0F7F4" stroke="#2F9E44" stroke-width="2"/>
-                    <!-- Right pan -->
-                    <path d="M 80 30 L 75 40 L 85 40 Z" fill="#E0F7F4" stroke="#2F9E44" stroke-width="2"/>
-                    <!-- Check mark -->
-                    <path d="M 40 50 L 45 55 L 60 40" stroke="#51CF66" stroke-width="4" stroke-linecap="round" fill="none"/>
-                </svg>
-
-                <h2 class="card-title">⚖️ 대법원의 판단</h2>
-
-                <div class="card-content">
-                    <p>
-                        대법원은 이러한 수사기관의 행위를 <strong style="color: var(--color-illegal);">위법</strong>으로 판단했습니다.
-                    </p>
-
-                    <div style="background: rgba(81, 207, 102, 0.1); padding: 15px; border-radius: 12px; margin: 15px 0; border-left: 4px solid var(--color-legal);">
-                        <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--color-legal);">
-                            <strong>판결 요지</strong>
-                        </h3>
-                        <ul class="card-list" style="color: var(--color-text-dark);">
-                            <li><strong>적법절차</strong>와 <strong>영장주의</strong>를 잠탈하는 행위</li>
-                            <li>형식적 반환으로 위법성이 <em>희석·단절되지 않음</em></li>
-                            <li>휴대전화 및 증거들은 <strong>위법수집증거</strong></li>
-                            <li>결론: <span style="color: var(--color-illegal); font-size: 20px;">증거능력 없음</span></li>
+            <div class="strategy-grid">
+                <!-- 단기 전략 -->
+                <div class="strategy-box" style="border-left-color: var(--color-danger);">
+                    <span class="strategy-label" style="background: var(--color-danger);">단기 전략</span>
+                    <h3 class="strategy-title">🛡️ 수요일 답변서 완벽 보강</h3>
+                    <div class="strategy-content">
+                        <p><strong>목표:</strong> KRCC가 계약 보류를 해제하고 계약을 진행할 수 있는 확고한 명분 제공</p>
+                        <ul>
+                            <li><strong>기술적 통합 정당성 입증:</strong> NK Radar-200은 수위 80GHz, 유속 24GHz의 혼합대역 레이더 기반이며 완벽히 규격 충족</li>
+                            <li><strong>영업 비밀 보호 하의 검증 제안:</strong> NDA 전제로 발주처에 시험 성적서 관련 항목 일부 제출/열람</li>
+                            <li><strong>세부 규격 반박:</strong> 유속 범위, 각도 조정 등 경쟁사 지적 사항에 대한 상세 기술 근거 제시</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="card-detail">
-                    <p style="font-size: 15px; line-height: 1.8; color: var(--color-text-mid);">
-                        <strong>🔍 왜 이런 판단을 내렸을까?</strong><br><br>
-
-                        수사기관이 영장 기각 후 즉시 반환하지 않은 것은 이미 위법입니다.
-                        그런데 그 위법한 상태를 이용해 새로운 영장을 발부받고,
-                        "형식적으로" 반환한 척하면서 즉시 재압수한 것은
-                        <strong>법의 취지를 완전히 무시한 것</strong>입니다.<br><br>
-
-                        만약 이런 방법을 허용한다면, 수사기관은 언제든지
-                        "반환 후 즉시 재압수"라는 편법으로 영장주의를 우회할 수 있게 됩니다.
-                        대법원은 이러한 <em>적법절차 잠탈</em>에 명확한 선을 그은 것입니다.
-                    </p>
-                </div>
-
-                <p class="expand-hint">👆 판결의 의미를 더 깊이 이해해보세요</p>
-            </article>
-        </section>
-
-        <!-- Verdict Box -->
-        <section class="verdict-box">
-            <div class="verdict-icon">🚫</div>
-            <h2 class="verdict-title">위법수집증거 배제!</h2>
-            <p class="verdict-text">
-                아무리 중요한 증거라도,<br>
-                <strong>위법한 절차</strong>로 수집되었다면<br>
-                법정에서 사용할 수 없습니다.<br><br>
-                이것이 바로 <em>적법절차의 원칙</em>이자<br>
-                <strong>법치주의의 근간</strong>입니다.
-            </p>
-        </section>
-
-        <!-- Key Takeaways -->
-        <section class="timeline mt-xl">
-            <article class="card card-lavender text-center">
-                <h2 class="card-title" style="margin-bottom: 20px;">💡 핵심 포인트 정리</h2>
-
-                <div class="card-content" style="text-align: left;">
-                    <div style="display: grid; gap: 15px;">
-                        <div style="background: white; padding: 15px; border-radius: 12px; border-left: 4px solid var(--color-illegal);">
-                            <strong style="color: var(--color-illegal);">1️⃣ 즉시 반환 의무</strong>
-                            <p style="margin-top: 8px; font-size: 15px;">
-                                영장이 기각되면 수사기관은 압수물을 <em>즉시</em> 반환해야 합니다.
-                                "즉시"란 불필요한 지체 없이 적극적으로 원상회복시키는 것을 의미합니다.
-                            </p>
-                        </div>
-
-                        <div style="background: white; padding: 15px; border-radius: 12px; border-left: 4px solid var(--color-warning);">
-                            <strong style="color: var(--color-warning);">2️⃣ 형식적 반환 무효</strong>
-                            <p style="margin-top: 8px; font-size: 15px;">
-                                반환하는 척하면서 즉시 재압수하는 것은
-                                적법절차를 잠탈하는 행위로 허용되지 않습니다.
-                            </p>
-                        </div>
-
-                        <div style="background: white; padding: 15px; border-radius: 12px; border-left: 4px solid var(--color-legal);">
-                            <strong style="color: var(--color-legal);">3️⃣ 위법성 단절 불가</strong>
-                            <p style="margin-top: 8px; font-size: 15px;">
-                                새로운 영장을 발부받았다고 해서 이전의 위법성이
-                                사라지는 것은 아닙니다. 위법수집증거는 증거능력이 없습니다.
-                            </p>
-                        </div>
+                <!-- 중기 전략 -->
+                <div class="strategy-box" style="border-left-color: var(--color-success);">
+                    <span class="strategy-label" style="background: var(--color-success);">중기 전략</span>
+                    <h3 class="strategy-title">⚔️ 파생 모델 리스크 근본 제거</h3>
+                    <div class="strategy-content">
+                        <p><strong>목표:</strong> 파생 모델 논란 자체를 제거하여 발주처의 '찝찝함' 해소 및 계약 정상화</p>
+                        <ul>
+                            <li><strong>독립된 신규 KC 인증 진행:</strong> B 모델을 독립적인 기본 모델로 KC 인증 새롭게 신청 중임을 공식 통지</li>
+                            <li><strong>적극적 협조 강조:</strong> "당장 계약 진행엔 문제없지만, 논란의 불씨를 저희 스스로 완전히 끄겠습니다"</li>
+                            <li><strong>신뢰 회복 & 계약 정당성 확보</strong></li>
+                        </ul>
                     </div>
                 </div>
-            </article>
+            </div>
+
+            <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(22, 163, 74, 0.05)); padding: var(--spacing-lg); border-radius: 20px; margin-top: var(--spacing-lg); border: 2px dashed var(--color-primary);">
+                <h4 style="font-size: 20px; font-weight: 800; margin-bottom: 12px; color: var(--color-primary); display: flex; align-items: center; gap: 8px;">
+                    <span>🎯</span> 양동작전의 핵심
+                </h4>
+                <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted);">
+                    단기적으로 <strong style="color: var(--color-danger);">방어선을 구축</strong>하면서,
+                    동시에 중기적으로 <strong style="color: var(--color-success);">리스크 요인을 근본적으로 제거</strong>합니다.
+                    이는 마치 성을 지키면서 동시에 적의 보급로를 차단하는 전략과 같습니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: 변호사 역할 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">조우성 변호사의<br>3대 핵심 역할</h2>
+            </div>
+
+            <div class="role-table">
+                <div class="role-header">
+                    <h3>30년 경력 전문성을 바탕으로 한 전방위 지원</h3>
+                    <p>법률 방어 + 전략 컨설팅 + 협의 대리</p>
+                </div>
+
+                <!-- Role 1 -->
+                <div class="role-row">
+                    <div class="role-name">
+                        <span class="role-icon">🛡️</span>
+                        법률 방패
+                    </div>
+                    <div class="role-duties">
+                        <strong>주요 업무:</strong>
+                        <ol>
+                            <li>답변서 논리 강화 및 법률 검토</li>
+                            <li>영업 비밀 보호 전략 실행 (정보공개법 등 근거 제시)</li>
+                            <li>KC 시험 성적서 공개 범위와 방법 법률 자문</li>
+                        </ol>
+                    </div>
+                    <div class="role-effect">
+                        <strong class="text-success">기대 효과:</strong><br>
+                        경쟁사의 공격을 법적·기술적으로 무력화하고,
+                        발주처에게 계약 진행의 법률적 확신을 제공합니다.
+                    </div>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="role-row">
+                    <div class="role-name">
+                        <span class="role-icon">🎯</span>
+                        전략 컨설팅
+                    </div>
+                    <div class="role-duties">
+                        <strong>주요 업무:</strong>
+                        <ol>
+                            <li>파생 모델 논란의 단계별 대응 시나리오 구축</li>
+                            <li>경쟁사 추가 민원 및 법무팀 질의 대비 방안 준비</li>
+                            <li>계약 이행 리스크 관리 (납품 기한 2025.12.19 등)</li>
+                        </ol>
+                    </div>
+                    <div class="role-effect">
+                        <strong class="text-success">기대 효과:</strong><br>
+                        분쟁을 장기전으로 끌지 않고 핵심 이슈를 조기 해결하여
+                        계약 정상화를 신속하게 추진합니다.
+                    </div>
+                </div>
+
+                <!-- Role 3 -->
+                <div class="role-row">
+                    <div class="role-name">
+                        <span class="role-icon">🤝</span>
+                        협의 대리
+                    </div>
+                    <div class="role-duties">
+                        <strong>주요 업무:</strong>
+                        <ol>
+                            <li>농어촌공사 담당 부서 및 법무팀과 비공식/공식 협의</li>
+                            <li>귀사의 법적 스탠스를 대리 전달</li>
+                            <li>발주처와의 신뢰 구축 지원</li>
+                        </ol>
+                    </div>
+                    <div class="role-effect">
+                        <strong class="text-success">기대 효과:</strong><br>
+                        발주처가 니브스코리아의 진정성과 기술력에 확신을 갖도록 하여
+                        계약 체결의 심리적 장벽을 제거합니다.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 비용 제안 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">법률 자문 비용<br>투명한 제안</h2>
+            </div>
+
+            <p style="font-size: 18px; line-height: 1.8; color: var(--color-text-muted); margin-bottom: var(--spacing-lg); text-align: center;">
+                고객사가 원하는 방식에 맞춰 <strong>유연하게 비용 구조</strong>를 제안합니다
+            </p>
+
+            <div class="pricing-grid">
+                <!-- Option 1: Time Charge -->
+                <div class="pricing-card">
+                    <div class="pricing-badge">Option 1</div>
+                    <h3 class="pricing-title">타임 차지 방식</h3>
+                    <div class="pricing-amount">
+                        ₩100만 원
+                        <span class="pricing-unit">/ 시간</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>
+                            <span class="check">✓</span>
+                            <span>실제 투입 시간 기준 청구</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>30년차 변호사 전문성</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>투명한 시간 기록 제공</span>
+                        </li>
+                        <li>
+                            <span style="color: var(--color-warning);">⚠</span>
+                            <span style="color: var(--color-text-muted);">총 금액 사전 예측 어려움</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Option 2: Retainer + Success Fee -->
+                <div class="pricing-card" style="border-color: var(--color-primary); box-shadow: 0 8px 32px rgba(30, 64, 175, 0.2);">
+                    <div class="pricing-badge" style="background: var(--color-primary);">Option 2 (추천)</div>
+                    <h3 class="pricing-title">착수금 + 성공 보수</h3>
+                    <div class="pricing-amount" style="font-size: 28px;">
+                        착수금 협의
+                        <span class="pricing-unit" style="display: block; margin-top: 8px; font-size: 14px;">+ 계약 체결 시 성공 보수</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>
+                            <span class="check">✓</span>
+                            <span>초기 대응 비용 최소화</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>계약 체결 성공 시 보수 지급</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>목표 명확: 15억 원 계약 체결</span>
+                        </li>
+                        <li>
+                            <span class="check">✓</span>
+                            <span>리스크 공유 구조</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="background: var(--color-bg-card); padding: var(--spacing-lg); border-radius: 16px; border: 2px solid var(--color-border); margin-top: var(--spacing-lg);">
+                <h4 style="font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--color-primary);">
+                    💬 다음 단계: 비용 논의
+                </h4>
+                <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted);">
+                    니브스코리아 측에서 위 두 가지 방식 중 어느 방식을 선호하시는지 알려주시면,
+                    현재 상황의 <strong style="color: var(--color-danger);">긴급성(수요일 마감)</strong>과
+                    <strong style="color: var(--color-primary);">계약 규모(15억 원)</strong>를 고려하여
+                    구체적인 예상 업무 시간 및 비용(또는 착수금/성공 보수 금액)을 제안드리겠습니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-icon">⚖️</div>
+            <h2 class="cta-title">긴급한 시기이지만,<br>정확한 진단과 체계적 대응만이<br>계약을 정상화할 수 있습니다</h2>
+            <p class="cta-text">
+                이번 분쟁은 단순히 '이기는 것'이 목표가 아닙니다.<br>
+                발주처의 신뢰를 회복하고, 계약의 정당성을 확보하며,<br>
+                장기적으로 논란의 소지를 근본적으로 제거하는 것이 핵심입니다.<br><br>
+                <strong>신속한 결정을 기다리겠습니다.</strong>
+            </p>
         </section>
 
         <!-- Footer -->
         <footer class="footer">
+            <h3 class="footer-title">조우성 변호사</h3>
             <p class="footer-text">
-                📚 참고 판례: <a href="#" class="footer-link">대법원 2024. 10. 8. 선고 2024도10062 판결</a><br>
-                ⚖️ 관련 법조: 형사소송법 제216조 제3항<br><br>
-
-                <small style="opacity: 0.7;">
-                    본 자료는 판례를 쉽게 이해하기 위한 시각화 자료이며,
-                    법적 자문을 대체할 수 없습니다.
-                </small>
+                30년 경력 | 전문 분야: 계약법, 공공계약, 인증 분쟁<br>
+                "법률은 방패이자 동시에 전략입니다"
+            </p>
+            <div class="footer-contact">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>law@example.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📞</span>
+                    <span>02-XXXX-XXXX</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>서울시 강남구</span>
+                </div>
+            </div>
+            <p style="margin-top: var(--spacing-lg); font-size: 13px; color: var(--color-text-light);">
+                본 자료는 법률 자문 제안을 위한 전략 문서이며, 정식 계약 전 기밀로 유지됩니다.
             </p>
         </footer>
     </div>
@@ -916,50 +1202,21 @@
         // INTERSECTION OBSERVER - SCROLL ANIMATIONS
         // ========================================
         const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        // Observe all cards and quote boxes
-        document.querySelectorAll('.card, .quote-box, .verdict-box').forEach(element => {
-            observer.observe(element);
-        });
-
-        // ========================================
-        // EXPANDABLE CARDS - CLICK TO EXPAND
-        // ========================================
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function() {
-                this.classList.toggle('expanded');
-
-                // Smooth scroll to card if expanded
-                if (this.classList.contains('expanded')) {
-                    setTimeout(() => {
-                        this.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'nearest'
-                        });
-                    }, 100);
-                }
-            });
-
-            // Keyboard accessibility
-            card.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
-                }
-            });
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            sectionObserver.observe(section);
         });
 
         // ========================================
@@ -979,32 +1236,66 @@
         });
 
         // ========================================
-        // CONSOLE EASTER EGG
+        // PRICING CARD INTERACTIONS
         // ========================================
-        console.log('%c⚖️ 적법절차의 원칙', 'font-size: 20px; color: #5F72BE; font-weight: bold;');
-        console.log('%c위법하게 수집된 증거는 아무리 중요해도 증거능력이 없습니다.', 'font-size: 12px; color: #FF6B6B;');
-        console.log('%c판례 출처: 대법원 2024도10062', 'font-size: 10px; color: #78909C;');
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) rotate(-1deg)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
 
         // ========================================
-        // PERFORMANCE: LAZY LOADING
+        // ROLE TABLE ROW HIGHLIGHTING
         // ========================================
-        if ('IntersectionObserver' in window) {
-            const lazyObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const element = entry.target;
-                        if (element.dataset.src) {
-                            element.src = element.dataset.src;
-                        }
-                        lazyObserver.unobserve(element);
-                    }
+        document.querySelectorAll('.role-row').forEach(row => {
+            row.addEventListener('click', function() {
+                // Remove highlight from all rows
+                document.querySelectorAll('.role-row').forEach(r => {
+                    r.style.background = '';
+                    r.style.borderLeft = '';
                 });
-            });
 
-            document.querySelectorAll('[data-src]').forEach(element => {
-                lazyObserver.observe(element);
+                // Highlight clicked row
+                this.style.background = 'rgba(30, 64, 175, 0.05)';
+                this.style.borderLeft = '4px solid var(--color-primary)';
             });
+        });
+
+        // ========================================
+        // CONSOLE SIGNATURE
+        // ========================================
+        console.log('%c⚖️ 법률 전략 제안서', 'font-size: 20px; color: #1e40af; font-weight: bold;');
+        console.log('%c양동작전: 단기 방어 + 중기 안정화', 'font-size: 14px; color: #16a34a;');
+        console.log('%c조우성 변호사 | 30년 경력', 'font-size: 12px; color: #64748b;');
+
+        // ========================================
+        // DYNAMIC DEADLINE COUNTDOWN (Optional)
+        // ========================================
+        function updateDeadline() {
+            const deadline = new Date('2024-11-12T23:59:59');
+            const now = new Date();
+            const diff = deadline - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                const badge = document.querySelector('.badge span:last-child');
+                if (badge && days >= 0) {
+                    badge.textContent = `D-${days} (${hours}시간 남음)`;
+                }
+            }
         }
+
+        // Update on load
+        updateDeadline();
+
+        // Update every hour
+        setInterval(updateDeadline, 3600000);
     </script>
 </body>
 </html>
