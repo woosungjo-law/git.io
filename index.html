@@ -3,157 +3,530 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="당연함의 무게 (2) - 침묵의 이유, 당연한 소통의 불가능">
-    <title>침묵의 이유 | 당연한 소통의 불가능</title>
+    <meta name="description" content="당연함의 무게 - 통제되지 않는 영토. 일상 활동이 불가능한 투쟁이 되는 순간들에 대한 인터랙티브 스토리">
+    <title>당연함의 무게 - 통제되지 않는 영토</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         /* ========================================
-           RESET & FOUNDATION
-        ======================================== */
+           RESET & BASE STYLES
+           ======================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        :root {
+            /* Color System - Duality Theme */
+            --color-light-bg: #f8fafc;
+            --color-light-text: #1e293b;
+            --color-dark-bg: #0f172a;
+            --color-dark-text: #f1f5f9;
+
+            --color-normal: #e0f2fe;
+            --color-normal-border: #7dd3fc;
+            --color-struggle: #1e293b;
+            --color-struggle-border: #64748b;
+
+            /* Condition-Specific Colors */
+            --color-heart: #ef4444;
+            --color-nerve: #8b5cf6;
+            --color-bladder: #3b82f6;
+            --color-light: #f97316;
+            --color-thyroid: #10b981;
+
+            /* Accent */
+            --color-accent: #f59e0b;
+            --color-warning: #dc2626;
+
+            /* Typography */
+            --font-primary: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.7;
+            color: var(--color-light-text);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            overflow-x: hidden;
             word-break: keep-all;
             word-wrap: break-word;
             overflow-wrap: break-word;
         }
 
-        :root {
-            /* Silence Color Palette */
-            --color-silence: #4a5568;
-            --color-silence-light: #718096;
-            --color-anxiety: #6b46c1;
-            --color-warmth: #ed8936;
-            --color-barrier: #e2e8f0;
-            --color-barrier-dark: #cbd5e0;
-
-            /* Semantic Colors */
-            --color-bg-light: #f7fafc;
-            --color-bg-dark: #2d3748;
-            --color-text: #1a202c;
-            --color-text-muted: #718096;
-            --color-text-inverse: #f7fafc;
-
-            /* Glass Effect */
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.18);
-
-            /* Spacing */
-            --spacing-xs: 8px;
-            --spacing-sm: 16px;
-            --spacing-md: 24px;
-            --spacing-lg: 40px;
-            --spacing-xl: 64px;
-
-            /* Typography */
-            --font-size-xs: 13px;
-            --font-size-sm: 15px;
-            --font-size-base: 17px;
-            --font-size-lg: 20px;
-            --font-size-xl: 28px;
-            --font-size-2xl: 40px;
-            --font-size-3xl: 56px;
-
-            /* Shadows */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(180deg, var(--color-bg-light) 0%, #e6ebf0 100%);
-            color: var(--color-text);
-            line-height: 1.8;
-            overflow-x: hidden;
-            font-size: var(--font-size-base);
-        }
-
-        /* Subtle Noise Texture */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 0;
-        }
-
         /* ========================================
-           CONTAINER
-        ======================================== */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: var(--spacing-md);
-            position: relative;
-            z-index: 1;
+           TYPOGRAPHY
+           ======================================== */
+        h1, h2, h3, h4, h5, h6, p, li, span, div, blockquote {
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        p {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            line-height: 1.8;
         }
 
         /* ========================================
            HERO SECTION
-        ======================================== */
+           ======================================== */
         .hero {
-            min-height: 85vh;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-md);
+            background: linear-gradient(135deg,
+                #0f172a 0%,
+                #1e293b 50%,
+                #334155 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                repeating-linear-gradient(0deg,
+                    rgba(255,255,255,0.03) 0px,
+                    transparent 1px,
+                    transparent 2px,
+                    rgba(255,255,255,0.03) 3px),
+                repeating-linear-gradient(90deg,
+                    rgba(255,255,255,0.03) 0px,
+                    transparent 1px,
+                    transparent 2px,
+                    rgba(255,255,255,0.03) 3px);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero-icon {
+            font-size: clamp(4rem, 8vw, 6rem);
+            margin-bottom: var(--spacing-md);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+        }
+
+        .hero-title {
+            color: white;
+            margin-bottom: var(--spacing-sm);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-md);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.7s forwards;
+        }
+
+        .hero-description {
+            font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+            color: #cbd5e1;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.9s forwards;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: var(--spacing-md);
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.5);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        /* ========================================
+           INTRO SECTION
+           ======================================== */
+        .intro {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+        }
+
+        .intro-text {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            font-weight: 500;
+            color: var(--color-light-text);
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .intro-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .intro-highlight {
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+
+        /* ========================================
+           STRUGGLES SECTION
+           ======================================== */
+        .struggles {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-md);
+        }
+
+        .struggle-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out, transform 0.3s ease;
+        }
+
+        .struggle-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .struggle-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Card Header */
+        .card-header {
+            padding: var(--spacing-md);
+            text-align: center;
+            border-bottom: 3px solid;
+        }
+
+        .card-header[data-condition="heart"] {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-color: var(--color-heart);
+        }
+
+        .card-header[data-condition="nerve"] {
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            border-color: var(--color-nerve);
+        }
+
+        .card-header[data-condition="bladder"] {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-color: var(--color-bladder);
+        }
+
+        .card-header[data-condition="light"] {
+            background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+            border-color: var(--color-light);
+        }
+
+        .card-header[data-condition="thyroid"] {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-color: var(--color-thyroid);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .card-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .card-condition {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        /* Card Body - Split Design */
+        .card-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 350px;
+        }
+
+        .card-column {
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-column.normal {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-right: 4px solid var(--color-normal-border);
+        }
+
+        .card-column.struggle {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            position: relative;
+        }
+
+        .card-column.struggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                repeating-linear-gradient(45deg,
+                    rgba(255,255,255,0.02) 0px,
+                    transparent 2px,
+                    transparent 4px,
+                    rgba(255,255,255,0.02) 6px);
+            pointer-events: none;
+        }
+
+        .column-label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--spacing-sm);
+            opacity: 0.7;
+        }
+
+        .card-column.normal .column-label {
+            color: var(--color-bladder);
+        }
+
+        .card-column.struggle .column-label {
+            color: var(--color-accent);
+        }
+
+        .column-text {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .column-quote {
+            font-size: clamp(1.125rem, 2.2vw, 1.25rem);
+            font-weight: 700;
+            font-style: italic;
+            padding: var(--spacing-sm);
+            background: rgba(245, 158, 11, 0.15);
+            border-left: 4px solid var(--color-accent);
+            border-radius: var(--radius-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        /* Card Stats */
+        .card-stats {
+            padding: var(--spacing-md);
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+            border-top: 3px solid var(--color-accent);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #78716c;
+            margin-bottom: var(--spacing-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: 900;
+            color: var(--color-warning);
+            line-height: 1;
+        }
+
+        .stat-description {
+            font-size: 0.9375rem;
+            color: #57534e;
+            margin-top: var(--spacing-xs);
+        }
+
+        /* ========================================
+           CLOSING SECTION
+           ======================================== */
+        .closing {
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: var(--spacing-xl) var(--spacing-md);
+            background: linear-gradient(135deg,
+                #0f172a 0%,
+                #1e293b 100%);
             position: relative;
+            overflow: hidden;
         }
 
-        .series-badge {
-            display: inline-block;
-            background: var(--color-silence);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: var(--font-size-xs);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: var(--spacing-md);
+        .closing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        .closing-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
             opacity: 0;
-            animation: fadeInDown 0.8s ease 0.2s forwards;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
         }
 
-        @keyframes fadeInDown {
+        .closing-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .closing-icon {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .closing-quote {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 700;
+            color: white;
+            line-height: 1.4;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .closing-text {
+            font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+            color: #cbd5e1;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .closing-highlight {
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: var(--spacing-md);
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--color-accent);
+            margin: var(--spacing-sm) auto;
+            border-radius: 2px;
+        }
+
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
             }
-        }
-
-        .hero-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: clamp(var(--font-size-2xl), 8vw, var(--font-size-3xl));
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: var(--spacing-md);
-            color: var(--color-silence);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
         }
 
         @keyframes fadeInUp {
@@ -167,408 +540,67 @@
             }
         }
 
-        .hero-subtitle {
-            font-size: var(--font-size-lg);
-            color: var(--color-text-muted);
-            max-width: 600px;
-            line-height: 1.7;
-            margin-bottom: var(--spacing-xl);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
-        }
-
-        .hero-icon {
-            font-size: 80px;
-            margin-bottom: var(--spacing-md);
-            opacity: 0.3;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
         }
 
         /* ========================================
-           BARRIER VISUAL - 보이지 않는 벽
-        ======================================== */
-        .barrier-visual {
-            width: 100%;
-            max-width: 600px;
-            height: 200px;
-            margin: var(--spacing-xl) auto;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .barrier-line {
-            position: absolute;
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(180deg,
-                transparent 0%,
-                var(--color-barrier-dark) 20%,
-                var(--color-barrier-dark) 80%,
-                transparent 100%);
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0.5;
-        }
-
-        .barrier-side {
-            flex: 1;
-            text-align: center;
-            padding: var(--spacing-md);
-        }
-
-        .barrier-label {
-            font-size: var(--font-size-sm);
-            font-weight: 600;
-            margin-bottom: var(--spacing-sm);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .barrier-side.left .barrier-label {
-            color: var(--color-text-muted);
-        }
-
-        .barrier-side.right .barrier-label {
-            color: var(--color-silence);
-        }
-
-        /* ========================================
-           SECTION
-        ======================================== */
-        .section {
-            margin-bottom: var(--spacing-xl);
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ========================================
-           SPLIT CARD - 대비되는 두 세계
-        ======================================== */
-        .split-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .split-header {
-            background: var(--color-silence);
-            color: white;
-            padding: var(--spacing-lg) var(--spacing-md);
-            text-align: center;
-        }
-
-        .split-number {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            line-height: 40px;
-            font-weight: 700;
-            margin-bottom: var(--spacing-sm);
-            font-size: var(--font-size-lg);
-        }
-
-        .split-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: var(--font-size-xl);
-            font-weight: 900;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .split-subtitle {
-            font-size: var(--font-size-sm);
-            opacity: 0.9;
-        }
-
-        .split-body {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 280px;
-        }
-
-        .split-column {
-            padding: var(--spacing-lg) var(--spacing-md);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .split-column.normal {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            border-right: 3px solid var(--color-barrier);
-        }
-
-        .split-column.struggle {
-            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-            color: white;
-        }
-
-        .column-label {
-            font-size: var(--font-size-xs);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: var(--spacing-sm);
-            opacity: 0.7;
-        }
-
-        .column-text {
-            font-size: var(--font-size-sm);
-            line-height: 1.8;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .column-quote {
-            font-family: 'Noto Serif KR', serif;
-            font-size: var(--font-size-base);
-            font-style: italic;
-            padding: var(--spacing-sm);
-            border-left: 3px solid currentColor;
-            margin-top: var(--spacing-sm);
-            opacity: 0.9;
-        }
-
-        /* ========================================
-           STAT BOX - 통계
-        ======================================== */
-        .stat-box {
-            background: rgba(107, 70, 193, 0.08);
-            border-left: 4px solid var(--color-anxiety);
-            padding: var(--spacing-md);
-            margin: var(--spacing-md) 0;
-            border-radius: 8px;
-        }
-
-        .stat-number {
-            font-family: 'Noto Serif KR', serif;
-            font-size: var(--font-size-2xl);
-            font-weight: 900;
-            color: var(--color-anxiety);
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .stat-label {
-            font-size: var(--font-size-sm);
-            color: var(--color-text-muted);
-        }
-
-        /* ========================================
-           CONSEQUENCE BOX
-        ======================================== */
-        .consequence {
-            background: linear-gradient(135deg,
-                rgba(237, 137, 54, 0.08) 0%,
-                rgba(237, 137, 54, 0.02) 100%);
-            padding: var(--spacing-md);
-            border-radius: 12px;
-            border: 2px dashed var(--color-warmth);
-            margin-top: var(--spacing-md);
-        }
-
-        .consequence-icon {
-            font-size: 24px;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .consequence-text {
-            font-size: var(--font-size-sm);
-            line-height: 1.7;
-            color: var(--color-silence);
-        }
-
-        /* ========================================
-           RIVER SECTION - 건널 수 없는 강
-        ======================================== */
-        .river-section {
-            background: linear-gradient(180deg,
-                var(--color-bg-dark) 0%,
-                #1a202c 100%);
-            color: white;
-            padding: var(--spacing-xl) var(--spacing-md);
-            border-radius: 32px;
-            margin: var(--spacing-xl) 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .river-section::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60%;
-            background: linear-gradient(180deg,
-                transparent 0%,
-                rgba(107, 70, 193, 0.1) 100%);
-            pointer-events: none;
-        }
-
-        .river-icon {
-            font-size: 64px;
-            margin-bottom: var(--spacing-md);
-            opacity: 0.6;
-        }
-
-        .river-title {
-            font-family: 'Noto Serif KR', serif;
-            font-size: var(--font-size-xl);
-            font-weight: 900;
-            margin-bottom: var(--spacing-md);
-            position: relative;
-            z-index: 1;
-        }
-
-        .river-text {
-            font-size: var(--font-size-base);
-            line-height: 1.9;
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ========================================
-           CLOSING SECTION
-        ======================================== */
-        .closing {
-            text-align: center;
-            padding: var(--spacing-xl) var(--spacing-md);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .closing-quote {
-            font-family: 'Noto Serif KR', serif;
-            font-size: var(--font-size-xl);
-            font-weight: 700;
-            line-height: 1.6;
-            color: var(--color-silence);
-            margin-bottom: var(--spacing-lg);
-            position: relative;
-        }
-
-        .closing-quote::before {
-            content: '"';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 80px;
-            opacity: 0.1;
-            font-family: Georgia, serif;
-        }
-
-        .closing-text {
-            font-size: var(--font-size-base);
-            line-height: 1.9;
-            color: var(--color-text-muted);
-        }
-
-        /* ========================================
-           FOOTER
-        ======================================== */
-        .footer {
-            text-align: center;
-            padding: var(--spacing-xl) var(--spacing-md);
-            border-top: 2px solid var(--color-barrier);
-            margin-top: var(--spacing-xl);
-        }
-
-        .footer-text {
-            font-size: var(--font-size-sm);
-            color: var(--color-text-muted);
-            line-height: 1.6;
-        }
-
-        .footer-note {
-            margin-top: var(--spacing-md);
-            font-size: var(--font-size-xs);
-            color: var(--color-text-muted);
-            opacity: 0.7;
-        }
-
-        .help-resources {
-            margin-top: var(--spacing-lg);
-            padding: var(--spacing-md);
-            background: rgba(107, 70, 193, 0.05);
-            border-radius: 12px;
-            border: 1px solid var(--color-anxiety);
-        }
-
-        .help-title {
-            font-weight: 700;
-            margin-bottom: var(--spacing-sm);
-            color: var(--color-anxiety);
-        }
-
-        .help-link {
-            display: block;
-            margin: 6px 0;
-            color: var(--color-silence);
-            text-decoration: none;
-            font-size: var(--font-size-sm);
-            transition: color 0.3s ease;
-        }
-
-        .help-link:hover {
-            color: var(--color-anxiety);
-            text-decoration: underline;
-        }
-
-        /* ========================================
-           RESPONSIVE
-        ======================================== */
+           RESPONSIVE DESIGN
+           ======================================== */
         @media (max-width: 768px) {
-            .split-body {
+            :root {
+                --spacing-lg: 3rem;
+                --spacing-xl: 4rem;
+            }
+
+            .card-body {
                 grid-template-columns: 1fr;
             }
 
-            .split-column.normal {
+            .card-column.normal {
                 border-right: none;
-                border-bottom: 3px solid var(--color-barrier);
+                border-bottom: 4px solid var(--color-normal-border);
             }
 
-            .barrier-visual {
-                height: 150px;
+            .card-stats {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
-            .river-section {
-                padding: var(--spacing-lg) var(--spacing-md);
+            .stat-item {
+                min-width: 100%;
             }
         }
 
         @media (max-width: 480px) {
             .hero {
-                min-height: 70vh;
+                min-height: 80vh;
             }
 
-            .hero-icon {
-                font-size: 60px;
+            .intro {
+                padding: var(--spacing-md);
+            }
+
+            .struggles {
+                padding: var(--spacing-sm);
+            }
+
+            .struggle-card {
+                margin-bottom: var(--spacing-md);
             }
         }
 
         /* ========================================
            ACCESSIBILITY
-        ======================================== */
+           ======================================== */
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -576,466 +608,405 @@
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
             }
         }
 
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        /* ========================================
-           UTILITY
-        ======================================== */
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-lg {
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .mt-xl {
-            margin-top: var(--spacing-xl);
+        /* Focus Styles */
+        a:focus,
+        button:focus {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <main>
         <!-- Hero Section -->
-        <header class="hero">
-            <div class="series-badge">당연함의 무게 (2)</div>
-            <div class="hero-icon">🤐</div>
-            <h1 class="hero-title">침묵의 이유</h1>
-            <p class="hero-subtitle">
-                당연한 소통이, 누군가에게는<br>
-                건널 수 없는 강입니다
+        <section class="hero" role="banner">
+            <div class="hero-content">
+                <div class="hero-icon" aria-hidden="true">⚠️</div>
+                <h1 class="hero-title">당연함의 무게</h1>
+                <p class="hero-subtitle">통제되지 않는 영토</p>
+                <p class="hero-description">
+                    몸이 허락하지 않을 때<br>
+                    우리가 당연하게 여기는 일상이 누군가에게는 불가능한 투쟁이 됩니다
+                </p>
+            </div>
+            <div class="scroll-indicator" aria-label="아래로 스크롤">↓</div>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="intro">
+            <p class="intro-text">
+                계단을 오르고, 밥을 먹고, 소변을 참고, 밝은 곳에서 일하고, 체중을 유지하는 것.<br>
+                이 모든 것이 <span class="intro-highlight">'당연한'</span> 일상입니다.<br>
+                하지만 <span class="intro-highlight">당연한 것들은 당연하지 않습니다.</span>
             </p>
-        </header>
+        </section>
 
-        <!-- Barrier Visual -->
-        <div class="barrier-visual">
-            <div class="barrier-side left">
-                <div class="barrier-label">당연함의 세계</div>
-                <p style="font-size: 14px; color: var(--color-text-muted);">말하고, 듣고, 반응한다</p>
-            </div>
-            <div class="barrier-line" aria-hidden="true"></div>
-            <div class="barrier-side right">
-                <div class="barrier-label">침묵의 세계</div>
-                <p style="font-size: 14px; color: var(--color-silence);">보이지 않는 벽 앞에서</p>
-            </div>
-        </div>
+        <!-- Struggles Section -->
+        <section class="struggles">
+            <!-- 1. 계단 오르기 - 심장질환 -->
+            <article class="struggle-card" data-condition="heart">
+                <header class="card-header" data-condition="heart">
+                    <div class="card-icon" aria-hidden="true">🏔️</div>
+                    <h2 class="card-title">계단 오르기</h2>
+                    <p class="card-condition">심장질환</p>
+                </header>
 
-        <main>
-            <!-- Section 1: 전화 받기 -->
-            <section class="section">
-                <article class="split-card">
-                    <div class="split-header">
-                        <div class="split-number">1</div>
-                        <h2 class="split-title">전화 받기</h2>
-                        <p class="split-subtitle">불안장애</p>
+                <div class="card-body">
+                    <div class="card-column normal">
+                        <div class="column-label">일반적인 경험</div>
+                        <p class="column-text">
+                            계단을 오르는 것은 다리를 번갈아 들어 올리는 단순한 동작이다.
+                            대부분의 사람들은 생각 없이 계단을 오른다.
+                            계단은 그저 계단이다.
+                        </p>
                     </div>
-                    <div class="split-body">
-                        <div class="split-column normal">
-                            <div class="column-label">일반적인 경험</div>
-                            <p class="column-text">
-                                전화를 받는 것은 벨소리에 반응해 수화기를 드는 단순한 행위입니다.
-                                대부분의 사람들은 전화벨이 울리면 자연스럽게 받습니다.
-                            </p>
-                        </div>
-                        <div class="split-column struggle">
-                            <div class="column-label">불안장애 환자에게</div>
-                            <p class="column-text">
-                                벨소리는 경보음입니다. 모르는 번호가 화면에 뜨는 순간 심장이 요동칩니다.
-                                손이 떨리고 목소리가 굳어집니다.
-                            </p>
-                            <div class="column-quote">
-                                "뭔가 잘못된 일이 생긴 게 아닐까"<br>
-                                "내가 실수한 게 있나"<br>
-                                "누가 화를 내려는 건 아닐까"
-                            </div>
+
+                    <div class="card-column struggle">
+                        <div class="column-label">심장질환 환자에게</div>
+                        <p class="column-text">
+                            3층은 에베레스트다. 심장이 충분한 피를 보내지 못하면
+                            다리 근육은 산소를 얻지 못한다. 숨이 가빠지고 가슴이 조인다.
+                            2층쯤에서 멈춰 서서 난간을 붙잡는다.
+                        </p>
+                        <div class="column-quote">
+                            "엘리베이터가 고장 난 날, 이들은 집에 돌아갈 수 없다."
                         </div>
                     </div>
-                </article>
-
-                <div class="stat-box">
-                    <div class="stat-number">6.3%</div>
-                    <div class="stat-label">한국 성인의 불안장애 경험률</div>
                 </div>
 
-                <div class="consequence">
-                    <div class="consequence-icon">📵</div>
-                    <p class="consequence-text">
-                        "전화 안 받으세요?" 그 짧은 문장 앞에서 불안은 다시 증폭됩니다.
-                        통화 버튼은 작은 아이콘에 불과하지만, 이들에게는 누를 수 없는 스위치입니다.
-                        부재중 전화 목록만 쌓여갑니다.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Section 2: 회의 발언 -->
-            <section class="section">
-                <article class="split-card">
-                    <div class="split-header">
-                        <div class="split-number">2</div>
-                        <h2 class="split-title">회의에서 발언하기</h2>
-                        <p class="split-subtitle">사회불안장애</p>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">영향받는 환자</div>
+                        <div class="stat-value" data-target="50" data-suffix="%">0%</div>
+                        <p class="stat-description">심부전 환자의 절반 가까이가 일상 활동에 어려움을 겪습니다</p>
                     </div>
-                    <div class="split-body">
-                        <div class="split-column normal">
-                            <div class="column-label">일반적인 경험</div>
-                            <p class="column-text">
-                                회의에서 발언하는 것은 직장생활의 기본입니다.
-                                자기 의견을 말하고, 질문을 던지고, 동료들과 생각을 나누는 일상적 과정입니다.
-                            </p>
-                        </div>
-                        <div class="split-column struggle">
-                            <div class="column-label">사회불안장애 환자에게</div>
-                            <p class="column-text">
-                                시선은 칼날입니다. 회의실에 앉으면 모든 사람의 눈이 자신을 향하는 것 같습니다.
-                                말을 꺼내려 하면 목구멍이 막힙니다. 얼굴이 달아오르고 목소리가 떨립니다.
-                            </p>
-                            <div class="column-quote">
-                                주변의 작은 속삭임조차<br>
-                                "저 사람 왜 저래"라는<br>
-                                조롱으로 들립니다
-                            </div>
+                </div>
+            </article>
+
+            <!-- 2. 밥 먹기 - 연하장애 -->
+            <article class="struggle-card" data-condition="nerve">
+                <header class="card-header" data-condition="nerve">
+                    <div class="card-icon" aria-hidden="true">🍽️</div>
+                    <h2 class="card-title">밥 먹기</h2>
+                    <p class="card-condition">연하장애</p>
+                </header>
+
+                <div class="card-body">
+                    <div class="card-column normal">
+                        <div class="column-label">일반적인 경험</div>
+                        <p class="column-text">
+                            밥을 먹는 것은 씹고 삼키는 자연스러운 과정이다.
+                            혀와 목의 근육들이 음식을 입에서 식도로 보낸다.
+                            식탁은 즐거운 공간이다.
+                        </p>
+                    </div>
+
+                    <div class="card-column struggle">
+                        <div class="column-label">연하장애 환자에게</div>
+                        <p class="column-text">
+                            식사는 질식의 공포다. 뇌졸중이나 파킨슨병으로 신경이 망가지면
+                            근육들이 제대로 움직이지 않는다. 물 한 모금이 기도로 넘어간다.
+                            격렬한 기침이 터진다.
+                        </p>
+                        <div class="column-quote">
+                            "매 끼니가 생존의 시간이다."
                         </div>
                     </div>
-                </article>
-
-                <div class="stat-box">
-                    <div class="stat-number">13%</div>
-                    <div class="stat-label">한국 직장인의 사회불안 증상 보고율</div>
                 </div>
 
-                <div class="consequence">
-                    <div class="consequence-icon">🤫</div>
-                    <p class="consequence-text">
-                        회의가 끝나고 자리로 돌아오면 자책이 시작됩니다. "왜 나는 한마디도 못했을까."
-                        승진 면접이나 프레젠테이션은 그저 악몽입니다. 능력이 부족해서가 아닙니다.
-                        시선이 무서워서입니다. 침묵 속에서 기회들은 조용히 지나갑니다.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Section 3: 거절하기 -->
-            <section class="section">
-                <article class="split-card">
-                    <div class="split-header">
-                        <div class="split-number">3</div>
-                        <h2 class="split-title">"아니오"라고 말하기</h2>
-                        <p class="split-subtitle">회피형 성격</p>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">65세 이상 노인</div>
+                        <div class="stat-value" data-target="15" data-suffix="%">0%</div>
+                        <p class="stat-description">65세 이상 노인 중 15%가 연하장애를 겪습니다</p>
                     </div>
-                    <div class="split-body">
-                        <div class="split-column normal">
-                            <div class="column-label">일반적인 경험</div>
-                            <p class="column-text">
-                                "아니오"라고 말하는 것은 자기 의사를 표현하는 기본 권리입니다.
-                                원하지 않는 것을 거절하고, 부당한 요구 앞에 선을 긋는 행위입니다.
-                            </p>
-                        </div>
-                        <div class="split-column struggle">
-                            <div class="column-label">회피형 성격의 사람에게</div>
-                            <p class="column-text">
-                                거절은 관계의 단절입니다. 상사가 주말 야근을 요구합니다. 친구가 돈을 빌려달라고 청합니다.
-                                마음속으론 "싫다"고 비명을 지르지만 입 밖으로는 "네"가 흘러나옵니다.
-                            </p>
-                            <div class="column-quote">
-                                거절하면 미움받을 것 같습니다<br>
-                                관계가 깨질 것 같습니다
-                            </div>
+                </div>
+            </article>
+
+            <!-- 3. 소변 참기 - 과민성 방광 -->
+            <article class="struggle-card" data-condition="bladder">
+                <header class="card-header" data-condition="bladder">
+                    <div class="card-icon" aria-hidden="true">🚻</div>
+                    <h2 class="card-title">소변 참기</h2>
+                    <p class="card-condition">과민성 방광</p>
+                </header>
+
+                <div class="card-body">
+                    <div class="card-column normal">
+                        <div class="column-label">일반적인 경험</div>
+                        <p class="column-text">
+                            소변을 참는 것은 당연한 능력이다.
+                            방광에 소변이 차면 신호가 오고,
+                            우리는 화장실에 갈 때까지 참는다.
+                        </p>
+                    </div>
+
+                    <div class="card-column struggle">
+                        <div class="column-label">과민성 방광 환자에게</div>
+                        <p class="column-text">
+                            화장실은 세계의 중심이다. 방광이 조금만 차도 갑자기 강한 요의가 온다.
+                            경고도 없이 찾아온다. 외출할 때는 먼저 화장실 위치부터 확인한다.
+                            회의 중에도, 극장에서도, 지하철 안에서도 화장실 생각뿐이다.
+                        </p>
+                        <div class="column-quote">
+                            "삶은 화장실 반경 안으로 좁아진다."
                         </div>
                     </div>
-                </article>
-
-                <div class="stat-box">
-                    <div class="stat-number">2.4%</div>
-                    <div class="stat-label">회피형 성격 장애 유병률 (경향을 가진 사람은 훨씬 많음)</div>
                 </div>
 
-                <div class="consequence">
-                    <div class="consequence-icon">⚖️</div>
-                    <p class="consequence-text">
-                        한국 사회에서 "노"는 더욱 무거운 단어입니다. 위계와 체면의 문화가 거절을 배신의 언어로 만듭니다.
-                        거절하지 못한 약속들이 쌓이고, 그 무게는 서서히 삶을 짓누릅니다.
-                        "아니오"는 두 글자가 아니라 무너질 수 있는 모든 것입니다.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Section 4: 웃어주기 -->
-            <section class="section">
-                <article class="split-card">
-                    <div class="split-header">
-                        <div class="split-number">4</div>
-                        <h2 class="split-title">농담에 웃어주기</h2>
-                        <p class="split-subtitle">자폐 스펙트럼 장애</p>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">성인 유병률</div>
+                        <div class="stat-value" data-target="10" data-suffix="-20%">0%</div>
+                        <p class="stat-description">성인 10명 중 1~2명이 과민성 방광을 경험합니다</p>
                     </div>
-                    <div class="split-body">
-                        <div class="split-column normal">
-                            <div class="column-label">일반적인 경험</div>
-                            <p class="column-text">
-                                농담에 웃어주는 것은 사회적 상호작용의 윤활유입니다.
-                                누군가 농담을 던지면 분위기를 읽고 자연스럽게 반응합니다.
-                            </p>
-                        </div>
-                        <div class="split-column struggle">
-                            <div class="column-label">자폐 스펙트럼 장애인에게</div>
-                            <p class="column-text">
-                                웃음의 타이밍을 계산합니다. 농담이 던져졌을 때, 왜 웃어야 하는지 즉각 이해하지 못할 때가 있습니다.
-                                표정과 말투와 맥락을 분석하는 데 시간이 필요합니다.
-                            </p>
-                            <div class="column-quote">
-                                다른 사람들이 웃을 때<br>
-                                한 박자 늦게 따라 웃거나<br>
-                                아예 웃지 않습니다
-                            </div>
+                </div>
+            </article>
+
+            <!-- 4. 밝은 곳에서 일하기 - 편두통 -->
+            <article class="struggle-card" data-condition="light">
+                <header class="card-header" data-condition="light">
+                    <div class="card-icon" aria-hidden="true">💡</div>
+                    <h2 class="card-title">밝은 곳에서 일하기</h2>
+                    <p class="card-condition">편두통</p>
+                </header>
+
+                <div class="card-body">
+                    <div class="card-column normal">
+                        <div class="column-label">일반적인 경험</div>
+                        <p class="column-text">
+                            밝은 곳에서 일하는 것은 직장생활의 기본이다.
+                            사무실 형광등, 컴퓨터 모니터, 창문으로 쏟아지는 햇빛은
+                            피할 수 없다.
+                        </p>
+                    </div>
+
+                    <div class="card-column struggle">
+                        <div class="column-label">편두통 환자에게</div>
+                        <p class="column-text">
+                            빛은 고문이다. 빛이 눈에 들어오면 뇌의 통증 회로가 작동한다.
+                            쿵쿵 박동하는 두통이 시작된다. 메스꺼움이 따라온다.
+                            하지만 직장에서 이들은 "예민한 사람"으로 불린다.
+                        </p>
+                        <div class="column-quote">
+                            "다른 사람들에게 빛은 일상이지만, 이들에게 빛은 칼날이다."
                         </div>
                     </div>
-                </article>
-
-                <div class="stat-box">
-                    <div class="stat-number">2.6%</div>
-                    <div class="stat-label">한국의 자폐 스펙트럼 장애 유병률 추정치</div>
                 </div>
 
-                <div class="consequence">
-                    <div class="consequence-icon">🎭</div>
-                    <p class="consequence-text">
-                        "왜 안 웃어?", "재미없어?" 질문들이 날아옵니다.
-                        직장 회식 자리에서 이들은 조용히 앉아 있습니다. 분위기를 맞춰야 한다는 압박만 커집니다.
-                        자연스러움은 계산으로 만들어지지 않습니다. 웃음은 반응이 아니라 풀어야 할 과제가 됩니다.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Section 5: 힘들다 말하기 -->
-            <section class="section">
-                <article class="split-card">
-                    <div class="split-header">
-                        <div class="split-number">5</div>
-                        <h2 class="split-title">"힘들다"고 말하기</h2>
-                        <p class="split-subtitle">학습된 무기력</p>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">세계 질병 부담</div>
+                        <div class="stat-value" data-target="2" data-suffix="위">0위</div>
+                        <p class="stat-description">편두통은 전 세계에서 두 번째로 일상생활을 방해하는 질환입니다</p>
                     </div>
-                    <div class="split-body">
-                        <div class="split-column normal">
-                            <div class="column-label">일반적인 경험</div>
-                            <p class="column-text">
-                                "힘들다"고 말하는 것은 도움을 구하는 신호입니다.
-                                고통을 드러내고, 지지를 받고, 함께 길을 찾는 출발점입니다.
-                            </p>
-                        </div>
-                        <div class="split-column struggle">
-                            <div class="column-label">학습된 무기력 상태의 사람에게</div>
-                            <p class="column-text">
-                                호소는 이미 배신당한 언어입니다. 어릴 적 "힘들다"고 말했을 때 "누가 안 힘드냐"는 대답이 돌아왔습니다.
-                                직장에서 "버거워요"라고 했을 때 "요즘 애들은 참을성이 없어"라는 말을 들었습니다.
-                            </p>
-                            <div class="column-quote">
-                                말해봤자<br>
-                                달라지는 건 없다는 것을<br>
-                                배웠습니다
-                            </div>
+                </div>
+            </article>
+
+            <!-- 5. 체중 유지 - 갑상선 기능 저하증 -->
+            <article class="struggle-card" data-condition="thyroid">
+                <header class="card-header" data-condition="thyroid">
+                    <div class="card-icon" aria-hidden="true">⚖️</div>
+                    <h2 class="card-title">체중 유지하기</h2>
+                    <p class="card-condition">갑상선 기능 저하증</p>
+                </header>
+
+                <div class="card-body">
+                    <div class="card-column normal">
+                        <div class="column-label">일반적인 경험</div>
+                        <p class="column-text">
+                            체중을 유지하는 것은 먹은 만큼, 움직인 만큼의 결과다.
+                            먹고, 활동하고, 몸이 에너지를 쓰는 과정이
+                            자연스럽게 균형을 맞춘다.
+                        </p>
+                    </div>
+
+                    <div class="card-column struggle">
+                        <div class="column-label">갑상선 기능 저하증 환자에게</div>
+                        <p class="column-text">
+                            몸은 배신한다. 갑상선 호르몬이 부족하면 신진대사가 느려진다.
+                            같은 양을 먹어도 살이 찐다. 운동해도 식사를 줄여도 체중계 숫자는 움직이지 않는다.
+                            주변 사람들은 "의지가 약하다"고 말한다.
+                        </p>
+                        <div class="column-quote">
+                            "몸은 말을 듣지 않는다. 통제권은 사라졌다."
                         </div>
                     </div>
-                </article>
-
-                <div class="stat-box">
-                    <div class="stat-number">최저</div>
-                    <div class="stat-label">OECD 국가 중 한국의 우울증 치료율 순위</div>
                 </div>
 
-                <div class="consequence">
-                    <div class="consequence-icon">🍶</div>
-                    <p class="consequence-text">
-                        정신과 방문은 여전히 지워지지 않는 낙인입니다.
-                        힘들다고 말하는 대신 술잔을 기울입니다. 혼자 견딥니다. 무너질 때까지 버팁니다.
-                        "힘들다"는 세 글자는 입 안에서 돌처럼 무겁게 가라앉습니다.
-                    </p>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">성인 여성 유병률</div>
+                        <div class="stat-value" data-target="10" data-suffix="%">0%</div>
+                        <p class="stat-description">성인 여성 10명 중 1명이 갑상선 기능 저하증을 앓습니다</p>
+                    </div>
                 </div>
-            </section>
+            </article>
+        </section>
 
-            <!-- River Section - 건널 수 없는 강 -->
-            <section class="river-section section">
-                <div class="river-icon">🌊</div>
-                <h2 class="river-title">건널 수 없는 강</h2>
-                <p class="river-text">
-                    말하지 못하는 것들이 있습니다.<br>
-                    말할 수 없는 이유들이 있습니다.<br><br>
-
-                    언어는 때로 다리가 아니라 벽이 됩니다.<br>
-                    침묵 뒤에는 보이지 않는 전쟁이 벌어집니다.<br><br>
-
-                    우리는 그 전쟁을 모릅니다.<br>
-                    당연하게 건네는 요구들이, 누군가에겐 건널 수 없는 강입니다.<br><br>
-
-                    <strong style="font-size: var(--font-size-lg); display: block; margin-top: var(--spacing-md);">
-                        그들은 지금도 강 앞에 서 있습니다.<br>
-                        말없이.
-                    </strong>
-                </p>
-            </section>
-
-            <!-- Closing -->
-            <section class="closing section">
-                <p class="closing-quote">
-                    당연함은<br>
-                    누군가의 침묵을<br>
-                    들을 수 있을 때<br>
-                    비로소 온전해집니다
-                </p>
+        <!-- Closing Section -->
+        <section class="closing">
+            <div class="closing-content">
+                <div class="closing-icon" aria-hidden="true">💔</div>
+                <blockquote class="closing-quote">
+                    "몸은 때로 우리를 배신한다.<br>
+                    그리고 그 배신은 보이지 않는다."
+                </blockquote>
                 <p class="closing-text">
-                    우리가 할 수 있는 것은 듣는 것입니다.<br>
-                    말하지 못하는 이유를 이해하려 애쓰는 것입니다.<br>
-                    침묵을 탓하지 않는 것입니다.<br><br>
-                    그리고 때로는, 기다리는 것입니다.
+                    누군가에게 일상은 전쟁터입니다.
+                    우리가 의식하지 않고 수행하는 것들이,
+                    다른 누군가에겐 <span class="closing-highlight">불가능의 영역</span>입니다.<br><br>
+                    당연한 것들은 당연하지 않습니다.
                 </p>
-            </section>
-        </main>
-
-        <!-- Footer with Help Resources -->
-        <footer class="footer">
-            <div class="help-resources">
-                <div class="help-title">💚 도움이 필요하신가요?</div>
-                <a href="tel:1577-0199" class="help-link">📞 정신건강 위기상담 전화: 1577-0199</a>
-                <a href="tel:1393" class="help-link">📞 자살예방 상담전화: 1393</a>
-                <a href="https://www.counselling.or.kr" class="help-link" target="_blank" rel="noopener">🌐 한국상담학회</a>
-                <a href="https://www.mindgil.com" class="help-link" target="_blank" rel="noopener">🌐 마음의 길 (온라인 상담)</a>
             </div>
+        </section>
 
-            <p class="footer-text">
-                본 인포그래픽은 정신건강에 대한 이해와 공감을 위해 제작되었습니다.
-            </p>
-            <p class="footer-note">
-                통계 출처: 보건복지부, 한국정신건강복지센터, OECD Health Statistics<br>
-                © 2024 당연함의 무게 시리즈
-            </p>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-divider" aria-hidden="true"></div>
+            <p>당연함의 무게 (1) 통제되지 않는 영토</p>
+            <p style="margin-top: 0.5rem; opacity: 0.6;">Interactive Infographic Story</p>
         </footer>
-    </div>
+    </main>
 
-    <!-- JavaScript -->
     <script>
         // ========================================
-        // INTERSECTION OBSERVER - SCROLL ANIMATIONS
+        // INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
         // ========================================
+
         const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -60px 0px'
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
         };
 
-        const sectionObserver = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+
+                    // Trigger stat animations when card becomes visible
+                    if (entry.target.classList.contains('struggle-card')) {
+                        const statValues = entry.target.querySelectorAll('.stat-value');
+                        statValues.forEach(stat => {
+                            if (!stat.classList.contains('animated')) {
+                                animateStat(stat);
+                                stat.classList.add('animated');
+                            }
+                        });
+                    }
                 }
             });
         }, observerOptions);
 
-        // Observe all sections
-        document.querySelectorAll('.section').forEach(section => {
-            sectionObserver.observe(section);
+        // Observe all animated elements
+        document.querySelectorAll('.intro-text, .struggle-card, .closing-content').forEach(el => {
+            observer.observe(el);
         });
 
         // ========================================
-        // STAT NUMBER COUNT-UP ANIMATION
+        // STAT COUNTER ANIMATION
         // ========================================
-        function animateValue(element, start, end, duration, suffix = '') {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
 
-                if (typeof end === 'number') {
-                    const value = progress * (end - start) + start;
-                    element.textContent = value.toFixed(1) + suffix;
+        function animateStat(element) {
+            const target = parseFloat(element.getAttribute('data-target'));
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 2000; // 2 seconds
+            const steps = 60;
+            const increment = target / steps;
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
                 }
 
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
+                // Format the number
+                let displayValue = Math.round(current);
+                if (suffix === '%') {
+                    element.textContent = displayValue + suffix;
+                } else if (suffix === '-20%') {
+                    element.textContent = '10-20%';
+                } else if (suffix === '위') {
+                    element.textContent = displayValue + suffix;
+                } else {
+                    element.textContent = displayValue + suffix;
                 }
-            };
-            window.requestAnimationFrame(step);
+            }, duration / steps);
         }
 
-        // Animate stat numbers when they become visible
-        const statObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const statNumber = entry.target;
-                    const text = statNumber.textContent.trim();
+        // ========================================
+        // SMOOTH SCROLL FOR INDICATOR
+        // ========================================
 
-                    // Check if it's a percentage
-                    if (text.includes('%')) {
-                        const num = parseFloat(text);
-                        animateValue(statNumber, 0, num, 1500, '%');
-                    }
-
-                    statObserver.unobserve(statNumber);
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (scrollIndicator) {
+            scrollIndicator.addEventListener('click', () => {
+                const introSection = document.querySelector('.intro');
+                if (introSection) {
+                    introSection.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-        }, { threshold: 0.5 });
+        }
 
-        document.querySelectorAll('.stat-number').forEach(stat => {
-            const text = stat.textContent.trim();
-            if (text.includes('%')) {
-                statObserver.observe(stat);
+        // ========================================
+        // KEYBOARD ACCESSIBILITY
+        // ========================================
+
+        document.addEventListener('keydown', (e) => {
+            // Allow keyboard navigation for interactive elements
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (document.activeElement === scrollIndicator) {
+                    e.preventDefault();
+                    scrollIndicator.click();
+                }
             }
         });
 
         // ========================================
-        // SMOOTH SCROLL
+        // PERFORMANCE OPTIMIZATION
         // ========================================
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+
+        // Debounce scroll events if needed
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(() => {
+                // Any scroll-dependent logic here
             });
-        });
+        }, { passive: true });
 
         // ========================================
-        // ACCESSIBILITY: KEYBOARD NAVIGATION
+        // ACCESSIBILITY: Announce dynamic content
         // ========================================
-        document.querySelectorAll('.help-link').forEach(link => {
-            link.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    link.click();
-                }
-            });
-        });
+
+        // Create live region for screen readers
+        const liveRegion = document.createElement('div');
+        liveRegion.setAttribute('role', 'status');
+        liveRegion.setAttribute('aria-live', 'polite');
+        liveRegion.setAttribute('aria-atomic', 'true');
+        liveRegion.style.position = 'absolute';
+        liveRegion.style.left = '-10000px';
+        liveRegion.style.width = '1px';
+        liveRegion.style.height = '1px';
+        liveRegion.style.overflow = 'hidden';
+        document.body.appendChild(liveRegion);
 
         // ========================================
-        // CONSOLE MESSAGE
+        // INITIALIZATION
         // ========================================
-        console.log('%c💚 침묵의 이유', 'font-size: 18px; color: #6b46c1; font-weight: bold;');
-        console.log('%c당연한 소통이 누군가에게는 건널 수 없는 강입니다', 'font-size: 12px; color: #4a5568;');
-        console.log('%c도움이 필요하시면: 1577-0199 (정신건강 위기상담)', 'font-size: 11px; color: #ed8936;');
 
-        // ========================================
-        // PERFORMANCE: REDUCE MOTION PREFERENCE
-        // ========================================
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        if (prefersReducedMotion) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.style.opacity = '1';
-                section.style.transform = 'none';
-            });
-        }
+        console.log('✅ 당연함의 무게 - Interactive Infographic loaded');
+        console.log('📊 5 conditions visualized');
+        console.log('♿ Accessibility features enabled');
     </script>
 </body>
 </html>
