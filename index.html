@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MOU(양해각서) 5가지 핵심 포인트 - 실무자를 위한 칸반보드 가이드">
-    <title>MOU 실무 가이드 | 칸반보드 인포그래픽</title>
+    <meta name="description" content="역경의 연단: 내면의 품격이 빚어내는 인생의 대반전 - 인터랙티브 웹 스토리">
+    <title>역경의 연단 | 내면의 품격이 빚어내는 인생의 대반전</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* ========================================
-           BASE STYLES
-           ======================================== */
+        /* ============================================
+           RESET & FOUNDATIONAL STYLES
+           ============================================ */
         * {
             margin: 0;
             padding: 0;
@@ -24,1053 +24,963 @@
             overflow-wrap: break-word;
         }
 
+        :root {
+            /* Color Palette - Cosmic & Elegant */
+            --color-cosmic-night: #0a0e27;
+            --color-deep-space: #1a1f3a;
+            --color-stellar-indigo: #4338ca;
+            --color-nebula-purple: #7c3aed;
+            --color-gold-accent: #fbbf24;
+            --color-amber-glow: #f59e0b;
+            --color-silver-text: #e2e8f0;
+            --color-pearl-white: #f8fafc;
+
+            /* Typography */
+            --font-serif: 'Noto Serif KR', serif;
+            --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 3rem;
+            --spacing-xl: 5rem;
+
+            /* Effects */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glow-gold: 0 0 30px rgba(251, 191, 36, 0.3);
+            --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-            color: #1e293b;
-            line-height: 1.6;
-        }
-
-        /* ========================================
-           HEADER
-           ======================================== */
-        .header {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            color: white;
-            padding: 2rem 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .header-title {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        .header-subtitle {
-            font-size: clamp(1rem, 2vw, 1.125rem);
-            opacity: 0.95;
-            margin-bottom: 1.5rem;
-        }
-
-        .header-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-            font-size: 0.875rem;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.375rem 0.875rem;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 9999px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-        }
-
-        /* ========================================
-           TOOLBAR
-           ======================================== */
-        .toolbar {
-            max-width: 1600px;
-            margin: 1.5rem auto;
-            padding: 0 1.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1rem;
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .filter-btn:hover {
-            border-color: #3b82f6;
-            background: #eff6ff;
-        }
-
-        .filter-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        .action-group {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .action-btn {
-            padding: 0.625rem 1.25rem;
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .action-btn:hover {
-            background: #f8fafc;
-            border-color: #cbd5e1;
-        }
-
-        .action-btn.primary {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        .action-btn.primary:hover {
-            background: #2563eb;
-        }
-
-        /* ========================================
-           KANBAN BOARD
-           ======================================== */
-        .kanban-wrapper {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 1.5rem 3rem;
-        }
-
-        .kanban-board {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.25rem;
-        }
-
-        @media (min-width: 1024px) {
-            .kanban-board {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        /* Lane */
-        .lane {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            display: flex;
-            flex-direction: column;
-            max-height: calc(100vh - 300px);
-        }
-
-        .lane-header {
-            padding: 1.25rem;
-            border-bottom: 3px solid;
-            border-radius: 12px 12px 0 0;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .lane-header h2 {
-            font-size: 1.125rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .lane-header p {
-            font-size: 0.8125rem;
-            opacity: 0.8;
-        }
-
-        .lane.summary .lane-header {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-            border-color: #3b82f6;
-            color: #1e40af;
-        }
-
-        .lane.caution .lane-header {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-color: #f59e0b;
-            color: #92400e;
-        }
-
-        .lane.guide .lane-header {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border-color: #10b981;
-            color: #065f46;
-        }
-
-        .lane.resources .lane-header {
-            background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 100%);
-            border-color: #a855f7;
-            color: #6b21a8;
-        }
-
-        .lane-cards {
-            padding: 1rem;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        /* Card */
-        .card {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: var(--font-sans);
+            background: linear-gradient(180deg, var(--color-cosmic-night) 0%, var(--color-deep-space) 100%);
+            color: var(--color-silver-text);
+            line-height: 1.8;
+            overflow-x: hidden;
             position: relative;
+            min-height: 100vh;
         }
 
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            border-color: #cbd5e1;
-        }
-
-        .card.hidden {
-            display: none;
-        }
-
-        .card-priority {
-            position: absolute;
-            top: -8px;
-            right: 12px;
-            background: white;
-            padding: 0.25rem 0.625rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .priority-high {
-            color: #dc2626;
-            border: 1.5px solid #ef4444;
-        }
-
-        .priority-medium {
-            color: #f59e0b;
-            border: 1.5px solid #fbbf24;
-        }
-
-        .priority-low {
-            color: #10b981;
-            border: 1.5px solid #34d399;
-        }
-
-        .card-category {
-            display: inline-block;
-            padding: 0.25rem 0.625rem;
-            background: #f1f5f9;
-            border-radius: 6px;
-            font-size: 0.6875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
-            color: #475569;
-            margin-bottom: 0.75rem;
-        }
-
-        .card-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 0.75rem;
-            line-height: 1.4;
-        }
-
-        .card-content {
-            font-size: 0.9375rem;
-            color: #475569;
-            line-height: 1.7;
-        }
-
-        .card-content ul,
-        .card-content ol {
-            margin: 0.75rem 0;
-            padding-left: 1.25rem;
-        }
-
-        .card-content li {
-            margin: 0.5rem 0;
-        }
-
-        .card-content strong {
-            color: #1e293b;
-            font-weight: 600;
-        }
-
-        .highlight-box {
-            background: #f8fafc;
-            border-left: 4px solid #3b82f6;
-            padding: 1rem;
-            margin: 0.75rem 0;
-            border-radius: 6px;
-            font-size: 0.875rem;
-        }
-
-        .warning-box {
-            background: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 1rem;
-            margin: 0.75rem 0;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            color: #92400e;
-        }
-
-        .success-box {
-            background: #d1fae5;
-            border-left: 4px solid #10b981;
-            padding: 1rem;
-            margin: 0.75rem 0;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            color: #065f46;
-        }
-
-        .code-box {
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 1rem;
-            border-radius: 6px;
-            font-size: 0.8125rem;
-            line-height: 1.6;
-            margin: 0.75rem 0;
-            font-family: 'Courier New', monospace;
-            white-space: pre-wrap;
-        }
-
-        .checklist {
-            list-style: none;
-            padding: 0;
-            margin: 0.75rem 0;
-        }
-
-        .checklist li {
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.625rem;
-        }
-
-        .checklist li::before {
-            content: '✓';
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 1.25rem;
-            height: 1.25rem;
-            background: #10b981;
-            color: white;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.75rem;
-            flex-shrink: 0;
-            margin-top: 0.125rem;
-        }
-
-        .copy-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.375rem 0.75rem;
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 0.5rem;
-        }
-
-        .copy-btn:hover {
-            background: #e2e8f0;
-        }
-
-        /* ========================================
-           TOAST NOTIFICATION
-           ======================================== */
-        .toast {
+        /* ============================================
+           COSMIC BACKGROUND & STARS
+           ============================================ */
+        .stars-background {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: #1e293b;
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s;
-            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
             pointer-events: none;
         }
 
-        .toast.show {
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Nebula glow effect */
+        .stars-background::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: nebulaPulse 8s ease-in-out infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes nebulaPulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        /* ============================================
+           LAYOUT CONTAINER
+           ============================================ */
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-lg) var(--spacing-md);
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-gold-accent);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--color-pearl-white) 0%, var(--color-gold-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            font-weight: 300;
+            color: var(--color-silver-text);
+            max-width: 600px;
+            margin: 0 auto var(--spacing-lg);
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .hero-quote {
+            position: relative;
+            font-family: var(--font-serif);
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-style: italic;
+            color: var(--color-gold-accent);
+            max-width: 500px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-lg) auto;
+            border-left: 3px solid var(--color-gold-accent);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 0 12px 12px 0;
+            animation: fadeInUp 1s ease-out 0.9s backwards;
+        }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: var(--spacing-lg);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: var(--color-gold-accent);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        /* ============================================
+           SECTION STYLES
+           ============================================ */
+        .section {
+            margin: var(--spacing-xl) 0;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
             opacity: 1;
             transform: translateY(0);
-            pointer-events: auto;
         }
 
-        /* ========================================
-           PRINT STYLES
-           ======================================== */
-        @media print {
-            body {
-                background: white;
-            }
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-stellar-indigo), var(--color-nebula-purple));
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--glow-gold);
+        }
 
-            .toolbar,
-            .action-btn,
-            .copy-btn,
-            .toast {
-                display: none !important;
-            }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--color-pearl-white);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.3;
+        }
 
-            .kanban-board {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-            }
+        .section-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: var(--spacing-lg) var(--spacing-md);
+            box-shadow: var(--shadow-deep);
+        }
 
-            .lane {
-                break-inside: avoid;
-                max-height: none;
-                box-shadow: none;
-                border: 1px solid #e5e7eb;
-            }
+        .section-text {
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            line-height: 1.9;
+            color: var(--color-silver-text);
+            margin-bottom: var(--spacing-md);
+        }
 
-            .lane-cards {
-                overflow: visible;
-            }
+        .section-text strong {
+            color: var(--color-gold-accent);
+            font-weight: 600;
+        }
 
-            .card {
-                break-inside: avoid;
-                box-shadow: none;
-                margin-bottom: 0.5rem;
-            }
+        .section-text em {
+            font-style: normal;
+            color: var(--color-gold-accent);
+            font-weight: 600;
+        }
 
-            .card:hover {
-                transform: none;
-            }
+        /* ============================================
+           STORY CARD (for case studies)
+           ============================================ */
+        .story-card {
+            background: linear-gradient(135deg, rgba(67, 56, 202, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 16px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-            @page {
-                size: A4;
-                margin: 1.5cm;
+        .story-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-size: 6rem;
+            font-family: Georgia, serif;
+            color: rgba(251, 191, 36, 0.1);
+            line-height: 1;
+        }
+
+        .story-card-title {
+            font-weight: 700;
+            color: var(--color-gold-accent);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.125rem;
+        }
+
+        .story-card-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-silver-text);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+           HIGHLIGHT BOX
+           ============================================ */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
+            border-left: 4px solid var(--color-gold-accent);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border-radius: 0 12px 12px 0;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-gold-accent);
+            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.1);
+        }
+
+        /* ============================================
+           CHECKLIST (for daily practices)
+           ============================================ */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: var(--spacing-md) 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) 0;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            transform: translateX(8px);
+        }
+
+        .checklist-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--color-gold-accent), var(--color-amber-glow));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            color: var(--color-cosmic-night);
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+        }
+
+        .checklist-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--color-silver-text);
+        }
+
+        .checklist-text strong {
+            color: var(--color-gold-accent);
+        }
+
+        /* ============================================
+           STATS COUNTER
+           ============================================ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-gold);
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 900;
+            color: var(--color-gold-accent);
+            line-height: 1;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--color-silver-text);
+            opacity: 0.8;
+        }
+
+        /* ============================================
+           CONSTELLATION VISUAL (Final section)
+           ============================================ */
+        .constellation-section {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            position: relative;
+        }
+
+        .constellation-canvas {
+            width: 300px;
+            height: 300px;
+            margin: var(--spacing-lg) auto;
+            position: relative;
+        }
+
+        .constellation-star {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--color-gold-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--color-gold-accent);
+            animation: starGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes starGlow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        .constellation-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-gold-accent), transparent);
+            opacity: 0.3;
+            transform-origin: left center;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-lg) var(--spacing-md);
+            border-top: 1px solid var(--glass-border);
+            margin-top: var(--spacing-xl);
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-gold-accent), transparent);
+            margin: 0 auto var(--spacing-md);
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--color-silver-text);
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* ========================================
-           RESPONSIVE
-           ======================================== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
         @media (max-width: 768px) {
-            .header {
-                padding: 1.5rem 1rem;
-            }
-
-            .toolbar {
+            .page-wrapper {
                 padding: 0 1rem;
             }
 
-            .kanban-wrapper {
-                padding: 0 1rem 2rem;
+            .hero {
+                min-height: 90vh;
+                padding: var(--spacing-md) var(--spacing-sm);
             }
 
-            .kanban-board {
+            .section {
+                margin: var(--spacing-lg) 0;
+            }
+
+            .section-content {
+                padding: var(--spacing-md) var(--spacing-sm);
+            }
+
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
 
-            .lane {
-                max-height: none;
+            .constellation-canvas {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --spacing-lg: 2rem;
+                --spacing-xl: 3rem;
             }
 
-            .action-group {
-                width: 100%;
+            .hero-quote {
+                font-size: 0.9375rem;
+                padding: var(--spacing-sm);
             }
+        }
 
-            .action-btn {
-                flex: 1;
-                justify-content: center;
+        /* ============================================
+           ACCESSIBILITY
+           ============================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
             }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <h1 class="header-title">📋 MOU(양해각서) 실무 가이드</h1>
-            <p class="header-subtitle">5가지 핵심 포인트로 정리한 법률 실무자용 칸반보드</p>
-            <div class="header-meta">
-                <span class="badge">
-                    <span>⚖️</span>
-                    <span>법률 실무</span>
-                </span>
-                <span class="badge">
-                    <span>📝</span>
-                    <span>계약 전 단계</span>
-                </span>
-                <span class="badge">
-                    <span>✍️</span>
-                    <span>작성: 조우성 변호사 (로펌 머스트노우)</span>
-                </span>
-            </div>
-        </div>
-    </header>
+    <!-- Stars Background -->
+    <div class="stars-background" id="stars-container"></div>
 
-    <!-- Toolbar -->
-    <div class="toolbar">
-        <div class="filter-group">
-            <button class="filter-btn active" data-filter="all">
-                <span>🔍</span>
-                <span>전체 보기</span>
-            </button>
-            <button class="filter-btn" data-filter="high">
-                <span>★★★</span>
-                <span>높은 우선순위</span>
-            </button>
-            <button class="filter-btn" data-filter="medium">
-                <span>★★</span>
-                <span>중간 우선순위</span>
-            </button>
-            <button class="filter-btn" data-filter="low">
-                <span>★</span>
-                <span>낮은 우선순위</span>
-            </button>
-        </div>
+    <!-- Main Content -->
+    <div class="page-wrapper">
+        <!-- Hero Section -->
+        <header class="hero" role="banner">
+            <div class="hero-badge">채근담의 지혜</div>
+            <h1 class="hero-title">
+                역경의 연단
+            </h1>
+            <p class="hero-subtitle">
+                내면의 품격이 빚어내는<br>인생의 대반전
+            </p>
+            <blockquote class="hero-quote">
+                "우리의 운명은 별에 쓰여 있는 것이 아니라,<br>
+                우리 내면의 별자리로 이루어진다"
+            </blockquote>
+            <div class="hero-scroll-indicator" aria-label="아래로 스크롤">↓</div>
+        </header>
 
-        <div class="action-group">
-            <button class="action-btn" onclick="window.print()">
-                <span>🖨️</span>
-                <span>인쇄</span>
-            </button>
-            <button class="action-btn primary" onclick="shareContent()">
-                <span>📤</span>
-                <span>공유하기</span>
-            </button>
-        </div>
-    </div>
+        <!-- Main Content -->
+        <main>
+            <!-- Section 1: 역경, 품격의 시험대 -->
+            <section class="section">
+                <div class="section-number">1</div>
+                <h2 class="section-title">역경, 품격의 시험대</h2>
+                <div class="section-content">
+                    <p class="section-text">
+                        <em>가난한 집일지라도 마당을 깨끗이 쓸고, 가난할지라도 여자가 머리를 곱게 빗으면
+                        외관과 외모가 화려하지 않아도 품위가 우아할 것이다.</em>
+                    </p>
+                    <p class="section-text">
+                        이 채근담의 구절은 단순한 처세술이 아니라 <strong>내면의 품격</strong>에 대한 깊은 통찰을 담고 있습니다.
+                        역경은 우리의 진정한 품격을 시험하는 도구입니다.
+                    </p>
 
-    <!-- Kanban Board -->
-    <div class="kanban-wrapper">
-        <div class="kanban-board">
-            <!-- Lane 1: 핵심 요약 -->
-            <div class="lane summary">
-                <div class="lane-header">
-                    <h2>
-                        <span>💡</span>
-                        <span>핵심 요약</span>
-                    </h2>
-                    <p>TL;DR & 주요 키워드</p>
-                </div>
-                <div class="lane-cards">
-                    <!-- Card 1 -->
-                    <div class="card" data-priority="high" data-category="definition">
-                        <span class="card-priority priority-high">★★★</span>
-                        <span class="card-category">기본 개념</span>
-                        <h3 class="card-title">MOU란 무엇인가?</h3>
-                        <div class="card-content">
-                            <p><strong>MOU (Memorandum of Understanding)</strong></p>
-                            <ul>
-                                <li><strong>한국어 명칭:</strong> 양해각서, 의향서, 협정서</li>
-                                <li><strong>영문 동의어:</strong> LOI (Letter of Intent)</li>
-                                <li><strong>목적:</strong> 정식 계약 체결 전 상호 간의 공통된 의향이나 이해를 정리</li>
-                            </ul>
-                            <div class="warning-box">
-                                <strong>⚠️ 혼동 주의:</strong> '약정서'는 MOU와 다릅니다. 약정서는 계약서와 동일하게 법적 구속력이 있습니다.
-                            </div>
-                        </div>
+                    <div class="story-card">
+                        <h3 class="story-card-title">존 밀러의 이야기</h3>
+                        <p class="story-card-text">
+                            2008년 금융위기 때 모든 것을 잃고도 매일 아침 정장을 차려입고 동네 공원을 산책하며
+                            자존감을 지켜낸 월스트리트의 전직 투자은행가. 그의 선택은 외적 환경과 무관하게
+                            내면의 품격을 유지하는 것이 얼마나 중요한지를 보여줍니다.
+                        </p>
                     </div>
 
-                    <!-- Card 2 -->
-                    <div class="card" data-priority="high" data-category="legal">
-                        <span class="card-priority priority-high">★★★</span>
-                        <span class="card-category">법적 효력</span>
-                        <h3 class="card-title">법적 구속력 여부</h3>
-                        <div class="card-content">
-                            <p>MOU의 법적 구속력은 <strong>내용</strong>에 따라 결정됩니다.</p>
-                            <div class="highlight-box">
-                                <strong>핵심 원칙:</strong><br>
-                                제목이 '양해각서'라고 해서 자동으로 법적 구속력이 없는 것이 아닙니다. 항상 내용을 확인해야 합니다.
-                            </div>
-                            <ul>
-                                <li><strong>구속력 없음:</strong> "본 양해각서는 법적으로 구속하지 않는다" 문구 + '역할' 용어 사용</li>
-                                <li><strong>구속력 있음:</strong> '권리, 의무' 용어 사용 + 손해배상 조항 포함</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="card" data-priority="medium" data-category="timeline">
-                        <span class="card-priority priority-medium">★★</span>
-                        <span class="card-category">기한 설정</span>
-                        <h3 class="card-title">5가지 핵심 포인트</h3>
-                        <div class="card-content">
-                            <ol>
-                                <li><strong>명칭과 의미:</strong> MOU, LOI, 양해각서, 의향서</li>
-                                <li><strong>법적 구속력:</strong> 내용에 따라 결정</li>
-                                <li><strong>유효기한:</strong> 명시적 설정 필요</li>
-                                <li><strong>해제/해지:</strong> 유연성 확보</li>
-                                <li><strong>비밀유지:</strong> 정보 보호 조치</li>
-                            </ol>
-                        </div>
+                    <div class="highlight-box">
+                        훌륭한 사람이 가난하고 불행해지더라도<br>
+                        어찌 자기 스스로 피폐해지고 해이해질 것인가
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Lane 2: 주의 사항 -->
-            <div class="lane caution">
-                <div class="lane-header">
-                    <h2>
-                        <span>⚠️</span>
-                        <span>주의 사항</span>
-                    </h2>
-                    <p>리스크 & 함정</p>
+            <!-- Section 2: 자기혁신, 기회의 씨앗 -->
+            <section class="section">
+                <div class="section-number">2</div>
+                <h2 class="section-title">자기혁신, 기회의 씨앗</h2>
+                <div class="section-content">
+                    <div class="highlight-box">
+                        역경은 우리를 부수는 망치가 아니라,<br>
+                        더 나은 모습으로 다듬는 조각칼이다
+                    </div>
+
+                    <p class="section-text">
+                        이는 단순한 위안이 아니라 실제 사례로 증명된 진실입니다.
+                    </p>
+
+                    <div class="story-card">
+                        <h3 class="story-card-title">마이클 창의 전환</h3>
+                        <p class="story-card-text">
+                            2020년 팬데믹으로 20년 경력의 요리사 직업을 잃은 마이클 창은 절망 대신 이를 기회로 삼았습니다.
+                            그는 매일 아침 셰프복을 입고 부엌에 서서 온라인 요리 클래스를 시작했고,
+                            이는 6개월 만에 10만 명의 구독자를 가진 유튜브 채널로 성장했습니다.
+                        </p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="20">0</div>
+                            <div class="stat-label">년 경력</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="6">0</div>
+                            <div class="stat-label">개월</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10만+</div>
+                            <div class="stat-label">구독자</div>
+                        </div>
+                    </div>
+
+                    <p class="section-text">
+                        이는 '위기는 기회다'라는 진부한 말을 넘어, <strong>적극적인 자기혁신</strong>이
+                        어떻게 새로운 길을 열 수 있는지 보여주는 생생한 예시입니다.
+                    </p>
                 </div>
-                <div class="lane-cards">
-                    <!-- Card 4 -->
-                    <div class="card" data-priority="high" data-category="legal">
-                        <span class="card-priority priority-high">★★★</span>
-                        <span class="card-category">법적 리스크</span>
-                        <h3 class="card-title">제목만으로 판단 금지</h3>
-                        <div class="card-content">
-                            <div class="warning-box">
-                                <strong>⚠️ 위험:</strong> 제목이 '양해각서'나 '의향서'라고 해도 법적 구속력이 있을 수 있습니다.
-                            </div>
-                            <p><strong>실수 사례:</strong></p>
-                            <ul>
-                                <li>"양해각서니까 법적 효력 없겠지" → <strong>잘못된 판단</strong></li>
-                                <li>내용에 '권리, 의무'가 명시되어 있다면 구속력 발생</li>
-                                <li>손해배상 조항이 있다면 대부분 법적 구속력 인정</li>
-                            </ul>
-                            <div class="highlight-box">
-                                <strong>So What?</strong> 항상 내용을 꼼꼼히 검토하세요. 제목에 속지 마세요.
-                            </div>
-                        </div>
-                    </div>
+            </section>
 
-                    <!-- Card 5 -->
-                    <div class="card" data-priority="high" data-category="timeline">
-                        <span class="card-priority priority-high">★★★</span>
-                        <span class="card-category">기한 관리</span>
-                        <h3 class="card-title">유효기한 미설정 위험</h3>
-                        <div class="card-content">
-                            <div class="warning-box">
-                                <strong>⚠️ 위험:</strong> 유효기한을 설정하지 않으면 MOU가 무기한으로 효력을 유지할 수 있습니다.
-                            </div>
-                            <p><strong>발생 가능한 문제:</strong></p>
-                            <ul>
-                                <li>10년 전 MOU가 여전히 유효하다고 주장</li>
-                                <li>상황이 바뀌었지만 MOU 내용에 묶임</li>
-                                <li>해지 절차가 복잡해짐</li>
-                            </ul>
-                            <div class="success-box">
-                                <strong>✓ 해결책:</strong> 항상 명확한 유효기한을 설정하세요.
-                            </div>
-                        </div>
-                    </div>
+            <!-- Section 3: 일상의 의식, 미래를 여는 열쇠 -->
+            <section class="section">
+                <div class="section-number">3</div>
+                <h2 class="section-title">일상의 의식, 미래를 여는 열쇠</h2>
+                <div class="section-content">
+                    <p class="section-text">
+                        품격 있는 삶은 거창한 것이 아니라 <strong>일상의 작은 습관들</strong>로 이루어집니다.
+                    </p>
 
-                    <!-- Card 6 -->
-                    <div class="card" data-priority="medium" data-category="termination">
-                        <span class="card-priority priority-medium">★★</span>
-                        <span class="card-category">해지 조항</span>
-                        <h3 class="card-title">해지 조항 누락 위험</h3>
-                        <div class="card-content">
-                            <p><strong>문제 상황:</strong></p>
-                            <ul>
-                                <li>상대방이 기대에 미치지 못함</li>
-                                <li>사업 환경이 급변함</li>
-                                <li>더 좋은 파트너를 발견함</li>
-                            </ul>
-                            <div class="warning-box">
-                                <strong>⚠️</strong> 해지 조항이 없으면 상대방 동의 없이는 MOU 종료가 어렵습니다.
-                            </div>
-                            <div class="highlight-box">
-                                <strong>So What?</strong> 쉽게 해제/해지할 수 있는 조항을 반드시 포함하세요.
-                            </div>
-                        </div>
-                    </div>
+                    <ul class="checklist">
+                        <li class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <span class="checklist-text">
+                                <strong>하루의 시작과 끝을 의식화하기</strong><br>
+                                매일 아침 5분간 명상하고, 잠들기 전 감사일기 쓰기
+                            </span>
+                        </li>
+                        <li class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <span class="checklist-text">
+                                <strong>학습의 일상화</strong><br>
+                                매일 30분씩 전문 서적 읽기 또는 온라인 강의 듣기
+                            </span>
+                        </li>
+                        <li class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <span class="checklist-text">
+                                <strong>건강 관리</strong><br>
+                                주 3회 30분 이상 걷기, 하루 2리터 물 마시기
+                            </span>
+                        </li>
+                        <li class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <span class="checklist-text">
+                                <strong>네트워크 유지</strong><br>
+                                주 1회 이상 옛 동료나 지인에게 안부 연락하기
+                            </span>
+                        </li>
+                    </ul>
 
-                    <!-- Card 7 -->
-                    <div class="card" data-priority="high" data-category="confidentiality">
-                        <span class="card-priority priority-high">★★★</span>
-                        <span class="card-category">정보 보안</span>
-                        <h3 class="card-title">비밀유지 누락 위험</h3>
-                        <div class="card-content">
-                            <div class="warning-box">
-                                <strong>⚠️ 위험:</strong> MOU 협상 과정에서 사업 기밀이 유출될 수 있습니다.
-                            </div>
-                            <p><strong>유출 가능 정보:</strong></p>
-                            <ul>
-                                <li>사업 계획 및 전략</li>
-                                <li>재무 정보</li>
-                                <li>기술 자료 및 노하우</li>
-                                <li>고객 명단 및 거래 조건</li>
-                            </ul>
-                            <div class="success-box">
-                                <strong>✓ 필수:</strong> 비밀유지 조항 + 손해배상 규정
-                            </div>
-                        </div>
-                    </div>
+                    <p class="section-text">
+                        이러한 작은 습관들이 모여 우리의 내면을 단단하게 만들고,
+                        예상치 못한 기회를 끌어당기는 <strong>자석</strong>이 됩니다.
+                    </p>
                 </div>
-            </div>
+            </section>
 
-            <!-- Lane 3: 실행 가이드 -->
-            <div class="lane guide">
-                <div class="lane-header">
-                    <h2>
-                        <span>✓</span>
-                        <span>실행 가이드</span>
-                    </h2>
-                    <p>단계별 체크리스트</p>
+            <!-- Section 4: 내면의 힘, 운명을 바꾸는 지렛대 -->
+            <section class="section">
+                <div class="section-number">4</div>
+                <h2 class="section-title">내면의 힘, 운명을 바꾸는 지렛대</h2>
+                <div class="section-content">
+                    <div class="highlight-box">
+                        우리의 운명은 별에 쓰여 있는 것이 아니라,<br>
+                        우리 내면의 별자리로 이루어진다
+                    </div>
+
+                    <p class="section-text">
+                        이 말은 우리의 내면이 얼마나 강력한 힘을 가졌는지 상기시킵니다.
+                    </p>
+
+                    <div class="story-card">
+                        <h3 class="story-card-title">김영호 씨의 대반전</h3>
+                        <p class="story-card-text">
+                            화학자 출신으로 30년간 연구원 생활을 하다 구조조정으로 일자리를 잃은 61세.
+                            절망 대신 자신의 경험을 살려 과학 교구 제작에 도전했습니다.
+                            3년간의 노력 끝에 그는 중소기업 백만불 수출의 탑을 수상하는 기업가가 되었습니다.
+                        </p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="61">0</div>
+                            <div class="stat-label">도전 시작 나이</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="30">0</div>
+                            <div class="stat-label">년 경력</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="3">0</div>
+                            <div class="stat-label">년 만에 성공</div>
+                        </div>
+                    </div>
+
+                    <p class="section-text">
+                        이는 나이와 환경을 뛰어넘어 <strong>내면의 힘</strong>이
+                        어떻게 인생을 바꿀 수 있는지 보여주는 감동적인 사례입니다.
+                    </p>
                 </div>
-                <div class="lane-cards">
-                    <!-- Card 8 -->
-                    <div class="card" data-priority="high" data-category="legal">
-                        <span class="card-priority priority-high">★★★</span>
-                        <span class="card-category">법적 구속력 배제</span>
-                        <h3 class="card-title">법적 구속력 배제 방법</h3>
-                        <div class="card-content">
-                            <ul class="checklist">
-                                <li>명시적 문구 삽입: "본 양해각서 상의 내용은 상대방을 법적으로 구속하지 않는다"</li>
-                                <li>'역할' 용어 사용: "갑의 역할", "을의 역할"</li>
-                                <li>'권리, 의무' 용어 회피</li>
-                                <li>손해배상 조항 제외</li>
-                            </ul>
-                            <div class="code-box">"본 양해각서는 갑과 을 간의 상호 이해와 협력 의향을 표시한 것으로, 어느 일방도 법적으로 구속하지 않는다."</div>
-                            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent)">
-                                <span>📋</span>
-                                <span>문구 복사</span>
-                            </button>
-                        </div>
-                    </div>
+            </section>
 
-                    <!-- Card 9 -->
-                    <div class="card" data-priority="high" data-category="timeline">
-                        <span class="card-priority priority-high">★★★</span>
-                        <span class="card-category">유효기한</span>
-                        <h3 class="card-title">유효기한 설정 방법</h3>
-                        <div class="card-content">
-                            <ul class="checklist">
-                                <li>두 가지 조건 중 먼저 도래하는 시점을 설정</li>
-                                <li>① 특정 날짜 (예: 2024년 12월 31일)</li>
-                                <li>② 본 계약 체결 시점</li>
-                                <li>자동 종료 조항 포함</li>
-                            </ul>
-                            <div class="code-box">"본 MOU는 다음 두 경우 중 먼저 도래하는 날에 효력을 상실한다.
-① 2024년 12월 31일까지 본 계약이 체결되지 않는 경우 해당 일자에
-② 본 계약이 체결된 때"</div>
-                            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent)">
-                                <span>📋</span>
-                                <span>문구 복사</span>
-                            </button>
-                        </div>
-                    </div>
+            <!-- Constellation Section - Closing -->
+            <section class="constellation-section section">
+                <h2 class="section-title">당신의 별자리를 그려라</h2>
 
-                    <!-- Card 10 -->
-                    <div class="card" data-priority="medium" data-category="termination">
-                        <span class="card-priority priority-medium">★★</span>
-                        <span class="card-category">해제/해지</span>
-                        <h3 class="card-title">유연한 해제/해지 조항</h3>
-                        <div class="card-content">
-                            <ul class="checklist">
-                                <li>상대방 귀책사유 불필요 명시</li>
-                                <li>자체 판단에 따른 해제/해지 가능</li>
-                                <li>상대방의 이의 제기 금지 조항</li>
-                                <li>서면 통지로 즉시 효력 발생</li>
-                            </ul>
-                            <div class="code-box">"갑과 을은 상대방의 귀책사유가 없어도 자체 판단에 따라 본 MOU를 해제 또는 해지할 수 있다. 상대방은 이러한 해제 또는 해지에 대해 이의를 제기하지 않기로 한다."</div>
-                            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent)">
-                                <span>📋</span>
-                                <span>문구 복사</span>
-                            </button>
-                            <div class="success-box">
-                                <strong>목적:</strong> 부담 없이 협력 관계를 탐색하고, 기대에 미치지 못하거나 상황이 바뀌었을 때 쉽게 종료 가능
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 11 -->
-                    <div class="card" data-priority="high" data-category="confidentiality">
-                        <span class="card-priority priority-high">★★★</span>
-                        <span class="card-category">비밀유지</span>
-                        <h3 class="card-title">비밀유지 조항 작성법</h3>
-                        <div class="card-content">
-                            <ul class="checklist">
-                                <li>비밀 정보의 범위 명확히 정의</li>
-                                <li>"비밀로 표시된 정보" 기준 설정</li>
-                                <li>보안 유지 의무 명시</li>
-                                <li>위반 시 손해배상 규정 포함</li>
-                                <li>구체적인 손해배상액 명시 (권장)</li>
-                            </ul>
-                            <div class="code-box">"본 MOU 이행을 위해 갑, 을 간에 서로 제공된 정보 중 비밀로 표시된 것은 서로 간에 보안을 유지해야 한다."</div>
-                            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent)">
-                                <span>📋</span>
-                                <span>문구 복사</span>
-                            </button>
-                            <div class="code-box">"비밀유지 의무를 위반하여 정보를 외부로 유출한 자는 그로 인한 손해배상금으로 금 ______원을 지급해야 한다."</div>
-                            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent)">
-                                <span>📋</span>
-                                <span>문구 복사</span>
-                            </button>
-                        </div>
-                    </div>
+                <div class="constellation-canvas" id="constellation">
+                    <!-- Stars will be dynamically generated here -->
                 </div>
-            </div>
 
-            <!-- Lane 4: 추가 리소스 -->
-            <div class="lane resources">
-                <div class="lane-header">
-                    <h2>
-                        <span>📚</span>
-                        <span>추가 리소스</span>
-                    </h2>
-                    <p>참고자료 & 관련 법규</p>
-                </div>
-                <div class="lane-cards">
-                    <!-- Card 12 -->
-                    <div class="card" data-priority="low" data-category="terms">
-                        <span class="card-priority priority-low">★</span>
-                        <span class="card-category">용어 사전</span>
-                        <h3 class="card-title">주요 용어 정리</h3>
-                        <div class="card-content">
-                            <ul>
-                                <li><strong>MOU:</strong> Memorandum of Understanding (양해각서)</li>
-                                <li><strong>LOI:</strong> Letter of Intent (의향서)</li>
-                                <li><strong>NDA:</strong> Non-Disclosure Agreement (비밀유지계약)</li>
-                                <li><strong>귀책사유:</strong> 책임을 물을 수 있는 사유</li>
-                                <li><strong>해제:</strong> 계약을 처음부터 없던 것으로 만듦</li>
-                                <li><strong>해지:</strong> 계약을 장래에 향해 종료</li>
-                            </ul>
-                        </div>
+                <div class="section-content" style="max-width: 600px; margin: 0 auto;">
+                    <p class="section-text">
+                        역경은 피할 수 없지만, 그 속에서 어떻게 대응하느냐에 따라 우리의 미래가 결정됩니다.
+                    </p>
+                    <p class="section-text">
+                        <strong>내면의 품격</strong>을 지키고 끊임없이 자기를 혁신하는 자만이
+                        진정한 성공의 열매를 맺을 수 있습니다.
+                    </p>
+                    <div class="highlight-box">
+                        오늘 당신의 내면에<br>
+                        어떤 별자리를 그리고 있는가?<br><br>
+                        그 답이 바로 당신의 미래입니다
                     </div>
+                </p>
+            </section>
+        </main>
 
-                    <!-- Card 13 -->
-                    <div class="card" data-priority="low" data-category="reference">
-                        <span class="card-priority priority-low">★</span>
-                        <span class="card-category">관련 법규</span>
-                        <h3 class="card-title">관련 법률</h3>
-                        <div class="card-content">
-                            <ul>
-                                <li><strong>민법:</strong> 계약 일반 원칙</li>
-                                <li><strong>민법 제105조:</strong> 법률행위 해석</li>
-                                <li><strong>민법 제527조:</strong> 계약 해제/해지</li>
-                                <li><strong>상법:</strong> 상행위에 관한 특칙</li>
-                                <li><strong>부정경쟁방지법:</strong> 영업비밀 보호</li>
-                            </ul>
-                            <div class="highlight-box">
-                                <strong>💡 팁:</strong> 구체적인 사안은 반드시 법률 전문가와 상담하세요.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 14 -->
-                    <div class="card" data-priority="medium" data-category="checklist">
-                        <span class="card-priority priority-medium">★★</span>
-                        <span class="card-category">최종 체크</span>
-                        <h3 class="card-title">MOU 작성 체크리스트</h3>
-                        <div class="card-content">
-                            <ul class="checklist">
-                                <li>제목: MOU, 양해각서, 의향서 중 선택</li>
-                                <li>당사자: 갑과 을의 명칭 및 주소 명시</li>
-                                <li>목적: MOU 체결 목적 명확히 기재</li>
-                                <li>법적 구속력: 배제 여부 명시</li>
-                                <li>유효기한: 종료 시점 두 가지 설정</li>
-                                <li>해제/해지: 유연한 조항 포함</li>
-                                <li>비밀유지: 보호 범위 및 손해배상 규정</li>
-                                <li>준거법: 적용 법률 명시</li>
-                                <li>서명: 대표자 날인 및 날짜</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Card 15 -->
-                    <div class="card" data-priority="low" data-category="author">
-                        <span class="card-priority priority-low">★</span>
-                        <span class="card-category">작성자 정보</span>
-                        <h3 class="card-title">법률 자문</h3>
-                        <div class="card-content">
-                            <p><strong>작성:</strong> 조우성 변호사</p>
-                            <p><strong>소속:</strong> 로펌 머스트노우</p>
-                            <div class="highlight-box">
-                                <strong>📞 문의:</strong><br>
-                                구체적인 법률 자문이 필요하시면 전문 변호사와 상담하시기 바랍니다.
-                            </div>
-                            <p style="margin-top: 1rem; font-size: 0.8125rem; color: #64748b;">
-                                <strong>면책사항:</strong> 본 자료는 일반적인 정보 제공 목적이며, 특정 사안에 대한 법률 자문이 아닙니다.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <span>✓</span>
-        <span id="toast-message">복사되었습니다!</span>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-divider"></div>
+            <p class="footer-text">
+                역경의 연단: 내면의 품격이 빚어내는 인생의 대반전
+            </p>
+            <p class="footer-text" style="margin-top: 0.5rem; font-size: 0.75rem;">
+                Interactive Web Story © 2024
+            </p>
+        </footer>
     </div>
 
     <script>
-        // ========================================
-        // FILTER FUNCTIONALITY
-        // ========================================
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const cards = document.querySelectorAll('.card');
+        // ============================================
+        // STARS BACKGROUND GENERATION
+        // ============================================
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            const starCount = 80;
 
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
 
-                // Add active class to clicked button
-                button.classList.add('active');
+                // Random position
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
 
-                // Get filter value
-                const filter = button.dataset.filter;
+                // Random size (1-3px)
+                const size = Math.random() * 2 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
 
-                // Filter cards
-                cards.forEach(card => {
-                    if (filter === 'all') {
-                        card.classList.remove('hidden');
-                    } else {
-                        const priority = card.dataset.priority;
-                        if (priority === filter) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    }
-                });
-            });
-        });
+                // Random animation delay
+                star.style.animationDelay = Math.random() * 3 + 's';
 
-        // ========================================
-        // COPY TO CLIPBOARD
-        // ========================================
-        function copyText(text) {
-            // Clean up the text
-            const cleanText = text.trim();
-
-            // Copy to clipboard
-            navigator.clipboard.writeText(cleanText).then(() => {
-                showToast('클립보드에 복사되었습니다!');
-            }).catch(err => {
-                console.error('복사 실패:', err);
-                showToast('복사에 실패했습니다. 다시 시도해주세요.', 'error');
-            });
-        }
-
-        // ========================================
-        // SHARE CONTENT
-        // ========================================
-        function shareContent() {
-            const url = window.location.href;
-            const title = 'MOU(양해각서) 실무 가이드';
-            const text = 'MOU 작성 시 꼭 알아야 할 5가지 핵심 포인트를 칸반보드로 정리했습니다.';
-
-            // Try Web Share API first
-            if (navigator.share) {
-                navigator.share({
-                    title: title,
-                    text: text,
-                    url: url
-                }).then(() => {
-                    showToast('공유되었습니다!');
-                }).catch(err => {
-                    // If user cancels, don't show error
-                    if (err.name !== 'AbortError') {
-                        fallbackShare(url);
-                    }
-                });
-            } else {
-                fallbackShare(url);
+                container.appendChild(star);
             }
         }
 
-        function fallbackShare(url) {
-            // Fallback: copy URL to clipboard
-            navigator.clipboard.writeText(url).then(() => {
-                showToast('링크가 클립보드에 복사되었습니다!');
-            }).catch(err => {
-                console.error('공유 실패:', err);
-                showToast('공유에 실패했습니다.', 'error');
+        // ============================================
+        // INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
+        // ============================================
+        function setupScrollAnimations() {
+            const options = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+
+                        // Trigger stat counters when section becomes visible
+                        const statNumbers = entry.target.querySelectorAll('.stat-number[data-target]');
+                        statNumbers.forEach(stat => {
+                            if (!stat.classList.contains('counted')) {
+                                animateCounter(stat);
+                                stat.classList.add('counted');
+                            }
+                        });
+                    }
+                });
+            }, options);
+
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
             });
         }
 
-        // ========================================
-        // TOAST NOTIFICATION
-        // ========================================
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toast-message');
+        // ============================================
+        // COUNTER ANIMATION
+        // ============================================
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const steps = 60;
+            const increment = target / steps;
+            let current = 0;
 
-            toastMessage.textContent = message;
-            toast.classList.add('show');
-
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.round(current);
+            }, duration / steps);
         }
 
-        // ========================================
-        // KEYBOARD SHORTCUTS
-        // ========================================
+        // ============================================
+        // CONSTELLATION VISUALIZATION
+        // ============================================
+        function createConstellation() {
+            const canvas = document.getElementById('constellation');
+            const stars = [
+                { x: 30, y: 20 },
+                { x: 70, y: 15 },
+                { x: 50, y: 50 },
+                { x: 20, y: 70 },
+                { x: 80, y: 75 },
+                { x: 60, y: 85 }
+            ];
+
+            // Create stars
+            stars.forEach((pos, index) => {
+                const star = document.createElement('div');
+                star.className = 'constellation-star';
+                star.style.left = pos.x + '%';
+                star.style.top = pos.y + '%';
+                star.style.animationDelay = (index * 0.2) + 's';
+                canvas.appendChild(star);
+            });
+
+            // Create lines connecting stars
+            const connections = [
+                [0, 1], [1, 2], [2, 3], [2, 4], [4, 5]
+            ];
+
+            connections.forEach(([start, end], index) => {
+                const startPos = stars[start];
+                const endPos = stars[end];
+
+                const line = document.createElement('div');
+                line.className = 'constellation-line';
+
+                const dx = endPos.x - startPos.x;
+                const dy = endPos.y - startPos.y;
+                const length = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+                line.style.width = length + '%';
+                line.style.left = startPos.x + '%';
+                line.style.top = startPos.y + '%';
+                line.style.transform = `rotate(${angle}deg)`;
+                line.style.animationDelay = (index * 0.3) + 's';
+
+                canvas.appendChild(line);
+            });
+        }
+
+        // ============================================
+        // SMOOTH SCROLL FOR INDICATOR
+        // ============================================
+        function setupScrollIndicator() {
+            const indicator = document.querySelector('.hero-scroll-indicator');
+            if (indicator) {
+                indicator.addEventListener('click', () => {
+                    const firstSection = document.querySelector('.section');
+                    if (firstSection) {
+                        firstSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            setupScrollAnimations();
+            createConstellation();
+            setupScrollIndicator();
+
+            console.log('%c✨ 역경의 연단', 'font-size: 20px; color: #fbbf24; font-weight: bold;');
+            console.log('%c내면의 품격이 빚어내는 인생의 대반전', 'font-size: 14px; color: #e2e8f0;');
+        });
+
+        // ============================================
+        // KEYBOARD ACCESSIBILITY
+        // ============================================
         document.addEventListener('keydown', (e) => {
-            // Ctrl/Cmd + P: Print
-            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
-                e.preventDefault();
-                window.print();
-            }
-
-            // Ctrl/Cmd + S: Share
-            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                e.preventDefault();
-                shareContent();
+            if (e.key === 'Enter' || e.key === ' ') {
+                const activeElement = document.activeElement;
+                if (activeElement.classList.contains('hero-scroll-indicator')) {
+                    e.preventDefault();
+                    activeElement.click();
+                }
             }
         });
-
-        // ========================================
-        // CONSOLE MESSAGE
-        // ========================================
-        console.log('%c📋 MOU 실무 가이드 칸반보드', 'font-size: 18px; color: #3b82f6; font-weight: bold;');
-        console.log('%c4 Lanes × 15 Cards', 'font-size: 14px; color: #64748b;');
-        console.log('%c키보드 단축키: Ctrl/Cmd + P (인쇄), Ctrl/Cmd + S (공유)', 'font-size: 12px; color: #10b981;');
     </script>
 </body>
 </html>
