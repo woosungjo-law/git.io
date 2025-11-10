@@ -3,604 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="당연함의 무게 - 통제되지 않는 영토. 일상 활동이 불가능한 투쟁이 되는 순간들에 대한 인터랙티브 스토리">
-    <title>당연함의 무게 - 통제되지 않는 영토</title>
+    <meta name="description" content="조직의 근간, 성과를 넘어선 성품의 힘 - 논리 구조 칸반 보드">
+    <title>성과를 넘어선 성품의 힘 | 논리 흐름 인포그래픽</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* ========================================
-           RESET & BASE STYLES
-           ======================================== */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* Color System - Duality Theme */
-            --color-light-bg: #f8fafc;
-            --color-light-text: #1e293b;
-            --color-dark-bg: #0f172a;
-            --color-dark-text: #f1f5f9;
-
-            --color-normal: #e0f2fe;
-            --color-normal-border: #7dd3fc;
-            --color-struggle: #1e293b;
-            --color-struggle-border: #64748b;
-
-            /* Condition-Specific Colors */
-            --color-heart: #ef4444;
-            --color-nerve: #8b5cf6;
-            --color-bladder: #3b82f6;
-            --color-light: #f97316;
-            --color-thyroid: #10b981;
-
-            /* Accent */
-            --color-accent: #f59e0b;
-            --color-warning: #dc2626;
-
-            /* Typography */
-            --font-primary: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-
-            /* Spacing */
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 2rem;
-            --spacing-lg: 4rem;
-            --spacing-xl: 6rem;
-
-            /* Border Radius */
-            --radius-sm: 8px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-
-            /* Shadows */
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
-            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         body {
-            font-family: var(--font-primary);
-            line-height: 1.7;
-            color: var(--color-light-text);
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            overflow-x: hidden;
-            word-break: keep-all;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
         }
 
-        /* ========================================
-           TYPOGRAPHY
-           ======================================== */
-        h1, h2, h3, h4, h5, h6, p, li, span, div, blockquote {
-            word-break: keep-all;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+        .serif {
+            font-family: 'Noto Serif KR', serif;
         }
 
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
+        /* Kanban Lane Gradients */
+        .lane-thesis {
+            background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
         }
 
-        h2 {
-            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.01em;
+        .lane-arguments {
+            background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
         }
 
-        h3 {
-            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-            font-weight: 700;
-            line-height: 1.3;
+        .lane-conclusion {
+            background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%);
         }
 
-        p {
-            font-size: clamp(1rem, 2vw, 1.125rem);
-            line-height: 1.8;
+        /* Card Styles */
+        .card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
         }
 
-        /* ========================================
-           HERO SECTION
-           ======================================== */
-        .hero {
-            min-height: 100vh;
+        .card:hover {
+            transform: translateY(-4px) rotate(0.5deg);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-number {
+            position: absolute;
+            top: -12px;
+            left: 12px;
+            background: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: var(--spacing-md);
-            background: linear-gradient(135deg,
-                #0f172a 0%,
-                #1e293b 50%,
-                #334155 100%);
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Quote Card Special Style */
+        .quote-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        .quote-card::before {
+            content: '"';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image:
-                repeating-linear-gradient(0deg,
-                    rgba(255,255,255,0.03) 0px,
-                    transparent 1px,
-                    transparent 2px,
-                    rgba(255,255,255,0.03) 3px),
-                repeating-linear-gradient(90deg,
-                    rgba(255,255,255,0.03) 0px,
-                    transparent 1px,
-                    transparent 2px,
-                    rgba(255,255,255,0.03) 3px);
-            pointer-events: none;
+            top: -20px;
+            right: 10px;
+            font-size: 120px;
+            font-family: Georgia, serif;
+            opacity: 0.1;
+            line-height: 1;
         }
 
-        .hero-content {
+        /* Strategy List */
+        .strategy-item {
+            padding-left: 1.5rem;
             position: relative;
-            z-index: 1;
-            max-width: 900px;
-            animation: fadeInUp 1.2s ease-out;
         }
 
-        .hero-icon {
-            font-size: clamp(4rem, 8vw, 6rem);
-            margin-bottom: var(--spacing-md);
-            opacity: 0;
-            animation: fadeIn 1s ease-out 0.3s forwards;
-        }
-
-        .hero-title {
-            color: white;
-            margin-bottom: var(--spacing-sm);
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.5s forwards;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 600;
-            color: var(--color-accent);
-            margin-bottom: var(--spacing-md);
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.7s forwards;
-        }
-
-        .hero-description {
-            font-size: clamp(1.125rem, 2.2vw, 1.375rem);
-            color: #cbd5e1;
-            max-width: 700px;
-            margin: 0 auto;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.9s forwards;
-        }
-
-        .scroll-indicator {
+        .strategy-item::before {
+            content: '→';
             position: absolute;
-            bottom: var(--spacing-md);
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255,255,255,0.5);
+            left: 0;
+            color: #3b82f6;
+            font-weight: 700;
+        }
+
+        /* Flow Arrows (decorative) */
+        .flow-arrow {
+            position: absolute;
             font-size: 2rem;
-            animation: bounce 2s infinite;
-            cursor: pointer;
+            color: #cbd5e1;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        /* ========================================
-           INTRO SECTION
-           ======================================== */
-        .intro {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: var(--spacing-xl) var(--spacing-md);
-            text-align: center;
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
         }
 
-        .intro-text {
-            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-            font-weight: 500;
-            color: var(--color-light-text);
-            line-height: 1.8;
+        /* Fade in animation */
+        .fade-in {
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.8s ease-out;
+            transition: all 0.6s ease-out;
         }
 
-        .intro-text.visible {
+        .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .intro-highlight {
-            color: var(--color-accent);
-            font-weight: 700;
-        }
-
-        /* ========================================
-           STRUGGLES SECTION
-           ======================================== */
-        .struggles {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: var(--spacing-md);
-        }
-
-        .struggle-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            margin-bottom: var(--spacing-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-xl);
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s ease-out, transform 0.3s ease;
-        }
-
-        .struggle-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .struggle-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
-
-        /* Card Header */
-        .card-header {
-            padding: var(--spacing-md);
-            text-align: center;
-            border-bottom: 3px solid;
-        }
-
-        .card-header[data-condition="heart"] {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border-color: var(--color-heart);
-        }
-
-        .card-header[data-condition="nerve"] {
-            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
-            border-color: var(--color-nerve);
-        }
-
-        .card-header[data-condition="bladder"] {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-            border-color: var(--color-bladder);
-        }
-
-        .card-header[data-condition="light"] {
-            background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
-            border-color: var(--color-light);
-        }
-
-        .card-header[data-condition="thyroid"] {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border-color: var(--color-thyroid);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .card-title {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .card-condition {
-            font-size: clamp(1rem, 2vw, 1.125rem);
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
             font-weight: 600;
-            opacity: 0.8;
-        }
-
-        /* Card Body - Split Design */
-        .card-body {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 350px;
-        }
-
-        .card-column {
-            padding: var(--spacing-md);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .card-column.normal {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-right: 4px solid var(--color-normal-border);
-        }
-
-        .card-column.struggle {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: white;
-            position: relative;
-        }
-
-        .card-column.struggle::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image:
-                repeating-linear-gradient(45deg,
-                    rgba(255,255,255,0.02) 0px,
-                    transparent 2px,
-                    transparent 4px,
-                    rgba(255,255,255,0.02) 6px);
-            pointer-events: none;
-        }
-
-        .column-label {
-            font-size: 0.875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--spacing-sm);
-            opacity: 0.7;
-        }
-
-        .card-column.normal .column-label {
-            color: var(--color-bladder);
-        }
-
-        .card-column.struggle .column-label {
-            color: var(--color-accent);
-        }
-
-        .column-text {
-            font-size: clamp(1rem, 2vw, 1.125rem);
-            line-height: 1.8;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .column-quote {
-            font-size: clamp(1.125rem, 2.2vw, 1.25rem);
-            font-weight: 700;
-            font-style: italic;
-            padding: var(--spacing-sm);
-            background: rgba(245, 158, 11, 0.15);
-            border-left: 4px solid var(--color-accent);
-            border-radius: var(--radius-sm);
-            margin-top: var(--spacing-sm);
-        }
-
-        /* Card Stats */
-        .card-stats {
-            padding: var(--spacing-md);
-            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
-            border-top: 3px solid var(--color-accent);
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-md);
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .stat-item {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #78716c;
-            margin-bottom: var(--spacing-xs);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
-        .stat-value {
-            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-            font-weight: 900;
-            color: var(--color-warning);
-            line-height: 1;
-        }
-
-        .stat-description {
-            font-size: 0.9375rem;
-            color: #57534e;
-            margin-top: var(--spacing-xs);
-        }
-
-        /* ========================================
-           CLOSING SECTION
-           ======================================== */
-        .closing {
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: var(--spacing-xl) var(--spacing-md);
-            background: linear-gradient(135deg,
-                #0f172a 0%,
-                #1e293b 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .closing::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
-            background-size: 40px 40px;
-            pointer-events: none;
-        }
-
-        .closing-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
-        }
-
-        .closing-content.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .closing-icon {
-            font-size: clamp(3rem, 6vw, 5rem);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .closing-quote {
-            font-size: clamp(1.5rem, 3vw, 2.25rem);
-            font-weight: 700;
-            color: white;
-            line-height: 1.4;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .closing-text {
-            font-size: clamp(1.125rem, 2.2vw, 1.375rem);
-            color: #cbd5e1;
-            line-height: 1.7;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .closing-highlight {
-            color: var(--color-accent);
-            font-weight: 700;
-        }
-
-        /* ========================================
-           FOOTER
-           ======================================== */
-        .footer {
-            background: #0f172a;
-            color: #94a3b8;
-            padding: var(--spacing-md);
-            text-align: center;
-            font-size: 0.875rem;
-        }
-
-        .footer-divider {
-            width: 60px;
-            height: 3px;
-            background: var(--color-accent);
-            margin: var(--spacing-sm) auto;
-            border-radius: 2px;
-        }
-
-        /* ========================================
-           ANIMATIONS
-           ======================================== */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
-
-        /* ========================================
-           RESPONSIVE DESIGN
-           ======================================== */
-        @media (max-width: 768px) {
-            :root {
-                --spacing-lg: 3rem;
-                --spacing-xl: 4rem;
-            }
-
-            .card-body {
-                grid-template-columns: 1fr;
-            }
-
-            .card-column.normal {
-                border-right: none;
-                border-bottom: 4px solid var(--color-normal-border);
-            }
-
-            .card-stats {
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .kanban-board {
                 flex-direction: column;
-                align-items: flex-start;
             }
 
-            .stat-item {
-                min-width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                min-height: 80vh;
-            }
-
-            .intro {
-                padding: var(--spacing-md);
-            }
-
-            .struggles {
-                padding: var(--spacing-sm);
-            }
-
-            .struggle-card {
-                margin-bottom: var(--spacing-md);
+            .flow-arrow {
+                display: none;
             }
         }
 
-        /* ========================================
-           ACCESSIBILITY
-           ======================================== */
+        /* Accessibility */
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -608,405 +157,340 @@
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
             }
-        }
-
-        /* Focus Styles */
-        a:focus,
-        button:focus {
-            outline: 3px solid var(--color-accent);
-            outline-offset: 2px;
         }
     </style>
 </head>
-<body>
-    <main>
-        <!-- Hero Section -->
-        <section class="hero" role="banner">
-            <div class="hero-content">
-                <div class="hero-icon" aria-hidden="true">⚠️</div>
-                <h1 class="hero-title">당연함의 무게</h1>
-                <p class="hero-subtitle">통제되지 않는 영토</p>
-                <p class="hero-description">
-                    몸이 허락하지 않을 때<br>
-                    우리가 당연하게 여기는 일상이 누군가에게는 불가능한 투쟁이 됩니다
-                </p>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-slate-800 to-slate-900 text-white py-16 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-block mb-4">
+                <span class="badge bg-blue-500 text-white">논리 구조 분석</span>
             </div>
-            <div class="scroll-indicator" aria-label="아래로 스크롤">↓</div>
-        </section>
-
-        <!-- Intro Section -->
-        <section class="intro">
-            <p class="intro-text">
-                계단을 오르고, 밥을 먹고, 소변을 참고, 밝은 곳에서 일하고, 체중을 유지하는 것.<br>
-                이 모든 것이 <span class="intro-highlight">'당연한'</span> 일상입니다.<br>
-                하지만 <span class="intro-highlight">당연한 것들은 당연하지 않습니다.</span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 serif leading-tight">
+                조직의 근간,<br>
+                성과를 넘어선 성품의 힘
+            </h1>
+            <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                성과와 성품의 균형에서 장기적 성공을 위한 성품 중심의 인재 관리까지,<br>
+                컬럼의 논리 흐름을 칸반 보드로 시각화했습니다.
             </p>
-        </section>
+        </div>
+    </header>
 
-        <!-- Struggles Section -->
-        <section class="struggles">
-            <!-- 1. 계단 오르기 - 심장질환 -->
-            <article class="struggle-card" data-condition="heart">
-                <header class="card-header" data-condition="heart">
-                    <div class="card-icon" aria-hidden="true">🏔️</div>
-                    <h2 class="card-title">계단 오르기</h2>
-                    <p class="card-condition">심장질환</p>
-                </header>
+    <!-- Kanban Board -->
+    <main class="max-w-[1600px] mx-auto px-4 py-12">
+        <!-- Board Title -->
+        <div class="mb-8 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-2">논리 흐름 칸반 보드</h2>
+            <p class="text-slate-600">왼쪽에서 오른쪽으로 논리가 전개됩니다</p>
+        </div>
 
-                <div class="card-body">
-                    <div class="card-column normal">
-                        <div class="column-label">일반적인 경험</div>
-                        <p class="column-text">
-                            계단을 오르는 것은 다리를 번갈아 들어 올리는 단순한 동작이다.
-                            대부분의 사람들은 생각 없이 계단을 오른다.
-                            계단은 그저 계단이다.
-                        </p>
+        <!-- Kanban Lanes -->
+        <div class="kanban-board flex flex-col lg:flex-row gap-6 relative">
+            <!-- Lane 1: 핵심 주장 (Thesis) -->
+            <div class="flex-1 fade-in">
+                <div class="lane-thesis rounded-t-xl p-6 border-b-4 border-blue-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-blue-900 flex items-center gap-2">
+                            <span class="text-2xl">🎯</span>
+                            핵심 주장
+                        </h3>
+                        <span class="badge bg-blue-500 text-white">Thesis</span>
                     </div>
+                    <p class="text-sm text-blue-700">중심 사상 및 문제 제기</p>
+                </div>
 
-                    <div class="card-column struggle">
-                        <div class="column-label">심장질환 환자에게</div>
-                        <p class="column-text">
-                            3층은 에베레스트다. 심장이 충분한 피를 보내지 못하면
-                            다리 근육은 산소를 얻지 못한다. 숨이 가빠지고 가슴이 조인다.
-                            2층쯤에서 멈춰 서서 난간을 붙잡는다.
+                <div class="bg-white p-4 rounded-b-xl min-h-[600px] space-y-4">
+                    <!-- Card 1 -->
+                    <div class="card bg-white border-2 border-blue-200 rounded-xl p-5 shadow-lg relative">
+                        <div class="card-number text-blue-600">1</div>
+                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">성과 vs 성품의 딜레마</h4>
+                        <p class="text-slate-700 leading-relaxed mb-3">
+                            조직 관리에서 가장 큰 도전은 <strong class="text-blue-600">성과와 성품 사이의 균형</strong>을 찾는 것
                         </p>
-                        <div class="column-quote">
-                            "엘리베이터가 고장 난 날, 이들은 집에 돌아갈 수 없다."
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
+                            <p class="text-sm text-blue-900 italic">
+                                "관리란 일을 올바르게 하는 것이고,<br>
+                                리더십은 올바른 일을 하는 것"
+                            </p>
+                            <p class="text-xs text-blue-700 mt-1">— 피터 드러커</p>
                         </div>
                     </div>
-                </div>
 
-                <div class="card-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">영향받는 환자</div>
-                        <div class="stat-value" data-target="50" data-suffix="%">0%</div>
-                        <p class="stat-description">심부전 환자의 절반 가까이가 일상 활동에 어려움을 겪습니다</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 2. 밥 먹기 - 연하장애 -->
-            <article class="struggle-card" data-condition="nerve">
-                <header class="card-header" data-condition="nerve">
-                    <div class="card-icon" aria-hidden="true">🍽️</div>
-                    <h2 class="card-title">밥 먹기</h2>
-                    <p class="card-condition">연하장애</p>
-                </header>
-
-                <div class="card-body">
-                    <div class="card-column normal">
-                        <div class="column-label">일반적인 경험</div>
-                        <p class="column-text">
-                            밥을 먹는 것은 씹고 삼키는 자연스러운 과정이다.
-                            혀와 목의 근육들이 음식을 입에서 식도로 보낸다.
-                            식탁은 즐거운 공간이다.
+                    <!-- Card 2 -->
+                    <div class="card bg-white border-2 border-blue-200 rounded-xl p-5 shadow-lg relative">
+                        <div class="card-number text-blue-600">2</div>
+                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">현대 조직의 함정</h4>
+                        <p class="text-slate-700 leading-relaxed mb-3">
+                            성과 중심 평가 시스템 → 단기 성과 집착 → 장기 조직 건강성 훼손
                         </p>
-                    </div>
-
-                    <div class="card-column struggle">
-                        <div class="column-label">연하장애 환자에게</div>
-                        <p class="column-text">
-                            식사는 질식의 공포다. 뇌졸중이나 파킨슨병으로 신경이 망가지면
-                            근육들이 제대로 움직이지 않는다. 물 한 모금이 기도로 넘어간다.
-                            격렬한 기침이 터진다.
-                        </p>
-                        <div class="column-quote">
-                            "매 끼니가 생존의 시간이다."
+                        <div class="flex items-center gap-2 text-sm text-red-600 bg-red-50 p-3 rounded">
+                            <span class="text-xl">⚠️</span>
+                            <span><strong>리스크:</strong> 과도한 성과 압박이 창의성 저해</span>
                         </div>
+                        <p class="text-xs text-slate-500 mt-2">출처: 제프리 페퍼(Jeffrey Pfeffer) 연구</p>
                     </div>
-                </div>
 
-                <div class="card-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">65세 이상 노인</div>
-                        <div class="stat-value" data-target="15" data-suffix="%">0%</div>
-                        <p class="stat-description">65세 이상 노인 중 15%가 연하장애를 겪습니다</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 3. 소변 참기 - 과민성 방광 -->
-            <article class="struggle-card" data-condition="bladder">
-                <header class="card-header" data-condition="bladder">
-                    <div class="card-icon" aria-hidden="true">🚻</div>
-                    <h2 class="card-title">소변 참기</h2>
-                    <p class="card-condition">과민성 방광</p>
-                </header>
-
-                <div class="card-body">
-                    <div class="card-column normal">
-                        <div class="column-label">일반적인 경험</div>
-                        <p class="column-text">
-                            소변을 참는 것은 당연한 능력이다.
-                            방광에 소변이 차면 신호가 오고,
-                            우리는 화장실에 갈 때까지 참는다.
+                    <!-- Card 3 -->
+                    <div class="quote-card card rounded-xl p-5 shadow-lg relative">
+                        <h4 class="font-bold text-lg mb-3">핵심 테제</h4>
+                        <p class="text-xl font-bold leading-relaxed serif">
+                            장기적 성공을 위해서는<br>
+                            <span class="text-green-300">성품</span>이 더 근본적인 요소다
                         </p>
                     </div>
-
-                    <div class="card-column struggle">
-                        <div class="column-label">과민성 방광 환자에게</div>
-                        <p class="column-text">
-                            화장실은 세계의 중심이다. 방광이 조금만 차도 갑자기 강한 요의가 온다.
-                            경고도 없이 찾아온다. 외출할 때는 먼저 화장실 위치부터 확인한다.
-                            회의 중에도, 극장에서도, 지하철 안에서도 화장실 생각뿐이다.
-                        </p>
-                        <div class="column-quote">
-                            "삶은 화장실 반경 안으로 좁아진다."
-                        </div>
-                    </div>
                 </div>
-
-                <div class="card-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">성인 유병률</div>
-                        <div class="stat-value" data-target="10" data-suffix="-20%">0%</div>
-                        <p class="stat-description">성인 10명 중 1~2명이 과민성 방광을 경험합니다</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 4. 밝은 곳에서 일하기 - 편두통 -->
-            <article class="struggle-card" data-condition="light">
-                <header class="card-header" data-condition="light">
-                    <div class="card-icon" aria-hidden="true">💡</div>
-                    <h2 class="card-title">밝은 곳에서 일하기</h2>
-                    <p class="card-condition">편두통</p>
-                </header>
-
-                <div class="card-body">
-                    <div class="card-column normal">
-                        <div class="column-label">일반적인 경험</div>
-                        <p class="column-text">
-                            밝은 곳에서 일하는 것은 직장생활의 기본이다.
-                            사무실 형광등, 컴퓨터 모니터, 창문으로 쏟아지는 햇빛은
-                            피할 수 없다.
-                        </p>
-                    </div>
-
-                    <div class="card-column struggle">
-                        <div class="column-label">편두통 환자에게</div>
-                        <p class="column-text">
-                            빛은 고문이다. 빛이 눈에 들어오면 뇌의 통증 회로가 작동한다.
-                            쿵쿵 박동하는 두통이 시작된다. 메스꺼움이 따라온다.
-                            하지만 직장에서 이들은 "예민한 사람"으로 불린다.
-                        </p>
-                        <div class="column-quote">
-                            "다른 사람들에게 빛은 일상이지만, 이들에게 빛은 칼날이다."
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">세계 질병 부담</div>
-                        <div class="stat-value" data-target="2" data-suffix="위">0위</div>
-                        <p class="stat-description">편두통은 전 세계에서 두 번째로 일상생활을 방해하는 질환입니다</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 5. 체중 유지 - 갑상선 기능 저하증 -->
-            <article class="struggle-card" data-condition="thyroid">
-                <header class="card-header" data-condition="thyroid">
-                    <div class="card-icon" aria-hidden="true">⚖️</div>
-                    <h2 class="card-title">체중 유지하기</h2>
-                    <p class="card-condition">갑상선 기능 저하증</p>
-                </header>
-
-                <div class="card-body">
-                    <div class="card-column normal">
-                        <div class="column-label">일반적인 경험</div>
-                        <p class="column-text">
-                            체중을 유지하는 것은 먹은 만큼, 움직인 만큼의 결과다.
-                            먹고, 활동하고, 몸이 에너지를 쓰는 과정이
-                            자연스럽게 균형을 맞춘다.
-                        </p>
-                    </div>
-
-                    <div class="card-column struggle">
-                        <div class="column-label">갑상선 기능 저하증 환자에게</div>
-                        <p class="column-text">
-                            몸은 배신한다. 갑상선 호르몬이 부족하면 신진대사가 느려진다.
-                            같은 양을 먹어도 살이 찐다. 운동해도 식사를 줄여도 체중계 숫자는 움직이지 않는다.
-                            주변 사람들은 "의지가 약하다"고 말한다.
-                        </p>
-                        <div class="column-quote">
-                            "몸은 말을 듣지 않는다. 통제권은 사라졌다."
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">성인 여성 유병률</div>
-                        <div class="stat-value" data-target="10" data-suffix="%">0%</div>
-                        <p class="stat-description">성인 여성 10명 중 1명이 갑상선 기능 저하증을 앓습니다</p>
-                    </div>
-                </div>
-            </article>
-        </section>
-
-        <!-- Closing Section -->
-        <section class="closing">
-            <div class="closing-content">
-                <div class="closing-icon" aria-hidden="true">💔</div>
-                <blockquote class="closing-quote">
-                    "몸은 때로 우리를 배신한다.<br>
-                    그리고 그 배신은 보이지 않는다."
-                </blockquote>
-                <p class="closing-text">
-                    누군가에게 일상은 전쟁터입니다.
-                    우리가 의식하지 않고 수행하는 것들이,
-                    다른 누군가에겐 <span class="closing-highlight">불가능의 영역</span>입니다.<br><br>
-                    당연한 것들은 당연하지 않습니다.
-                </p>
             </div>
-        </section>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-divider" aria-hidden="true"></div>
-            <p>당연함의 무게 (1) 통제되지 않는 영토</p>
-            <p style="margin-top: 0.5rem; opacity: 0.6;">Interactive Infographic Story</p>
-        </footer>
+            <!-- Flow Arrow 1 -->
+            <div class="flow-arrow hidden lg:block" style="top: 50%; right: -1.5rem;">→</div>
+
+            <!-- Lane 2: 주요 근거 (Arguments) -->
+            <div class="flex-1 fade-in" style="transition-delay: 0.2s;">
+                <div class="lane-arguments rounded-t-xl p-6 border-b-4 border-amber-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+                            <span class="text-2xl">📊</span>
+                            주요 근거
+                        </h3>
+                        <span class="badge bg-amber-500 text-white">Arguments</span>
+                    </div>
+                    <p class="text-sm text-amber-700">핵심 논거 및 증거</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-b-xl min-h-[600px] space-y-4">
+                    <!-- Card 4 -->
+                    <div class="card bg-white border-2 border-amber-200 rounded-xl p-5 shadow-lg relative">
+                        <div class="card-number text-amber-600">1</div>
+                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">성품이 만드는 조직 문화</h4>
+                        <p class="text-slate-700 leading-relaxed mb-3">
+                            좋은 성품을 가진 리더와 구성원 → <strong class="text-amber-600">신뢰와 협력의 문화</strong> → 장기적 성과 향상
+                        </p>
+                        <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded mb-3">
+                            <p class="text-sm text-amber-900 italic">
+                                "조직의 문화는 리더의 행동을 통해 형성된다"
+                            </p>
+                            <p class="text-xs text-amber-700 mt-1">— 에드거 샤인 (Edgar Schein)</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="card bg-white border-2 border-amber-200 rounded-xl p-5 shadow-lg relative">
+                        <div class="card-number text-amber-600">2</div>
+                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">GE 사례: 성품 우선 결정</h4>
+                        <p class="text-slate-700 leading-relaxed mb-3">
+                            제프 이멜트 전 CEO의 선택:
+                        </p>
+                        <div class="bg-gradient-to-r from-red-50 to-amber-50 p-4 rounded-lg border border-amber-200">
+                            <p class="font-bold text-slate-800 mb-2">"성과는 좋지만 성품이 나쁜 직원을 포기하겠다"</p>
+                            <p class="text-sm text-slate-600">→ 단순 인사 정책이 아닌 조직의 근본적 가치관 표명</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="card bg-white border-2 border-amber-200 rounded-xl p-5 shadow-lg relative">
+                        <div class="card-number text-amber-600">3</div>
+                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2 flex items-center gap-2">
+                            <span class="text-2xl">🌳</span>
+                            나무의 비유
+                        </h4>
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="bg-green-50 p-4 rounded-lg border-2 border-green-300">
+                                <div class="text-3xl mb-2">🌱</div>
+                                <p class="font-bold text-green-800">뿌리</p>
+                                <p class="text-sm text-green-700 mt-1">성품</p>
+                                <p class="text-xs text-green-600 mt-2">지속적 성장의 기반</p>
+                            </div>
+                            <div class="bg-red-50 p-4 rounded-lg border-2 border-red-200">
+                                <div class="text-3xl mb-2">🍎</div>
+                                <p class="font-bold text-red-800">열매</p>
+                                <p class="text-sm text-red-700 mt-1">성과</p>
+                                <p class="text-xs text-red-600 mt-2">눈에 보이는 결과</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="card bg-white border-2 border-amber-200 rounded-xl p-5 shadow-lg relative">
+                        <div class="card-number text-amber-600">4</div>
+                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">성품 중심 인재 관리 전략</h4>
+                        <p class="text-slate-700 mb-3">
+                            <strong>캐럴 드웩 교수:</strong> 재능보다 도덕성에 가산점
+                        </p>
+                        <div class="space-y-2">
+                            <div class="strategy-item text-sm text-slate-700 leading-relaxed">
+                                채용 과정에서 <strong>인성 평가 비중</strong> 확대
+                            </div>
+                            <div class="strategy-item text-sm text-slate-700 leading-relaxed">
+                                성과 평가 시 <strong>윤리적 행동과 팀워크</strong>를 핵심 지표로
+                            </div>
+                            <div class="strategy-item text-sm text-slate-700 leading-relaxed">
+                                리더십 교육에서 <strong>윤리와 도덕성</strong> 강조
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flow Arrow 2 -->
+            <div class="flow-arrow hidden lg:block" style="top: 50%; right: -1.5rem;">→</div>
+
+            <!-- Lane 3: 최종 결론 (Conclusion) -->
+            <div class="flex-1 fade-in" style="transition-delay: 0.4s;">
+                <div class="lane-conclusion rounded-t-xl p-6 border-b-4 border-green-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-green-900 flex items-center gap-2">
+                            <span class="text-2xl">✨</span>
+                            최종 결론
+                        </h3>
+                        <span class="badge bg-green-500 text-white">Conclusion</span>
+                    </div>
+                    <p class="text-sm text-green-700">주요 시사점 및 행동 과제</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-b-xl min-h-[600px] space-y-4">
+                    <!-- Card 8 -->
+                    <div class="card bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-5 shadow-lg relative">
+                        <div class="card-number text-green-600">1</div>
+                        <div class="mt-2">
+                            <div class="text-5xl mb-4 text-center">💎</div>
+                            <p class="text-2xl font-black text-center text-green-900 serif mb-3">
+                                "성품은 운명이다"
+                            </p>
+                            <p class="text-center text-slate-700 leading-relaxed">
+                                개인뿐 아니라<br>
+                                <strong class="text-green-700">조직에도 똑같이 적용</strong>되는 진리
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 9 -->
+                    <div class="card bg-white border-2 border-green-200 rounded-xl p-5 shadow-lg relative">
+                        <div class="card-number text-green-600">2</div>
+                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">지속 가능한 성공의 조건</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl shrink-0">🛡️</span>
+                                <div>
+                                    <p class="font-semibold text-slate-800">위기 속 흔들림 없는 조직</p>
+                                    <p class="text-sm text-slate-600">성품 뛰어난 구성원들의 힘</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl shrink-0">📈</span>
+                                <div>
+                                    <p class="font-semibold text-slate-800">장기적 더 큰 성공</p>
+                                    <p class="text-sm text-slate-600">단기 성과를 넘어선 지속 성장</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 10 -->
+                    <div class="card bg-white border-2 border-green-200 rounded-xl p-5 shadow-lg relative">
+                        <div class="card-number text-green-600">3</div>
+                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">패러다임의 전환</h4>
+                        <div class="bg-slate-100 p-4 rounded-lg mb-3">
+                            <p class="text-sm text-slate-700 mb-2"><span class="text-red-600 font-bold">❌ 기존:</span> 단기적 성과에 집착하는 현대 경영</p>
+                            <p class="text-sm text-slate-700"><span class="text-green-600 font-bold">✓ 새로운:</span> 성품을 중시하는 조직 문화</p>
+                        </div>
+                        <p class="text-slate-700 leading-relaxed">
+                            더 나은 미래를 위한 근본적 선택
+                        </p>
+                    </div>
+
+                    <!-- Card 11 - Final Takeaway -->
+                    <div class="quote-card card rounded-xl p-6 shadow-xl relative">
+                        <div class="text-center">
+                            <div class="text-4xl mb-3">🎯</div>
+                            <h4 class="font-bold text-2xl mb-4 text-green-300">21세기 조직 관리의 핵심 과제</h4>
+                            <p class="text-xl font-bold leading-relaxed">
+                                성품을 중시하는<br>
+                                조직 문화를 만드는 것
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="mt-12 max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-blue-500">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                    <span class="text-3xl">📝</span>
+                    논리 구조 요약
+                </h3>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl">🎯</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 mb-2">핵심 주장</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            성과보다 성품이 조직의 장기적 성공에 더 근본적
+                        </p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl">📊</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 mb-2">주요 근거</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            조직 문화 형성, GE 사례, 나무 비유, 실천 전략
+                        </p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl">✨</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 mb-2">최종 결론</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            성품 중심 조직 문화가 21세기 핵심 과제
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <script>
-        // ========================================
-        // INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
-        // ========================================
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400 py-8 mt-16">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="mb-2">논리 구조 칸반 보드 인포그래픽</p>
+            <p class="text-sm">원문: "조직의 근간, 성과를 넘어선 성품의 힘"</p>
+            <div class="mt-4 h-1 w-20 bg-blue-500 mx-auto rounded"></div>
+        </div>
+    </footer>
 
+    <script>
+        // Intersection Observer for fade-in animations
         const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.2
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-
-                    // Trigger stat animations when card becomes visible
-                    if (entry.target.classList.contains('struggle-card')) {
-                        const statValues = entry.target.querySelectorAll('.stat-value');
-                        statValues.forEach(stat => {
-                            if (!stat.classList.contains('animated')) {
-                                animateStat(stat);
-                                stat.classList.add('animated');
-                            }
-                        });
-                    }
                 }
             });
         }, observerOptions);
 
-        // Observe all animated elements
-        document.querySelectorAll('.intro-text, .struggle-card, .closing-content').forEach(el => {
+        document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
 
-        // ========================================
-        // STAT COUNTER ANIMATION
-        // ========================================
-
-        function animateStat(element) {
-            const target = parseFloat(element.getAttribute('data-target'));
-            const suffix = element.getAttribute('data-suffix') || '';
-            const duration = 2000; // 2 seconds
-            const steps = 60;
-            const increment = target / steps;
-            let current = 0;
-
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-
-                // Format the number
-                let displayValue = Math.round(current);
-                if (suffix === '%') {
-                    element.textContent = displayValue + suffix;
-                } else if (suffix === '-20%') {
-                    element.textContent = '10-20%';
-                } else if (suffix === '위') {
-                    element.textContent = displayValue + suffix;
-                } else {
-                    element.textContent = displayValue + suffix;
-                }
-            }, duration / steps);
-        }
-
-        // ========================================
-        // SMOOTH SCROLL FOR INDICATOR
-        // ========================================
-
-        const scrollIndicator = document.querySelector('.scroll-indicator');
-        if (scrollIndicator) {
-            scrollIndicator.addEventListener('click', () => {
-                const introSection = document.querySelector('.intro');
-                if (introSection) {
-                    introSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        }
-
-        // ========================================
-        // KEYBOARD ACCESSIBILITY
-        // ========================================
-
-        document.addEventListener('keydown', (e) => {
-            // Allow keyboard navigation for interactive elements
-            if (e.key === 'Enter' || e.key === ' ') {
-                if (document.activeElement === scrollIndicator) {
-                    e.preventDefault();
-                    scrollIndicator.click();
-                }
-            }
-        });
-
-        // ========================================
-        // PERFORMANCE OPTIMIZATION
-        // ========================================
-
-        // Debounce scroll events if needed
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            if (scrollTimeout) {
-                window.cancelAnimationFrame(scrollTimeout);
-            }
-            scrollTimeout = window.requestAnimationFrame(() => {
-                // Any scroll-dependent logic here
-            });
-        }, { passive: true });
-
-        // ========================================
-        // ACCESSIBILITY: Announce dynamic content
-        // ========================================
-
-        // Create live region for screen readers
-        const liveRegion = document.createElement('div');
-        liveRegion.setAttribute('role', 'status');
-        liveRegion.setAttribute('aria-live', 'polite');
-        liveRegion.setAttribute('aria-atomic', 'true');
-        liveRegion.style.position = 'absolute';
-        liveRegion.style.left = '-10000px';
-        liveRegion.style.width = '1px';
-        liveRegion.style.height = '1px';
-        liveRegion.style.overflow = 'hidden';
-        document.body.appendChild(liveRegion);
-
-        // ========================================
-        // INITIALIZATION
-        // ========================================
-
-        console.log('✅ 당연함의 무게 - Interactive Infographic loaded');
-        console.log('📊 5 conditions visualized');
-        console.log('♿ Accessibility features enabled');
+        // Console message
+        console.log('%c📊 논리 구조 칸반 보드', 'font-size: 18px; color: #3b82f6; font-weight: bold;');
+        console.log('%c성과를 넘어선 성품의 힘', 'font-size: 14px; color: #64748b;');
+        console.log('%c3 Lanes × 11 Cards = 논리 흐름 완성', 'font-size: 12px; color: #10b981;');
     </script>
 </body>
 </html>
