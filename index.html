@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="조직의 근간, 성과를 넘어선 성품의 힘 - 논리 구조 칸반 보드">
-    <title>성과를 넘어선 성품의 힘 | 논리 흐름 인포그래픽</title>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="MOU(양해각서) 5가지 핵심 포인트 - 실무자를 위한 칸반보드 가이드">
+    <title>MOU 실무 가이드 | 칸반보드 인포그래픽</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
+        /* ========================================
+           BASE STYLES
+           ======================================== */
         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             word-break: keep-all;
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -23,474 +26,1051 @@
 
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #1e293b;
+            line-height: 1.6;
         }
 
-        .serif {
-            font-family: 'Noto Serif KR', serif;
+        /* ========================================
+           HEADER
+           ======================================== */
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Kanban Lane Gradients */
-        .lane-thesis {
-            background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
         }
 
-        .lane-arguments {
-            background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+        .header-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
         }
 
-        .lane-conclusion {
-            background: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%);
+        .header-subtitle {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
         }
 
-        /* Card Styles */
+        .header-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.375rem 0.875rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        /* ========================================
+           TOOLBAR
+           ======================================== */
+        .toolbar {
+            max-width: 1600px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .filter-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .action-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.625rem 1.25rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .action-btn.primary {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .action-btn.primary:hover {
+            background: #2563eb;
+        }
+
+        /* ========================================
+           KANBAN BOARD
+           ======================================== */
+        .kanban-wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+
+        .kanban-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 1024px) {
+            .kanban-board {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Lane */
+        .lane {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 300px);
+        }
+
+        .lane-header {
+            padding: 1.25rem;
+            border-bottom: 3px solid;
+            border-radius: 12px 12px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .lane-header h2 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .lane-header p {
+            font-size: 0.8125rem;
+            opacity: 0.8;
+        }
+
+        .lane.summary .lane-header {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-color: #3b82f6;
+            color: #1e40af;
+        }
+
+        .lane.caution .lane-header {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-color: #f59e0b;
+            color: #92400e;
+        }
+
+        .lane.guide .lane-header {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-color: #10b981;
+            color: #065f46;
+        }
+
+        .lane.resources .lane-header {
+            background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 100%);
+            border-color: #a855f7;
+            color: #6b21a8;
+        }
+
+        .lane-cards {
+            padding: 1rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        /* Card */
         .card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: default;
+            position: relative;
         }
 
         .card:hover {
-            transform: translateY(-4px) rotate(0.5deg);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
         }
 
-        .card-number {
+        .card.hidden {
+            display: none;
+        }
+
+        .card-priority {
             position: absolute;
-            top: -12px;
-            left: 12px;
+            top: -8px;
+            right: 12px;
             background: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 14px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Quote Card Special Style */
-        .quote-card {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .quote-card::before {
-            content: '"';
-            position: absolute;
-            top: -20px;
-            right: 10px;
-            font-size: 120px;
-            font-family: Georgia, serif;
-            opacity: 0.1;
-            line-height: 1;
-        }
-
-        /* Strategy List */
-        .strategy-item {
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .strategy-item::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: #3b82f6;
-            font-weight: 700;
-        }
-
-        /* Flow Arrows (decorative) */
-        .flow-arrow {
-            position: absolute;
-            font-size: 2rem;
-            color: #cbd5e1;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.1); }
-        }
-
-        /* Fade in animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Badge */
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
+            padding: 0.25rem 0.625rem;
             border-radius: 9999px;
             font-size: 0.75rem;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .priority-high {
+            color: #dc2626;
+            border: 1.5px solid #ef4444;
+        }
+
+        .priority-medium {
+            color: #f59e0b;
+            border: 1.5px solid #fbbf24;
+        }
+
+        .priority-low {
+            color: #10b981;
+            border: 1.5px solid #34d399;
+        }
+
+        .card-category {
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            background: #f1f5f9;
+            border-radius: 6px;
+            font-size: 0.6875rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.025em;
+            color: #475569;
+            margin-bottom: 0.75rem;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 1024px) {
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .card-content {
+            font-size: 0.9375rem;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .card-content ul,
+        .card-content ol {
+            margin: 0.75rem 0;
+            padding-left: 1.25rem;
+        }
+
+        .card-content li {
+            margin: 0.5rem 0;
+        }
+
+        .card-content strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 0.75rem 0;
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 0.75rem 0;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #92400e;
+        }
+
+        .success-box {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            margin: 0.75rem 0;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #065f46;
+        }
+
+        .code-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            margin: 0.75rem 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0.75rem 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.625rem;
+        }
+
+        .checklist li::before {
+            content: '✓';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.25rem;
+            height: 1.25rem;
+            background: #10b981;
+            color: white;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.375rem 0.75rem;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: #e2e8f0;
+        }
+
+        /* ========================================
+           TOAST NOTIFICATION
+           ======================================== */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1e293b;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* ========================================
+           PRINT STYLES
+           ======================================== */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .toolbar,
+            .action-btn,
+            .copy-btn,
+            .toast {
+                display: none !important;
+            }
+
             .kanban-board {
-                flex-direction: column;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
             }
 
-            .flow-arrow {
-                display: none;
+            .lane {
+                break-inside: avoid;
+                max-height: none;
+                box-shadow: none;
+                border: 1px solid #e5e7eb;
+            }
+
+            .lane-cards {
+                overflow: visible;
+            }
+
+            .card {
+                break-inside: avoid;
+                box-shadow: none;
+                margin-bottom: 0.5rem;
+            }
+
+            .card:hover {
+                transform: none;
+            }
+
+            @page {
+                size: A4;
+                margin: 1.5cm;
             }
         }
 
-        /* Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.5rem 1rem;
+            }
+
+            .toolbar {
+                padding: 0 1rem;
+            }
+
+            .kanban-wrapper {
+                padding: 0 1rem 2rem;
+            }
+
+            .kanban-board {
+                grid-template-columns: 1fr;
+            }
+
+            .lane {
+                max-height: none;
+            }
+
+            .action-group {
+                width: 100%;
+            }
+
+            .action-btn {
+                flex: 1;
+                justify-content: center;
             }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
+<body>
     <!-- Header -->
-    <header class="bg-gradient-to-r from-slate-800 to-slate-900 text-white py-16 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <div class="inline-block mb-4">
-                <span class="badge bg-blue-500 text-white">논리 구조 분석</span>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title">📋 MOU(양해각서) 실무 가이드</h1>
+            <p class="header-subtitle">5가지 핵심 포인트로 정리한 법률 실무자용 칸반보드</p>
+            <div class="header-meta">
+                <span class="badge">
+                    <span>⚖️</span>
+                    <span>법률 실무</span>
+                </span>
+                <span class="badge">
+                    <span>📝</span>
+                    <span>계약 전 단계</span>
+                </span>
+                <span class="badge">
+                    <span>✍️</span>
+                    <span>작성: 조우성 변호사 (로펌 머스트노우)</span>
+                </span>
             </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 serif leading-tight">
-                조직의 근간,<br>
-                성과를 넘어선 성품의 힘
-            </h1>
-            <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                성과와 성품의 균형에서 장기적 성공을 위한 성품 중심의 인재 관리까지,<br>
-                컬럼의 논리 흐름을 칸반 보드로 시각화했습니다.
-            </p>
         </div>
     </header>
 
-    <!-- Kanban Board -->
-    <main class="max-w-[1600px] mx-auto px-4 py-12">
-        <!-- Board Title -->
-        <div class="mb-8 text-center">
-            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-2">논리 흐름 칸반 보드</h2>
-            <p class="text-slate-600">왼쪽에서 오른쪽으로 논리가 전개됩니다</p>
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">
+                <span>🔍</span>
+                <span>전체 보기</span>
+            </button>
+            <button class="filter-btn" data-filter="high">
+                <span>★★★</span>
+                <span>높은 우선순위</span>
+            </button>
+            <button class="filter-btn" data-filter="medium">
+                <span>★★</span>
+                <span>중간 우선순위</span>
+            </button>
+            <button class="filter-btn" data-filter="low">
+                <span>★</span>
+                <span>낮은 우선순위</span>
+            </button>
         </div>
 
-        <!-- Kanban Lanes -->
-        <div class="kanban-board flex flex-col lg:flex-row gap-6 relative">
-            <!-- Lane 1: 핵심 주장 (Thesis) -->
-            <div class="flex-1 fade-in">
-                <div class="lane-thesis rounded-t-xl p-6 border-b-4 border-blue-500">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="text-xl font-bold text-blue-900 flex items-center gap-2">
-                            <span class="text-2xl">🎯</span>
-                            핵심 주장
-                        </h3>
-                        <span class="badge bg-blue-500 text-white">Thesis</span>
-                    </div>
-                    <p class="text-sm text-blue-700">중심 사상 및 문제 제기</p>
-                </div>
+        <div class="action-group">
+            <button class="action-btn" onclick="window.print()">
+                <span>🖨️</span>
+                <span>인쇄</span>
+            </button>
+            <button class="action-btn primary" onclick="shareContent()">
+                <span>📤</span>
+                <span>공유하기</span>
+            </button>
+        </div>
+    </div>
 
-                <div class="bg-white p-4 rounded-b-xl min-h-[600px] space-y-4">
+    <!-- Kanban Board -->
+    <div class="kanban-wrapper">
+        <div class="kanban-board">
+            <!-- Lane 1: 핵심 요약 -->
+            <div class="lane summary">
+                <div class="lane-header">
+                    <h2>
+                        <span>💡</span>
+                        <span>핵심 요약</span>
+                    </h2>
+                    <p>TL;DR & 주요 키워드</p>
+                </div>
+                <div class="lane-cards">
                     <!-- Card 1 -->
-                    <div class="card bg-white border-2 border-blue-200 rounded-xl p-5 shadow-lg relative">
-                        <div class="card-number text-blue-600">1</div>
-                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">성과 vs 성품의 딜레마</h4>
-                        <p class="text-slate-700 leading-relaxed mb-3">
-                            조직 관리에서 가장 큰 도전은 <strong class="text-blue-600">성과와 성품 사이의 균형</strong>을 찾는 것
-                        </p>
-                        <div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
-                            <p class="text-sm text-blue-900 italic">
-                                "관리란 일을 올바르게 하는 것이고,<br>
-                                리더십은 올바른 일을 하는 것"
-                            </p>
-                            <p class="text-xs text-blue-700 mt-1">— 피터 드러커</p>
+                    <div class="card" data-priority="high" data-category="definition">
+                        <span class="card-priority priority-high">★★★</span>
+                        <span class="card-category">기본 개념</span>
+                        <h3 class="card-title">MOU란 무엇인가?</h3>
+                        <div class="card-content">
+                            <p><strong>MOU (Memorandum of Understanding)</strong></p>
+                            <ul>
+                                <li><strong>한국어 명칭:</strong> 양해각서, 의향서, 협정서</li>
+                                <li><strong>영문 동의어:</strong> LOI (Letter of Intent)</li>
+                                <li><strong>목적:</strong> 정식 계약 체결 전 상호 간의 공통된 의향이나 이해를 정리</li>
+                            </ul>
+                            <div class="warning-box">
+                                <strong>⚠️ 혼동 주의:</strong> '약정서'는 MOU와 다릅니다. 약정서는 계약서와 동일하게 법적 구속력이 있습니다.
+                            </div>
                         </div>
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="card bg-white border-2 border-blue-200 rounded-xl p-5 shadow-lg relative">
-                        <div class="card-number text-blue-600">2</div>
-                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">현대 조직의 함정</h4>
-                        <p class="text-slate-700 leading-relaxed mb-3">
-                            성과 중심 평가 시스템 → 단기 성과 집착 → 장기 조직 건강성 훼손
-                        </p>
-                        <div class="flex items-center gap-2 text-sm text-red-600 bg-red-50 p-3 rounded">
-                            <span class="text-xl">⚠️</span>
-                            <span><strong>리스크:</strong> 과도한 성과 압박이 창의성 저해</span>
+                    <div class="card" data-priority="high" data-category="legal">
+                        <span class="card-priority priority-high">★★★</span>
+                        <span class="card-category">법적 효력</span>
+                        <h3 class="card-title">법적 구속력 여부</h3>
+                        <div class="card-content">
+                            <p>MOU의 법적 구속력은 <strong>내용</strong>에 따라 결정됩니다.</p>
+                            <div class="highlight-box">
+                                <strong>핵심 원칙:</strong><br>
+                                제목이 '양해각서'라고 해서 자동으로 법적 구속력이 없는 것이 아닙니다. 항상 내용을 확인해야 합니다.
+                            </div>
+                            <ul>
+                                <li><strong>구속력 없음:</strong> "본 양해각서는 법적으로 구속하지 않는다" 문구 + '역할' 용어 사용</li>
+                                <li><strong>구속력 있음:</strong> '권리, 의무' 용어 사용 + 손해배상 조항 포함</li>
+                            </ul>
                         </div>
-                        <p class="text-xs text-slate-500 mt-2">출처: 제프리 페퍼(Jeffrey Pfeffer) 연구</p>
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="quote-card card rounded-xl p-5 shadow-lg relative">
-                        <h4 class="font-bold text-lg mb-3">핵심 테제</h4>
-                        <p class="text-xl font-bold leading-relaxed serif">
-                            장기적 성공을 위해서는<br>
-                            <span class="text-green-300">성품</span>이 더 근본적인 요소다
-                        </p>
+                    <div class="card" data-priority="medium" data-category="timeline">
+                        <span class="card-priority priority-medium">★★</span>
+                        <span class="card-category">기한 설정</span>
+                        <h3 class="card-title">5가지 핵심 포인트</h3>
+                        <div class="card-content">
+                            <ol>
+                                <li><strong>명칭과 의미:</strong> MOU, LOI, 양해각서, 의향서</li>
+                                <li><strong>법적 구속력:</strong> 내용에 따라 결정</li>
+                                <li><strong>유효기한:</strong> 명시적 설정 필요</li>
+                                <li><strong>해제/해지:</strong> 유연성 확보</li>
+                                <li><strong>비밀유지:</strong> 정보 보호 조치</li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Flow Arrow 1 -->
-            <div class="flow-arrow hidden lg:block" style="top: 50%; right: -1.5rem;">→</div>
-
-            <!-- Lane 2: 주요 근거 (Arguments) -->
-            <div class="flex-1 fade-in" style="transition-delay: 0.2s;">
-                <div class="lane-arguments rounded-t-xl p-6 border-b-4 border-amber-500">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
-                            <span class="text-2xl">📊</span>
-                            주요 근거
-                        </h3>
-                        <span class="badge bg-amber-500 text-white">Arguments</span>
-                    </div>
-                    <p class="text-sm text-amber-700">핵심 논거 및 증거</p>
+            <!-- Lane 2: 주의 사항 -->
+            <div class="lane caution">
+                <div class="lane-header">
+                    <h2>
+                        <span>⚠️</span>
+                        <span>주의 사항</span>
+                    </h2>
+                    <p>리스크 & 함정</p>
                 </div>
-
-                <div class="bg-white p-4 rounded-b-xl min-h-[600px] space-y-4">
+                <div class="lane-cards">
                     <!-- Card 4 -->
-                    <div class="card bg-white border-2 border-amber-200 rounded-xl p-5 shadow-lg relative">
-                        <div class="card-number text-amber-600">1</div>
-                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">성품이 만드는 조직 문화</h4>
-                        <p class="text-slate-700 leading-relaxed mb-3">
-                            좋은 성품을 가진 리더와 구성원 → <strong class="text-amber-600">신뢰와 협력의 문화</strong> → 장기적 성과 향상
-                        </p>
-                        <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded mb-3">
-                            <p class="text-sm text-amber-900 italic">
-                                "조직의 문화는 리더의 행동을 통해 형성된다"
-                            </p>
-                            <p class="text-xs text-amber-700 mt-1">— 에드거 샤인 (Edgar Schein)</p>
+                    <div class="card" data-priority="high" data-category="legal">
+                        <span class="card-priority priority-high">★★★</span>
+                        <span class="card-category">법적 리스크</span>
+                        <h3 class="card-title">제목만으로 판단 금지</h3>
+                        <div class="card-content">
+                            <div class="warning-box">
+                                <strong>⚠️ 위험:</strong> 제목이 '양해각서'나 '의향서'라고 해도 법적 구속력이 있을 수 있습니다.
+                            </div>
+                            <p><strong>실수 사례:</strong></p>
+                            <ul>
+                                <li>"양해각서니까 법적 효력 없겠지" → <strong>잘못된 판단</strong></li>
+                                <li>내용에 '권리, 의무'가 명시되어 있다면 구속력 발생</li>
+                                <li>손해배상 조항이 있다면 대부분 법적 구속력 인정</li>
+                            </ul>
+                            <div class="highlight-box">
+                                <strong>So What?</strong> 항상 내용을 꼼꼼히 검토하세요. 제목에 속지 마세요.
+                            </div>
                         </div>
                     </div>
 
                     <!-- Card 5 -->
-                    <div class="card bg-white border-2 border-amber-200 rounded-xl p-5 shadow-lg relative">
-                        <div class="card-number text-amber-600">2</div>
-                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">GE 사례: 성품 우선 결정</h4>
-                        <p class="text-slate-700 leading-relaxed mb-3">
-                            제프 이멜트 전 CEO의 선택:
-                        </p>
-                        <div class="bg-gradient-to-r from-red-50 to-amber-50 p-4 rounded-lg border border-amber-200">
-                            <p class="font-bold text-slate-800 mb-2">"성과는 좋지만 성품이 나쁜 직원을 포기하겠다"</p>
-                            <p class="text-sm text-slate-600">→ 단순 인사 정책이 아닌 조직의 근본적 가치관 표명</p>
+                    <div class="card" data-priority="high" data-category="timeline">
+                        <span class="card-priority priority-high">★★★</span>
+                        <span class="card-category">기한 관리</span>
+                        <h3 class="card-title">유효기한 미설정 위험</h3>
+                        <div class="card-content">
+                            <div class="warning-box">
+                                <strong>⚠️ 위험:</strong> 유효기한을 설정하지 않으면 MOU가 무기한으로 효력을 유지할 수 있습니다.
+                            </div>
+                            <p><strong>발생 가능한 문제:</strong></p>
+                            <ul>
+                                <li>10년 전 MOU가 여전히 유효하다고 주장</li>
+                                <li>상황이 바뀌었지만 MOU 내용에 묶임</li>
+                                <li>해지 절차가 복잡해짐</li>
+                            </ul>
+                            <div class="success-box">
+                                <strong>✓ 해결책:</strong> 항상 명확한 유효기한을 설정하세요.
+                            </div>
                         </div>
                     </div>
 
                     <!-- Card 6 -->
-                    <div class="card bg-white border-2 border-amber-200 rounded-xl p-5 shadow-lg relative">
-                        <div class="card-number text-amber-600">3</div>
-                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2 flex items-center gap-2">
-                            <span class="text-2xl">🌳</span>
-                            나무의 비유
-                        </h4>
-                        <div class="grid grid-cols-2 gap-4 text-center">
-                            <div class="bg-green-50 p-4 rounded-lg border-2 border-green-300">
-                                <div class="text-3xl mb-2">🌱</div>
-                                <p class="font-bold text-green-800">뿌리</p>
-                                <p class="text-sm text-green-700 mt-1">성품</p>
-                                <p class="text-xs text-green-600 mt-2">지속적 성장의 기반</p>
+                    <div class="card" data-priority="medium" data-category="termination">
+                        <span class="card-priority priority-medium">★★</span>
+                        <span class="card-category">해지 조항</span>
+                        <h3 class="card-title">해지 조항 누락 위험</h3>
+                        <div class="card-content">
+                            <p><strong>문제 상황:</strong></p>
+                            <ul>
+                                <li>상대방이 기대에 미치지 못함</li>
+                                <li>사업 환경이 급변함</li>
+                                <li>더 좋은 파트너를 발견함</li>
+                            </ul>
+                            <div class="warning-box">
+                                <strong>⚠️</strong> 해지 조항이 없으면 상대방 동의 없이는 MOU 종료가 어렵습니다.
                             </div>
-                            <div class="bg-red-50 p-4 rounded-lg border-2 border-red-200">
-                                <div class="text-3xl mb-2">🍎</div>
-                                <p class="font-bold text-red-800">열매</p>
-                                <p class="text-sm text-red-700 mt-1">성과</p>
-                                <p class="text-xs text-red-600 mt-2">눈에 보이는 결과</p>
+                            <div class="highlight-box">
+                                <strong>So What?</strong> 쉽게 해제/해지할 수 있는 조항을 반드시 포함하세요.
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 7 -->
-                    <div class="card bg-white border-2 border-amber-200 rounded-xl p-5 shadow-lg relative">
-                        <div class="card-number text-amber-600">4</div>
-                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">성품 중심 인재 관리 전략</h4>
-                        <p class="text-slate-700 mb-3">
-                            <strong>캐럴 드웩 교수:</strong> 재능보다 도덕성에 가산점
-                        </p>
-                        <div class="space-y-2">
-                            <div class="strategy-item text-sm text-slate-700 leading-relaxed">
-                                채용 과정에서 <strong>인성 평가 비중</strong> 확대
+                    <div class="card" data-priority="high" data-category="confidentiality">
+                        <span class="card-priority priority-high">★★★</span>
+                        <span class="card-category">정보 보안</span>
+                        <h3 class="card-title">비밀유지 누락 위험</h3>
+                        <div class="card-content">
+                            <div class="warning-box">
+                                <strong>⚠️ 위험:</strong> MOU 협상 과정에서 사업 기밀이 유출될 수 있습니다.
                             </div>
-                            <div class="strategy-item text-sm text-slate-700 leading-relaxed">
-                                성과 평가 시 <strong>윤리적 행동과 팀워크</strong>를 핵심 지표로
-                            </div>
-                            <div class="strategy-item text-sm text-slate-700 leading-relaxed">
-                                리더십 교육에서 <strong>윤리와 도덕성</strong> 강조
+                            <p><strong>유출 가능 정보:</strong></p>
+                            <ul>
+                                <li>사업 계획 및 전략</li>
+                                <li>재무 정보</li>
+                                <li>기술 자료 및 노하우</li>
+                                <li>고객 명단 및 거래 조건</li>
+                            </ul>
+                            <div class="success-box">
+                                <strong>✓ 필수:</strong> 비밀유지 조항 + 손해배상 규정
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Flow Arrow 2 -->
-            <div class="flow-arrow hidden lg:block" style="top: 50%; right: -1.5rem;">→</div>
-
-            <!-- Lane 3: 최종 결론 (Conclusion) -->
-            <div class="flex-1 fade-in" style="transition-delay: 0.4s;">
-                <div class="lane-conclusion rounded-t-xl p-6 border-b-4 border-green-500">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="text-xl font-bold text-green-900 flex items-center gap-2">
-                            <span class="text-2xl">✨</span>
-                            최종 결론
-                        </h3>
-                        <span class="badge bg-green-500 text-white">Conclusion</span>
-                    </div>
-                    <p class="text-sm text-green-700">주요 시사점 및 행동 과제</p>
+            <!-- Lane 3: 실행 가이드 -->
+            <div class="lane guide">
+                <div class="lane-header">
+                    <h2>
+                        <span>✓</span>
+                        <span>실행 가이드</span>
+                    </h2>
+                    <p>단계별 체크리스트</p>
                 </div>
-
-                <div class="bg-white p-4 rounded-b-xl min-h-[600px] space-y-4">
+                <div class="lane-cards">
                     <!-- Card 8 -->
-                    <div class="card bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-5 shadow-lg relative">
-                        <div class="card-number text-green-600">1</div>
-                        <div class="mt-2">
-                            <div class="text-5xl mb-4 text-center">💎</div>
-                            <p class="text-2xl font-black text-center text-green-900 serif mb-3">
-                                "성품은 운명이다"
-                            </p>
-                            <p class="text-center text-slate-700 leading-relaxed">
-                                개인뿐 아니라<br>
-                                <strong class="text-green-700">조직에도 똑같이 적용</strong>되는 진리
-                            </p>
+                    <div class="card" data-priority="high" data-category="legal">
+                        <span class="card-priority priority-high">★★★</span>
+                        <span class="card-category">법적 구속력 배제</span>
+                        <h3 class="card-title">법적 구속력 배제 방법</h3>
+                        <div class="card-content">
+                            <ul class="checklist">
+                                <li>명시적 문구 삽입: "본 양해각서 상의 내용은 상대방을 법적으로 구속하지 않는다"</li>
+                                <li>'역할' 용어 사용: "갑의 역할", "을의 역할"</li>
+                                <li>'권리, 의무' 용어 회피</li>
+                                <li>손해배상 조항 제외</li>
+                            </ul>
+                            <div class="code-box">"본 양해각서는 갑과 을 간의 상호 이해와 협력 의향을 표시한 것으로, 어느 일방도 법적으로 구속하지 않는다."</div>
+                            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent)">
+                                <span>📋</span>
+                                <span>문구 복사</span>
+                            </button>
                         </div>
                     </div>
 
                     <!-- Card 9 -->
-                    <div class="card bg-white border-2 border-green-200 rounded-xl p-5 shadow-lg relative">
-                        <div class="card-number text-green-600">2</div>
-                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">지속 가능한 성공의 조건</h4>
-                        <div class="space-y-3">
-                            <div class="flex items-start gap-3">
-                                <span class="text-2xl shrink-0">🛡️</span>
-                                <div>
-                                    <p class="font-semibold text-slate-800">위기 속 흔들림 없는 조직</p>
-                                    <p class="text-sm text-slate-600">성품 뛰어난 구성원들의 힘</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <span class="text-2xl shrink-0">📈</span>
-                                <div>
-                                    <p class="font-semibold text-slate-800">장기적 더 큰 성공</p>
-                                    <p class="text-sm text-slate-600">단기 성과를 넘어선 지속 성장</p>
-                                </div>
-                            </div>
+                    <div class="card" data-priority="high" data-category="timeline">
+                        <span class="card-priority priority-high">★★★</span>
+                        <span class="card-category">유효기한</span>
+                        <h3 class="card-title">유효기한 설정 방법</h3>
+                        <div class="card-content">
+                            <ul class="checklist">
+                                <li>두 가지 조건 중 먼저 도래하는 시점을 설정</li>
+                                <li>① 특정 날짜 (예: 2024년 12월 31일)</li>
+                                <li>② 본 계약 체결 시점</li>
+                                <li>자동 종료 조항 포함</li>
+                            </ul>
+                            <div class="code-box">"본 MOU는 다음 두 경우 중 먼저 도래하는 날에 효력을 상실한다.
+① 2024년 12월 31일까지 본 계약이 체결되지 않는 경우 해당 일자에
+② 본 계약이 체결된 때"</div>
+                            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent)">
+                                <span>📋</span>
+                                <span>문구 복사</span>
+                            </button>
                         </div>
                     </div>
 
                     <!-- Card 10 -->
-                    <div class="card bg-white border-2 border-green-200 rounded-xl p-5 shadow-lg relative">
-                        <div class="card-number text-green-600">3</div>
-                        <h4 class="font-bold text-lg text-slate-800 mb-3 mt-2">패러다임의 전환</h4>
-                        <div class="bg-slate-100 p-4 rounded-lg mb-3">
-                            <p class="text-sm text-slate-700 mb-2"><span class="text-red-600 font-bold">❌ 기존:</span> 단기적 성과에 집착하는 현대 경영</p>
-                            <p class="text-sm text-slate-700"><span class="text-green-600 font-bold">✓ 새로운:</span> 성품을 중시하는 조직 문화</p>
+                    <div class="card" data-priority="medium" data-category="termination">
+                        <span class="card-priority priority-medium">★★</span>
+                        <span class="card-category">해제/해지</span>
+                        <h3 class="card-title">유연한 해제/해지 조항</h3>
+                        <div class="card-content">
+                            <ul class="checklist">
+                                <li>상대방 귀책사유 불필요 명시</li>
+                                <li>자체 판단에 따른 해제/해지 가능</li>
+                                <li>상대방의 이의 제기 금지 조항</li>
+                                <li>서면 통지로 즉시 효력 발생</li>
+                            </ul>
+                            <div class="code-box">"갑과 을은 상대방의 귀책사유가 없어도 자체 판단에 따라 본 MOU를 해제 또는 해지할 수 있다. 상대방은 이러한 해제 또는 해지에 대해 이의를 제기하지 않기로 한다."</div>
+                            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent)">
+                                <span>📋</span>
+                                <span>문구 복사</span>
+                            </button>
+                            <div class="success-box">
+                                <strong>목적:</strong> 부담 없이 협력 관계를 탐색하고, 기대에 미치지 못하거나 상황이 바뀌었을 때 쉽게 종료 가능
+                            </div>
                         </div>
-                        <p class="text-slate-700 leading-relaxed">
-                            더 나은 미래를 위한 근본적 선택
-                        </p>
                     </div>
 
-                    <!-- Card 11 - Final Takeaway -->
-                    <div class="quote-card card rounded-xl p-6 shadow-xl relative">
-                        <div class="text-center">
-                            <div class="text-4xl mb-3">🎯</div>
-                            <h4 class="font-bold text-2xl mb-4 text-green-300">21세기 조직 관리의 핵심 과제</h4>
-                            <p class="text-xl font-bold leading-relaxed">
-                                성품을 중시하는<br>
-                                조직 문화를 만드는 것
+                    <!-- Card 11 -->
+                    <div class="card" data-priority="high" data-category="confidentiality">
+                        <span class="card-priority priority-high">★★★</span>
+                        <span class="card-category">비밀유지</span>
+                        <h3 class="card-title">비밀유지 조항 작성법</h3>
+                        <div class="card-content">
+                            <ul class="checklist">
+                                <li>비밀 정보의 범위 명확히 정의</li>
+                                <li>"비밀로 표시된 정보" 기준 설정</li>
+                                <li>보안 유지 의무 명시</li>
+                                <li>위반 시 손해배상 규정 포함</li>
+                                <li>구체적인 손해배상액 명시 (권장)</li>
+                            </ul>
+                            <div class="code-box">"본 MOU 이행을 위해 갑, 을 간에 서로 제공된 정보 중 비밀로 표시된 것은 서로 간에 보안을 유지해야 한다."</div>
+                            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent)">
+                                <span>📋</span>
+                                <span>문구 복사</span>
+                            </button>
+                            <div class="code-box">"비밀유지 의무를 위반하여 정보를 외부로 유출한 자는 그로 인한 손해배상금으로 금 ______원을 지급해야 한다."</div>
+                            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent)">
+                                <span>📋</span>
+                                <span>문구 복사</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lane 4: 추가 리소스 -->
+            <div class="lane resources">
+                <div class="lane-header">
+                    <h2>
+                        <span>📚</span>
+                        <span>추가 리소스</span>
+                    </h2>
+                    <p>참고자료 & 관련 법규</p>
+                </div>
+                <div class="lane-cards">
+                    <!-- Card 12 -->
+                    <div class="card" data-priority="low" data-category="terms">
+                        <span class="card-priority priority-low">★</span>
+                        <span class="card-category">용어 사전</span>
+                        <h3 class="card-title">주요 용어 정리</h3>
+                        <div class="card-content">
+                            <ul>
+                                <li><strong>MOU:</strong> Memorandum of Understanding (양해각서)</li>
+                                <li><strong>LOI:</strong> Letter of Intent (의향서)</li>
+                                <li><strong>NDA:</strong> Non-Disclosure Agreement (비밀유지계약)</li>
+                                <li><strong>귀책사유:</strong> 책임을 물을 수 있는 사유</li>
+                                <li><strong>해제:</strong> 계약을 처음부터 없던 것으로 만듦</li>
+                                <li><strong>해지:</strong> 계약을 장래에 향해 종료</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card 13 -->
+                    <div class="card" data-priority="low" data-category="reference">
+                        <span class="card-priority priority-low">★</span>
+                        <span class="card-category">관련 법규</span>
+                        <h3 class="card-title">관련 법률</h3>
+                        <div class="card-content">
+                            <ul>
+                                <li><strong>민법:</strong> 계약 일반 원칙</li>
+                                <li><strong>민법 제105조:</strong> 법률행위 해석</li>
+                                <li><strong>민법 제527조:</strong> 계약 해제/해지</li>
+                                <li><strong>상법:</strong> 상행위에 관한 특칙</li>
+                                <li><strong>부정경쟁방지법:</strong> 영업비밀 보호</li>
+                            </ul>
+                            <div class="highlight-box">
+                                <strong>💡 팁:</strong> 구체적인 사안은 반드시 법률 전문가와 상담하세요.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 14 -->
+                    <div class="card" data-priority="medium" data-category="checklist">
+                        <span class="card-priority priority-medium">★★</span>
+                        <span class="card-category">최종 체크</span>
+                        <h3 class="card-title">MOU 작성 체크리스트</h3>
+                        <div class="card-content">
+                            <ul class="checklist">
+                                <li>제목: MOU, 양해각서, 의향서 중 선택</li>
+                                <li>당사자: 갑과 을의 명칭 및 주소 명시</li>
+                                <li>목적: MOU 체결 목적 명확히 기재</li>
+                                <li>법적 구속력: 배제 여부 명시</li>
+                                <li>유효기한: 종료 시점 두 가지 설정</li>
+                                <li>해제/해지: 유연한 조항 포함</li>
+                                <li>비밀유지: 보호 범위 및 손해배상 규정</li>
+                                <li>준거법: 적용 법률 명시</li>
+                                <li>서명: 대표자 날인 및 날짜</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card 15 -->
+                    <div class="card" data-priority="low" data-category="author">
+                        <span class="card-priority priority-low">★</span>
+                        <span class="card-category">작성자 정보</span>
+                        <h3 class="card-title">법률 자문</h3>
+                        <div class="card-content">
+                            <p><strong>작성:</strong> 조우성 변호사</p>
+                            <p><strong>소속:</strong> 로펌 머스트노우</p>
+                            <div class="highlight-box">
+                                <strong>📞 문의:</strong><br>
+                                구체적인 법률 자문이 필요하시면 전문 변호사와 상담하시기 바랍니다.
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 0.8125rem; color: #64748b;">
+                                <strong>면책사항:</strong> 본 자료는 일반적인 정보 제공 목적이며, 특정 사안에 대한 법률 자문이 아닙니다.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Summary Section -->
-        <div class="mt-12 max-w-4xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-blue-500">
-                <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                    <span class="text-3xl">📝</span>
-                    논리 구조 요약
-                </h3>
-
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-2xl">🎯</span>
-                        </div>
-                        <h4 class="font-bold text-slate-800 mb-2">핵심 주장</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed">
-                            성과보다 성품이 조직의 장기적 성공에 더 근본적
-                        </p>
-                    </div>
-
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-2xl">📊</span>
-                        </div>
-                        <h4 class="font-bold text-slate-800 mb-2">주요 근거</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed">
-                            조직 문화 형성, GE 사례, 나무 비유, 실천 전략
-                        </p>
-                    </div>
-
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-2xl">✨</span>
-                        </div>
-                        <h4 class="font-bold text-slate-800 mb-2">최종 결론</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed">
-                            성품 중심 조직 문화가 21세기 핵심 과제
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-slate-800 text-slate-400 py-8 mt-16">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="mb-2">논리 구조 칸반 보드 인포그래픽</p>
-            <p class="text-sm">원문: "조직의 근간, 성과를 넘어선 성품의 힘"</p>
-            <div class="mt-4 h-1 w-20 bg-blue-500 mx-auto rounded"></div>
-        </div>
-    </footer>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span>✓</span>
+        <span id="toast-message">복사되었습니다!</span>
+    </div>
 
     <script>
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        // ========================================
+        // FILTER FUNCTIONALITY
+        // ========================================
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.card');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                // Get filter value
+                const filter = button.dataset.filter;
+
+                // Filter cards
+                cards.forEach(card => {
+                    if (filter === 'all') {
+                        card.classList.remove('hidden');
+                    } else {
+                        const priority = card.dataset.priority;
+                        if (priority === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    }
+                });
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
         });
 
-        // Console message
-        console.log('%c📊 논리 구조 칸반 보드', 'font-size: 18px; color: #3b82f6; font-weight: bold;');
-        console.log('%c성과를 넘어선 성품의 힘', 'font-size: 14px; color: #64748b;');
-        console.log('%c3 Lanes × 11 Cards = 논리 흐름 완성', 'font-size: 12px; color: #10b981;');
+        // ========================================
+        // COPY TO CLIPBOARD
+        // ========================================
+        function copyText(text) {
+            // Clean up the text
+            const cleanText = text.trim();
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(cleanText).then(() => {
+                showToast('클립보드에 복사되었습니다!');
+            }).catch(err => {
+                console.error('복사 실패:', err);
+                showToast('복사에 실패했습니다. 다시 시도해주세요.', 'error');
+            });
+        }
+
+        // ========================================
+        // SHARE CONTENT
+        // ========================================
+        function shareContent() {
+            const url = window.location.href;
+            const title = 'MOU(양해각서) 실무 가이드';
+            const text = 'MOU 작성 시 꼭 알아야 할 5가지 핵심 포인트를 칸반보드로 정리했습니다.';
+
+            // Try Web Share API first
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: text,
+                    url: url
+                }).then(() => {
+                    showToast('공유되었습니다!');
+                }).catch(err => {
+                    // If user cancels, don't show error
+                    if (err.name !== 'AbortError') {
+                        fallbackShare(url);
+                    }
+                });
+            } else {
+                fallbackShare(url);
+            }
+        }
+
+        function fallbackShare(url) {
+            // Fallback: copy URL to clipboard
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('링크가 클립보드에 복사되었습니다!');
+            }).catch(err => {
+                console.error('공유 실패:', err);
+                showToast('공유에 실패했습니다.', 'error');
+            });
+        }
+
+        // ========================================
+        // TOAST NOTIFICATION
+        // ========================================
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ========================================
+        // KEYBOARD SHORTCUTS
+        // ========================================
+        document.addEventListener('keydown', (e) => {
+            // Ctrl/Cmd + P: Print
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+
+            // Ctrl/Cmd + S: Share
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                shareContent();
+            }
+        });
+
+        // ========================================
+        // CONSOLE MESSAGE
+        // ========================================
+        console.log('%c📋 MOU 실무 가이드 칸반보드', 'font-size: 18px; color: #3b82f6; font-weight: bold;');
+        console.log('%c4 Lanes × 15 Cards', 'font-size: 14px; color: #64748b;');
+        console.log('%c키보드 단축키: Ctrl/Cmd + P (인쇄), Ctrl/Cmd + S (공유)', 'font-size: 12px; color: #10b981;');
     </script>
 </body>
 </html>
