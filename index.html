@@ -3,517 +3,637 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>침묵의 이유 - 당연한 소통의 불가능</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-section: #121212;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #4a9eff;
+            --accent-dim: #2a5a8f;
+            --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+            --gradient-2: linear-gradient(90deg, #4a9eff 0%, #2a5a8f 100%);
+            --spacing-unit: 8px;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        .hero {
             min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: calc(var(--spacing-unit) * 6);
+            background: var(--gradient-1);
             position: relative;
-            overflow-y: auto;
-        }
-
-        .header {
             text-align: center;
-            margin-bottom: 35px;
-            position: relative;
         }
 
-        .header::after {
+        .hero::before {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(74, 154, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(74, 154, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .series-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
         }
 
         .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 8vw, 72px);
             font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
         }
 
         .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
         }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
-        }
-
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-        }
-
-        .flow-step::after {
-            content: '→';
+        .scroll-indicator {
             position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
+            bottom: calc(var(--spacing-unit) * 4);
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards, bounce 2s ease-in-out 1.5s infinite;
         }
 
-        .flow-step:last-child::after {
-            display: none;
-        }
-
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
-        }
-
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
-
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
-
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
-
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .fact-item {
-            text-align: center;
-        }
-
-        .fact-number {
+        .scroll-indicator::before {
+            content: '↓';
             font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
+            color: var(--accent-blue);
             display: block;
         }
 
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 3);
         }
 
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
-        }
-
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
+        /* Section */
+        .section {
+            min-height: 100vh;
             display: flex;
             align-items: center;
+            padding: calc(var(--spacing-unit) * 12) 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
         }
 
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .footer {
+        .section-content {
+            width: 100%;
+        }
+
+        /* Section Number */
+        .section-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: var(--accent-blue);
+            letter-spacing: 2px;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .section-number::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--accent-dim);
+            max-width: 100px;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            color: var(--text-primary);
+        }
+
+        /* Section Description */
+        .section-description {
+            font-size: clamp(16px, 2.5vw, 20px);
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        /* Quote */
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(20px, 3vw, 32px);
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--text-primary);
+            padding: calc(var(--spacing-unit) * 4);
+            border-left: 4px solid var(--accent-blue);
+            background: rgba(74, 154, 255, 0.05);
+            margin: calc(var(--spacing-unit) * 4) 0;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            font-size: 120px;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            color: var(--accent-dim);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        /* Stat Card */
+        .stat-card {
+            background: var(--bg-section);
+            border: 1px solid rgba(74, 154, 255, 0.2);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 4);
+            margin: calc(var(--spacing-unit) * 4) 0;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: calc(var(--spacing-unit) * 3);
+            align-items: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateX(10px);
+            border-color: var(--accent-blue);
+        }
+
+        .stat-number {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 700;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: clamp(14px, 2vw, 18px);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .stat-label strong {
+            display: block;
+            color: var(--text-primary);
+            font-size: clamp(16px, 2.5vw, 20px);
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        /* Grid Layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin: calc(var(--spacing-unit) * 4) 0;
+        }
+
+        /* Highlight Text */
+        .highlight {
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        /* Ending Section */
+        .ending {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: calc(var(--spacing-unit) * 12) calc(var(--spacing-unit) * 3);
+            background: var(--gradient-1);
             text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
         }
 
-        .footer-highlight {
-            color: #1A2A57;
+        .ending-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 48px);
+            line-height: 1.6;
+            max-width: 900px;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .ending-text.visible {
+            opacity: 1;
+        }
+
+        .closing-line {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 64px);
             font-weight: 700;
+            color: var(--accent-blue);
+            margin-top: calc(var(--spacing-unit) * 4);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
         }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
+        .closing-line.visible {
+            opacity: 1;
         }
 
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
+            .hero {
+                padding: calc(var(--spacing-unit) * 3);
             }
-            
-            .content-grid {
+
+            .section {
+                padding: calc(var(--spacing-unit) * 8) 0;
+                min-height: auto;
+            }
+
+            .stat-card {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                text-align: center;
+                gap: calc(var(--spacing-unit) * 2);
             }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
+
+            .quote {
+                padding: calc(var(--spacing-unit) * 3);
             }
-            
-            .main-title {
-                font-size: 24px;
+
+            .quote::before {
+                font-size: 80px;
+                top: -10px;
+                left: 10px;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Typography improvements */
+        p {
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
-        </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="series-tag">당연함의 무게 (2)</div>
+        <h1 class="main-title">침묵의 이유</h1>
+        <p class="subtitle">당연한 소통의 불가능</p>
+        <div class="scroll-indicator"></div>
+    </section>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
-        </div>
+    <!-- Section 1: Phone Call -->
+    <section class="section" id="section1">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-number">01 — 전화벨</div>
+                <h2 class="section-title">벨소리는 경보음이다</h2>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
+                <div class="section-description">
+                    <p>전화를 받는 것은 벨소리에 반응해 수화기를 드는 단순한 행위다. 대부분의 사람들은 전화벨이 울리면 자연스럽게 받는다.</p>
+                    <p>불안장애 환자에게 벨소리는 경보음이다. 모르는 번호가 화면에 뜨는 순간 심장이 요동친다. 손이 떨리고 목소리가 굳어진다.</p>
+                </div>
 
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
+                <div class="quote">
+                    뭔가 잘못된 일이 생긴 게 아닐까. 내가 실수한 게 있나. 누가 화를 내려는 건 아닐까.
+                </div>
+
+                <div class="section-description">
+                    <p>생각은 꼬리를 물고 어두워진다. 통화 버튼은 작은 아이콘에 불과하지만, 이들에게는 누를 수 없는 스위치다.</p>
+                    <p>전화를 받지 않으면 문자가 온다. "전화 안 받으세요?" 그 짧은 문장 앞에서 불안은 다시 증폭된다. 부재중 전화 목록만 쌓여간다.</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-number">6.3%</div>
+                    <div class="stat-label">
+                        <strong>한국 성인 불안장애 유병률</strong>
+                        통계는 벨소리 앞에서 얼어붙는 이 순간을 설명하지 못한다.
                     </div>
-                    <div class="section-title">보증보험 청구</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
+    <!-- Section 2: Meeting -->
+    <section class="section" id="section2">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-number">02 — 회의실</div>
+                <h2 class="section-title">시선은 칼날이다</h2>
+
+                <div class="section-description">
+                    <p>회의에서 발언하는 것은 직장생활의 기본이다. 자기 의견을 말하고, 질문을 던지고, 동료들과 생각을 나누는 일상적 과정이다.</p>
+                    <p>사회불안장애 환자에게 시선은 칼날이다. 회의실에 앉으면 모든 사람의 눈이 자신을 향하는 것 같다. 말을 꺼내려 하면 목구멍이 막힌다. 얼굴이 달아오르고 목소리가 떨린다.</p>
+                </div>
+
+                <div class="section-description">
+                    <p>주변의 작은 속삭임조차 <span class="highlight">"저 사람 왜 저래"</span>라는 조롱으로 들린다. 회의가 끝나고 자리로 돌아오면 자책이 시작된다.</p>
+                    <p>"왜 나는 한마디도 못했을까." 승진 면접이나 프레젠테이션은 그저 악몽이다. 능력이 부족해서가 아니다. <strong>시선이 무서워서다.</strong></p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-number">13%</div>
+                    <div class="stat-label">
+                        <strong>한국 직장인 사회불안 증상 비율</strong>
+                        침묵 속에서 기회들은 조용히 지나간다.
                     </div>
-                    <div class="section-title">민사소송 & 가압류</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
+    <!-- Section 3: Rejection -->
+    <section class="section" id="section3">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-number">03 — 거절</div>
+                <h2 class="section-title">"아니오"는 관계의 단절이다</h2>
+
+                <div class="section-description">
+                    <p>"아니오"라고 말하는 것은 자기 의사를 표현하는 기본 권리다. 원하지 않는 것을 거절하고, 부당한 요구 앞에 선을 긋는 행위다.</p>
+                    <p>회피형 성격의 사람에게 거절은 관계의 단절이다. 상사가 주말 야근을 요구한다. 친구가 돈을 빌려달라고 청한다. 마음속으론 "싫다"고 비명을 지르지만 입 밖으로는 "네"가 흘러나온다.</p>
+                </div>
+
+                <div class="quote">
+                    거절하면 미움받을 것 같다. 관계가 깨질 것 같다.
+                </div>
+
+                <div class="section-description">
+                    <p>한국 사회에서 "노"는 더욱 무거운 단어다. 위계와 체면의 문화가 거절을 배신의 언어로 만든다.</p>
+                    <p>거절하지 못한 약속들이 쌓이고, 그 무게는 서서히 삶을 짓누른다. <strong>"아니오"는 두 글자가 아니라 무너질 수 있는 모든 것이다.</strong></p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-number">2.4%</div>
+                    <div class="stat-label">
+                        <strong>회피형 성격장애 유병률</strong>
+                        이런 경향을 가진 사람은 훨씬 더 많다.
                     </div>
-                    <div class="section-title">사해행위 취소</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
+    <!-- Section 4: Laughter -->
+    <section class="section" id="section4">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-number">04 — 농담</div>
+                <h2 class="section-title">웃음의 타이밍을 계산한다</h2>
+
+                <div class="section-description">
+                    <p>농담에 웃어주는 것은 사회적 상호작용의 윤활유다. 누군가 농담을 던지면 분위기를 읽고 자연스럽게 반응한다.</p>
+                    <p>자폐 스펙트럼 장애인은 웃음의 타이밍을 계산한다. 농담이 던져졌을 때, 왜 웃어야 하는지 즉각 이해하지 못할 때가 있다. 표정과 말투와 맥락을 분석하는 데 시간이 필요하다.</p>
+                </div>
+
+                <div class="section-description">
+                    <p>다른 사람들이 웃을 때 한 박자 늦게 따라 웃거나, 아예 웃지 않는다. "왜 안 웃어?", "재미없어?" 질문들이 날아온다.</p>
+                    <p>직장 회식 자리에서 이들은 조용히 앉아 있다. 분위기를 맞춰야 한다는 압박만 커진다. <span class="highlight">자연스러움은 계산으로 만들어지지 않는다.</span> 웃음은 반응이 아니라 풀어야 할 과제가 된다.</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-number">2.6%</div>
+                    <div class="stat-label">
+                        <strong>한국 자폐 스펙트럼 장애 유병률</strong>
+                        눈에 보이지 않는 차이, 이해받지 못하는 고통.
                     </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
+    <!-- Section 5: Asking for Help -->
+    <section class="section" id="section5">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-number">05 — 호소</div>
+                <h2 class="section-title">"힘들다"는 배신당한 언어다</h2>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
-        </div>
+                <div class="section-description">
+                    <p>"힘들다"고 말하는 것은 도움을 구하는 신호다. 고통을 드러내고, 지지를 받고, 함께 길을 찾는 출발점이다.</p>
+                    <p>학습된 무기력 상태의 사람에게 호소는 이미 배신당한 언어다. 어릴 적 "힘들다"고 말했을 때 "누가 안 힘드냐"는 대답이 돌아왔다. 직장에서 "버거워요"라고 했을 때 "요즘 애들은 참을성이 없어"라는 말을 들었다.</p>
+                </div>
 
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
+                <div class="quote">
+                    말해봤자 달라지는 건 없다는 것을 배웠다.
+                </div>
+
+                <div class="section-description">
+                    <p>한국은 OECD 국가 중 <span class="highlight">우울증 치료율이 가장 낮다.</span> 정신과 방문은 여전히 지워지지 않는 낙인이다.</p>
+                    <p>힘들다고 말하는 대신 술잔을 기울인다. 혼자 견딘다. 무너질 때까지 버틴다. <strong>"힘들다"는 세 글자는 입 안에서 돌처럼 무겁게 가라앉는다.</strong></p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-number">최저</div>
+                    <div class="stat-label">
+                        <strong>한국의 OECD 우울증 치료율 순위</strong>
+                        침묵은 선택이 아니라 학습된 생존 전략이다.
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Ending Section -->
+    <section class="ending">
+        <div class="ending-text" id="endingText">
+            말하지 못하는 것들이 있다.<br>
+            말할 수 없는 이유들이 있다.<br>
+            언어는 때로 다리가 아니라 벽이 된다.<br><br>
+            침묵 뒤에는 보이지 않는 전쟁이 벌어진다.<br>
+            우리는 그 전쟁을 모른다.<br><br>
+            당연하게 건네는 요구들이,<br>
+            누군가에겐 건널 수 없는 강이다.
+        </div>
+        <div class="closing-line" id="closingLine">
+            그들은 지금도 강 앞에 서 있다.<br>
+            말없이.
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => observer.observe(section));
+
+        // Observe ending elements
+        const endingText = document.getElementById('endingText');
+        const closingLine = document.getElementById('closingLine');
+
+        const endingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, 200);
+                }
+            });
+        }, observerOptions);
+
+        endingObserver.observe(endingText);
+        endingObserver.observe(closingLine);
+
+        // Stat number animation
+        function animateNumber(element, target, duration = 2000) {
+            const isPercentage = target.includes('%');
+            const numericValue = parseFloat(target);
+
+            if (isNaN(numericValue)) return;
+
+            const start = 0;
+            const increment = numericValue / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= numericValue) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = current.toFixed(1) + (isPercentage ? '%' : '');
+                }
+            }, 16);
+        }
+
+        // Animate stats when visible
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    const statNumber = entry.target.querySelector('.stat-number');
+                    const originalValue = statNumber.textContent;
+                    entry.target.dataset.animated = 'true';
+
+                    if (originalValue !== '최저') {
+                        animateNumber(statNumber, originalValue);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        const statCards = document.querySelectorAll('.stat-card');
+        statCards.forEach(card => statObserver.observe(card));
+    </script>
 </body>
 </html>
