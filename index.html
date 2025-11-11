@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>침묵의 이유 - 당연한 소통의 불가능</title>
+    <title>보통의 양육은 어떻게 특권이 되는가</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-
         * {
             margin: 0;
             padding: 0;
@@ -19,118 +17,152 @@
         }
 
         :root {
-            --bg-dark: #0a0a0a;
-            --bg-section: #121212;
-            --text-primary: #e8e8e8;
-            --text-secondary: #a0a0a0;
-            --accent-blue: #4a9eff;
-            --accent-dim: #2a5a8f;
-            --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
-            --gradient-2: linear-gradient(90deg, #4a9eff 0%, #2a5a8f 100%);
-            --spacing-unit: 8px;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            --bg-dark: #0f0f1e;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a8a8b8;
+            --accent-warm: #ff6b6b;
+            --accent-cool: #4ecdc4;
+            --accent-gold: #ffd93d;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
-            font-family: 'Pretendard', -apple-system, sans-serif;
+            font-family: 'Noto Sans KR', sans-serif;
             background: var(--bg-dark);
             color: var(--text-primary);
-            line-height: 1.8;
+            line-height: 1.7;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Header Section */
+        /* Animated Gradient Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 107, 107, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(78, 205, 196, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 217, 61, 0.08) 0%, transparent 70%);
+            z-index: -1;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-warm), var(--accent-cool));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Container */
+        .container {
+            max-width: 428px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: calc(var(--spacing-unit) * 6);
-            background: var(--gradient-1);
-            position: relative;
             text-align: center;
+            padding: 60px 20px;
+            position: relative;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 20% 30%, rgba(74, 154, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(74, 154, 255, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .series-tag {
-            font-family: 'Space Mono', monospace;
+        .hero-tag {
             font-size: 12px;
-            letter-spacing: 3px;
-            color: var(--accent-blue);
+            letter-spacing: 4px;
+            color: var(--accent-cool);
+            margin-bottom: 16px;
             text-transform: uppercase;
-            margin-bottom: calc(var(--spacing-unit) * 2);
             opacity: 0;
-            animation: fadeInUp 1s ease forwards;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
         }
 
-        .main-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(32px, 8vw, 72px);
+        .hero-title {
+            font-size: clamp(36px, 10vw, 52px);
             font-weight: 900;
             line-height: 1.2;
-            margin-bottom: calc(var(--spacing-unit) * 3);
-            background: var(--gradient-2);
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--accent-warm), var(--accent-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             opacity: 0;
-            animation: fadeInUp 1s ease 0.2s forwards;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
         }
 
-        .subtitle {
-            font-size: clamp(18px, 3vw, 24px);
+        .hero-subtitle {
+            font-size: 18px;
             color: var(--text-secondary);
-            max-width: 800px;
-            margin-bottom: calc(var(--spacing-unit) * 6);
+            max-width: 320px;
+            line-height: 1.8;
+            margin-bottom: 40px;
             opacity: 0;
-            animation: fadeInUp 1s ease 0.4s forwards;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
         }
 
-        .scroll-indicator {
+        .scroll-hint {
             position: absolute;
-            bottom: calc(var(--spacing-unit) * 4);
+            bottom: 40px;
+            width: 24px;
+            height: 40px;
+            border: 2px solid var(--accent-cool);
+            border-radius: 12px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards, scrollBounce 2s ease-in-out 1.5s infinite;
+        }
+
+        .scroll-hint::before {
+            content: '';
+            position: absolute;
+            top: 8px;
             left: 50%;
             transform: translateX(-50%);
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.6s forwards, bounce 2s ease-in-out 1.5s infinite;
+            width: 4px;
+            height: 8px;
+            background: var(--accent-cool);
+            border-radius: 2px;
+            animation: scrollDot 2s ease-in-out infinite;
         }
 
-        .scroll-indicator::before {
-            content: '↓';
-            font-size: 24px;
-            color: var(--accent-blue);
-            display: block;
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: calc(var(--spacing-unit) * 3);
+        @keyframes scrollDot {
+            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
         }
 
         /* Section */
         .section {
             min-height: 100vh;
+            padding: 80px 20px;
             display: flex;
-            align-items: center;
-            padding: calc(var(--spacing-unit) * 12) 0;
+            flex-direction: column;
+            justify-content: center;
             opacity: 0;
             transform: translateY(50px);
             transition: opacity 1s ease, transform 1s ease;
@@ -141,127 +173,208 @@
             transform: translateY(0);
         }
 
-        .section-content {
-            width: 100%;
+        /* Glass Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px 24px;
+            margin: 24px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
         }
 
         /* Section Number */
-        .section-number {
-            font-family: 'Space Mono', monospace;
+        .section-num {
             font-size: 14px;
-            color: var(--accent-blue);
+            font-weight: 700;
+            color: var(--accent-cool);
             letter-spacing: 2px;
-            margin-bottom: calc(var(--spacing-unit) * 2);
-            display: flex;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 2);
-        }
-
-        .section-number::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--accent-dim);
-            max-width: 100px;
+            margin-bottom: 16px;
+            display: inline-block;
         }
 
         /* Section Title */
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(28px, 5vw, 48px);
-            font-weight: 700;
-            margin-bottom: calc(var(--spacing-unit) * 3);
+            font-size: clamp(28px, 7vw, 40px);
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 20px;
             color: var(--text-primary);
-        }
-
-        /* Section Description */
-        .section-description {
-            font-size: clamp(16px, 2.5vw, 20px);
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: calc(var(--spacing-unit) * 4);
         }
 
         /* Quote */
         .quote {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(20px, 3vw, 32px);
+            font-size: 18px;
             font-style: italic;
-            line-height: 1.6;
-            color: var(--text-primary);
-            padding: calc(var(--spacing-unit) * 4);
-            border-left: 4px solid var(--accent-blue);
-            background: rgba(74, 154, 255, 0.05);
-            margin: calc(var(--spacing-unit) * 4) 0;
-            position: relative;
+            line-height: 1.8;
+            color: var(--accent-gold);
+            padding: 24px;
+            margin: 24px 0;
+            border-left: 4px solid var(--accent-gold);
+            background: rgba(255, 217, 61, 0.05);
+            border-radius: 0 12px 12px 0;
         }
 
-        .quote::before {
-            content: '"';
-            font-size: 120px;
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            color: var(--accent-dim);
-            opacity: 0.3;
-            line-height: 1;
+        /* Description */
+        .description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
         }
 
-        /* Stat Card */
-        .stat-card {
-            background: var(--bg-section);
-            border: 1px solid rgba(74, 154, 255, 0.2);
-            border-radius: 16px;
-            padding: calc(var(--spacing-unit) * 4);
-            margin: calc(var(--spacing-unit) * 4) 0;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: calc(var(--spacing-unit) * 3);
-            align-items: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateX(10px);
-            border-color: var(--accent-blue);
+        /* Stat Display */
+        .stat-display {
+            text-align: center;
+            padding: 40px 0;
+            margin: 32px 0;
         }
 
         .stat-number {
-            font-family: 'Space Mono', monospace;
-            font-size: clamp(48px, 8vw, 96px);
-            font-weight: 700;
-            background: var(--gradient-2);
+            font-size: clamp(64px, 15vw, 96px);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-warm), var(--accent-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1;
+            margin-bottom: 16px;
+            display: block;
         }
 
         .stat-label {
-            font-size: clamp(14px, 2vw, 18px);
+            font-size: 16px;
             color: var(--text-secondary);
-            line-height: 1.6;
+            font-weight: 500;
         }
 
-        .stat-label strong {
-            display: block;
-            color: var(--text-primary);
-            font-size: clamp(16px, 2.5vw, 20px);
-            margin-bottom: calc(var(--spacing-unit));
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 200px;
+            margin: 40px 0;
         }
 
-        /* Grid Layout */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: calc(var(--spacing-unit) * 3);
-            margin: calc(var(--spacing-unit) * 4) 0;
+        /* Progress Circle */
+        .progress-circle {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 40px auto;
         }
 
-        /* Highlight Text */
-        .highlight {
-            color: var(--accent-blue);
+        .progress-circle svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 12;
+        }
+
+        .progress-circle-fill {
+            fill: none;
+            stroke: url(#gradient);
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+            transition: stroke-dashoffset 2s ease;
+        }
+
+        .progress-circle.animate .progress-circle-fill {
+            stroke-dashoffset: 176;
+        }
+
+        .progress-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .progress-value {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--accent-warm);
+            line-height: 1;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 32px 0;
+            gap: 20px;
+        }
+
+        .timeline-time {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--accent-cool);
+            min-width: 80px;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 16px;
             font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Pill Badge */
+        .pill {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, var(--accent-warm), var(--accent-gold));
+            color: var(--bg-dark);
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 20px;
+            margin: 8px 4px;
+        }
+
+        /* Divider */
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-cool), transparent);
+            margin: 60px 0;
+            opacity: 0.3;
         }
 
         /* Ending Section */
@@ -271,36 +384,25 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: calc(var(--spacing-unit) * 12) calc(var(--spacing-unit) * 3);
-            background: var(--gradient-1);
             text-align: center;
+            padding: 80px 20px;
         }
 
         .ending-text {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(24px, 4vw, 48px);
-            line-height: 1.6;
-            max-width: 900px;
-            margin-bottom: calc(var(--spacing-unit) * 6);
+            font-size: clamp(24px, 6vw, 36px);
+            font-weight: 900;
+            line-height: 1.5;
+            max-width: 360px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             opacity: 0;
             animation: fadeInUp 1s ease forwards;
         }
 
         .ending-text.visible {
-            opacity: 1;
-        }
-
-        .closing-line {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(32px, 5vw, 64px);
-            font-weight: 700;
-            color: var(--accent-blue);
-            margin-top: calc(var(--spacing-unit) * 4);
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.3s forwards;
-        }
-
-        .closing-line.visible {
             opacity: 1;
         }
 
@@ -316,55 +418,32 @@
             }
         }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            50% {
-                transform: translateX(-50%) translateY(-10px);
-            }
+        /* Highlight */
+        .highlight {
+            color: var(--accent-warm);
+            font-weight: 700;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                padding: calc(var(--spacing-unit) * 3);
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 16px;
             }
 
-            .section {
-                padding: calc(var(--spacing-unit) * 8) 0;
-                min-height: auto;
+            .glass-card {
+                padding: 24px 20px;
             }
 
-            .stat-card {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: calc(var(--spacing-unit) * 2);
-            }
-
-            .quote {
-                padding: calc(var(--spacing-unit) * 3);
-            }
-
-            .quote::before {
-                font-size: 80px;
-                top: -10px;
-                left: 10px;
-            }
-
-            .grid-2 {
-                grid-template-columns: 1fr;
+            .hero-title {
+                font-size: 32px;
             }
         }
 
-        /* Typography improvements */
-        p {
-            margin-bottom: calc(var(--spacing-unit) * 2);
-        }
-
-        strong {
-            color: var(--text-primary);
-            font-weight: 700;
+        /* Touch Optimization */
+        @media (hover: none) and (pointer: coarse) {
+            .glass-card:active {
+                transform: scale(0.98);
+            }
         }
 
         /* Accessibility */
@@ -375,198 +454,318 @@
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
             }
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 180px;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+
+        .bar {
+            width: 50px;
+            background: linear-gradient(180deg, var(--accent-warm), var(--accent-gold));
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 0;
+        }
+
+        .bar.animate {
+            height: var(--bar-height);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-warm);
+        }
+
+        /* Icon */
+        .icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            font-size: 28px;
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
 <body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
     <!-- Hero Section -->
     <section class="hero">
-        <div class="series-tag">당연함의 무게 (2)</div>
-        <h1 class="main-title">침묵의 이유</h1>
-        <p class="subtitle">당연한 소통의 불가능</p>
-        <div class="scroll-indicator"></div>
+        <div class="hero-tag">PARENTING INEQUALITY</div>
+        <h1 class="hero-title">보통의 양육은<br>어떻게 특권이<br>되는가</h1>
+        <p class="hero-subtitle">양육은 본능이 아니다. 자격이다.<br>그 자격은 종종 돈으로 증명된다.</p>
+        <div class="scroll-hint"></div>
     </section>
 
-    <!-- Section 1: Phone Call -->
+    <!-- Section 1: 학원비 -->
     <section class="section" id="section1">
         <div class="container">
-            <div class="section-content">
-                <div class="section-number">01 — 전화벨</div>
-                <h2 class="section-title">벨소리는 경보음이다</h2>
+            <div class="section-num">01</div>
+            <h2 class="section-title">숫자는 감정이 없지만</h2>
 
-                <div class="section-description">
-                    <p>전화를 받는 것은 벨소리에 반응해 수화기를 드는 단순한 행위다. 대부분의 사람들은 전화벨이 울리면 자연스럽게 받는다.</p>
-                    <p>불안장애 환자에게 벨소리는 경보음이다. 모르는 번호가 화면에 뜨는 순간 심장이 요동친다. 손이 떨리고 목소리가 굳어진다.</p>
-                </div>
+            <div class="glass-card">
+                <div class="icon">💰</div>
+                <p class="description">
+                    학원비 내는 날이다. 문자가 온다. 숫자는 간단하다. 그러나 통장 잔고에게는 폭력이다. 손가락이 이체 버튼 위를 맴돈다. 누르지 못한다.
+                </p>
+            </div>
 
-                <div class="quote">
-                    뭔가 잘못된 일이 생긴 게 아닐까. 내가 실수한 게 있나. 누가 화를 내려는 건 아닐까.
-                </div>
+            <div class="quote">
+                숫자는 감정이 없지만, 가장 정확하게 감정을 할퀸다.
+            </div>
 
-                <div class="section-description">
-                    <p>생각은 꼬리를 물고 어두워진다. 통화 버튼은 작은 아이콘에 불과하지만, 이들에게는 누를 수 없는 스위치다.</p>
-                    <p>전화를 받지 않으면 문자가 온다. "전화 안 받으세요?" 그 짧은 문장 앞에서 불안은 다시 증폭된다. 부재중 전화 목록만 쌓여간다.</p>
-                </div>
+            <p class="description">
+                보이지 않는 저울 위에서 아이의 미래와 이번 달 가스비가 다투고 있다.
+            </p>
 
-                <div class="stat-card">
-                    <div class="stat-number">6.3%</div>
-                    <div class="stat-label">
-                        <strong>한국 성인 불안장애 유병률</strong>
-                        통계는 벨소리 앞에서 얼어붙는 이 순간을 설명하지 못한다.
+            <div class="stat-display">
+                <div class="bar-chart">
+                    <div class="bar" style="--bar-height: 140px;" data-animate="bar1">
+                        <div class="bar-value">4</div>
+                        <div class="bar-label">교육비에<br>짓눌림</div>
+                    </div>
+                    <div class="bar" style="--bar-height: 100px;" data-animate="bar2">
+                        <div class="bar-value">10</div>
+                        <div class="bar-label">차상위<br>계층</div>
                     </div>
                 </div>
+                <p class="stat-label">차상위계층 10명 중 4명은 교육비에 짓눌려 산다</p>
             </div>
         </div>
     </section>
 
-    <!-- Section 2: Meeting -->
+    <!-- Section 2: 한부모 편견 -->
     <section class="section" id="section2">
         <div class="container">
-            <div class="section-content">
-                <div class="section-number">02 — 회의실</div>
-                <h2 class="section-title">시선은 칼날이다</h2>
+            <div class="section-num">02</div>
+            <h2 class="section-title">일상이라는 이름의 허들</h2>
 
-                <div class="section-description">
-                    <p>회의에서 발언하는 것은 직장생활의 기본이다. 자기 의견을 말하고, 질문을 던지고, 동료들과 생각을 나누는 일상적 과정이다.</p>
-                    <p>사회불안장애 환자에게 시선은 칼날이다. 회의실에 앉으면 모든 사람의 눈이 자신을 향하는 것 같다. 말을 꺼내려 하면 목구멍이 막힌다. 얼굴이 달아오르고 목소리가 떨린다.</p>
-                </div>
+            <div class="glass-card">
+                <div class="icon">👥</div>
+                <p class="description">
+                    학부모 모임에 간다. 실내엔 커피 향이 퍼지고, 사람들 사이엔 웃음소리가 떠다닌다. 익숙한 풍경이다.
+                </p>
+                <p class="description">
+                    하지만 한부모에게 그 자리는 심문대와 같다.
+                </p>
+            </div>
 
-                <div class="section-description">
-                    <p>주변의 작은 속삭임조차 <span class="highlight">"저 사람 왜 저래"</span>라는 조롱으로 들린다. 회의가 끝나고 자리로 돌아오면 자책이 시작된다.</p>
-                    <p>"왜 나는 한마디도 못했을까." 승진 면접이나 프레젠테이션은 그저 악몽이다. 능력이 부족해서가 아니다. <strong>시선이 무서워서다.</strong></p>
-                </div>
+            <div class="quote">
+                "아버님은 뭘 하시고요?"
+            </div>
 
-                <div class="stat-card">
-                    <div class="stat-number">13%</div>
-                    <div class="stat-label">
-                        <strong>한국 직장인 사회불안 증상 비율</strong>
-                        침묵 속에서 기회들은 조용히 지나간다.
-                    </div>
+            <p class="description">
+                악의 없는 질문이 공기를 가른다. 심장이 쿵, 내려앉는다. 아무도 나쁘지 않다. 그래서 더 잔인하다.
+            </p>
+
+            <div class="glass-card">
+                <div class="quote">
+                    세상의 선의는 언제나 다수를 기준으로 설계된다.
                 </div>
+                <p class="description">
+                    세상은 죄가 없다고 말한다. 하지만 세상의 모든 질문은 언제나 온전한 부부를 향해있다.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Section 3: Rejection -->
+    <div class="divider"></div>
+
+    <!-- Section 3: 학력 대물림 -->
     <section class="section" id="section3">
         <div class="container">
-            <div class="section-content">
-                <div class="section-number">03 — 거절</div>
-                <h2 class="section-title">"아니오"는 관계의 단절이다</h2>
+            <div class="section-num">03</div>
+            <h2 class="section-title">빈칸의 무게</h2>
 
-                <div class="section-description">
-                    <p>"아니오"라고 말하는 것은 자기 의사를 표현하는 기본 권리다. 원하지 않는 것을 거절하고, 부당한 요구 앞에 선을 긋는 행위다.</p>
-                    <p>회피형 성격의 사람에게 거절은 관계의 단절이다. 상사가 주말 야근을 요구한다. 친구가 돈을 빌려달라고 청한다. 마음속으론 "싫다"고 비명을 지르지만 입 밖으로는 "네"가 흘러나온다.</p>
-                </div>
+            <div class="glass-card">
+                <div class="icon">📝</div>
+                <p class="description">
+                    아이의 서류를 쓰는 일은 육아의 일부다. 그저 펜을 쥘 뿐이다. 당신은 '보호자' 칸에 이름을 적는다. 다음 칸이 온다.
+                </p>
+                <p class="description" style="margin-top: 20px;">
+                    <span class="highlight">'부모 최종학력'</span>
+                </p>
+                <p class="description" style="margin-top: 20px;">
+                    펜이 허공에 멈춘다. 글자가 보이지 않고, 네모난 빈칸이 당신을 쏘아본다.
+                </p>
+            </div>
 
-                <div class="quote">
-                    거절하면 미움받을 것 같다. 관계가 깨질 것 같다.
-                </div>
+            <div class="quote">
+                과거는 현재를 딛고 미래를 겨누는 총구와 같다.
+            </div>
 
-                <div class="section-description">
-                    <p>한국 사회에서 "노"는 더욱 무거운 단어다. 위계와 체면의 문화가 거절을 배신의 언어로 만든다.</p>
-                    <p>거절하지 못한 약속들이 쌓이고, 그 무게는 서서히 삶을 짓누른다. <strong>"아니오"는 두 글자가 아니라 무너질 수 있는 모든 것이다.</strong></p>
+            <div class="progress-circle" id="progressCircle">
+                <svg width="200" height="200">
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ffd93d;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle class="progress-circle-bg" cx="100" cy="100" r="70"></circle>
+                    <circle class="progress-circle-fill" cx="100" cy="100" r="70"></circle>
+                </svg>
+                <div class="progress-label">
+                    <div class="progress-value">60%</div>
+                    <div class="progress-text">계층 대물림</div>
                 </div>
+            </div>
 
-                <div class="stat-card">
-                    <div class="stat-number">2.4%</div>
-                    <div class="stat-label">
-                        <strong>회피형 성격장애 유병률</strong>
-                        이런 경향을 가진 사람은 훨씬 더 많다.
-                    </div>
-                </div>
+            <p class="description" style="text-align: center;">
+                부모의 지위가 자녀에게 대물림될 확률은 이제 <span class="highlight">60%를 넘는다.</span>
+            </p>
+
+            <div class="glass-card">
+                <p class="description">
+                    이것은 단순한 열등감이 아니다. 계층이라는 보이지 않는 중력이 펜을 쥔 손목을 짓누르는, 명백한 물리적 감각이다.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Section 4: Laughter -->
+    <div class="divider"></div>
+
+    <!-- Section 4: 돌봄 공백 -->
     <section class="section" id="section4">
         <div class="container">
-            <div class="section-content">
-                <div class="section-number">04 — 농담</div>
-                <h2 class="section-title">웃음의 타이밍을 계산한다</h2>
+            <div class="section-num">04</div>
+            <h2 class="section-title">세상의 기준, 부모의 죄</h2>
 
-                <div class="section-description">
-                    <p>농담에 웃어주는 것은 사회적 상호작용의 윤활유다. 누군가 농담을 던지면 분위기를 읽고 자연스럽게 반응한다.</p>
-                    <p>자폐 스펙트럼 장애인은 웃음의 타이밍을 계산한다. 농담이 던져졌을 때, 왜 웃어야 하는지 즉각 이해하지 못할 때가 있다. 표정과 말투와 맥락을 분석하는 데 시간이 필요하다.</p>
+            <div class="glass-card">
+                <div class="icon">⏰</div>
+                <p class="description">
+                    퇴근은 여섯 시. 아이는 네 시에 끝난다. 두 시간이 비어있다. 그 두 시간은 그냥 시간이 아니다. <span class="highlight">공포의 진공</span>이다.
+                </p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">16:00</div>
+                    <div class="timeline-content">
+                        <div class="timeline-label">하교 시간</div>
+                        <div class="timeline-desc">아이 혼자</div>
+                    </div>
                 </div>
-
-                <div class="section-description">
-                    <p>다른 사람들이 웃을 때 한 박자 늦게 따라 웃거나, 아예 웃지 않는다. "왜 안 웃어?", "재미없어?" 질문들이 날아온다.</p>
-                    <p>직장 회식 자리에서 이들은 조용히 앉아 있다. 분위기를 맞춰야 한다는 압박만 커진다. <span class="highlight">자연스러움은 계산으로 만들어지지 않는다.</span> 웃음은 반응이 아니라 풀어야 할 과제가 된다.</p>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-number">2.6%</div>
-                    <div class="stat-label">
-                        <strong>한국 자폐 스펙트럼 장애 유병률</strong>
-                        눈에 보이지 않는 차이, 이해받지 못하는 고통.
+                <div class="timeline-item">
+                    <div class="timeline-time">18:00</div>
+                    <div class="timeline-content">
+                        <div class="timeline-label">퇴근 시간</div>
+                        <div class="timeline-desc">부모 귀가</div>
                     </div>
                 </div>
             </div>
+
+            <div class="glass-card">
+                <p class="description">
+                    뉴스 속보의 잔상이 머리를 스친다. 낯선 사람. 어두운 골목. 잠긴 문. 전화벨이 울릴 때마다 온몸의 피가 식는다.
+                </p>
+            </div>
+
+            <div class="quote">
+                세상은 결과를 심판하지만, 누구도 과정을 책임지지 않는다.
+            </div>
+
+            <p class="description">
+                도시는 아이를 혼자 두는 것을 방임이라 말한다. 아이를 맡길 곳이 없는 것은 현실이다. 그 현실이 부모를 죄인으로 만든다.
+            </p>
         </div>
     </section>
 
-    <!-- Section 5: Asking for Help -->
+    <div class="divider"></div>
+
+    <!-- Section 5: 정상성의 폭력 -->
     <section class="section" id="section5">
         <div class="container">
-            <div class="section-content">
-                <div class="section-number">05 — 호소</div>
-                <h2 class="section-title">"힘들다"는 배신당한 언어다</h2>
+            <div class="section-num">05</div>
+            <h2 class="section-title">평범함의 폭력</h2>
 
-                <div class="section-description">
-                    <p>"힘들다"고 말하는 것은 도움을 구하는 신호다. 고통을 드러내고, 지지를 받고, 함께 길을 찾는 출발점이다.</p>
-                    <p>학습된 무기력 상태의 사람에게 호소는 이미 배신당한 언어다. 어릴 적 "힘들다"고 말했을 때 "누가 안 힘드냐"는 대답이 돌아왔다. 직장에서 "버거워요"라고 했을 때 "요즘 애들은 참을성이 없어"라는 말을 들었다.</p>
-                </div>
-
-                <div class="quote">
-                    말해봤자 달라지는 건 없다는 것을 배웠다.
-                </div>
-
-                <div class="section-description">
-                    <p>한국은 OECD 국가 중 <span class="highlight">우울증 치료율이 가장 낮다.</span> 정신과 방문은 여전히 지워지지 않는 낙인이다.</p>
-                    <p>힘들다고 말하는 대신 술잔을 기울인다. 혼자 견딘다. 무너질 때까지 버틴다. <strong>"힘들다"는 세 글자는 입 안에서 돌처럼 무겁게 가라앉는다.</strong></p>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-number">최저</div>
-                    <div class="stat-label">
-                        <strong>한국의 OECD 우울증 치료율 순위</strong>
-                        침묵은 선택이 아니라 학습된 생존 전략이다.
-                    </div>
-                </div>
+            <div class="glass-card">
+                <div class="icon">💬</div>
+                <p class="description">
+                    "우리 애는…" 누군가 자랑을 시작한다. 그 말은 축복이다. 그러나 어떤 부모에게는 칼날이다.
+                </p>
             </div>
+
+            <div class="glass-card">
+                <p class="description">
+                    그의 아이는 말을 못 한다. 눈을 맞추지 않는다. 세상이 그어놓은 '정상성'이라는 철로에서 이탈한 아이다.
+                </p>
+                <p class="description" style="margin-top: 20px;">
+                    부모는 침묵한다. 대화에 끼지 못한다. 아니, 낄 수 없다.
+                </p>
+            </div>
+
+            <div class="quote">
+                평범함에 대한 찬사는, 누군가에게는 소리 없는 추방이다.
+            </div>
+
+            <p class="description">
+                아이를 사랑하지 않아서가 아니다. '평범함'을 예찬하는 그 대화 속에서 내 아이가 존재하지 않음을 확인하는 순간을 견딜 수 없을 뿐이다.
+            </p>
         </div>
     </section>
 
     <!-- Ending Section -->
     <section class="ending">
         <div class="ending-text" id="endingText">
-            말하지 못하는 것들이 있다.<br>
-            말할 수 없는 이유들이 있다.<br>
-            언어는 때로 다리가 아니라 벽이 된다.<br><br>
-            침묵 뒤에는 보이지 않는 전쟁이 벌어진다.<br>
-            우리는 그 전쟁을 모른다.<br><br>
-            당연하게 건네는 요구들이,<br>
-            누군가에겐 건널 수 없는 강이다.
-        </div>
-        <div class="closing-line" id="closingLine">
-            그들은 지금도 강 앞에 서 있다.<br>
-            말없이.
+            양육은 본능이 아니다.<br>
+            자격이다.<br><br>
+            그 자격은 종종<br>
+            <span class="highlight">돈으로 증명된다.</span><br><br>
+            우리는 그 사실을<br>
+            외면한다.
         </div>
     </section>
 
     <script>
-        // Intersection Observer for scroll animations
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        });
+
+        // Intersection Observer for Sections
         const observerOptions = {
             root: null,
             rootMargin: '0px',
             threshold: 0.2
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
@@ -574,14 +773,48 @@
             });
         }, observerOptions);
 
-        // Observe all sections
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => observer.observe(section));
+        document.querySelectorAll('.section').forEach(section => {
+            sectionObserver.observe(section);
+        });
 
-        // Observe ending elements
-        const endingText = document.getElementById('endingText');
-        const closingLine = document.getElementById('closingLine');
+        // Bar Chart Animation
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    const bars = entry.target.querySelectorAll('.bar');
+                    bars.forEach(bar => {
+                        setTimeout(() => {
+                            bar.classList.add('animate');
+                        }, 300);
+                    });
+                    entry.target.dataset.animated = 'true';
+                }
+            });
+        }, observerOptions);
 
+        const barChart = document.querySelector('.bar-chart');
+        if (barChart) {
+            barObserver.observe(barChart.parentElement);
+        }
+
+        // Progress Circle Animation
+        const circleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animate');
+                    }, 300);
+                    entry.target.dataset.animated = 'true';
+                }
+            });
+        }, observerOptions);
+
+        const progressCircle = document.getElementById('progressCircle');
+        if (progressCircle) {
+            circleObserver.observe(progressCircle);
+        }
+
+        // Ending Text Animation
         const endingObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -592,48 +825,10 @@
             });
         }, observerOptions);
 
-        endingObserver.observe(endingText);
-        endingObserver.observe(closingLine);
-
-        // Stat number animation
-        function animateNumber(element, target, duration = 2000) {
-            const isPercentage = target.includes('%');
-            const numericValue = parseFloat(target);
-
-            if (isNaN(numericValue)) return;
-
-            const start = 0;
-            const increment = numericValue / (duration / 16);
-            let current = start;
-
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= numericValue) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = current.toFixed(1) + (isPercentage ? '%' : '');
-                }
-            }, 16);
+        const endingText = document.getElementById('endingText');
+        if (endingText) {
+            endingObserver.observe(endingText);
         }
-
-        // Animate stats when visible
-        const statObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.dataset.animated) {
-                    const statNumber = entry.target.querySelector('.stat-number');
-                    const originalValue = statNumber.textContent;
-                    entry.target.dataset.animated = 'true';
-
-                    if (originalValue !== '최저') {
-                        animateNumber(statNumber, originalValue);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        const statCards = document.querySelectorAll('.stat-card');
-        statCards.forEach(card => statObserver.observe(card));
     </script>
 </body>
 </html>
