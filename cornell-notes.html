@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>코넬노트: 미국 정부 셧다운과 오바마케어</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            word-break: keep-all;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 24px 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #7F8C8D;
+            margin-top: 8px;
+        }
+
+        .cornell-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #E74C3C, #C0392B);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            background: linear-gradient(to bottom, #2C3E50, #34495E);
+            color: #FFFFFF;
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .card-header:hover {
+            background: linear-gradient(to bottom, #34495E, #3d566e);
+        }
+
+        .card-header:active {
+            transform: scale(0.98);
+        }
+
+        .card-keyword {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .card-icon {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+            margin-left: 12px;
+        }
+
+        .card.expanded .card-icon {
+            transform: rotate(90deg);
+        }
+
+        .card-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .card.expanded .card-body {
+            max-height: 1000px;
+        }
+
+        .card-content {
+            background: #ECF0F1;
+            padding: 20px;
+        }
+
+        .card-notes {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2C3E50;
+        }
+
+        .card-notes ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+
+        .card-notes li {
+            margin-bottom: 8px;
+        }
+
+        .card-notes strong {
+            color: #E74C3C;
+            font-weight: 600;
+        }
+
+        .summary {
+            background: linear-gradient(to bottom, #FFE5B4, #FFD89B);
+            border-radius: 16px;
+            padding: 24px 20px;
+            margin-top: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .summary-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-icon {
+            font-size: 24px;
+        }
+
+        .summary-text {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.8;
+            color: #2C3E50;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+            padding: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+        }
+
+        .footer-author {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .expand-all-btn {
+            background: linear-gradient(135deg, #E74C3C, #C0392B);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .expand-all-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(231, 76, 60, 0.4);
+        }
+
+        .expand-all-btn:active {
+            transform: translateY(0);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(231, 76, 60, 0.1);
+            color: #E74C3C;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        /* Animation for cards appearing */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.5s ease backwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Responsive */
+        @media (max-width: 380px) {
+            .header h1 {
+                font-size: 20px;
+            }
+            .card-keyword {
+                font-size: 16px;
+            }
+            .summary-title {
+                font-size: 18px;
+            }
+        }
+
+        /* Accessibility */
+        .card-header:focus {
+            outline: 3px solid #E74C3C;
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <span class="cornell-label">📝 Cornell Notes</span>
+            <h1>미국 정부 셧다운과 오바마케어</h1>
+            <p>2013년 16일간의 혼란, 그 이면의 이념 전쟁</p>
+        </div>
+
+        <!-- Expand All Button -->
+        <button class="expand-all-btn" id="expandAllBtn" onclick="toggleAll()">
+            전체 펼치기 ▼
+        </button>
+
+        <!-- Card 1 -->
+        <div class="card" data-index="0">
+            <div class="card-header" onclick="toggleCard(0)" tabindex="0" role="button" aria-expanded="false">
+                <div class="card-keyword">🏛️ 2013년 정부 셧다운</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-body">
+                <div class="card-content">
+                    <div class="card-notes">
+                        <strong>기간:</strong> 2013년 10월 1일~16일 (17년 만)<br><br>
+                        <strong>피해 규모:</strong>
+                        <ul>
+                            <li>80만 연방 공무원 무급 휴직</li>
+                            <li>130만 명 급여 지급일 불투명</li>
+                            <li>국립공원, 박물관 전면 폐쇄</li>
+                        </ul>
+                        <strong>아이러니:</strong> 셧다운 당일, 오바마케어 건강보험 마켓플레이스 등록 개시
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card" data-index="1">
+            <div class="card-header" onclick="toggleCard(1)" tabindex="0" role="button" aria-expanded="false">
+                <div class="card-keyword">⚕️ 오바마케어 핵심 3가지</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-body">
+                <div class="card-content">
+                    <div class="card-notes">
+                        <span class="badge">1</span><strong>전국민 의무가입제</strong><br>
+                        모든 국민은 건강보험 가입 필수, 미가입 시 벌금 부과<br><br>
+
+                        <span class="badge">2</span><strong>차별 금지</strong><br>
+                        보험사는 기존 질병을 이유로 가입 거부 불가, 평생 보장 한도 금지<br><br>
+
+                        <span class="badge">3</span><strong>저소득층 보조금 확대</strong><br>
+                        정부 지원으로 보험료 부담 경감<br><br>
+
+                        <strong>특징:</strong> 한국의 국민건강보험과 달리 민간보험 의무가입 방식 (자동차 책임보험과 유사)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" data-index="2">
+            <div class="card-header" onclick="toggleCard(2)" tabindex="0" role="button" aria-expanded="false">
+                <div class="card-keyword">⚖️ 자유 vs 복지 충돌</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-body">
+                <div class="card-content">
+                    <div class="card-notes">
+                        <strong>공화당 입장:</strong>
+                        <ul>
+                            <li>의무가입은 개인 자유 침해</li>
+                            <li>주 정부 권한 무시하는 연방 강제</li>
+                            <li>마크 메도우스 의원, 예산 차단 요구</li>
+                        </ul>
+
+                        <strong>민주당 입장:</strong>
+                        <ul>
+                            <li>"건강보험 없는 사람들에게 보험 제공" (오바마)</li>
+                            <li>의료 접근권은 기본권</li>
+                        </ul>
+
+                        <strong>여론:</strong> 72% 국민은 셧다운 반대, 55%가 공화당에 책임 전가 (퀸니피악대 조사)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card" data-index="3">
+            <div class="card-header" onclick="toggleCard(3)" tabindex="0" role="button" aria-expanded="false">
+                <div class="card-keyword">🎓 전문가 의견: 이념전쟁</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-body">
+                <div class="card-content">
+                    <div class="card-notes">
+                        <strong>폴 크루그먼</strong> (노벨 경제학상 수상자, 진보):<br>
+                        "공화당 하원은 '망상적 세력'. 세계 경제를 볼모로 한 협박에 굴복할 수 없다"<br><br>
+
+                        <strong>토마스 소웰</strong> (보수 경제학자):<br>
+                        "공화당은 오바마케어 제외한 모든 예산 승인. 정부 운영 거부는 민주당 책임"<br><br>
+
+                        <strong>라지프·프로터</strong> (스탠퍼드대 법학교수, 2025):<br>
+                        "보수파가 계속 방해하면 유일한 대안은 '모두를 위한 메디케어' 단일보험"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card" data-index="4">
+            <div class="card-header" onclick="toggleCard(4)" tabindex="0" role="button" aria-expanded="false">
+                <div class="card-keyword">💰 결과와 여파</div>
+                <div class="card-icon">▶</div>
+            </div>
+            <div class="card-body">
+                <div class="card-content">
+                    <div class="card-notes">
+                        <strong>경제적 손실:</strong>
+                        <ul>
+                            <li>240억 달러 경제 손실</li>
+                            <li>4분기 GDP 성장률 0.6%p 하락</li>
+                        </ul>
+
+                        <strong>정치적 결과:</strong><br>
+                        10월 17일 단기 예산안 통과로 셧다운 종료, 오바마케어는 변화 없이 유지<br><br>
+
+                        <strong>현재 (2025년):</strong><br>
+                        ACA 보조금 연장 문제로 또다시 정부 셧다운 발생. 논쟁은 계속된다.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary">
+            <div class="summary-title">
+                <span class="summary-icon">💡</span>
+                핵심 요약
+            </div>
+            <div class="summary-text">
+                2013년 미국 정부 셧다운은 오바마케어를 둘러싼 <strong>자유와 복지의 충돌</strong>이었다. 의무가입제에 반발한 공화당과 건강권을 강조한 민주당의 대립은 <strong>240억 달러 경제 손실</strong>을 낳았지만, 본질적 질문은 여전히 남았다: <strong>정부는 국민 건강에 어디까지 개입해야 하는가?</strong> 이는 단순한 의료보험 논쟁이 아니라, 우리가 어떤 사회에서 살고 싶은가에 대한 근본적인 질문이다.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-author">리서치 & 작성: 조우성 변호사</div>
+            <div>Cornell Notes Method • Mobile Optimized</div>
+        </div>
+    </div>
+
+    <script>
+        let allExpanded = false;
+        const cards = document.querySelectorAll('.card');
+
+        function toggleCard(index) {
+            const card = cards[index];
+            const isExpanded = card.classList.contains('expanded');
+
+            card.classList.toggle('expanded');
+
+            // Update ARIA attribute
+            const header = card.querySelector('.card-header');
+            header.setAttribute('aria-expanded', !isExpanded);
+
+            // Update expand all button if needed
+            updateExpandAllButton();
+        }
+
+        function toggleAll() {
+            allExpanded = !allExpanded;
+            const btn = document.getElementById('expandAllBtn');
+
+            cards.forEach(card => {
+                if (allExpanded) {
+                    card.classList.add('expanded');
+                    card.querySelector('.card-header').setAttribute('aria-expanded', 'true');
+                } else {
+                    card.classList.remove('expanded');
+                    card.querySelector('.card-header').setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            btn.textContent = allExpanded ? '전체 접기 ▲' : '전체 펼치기 ▼';
+        }
+
+        function updateExpandAllButton() {
+            const expandedCount = document.querySelectorAll('.card.expanded').length;
+            const btn = document.getElementById('expandAllBtn');
+
+            if (expandedCount === cards.length) {
+                allExpanded = true;
+                btn.textContent = '전체 접기 ▲';
+            } else if (expandedCount === 0) {
+                allExpanded = false;
+                btn.textContent = '전체 펼치기 ▼';
+            }
+        }
+
+        // Keyboard navigation
+        document.querySelectorAll('.card-header').forEach((header, index) => {
+            header.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleCard(index);
+                }
+            });
+        });
+
+        // Smooth scroll restoration
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+    </script>
+</body>
+</html>
