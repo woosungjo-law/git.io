@@ -3,130 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="역경의 연단: 내면의 품격이 빚어내는 인생의 대반전 - 인터랙티브 웹 스토리">
-    <title>역경의 연단 | 내면의 품격이 빚어내는 인생의 대반전</title>
+    <meta name="description" content="참는 자의 역설 - 온화함이라는 가장 치열한 싸움">
+    <title>참는 자의 역설 | 손그림 인포그래픽</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* ============================================
-           RESET & FOUNDATIONAL STYLES
-           ============================================ */
+        :root {
+            /* Airbnb-inspired Warm Palette */
+            --primary-coral: #FF5A5F;
+            --primary-teal: #00A699;
+            --accent-cream: #FFF8E7;
+            --neutral-charcoal: #484848;
+            --neutral-light: #F7F7F7;
+            --text-dark: #2B2B2B;
+            --text-muted: #767676;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             word-break: keep-all;
             word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-        :root {
-            /* Color Palette - Cosmic & Elegant */
-            --color-cosmic-night: #0a0e27;
-            --color-deep-space: #1a1f3a;
-            --color-stellar-indigo: #4338ca;
-            --color-nebula-purple: #7c3aed;
-            --color-gold-accent: #fbbf24;
-            --color-amber-glow: #f59e0b;
-            --color-silver-text: #e2e8f0;
-            --color-pearl-white: #f8fafc;
-
-            /* Typography */
-            --font-serif: 'Noto Serif KR', serif;
-            --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-
-            /* Spacing */
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 1.5rem;
-            --spacing-lg: 3rem;
-            --spacing-xl: 5rem;
-
-            /* Effects */
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glow-gold: 0 0 30px rgba(251, 191, 36, 0.3);
-            --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
         }
 
         body {
-            font-family: var(--font-sans);
-            background: linear-gradient(180deg, var(--color-cosmic-night) 0%, var(--color-deep-space) 100%);
-            color: var(--color-silver-text);
-            line-height: 1.8;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--neutral-light);
+            color: var(--text-dark);
+            line-height: 1.7;
             overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
         }
 
-        /* ============================================
-           COSMIC BACKGROUND & STARS
-           ============================================ */
-        .stars-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s ease-in-out infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* Nebula glow effect */
-        .stars-background::before {
-            content: '';
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: nebulaPulse 8s ease-in-out infinite;
-            transform: translate(-50%, -50%);
-        }
-
-        @keyframes nebulaPulse {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
-        }
-
-        /* ============================================
-           LAYOUT CONTAINER
-           ============================================ */
-        .page-wrapper {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
+        .container {
+            max-width: 480px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 20px;
         }
 
-        /* ============================================
-           HERO SECTION
-           ============================================ */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -134,83 +52,62 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: var(--spacing-lg) var(--spacing-md);
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--accent-cream) 0%, #fff 100%);
             position: relative;
         }
 
         .hero-badge {
             display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            margin-bottom: var(--spacing-md);
-            color: var(--color-gold-accent);
-            animation: fadeInDown 1s ease-out;
+            padding: 8px 20px;
+            background: var(--primary-coral);
+            color: white;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .hero-title {
-            font-family: var(--font-serif);
-            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-family: 'Pretendard', sans-serif;
+            font-size: clamp(28px, 8vw, 36px);
             font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: var(--spacing-md);
-            background: linear-gradient(135deg, var(--color-pearl-white) 0%, var(--color-gold-accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease-out 0.3s backwards;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            animation: fadeIn 0.8s ease-out 0.2s backwards;
         }
 
         .hero-subtitle {
-            font-size: clamp(1.125rem, 3vw, 1.5rem);
-            font-weight: 300;
-            color: var(--color-silver-text);
-            max-width: 600px;
-            margin: 0 auto var(--spacing-lg);
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.6s backwards;
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out 0.4s backwards;
         }
 
-        .hero-quote {
-            position: relative;
-            font-family: var(--font-serif);
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            font-style: italic;
-            color: var(--color-gold-accent);
-            max-width: 500px;
-            padding: var(--spacing-md);
-            margin: var(--spacing-lg) auto;
-            border-left: 3px solid var(--color-gold-accent);
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 0 12px 12px 0;
-            animation: fadeInUp 1s ease-out 0.9s backwards;
+        .hero-illustration {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out 0.6s backwards;
         }
 
-        .hero-scroll-indicator {
-            position: absolute;
-            bottom: var(--spacing-lg);
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2rem;
-            color: var(--color-gold-accent);
-            animation: bounce 2s infinite;
-            cursor: pointer;
+        /* Wavy Path Connector */
+        .path-connector {
+            width: 100%;
+            height: 60px;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 Q25,10 50,30 T100,30' stroke='%2300A699' stroke-width='3' fill='none' stroke-dasharray='5,5'/%3E%3C/svg%3E") repeat-x;
+            background-size: 100px 60px;
+            opacity: 0.3;
         }
 
-        /* ============================================
-           SECTION STYLES
-           ============================================ */
+        /* Section */
         .section {
-            margin: var(--spacing-xl) 0;
+            padding: 40px 0;
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
 
         .section.visible {
@@ -218,769 +115,455 @@
             transform: translateY(0);
         }
 
-        .section-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--color-stellar-indigo), var(--color-nebula-purple));
-            color: white;
-            border-radius: 50%;
-            font-weight: 700;
-            font-size: 1.25rem;
-            margin-bottom: var(--spacing-md);
-            box-shadow: var(--glow-gold);
-        }
-
         .section-title {
-            font-family: var(--font-serif);
-            font-size: clamp(1.75rem, 5vw, 2.5rem);
-            font-weight: 700;
-            color: var(--color-pearl-white);
-            margin-bottom: var(--spacing-md);
-            line-height: 1.3;
-        }
-
-        .section-content {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: var(--spacing-lg) var(--spacing-md);
-            box-shadow: var(--shadow-deep);
+            font-family: 'Pretendard', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--neutral-charcoal);
         }
 
         .section-text {
-            font-size: clamp(1rem, 2.5vw, 1.125rem);
-            line-height: 1.9;
-            color: var(--color-silver-text);
-            margin-bottom: var(--spacing-md);
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 16px;
         }
 
-        .section-text strong {
-            color: var(--color-gold-accent);
-            font-weight: 600;
+        /* Quote Box */
+        .quote-box {
+            background: var(--accent-cream);
+            border-left: 4px solid var(--primary-teal);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            box-shadow: 2px 4px 12px rgba(0,0,0,0.05);
         }
 
-        .section-text em {
-            font-style: normal;
-            color: var(--color-gold-accent);
-            font-weight: 600;
+        /* Three Types Cards */
+        .types-grid {
+            display: grid;
+            gap: 20px;
+            margin: 30px 0;
         }
 
-        /* ============================================
-           STORY CARD (for case studies)
-           ============================================ */
-        .story-card {
-            background: linear-gradient(135deg, rgba(67, 56, 202, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
-            border: 1px solid rgba(124, 58, 237, 0.3);
+        .type-card {
+            background: white;
             border-radius: 16px;
-            padding: var(--spacing-md);
-            margin: var(--spacing-md) 0;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
             position: relative;
             overflow: hidden;
         }
 
-        .story-card::before {
-            content: '"';
+        .type-card::before {
+            content: '';
             position: absolute;
-            top: -10px;
-            left: 10px;
-            font-size: 6rem;
-            font-family: Georgia, serif;
-            color: rgba(251, 191, 36, 0.1);
-            line-height: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
         }
 
-        .story-card-title {
+        .type-card.fire::before { background: #FF6B6B; }
+        .type-card.ice::before { background: #4ECDC4; }
+        .type-card.dead::before { background: #95A5A6; }
+
+        .type-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .type-title {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 18px;
             font-weight: 700;
-            color: var(--color-gold-accent);
-            margin-bottom: var(--spacing-sm);
-            font-size: 1.125rem;
+            margin-bottom: 12px;
         }
 
-        .story-card-text {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--color-silver-text);
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ============================================
-           HIGHLIGHT BOX
-           ============================================ */
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
-            border-left: 4px solid var(--color-gold-accent);
-            padding: var(--spacing-md);
-            margin: var(--spacing-md) 0;
-            border-radius: 0 12px 12px 0;
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--color-gold-accent);
-            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.1);
-        }
-
-        /* ============================================
-           CHECKLIST (for daily practices)
-           ============================================ */
-        .checklist {
-            list-style: none;
-            padding: 0;
-            margin: var(--spacing-md) 0;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) 0;
-            transition: all 0.3s ease;
-        }
-
-        .checklist-item:hover {
-            transform: translateX(8px);
-        }
-
-        .checklist-icon {
-            flex-shrink: 0;
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, var(--color-gold-accent), var(--color-amber-glow));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.875rem;
-            color: var(--color-cosmic-night);
-            font-weight: 700;
-            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
-        }
-
-        .checklist-text {
-            font-size: 1rem;
+        .type-description {
+            font-size: 14px;
             line-height: 1.7;
-            color: var(--color-silver-text);
+            color: var(--text-muted);
         }
 
-        .checklist-text strong {
-            color: var(--color-gold-accent);
-        }
-
-        /* ============================================
-           STATS COUNTER
-           ============================================ */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: var(--spacing-md);
-            margin: var(--spacing-lg) 0;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: var(--spacing-md);
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #FF5A5F15 0%, #00A69915 100%);
+            border: 2px dashed var(--primary-teal);
             border-radius: 16px;
-            transition: all 0.3s ease;
+            padding: 24px;
+            margin: 30px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1.6;
         }
 
-        .stat-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--glow-gold);
+        /* Stats */
+        .stat-box {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            text-align: center;
         }
 
         .stat-number {
-            font-family: var(--font-serif);
-            font-size: clamp(2rem, 6vw, 3rem);
+            font-family: 'Pretendard', sans-serif;
+            font-size: 36px;
             font-weight: 900;
-            color: var(--color-gold-accent);
+            color: var(--primary-coral);
             line-height: 1;
-            margin-bottom: var(--spacing-xs);
         }
 
         .stat-label {
-            font-size: 0.875rem;
-            color: var(--color-silver-text);
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* Daily Choices */
+        .choices-grid {
+            display: grid;
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        .choice-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .choice-card:hover {
+            transform: translateX(4px);
+        }
+
+        .choice-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--accent-cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .choice-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Final Choice */
+        .final-choice {
+            background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-coral) 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px 24px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .final-choice h3 {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .final-choice p {
+            font-size: 15px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--neutral-charcoal);
+            color: white;
+        }
+
+        .footer-credit {
+            font-size: 13px;
             opacity: 0.8;
         }
 
-        /* ============================================
-           CONSTELLATION VISUAL (Final section)
-           ============================================ */
-        .constellation-section {
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: var(--spacing-xl) var(--spacing-md);
-            position: relative;
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .constellation-canvas {
-            width: 300px;
-            height: 300px;
-            margin: var(--spacing-lg) auto;
-            position: relative;
-        }
-
-        .constellation-star {
+        .scroll-hint {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--color-gold-accent);
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--color-gold-accent);
-            animation: starGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes starGlow {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
-        }
-
-        .constellation-line {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--color-gold-accent), transparent);
-            opacity: 0.3;
-            transform-origin: left center;
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-        .footer {
-            text-align: center;
-            padding: var(--spacing-lg) var(--spacing-md);
-            border-top: 1px solid var(--glass-border);
-            margin-top: var(--spacing-xl);
-        }
-
-        .footer-divider {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--color-gold-accent), transparent);
-            margin: 0 auto var(--spacing-md);
-        }
-
-        .footer-text {
-            font-size: 0.875rem;
-            color: var(--color-silver-text);
-            opacity: 0.7;
-        }
-
-        /* ============================================
-           ANIMATIONS
-           ============================================ */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            animation: bounce 2s infinite;
+            opacity: 0.5;
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
         }
 
-        /* ============================================
-           RESPONSIVE DESIGN
-           ============================================ */
-        @media (max-width: 768px) {
-            .page-wrapper {
-                padding: 0 1rem;
-            }
-
-            .hero {
-                min-height: 90vh;
-                padding: var(--spacing-md) var(--spacing-sm);
-            }
-
-            .section {
-                margin: var(--spacing-lg) 0;
-            }
-
-            .section-content {
-                padding: var(--spacing-md) var(--spacing-sm);
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .constellation-canvas {
-                width: 250px;
-                height: 250px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            :root {
-                --spacing-lg: 2rem;
-                --spacing-xl: 3rem;
-            }
-
-            .hero-quote {
-                font-size: 0.9375rem;
-                padding: var(--spacing-sm);
-            }
-        }
-
-        /* ============================================
-           ACCESSIBILITY
-           ============================================ */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
+        @media (max-width: 400px) {
+            .hero-title { font-size: 26px; }
+            .section-title { font-size: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Stars Background -->
-    <div class="stars-background" id="stars-container"></div>
+    <div class="hero">
+        <div class="hero-badge">채근담의 지혜</div>
+        <h1 class="hero-title">참는 자의 역설</h1>
+        <p class="hero-subtitle">온화함이라는 가장 치열한 싸움</p>
 
-    <!-- Main Content -->
-    <div class="page-wrapper">
-        <!-- Hero Section -->
-        <header class="hero" role="banner">
-            <div class="hero-badge">채근담의 지혜</div>
-            <h1 class="hero-title">
-                역경의 연단
-            </h1>
-            <p class="hero-subtitle">
-                내면의 품격이 빚어내는<br>인생의 대반전
-            </p>
-            <blockquote class="hero-quote">
-                "우리의 운명은 별에 쓰여 있는 것이 아니라,<br>
-                우리 내면의 별자리로 이루어진다"
-            </blockquote>
-            <div class="hero-scroll-indicator" aria-label="아래로 스크롤">↓</div>
-        </header>
+        <svg class="hero-illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FF5A5F;stop-opacity:0.2" />
+                    <stop offset="100%" style="stop-color:#00A699;stop-opacity:0.2" />
+                </linearGradient>
+            </defs>
+            <!-- Person silhouette -->
+            <circle cx="100" cy="70" r="25" fill="url(#grad1)" stroke="#484848" stroke-width="2"/>
+            <path d="M 75 95 Q 100 85 125 95 L 120 150 L 80 150 Z" fill="url(#grad1)" stroke="#484848" stroke-width="2"/>
+            <!-- Thought bubbles -->
+            <circle cx="60" cy="40" r="8" fill="none" stroke="#FF5A5F" stroke-width="2" stroke-dasharray="2,2"/>
+            <circle cx="140" cy="40" r="8" fill="none" stroke="#00A699" stroke-width="2" stroke-dasharray="2,2"/>
+            <text x="60" y="45" font-size="10" text-anchor="middle" fill="#FF5A5F">火</text>
+            <text x="140" y="45" font-size="10" text-anchor="middle" fill="#00A699">水</text>
+        </svg>
 
-        <!-- Main Content -->
-        <main>
-            <!-- Section 1: 역경, 품격의 시험대 -->
-            <section class="section">
-                <div class="section-number">1</div>
-                <h2 class="section-title">역경, 품격의 시험대</h2>
-                <div class="section-content">
-                    <p class="section-text">
-                        <em>가난한 집일지라도 마당을 깨끗이 쓸고, 가난할지라도 여자가 머리를 곱게 빗으면
-                        외관과 외모가 화려하지 않아도 품위가 우아할 것이다.</em>
-                    </p>
-                    <p class="section-text">
-                        이 채근담의 구절은 단순한 처세술이 아니라 <strong>내면의 품격</strong>에 대한 깊은 통찰을 담고 있습니다.
-                        역경은 우리의 진정한 품격을 시험하는 도구입니다.
-                    </p>
-
-                    <div class="story-card">
-                        <h3 class="story-card-title">존 밀러의 이야기</h3>
-                        <p class="story-card-text">
-                            2008년 금융위기 때 모든 것을 잃고도 매일 아침 정장을 차려입고 동네 공원을 산책하며
-                            자존감을 지켜낸 월스트리트의 전직 투자은행가. 그의 선택은 외적 환경과 무관하게
-                            내면의 품격을 유지하는 것이 얼마나 중요한지를 보여줍니다.
-                        </p>
-                    </div>
-
-                    <div class="highlight-box">
-                        훌륭한 사람이 가난하고 불행해지더라도<br>
-                        어찌 자기 스스로 피폐해지고 해이해질 것인가
-                    </div>
-                </div>
-            </section>
-
-            <!-- Section 2: 자기혁신, 기회의 씨앗 -->
-            <section class="section">
-                <div class="section-number">2</div>
-                <h2 class="section-title">자기혁신, 기회의 씨앗</h2>
-                <div class="section-content">
-                    <div class="highlight-box">
-                        역경은 우리를 부수는 망치가 아니라,<br>
-                        더 나은 모습으로 다듬는 조각칼이다
-                    </div>
-
-                    <p class="section-text">
-                        이는 단순한 위안이 아니라 실제 사례로 증명된 진실입니다.
-                    </p>
-
-                    <div class="story-card">
-                        <h3 class="story-card-title">마이클 창의 전환</h3>
-                        <p class="story-card-text">
-                            2020년 팬데믹으로 20년 경력의 요리사 직업을 잃은 마이클 창은 절망 대신 이를 기회로 삼았습니다.
-                            그는 매일 아침 셰프복을 입고 부엌에 서서 온라인 요리 클래스를 시작했고,
-                            이는 6개월 만에 10만 명의 구독자를 가진 유튜브 채널로 성장했습니다.
-                        </p>
-                    </div>
-
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="20">0</div>
-                            <div class="stat-label">년 경력</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="6">0</div>
-                            <div class="stat-label">개월</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">10만+</div>
-                            <div class="stat-label">구독자</div>
-                        </div>
-                    </div>
-
-                    <p class="section-text">
-                        이는 '위기는 기회다'라는 진부한 말을 넘어, <strong>적극적인 자기혁신</strong>이
-                        어떻게 새로운 길을 열 수 있는지 보여주는 생생한 예시입니다.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Section 3: 일상의 의식, 미래를 여는 열쇠 -->
-            <section class="section">
-                <div class="section-number">3</div>
-                <h2 class="section-title">일상의 의식, 미래를 여는 열쇠</h2>
-                <div class="section-content">
-                    <p class="section-text">
-                        품격 있는 삶은 거창한 것이 아니라 <strong>일상의 작은 습관들</strong>로 이루어집니다.
-                    </p>
-
-                    <ul class="checklist">
-                        <li class="checklist-item">
-                            <span class="checklist-icon">✓</span>
-                            <span class="checklist-text">
-                                <strong>하루의 시작과 끝을 의식화하기</strong><br>
-                                매일 아침 5분간 명상하고, 잠들기 전 감사일기 쓰기
-                            </span>
-                        </li>
-                        <li class="checklist-item">
-                            <span class="checklist-icon">✓</span>
-                            <span class="checklist-text">
-                                <strong>학습의 일상화</strong><br>
-                                매일 30분씩 전문 서적 읽기 또는 온라인 강의 듣기
-                            </span>
-                        </li>
-                        <li class="checklist-item">
-                            <span class="checklist-icon">✓</span>
-                            <span class="checklist-text">
-                                <strong>건강 관리</strong><br>
-                                주 3회 30분 이상 걷기, 하루 2리터 물 마시기
-                            </span>
-                        </li>
-                        <li class="checklist-item">
-                            <span class="checklist-icon">✓</span>
-                            <span class="checklist-text">
-                                <strong>네트워크 유지</strong><br>
-                                주 1회 이상 옛 동료나 지인에게 안부 연락하기
-                            </span>
-                        </li>
-                    </ul>
-
-                    <p class="section-text">
-                        이러한 작은 습관들이 모여 우리의 내면을 단단하게 만들고,
-                        예상치 못한 기회를 끌어당기는 <strong>자석</strong>이 됩니다.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Section 4: 내면의 힘, 운명을 바꾸는 지렛대 -->
-            <section class="section">
-                <div class="section-number">4</div>
-                <h2 class="section-title">내면의 힘, 운명을 바꾸는 지렛대</h2>
-                <div class="section-content">
-                    <div class="highlight-box">
-                        우리의 운명은 별에 쓰여 있는 것이 아니라,<br>
-                        우리 내면의 별자리로 이루어진다
-                    </div>
-
-                    <p class="section-text">
-                        이 말은 우리의 내면이 얼마나 강력한 힘을 가졌는지 상기시킵니다.
-                    </p>
-
-                    <div class="story-card">
-                        <h3 class="story-card-title">김영호 씨의 대반전</h3>
-                        <p class="story-card-text">
-                            화학자 출신으로 30년간 연구원 생활을 하다 구조조정으로 일자리를 잃은 61세.
-                            절망 대신 자신의 경험을 살려 과학 교구 제작에 도전했습니다.
-                            3년간의 노력 끝에 그는 중소기업 백만불 수출의 탑을 수상하는 기업가가 되었습니다.
-                        </p>
-                    </div>
-
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="61">0</div>
-                            <div class="stat-label">도전 시작 나이</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="30">0</div>
-                            <div class="stat-label">년 경력</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="3">0</div>
-                            <div class="stat-label">년 만에 성공</div>
-                        </div>
-                    </div>
-
-                    <p class="section-text">
-                        이는 나이와 환경을 뛰어넘어 <strong>내면의 힘</strong>이
-                        어떻게 인생을 바꿀 수 있는지 보여주는 감동적인 사례입니다.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Constellation Section - Closing -->
-            <section class="constellation-section section">
-                <h2 class="section-title">당신의 별자리를 그려라</h2>
-
-                <div class="constellation-canvas" id="constellation">
-                    <!-- Stars will be dynamically generated here -->
-                </div>
-
-                <div class="section-content" style="max-width: 600px; margin: 0 auto;">
-                    <p class="section-text">
-                        역경은 피할 수 없지만, 그 속에서 어떻게 대응하느냐에 따라 우리의 미래가 결정됩니다.
-                    </p>
-                    <p class="section-text">
-                        <strong>내면의 품격</strong>을 지키고 끊임없이 자기를 혁신하는 자만이
-                        진정한 성공의 열매를 맺을 수 있습니다.
-                    </p>
-                    <div class="highlight-box">
-                        오늘 당신의 내면에<br>
-                        어떤 별자리를 그리고 있는가?<br><br>
-                        그 답이 바로 당신의 미래입니다
-                    </div>
-                </p>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-divider"></div>
-            <p class="footer-text">
-                역경의 연단: 내면의 품격이 빚어내는 인생의 대반전
-            </p>
-            <p class="footer-text" style="margin-top: 0.5rem; font-size: 0.75rem;">
-                Interactive Web Story © 2024
-            </p>
-        </footer>
+        <div class="scroll-hint">↓</div>
     </div>
 
+    <div class="container">
+        <!-- Intro -->
+        <section class="section">
+            <p class="section-text">
+                엘리베이터 문이 닫힌다. 회의를 마친 사람들이 각자의 층으로 흩어진다.
+                누군가는 주먹을 쥔다. 누군가는 입술을 문다.
+            </p>
+            <p class="section-text">
+                순간의 모욕, 부당한 질책, 억울한 평가가 목구멍을 타고 올라온다.
+                말해야 했던 것들, 쏟아내야 했던 분노가 식도를 긁는다.
+            </p>
+            <div class="highlight-box">
+                일상은 이렇게 미세한 전쟁의 연속이다
+            </div>
+        </section>
+
+        <div class="path-connector"></div>
+
+        <!-- Three Types -->
+        <section class="section">
+            <h2 class="section-title">세 부류의 인간</h2>
+            <p class="section-text">
+                『채근담』이 해부한 세 가지 유형. 당신은 어디에 가까운가?
+            </p>
+
+            <div class="types-grid">
+                <div class="type-card fire">
+                    <div class="type-icon">🔥</div>
+                    <h3 class="type-title">불처럼 타오르는 자</h3>
+                    <p class="type-description">
+                        급한 성질의 소유자. 만나는 것마다 태운다.
+                        순간의 통쾌함을 위해 긴 시간의 축적을 포기한다.
+                    </p>
+                </div>
+
+                <div class="type-card ice">
+                    <div class="type-icon">❄️</div>
+                    <h3 class="type-title">얼음처럼 차가운 자</h3>
+                    <p class="type-description">
+                        은덕이 적은 자. 냉소하고, 비웃고, 무시한다.
+                        침묵은 분노보다 더 깊은 상처를 낸다.
+                    </p>
+                </div>
+
+                <div class="type-card dead">
+                    <div class="type-icon">🪨</div>
+                    <h3 class="type-title">죽은 물처럼 고인 자</h3>
+                    <p class="type-description">
+                        고집스럽게 막힌 자. 변화를 거부한다.
+                        죽은 물, 썩은 나무. 생기가 끊어졌다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="path-connector"></div>
+
+        <!-- Paradox -->
+        <section class="section">
+            <h2 class="section-title">순간의 쾌감, 긴 시간의 대가</h2>
+
+            <div class="stat-box">
+                <div class="stat-number">0.2초</div>
+                <div class="stat-label">편도체에서 분노가 뇌 전체를 장악하는 시간</div>
+            </div>
+
+            <p class="section-text">
+                심리학은 말한다. 분노는 0.2초 만에 뇌 전체를 장악한다고.
+                이성을 담당하는 전두엽은 그 속도를 따라잡지 못한다.
+            </p>
+
+            <div class="quote-box">
+                "화를 내는 사람은 순간적으로 강해 보이지만, 장기적으로는 가장 약하다.
+                자신의 감정을 통제하지 못하는 사람이니까."
+            </div>
+
+            <p class="section-text">
+                반면 참는 사람은 순간적으로 약해 보이지만, 그는 가장 강한 사람이다.
+                <strong>자신의 내면을 다스릴 줄 아는 사람이다.</strong>
+            </p>
+        </section>
+
+        <div class="path-connector"></div>
+
+        <!-- Transformation -->
+        <section class="section">
+            <h2 class="section-title">억제가 아니라 전환이다</h2>
+
+            <p class="section-text">
+                진정한 온화함은 감정을 억누르는 게 아니다. 전환하는 것이다.
+            </p>
+
+            <div class="highlight-box">
+                타인을 향해 불을 지르지만,<br>
+                그 불은 가장 먼저<br>
+                우리 자신을 태운다
+            </div>
+
+            <p class="section-text">
+                온화함은 시선을 전환하는 능력이다.
+            </p>
+
+            <div class="choices-grid">
+                <div class="choice-card">
+                    <div class="choice-icon">🔄</div>
+                    <div class="choice-text">
+                        "그는 나를 공격한 게 아니라, 자신의 두려움을 표현한 것이다"
+                    </div>
+                </div>
+
+                <div class="choice-card">
+                    <div class="choice-icon">💭</div>
+                    <div class="choice-text">
+                        "그녀는 나를 무시한 게 아니라, 자신의 불안을 드러낸 것이다"
+                    </div>
+                </div>
+
+                <div class="choice-card">
+                    <div class="choice-icon">🤝</div>
+                    <div class="choice-text">
+                        "나 역시 완벽하지 않다. 나 역시 실수하고, 상처받고, 두려워한다"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="path-connector"></div>
+
+        <!-- Daily Choices -->
+        <section class="section">
+            <h2 class="section-title">매일의 작은 선택이 만드는 운명</h2>
+
+            <p class="section-text">
+                온화함은 하루아침에 만들어지지 않는다. 매일의 작은 선택이 쌓여 만들어지는 성품이다.
+            </p>
+
+            <div class="choices-grid">
+                <div class="choice-card">
+                    <div class="choice-icon">🍽️</div>
+                    <div class="choice-text">
+                        <strong>아침 식탁에서</strong><br>
+                        목구멍까지 치밀어 오른 말을 삼키는 순간
+                    </div>
+                </div>
+
+                <div class="choice-card">
+                    <div class="choice-icon">💼</div>
+                    <div class="choice-text">
+                        <strong>회의실에서</strong><br>
+                        부당한 평가를 참아내는 순간
+                    </div>
+                </div>
+
+                <div class="choice-card">
+                    <div class="choice-icon">🚇</div>
+                    <div class="choice-text">
+                        <strong>퇴근길 지하철에서</strong><br>
+                        짜증을 억누르고 양보하는 순간
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "그 순간들이 쌓인다. 습관이 되고, 습관은 성품이 되고, 성품은 운명이 된다."
+            </div>
+        </section>
+
+        <div class="path-connector"></div>
+
+        <!-- Final Choice -->
+        <div class="final-choice section">
+            <h3>선택은 우리의 몫이다</h3>
+            <p>
+                불처럼 타오르며 모든 것을 태울 것인가.<br>
+                얼음처럼 차갑게 모든 것을 죽일 것인가.<br>
+                썩은 물처럼 고여 있을 것인가.<br><br>
+
+                <strong>아니면 흐르는 물처럼,<br>
+                자라는 나무처럼,<br>
+                온화하게 강할 것인가.</strong>
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p class="footer-credit">본문 작성 및 인포그래픽 디자인 by 조우성</p>
+    </footer>
+
     <script>
-        // ============================================
-        // STARS BACKGROUND GENERATION
-        // ============================================
-        function createStars() {
-            const container = document.getElementById('stars-container');
-            const starCount = 80;
-
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-
-                // Random position
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-
-                // Random size (1-3px)
-                const size = Math.random() * 2 + 1;
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-
-                // Random animation delay
-                star.style.animationDelay = Math.random() * 3 + 's';
-
-                container.appendChild(star);
-            }
-        }
-
-        // ============================================
-        // INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
-        // ============================================
-        function setupScrollAnimations() {
-            const options = {
-                threshold: 0.15,
-                rootMargin: '0px 0px -100px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-
-                        // Trigger stat counters when section becomes visible
-                        const statNumbers = entry.target.querySelectorAll('.stat-number[data-target]');
-                        statNumbers.forEach(stat => {
-                            if (!stat.classList.contains('counted')) {
-                                animateCounter(stat);
-                                stat.classList.add('counted');
-                            }
-                        });
-                    }
-                });
-            }, options);
-
-            document.querySelectorAll('.section').forEach(section => {
-                observer.observe(section);
-            });
-        }
-
-        // ============================================
-        // COUNTER ANIMATION
-        // ============================================
-        function animateCounter(element) {
-            const target = parseInt(element.getAttribute('data-target'));
-            const duration = 2000; // 2 seconds
-            const steps = 60;
-            const increment = target / steps;
-            let current = 0;
-
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
-                element.textContent = Math.round(current);
-            }, duration / steps);
-        }
-
-        // ============================================
-        // CONSTELLATION VISUALIZATION
-        // ============================================
-        function createConstellation() {
-            const canvas = document.getElementById('constellation');
-            const stars = [
-                { x: 30, y: 20 },
-                { x: 70, y: 15 },
-                { x: 50, y: 50 },
-                { x: 20, y: 70 },
-                { x: 80, y: 75 },
-                { x: 60, y: 85 }
-            ];
-
-            // Create stars
-            stars.forEach((pos, index) => {
-                const star = document.createElement('div');
-                star.className = 'constellation-star';
-                star.style.left = pos.x + '%';
-                star.style.top = pos.y + '%';
-                star.style.animationDelay = (index * 0.2) + 's';
-                canvas.appendChild(star);
             });
-
-            // Create lines connecting stars
-            const connections = [
-                [0, 1], [1, 2], [2, 3], [2, 4], [4, 5]
-            ];
-
-            connections.forEach(([start, end], index) => {
-                const startPos = stars[start];
-                const endPos = stars[end];
-
-                const line = document.createElement('div');
-                line.className = 'constellation-line';
-
-                const dx = endPos.x - startPos.x;
-                const dy = endPos.y - startPos.y;
-                const length = Math.sqrt(dx * dx + dy * dy);
-                const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-
-                line.style.width = length + '%';
-                line.style.left = startPos.x + '%';
-                line.style.top = startPos.y + '%';
-                line.style.transform = `rotate(${angle}deg)`;
-                line.style.animationDelay = (index * 0.3) + 's';
-
-                canvas.appendChild(line);
-            });
-        }
-
-        // ============================================
-        // SMOOTH SCROLL FOR INDICATOR
-        // ============================================
-        function setupScrollIndicator() {
-            const indicator = document.querySelector('.hero-scroll-indicator');
-            if (indicator) {
-                indicator.addEventListener('click', () => {
-                    const firstSection = document.querySelector('.section');
-                    if (firstSection) {
-                        firstSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            }
-        }
-
-        // ============================================
-        // INITIALIZATION
-        // ============================================
-        document.addEventListener('DOMContentLoaded', () => {
-            createStars();
-            setupScrollAnimations();
-            createConstellation();
-            setupScrollIndicator();
-
-            console.log('%c✨ 역경의 연단', 'font-size: 20px; color: #fbbf24; font-weight: bold;');
-            console.log('%c내면의 품격이 빚어내는 인생의 대반전', 'font-size: 14px; color: #e2e8f0;');
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
         });
 
-        // ============================================
-        // KEYBOARD ACCESSIBILITY
-        // ============================================
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                const activeElement = document.activeElement;
-                if (activeElement.classList.contains('hero-scroll-indicator')) {
-                    e.preventDefault();
-                    activeElement.click();
-                }
-            }
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
         });
+
+        // Smooth scroll for hint
+        document.querySelector('.scroll-hint').addEventListener('click', () => {
+            document.querySelector('.section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        console.log('✨ 참는 자의 역설 - 인포그래픽 로드 완료');
     </script>
 </body>
 </html>
