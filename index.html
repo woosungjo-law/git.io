@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>조언을 멈춰야 조언이 된다 | T공자의 까칭한 조언</title>
+    <title>M&A Earn-Out 조항 완전 가이드 | 조변의 머스트노우</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-wisdom: #0F62FE;
-            --primary-depth: #002D9C;
-            --accent-warning: #FF832B;
-            --neutral-light: #F4F4F4;
-            --neutral-dark: #161616;
-            --spacing-unit: clamp(16px, 4vw, 24px);
+            /* Stripe-inspired color system */
+            --primary-indigo: #635BFF;
+            --primary-purple: #7A73FF;
+            --accent-mint: #00D4AA;
+            --accent-coral: #FF6B6B;
+            --neutral-dark: #1A1F36;
+            --neutral-gray: #525F7F;
+            --neutral-light: #F6F9FC;
+            --card-shadow: 0 4px 12px rgba(99, 91, 255, 0.1);
         }
 
         * {
@@ -25,344 +28,356 @@
 
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background: var(--neutral-light);
+            background: linear-gradient(135deg, #F6F9FC 0%, #E3E8EF 100%);
             color: var(--neutral-dark);
             line-height: 1.6;
-            overflow-x: hidden;
+            padding: 20px 0;
         }
 
         .container {
             max-width: 480px;
             margin: 0 auto;
-            background: white;
-            min-height: 100vh;
-            box-shadow: 0 0 60px rgba(0,0,0,0.08);
+            padding: 0 16px;
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-wisdom) 0%, var(--primary-depth) 100%);
-            padding: calc(var(--spacing-unit) * 3) var(--spacing-unit);
+        /* Header Card */
+        .header-card {
+            background: linear-gradient(135deg, var(--primary-indigo) 0%, var(--primary-purple) 100%);
+            border-radius: 20px;
+            padding: 40px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(99, 91, 255, 0.25);
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        .header-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 300px;
-            height: 300px;
-            border: 40px solid rgba(255,255,255,0.1);
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
-            transform: rotate(-15deg);
         }
 
-        .hero-badge {
+        .header-badge {
             display: inline-block;
             background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 16px;
             backdrop-filter: blur(10px);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 12px;
         }
 
-        .hero-title {
-            font-size: clamp(32px, 8vw, 42px);
+        .header-title {
+            font-size: 28px;
             font-weight: 900;
             color: white;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            line-height: 1.3;
+            margin-bottom: 12px;
         }
 
-        .hero-subtitle {
-            font-size: 18px;
+        .header-subtitle {
+            font-size: 16px;
             color: rgba(255,255,255,0.9);
-            font-weight: 500;
             line-height: 1.5;
         }
 
-        /* Story Intro */
-        .story-intro {
-            padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
+        /* Flow Arrow */
+        .flow-arrow {
+            width: 40px;
+            height: 40px;
+            margin: 16px auto;
+            opacity: 0.4;
+        }
+
+        .flow-arrow svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Info Card Base */
+        .info-card {
             background: white;
-            position: relative;
-        }
-
-        .doodle-clock {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
-            position: relative;
-        }
-
-        .doodle-clock svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
-        }
-
-        .story-text {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #393939;
-            margin-bottom: 16px;
-        }
-
-        .story-highlight {
-            background: linear-gradient(transparent 60%, rgba(255,131,43,0.3) 60%);
-            padding: 0 4px;
-            font-weight: 700;
-        }
-
-        /* Path Connector */
-        .path-connector {
-            width: 100%;
-            height: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .path-line {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .path-line svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Quote Section */
-        .quote-section {
-            padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
-            background: var(--neutral-light);
-            position: relative;
-        }
-
-        .hand-drawn-frame {
-            border: 4px solid var(--primary-wisdom);
-            border-radius: 20px;
-            padding: 32px 24px;
-            background: white;
-            position: relative;
-            box-shadow: 8px 8px 0px rgba(15,98,254,0.15);
-            transform: rotate(-1deg);
-        }
-
-        .confucian-text {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-depth);
-            text-align: center;
-            margin-bottom: 16px;
-            line-height: 1.4;
-        }
-
-        .confucian-chinese {
-            font-size: 18px;
-            color: #666;
-            text-align: center;
-            font-style: italic;
-            margin-top: 12px;
-        }
-
-        .quote-translation {
-            font-size: 15px;
-            color: #525252;
-            text-align: center;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 2px dashed #ddd;
-        }
-
-        /* Key Insight Boxes */
-        .insight-box {
-            margin: calc(var(--spacing-unit) * 2) var(--spacing-unit);
+            border-radius: 16px;
             padding: 24px;
-            background: white;
-            border-left: 6px solid var(--accent-warning);
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: all 0.6s ease;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            transition: transform 0.3s ease;
         }
 
-        .insight-box.visible {
-            opacity: 1;
-            transform: translateX(0);
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(99, 91, 255, 0.15);
         }
 
-        .insight-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--accent-warning);
-            border-radius: 50%;
+        /* Card Icon */
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-indigo), var(--primary-purple));
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
             margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(99, 91, 255, 0.2);
         }
 
-        .insight-title {
+        .card-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* Card Headline */
+        .card-headline {
             font-size: 20px;
             font-weight: 700;
             color: var(--neutral-dark);
             margin-bottom: 12px;
-        }
-
-        .insight-text {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #525252;
-        }
-
-        /* Action Principles */
-        .principles-section {
-            padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
-            background: var(--primary-depth);
-            color: white;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .principle-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 16px;
-            border: 2px solid rgba(255,255,255,0.2);
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 0.5s ease;
-        }
-
-        .principle-card.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .principle-number {
-            display: inline-block;
-            width: 36px;
-            height: 36px;
-            background: var(--accent-warning);
-            color: var(--neutral-dark);
-            border-radius: 50%;
-            text-align: center;
-            line-height: 36px;
-            font-weight: 900;
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-
-        .principle-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .principle-desc {
-            font-size: 15px;
-            line-height: 1.6;
-            color: rgba(255,255,255,0.9);
-        }
-
-        /* Visual Metaphor */
-        .visual-metaphor {
-            padding: calc(var(--spacing-unit) * 3) var(--spacing-unit);
-            background: white;
-            text-align: center;
-        }
-
-        .metaphor-illustration {
-            max-width: 280px;
-            margin: 0 auto 32px;
-        }
-
-        .metaphor-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-depth);
-            margin-bottom: 16px;
-        }
-
-        .metaphor-text {
-            font-size: 16px;
-            line-height: 1.7;
-            color: #525252;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        /* Call to Action */
-        .cta-section {
-            padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
-            background: linear-gradient(135deg, #FF832B 0%, #FF6B1A 100%);
-            text-align: center;
-        }
-
-        .cta-title {
-            font-size: 26px;
-            font-weight: 900;
-            color: white;
-            margin-bottom: 16px;
             line-height: 1.3;
         }
 
-        .cta-text {
-            font-size: 16px;
-            color: rgba(255,255,255,0.95);
-            line-height: 1.6;
-            margin-bottom: 24px;
+        /* Card Content */
+        .card-content {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--neutral-gray);
+            margin-bottom: 12px;
         }
 
-        .cta-highlight {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 2px 8px;
-            border-radius: 4px;
+        .card-content strong {
+            color: var(--neutral-dark);
             font-weight: 700;
+        }
+
+        /* Sticky Note Annotation */
+        .sticky-note {
+            background: #FFF9C4;
+            border-left: 4px solid #FFD54F;
+            padding: 12px 16px;
+            margin-top: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #5D4037;
+            transform: rotate(-0.5deg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .sticky-note-icon {
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        /* Number Badge */
+        .number-badge {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: var(--accent-mint);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 900;
+            font-size: 16px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Key Points List */
+        .key-points {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .key-points li {
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            background: var(--neutral-light);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-indigo);
+            font-size: 15px;
+            color: var(--neutral-dark);
+        }
+
+        .key-points li strong {
+            color: var(--primary-indigo);
+        }
+
+        /* Warning Card */
+        .warning-card {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 2px solid #FFB74D;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .warning-card .card-headline {
+            color: #E65100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-card .card-content {
+            color: #5D4037;
+        }
+
+        /* Success Card */
+        .success-card {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 2px solid #66BB6A;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .success-card .card-headline {
+            color: #1B5E20;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .success-card .card-content {
+            color: #2E7D32;
+        }
+
+        /* Stats Card */
+        .stats-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 16px;
+            background: var(--neutral-light);
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--primary-indigo);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--neutral-gray);
+        }
+
+        /* Comparison Card */
+        .comparison-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .comparison-row {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .comparison-row.wrong {
+            background: #FFEBEE;
+            border-left: 4px solid var(--accent-coral);
+        }
+
+        .comparison-row.correct {
+            background: #E8F5E9;
+            border-left: 4px solid var(--accent-mint);
+        }
+
+        .comparison-icon {
+            font-size: 20px;
+            margin-right: 12px;
+        }
+
+        /* CTA Card */
+        .cta-card {
+            background: linear-gradient(135deg, var(--primary-indigo) 0%, var(--primary-purple) 100%);
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(99, 91, 255, 0.25);
+        }
+
+        .cta-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .cta-text {
+            font-size: 15px;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .cta-contact {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            margin-top: 16px;
         }
 
         /* Footer */
         .footer {
-            padding: 32px var(--spacing-unit);
-            background: var(--neutral-dark);
-            color: white;
             text-align: center;
+            padding: 24px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
         }
 
         .footer-text {
             font-size: 14px;
-            opacity: 0.7;
-            margin-bottom: 8px;
+            color: var(--neutral-gray);
+            margin-bottom: 4px;
         }
 
         .footer-credit {
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 700;
+            color: var(--neutral-dark);
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -370,269 +385,279 @@
             }
         }
 
-        .animate-in {
-            animation: fadeInUp 0.8s ease forwards;
+        .info-card, .warning-card, .success-card, .stats-card, .comparison-card {
+            animation: fadeInUp 0.6s ease forwards;
         }
 
-        /* Doodle Elements */
-        .doodle-arrow {
-            width: 60px;
-            height: 60px;
-            margin: 20px auto;
-        }
-
+        /* Responsive */
         @media (max-width: 480px) {
-            .hero-title {
-                font-size: 32px;
+            .header-title {
+                font-size: 24px;
             }
 
-            .confucian-text {
-                font-size: 20px;
+            .card-headline {
+                font-size: 18px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-badge">T공자의 까칭한 조언</div>
-            <h1 class="hero-title">조언을 멈춰야<br>조언이 된다</h1>
-            <p class="hero-subtitle">선의의 조언이 관계의 부채가 되는 순간</p>
-        </section>
-
-        <!-- Story Introduction -->
-        <section class="story-intro animate-in">
-            <div class="doodle-clock">
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" stroke="#FF832B" stroke-width="3" stroke-linecap="round"/>
-                    <line x1="50" y1="50" x2="50" y2="25" stroke="#0F62FE" stroke-width="3" stroke-linecap="round"/>
-                    <line x1="50" y1="50" x2="70" y2="50" stroke="#0F62FE" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="50" cy="50" r="4" fill="#FF832B"/>
-                </svg>
-            </div>
-            <p class="story-text">
-                금요일 오후 4시, 박지영 팀장은 또다시 후배의 보고서를 붉은 펜으로 고치고 있었다.
-                <span class="story-highlight">같은 실수를 3주째 반복</span>하는 이수빈 씨.
-                30분 넘게 설명했지만, 후배의 눈에는 이해보다 <span class="story-highlight">곤혹스러움</span>이 더 짙었다.
-            </p>
-            <p class="story-text">
-                "내 설명이 부족한가? 내가 너무 많은 걸 바라나?"
-            </p>
-            <p class="story-text">
-                선의로 시작한 조언은 어느새 <span class="story-highlight">지영의 어깨를 짓누르는 책임감</span>으로 변해 있었다.
-            </p>
-        </section>
-
-        <!-- Path Connector -->
-        <div class="path-connector">
-            <div class="path-line">
-                <svg viewBox="0 0 400 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M 0 40 Q 100 10, 200 40 T 400 40" stroke="#0F62FE" stroke-width="3" stroke-dasharray="5,5" opacity="0.3"/>
-                </svg>
-            </div>
+        <!-- Header -->
+        <div class="header-card">
+            <div class="header-badge">조변의 머스트노우</div>
+            <h1 class="header-title">M&A할 때<br>"일단 거래하고,<br>잘되면 더 드릴게요"</h1>
+            <p class="header-subtitle">Earn-Out 조항의 모든 것</p>
         </div>
 
-        <!-- Confucian Quote -->
-        <section class="quote-section">
-            <div class="hand-drawn-frame">
-                <p class="confucian-text">
-                    충심으로 충고하되,<br>
-                    <strong style="color: #FF832B; font-size: 28px;">안 되면 그만두어</strong><br>
-                    스스로 욕되게 하지 마라
-                </p>
-                <p class="confucian-chinese">
-                    忠告而善道之, 不可則止, 毋自辱焉
-                </p>
-                <p class="quote-translation">
-                    『논어』 「안연」편 - 공자가 말하는 조언의 한계
-                </p>
-            </div>
-        </section>
-
-        <!-- Key Insight 1 -->
-        <div class="insight-box">
-            <div class="insight-icon">💡</div>
-            <h3 class="insight-title">조언이라는 이름의 착각</h3>
-            <p class="insight-text">
-                조언은 씨앗일 뿐, 싹을 틔우고 뿌리를 내리는 것은 전적으로 땅의 몫이다.
-                조언의 가치는 말하는 사람의 논리가 아닌, <strong>듣는 사람의 의지 안에서</strong> 비로소 완성된다.
-            </p>
-        </div>
-
-        <!-- Key Insight 2 -->
-        <div class="insight-box">
-            <div class="insight-icon">⚡</div>
-            <h3 class="insight-title">멈춤의 기술, 혹은 관계의 손절매</h3>
-            <p class="insight-text">
-                공자는 명확한 손절매(Stop-loss) 라인을 긋는다.
-                '불가(不可)', 즉 상대가 받아들일 의지가 없음이 확인되는 시점.
-                <strong>충고는 상대의 변화를 위한 투자가 아니라, 내 원칙을 지키는 행위여야 한다.</strong>
-            </p>
-        </div>
-
-        <!-- Key Insight 3 -->
-        <div class="insight-box">
-            <div class="insight-icon">🎯</div>
-            <h3 class="insight-title">가장 강력한 조언은 조언의 부재다</h3>
-            <p class="insight-text">
-                "수빈 씨, 이 부분은 지난번 피드백과 같은 맥락이니 다시 검토해줘요."
-                이는 책임 전가가 아니다. <strong>책임의 주체를 명확히 하는 것</strong>이다.
-                침묵은 무관심이 아니라, 상대가 스스로 생각할 공간을 열어주는 가장 적극적인 행위다.
-            </p>
-        </div>
-
-        <!-- Doodle Arrow -->
-        <div class="doodle-arrow">
+        <!-- Flow Arrow -->
+        <div class="flow-arrow">
             <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 50 10 L 50 70" stroke="#FF832B" stroke-width="4" stroke-linecap="round"/>
-                <path d="M 30 55 L 50 75 L 70 55" stroke="#FF832B" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <path d="M 50 10 L 50 70" stroke="#635BFF" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round"/>
+                <path d="M 35 60 L 50 75 L 65 60" stroke="#635BFF" stroke-width="3" stroke-linecap="round" fill="none"/>
             </svg>
         </div>
 
-        <!-- Action Principles -->
-        <section class="principles-section">
-            <h2 class="section-title">당신이 할 일은 명확하다</h2>
-
-            <div class="principle-card">
-                <div class="principle-number">1</div>
-                <h3 class="principle-title">조언의 횟수를 제한하라</h3>
-                <p class="principle-desc">
-                    같은 문제에 대한 조언은 한 번이면 족하다. 반복은 충고가 아니라 잔소리이며,
-                    당신 말의 가치를 스스로 떨어뜨리는 행위다.
-                </p>
-            </div>
-
-            <div class="principle-card">
-                <div class="principle-number">2</div>
-                <h3 class="principle-title">해결책 대신 질문을 던져라</h3>
-                <p class="principle-desc">
-                    "어떻게 해야 할지 모르겠어요"라는 말에 "이렇게 해봐"라고 답하지 말고,
-                    "어떤 방법들을 생각해 봤어요?"라고 되물어라.
-                </p>
-            </div>
-
-            <div class="principle-card">
-                <div class="principle-number">3</div>
-                <h3 class="principle-title">감정적 거리를 확보하라</h3>
-                <p class="principle-desc">
-                    상대의 문제에 과몰입하는 순간, 당신은 조언자에서 문제 해결사로 전락한다.
-                    이것은 냉담함이 아니라, 관계의 건강성을 지키는 현실적 경계 설정이다.
-                </p>
-            </div>
-
-            <div class="principle-card">
-                <div class="principle-number">4</div>
-                <h3 class="principle-title">결과를 책임지지 마라</h3>
-                <p class="principle-desc">
-                    당신의 조언을 따르든 무시하든, 그 결과는 오롯이 상대의 몫이다.
-                    그 몫을 온전히 되돌려주는 것이야말로 당신이 보여줄 수 있는 마지막 존중이다.
-                </p>
-            </div>
-        </section>
-
-        <!-- Visual Metaphor -->
-        <section class="visual-metaphor">
-            <div class="metaphor-illustration">
-                <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Seeds (advice) -->
-                    <circle cx="60" cy="100" r="8" fill="#0F62FE" opacity="0.3"/>
-                    <circle cx="80" cy="95" r="8" fill="#0F62FE" opacity="0.3"/>
-                    <circle cx="100" cy="100" r="8" fill="#0F62FE" opacity="0.3"/>
-
-                    <!-- Arrow -->
-                    <path d="M 120 100 L 160 100" stroke="#FF832B" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M 150 90 L 160 100 L 150 110" stroke="#FF832B" stroke-width="3" stroke-linecap="round" fill="none"/>
-
-                    <!-- Growing plant (with question mark) -->
-                    <path d="M 200 100 Q 200 80, 210 70" stroke="#002D9C" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="210" cy="65" r="6" fill="#002D9C"/>
-                    <text x="208" y="70" font-size="12" fill="white" font-weight="bold">?</text>
-
-                    <!-- Ground line -->
-                    <line x1="180" y1="100" x2="240" y2="100" stroke="#393939" stroke-width="2"/>
+        <!-- Problem Scenario Card -->
+        <div class="info-card">
+            <div class="card-icon">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="35" cy="50" r="20" stroke="white" stroke-width="4"/>
+                    <circle cx="65" cy="50" r="20" stroke="white" stroke-width="4"/>
+                    <line x1="45" y1="50" x2="55" y2="50" stroke="white" stroke-width="4"/>
                 </svg>
             </div>
-            <h3 class="metaphor-title">성장은 타인의 몫이다</h3>
-            <p class="metaphor-text">
-                씨앗을 뿌리는 것은 당신의 역할이지만,
-                그것이 싹을 틀지, 언제 꽃을 피울지는 오롯이 그들의 선택이다.
-            </p>
-        </section>
+            <h2 class="card-headline">가치 평가가 안 맞으면?</h2>
+            <div class="card-content">
+                스타트업 인수 협상 중...<br><br>
+                <strong>창업자:</strong> "우리 회사 100억 가치!"<br>
+                <strong>인수자:</strong> "아무리 봐도 50억인데요?"<br><br>
+                → 거래 결렬 위기 💥
+            </div>
+            <div class="sticky-note">
+                <span class="sticky-note-icon">💡</span>
+                <strong>Earn-Out 솔루션:</strong> "일단 50억 드릴게요. 2년 뒤 실적이 정말 좋으면 50억 더 드릴게요!"
+            </div>
+        </div>
 
-        <!-- Call to Action -->
-        <section class="cta-section">
-            <h2 class="cta-title">스스로를 욕되게 하지 마라</h2>
+        <!-- Flow Arrow -->
+        <div class="flow-arrow">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 50 10 L 50 70" stroke="#00D4AA" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round"/>
+                <path d="M 35 60 L 50 75 L 65 60" stroke="#00D4AA" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+        </div>
+
+        <!-- Why Needed Card -->
+        <div class="info-card">
+            <div class="card-icon">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50" y="65" font-size="48" fill="white" text-anchor="middle" font-weight="bold">?</text>
+                </svg>
+            </div>
+            <h2 class="card-headline">왜 이런 조항이 필요할까?</h2>
+            <ul class="key-points">
+                <li><span class="number-badge">1</span><strong>가치 평가 갭 해소</strong><br>성장 중인 회사, 기술력은 있는데 매출은 아직... 미래가치를 어떻게 볼지 천차만별</li>
+                <li><span class="number-badge">2</span><strong>핵심 인력 유지</strong><br>IT/디자인 회사처럼 '사람'이 핵심 자산. 창업자가 돈 받고 떠나면 가치 폭락</li>
+                <li><span class="number-badge">3</span><strong>리스크 분산</strong><br>매수인: "비싸게 샀다가 망하면?" vs 매도인: "싸게 팔았다가 대박나면?" → Win-Win</li>
+            </ul>
+        </div>
+
+        <!-- Flow Arrow -->
+        <div class="flow-arrow">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 50 10 Q 30 40, 50 70" stroke="#7A73FF" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round" fill="none"/>
+            </svg>
+        </div>
+
+        <!-- Key Metrics Card -->
+        <div class="stats-card">
+            <h2 class="card-headline">📊 가장 많이 쓰는 성과 지표</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">#1</span>
+                    <div class="stat-label">EBITDA<br>(영업이익)</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">#2</span>
+                    <div class="stat-label">매출액<br>(단순명확)</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">#3</span>
+                    <div class="stat-label">순이익<br>(세금포함)</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">#4</span>
+                    <div class="stat-label">ARR<br>(구독모델)</div>
+                </div>
+            </div>
+            <div class="sticky-note">
+                <span class="sticky-note-icon">⚠️</span>
+                <strong>피해야 할 지표:</strong> "고객 만족도" 같은 건 측정 애매하고 조작 가능성 UP!
+            </div>
+        </div>
+
+        <!-- Flow Arrow -->
+        <div class="flow-arrow">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 50 10 L 50 70" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round"/>
+                <path d="M 35 60 L 50 75 L 65 60" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+        </div>
+
+        <!-- Warning Card -->
+        <div class="warning-card">
+            <h2 class="card-headline">
+                <span style="font-size: 24px;">🚨</span>
+                "장난질" 막는 장치 필수
+            </h2>
+            <div class="card-content">
+                인수자가 나쁜 마음 먹으면 일부러 실적 안 나게 할 수 있어요:
+            </div>
+            <ul class="key-points">
+                <li>❌ 핵심 직원 내보내기</li>
+                <li>❌ 마케팅 예산 확 줄이기</li>
+                <li>❌ 사업부 매각해버리기</li>
+            </ul>
+            <div class="sticky-note">
+                <span class="sticky-note-icon">📌</span>
+                <strong>실제 케이스:</strong> 한 회사가 인수 후 핵심 사업부를 통째로 팔아버려 earn-out이 날아감. 법적 분쟁까지 진행됨.
+            </div>
+        </div>
+
+        <!-- Flow Arrow -->
+        <div class="flow-arrow">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 50 10 Q 70 40, 50 70" stroke="#635BFF" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round" fill="none"/>
+            </svg>
+        </div>
+
+        <!-- Tips Card -->
+        <div class="info-card">
+            <div class="card-icon">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="35" r="8" fill="white"/>
+                    <rect x="46" y="48" width="8" height="30" rx="2" fill="white"/>
+                </svg>
+            </div>
+            <h2 class="card-headline">실전 꿀팁 3가지</h2>
+            <ul class="key-points">
+                <li><strong>1. 지표는 명확하고 단순하게</strong><br>측정 가능하고 조작 불가능한 것으로</li>
+                <li><strong>2. "정상적인 사업 운영" 조항 필수</strong><br>인수 전 3년간의 방식과 동일하게 운영</li>
+                <li><strong>3. 회계 기준 확실히 못 박기</strong><br>감가상각, 관리비 배분 방식 명시</li>
+            </ul>
+        </div>
+
+        <!-- Flow Arrow -->
+        <div class="flow-arrow">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 50 10 L 50 70" stroke="#00D4AA" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round"/>
+                <path d="M 35 60 L 50 75 L 65 60" stroke="#00D4AA" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+        </div>
+
+        <!-- Comparison Card -->
+        <div class="comparison-card">
+            <h2 class="card-headline">실무에서 자주 보는 실수들</h2>
+
+            <div class="comparison-row wrong">
+                <span class="comparison-icon">❌</span>
+                <span>"매출이 많이 오르면 추가로 드림"<br><small>→ 얼마나? 어떻게 계산?</small></span>
+            </div>
+            <div class="comparison-row correct">
+                <span class="comparison-icon">✅</span>
+                <span>"매출 100억 달성 시 20억, 150억 달성 시 30억 추가 지급"</span>
+            </div>
+
+            <div class="comparison-row wrong">
+                <span class="comparison-icon">❌</span>
+                <span>"회사를 정상 운영한다"<br><small>→ 정상이 뭔데?</small></span>
+            </div>
+            <div class="comparison-row correct">
+                <span class="comparison-icon">✅</span>
+                <span>"인수 전 3년간의 사업 방식과 동일하게 운영하며, 주요 정책 변경 시 매도인과 사전 협의"</span>
+            </div>
+
+            <div class="comparison-row wrong">
+                <span class="comparison-icon">❌</span>
+                <span>"2년 후 실적 보고 지급"<br><small>→ 2년이 언제부터?</small></span>
+            </div>
+            <div class="comparison-row correct">
+                <span class="comparison-icon">✅</span>
+                <span>"2025년 1월 1일부터 2026년 12월 31일까지의 회계연도 실적 기준"</span>
+            </div>
+        </div>
+
+        <!-- Flow Arrow -->
+        <div class="flow-arrow">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 50 10 L 50 70" stroke="#7A73FF" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round"/>
+                <path d="M 35 60 L 50 75 L 65 60" stroke="#7A73FF" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+        </div>
+
+        <!-- Success Card -->
+        <div class="success-card">
+            <h2 class="card-headline">
+                <span style="font-size: 24px;">🎯</span>
+                마무리하며
+            </h2>
+            <div class="card-content">
+                <strong>Earn-out은 단순히 "돈 나눠 주기"가 아니라, 인수 후 2~3년간의 파트너십을 설계하는 것입니다.</strong>
+                <br><br>
+                서로 믿고 같은 방향을 보고 가자는 약속이죠.
+                <br><br>
+                그만큼 조항 하나하나가 중요합니다. 나중에 "이런 뜻이 아니었는데..."는 소용없어요.
+                <br><br>
+                <strong>처음부터 명확하고 구체적으로 써야 합니다.</strong>
+            </div>
+        </div>
+
+        <!-- CTA Card -->
+        <div class="cta-card">
+            <h2 class="cta-title">M&A 계약 검토가 필요하신가요?</h2>
             <p class="cta-text">
-                타인에 대한 기대를 끊고 자신에게로 돌아오라는 냉정한 귀환 명령.
-                당신에게 필요한 것은 더 나은 조언의 기술이 아니다.
-                <span class="cta-highlight">그만둘 수 있는 용기</span>다.
+                Earn-out 조항 설계부터 협상까지<br>
+                실전 경험 풍부한 전문가가 함께합니다
             </p>
-        </section>
+            <p class="cta-contact">
+                📧 law@mustknow.co.kr
+            </p>
+        </div>
 
         <!-- Footer -->
-        <footer class="footer">
-            <p class="footer-text">© 2025 T공자의 까칭한 조언</p>
+        <div class="footer">
+            <p class="footer-text">작성: 조우성 변호사 / 로펌 머스트노우</p>
             <p class="footer-credit">본문 작성 및 인포그래픽 디자인 by 조우성</p>
-        </footer>
+        </div>
     </div>
 
     <script>
-        // Scroll-triggered animations
+        // Intersection Observer for scroll animations
         const observerOptions = {
-            threshold: 0.2,
+            threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
-        // Observe all animatable elements
-        document.querySelectorAll('.insight-box, .principle-card').forEach(el => {
-            observer.observe(el);
+        document.querySelectorAll('.info-card, .warning-card, .success-card, .stats-card, .comparison-card').forEach(card => {
+            observer.observe(card);
         });
 
-        // Smooth scroll behavior
+        // Add smooth scroll behavior
         document.documentElement.style.scrollBehavior = 'smooth';
-
-        // Add parallax effect to hero
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero && scrolled < window.innerHeight) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-                hero.style.opacity = 1 - (scrolled / window.innerHeight);
-            }
-        });
-
-        // Add breathing animation to path connector
-        const pathLine = document.querySelector('.path-line path');
-        if (pathLine) {
-            let dashOffset = 0;
-            function animatePath() {
-                dashOffset += 0.5;
-                pathLine.style.strokeDashoffset = dashOffset;
-                requestAnimationFrame(animatePath);
-            }
-            animatePath();
-        }
-
-        // Performance optimization: Debounce scroll event
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    // Scroll-based logic here
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
     </script>
 </body>
 </html>
