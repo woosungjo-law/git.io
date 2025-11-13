@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>당연함의 무게 : 텅 빈 카트 - ADHD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,506 +13,924 @@
         }
 
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #FFF5E1 0%, #E8F4F8 100%);
+            color: #2C3E50;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 480px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
+            background: white;
+            min-height: 100vh;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
+        /* Header Section */
+        .hero {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            padding: 60px 30px 40px;
             position: relative;
+            overflow: hidden;
         }
 
-        .header::after {
+        .hero::before {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
-        }
-
-        .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
-        }
-
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-        }
-
-        .flow-step::after {
-            content: '→';
-            position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
-        }
-
-        .flow-step:last-child::after {
-            display: none;
-        }
-
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
         }
 
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
-
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
-
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
-
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .fact-item {
-            text-align: center;
-        }
-
-        .fact-number {
-            font-size: 24px;
+        .hero-title {
+            font-size: 32px;
             font-weight: 900;
-            color: #D4AF37;
-            display: block;
+            color: white;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+            line-height: 1.2;
         }
 
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
+        .hero-subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.95);
+            position: relative;
+            z-index: 2;
         }
 
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
+        /* Shopping List Sticky Header */
+        .shopping-list-header {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 3px solid #FF6B35;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            animation: fadeHeader 8s ease-in-out forwards;
         }
 
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
+        @keyframes fadeHeader {
+            0%, 20% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        .shopping-list-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #FF6B35;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
         }
 
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
+        .shopping-items {
+            display: flex;
+            gap: 20px;
         }
 
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
+        .shopping-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
             font-weight: 500;
+            color: #2C3E50;
+            animation: itemFade 8s ease-in-out forwards;
         }
 
-        .footer-highlight {
-            color: #1A2A57;
+        @keyframes itemFade {
+            0%, 20% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.25; transform: scale(0.95); filter: blur(0.5px); }
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #FF6B35;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        /* Story Section - The Plan */
+        .section {
+            padding: 40px 30px;
+            position: relative;
+        }
+
+        .section-compact {
+            padding: 25px 30px;
+        }
+
+        .section-large {
+            padding: 50px 30px;
+        }
+
+        .section-number {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 80px;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.03);
+            line-height: 1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
             font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
         }
 
-        .small-text {
+        .story-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+
+        .story-text.large {
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .emphasis {
+            font-weight: 700;
+            color: #E63946;
+            position: relative;
+            padding: 2px 4px;
+        }
+
+        .highlight-circle {
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight-circle::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 3px solid #FF006E;
+            border-radius: 50%;
+            opacity: 0.6;
+            transform: rotate(-5deg);
+        }
+
+        /* The First Crack - Distraction Moment */
+        .crack-section {
+            background: linear-gradient(135deg, #FFE66D 0%, #FF6B6B 100%);
+            padding: 40px 30px;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .crack-section::before {
+            content: '⚡';
+            position: absolute;
+            font-size: 120px;
+            top: 50%;
+            right: -20px;
+            transform: translateY(-50%) rotate(-15deg);
+            opacity: 0.15;
+        }
+
+        .crack-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .crack-text {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.8;
+        }
+
+        /* Sensory Overload Section */
+        .chaos-section {
+            background: #2C3E50;
+            padding: 50px 30px;
+            color: white;
+            position: relative;
+        }
+
+        .chaos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .sensory-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sensory-card.large {
+            grid-column: 1 / -1;
+        }
+
+        .sensory-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .sensory-label {
             font-size: 12px;
-            color: #666;
-            line-height: 1.4;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            margin-bottom: 8px;
         }
 
-        .bold {
+        .sensory-description {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Cart Filling Chaos */
+        .impulse-section {
+            background: linear-gradient(135deg, #FF006E 0%, #E63946 100%);
+            padding: 50px 30px;
+            color: white;
+        }
+
+        .impulse-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .cart-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .cart-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            animation: popIn 0.5s ease-out backwards;
+        }
+
+        .cart-item:nth-child(1) { animation-delay: 0.1s; }
+        .cart-item:nth-child(2) { animation-delay: 0.2s; }
+        .cart-item:nth-child(3) { animation-delay: 0.3s; }
+        .cart-item:nth-child(4) { animation-delay: 0.4s; }
+        .cart-item:nth-child(5) { animation-delay: 0.5s; }
+        .cart-item:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .impulse-subtitle {
+            font-size: 15px;
+            text-align: center;
+            opacity: 0.9;
+            font-weight: 400;
+            margin-top: 20px;
+        }
+
+        /* The Realization - Cool Tones */
+        .realization-section {
+            background: linear-gradient(135deg, #4ECDC4 0%, #1A535C 100%);
+            padding: 60px 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .realization-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .realization-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .forgotten-items {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .forgotten-item {
+            font-size: 48px;
+            opacity: 0.3;
+            animation: ghostFloat 3s ease-in-out infinite;
+        }
+
+        .forgotten-item:nth-child(2) { animation-delay: 0.5s; }
+        .forgotten-item:nth-child(3) { animation-delay: 1s; }
+
+        @keyframes ghostFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .realization-quote {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.8;
+            margin-top: 25px;
+            font-style: italic;
+            opacity: 0.95;
+        }
+
+        /* Understanding Section */
+        .understanding-section {
+            background: white;
+            padding: 50px 30px;
+        }
+
+        .understanding-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #2C3E50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .callout-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 25px;
+            border-radius: 16px;
+            border-left: 6px solid #FF6B35;
+            margin: 20px 0;
+        }
+
+        .callout-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2C3E50;
+        }
+
+        .key-point {
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 2px dashed #E63946;
+        }
+
+        .key-point-title {
+            font-size: 16px;
             font-weight: 700;
-            color: #1A2A57;
+            color: #E63946;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
+        .key-point-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #2C3E50;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
+        /* ADHD Educational Section */
+        .education-section {
+            background: linear-gradient(180deg, #1A535C 0%, #2C3E50 100%);
+            padding: 60px 30px;
+            color: white;
+        }
+
+        .education-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .education-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .education-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .education-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .brain-visual {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .brain-circle {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #4ECDC4 0%, #FF6B35 100%);
+            border-radius: 50%;
+            position: relative;
+            animation: brainPulse 4s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        @keyframes brainPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(78, 205, 196, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(78, 205, 196, 0); }
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #4ECDC4;
+        }
+
+        .info-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #4ECDC4;
+        }
+
+        .info-card-text {
+            font-size: 14px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .symptom-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .symptom-tag {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Final Message */
+        .finale-section {
+            background: white;
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .finale-quote {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2C3E50;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .finale-quote::before,
+        .finale-quote::after {
+            content: '"';
+            font-size: 48px;
+            color: #FF6B35;
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .finale-quote::before {
+            top: -10px;
+            left: -10px;
+        }
+
+        .finale-quote::after {
+            bottom: -30px;
+            right: -10px;
+        }
+
+        .finale-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2C3E50;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: #F8F9FA;
+            padding: 40px 30px;
+            text-align: center;
+            border-top: 3px solid #FF6B35;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+
+        .footer-credit {
+            font-size: 13px;
+            color: #6C757D;
+            margin-top: 10px;
+        }
+
+        /* Decorative Arrow */
+        .arrow-down {
+            text-align: center;
+            font-size: 32px;
+            color: rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-            
-            .content-grid {
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero {
+                padding: 50px 25px 35px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .section, .section-large {
+                padding: 35px 25px;
+            }
+
+            .chaos-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .main-title {
-                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 class="hero-title">당연함의 무게<br>텅 빈 카트</h1>
+            <p class="hero-subtitle">ADHD와 함께하는 일상의 전쟁</p>
         </div>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
+        <!-- Sticky Shopping List -->
+        <div class="shopping-list-header">
+            <div class="shopping-list-title">📝 오늘의 쇼핑 목록</div>
+            <div class="shopping-items">
+                <div class="shopping-item">
+                    <div class="checkbox"></div>
+                    <span>🥚 계란</span>
                 </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
+                <div class="shopping-item">
+                    <div class="checkbox"></div>
+                    <span>🥛 우유</span>
                 </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
+                <div class="shopping-item">
+                    <div class="checkbox"></div>
+                    <span>🧅 양파</span>
                 </div>
             </div>
         </div>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
+        <!-- The Beginning -->
+        <div class="section">
+            <div class="section-number">01</div>
+            <div class="content-wrapper fade-in">
+                <span class="section-tag">시작</span>
+                <p class="story-text large">
+                    김지영이 카트를 민다. 바퀴가 일정한 소음을 내며 구른다. 마트의 냉기가 발목을 스친다. 천장 형광등이 사물들의 경계를 지우며 하얗게 빛난다.
+                </p>
+                <p class="story-text">
+                    오늘의 목표는 <span class="emphasis">명확했다</span>. 계란 한 판, 우유 한 팩, 찌개에 넣을 양파 한 망. 현관문 냉장고에 붙여 둔 메모지의 목록이다.
+                </p>
             </div>
         </div>
 
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
+        <div class="arrow-down">↓</div>
+
+        <!-- The Plan -->
+        <div class="section-compact">
+            <div class="content-wrapper fade-in">
+                <div class="callout-box">
+                    <p class="callout-text">
+                        <strong>계획은 채소 코너로 직진하는 것이었다.</strong> 동선이 가장 효율적이다. 이것은 장보기다. 단순하고 반복적인 노동일 뿐이다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- The First Crack -->
+        <div class="crack-section">
+            <div class="crack-title">첫 번째 균열</div>
+            <p class="crack-text">
+                그러나 그녀의 발이 멈춘다. 시선이 매대 끝, <strong>강렬한 붉은색 포장지</strong>에 꽂힌다. 새로 나온 감자칩 광고가 요란하다.
+            </p>
+            <p class="crack-text" style="margin-top: 15px;">
+                머릿속의 목소리가 경고한다. '채소 코너로 가, 지영아.' 하지만 몸은 이미 과자 진열대를 향해 한 걸음 옮긴 뒤다.
+            </p>
+            <p class="crack-text" style="margin-top: 15px; font-weight: 700; font-size: 17px;">
+                계획이라는 단단했던 구조물에 첫 균열이 생긴다.
+            </p>
+        </div>
+
+        <!-- Sensory Overload -->
+        <div class="chaos-section">
+            <div class="section-tag" style="background: rgba(255, 255, 255, 0.2);">감각의 폭동</div>
+            <p class="story-text" style="color: white; font-size: 17px; margin-top: 15px;">
+                이제 김지영의 뇌 속으로 마트의 <span class="emphasis" style="color: #FFE66D;">모든 자극</span>이 경쟁적으로 쏟아져 들어온다.
+            </p>
+
+            <div class="chaos-grid">
+                <div class="sensory-card">
+                    <span class="sensory-icon">👂</span>
+                    <div class="sensory-label">청각</div>
+                    <div class="sensory-description">계산대 기계음, 카트 바퀴 소리, 아주머니의 외침</div>
+                </div>
+
+                <div class="sensory-card">
+                    <span class="sensory-icon">👃</span>
+                    <div class="sensory-label">후각</div>
+                    <div class="sensory-description">멀리서 희미하게 풍겨오는 빵 냄새</div>
+                </div>
+
+                <div class="sensory-card">
+                    <span class="sensory-icon">👁️</span>
+                    <div class="sensory-label">시각</div>
+                    <div class="sensory-description">할인 딱지의 노란색, 신상품의 원색들</div>
+                </div>
+
+                <div class="sensory-card">
+                    <span class="sensory-icon">✋</span>
+                    <div class="sensory-label">촉각</div>
+                    <div class="sensory-description">과자 봉지의 바삭한 질감</div>
+                </div>
+
+                <div class="sensory-card large">
+                    <div class="sensory-description" style="font-size: 15px; font-weight: 600; text-align: center;">
+                        모든 정보가 <span style="color: #FFE66D;">동등한 중요도</span>를 주장하며 그녀의 의식을 점거하려 든다.
                     </div>
-                    <div class="section-title">보증보험 청구</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <div class="section-title">민사소송 & 가압류</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
-                    </div>
-                    <div class="section-title">사해행위 취소</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
                 </div>
             </div>
         </div>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
+        <!-- The Impulse Purchase Cascade -->
+        <div class="impulse-section">
+            <div class="impulse-title">충동이 이성을 집어삼킨다</div>
+
+            <div class="cart-items">
+                <div class="cart-item">🍪 과자</div>
+                <div class="cart-item">🧴 샴푸</div>
+                <div class="cart-item">🧼 세제 1+1</div>
+                <div class="cart-item">🍕 반값 냉동식품</div>
+                <div class="cart-item">🍫 초콜릿</div>
+                <div class="cart-item">🥤 음료수</div>
             </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
+
+            <p class="impulse-subtitle">
+                카트는 목적 없이 표류하던 욕망의 파편들로 빠르게 채워져 간다.
+            </p>
+        </div>
+
+        <!-- Lost Memory -->
+        <div class="section-large">
+            <div class="content-wrapper fade-in">
+                <p class="story-text large">
+                    채소 코너는 이미 아득히 멀다. 무언가 <span class="emphasis">중요한 것을 잊었다</span>는 불안감이 안개처럼 피어오르지만, 그 실체를 붙잡을 힘이 없다.
+                </p>
+                <p class="story-text" style="margin-top: 20px;">
+                    뇌는 오직 <strong>다음 자극, 다음 새로움</strong>만을 향해 돌진할 뿐이다.
+                </p>
             </div>
         </div>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
+        <!-- The Realization -->
+        <div class="realization-section">
+            <span class="realization-icon">💳</span>
+            <h2 class="realization-title">깨달음의 순간</h2>
+            <p style="font-size: 16px; opacity: 0.9; margin-bottom: 20px;">
+                계산대를 지나 자동문을 나선다.<br>
+                주차장의 차가운 공기가 뺨을 때린다.
+            </p>
+            <p style="font-size: 17px; font-weight: 600; margin-bottom: 25px;">
+                얼어붙었던 기억의 표면이 깨진다.
+            </p>
+
+            <div class="forgotten-items">
+                <div class="forgotten-item">🥚</div>
+                <div class="forgotten-item">🥛</div>
+                <div class="forgotten-item">🧅</div>
             </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
+
+            <p class="realization-quote">
+                카트는 가득 찼다.<br>
+                하지만 저녁 식탁에 오를 것은 없다.
+            </p>
+        </div>
+
+        <!-- Understanding Section -->
+        <div class="understanding-section">
+            <h2 class="understanding-title">이것은 무엇인가?</h2>
+
+            <div class="key-point">
+                <div class="key-point-title">
+                    <span>⚠️</span> 단순한 건망증이 아니다
+                </div>
+                <div class="key-point-text">
+                    이것은 의지나 성의 부족의 문제가 아니다. <strong>뇌의 실행 기능</strong>, 즉 계획을 세우고 작업 기억을 유지하며 충동을 억제하는 사령부의 작동 방식이 다를 뿐이다.
+                </div>
+            </div>
+
+            <div class="callout-box">
+                <p class="callout-text">
+                    쏟아지는 자극의 홍수 속에서 <strong>중요한 것과 그렇지 않은 것을 구분해 내는 필터</strong>가 고장 난 상태에 가깝다. 이것이 성인 ADHD 당사자가 마주하는 현실이다.
+                </p>
+            </div>
+
+            <p class="story-text" style="margin-top: 25px; text-align: center; font-size: 17px;">
+                평범한 심부름은 그렇게,<br>
+                <span class="emphasis">실패한 임무</span>가 되어버렸다.
+            </p>
+        </div>
+
+        <!-- Educational Section -->
+        <div class="education-section">
+            <div class="education-header">
+                <div class="education-tag">전문 용어 해설</div>
+                <h2 class="education-title">ADHD란 무엇인가</h2>
+                <p class="education-subtitle">Attention-Deficit/Hyperactivity Disorder</p>
+            </div>
+
+            <div class="brain-visual">
+                <div class="brain-circle">🧠</div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-card-title">정의</div>
+                    <div class="info-card-text">
+                        아동기에 주로 발현하여 성인기까지 상당수가 지속되는 <strong>신경발달장애</strong>의 일종. 주의력 결핍, 과잉행동, 충동성을 핵심 증상으로 한다.
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-title">원인</div>
+                    <div class="info-card-text">
+                        의지나 성격의 문제가 아니라, <strong>뇌의 전두엽 기능 및 도파민</strong>과 같은 신경전달물질 시스템의 생물학적 차이에서 기인한다.
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-title">영향을 받는 영역</div>
+                    <div class="info-card-text">
+                        계획 수립, 시간 관리, 감정 조절, 작업 기억 등 삶 전반에 필요한 <strong>실행 기능</strong>에 어려움을 겪을 수 있다.
+                    </div>
+                    <div class="symptom-list">
+                        <div class="symptom-tag">계획 수립</div>
+                        <div class="symptom-tag">시간 관리</div>
+                        <div class="symptom-tag">감정 조절</div>
+                        <div class="symptom-tag">작업 기억</div>
+                        <div class="symptom-tag">충동 억제</div>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!-- Final Message -->
+        <div class="finale-section">
+            <p class="finale-quote">
+                때로는 가장 단순해 보이는 일상이 누군가에게는 전쟁터가 된다
+            </p>
+            <p class="finale-text">
+                ADHD는 보이지 않는 장애입니다. 하지만 그것이 덜 실재한다는 뜻은 아닙니다. 이해와 공감, 그리고 적절한 지원이 필요한 이유입니다.
+            </p>
+        </div>
+
+        <!-- Footer -->
         <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
+            <p class="footer-text">본문 작성 및 인포그래픽 디자인 by 조우성</p>
+            <p class="footer-credit">© 2025 Digital Graphic Recording Project</p>
         </div>
     </div>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Shopping list header fade based on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.shopping-list-header');
+            const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+
+            if (scrollPercent > 0.3) {
+                header.style.opacity = Math.max(0.2, 1 - (scrollPercent - 0.3) * 2);
+            }
+        });
+    </script>
 </body>
 </html>
