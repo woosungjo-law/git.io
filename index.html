@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>답변서 핵심 쟁점 분석 - 코넬노트</title>
+    <meta name="description" content="사마천, 당신의 무기가 되다 - 구천의 시간은 다르게 흘렀다">
+    <title>구천의 시간은 다르게 흘렀다 | 인내를 설계하는 법</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@700;900&family=Pretendard:wght@600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --ink-black: #1a1a1a;
+            --charcoal: #2d2d2d;
+            --gold: #D4AF37;
+            --amber: #FFA500;
+            --crimson: #8B0000;
+            --cream: #F5F5DC;
+            --gray-light: #d4d4d4;
+            --gray-medium: #6b6b6b;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,188 +31,568 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px 16px;
-            line-height: 1.7;
-            color: #2C3E50;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: var(--cream);
+            line-height: 1.75;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 480px;
+            max-width: 800px;
             margin: 0 auto;
+            padding: 0 24px;
         }
 
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 24px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-        }
-
-        .header h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #2C3E50;
-            margin-bottom: 8px;
-        }
-
-        .header p {
-            font-size: 14px;
-            color: #7F8C8D;
-            line-height: 1.6;
-        }
-
-        .card {
-            background: white;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        .card-header {
-            background: linear-gradient(to bottom, #2C3E50, #34495E);
-            color: #FFFFFF;
-            padding: 16px 20px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            transition: all 0.3s ease;
-            user-select: none;
+            text-align: center;
+            position: relative;
+            padding: 80px 24px;
         }
 
-        .card-header:hover {
-            background: linear-gradient(to bottom, #34495E, #3d566e);
-        }
-
-        .card-header:active {
-            transform: scale(0.98);
-        }
-
-        .card-header .icon {
-            color: #E74C3C;
-            font-size: 20px;
-            transition: transform 0.3s ease;
+        .hero-badge {
+            display: inline-block;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--gold), var(--amber));
+            color: var(--ink-black);
+            border-radius: 30px;
+            font-size: 13px;
             font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 32px;
+            animation: fadeInDown 0.8s ease-out;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
         }
 
-        .card-header.active .icon {
-            transform: rotate(90deg);
+        .hero-chinese {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(48px, 12vw, 80px);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 50%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
         }
 
-        .card-body {
-            background: #ECF0F1;
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .card-body.active {
-            max-height: 1000px;
-            padding: 20px;
-        }
-
-        .card-body p {
-            font-size: 15px;
-            line-height: 1.8;
-            color: #2C3E50;
-            margin-bottom: 12px;
-        }
-
-        .card-body p:last-child {
-            margin-bottom: 0;
-        }
-
-        .card-body strong {
-            color: #E74C3C;
-            font-weight: 600;
-        }
-
-        .summary-section {
-            background: linear-gradient(to bottom, #FFE5B4, #FFD89B);
-            border-radius: 12px;
-            padding: 24px 20px;
-            margin-top: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .summary-section h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2C3E50;
+        .hero-title {
+            font-family: 'Pretendard', sans-serif;
+            font-size: clamp(24px, 6vw, 36px);
+            font-weight: 800;
+            color: var(--cream);
             margin-bottom: 16px;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+            line-height: 1.4;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--gray-light);
+            margin-bottom: 48px;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 8px;
-        }
-
-        .summary-section h2::before {
-            content: "📌";
-            font-size: 24px;
-        }
-
-        .summary-section p {
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 1.8;
-            color: #2C3E50;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 24px 20px;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 13px;
-        }
-
-        .toggle-all {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 16px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            display: flex;
-            gap: 12px;
-        }
-
-        .toggle-btn {
-            flex: 1;
-            background: linear-gradient(to right, #2C3E50, #34495E);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 14px;
-            font-weight: 600;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .toggle-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        .scroll-indicator span {
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            color: var(--gold);
         }
 
-        .toggle-btn:active {
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 24px;
+            color: var(--gold);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
             transform: translateY(0);
         }
 
-        .toggle-btn.collapse {
-            background: linear-gradient(to right, #7F8C8D, #95a5a6);
+        .section-label {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: 'Pretendard', sans-serif;
+            font-size: clamp(28px, 7vw, 42px);
+            font-weight: 800;
+            color: var(--cream);
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+
+        .section-text {
+            font-size: 16px;
+            line-height: 1.9;
+            color: var(--gray-light);
+            margin-bottom: 20px;
+        }
+
+        .section-text em {
+            font-style: normal;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Story Card */
+        .story-card {
+            background: linear-gradient(135deg, rgba(45, 45, 45, 0.6), rgba(26, 26, 26, 0.6));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .story-card p {
+            font-size: 17px;
+            line-height: 2;
+            color: var(--cream);
+            margin-bottom: 16px;
+        }
+
+        .story-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-card strong {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.15), rgba(139, 0, 0, 0.05));
+            border-left: 4px solid var(--crimson);
+            padding: 32px;
+            margin: 40px 0;
+            border-radius: 0 12px 12px 0;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.8;
+            color: var(--cream);
+            font-style: italic;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, var(--gold), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 80px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(45, 45, 45, 0.8), rgba(26, 26, 26, 0.8));
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-year {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 12px;
+        }
+
+        .timeline-desc {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--gray-light);
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 4px solid var(--ink-black);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        /* Flywheel Visualization */
+        .flywheel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+
+        .flywheel {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin-bottom: 48px;
+        }
+
+        .flywheel-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--gold);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        .flywheel-circle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.3), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .flywheel-segment {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flywheel-segment:nth-child(1) { transform: rotate(0deg); }
+        .flywheel-segment:nth-child(2) { transform: rotate(90deg); }
+        .flywheel-segment:nth-child(3) { transform: rotate(180deg); }
+        .flywheel-segment:nth-child(4) { transform: rotate(270deg); }
+
+        .flywheel-label {
+            position: absolute;
+            top: -30px;
+            background: var(--gold);
+            color: var(--ink-black);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            animation: rotate-reverse 20s linear infinite;
+        }
+
+        .flywheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--gold);
+            color: var(--ink-black);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            text-align: center;
+            line-height: 1.3;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Action Cards */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 48px 0;
+        }
+
+        .action-card {
+            background: linear-gradient(135deg, rgba(45, 45, 45, 0.6), rgba(26, 26, 26, 0.6));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--amber));
+        }
+
+        .action-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.3);
+            border-color: var(--gold);
+        }
+
+        .action-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--gold);
+            color: var(--ink-black);
+            border-radius: 50%;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .action-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .action-desc {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--gray-light);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(255, 165, 0, 0.15));
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 48px 0;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.8;
+            color: var(--gold);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 48px 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(45, 45, 45, 0.6), rgba(26, 26, 26, 0.6));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+        }
+
+        .stat-number {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray-light);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 80px 24px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            margin-top: 80px;
+        }
+
+        .footer-credit {
+            font-size: 14px;
+            color: var(--gray-medium);
+            margin-bottom: 8px;
+        }
+
+        .footer-author {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-15px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotate-reverse {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                padding-left: 60px;
+            }
+
+            .timeline-item:nth-child(even) {
+                flex-direction: column !important;
+            }
+
+            .timeline-dot {
+                position: absolute;
+                left: 11px;
+            }
+
+            .flywheel {
+                width: 250px;
+                height: 250px;
+            }
+
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .story-card {
+                padding: 28px;
+            }
+
+            .quote-box {
+                font-size: 16px;
+                padding: 24px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -204,245 +601,240 @@
                 transition: none !important;
             }
         }
-
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 22px;
-            }
-
-            .card-header {
-                font-size: 17px;
-                padding: 14px 16px;
-            }
-
-            .card-body {
-                font-size: 14px;
-            }
-
-            .card-body.active {
-                padding: 16px;
-            }
-
-            .summary-section {
-                padding: 20px 16px;
-            }
-
-            .summary-section p {
-                font-size: 15px;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>답변서 핵심 쟁점 분석</h1>
-            <p>부동산 매매 분쟁 사건의 피고 측 방어논리 코넬노트</p>
-        </div>
-
-        <!-- Toggle All Buttons -->
-        <div class="toggle-all">
-            <button class="toggle-btn expand" onclick="expandAll()">전체 펼치기</button>
-            <button class="toggle-btn collapse" onclick="collapseAll()">전체 접기</button>
-        </div>
-
-        <!-- Cornell Note Cards -->
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>청구 기각 요청</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p>피고는 원고의 모든 청구를 기각하고 소송비용을 원고가 부담할 것을 요구합니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>당사자 관계 및 배경</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>2002년</strong> 정치활동을 통해 인연을 맺은 사이입니다.</p>
-                <p>원고는 <strong>신용불량자</strong> 신분으로 2008년부터 2012년까지 라디오21 방송국 운영비, 로고송 사업 자금 명목으로 피고에게 지속적인 금전 대여를 요청했습니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>누적 채무액</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>2011. 3. 16. 기준:</strong> 1억 5,000만 원</p>
-                <p><strong>2012. 1. 31. 기준:</strong> 약 2억 9,530만 원</p>
-                <p>원고의 피고에 대한 채무액은 계속해서 증가했습니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>2억 5천만 원 지급 (2012.2.17)</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p>원고는 이를 <strong>매매대금</strong>이라 주장하나, 실제로는 <strong>기존 채무 정산금</strong>입니다.</p>
-                <p>원고가 "2억 7,000만 원 채무를 2억 5,000만 원으로 퉁치자"고 제안했고, 피고가 수락하여 채무 변제로 수령했습니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>3억 원 지급 및 반환 (2012.2.27)</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>2012. 2. 24.</strong> 원고가 "언니 집을 살까"라고 제안했습니다.</p>
-                <p><strong>2012. 2. 27.</strong> 피고가 중국여행 중일 때 문화네트워크 명의로 3억 원이 입금되었습니다.</p>
-                <p><strong>2012. 3. 8.</strong> 원고가 로고송 사업 자금이 필요하다며 3억 원 + 투자금 3,000만 원 = <strong>총 3억 3,000만 원을 반환</strong>받아갔습니다.</p>
-                <p>피고 진술서(갑 제6호증)에서도 "매매 명목으로 3억 원을 받았다가 곧바로 다시 돌려주었다"고 확인됩니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>계약확인서 진정성립 부인</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p>피고는 <strong>2013년 10월 마포경찰서 수사</strong> 과정에서 처음 이 문서의 존재를 알게 되었습니다.</p>
-                <p>계약확인서에 찍힌 <strong>도장은 피고의 도장이 아닙니다.</strong></p>
-                <p>형사 1심에서 원고의 <strong>사문서위조에 대해 유죄 판결</strong>이 내려졌습니다. 항소심 무죄는 "합리적 의심을 배제할 정도의 증명 부족"일 뿐입니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>원고의 사문서위조 전과</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p>원고는 "벼락 맞은 대추나무 도장"으로 날인했다고 구체적으로 진술했으나, 해당 도장은 계약확인서 날인 도장이 아닙니다.</p>
-                <p><strong>2009. 9.</strong> 제3자에게 MBC 방송국장 명의 약정서 등을 위조하여 <strong>3억 6,000만 원을 편취</strong>하고 <strong>징역 2년</strong>을 선고받은 전력이 있습니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>계약확인서의 다수 모순</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>호수 혼재:</strong> 계약 목적물은 702호로 기재되어 있으나 확인내용에서는 501호와 702호가 혼재되어 있습니다.</p>
-                <p><strong>금액 불일치:</strong> 대출금 포함 7억 원이나 대출금 금액이 특정되지 않았고, 실제 잔여 담보대출금은 약 2억 3,000만 원입니다. 매매대금은 약 4억 7,000만 원이어야 하나 원고는 5억 5,000만 원 지급을 주장합니다 (<strong>8,000만 원 초과</strong>).</p>
-                <p><strong>날짜 불일치:</strong> 계약확인서상 매매대금 지급일은 2012. 3. 6.이나 원고 주장은 2012. 2. 17., 2. 27.로 일치하지 않습니다.</p>
-                <p><strong>불가능한 조건:</strong> 동시이행 조건으로 라디오21 관련 권리 이전이 명시되었으나, 이미 2012. 2. 10. 제3자에게 주식 이전 판결로 이전이 불가능한 상태였습니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>미등기 전매 조항의 비현실성</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p>계약확인서 2. 3)항은 "매수자가 존재하는 즉시 소유권 이전"을 명시하고 있습니다.</p>
-                <p>당시 미등기 전매는 <strong>형사처벌 대상</strong>이었고, <strong>과징금 30% 부과</strong>, 각종 세액감면 혜택 상실 등의 불이익이 있었습니다.</p>
-                <p>피고가 이러한 위험을 감수할 이유가 없으며, 이는 최종 매매계약이 아닌 <strong>양해각서(MOU) 또는 매매예약</strong>에 불과합니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>원고 자금의 출처 - 공천사기 편취금</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p>원고는 <strong>2012. 2. 17. 8억 원</strong>, <strong>2012. 2. 27. 12억 원</strong>을 공천사기로 편취했습니다 (서울중앙지방법원 2012고합1230, <strong>징역 3년</strong>).</p>
-                <p><strong>편취 일자와 피고에게 지급한 일자가 정확히 일치</strong>합니다.</p>
-                <p>편취금으로 피고 외에도 다른 채무자들에게 변제했습니다 (김은영 1억 원, 홍순태 1억 2,000만 원 등).</p>
-            </div>
-        </div>
-
-        <!-- Summary Section -->
-        <div class="summary-section">
-            <h2>핵심 요약</h2>
-            <p>
-                원고가 주장하는 5억 5천만 원 매매대금은 실제로는 ①기존 채무 정산금 2억 5천만 원과 ②대여 후 즉시 반환한 3억 원입니다.
-                계약확인서는 도장 위조, 호수·금액·날짜 불일치 등 다수의 모순점이 있으며,
-                원고는 사문서위조 전과가 있고 자금 출처가 공천사기 편취금입니다.
-                따라서 정상적인 부동산 매매계약이 성립하지 않았다는 것이 피고의 핵심 방어논리입니다.
-            </p>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>Cornell Note Method • Mobile Optimized Design</p>
-            <p>© 2024 Legal Document Analysis</p>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-badge">사마천, 당신의 무기가 되다</div>
+        <h1 class="hero-chinese">臥薪嘗膽</h1>
+        <h2 class="hero-title">구천의 시간은 다르게 흘렀다</h2>
+        <p class="hero-subtitle">인내를 설계하는 법</p>
+        <div class="scroll-indicator" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
+            <span>SCROLL</span>
         </div>
     </div>
 
+    <div class="container">
+        <!-- Intro Story -->
+        <section class="section">
+            <span class="section-label">CHAPTER 1</span>
+            <h3 class="section-title">김 팀장의 월요일</h3>
+
+            <div class="story-card">
+                <p>월요일 오전 9시. 책상 위엔 <strong>'프로젝트 오디세이'</strong> 폴더가 놓여 있다.</p>
+                <p>3년짜리 신사업 프로젝트. 시작은 거창했지만, 이제는 모두가 기피하는 일이 되었다. 인력은 반으로 줄고 예산은 동결됐다.</p>
+                <p>"그래서, 성과는 언제 나옵니까?" 칼날 없는 칼이 심장에 와서 꽂힌다.</p>
+                <p>팀원들의 눈은 빛을 잃은 지 오래다. 매일 밤 되뇐다. <strong>버텨야 한다. 인내가 답이다.</strong></p>
+            </div>
+
+            <p class="section-text">하지만 무엇을 위한 인내이며, 어떻게 버텨야 하는가. 시간은 속절없이 흐르고 목표는 여전히 멀다.</p>
+
+            <div class="highlight-box">
+                이것은 인내가 아니라 표류다.<br>
+                당신이라면 어떻게 하겠는가?
+            </div>
+        </section>
+
+        <!-- Problem Definition -->
+        <section class="section">
+            <span class="section-label">ESSENCE</span>
+            <h3 class="section-title">본질은 시스템의 부재다</h3>
+
+            <p class="section-text">이 상황의 본질은 인내심 부족이 아니다. <em>'승리를 위한 시스템의 부재'</em>가 모든 문제의 근원이다.</p>
+
+            <p class="section-text">자원은 소모되고, 확신은 약해지며, 시간은 압박해온다. 이들은 개별 문제가 아니다. 하나의 본질을 가리킨다. 바로 <strong>시스템의 부재</strong>다.</p>
+
+            <div class="quote-box">
+                "목표만 있고 시스템이 없는 인내는 자기 학대일 뿐이다. 그저 시간을 견디는 행위, 희망이라는 이름의 고문과 다르지 않다."
+            </div>
+
+            <p class="section-text">문제는 <em>'얼마나 견디는가'</em>가 아니라 <em>'무엇을 쌓고 있는가'</em>이다. 진정한 인내는 소모전이 아닌, <strong>축적의 과정</strong>이어야 한다.</p>
+        </section>
+
+        <!-- Historical Timeline -->
+        <section class="section">
+            <span class="section-label">HISTORY</span>
+            <h3 class="section-title">회계산의 치욕, 그 후 20년</h3>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">BC 494</div>
+                        <div class="timeline-title">회계산 대패</div>
+                        <div class="timeline-desc">
+                            월왕 구천, 오나라 왕 부차에게 대패. 죽음 대신 노예의 길을 택했다. 부차의 마구간에서 말을 돌보고, 병든 대변을 맛보는 굴욕까지 감수했다.
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">BC 491</div>
+                        <div class="timeline-title">귀국과 와신상담</div>
+                        <div class="timeline-desc">
+                            3년간의 노예 생활 끝에 월나라로 돌아왔다. 장작 위에서 잠을 자고(臥薪), 쓸개를 핥으며(嘗膽) 치욕을 각인했다. 이것은 감정 유지가 아니라, <strong>시스템을 점검하는 스위치</strong>였다.
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">BC 491-473</div>
+                        <div class="timeline-title">시스템 설계 20년</div>
+                        <div class="timeline-desc">
+                            재상 범려에게 생산과 경제를, 문종에게는 행정과 군사 훈련을 맡겼다. 세금을 낮추고 출산을 장려하며 국력을 길렀다. 동시에 오나라에 미녀 서시와 목재를 보내 부차를 현혹했다.
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">BC 473</div>
+                        <div class="timeline-title">오나라 멸망</div>
+                        <div class="timeline-desc">
+                            20년간 쌓아올린 시스템이 폭발했다. 월나라 군대는 오나라를 멸망시켰다. 승리는 어느 날 갑자기 온 것이 아니다. <strong>설계된 시스템의 필연적 결과</strong>였다.
+                        </div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">20년</div>
+                    <div class="stat-label">시스템 설계<br>기간</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">3년</div>
+                    <div class="stat-label">노예 생활<br>굴욕의 시간</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">1회</div>
+                    <div class="stat-label">완벽한<br>복수</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flywheel Concept -->
+        <section class="section">
+            <span class="section-label">SYSTEM</span>
+            <h3 class="section-title">인내는 설계하는 것이다</h3>
+
+            <p class="section-text">구천은 그저 고통을 곱씹은 것이 아니었다. <em>와신상담은 목표를 온몸에 각인하는 매일의 의식</em>이었다.</p>
+
+            <div class="flywheel-container">
+                <div class="flywheel">
+                    <div class="flywheel-circle">
+                        <div class="flywheel-segment">
+                            <div class="flywheel-label">경제 재건</div>
+                        </div>
+                        <div class="flywheel-segment">
+                            <div class="flywheel-label">군사 훈련</div>
+                        </div>
+                        <div class="flywheel-segment">
+                            <div class="flywheel-label">적 와해</div>
+                        </div>
+                        <div class="flywheel-segment">
+                            <div class="flywheel-label">인구 증대</div>
+                        </div>
+                    </div>
+                    <div class="flywheel-center">승리<br>시스템</div>
+                </div>
+
+                <p class="section-text" style="text-align: center; max-width: 600px;">
+                    손자가 말한 <em>'이겨놓고 싸우는 군대(勝兵先勝而後求戰)'</em>가 바로 이것이다. 작고 규율 잡힌 행동들이 모여 거대한 관성을 만들면, 어느 순간 바퀴가 폭발적으로 스스로 돌아간다.
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                승리는 어느 날 갑자기 오는 것이 아니다.<br>
+                설계된 시스템의 필연적 결과다.
+            </div>
+        </section>
+
+        <!-- Back to Modern -->
+        <section class="section">
+            <span class="section-label">APPLICATION</span>
+            <h3 class="section-title">플라이휠을 돌리는 리더</h3>
+
+            <p class="section-text">이야기는 다시 김 팀장에게로 향한다. 그의 인내는 '버티기'가 되어서는 안 된다. <em>'플라이휠 돌리기'</em>가 되어야 한다.</p>
+
+            <div class="story-card">
+                <p><strong>지금 당장 할 수 있는 작은 행동은 무엇인가?</strong></p>
+                <p>고객 불만 사항 하나를 해결하고 데이터로 남기는 것, 팀원 한 명에게 새로운 기술을 교육하는 것, 비효율적인 보고 과정을 하나라도 개선하는 것.</p>
+                <p>이 작은 성공들이 플라이휠의 첫 바퀴다. 눈에 띄지 않고 누구도 알아주지 않는다. 그러나 이 행동들이 축적될 때, 프로젝트는 스스로 돌아가는 힘을 얻기 시작한다.</p>
+            </div>
+
+            <div class="quote-box">
+                "김 팀장의 '와신상담'은 퇴근 후 기울이는 술잔이 아니다. 아침에 5분 일찍 출근해, 오늘 돌려야 할 플라이휠의 작은 톱니바퀴를 점검하는 것이다."
+            </div>
+
+            <p class="section-text">그것이 리더의 진짜 인내다. <em>치욕과 절망의 자리에서 시스템을 상상하는 자가 최후에 승리한다.</em></p>
+        </section>
+
+        <!-- Action Items -->
+        <section class="section">
+            <span class="section-label">ACTION</span>
+            <h3 class="section-title">내일 실천할 3가지</h3>
+
+            <div class="action-grid">
+                <div class="action-card">
+                    <div class="action-number">1</div>
+                    <h4 class="action-title">나만의 '와신상담'을 정의하라</h4>
+                    <p class="action-desc">
+                        매일 아침 5분, 프로젝트의 최종 목표와 오늘의 핵심 과제 하나를 종이에 적어보라. 이것이 감정적 인내를 전략적 각인으로 바꾸는 당신만의 의식이다.
+                    </p>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-number">2</div>
+                    <h4 class="action-title">프로젝트의 '플라이휠'을 그려라</h4>
+                    <p class="action-desc">
+                        우리 팀이 반복해야 할 가장 중요한 행동 3가지를 정하고, 그것이 어떻게 다음 단계의 동력으로 이어지는지 도식화하라. 팀원들과 이 그림을 공유하고 매주 진척도를 함께 점검하라.
+                    </p>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-number">3</div>
+                    <h4 class="action-title">'성장의 기록'을 시작하라</h4>
+                    <p class="action-desc">
+                        외부의 비판이나 내부의 좌절(치욕)을 기록하고, 그럼에도 우리가 이뤄낸 작은 성공을 나란히 적어보라. 이것은 팀의 심리적 회복탄력성을 키우는 가장 단단한 자산이 된다.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-credit">사마천, 당신의 무기가 되다</p>
+        <p class="footer-author">작성: 조우성 변호사</p>
+    </footer>
+
     <script>
-        function toggleCard(header) {
-            const body = header.nextElementSibling;
-            const icon = header.querySelector('.icon');
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
 
-            header.classList.toggle('active');
-            body.classList.toggle('active');
-        }
-
-        function expandAll() {
-            const headers = document.querySelectorAll('.card-header');
-            const bodies = document.querySelectorAll('.card-body');
-
-            headers.forEach(header => {
-                if (!header.classList.contains('active')) {
-                    header.classList.add('active');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
             });
+        }, observerOptions);
 
-            bodies.forEach(body => {
-                if (!body.classList.contains('active')) {
-                    body.classList.add('active');
-                }
-            });
-        }
-
-        function collapseAll() {
-            const headers = document.querySelectorAll('.card-header');
-            const bodies = document.querySelectorAll('.card-body');
-
-            headers.forEach(header => {
-                header.classList.remove('active');
-            });
-
-            bodies.forEach(body => {
-                body.classList.remove('active');
-            });
-        }
-
-        // Keyboard accessibility
-        document.addEventListener('keydown', (e) => {
-            if (e.target.classList.contains('card-header')) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    toggleCard(e.target);
-                }
-            }
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
         });
 
-        // Make headers focusable for keyboard navigation
-        document.querySelectorAll('.card-header').forEach(header => {
-            header.setAttribute('tabindex', '0');
-            header.setAttribute('role', 'button');
-            header.setAttribute('aria-expanded', 'false');
-
-            header.addEventListener('click', function() {
-                const isExpanded = this.classList.contains('active');
-                this.setAttribute('aria-expanded', isExpanded);
-            });
-        });
+        console.log('✨ 구천의 시간은 다르게 흘렀다 - 인포그래픽 로드 완료');
     </script>
 </body>
 </html>
