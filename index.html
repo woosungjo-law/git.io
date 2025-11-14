@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>손실회피의 함정 - 행동경제학 코넬노트</title>
+    <meta name="description" content="약자가 강자를 이기는 법 - 장의의 전략">
+    <title>당신이 약할 때 이기는 법 | 장의의 혀가 70만 대군을 이긴 이유</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -11,202 +17,348 @@
             box-sizing: border-box;
             word-break: keep-all;
             word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        :root {
+            /* Color Palette */
+            --primary: #1a1a2e;
+            --primary-light: #2a2a3e;
+            --secondary: #c5a572;
+            --accent: #d32f2f;
+            --accent-light: #ff6659;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-700: #616161;
+            --gray-900: #212121;
+
+            /* Typography */
+            --font-display: 'Noto Serif KR', serif;
+            --font-body: 'Noto Sans KR', sans-serif;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px 16px;
+            font-family: var(--font-body);
+            background: var(--gray-100);
+            color: var(--gray-900);
             line-height: 1.7;
-            color: #2C3E50;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 480px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 40px 24px;
         }
 
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 24px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        /* Bento Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            margin-bottom: 24px;
         }
 
-        .header h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #2C3E50;
-            margin-bottom: 8px;
-        }
-
-        .header p {
-            font-size: 14px;
-            color: #7F8C8D;
-            line-height: 1.6;
-        }
-
+        /* Card Base */
         .card {
             background: white;
-            border-radius: 12px;
-            margin-bottom: 16px;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .card:hover {
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
         }
 
-        .card-header {
-            background: linear-gradient(to bottom, #2C3E50, #34495E);
-            color: #FFFFFF;
-            padding: 16px 20px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
+        /* Ripple Effect */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(197, 165, 114, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .card:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Grid Sizes */
+        .span-12 { grid-column: span 12; }
+        .span-8 { grid-column: span 8; }
+        .span-6 { grid-column: span 6; }
+        .span-4 { grid-column: span 4; }
+        .span-3 { grid-column: span 3; }
+
+        /* Hero Card */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            min-height: 400px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-            user-select: none;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
         }
 
-        .card-header:hover {
-            background: linear-gradient(to bottom, #34495E, #3d566e);
+        .hero::after {
+            content: '⚔️';
+            position: absolute;
+            bottom: 32px;
+            right: 32px;
+            font-size: 120px;
+            opacity: 0.1;
         }
 
-        .card-header:active {
-            transform: scale(0.98);
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(197, 165, 114, 0.2);
+            border: 1px solid var(--secondary);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+            width: fit-content;
         }
 
-        .card-header .icon {
-            color: #E74C3C;
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
             font-size: 20px;
-            transition: transform 0.3s ease;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Card Title Styles */
+        .card-title {
+            font-family: var(--font-display);
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .card-subtitle {
+            font-size: 16px;
+            color: var(--gray-700);
+            margin-bottom: 16px;
             font-weight: 700;
         }
 
-        .card-header.active .icon {
-            transform: rotate(90deg);
-        }
-
-        .card-body {
-            background: #ECF0F1;
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .card-body.active {
-            max-height: 1200px;
-            padding: 20px;
-        }
-
-        .card-body p {
-            font-size: 15px;
+        .card-text {
+            font-size: 16px;
             line-height: 1.8;
-            color: #2C3E50;
-            margin-bottom: 12px;
+            color: var(--gray-900);
+            margin-bottom: 16px;
         }
 
-        .card-body p:last-child {
+        .card-text:last-child {
             margin-bottom: 0;
         }
 
-        .card-body strong {
-            color: #E74C3C;
-            font-weight: 600;
+        /* Accent Card */
+        .accent-card {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
         }
 
-        .card-body ul {
-            margin-left: 20px;
+        .accent-card .card-title {
+            color: white;
+        }
+
+        /* Secondary Card */
+        .secondary-card {
+            background: linear-gradient(135deg, var(--secondary) 0%, #d4b896 100%);
+            color: var(--primary);
+        }
+
+        /* Stat Card */
+        .stat-card {
+            text-align: center;
+            background: var(--gray-50);
+            border: 2px solid var(--gray-200);
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
             margin-bottom: 12px;
         }
 
-        .card-body li {
-            margin-bottom: 8px;
-            color: #2C3E50;
-        }
-
-        .summary-section {
-            background: linear-gradient(to bottom, #FFE5B4, #FFD89B);
-            border-radius: 12px;
-            padding: 24px 20px;
-            margin-top: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .summary-section h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2C3E50;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .summary-section h2::before {
-            content: "📌";
-            font-size: 24px;
-        }
-
-        .summary-section p {
+        .stat-label {
             font-size: 16px;
-            font-weight: 600;
-            line-height: 1.8;
-            color: #2C3E50;
+            font-weight: 700;
+            color: var(--gray-700);
         }
 
+        /* Story Card */
+        .story-card {
+            background: var(--primary);
+            color: white;
+        }
+
+        .story-card .card-title {
+            color: var(--secondary);
+        }
+
+        .story-quote {
+            background: rgba(197, 165, 114, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 0 12px 12px 0;
+        }
+
+        /* Strategy Cards */
+        .strategy-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 900;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        /* List Styles */
+        .card-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-list li {
+            padding: 12px 0;
+            padding-left: 28px;
+            position: relative;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .card-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Highlight Text */
+        .highlight {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .highlight-secondary {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: var(--accent);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+        }
+
+        .cta-button:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+        }
+
+        /* Footer */
         .footer {
             text-align: center;
-            padding: 24px 20px;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 13px;
-        }
-
-        .toggle-all {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 16px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            display: flex;
-            gap: 12px;
-        }
-
-        .toggle-btn {
-            flex: 1;
-            background: linear-gradient(to right, #2C3E50, #34495E);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 16px;
+            padding: 40px 24px;
+            color: var(--gray-700);
             font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .toggle-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .span-8, .span-6, .span-4, .span-3 {
+                grid-column: span 12;
+            }
         }
 
-        .toggle-btn:active {
-            transform: translateY(0);
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .bento-grid {
+                gap: 16px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .hero {
+                min-height: 300px;
+            }
+
+            .hero::after {
+                font-size: 80px;
+            }
         }
 
-        .toggle-btn.collapse {
-            background: linear-gradient(to right, #7F8C8D, #95a5a6);
-        }
+        /* Animation Delays */
+        .card:nth-child(1) { transition-delay: 0.1s; }
+        .card:nth-child(2) { transition-delay: 0.2s; }
+        .card:nth-child(3) { transition-delay: 0.3s; }
+        .card:nth-child(4) { transition-delay: 0.4s; }
+        .card:nth-child(5) { transition-delay: 0.5s; }
+        .card:nth-child(6) { transition-delay: 0.6s; }
+        .card:nth-child(7) { transition-delay: 0.7s; }
+        .card:nth-child(8) { transition-delay: 0.8s; }
+        .card:nth-child(9) { transition-delay: 0.9s; }
+        .card:nth-child(10) { transition-delay: 1s; }
 
         @media (prefers-reduced-motion: reduce) {
             * {
@@ -214,258 +366,203 @@
                 transition: none !important;
             }
         }
-
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 22px;
-            }
-
-            .card-header {
-                font-size: 17px;
-                padding: 14px 16px;
-            }
-
-            .card-body {
-                font-size: 14px;
-            }
-
-            .card-body.active {
-                padding: 16px;
-            }
-
-            .summary-section {
-                padding: 20px 16px;
-            }
-
-            .summary-section p {
-                font-size: 15px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>손실회피의 함정</h1>
-            <p>행동경제학으로 풀어보는 투자 심리 - 코넬노트</p>
-        </div>
-
-        <!-- Toggle All Buttons -->
-        <div class="toggle-all">
-            <button class="toggle-btn expand" onclick="expandAll()">전체 펼치기</button>
-            <button class="toggle-btn collapse" onclick="collapseAll()">전체 접기</button>
-        </div>
-
-        <!-- Cornell Note Cards -->
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>손실회피 원리</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>손실의 고통 = 이익의 기쁨 × 2배</strong></p>
-                <p>카너먼과 트버스키의 전망이론(1979): 인간은 같은 금액의 이익보다 손실에 2배 이상 민감하게 반응합니다.</p>
-                <p>10만 원을 얻는 기쁨보다 10만 원을 잃는 고통이 2배 크기 때문에, 손실을 확정하는 순간을 최대한 미루게 됩니다.</p>
+        <!-- Hero Section -->
+        <div class="bento-grid">
+            <div class="card hero span-12">
+                <div class="hero-badge">사마천, 당신의 무기가 되는 순간</div>
+                <h1 class="hero-title">당신이 약할 때 이기는 법</h1>
+                <p class="hero-subtitle">장의의 혀가 70만 대군을 이긴 이유</p>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>처분효과 (82%)</span>
-                <span class="icon">▶</span>
+        <!-- Problem Section -->
+        <div class="bento-grid">
+            <div class="card accent-card span-8">
+                <h2 class="card-title">약자는 왜 무너지는가?</h2>
+                <p class="card-text">자금도 부족하고, 사람도 모자라고, 시장 점유율은 없다시피 하다. 그런데 진짜 문제는 따로 있다.</p>
+                <p class="card-text" style="font-size: 20px; font-weight: 700; margin-top: 24px;">
+                    약자는 강자의 게임을 그대로 따라한다.
+                </p>
+                <p class="card-text">같은 시장에서 같은 방식으로 경쟁하려 든다는 것. 이건 자살행위다.</p>
             </div>
-            <div class="card-body">
-                <p><strong>이익 난 주식은 빨리 팔고, 손실 난 주식은 계속 보유</strong></p>
-                <p>테런스 오딘 교수의 5년 추적 연구 결과:</p>
-                <ul>
-                    <li>82%의 투자자가 처분효과에 빠짐</li>
-                    <li>이익 주식: 평균 <strong>50일</strong> 보유 후 매도</li>
-                    <li>손실 주식: 평균 <strong>124일</strong> 보유 (2.5배 더 오래)</li>
+
+            <div class="card stat-card span-4">
+                <div class="stat-number">3개월</div>
+                <div class="stat-label">스타트업에 남은<br>자금 기간</div>
+            </div>
+        </div>
+
+        <!-- Story Section -->
+        <div class="bento-grid">
+            <div class="card story-card span-12">
+                <h2 class="card-title">장의, 600리를 6리로 바꾸다</h2>
+                <p class="card-text">기원전 312년, 초나라는 제나라와 동맹을 맺고 있었다. 진나라는 이 동맹을 깨야 했다. 진나라 재상 장의가 초나라 왕 회왕을 찾아갔다.</p>
+
+                <div class="story-quote">
+                    "제나라와 손을 끊으시면, 진나라가 빼앗았던 땅 600리를 돌려드리겠습니다."
+                </div>
+
+                <p class="card-text">회왕은 신하 진진의 반대를 무릅쓰고 제나라와 동맹을 파기했다. 초나라 사신이 땅을 받으러 진나라에 가자, 장의가 말했다.</p>
+
+                <div class="story-quote">
+                    "제가 약속한 것은 제 개인 영지 6리입니다. 600리라고 하셨습니까?"
+                </div>
+
+                <p class="card-text">격분한 초나라가 진나라를 공격했다. 단양 전투에서 초나라는 대패했고, 오히려 600리를 더 빼앗겼다.</p>
+
+                <p class="card-text" style="font-size: 20px; font-weight: 700; color: var(--secondary); margin-top: 24px;">
+                    장의는 말 한 마디로 최강국의 동맹을 붕괴시켰다. 힘이 아니라 전략이 승부를 갈랐다.
+                </p>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="bento-grid">
+            <div class="card stat-card span-4">
+                <div class="stat-number">600리</div>
+                <div class="stat-label">약속한 땅</div>
+            </div>
+
+            <div class="card stat-card span-4">
+                <div class="stat-number">6리</div>
+                <div class="stat-label">실제 준 땅</div>
+            </div>
+
+            <div class="card stat-card span-4">
+                <div class="stat-number">70만</div>
+                <div class="stat-label">장의의 혀가 이긴<br>대군의 수</div>
+            </div>
+        </div>
+
+        <!-- Strategy Section -->
+        <div class="bento-grid">
+            <div class="card span-12">
+                <h2 class="card-title">전략이란 무엇을 버릴지 아는 것</h2>
+                <p class="card-subtitle">장의의 선택에서 보이는 세 가지 원칙</p>
+            </div>
+
+            <div class="card span-4">
+                <div class="strategy-number">1</div>
+                <h3 class="card-subtitle">정면 대결을 피했다</h3>
+                <p class="card-text">초나라와 제나라 연합군을 진나라가 이길 수 없다는 걸 알았다.</p>
+            </div>
+
+            <div class="card span-4">
+                <div class="strategy-number">2</div>
+                <h3 class="card-subtitle">상대의 욕망을 이용했다</h3>
+                <p class="card-text">회왕은 땅을 원했고, 장의는 그 욕망에 미끼를 던졌다.</p>
+            </div>
+
+            <div class="card span-4">
+                <div class="strategy-number">3</div>
+                <h3 class="card-subtitle">결정적 순간에 자원을 집중했다</h3>
+                <p class="card-text">600리가 아니라 동맹 파기라는 단 하나의 목표에 모든 것을 걸었다.</p>
+            </div>
+        </div>
+
+        <!-- Modern Examples -->
+        <div class="bento-grid">
+            <div class="card secondary-card span-6">
+                <h2 class="card-title">현대 약자들의 승리 전략</h2>
+                <ul class="card-list">
+                    <li><span class="highlight">에어비앤비:</span> 호텔 업계와 정면 대결하지 않고 '공유경제'라는 새 게임을 만듦</li>
+                    <li><span class="highlight">테슬라:</span> 기존 자동차 회사와 같은 방식으로 경쟁하지 않고 소프트웨어와 배터리 기술이라는 다른 전장을 선택</li>
                 </ul>
-                <p>더 큰 문제: 판 이익 주식은 그 후 15% 더 상승했고, 보유한 손실 주식은 8% 더 하락했습니다.</p>
+            </div>
+
+            <div class="card span-6">
+                <h2 class="card-title">무엇을 하지 않을 것인가?</h2>
+                <p class="card-text">드러커가 말한 전략적 사고의 핵심은 이것이다.</p>
+                <p class="card-text" style="font-size: 20px; font-weight: 700; color: var(--accent); margin-top: 16px;">
+                    "무엇을 하지 않을 것인가를 먼저 결정하라."
+                </p>
+                <p class="card-text">약자는 모든 것을 할 수 없다. 선택과 집중이 생존을 결정한다.</p>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>보유효과</span>
-                <span class="icon">▶</span>
+        <!-- Action Cards -->
+        <div class="bento-grid">
+            <div class="card span-12">
+                <h2 class="card-title">내일 실천할 3가지</h2>
             </div>
-            <div class="card-body">
-                <p><strong>내 것은 실제보다 더 가치 있다고 느끼는 심리</strong></p>
-                <p>5만 원에 산 주식이 3만 원으로 떨어져도 "내 것"이기에 가치를 부풀립니다.</p>
-                <p>"곧 오를 거야"라는 희망은 사실 보유효과가 만들어낸 환상에 가깝습니다.</p>
+
+            <div class="card span-4">
+                <div class="strategy-number">1</div>
+                <h3 class="card-subtitle">포기 리스트를 작성하라</h3>
+                <p class="card-text">다음 3개월간 절대 하지 않을 사업 영역 3가지를 명확히 정하라. 선택이 아니라 <span class="highlight">포기가 전략의 시작</span>이다.</p>
+            </div>
+
+            <div class="card span-4">
+                <div class="strategy-number">2</div>
+                <h3 class="card-subtitle">경쟁 구도를 재정의하라</h3>
+                <p class="card-text">"우리는 누구와 경쟁하는가?"라는 질문에 기존 답변을 버리고 새로운 카테고리를 설정하라. <span class="highlight">같은 시장의 2등보다 새 시장의 1등</span>이 되라.</p>
+            </div>
+
+            <div class="card span-4">
+                <div class="strategy-number">3</div>
+                <h3 class="card-subtitle">단일 돌파구를 찾아라</h3>
+                <p class="card-text">지금 가진 모든 자원을 투입해도 이길 수 있는 단 하나의 전장을 선택하라. 그곳에서 이기면 나머지는 따라온다. <span class="highlight">30일 안에 그 결과를 측정</span>하라.</p>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>확증편향</span>
-                <span class="icon">▶</span>
+        <!-- Conclusion -->
+        <div class="bento-grid">
+            <div class="card accent-card span-12" style="min-height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <h2 class="card-title" style="font-size: clamp(32px, 6vw, 48px); margin-bottom: 32px;">
+                    장의의 혀는 진나라의 70만 대군보다 강했다
+                </h2>
+                <p class="card-text" style="font-size: 20px; max-width: 800px; margin-bottom: 32px;">
+                    약자가 강자를 이기는 법은 힘이 아니라 전략에 있다. 당신이 약하다면, 지금이 전략적 사고를 시작할 때다. 게임의 규칙을 바꾸지 못하면, 규칙에 갇혀 무너진다.
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+                    <button class="cta-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">처음부터 다시 읽기</button>
+                </div>
             </div>
-            <div class="card-body">
-                <p><strong>자신의 믿음을 지지하는 정보만 수집</strong></p>
-                <p>손실 주식을 보유한 투자자는 "곧 반등할 것"이라는 뉴스만 찾아 읽습니다.</p>
-                <p>반대 의견은 애써 외면하게 되며, 카카오톡 주식방, 유튜브 알고리즘 모두 이 편향을 강화합니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>매몰비용 오류</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>이미 투입한 것 때문에 손실을 계속 키우는 오류</strong></p>
-                <p>실패가 명백한 프로젝트를 "이미 3개월을 투입했다"며 계속 밀고 나갑니다.</p>
-                <p>초기 투자금 5억을 넣은 스타트업이 침몰하고 있는데, "여기서 그만두면 5억이 날아간다"며 추가로 3억을 더 넣어 결국 8억을 모두 잃습니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>일상 속 손실회피</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>투자를 넘어 삶의 곳곳에 스며든 패턴</strong></p>
-                <ul>
-                    <li><strong>부부관계:</strong> "5년을 버렸는데"라는 생각이 파국으로 치닫는 관계의 결별을 막음</li>
-                    <li><strong>자녀 교육:</strong> 2년간 효과 없는 학원을 "여기까지 투자한 걸 생각하면"이라며 계속 보냄</li>
-                    <li><strong>배달음식:</strong> 1시간째 안 오는데 "취소하면 지금까지 기다린 시간이 아깝다"며 계속 기다림</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>손절가/목표가 자동 설정</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>감정 개입을 시스템으로 차단</strong></p>
-                <p>매수 시점에 "이 주식이 20% 떨어지면 무조건 판다"고 미리 정합니다.</p>
-                <p>증권앱에서 손절가와 목표가를 동시에 설정하고 자동 주문을 걸어, 감정이 개입할 여지를 원천 차단합니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>핵심 질문</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>"내가 이 주식을 갖고 있지 않다면, 지금 이 가격에 살까?"</strong></p>
-                <p>매주 일요일 저녁, 보유 종목을 보며 이 질문을 던져보세요.</p>
-                <p>대답이 <strong>'아니오'</strong>라면 월요일 장 시작과 동시에 팔아야 합니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>투자 일지</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>패턴 인식을 통한 통제</strong></p>
-                <p>매수 이유, 목표가, 손절가, 실제 결과를 기록합니다.</p>
-                <p>3개월마다 패턴을 분석하여 "나는 언제 손실회피에 빠지는가?"라는 질문에 답할 수 있을 때 비로소 통제가 시작됩니다.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span>정기 포트폴리오 재평가</span>
-                <span class="icon">▶</span>
-            </div>
-            <div class="card-body">
-                <p><strong>"오늘 계좌가 비어 있다면, 이 종목들을 다시 살까?"</strong></p>
-                <p>분기마다 전체 포트폴리오를 이 기준으로 냉정하게 재평가합니다.</p>
-                <p>쿠팡에서 장바구니를 비우듯, 손실 종목을 과감히 정리해야 합니다.</p>
-            </div>
-        </div>
-
-        <!-- Summary Section -->
-        <div class="summary-section">
-            <h2>핵심 요약</h2>
-            <p>
-                인간은 손실의 고통을 이익의 기쁨보다 2배 크게 느끼기 때문에(손실회피),
-                82%의 투자자가 이익 주식은 빨리 팔고 손실 주식은 2.5배 더 오래 보유합니다(처분효과).
-                이를 극복하려면 매수 시점에 손절가/목표가를 설정하고,
-                "지금 이 주식을 갖고 있지 않다면 살까?"라는 질문을 정기적으로 던지며,
-                투자 일지로 패턴을 분석해야 합니다.
-                손실을 인정하는 것은 패배가 아니라 다음 기회를 위한 자본의 재배치입니다.
-            </p>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>Cornell Note Method • Behavioral Economics</p>
-            <p>© 2024 Investment Psychology Analysis</p>
         </div>
     </div>
 
+    <!-- Footer -->
+    <div class="footer">
+        <p>사마천, 당신의 무기가 되는 순간</p>
+        <p style="margin-top: 8px;">© 2024 Strategic Wisdom from Ancient History</p>
+    </div>
+
     <script>
-        function toggleCard(header) {
-            const body = header.nextElementSibling;
-            const icon = header.querySelector('.icon');
+        // Intersection Observer for lazy loading animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-            header.classList.toggle('active');
-            body.classList.toggle('active');
-        }
-
-        function expandAll() {
-            const headers = document.querySelectorAll('.card-header');
-            const bodies = document.querySelectorAll('.card-body');
-
-            headers.forEach(header => {
-                if (!header.classList.contains('active')) {
-                    header.classList.add('active');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
             });
+        }, observerOptions);
 
-            bodies.forEach(body => {
-                if (!body.classList.contains('active')) {
-                    body.classList.add('active');
-                }
-            });
-        }
-
-        function collapseAll() {
-            const headers = document.querySelectorAll('.card-header');
-            const bodies = document.querySelectorAll('.card-body');
-
-            headers.forEach(header => {
-                header.classList.remove('active');
-            });
-
-            bodies.forEach(body => {
-                body.classList.remove('active');
-            });
-        }
-
-        // Keyboard accessibility
-        document.addEventListener('keydown', (e) => {
-            if (e.target.classList.contains('card-header')) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    toggleCard(e.target);
-                }
-            }
+        // Observe all cards
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
         });
 
-        // Make headers focusable for keyboard navigation
-        document.querySelectorAll('.card-header').forEach(header => {
-            header.setAttribute('tabindex', '0');
-            header.setAttribute('role', 'button');
-            header.setAttribute('aria-expanded', 'false');
-
-            header.addEventListener('click', function() {
-                const isExpanded = this.classList.contains('active');
-                this.setAttribute('aria-expanded', isExpanded);
+        // Ripple effect on click
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Only trigger if not clicking a button
+                if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') {
+                    this.style.setProperty('--ripple-x', e.clientX - this.offsetLeft + 'px');
+                    this.style.setProperty('--ripple-y', e.clientY - this.offsetTop + 'px');
+                }
             });
         });
+
+        console.log('✨ 장의의 전략 인포그래픽 로드 완료');
     </script>
 </body>
 </html>
