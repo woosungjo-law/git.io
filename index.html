@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>교착을 돌파하는 ARISE 협상법</title>
+    <title>제3의 대안: 두 개의 길 끝에서 세 번째 지도를 그리다</title>
     <style>
         /* 한글 텍스트 최적화 - 필수 */
         * {
@@ -16,512 +16,635 @@
         }
 
         :root {
-            --primary: #003E51;
-            --secondary: #00A4B4;
-            --accent: #E87722;
-            --light: #F4F4F4;
-            --text: #1A1A1A;
+            --primary: #FF5A5F;
+            --secondary: #00A699;
+            --accent: #FC642D;
+            --gray: #767676;
+            --light: #F7F7F7;
+            --text: #484848;
             --white: #FFFFFF;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
-            background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+            background: var(--light);
             color: var(--text);
-            line-height: 1.6;
-            padding: 20px;
+            line-height: 1.7;
+            padding: 16px;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: var(--white);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 62, 81, 0.12);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(72, 72, 72, 0.08);
             overflow: hidden;
         }
 
-        /* 헤더 섹션 */
+        /* 헤더 */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: var(--white);
-            padding: 40px 24px;
+            padding: 48px 24px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        header::before {
+        header::before,
+        header::after {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 50%;
         }
 
+        header::before {
+            width: 400px;
+            height: 400px;
+            top: -200px;
+            left: -100px;
+        }
+
+        header::after {
+            width: 300px;
+            height: 300px;
+            bottom: -150px;
+            right: -80px;
+        }
+
         h1 {
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 800;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             position: relative;
             z-index: 1;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.8px;
+            line-height: 1.3;
         }
 
         .subtitle {
-            font-size: 1rem;
+            font-size: 1.1rem;
             opacity: 0.95;
             font-weight: 400;
             position: relative;
             z-index: 1;
         }
 
-        /* 프로세스 흐름 */
-        .process-flow {
-            padding: 32px 24px;
-            background: var(--light);
+        /* 지도 시각화 - 핵심 섹션 */
+        .map-section {
+            padding: 64px 24px;
+            background: linear-gradient(180deg, var(--white) 0%, var(--light) 100%);
+            position: relative;
         }
 
-        .flow-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 24px;
+        .map-title {
+            font-size: 1.8rem;
+            font-weight: 800;
             text-align: center;
+            color: var(--text);
+            margin-bottom: 48px;
+            letter-spacing: -0.5px;
         }
 
-        .flow-steps {
+        .map-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            align-items: center;
+        }
+
+        /* 대립 지점 (산 vs 바다) */
+        .conflict-row {
             display: grid;
-            gap: 16px;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            width: 100%;
+            max-width: 800px;
         }
 
-        .step {
+        .destination {
             background: var(--white);
-            border-left: 4px solid var(--secondary);
-            padding: 16px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .step:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 16px rgba(0, 164, 180, 0.15);
+        .destination:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .destination.mountain {
+            border-top: 6px solid var(--gray);
+        }
+
+        .destination.sea {
+            border-top: 6px solid var(--secondary);
+        }
+
+        .destination-icon {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .destination-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .destination-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--gray);
+        }
+
+        /* 연결선 */
+        .connector {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            padding: 24px 0;
+        }
+
+        .vs-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 8px 24px;
+            border-radius: 24px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* 질문 - 전환점 */
+        .question-pivot {
+            width: 100%;
+            max-width: 650px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(252, 100, 45, 0.25);
+            position: relative;
+            margin: 24px 0;
+        }
+
+        .question-pivot::before {
+            content: '💡';
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            background: var(--white);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .question-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .question-desc {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+        }
+
+        /* 제3의 대안 - 호수 */
+        .solution {
+            width: 100%;
+            max-width: 700px;
+            background: linear-gradient(135deg, var(--secondary) 0%, #00857a 100%);
+            border-radius: 20px;
+            padding: 48px 32px;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(0, 166, 153, 0.3);
+            position: relative;
+            margin-top: 16px;
+        }
+
+        .solution-icon {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+        }
+
+        .solution-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .solution-desc {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .benefit {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 16px 12px;
+            font-size: 0.9rem;
+            color: var(--white);
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        /* 내러티브 흐름 */
+        .narrative {
+            padding: 64px 24px;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .narrative-steps {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            gap: 24px;
+        }
+
+        .narrative-step {
+            background: var(--light);
+            border-left: 5px solid var(--primary);
+            border-radius: 12px;
+            padding: 28px 32px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .narrative-step:nth-child(3) {
+            border-left-color: var(--accent);
+            background: linear-gradient(135deg, #fff5f0 0%, var(--light) 100%);
+        }
+
+        .narrative-step:nth-child(4) {
+            border-left-color: var(--secondary);
+            background: linear-gradient(135deg, #f0fffe 0%, var(--light) 100%);
+        }
+
+        .narrative-step:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
         .step-number {
             position: absolute;
-            left: -14px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--secondary);
+            left: -18px;
+            top: 24px;
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
             color: var(--white);
-            width: 28px;
-            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 0.875rem;
-            box-shadow: 0 2px 8px rgba(0, 164, 180, 0.3);
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(255, 90, 95, 0.3);
+        }
+
+        .narrative-step:nth-child(3) .step-number {
+            background: var(--accent);
+        }
+
+        .narrative-step:nth-child(4) .step-number {
+            background: var(--secondary);
         }
 
         .step-title {
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
-            font-size: 1.05rem;
-        }
-
-        .step-desc {
             color: var(--text);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* 빙산 모델 섹션 */
-        .iceberg-section {
-            padding: 48px 24px;
-            background: var(--white);
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--secondary);
-            margin-bottom: 40px;
-            font-size: 1rem;
-        }
-
-        .iceberg-container {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* 수면(교착의 표면) */
-        .surface {
-            background: linear-gradient(180deg, rgba(0, 164, 180, 0.1) 0%, rgba(0, 164, 180, 0.2) 100%);
-            border: 2px dashed var(--secondary);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .surface::before {
-            content: '표면';
-            position: absolute;
-            top: -12px;
-            left: 24px;
-            background: var(--white);
-            padding: 4px 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--secondary);
-            letter-spacing: 1px;
-        }
-
-        .surface-content {
-            text-align: center;
-        }
-
-        .surface-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
             margin-bottom: 12px;
         }
 
-        .surface-desc {
-            font-size: 0.95rem;
+        .step-content {
+            font-size: 1rem;
+            line-height: 1.7;
             color: var(--text);
-            line-height: 1.6;
         }
 
-        /* 수면선 */
-        .waterline {
-            position: relative;
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, var(--secondary) 50%, transparent 100%);
-            margin: 32px 0;
-        }
-
-        .waterline-label {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--white);
-            padding: 8px 20px;
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: var(--secondary);
-            white-space: nowrap;
-            border: 2px solid var(--secondary);
-            border-radius: 20px;
-        }
-
-        /* 심층(다섯 가지 뿌리) */
-        .depth {
-            background: linear-gradient(180deg, var(--primary) 0%, #002a38 100%);
-            border-radius: 12px;
-            padding: 32px 24px;
-            position: relative;
-        }
-
-        .depth::before {
-            content: '심층';
-            position: absolute;
-            top: -12px;
-            left: 24px;
-            background: var(--white);
-            padding: 4px 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: 1px;
-        }
-
-        .depth-title {
-            color: var(--white);
-            font-size: 1.25rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .roots {
-            display: grid;
-            gap: 16px;
-        }
-
-        .root {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 4px solid var(--accent);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-        }
-
-        .root:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(232, 119, 34, 0.2);
-        }
-
-        .root-number {
-            position: absolute;
-            right: 16px;
-            top: 16px;
-            width: 32px;
-            height: 32px;
-            background: var(--accent);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.875rem;
-        }
-
-        .root-title {
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 8px;
-            font-size: 1.05rem;
-            padding-right: 48px;
-        }
-
-        .root-desc {
-            color: var(--text);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* 적용 섹션 */
-        .application {
+        /* 입장 vs 이해관계 비교 */
+        .comparison {
+            padding: 64px 24px;
             background: var(--light);
-            padding: 48px 24px;
         }
 
-        .checklist {
-            max-width: 800px;
+        .comparison-container {
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
         }
 
-        .check-category {
+        .comparison-card {
             background: var(--white);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
 
-        .check-category-title {
-            font-size: 1.15rem;
+        .comparison-card.wrong {
+            border: 3px solid #ff000020;
+        }
+
+        .comparison-card.right {
+            border: 3px solid var(--secondary);
+            background: linear-gradient(135deg, #f0fffe 0%, var(--white) 100%);
+        }
+
+        .card-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
             font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
         }
 
-        .check-icon {
-            width: 32px;
-            height: 32px;
+        .wrong .card-badge {
+            background: #ff000015;
+            color: #cc0000;
+        }
+
+        .right .card-badge {
             background: var(--secondary);
             color: var(--white);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
         }
 
-        .check-list {
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .card-list {
             list-style: none;
             display: grid;
             gap: 12px;
         }
 
-        .check-item {
-            padding-left: 28px;
+        .card-list li {
+            padding-left: 32px;
             position: relative;
             font-size: 0.95rem;
             line-height: 1.6;
-            color: var(--text);
         }
 
-        .check-item::before {
+        .wrong .card-list li::before {
+            content: '✕';
+            position: absolute;
+            left: 0;
+            color: #cc0000;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .right .card-list li::before {
             content: '✓';
             position: absolute;
             left: 0;
-            color: var(--accent);
+            color: var(--secondary);
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
-        /* 경고 섹션 */
-        .warnings {
-            max-width: 800px;
-            margin: 32px auto 0;
+        /* 적용 가이드 */
+        .application {
+            padding: 64px 24px;
+            background: var(--white);
+        }
+
+        .guide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            gap: 32px;
+        }
+
+        .guide-box {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 32px;
+            border-left: 6px solid var(--primary);
+        }
+
+        .guide-box.checklist {
+            border-left-color: var(--secondary);
+        }
+
+        .guide-box.warning {
+            border-left-color: var(--accent);
+            background: linear-gradient(135deg, #fff5f0 0%, var(--light) 100%);
+        }
+
+        .guide-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .guide-icon {
+            font-size: 1.8rem;
+        }
+
+        .guide-list {
+            list-style: none;
             display: grid;
             gap: 16px;
         }
 
-        .warning {
-            background: linear-gradient(135deg, #fff5f0 0%, var(--white) 100%);
-            border-left: 4px solid var(--accent);
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .warning-title {
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 8px;
+        .guide-list li {
+            padding-left: 36px;
+            position: relative;
             font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .warning-icon {
-            font-size: 1.2rem;
-        }
-
-        .warning-desc {
+            line-height: 1.7;
             color: var(--text);
-            font-size: 0.9rem;
-            line-height: 1.6;
+        }
+
+        .guide-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .checklist .guide-list li::before {
+            content: '□';
+            color: var(--secondary);
+        }
+
+        .warning .guide-list li::before {
+            content: '⚠';
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, rgba(255, 90, 95, 0.2) 60%);
+            font-weight: 700;
+            padding: 2px 4px;
         }
 
         /* 푸터 */
         footer {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--text) 0%, #2a2a2a 100%);
             color: var(--white);
             text-align: center;
-            padding: 32px 24px;
+            padding: 48px 24px;
         }
 
         .cta {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.4;
         }
 
         .cta-desc {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             opacity: 0.9;
+            line-height: 1.6;
         }
 
         /* 반응형 디자인 */
         @media (min-width: 768px) {
             body {
-                padding: 40px;
+                padding: 32px;
             }
 
             header {
-                padding: 60px 40px;
+                padding: 72px 48px;
             }
 
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
 
             .subtitle {
-                font-size: 1.15rem;
+                font-size: 1.25rem;
             }
 
-            .process-flow {
-                padding: 48px 40px;
+            .map-section {
+                padding: 80px 48px;
             }
 
-            .flow-steps {
+            .narrative {
+                padding: 80px 48px;
+            }
+
+            .narrative-steps {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 24px;
             }
 
-            .step:nth-child(3) {
+            .narrative-step:nth-child(3),
+            .narrative-step:nth-child(5) {
                 grid-column: 1 / -1;
-                max-width: 600px;
+                max-width: 650px;
                 margin: 0 auto;
                 width: 100%;
             }
 
-            .iceberg-section {
-                padding: 64px 40px;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .roots {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .root:nth-child(5) {
-                grid-column: 1 / -1;
-                max-width: 600px;
-                margin: 0 auto;
-                width: 100%;
+            .comparison {
+                padding: 80px 48px;
             }
 
             .application {
-                padding: 64px 40px;
+                padding: 80px 48px;
             }
 
-            .checklist {
+            .guide-container {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .warnings {
-                grid-template-columns: repeat(2, 1fr);
+            .guide-box.warning {
+                grid-column: 1 / -1;
             }
         }
 
-        @media (min-width: 1024px) {
-            .flow-steps {
-                grid-template-columns: repeat(5, 1fr);
+        @media (max-width: 767px) {
+            .conflict-row {
+                grid-template-columns: 1fr;
             }
 
-            .step:nth-child(3) {
-                grid-column: auto;
-                max-width: none;
+            .comparison-container {
+                grid-template-columns: 1fr;
             }
 
-            .roots {
-                grid-template-columns: repeat(3, 1fr);
+            .benefits {
+                grid-template-columns: 1fr;
             }
 
-            .root:nth-child(4),
-            .root:nth-child(5) {
-                grid-column: auto;
+            h1 {
+                font-size: 1.6rem;
             }
 
-            .root:nth-child(5) {
-                grid-column: 2 / 3;
-                max-width: none;
+            .question-text {
+                font-size: 1.3rem;
+            }
+
+            .solution-title {
+                font-size: 1.6rem;
             }
         }
 
@@ -533,9 +656,9 @@
             }
         }
 
-        /* 인터랙션 피드백 */
-        .step:active,
-        .root:active {
+        /* 인터랙션 */
+        .destination:active,
+        .narrative-step:active {
             transform: scale(0.98);
         }
     </style>
@@ -544,151 +667,217 @@
     <div class="container">
         <!-- 헤더 -->
         <header>
-            <h1>교착을 돌파하는 ARISE 협상법</h1>
-            <p class="subtitle">문이 닫혔을 때, 우리는 판을 읽어야 한다</p>
+            <h1>제3의 대안<br>두 개의 길 끝에서, 세 번째 지도를 그리다</h1>
+            <p class="subtitle">교착을 돌파하는 ARISE 협상법</p>
         </header>
 
-        <!-- 프로세스 흐름 -->
-        <section class="process-flow">
-            <h2 class="flow-title">교착에서 돌파까지: 5단계 여정</h2>
-            <div class="flow-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">닫힌 문</div>
-                    <p class="step-desc">스타트업과 대기업의 M&A 협상. 합리적 요구들이 서로를 향한 칼날이 되다.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">교착의 심화</div>
-                    <p class="step-desc">반복되는 실패. 불신이 적대감으로, 소모전이 처절한 벽으로 굳어지다.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">제3의 대안</div>
-                    <p class="step-desc">"우리가 밀고 있는 이 벽은 무엇으로 만들어졌는가?" 상대가 아닌 판 자체를 해부하다.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">해결의 시작</div>
-                    <p class="step-desc">벽의 벽돌을 하나씩 빼내는 작업. 공동의 파이를 상상하고 신뢰를 회복하다.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <div class="step-title">원칙의 적용</div>
-                    <p class="step-desc">모든 교착은 신호다. 당신의 협상 테이블을 진단하고 판을 다시 짜라.</p>
-                </div>
-            </div>
-        </section>
+        <!-- 지도 시각화 - 핵심 섹션 -->
+        <section class="map-section">
+            <h2 class="map-title">갈등의 지도에서 해결의 지도로</h2>
 
-        <!-- 빙산 모델: 교착의 구조 -->
-        <section class="iceberg-section">
-            <h2 class="section-title">교착의 해부학</h2>
-            <p class="section-subtitle">표면의 증상 아래, 다섯 겹의 구조적 뿌리</p>
-
-            <div class="iceberg-container">
-                <!-- 표면: 증상 -->
-                <div class="surface">
-                    <div class="surface-content">
-                        <div class="surface-title">🚫 교착 (증상)</div>
-                        <p class="surface-desc">
-                            합의 불가능, 반복되는 실패, 깊어지는 적대감.<br>
-                            "우리는 더 이상 나아갈 수 없다."
+            <div class="map-container">
+                <!-- 대립: 산 vs 바다 -->
+                <div class="conflict-row">
+                    <div class="destination mountain">
+                        <span class="destination-icon">⛰️</span>
+                        <div class="destination-name">산</div>
+                        <p class="destination-desc">
+                            신체 활동, 사색 시간, 성취감, 고요한 숲길
+                        </p>
+                    </div>
+                    <div class="destination sea">
+                        <span class="destination-icon">🌊</span>
+                        <div class="destination-name">바다</div>
+                        <p class="destination-desc">
+                            완전한 휴식, 물의 부드러움, 아름다운 풍경, 탈일상
                         </p>
                     </div>
                 </div>
 
-                <!-- 수면선 -->
-                <div class="waterline">
-                    <span class="waterline-label">수면 ─ 표면 아래를 보라</span>
+                <!-- 대립 표시 -->
+                <div class="connector">
+                    <span class="vs-badge">VS</span>
                 </div>
 
-                <!-- 심층: 다섯 가지 뿌리 -->
-                <div class="depth">
-                    <h3 class="depth-title">교착을 만드는 다섯 가지 구조적 뿌리</h3>
-                    <div class="roots">
-                        <div class="root">
-                            <div class="root-number">1</div>
-                            <div class="root-title">제로섬 프레임</div>
-                            <p class="root-desc">한정된 파이 앞에서 칼을 든 자들. 한쪽이 얻으면 다른 쪽이 잃는다는 관념이 모든 가능성을 질식시킨다.</p>
-                        </div>
-                        <div class="root">
-                            <div class="root-number">2</div>
-                            <div class="root-title">입장의 고착</div>
-                            <p class="root-desc">최초의 입장이 자존심이 되다. 입장을 바꾸는 것은 패배를 인정하는 꼴. 내용은 사라지고 깃발만 남았다.</p>
-                        </div>
-                        <div class="root">
-                            <div class="root-number">3</div>
-                            <div class="root-title">신뢰의 결핍</div>
-                            <p class="root-desc">반복된 실패가 남긴 감정의 상처. 상대는 이제 파트너가 아니라 이겨야 할 적이다.</p>
-                        </div>
-                        <div class="root">
-                            <div class="root-number">4</div>
-                            <div class="root-title">복잡한 이해관계</div>
-                            <p class="root-desc">테이블에 앉은 사람은 소수, 하지만 뒤에는 투자자, 직원, 가족들. 보이지 않는 그림자들이 어깨를 짓누른다.</p>
-                        </div>
-                        <div class="root">
-                            <div class="root-number">5</div>
-                            <div class="root-title">문화의 충돌</div>
-                            <p class="root-desc">스타트업의 언어는 속도와 자율성, 대기업의 언어는 절차와 안정성. 같은 단어, 다른 세상.</p>
-                        </div>
+                <!-- 질문: 전환의 순간 -->
+                <div class="question-pivot">
+                    <div class="question-text">"우리는 왜 여행을 가고 싶어?"</div>
+                    <p class="question-desc">
+                        장소(Where)가 아닌 존재의 근원(Why)을 묻는 순간,<br>
+                        입장(Position)이 아닌 이해관계(Interest)가 드러나기 시작한다.
+                    </p>
+                </div>
+
+                <!-- 제3의 대안: 호수 -->
+                <div class="solution">
+                    <div class="solution-icon">🏞️</div>
+                    <div class="solution-title">호수</div>
+                    <p class="solution-desc">
+                        산도 바다도 아닌 제3의 대안. 깊은 숲 속 호수는 모두의 근본적 욕구를 충족시키는
+                        새로운 목적지였다. 누구도 이기지 않았고, 누구도 지지 않았다.
+                        <strong>모두가 이겼다.</strong>
+                    </p>
+                    <div class="benefits">
+                        <div class="benefit">🌲 짙은 녹음</div>
+                        <div class="benefit">🥾 등산로</div>
+                        <div class="benefit">💧 고요한 물</div>
+                        <div class="benefit">📖 휴식</div>
+                        <div class="benefit">🛶 카누</div>
+                        <div class="benefit">🔥 캠프파이어</div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 내러티브 5단계 -->
+        <section class="narrative">
+            <div class="section-header">
+                <h2 class="section-title">제3의 대안까지의 여정</h2>
+                <p class="section-subtitle">갈등에서 창조로 향하는 5단계 이야기</p>
+            </div>
+
+            <div class="narrative-steps">
+                <div class="narrative-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">갈등의 지도</h3>
+                    <p class="step-content">
+                        식탁 위 펼쳐진 여름휴가 지도. 아버지는 산을, 어머니는 바다를 원한다.
+                        두 개의 목적지는 멀고, 주장은 단단하다. 이것은 단순한 여행지 논쟁이 아니라
+                        고단함을 위로받는 방식에 대한 근원적 대립이다.
+                    </p>
+                </div>
+
+                <div class="narrative-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">좌초된 시간</h3>
+                    <p class="step-content">
+                        몇 주가 흐르고 안내 책자만 쌓인다. 어설픈 타협안들은 누구의 마음도 채우지 못한다.
+                        기대감은 무거운 짐이 되고, 침묵이 식탁을 덮는다.
+                        교착은 관계를 갉아먹는 조용한 침식이다.
+                    </p>
+                </div>
+
+                <div class="narrative-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">질문, 모든 것의 시작</h3>
+                    <p class="step-content">
+                        아이가 묻는다. "우리는 왜 여행을 가고 싶어?" 장소가 아닌 존재의 근원에 대한 탐문.
+                        산이냐 바다냐는 선택지는 한순간에 껍데기가 되고, 가족은 백지를 펼쳐
+                        '무엇'이 아닌 '왜'를 적기 시작한다. 이것이 제3의 대안으로 들어서는 첫 관문이다.
+                    </p>
+                </div>
+
+                <div class="narrative-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">세 번째 지도</h3>
+                    <p class="step-content">
+                        새로운 해답은 지도 밖에서 온다. 호수는 산도 바다도 아니었지만,
+                        모두의 근본적 이해관계를 충족시켰다. 아버지는 숲길을, 어머니는 호숫가를,
+                        아이들은 물놀이를 즐긴다. 승패라는 개념이 사라지고, 함께 건설한 새로운 길만 남았다.
+                    </p>
+                </div>
+
+                <div class="narrative-step">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">원칙의 추출</h3>
+                    <p class="step-content">
+                        교착은 길이 없다는 신호가 아니라, 우리가 아는 길이 여기가 끝이라는 신호다.
+                        제3의 대안은 타협(양쪽이 조금씩 잃음)이 아니라 창조(판 자체를 키우고 새로운 가치 창출)다.
+                        벽 앞에서 질문을 던지는 순간, 벽은 문이 된다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 입장 vs 이해관계 비교 -->
+        <section class="comparison">
+            <div class="section-header">
+                <h2 class="section-title">입장에서 이해관계로</h2>
+                <p class="section-subtitle">제3의 대안을 찾기 위한 근본적 전환</p>
+            </div>
+
+            <div class="comparison-container">
+                <div class="comparison-card wrong">
+                    <span class="card-badge">입장 (Position)</span>
+                    <h3 class="card-title">무엇을 원하는가</h3>
+                    <ul class="card-list">
+                        <li>아버지: "산으로 가야 해"</li>
+                        <li>어머니: "바다가 좋겠어"</li>
+                        <li>→ 제로섬 게임</li>
+                        <li>→ 한쪽이 이기면 한쪽이 진다</li>
+                        <li>→ 교착과 갈등 심화</li>
+                    </ul>
+                </div>
+
+                <div class="comparison-card right">
+                    <span class="card-badge">이해관계 (Interest)</span>
+                    <h3 class="card-title">왜 그것을 원하는가</h3>
+                    <ul class="card-list">
+                        <li>아버지: 신체 활동, 사색, 성취감</li>
+                        <li>어머니: 완전한 휴식, 아름다움</li>
+                        <li>아이들: 신나는 놀이, 새로운 경험</li>
+                        <li>→ 근본 욕구 파악</li>
+                        <li>→ 판을 키우고 새로운 대안 창조</li>
+                        <li>→ 모두가 승리하는 제3의 길</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- 적용 가이드 -->
         <section class="application">
-            <h2 class="section-title">당신의 교착을 진단하라</h2>
-            <p class="section-subtitle">구조를 이해하는 것이 모든 돌파의 시작이다</p>
-
-            <div class="checklist">
-                <div class="check-category">
-                    <h3 class="check-category-title">
-                        <span class="check-icon">?</span>
-                        핵심 질문
-                    </h3>
-                    <ul class="check-list">
-                        <li class="check-item">우리는 지금 하나의 파이를 나누고 있는가, 아니면 함께 더 큰 파이를 만들 수 있는가?</li>
-                        <li class="check-item">내가 고수하는 '입장' 뒤에 숨겨진 나의 진짜 욕구와 이익은 무엇인가?</li>
-                        <li class="check-item">과거의 실패 경험이 현재 우리의 판단을 얼마나 지배하고 있는가?</li>
-                    </ul>
-                </div>
-
-                <div class="check-category">
-                    <h3 class="check-category-title">
-                        <span class="check-icon">✓</span>
-                        적용 체크리스트
-                    </h3>
-                    <ul class="check-list">
-                        <li class="check-item">우리 논의가 단 하나의 쟁점(예: 가격)에만 갇혀 있지 않은가?</li>
-                        <li class="check-item">'절대 양보 못 해'라고 말하는 항목이 있는가? 그 이유는 무엇인가?</li>
-                        <li class="check-item">상대의 제안을 들을 때, 선의보다 악의를 먼저 가정하고 있지는 않은가?</li>
-                    </ul>
-                </div>
+            <div class="section-header">
+                <h2 class="section-title">당신의 교착을 제3의 대안으로</h2>
+                <p class="section-subtitle">벽을 문으로 바꾸는 실천 도구</p>
             </div>
 
-            <div class="warnings">
-                <div class="warning">
-                    <div class="warning-title">
-                        <span class="warning-icon">⚠️</span>
-                        분석을 위한 분석
-                    </div>
-                    <p class="warning-desc">교착의 원인 분석이 상대를 비난할 무기가 되어서는 안 된다. 진단은 공동의 문제 해결을 위한 것이다. 분석이 비난으로 변질되는 순간, 해부는 부검이 된다.</p>
+            <div class="guide-container">
+                <div class="guide-box questions">
+                    <h3 class="guide-title">
+                        <span class="guide-icon">❓</span>
+                        핵심 질문
+                    </h3>
+                    <ul class="guide-list">
+                        <li>우리가 주장하는 <span class="highlight">입장 이면의 진짜 욕구(Interest)</span>는 무엇인가?</li>
+                        <li>'무엇을(What)'이 아닌 <span class="highlight">'왜(Why)'</span>라고 질문을 바꾸면 무엇이 보이는가?</li>
+                        <li>돈, 시간, 규칙의 제약이 없다면 어떤 해결책을 상상할 수 있는가?</li>
+                    </ul>
                 </div>
-                <div class="warning">
-                    <div class="warning-title">
-                        <span class="warning-icon">⚠️</span>
-                        진단이 곧 해결이라는 착각
-                    </div>
-                    <p class="warning-desc">교착의 원인을 파악한 것은 위대한 첫걸음일 뿐, 해결책 그 자체는 아니다. 지도는 보물 그 자체가 아니다. 지도를 손에 쥐었다면, 이제 함께 길을 떠나야 한다.</p>
+
+                <div class="guide-box checklist">
+                    <h3 class="guide-title">
+                        <span class="guide-icon">✓</span>
+                        적용 체크리스트
+                    </h3>
+                    <ul class="guide-list">
+                        <li>양측의 입장이 아닌, <span class="highlight">이해관계 목록</span>을 작성했는가?</li>
+                        <li>이해관계를 기준으로, 완전히 새로운 선택지를 <span class="highlight">3개 이상</span> 브레인스토밍했는가?</li>
+                        <li>'나의 승리'가 아닌 <span class="highlight">'우리의 만족'</span>으로 목표를 재설정했는가?</li>
+                        <li>상대의 아이디어에 비판 대신 "그 아이디어의 좋은 점은 무엇인가?"라고 질문했는가?</li>
+                    </ul>
+                </div>
+
+                <div class="guide-box warning">
+                    <h3 class="guide-title">
+                        <span class="guide-icon">⚠️</span>
+                        가장 큰 함정: 성급한 타협
+                    </h3>
+                    <ul class="guide-list">
+                        <li>제3의 대안을 찾는 노력을 포기하고 <span class="highlight">중간 지점에서 안주</span>하는 것이 가장 큰 함정이다.</li>
+                        <li>오렌지 하나를 반으로 나누는 것이 아니라, 한 명은 껍질을, 다른 한 명은 과육을 갖도록 하는 길을 찾아야 한다.</li>
+                        <li><span class="highlight">타협은 창조의 적</span>이다. 진정한 탐험을 포기하게 만들기 때문이다.</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- 푸터 CTA -->
         <footer>
-            <p class="cta">모든 교착은 신호이다</p>
-            <p class="cta-desc">기존의 판이 수명을 다했으니 새로운 판을 짜라는 신호이다.</p>
+            <p class="cta">교착의 순간이야말로<br>위대한 창조의 기회이다</p>
+            <p class="cta-desc">
+                벽 앞에서 절망하는 대신, 조용히 질문을 던지는 길이 있다.<br>
+                우리는 왜 여기에 서 있는가. 그 질문이 당신을 세 번째 길로 안내할 것이다.
+            </p>
         </footer>
     </div>
 </body>
