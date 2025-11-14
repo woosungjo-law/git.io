@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사지도, 빌리지도 않는다: 제3의 법인을 세우다</title>
+    <title>둥지는 그대로, 어른새가 날아오르다</title>
     <style>
         /* 한글 텍스트 최적화 - 필수 */
         * {
@@ -16,19 +16,18 @@
         }
 
         :root {
-            --primary: #0093D0;
-            --secondary: #002A5C;
-            --accent-blue: #00B5E2;
-            --accent-green: #7AC143;
-            --light: #F0F0F0;
+            --primary: #0051BA;
+            --secondary: #FFDB00;
+            --accent: #F39200;
+            --light: #E5E5E5;
             --white: #FFFFFF;
-            --text: #333333;
+            --text: #111111;
             --gray: #666666;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
-            background: var(--light);
+            background: linear-gradient(135deg, #f0f4ff 0%, var(--white) 100%);
             color: var(--text);
             line-height: 1.7;
             padding: 16px;
@@ -39,14 +38,14 @@
             max-width: 1400px;
             margin: 0 auto;
             background: var(--white);
-            border-radius: 16px;
-            box-shadow: 0 8px 40px rgba(0, 42, 92, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 10px 50px rgba(0, 81, 186, 0.08);
             overflow: hidden;
         }
 
         /* 헤더 */
         header {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #003d8f 100%);
             color: var(--white);
             padding: 56px 32px;
             text-align: center;
@@ -54,14 +53,24 @@
             overflow: hidden;
         }
 
-        header::before {
-            content: '';
+        header::before,
+        header::after {
+            content: '🏠';
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            top: -200px;
-            right: -150px;
+            font-size: 8rem;
+            opacity: 0.05;
+        }
+
+        header::before {
+            top: -30px;
+            left: -20px;
+            transform: rotate(-15deg);
+        }
+
+        header::after {
+            bottom: -30px;
+            right: -20px;
+            transform: rotate(15deg);
         }
 
         h1 {
@@ -82,31 +91,41 @@
             z-index: 1;
         }
 
-        /* 교착 상황 */
-        .deadlock {
+        /* 문제 상황 */
+        .problem {
             padding: 56px 32px;
-            background: var(--light);
-        }
-
-        .section-header {
+            background: linear-gradient(180deg, var(--white) 0%, #fff9e6 100%);
             text-align: center;
-            margin-bottom: 48px;
         }
 
-        .section-title {
+        .problem-icon {
+            font-size: 5rem;
+            margin-bottom: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .problem-title {
             font-size: 1.9rem;
             font-weight: 800;
-            color: var(--secondary);
-            margin-bottom: 12px;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
 
-        .section-subtitle {
+        .problem-text {
+            max-width: 800px;
+            margin: 0 auto 32px;
             font-size: 1.05rem;
-            color: var(--gray);
+            line-height: 1.8;
+            color: var(--text);
         }
 
-        .deadlock-grid {
-            max-width: 1000px;
+        .demands {
+            max-width: 900px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
@@ -114,65 +133,42 @@
             align-items: center;
         }
 
-        .party {
+        .demand-box {
             background: var(--white);
-            border-radius: 16px;
-            padding: 32px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-top: 6px solid var(--primary);
+            border-radius: 20px;
+            padding: 32px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 3px solid var(--light);
+            transition: all 0.3s ease;
         }
 
-        .party.company-b {
-            border-top-color: var(--accent-green);
+        .demand-box:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
         }
 
-        .party-name {
-            font-size: 1.6rem;
+        .demand-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .demand-label {
+            font-size: 1.3rem;
             font-weight: 800;
-            color: var(--secondary);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            color: var(--primary);
+            margin-bottom: 12px;
         }
 
-        .party-icon {
-            font-size: 2rem;
-        }
-
-        .party-desc {
+        .demand-text {
             font-size: 1rem;
-            line-height: 1.7;
             color: var(--gray);
-            margin-bottom: 16px;
+            line-height: 1.6;
         }
 
-        .party-demand {
-            background: rgba(0, 147, 208, 0.08);
-            border-left: 4px solid var(--primary);
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        .company-b .party-demand {
-            background: rgba(122, 193, 67, 0.08);
-            border-left-color: var(--accent-green);
-        }
-
-        .vs-divider {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .vs-badge {
+        .vs {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #cc0000 0%, #ff3333 100%);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff3838 100%);
             color: var(--white);
             border-radius: 50%;
             display: flex;
@@ -180,45 +176,25 @@
             justify-content: center;
             font-weight: 900;
             font-size: 1.3rem;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 16px rgba(204, 0, 0, 0.3);
+            box-shadow: 0 4px 16px rgba(255, 56, 56, 0.3);
         }
 
-        .vs-line {
-            width: 2px;
-            height: 120px;
-            background: linear-gradient(180deg, transparent 0%, #cc0000 50%, transparent 100%);
-        }
-
-        /* 전환점 - 새로운 판 */
+        /* 전환점 */
         .pivot {
-            padding: 72px 32px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-blue) 100%);
-            color: var(--white);
+            padding: 64px 32px;
+            background: linear-gradient(135deg, var(--secondary) 0%, #ffd700 100%);
             text-align: center;
             position: relative;
         }
 
-        .pivot::before,
-        .pivot::after {
-            content: '';
-            position: absolute;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 50%;
-        }
-
         .pivot::before {
-            width: 300px;
-            height: 300px;
-            top: -100px;
-            left: -50px;
-        }
-
-        .pivot::after {
-            width: 400px;
-            height: 400px;
-            bottom: -150px;
-            right: -100px;
+            content: '💡';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .pivot-content {
@@ -229,13 +205,20 @@
         }
 
         .pivot-icon {
-            font-size: 4rem;
+            font-size: 4.5rem;
             margin-bottom: 24px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .pivot-title {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 800;
+            color: var(--primary);
             margin-bottom: 20px;
             line-height: 1.3;
         }
@@ -243,193 +226,275 @@
         .pivot-text {
             font-size: 1.15rem;
             line-height: 1.8;
-            opacity: 0.95;
+            color: var(--text);
         }
 
-        /* 구조 다이어그램 - 핵심 */
-        .structure {
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, var(--accent) 60%);
+            padding: 2px 6px;
+            font-weight: 800;
+        }
+
+        /* 둥지형 양육 다이어그램 - 핵심 */
+        .nest-diagram {
             padding: 72px 32px;
             background: var(--white);
         }
 
-        .structure-diagram {
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--gray);
+        }
+
+        .diagram-container {
             max-width: 1100px;
-            margin: 48px auto;
+            margin: 0 auto;
             position: relative;
         }
 
-        .transformation {
+        /* 중앙 둥지 */
+        .nest-center {
+            max-width: 450px;
+            margin: 0 auto 48px;
+            background: linear-gradient(135deg, #fff9e6 0%, var(--white) 100%);
+            border: 4px solid var(--secondary);
+            border-radius: 30px;
+            padding: 48px 40px;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(255, 219, 0, 0.2);
+            position: relative;
+        }
+
+        .nest-center::before {
+            content: '🏠';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4rem;
+            background: var(--white);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(255, 219, 0, 0.3);
+        }
+
+        .nest-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+            margin-top: 24px;
+        }
+
+        .nest-desc {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 24px;
+        }
+
+        .nest-features {
+            display: grid;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .nest-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            padding: 12px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* 부모 순환 구조 */
+        .parents-rotation {
+            max-width: 1000px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             gap: 32px;
             align-items: center;
-            margin-bottom: 56px;
         }
 
-        .entity {
-            background: var(--white);
-            border: 3px solid var(--primary);
-            border-radius: 20px;
-            padding: 40px 32px;
+        .parent-space {
+            background: linear-gradient(135deg, #f0f4ff 0%, var(--white) 100%);
+            border: 3px dashed var(--primary);
+            border-radius: 24px;
+            padding: 32px 24px;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 147, 208, 0.15);
+            position: relative;
         }
 
-        .entity.company-b {
-            border-color: var(--accent-green);
-            box-shadow: 0 8px 32px rgba(122, 193, 67, 0.15);
+        .parent-space.mom {
+            border-color: #ff6b9d;
         }
 
-        .entity.joint-venture {
-            border-color: var(--accent-blue);
-            background: linear-gradient(135deg, #f0f9ff 0%, var(--white) 100%);
-            box-shadow: 0 12px 48px rgba(0, 181, 226, 0.2);
-            grid-column: 1 / -1;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .entity-icon {
+        .parent-icon {
             font-size: 3.5rem;
             margin-bottom: 16px;
         }
 
-        .entity-name {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--secondary);
-            margin-bottom: 12px;
-        }
-
-        .entity-label {
-            font-size: 1rem;
-            color: var(--gray);
-            margin-bottom: 20px;
-        }
-
-        .entity-contribution {
-            background: var(--light);
-            border-radius: 12px;
-            padding: 20px;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            text-align: left;
-        }
-
-        .entity-contribution strong {
-            display: block;
-            color: var(--secondary);
-            font-size: 1.05rem;
-            margin-bottom: 12px;
-        }
-
-        .entity-contribution ul {
-            list-style: none;
-            display: grid;
-            gap: 8px;
-        }
-
-        .entity-contribution li {
-            padding-left: 24px;
-            position: relative;
-        }
-
-        .entity-contribution li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: 700;
+        .parent-label {
             font-size: 1.3rem;
-        }
-
-        .company-b .entity-contribution li::before {
-            color: var(--accent-green);
-        }
-
-        .arrow {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .arrow-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-        }
-
-        .arrow-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* 조인트 벤처 내부 구조 */
-        .jv-structure {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-top: 32px;
-        }
-
-        .jv-component {
-            background: var(--white);
-            border: 2px solid var(--light);
-            border-radius: 12px;
-            padding: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .jv-component:hover {
-            border-color: var(--accent-blue);
-            box-shadow: 0 8px 24px rgba(0, 181, 226, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .jv-component-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-
-        .jv-component-title {
-            font-size: 1.2rem;
             font-weight: 800;
-            color: var(--secondary);
+            color: var(--primary);
             margin-bottom: 12px;
         }
 
-        .jv-component-desc {
+        .parent-space.mom .parent-label {
+            color: #ff6b9d;
+        }
+
+        .parent-desc {
             font-size: 0.95rem;
             line-height: 1.6;
             color: var(--gray);
         }
 
-        .percentage {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-blue) 100%);
+        .rotation-arrows {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .arrow-circle {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
             color: var(--white);
-            padding: 4px 12px;
-            border-radius: 6px;
             font-weight: 800;
-            font-size: 1.1rem;
-            margin: 0 4px;
+            box-shadow: 0 4px 20px rgba(243, 146, 0, 0.3);
+            animation: rotate 3s linear infinite;
         }
 
-        .percentage.green {
-            background: linear-gradient(135deg, var(--accent-green) 0%, #8fd155 100%);
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
         }
 
-        /* 결과 비교 */
-        .results {
+        .arrow-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        /* 3단계 프로세스 */
+        .process {
             padding: 64px 32px;
             background: var(--light);
         }
 
-        .results-grid {
+        .process-steps {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            gap: 24px;
+        }
+
+        .step-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border-left: 6px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .step-card:nth-child(2) {
+            border-left-color: var(--secondary);
+        }
+
+        .step-card:nth-child(3) {
+            border-left-color: var(--accent);
+        }
+
+        .step-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 32px rgba(0, 81, 186, 0.12);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .step-card:nth-child(2) .step-number {
+            background: var(--secondary);
+            color: var(--text);
+        }
+
+        .step-card:nth-child(3) .step-number {
+            background: var(--accent);
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .step-content {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--gray);
+        }
+
+        /* 비교 섹션 */
+        .comparison {
+            padding: 64px 32px;
+            background: var(--white);
+        }
+
+        .comparison-grid {
             max-width: 1000px;
             margin: 0 auto;
             display: grid;
@@ -437,111 +502,106 @@
             gap: 32px;
         }
 
-        .result-card {
+        .comparison-card {
             background: var(--white);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 32px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 3px solid var(--light);
         }
 
-        .result-card.before {
-            border: 3px solid rgba(204, 0, 0, 0.2);
+        .comparison-card.before {
+            border-color: #ffcccb;
         }
 
-        .result-card.after {
-            border: 3px solid var(--accent-blue);
+        .comparison-card.after {
+            border-color: #b3e5b3;
+            background: linear-gradient(135deg, #f0fff0 0%, var(--white) 100%);
         }
 
-        .result-badge {
+        .comparison-badge {
             display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
+            padding: 8px 20px;
+            border-radius: 24px;
             font-size: 0.85rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 20px;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
-        .before .result-badge {
-            background: rgba(204, 0, 0, 0.1);
-            color: #cc0000;
+        .before .comparison-badge {
+            background: #ff6b6b;
+            color: var(--white);
         }
 
-        .after .result-badge {
-            background: rgba(0, 181, 226, 0.1);
-            color: var(--accent-blue);
+        .after .comparison-badge {
+            background: #4caf50;
+            color: var(--white);
         }
 
-        .result-title {
+        .comparison-title {
             font-size: 1.5rem;
             font-weight: 800;
-            margin-bottom: 16px;
-            color: var(--secondary);
+            margin-bottom: 20px;
+            color: var(--text);
         }
 
-        .result-list {
+        .comparison-list {
             list-style: none;
             display: grid;
             gap: 12px;
         }
 
-        .result-list li {
-            padding-left: 32px;
+        .comparison-list li {
+            padding-left: 36px;
             position: relative;
             font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        .before .result-list li::before {
-            content: '✕';
+        .before .comparison-list li::before {
+            content: '😢';
             position: absolute;
             left: 0;
-            color: #cc0000;
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
         }
 
-        .after .result-list li::before {
-            content: '✓';
+        .after .comparison-list li::before {
+            content: '✨';
             position: absolute;
             left: 0;
-            color: var(--accent-blue);
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
         }
 
         /* 원칙 가이드 */
         .principles {
             padding: 64px 32px;
-            background: var(--white);
+            background: linear-gradient(135deg, #f0f4ff 0%, var(--light) 100%);
         }
 
         .principles-container {
             max-width: 1000px;
             margin: 0 auto;
             display: grid;
-            gap: 32px;
+            gap: 24px;
         }
 
         .principle-box {
-            background: var(--light);
-            border-radius: 16px;
+            background: var(--white);
+            border-radius: 20px;
             padding: 32px;
-            border-left: 6px solid var(--primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border-top: 6px solid var(--primary);
         }
 
         .principle-box.questions {
-            border-left-color: var(--accent-blue);
-        }
-
-        .principle-box.checklist {
-            border-left-color: var(--accent-green);
+            border-top-color: var(--accent);
         }
 
         .principle-title {
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--secondary);
+            color: var(--text);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -549,7 +609,7 @@
         }
 
         .principle-icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
         .principle-list {
@@ -559,7 +619,7 @@
         }
 
         .principle-list li {
-            padding-left: 36px;
+            padding-left: 40px;
             position: relative;
             font-size: 1rem;
             line-height: 1.7;
@@ -571,16 +631,16 @@
             position: absolute;
             left: 0;
             color: var(--primary);
-            font-weight: 700;
-            font-size: 1.3rem;
+            font-weight: 900;
+            font-size: 1.5rem;
         }
 
         .questions .principle-list li::before {
             content: '?';
-            color: var(--accent-blue);
-            width: 24px;
-            height: 24px;
-            background: rgba(0, 181, 226, 0.1);
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -588,38 +648,42 @@
             font-size: 1.2rem;
         }
 
-        .checklist .principle-list li::before {
-            content: '□';
-            color: var(--accent-green);
-        }
-
-        .highlight {
-            background: linear-gradient(180deg, transparent 60%, rgba(0, 181, 226, 0.2) 60%);
-            font-weight: 700;
-            padding: 2px 4px;
-        }
-
         /* 푸터 */
         footer {
-            background: var(--secondary);
+            background: linear-gradient(135deg, var(--primary) 0%, #003d8f 100%);
             color: var(--white);
             text-align: center;
-            padding: 48px 32px;
+            padding: 56px 32px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '🕊️';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .cta {
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             font-weight: 800;
             margin-bottom: 16px;
             line-height: 1.4;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-desc {
             font-size: 1.05rem;
-            opacity: 0.9;
+            opacity: 0.95;
             line-height: 1.6;
             max-width: 700px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         /* 반응형 디자인 */
@@ -636,15 +700,23 @@
                 font-size: 3rem;
             }
 
-            .deadlock {
+            .problem {
                 padding: 72px 48px;
             }
 
-            .structure {
+            .nest-diagram {
                 padding: 88px 48px;
             }
 
-            .results {
+            .process {
+                padding: 80px 48px;
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .comparison {
                 padding: 80px 48px;
             }
 
@@ -659,37 +731,32 @@
 
         @media (max-width: 767px) {
             h1 {
-                font-size: 1.7rem;
+                font-size: 1.8rem;
             }
 
-            .deadlock-grid {
+            .demands {
                 grid-template-columns: 1fr;
             }
 
-            .vs-divider {
-                flex-direction: row;
+            .vs {
+                transform: rotate(90deg);
+                margin: 16px auto;
             }
 
-            .vs-line {
-                width: 120px;
-                height: 2px;
-                background: linear-gradient(90deg, transparent 0%, #cc0000 50%, transparent 100%);
-            }
-
-            .transformation {
+            .parents-rotation {
                 grid-template-columns: 1fr;
             }
 
-            .arrow {
+            .rotation-arrows {
                 flex-direction: row;
+                margin: 16px 0;
+            }
+
+            .arrow-circle {
                 transform: rotate(90deg);
             }
 
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .jv-structure {
+            .comparison-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -703,10 +770,9 @@
         }
 
         /* 인터랙션 */
-        .entity:hover,
-        .party:hover {
-            transform: scale(1.02);
-            transition: transform 0.3s ease;
+        .demand-box:active,
+        .step-card:active {
+            transform: scale(0.97);
         }
     </style>
 </head>
@@ -714,49 +780,36 @@
     <div class="container">
         <!-- 헤더 -->
         <header>
-            <h1>사지도, 빌리지도 않는다<br>제3의 법인을 세우다</h1>
-            <p class="subtitle">교착을 돌파하는 ARISE 협상법: Alternative Structures</p>
+            <h1>둥지는 그대로,<br>어른새가 날아오르다</h1>
+            <p class="subtitle">교착을 돌파하는 ARISE 협상법: 둥지형 양육 (Bird's Nest Custody)</p>
         </header>
 
-        <!-- 교착 상황 -->
-        <section class="deadlock">
-            <div class="section-header">
-                <h2 class="section-title">교착: 양자택일의 함정</h2>
-                <p class="section-subtitle">글로벌 제약사 A vs 바이오벤처 B, 1년간의 대치</p>
-            </div>
+        <!-- 문제 상황 -->
+        <section class="problem">
+            <div class="problem-icon">💔</div>
+            <h2 class="problem-title">교착: 누가 아이들을 데려갈 것인가</h2>
+            <p class="problem-text">
+                집은 하나, 아이는 둘. 이혼 후 양육권을 둘러싼 처절한 싸움.
+                아이들의 삶 전체를 뒤흔들지 않고는 어느 누구도 만족할 수 없는 막다른 길.
+            </p>
 
-            <div class="deadlock-grid">
-                <div class="party">
-                    <div class="party-name">
-                        <span class="party-icon">🏢</span>
-                        글로벌 제약사 A
-                    </div>
-                    <p class="party-desc">
-                        막대한 임상 비용 리스크를 감당해야 하는 대기업.
-                        기술에 대한 완전한 통제권 없이는 투자할 수 없다.
+            <div class="demands">
+                <div class="demand-box">
+                    <div class="demand-icon">👨‍👧‍👦</div>
+                    <div class="demand-label">남편의 주장</div>
+                    <p class="demand-text">
+                        "아이들은 이 집에서, 나와 함께 있어야 한다."
                     </p>
-                    <div class="party-demand">
-                        "1000억 인수. 통제권 없이는 단 한 푼도 없습니다."
-                    </div>
                 </div>
 
-                <div class="vs-divider">
-                    <div class="vs-badge">VS</div>
-                    <div class="vs-line"></div>
-                </div>
+                <div class="vs">VS</div>
 
-                <div class="party company-b">
-                    <div class="party-name">
-                        <span class="party-icon">🧬</span>
-                        바이오벤처 B
-                    </div>
-                    <p class="party-desc">
-                        세상을 바꿀 신약 기술을 개발한 혁신 기업.
-                        자식 같은 기술이 선반 위에서 먼지 쌓이는 것을 볼 수 없다.
+                <div class="demand-box">
+                    <div class="demand-icon">👩‍👧‍👦</div>
+                    <div class="demand-label">아내의 주장</div>
+                    <p class="demand-text">
+                        "아이들은 새집에서, 나와 함께 시작해야 한다."
                     </p>
-                    <div class="party-demand">
-                        "기술은 팔 수 없습니다. 독립성을 지켜야 합니다."
-                    </div>
                 </div>
             </div>
         </section>
@@ -765,152 +818,157 @@
         <section class="pivot">
             <div class="pivot-content">
                 <div class="pivot-icon">💡</div>
-                <h2 class="pivot-title">"왜 우리는 '사거나' '빌려주는'<br>두 개의 길만 보고 있습니까?"</h2>
+                <h2 class="pivot-title">
+                    질문을 바꾸자, 길이 보이다<br>
+                    "어떻게 하면 아이들이<br>이 집에 계속 머물게 할 수 있는가?"
+                </h2>
                 <p class="pivot-text">
-                    막다른 길에 부딪혔을 때, 그 길 위에서 싸우는 것이 아니라
-                    <strong>아예 새로운 지도를 그리는 방식</strong>이다.
-                    그것은 '누가 이길 것인가'의 판에서 '어떻게 함께 더 큰 것을 만들 것인가'의 판으로 옮겨가는
-                    장엄한 도약이다.
+                    <span class="highlight">아이들이 움직이는 것이 아니라, 부모가 움직인다</span>는 발상의 전환.
+                    판 위의 말을 움직이는 것이 아니라, 판 자체를 새로 짜는 것이다.
                 </p>
             </div>
         </section>
 
-        <!-- 구조 다이어그램 -->
-        <section class="structure">
+        <!-- 둥지형 양육 다이어그램 -->
+        <section class="nest-diagram">
             <div class="section-header">
-                <h2 class="section-title">대안적 구조: A + B → C</h2>
-                <p class="section-subtitle">새로운 법인 설립을 통한 창조적 해결</p>
+                <h2 class="section-title">둥지형 양육 (Bird's Nest Custody)</h2>
+                <p class="section-subtitle">아이들은 그대로, 부모가 교대로 이동하는 새로운 구조</p>
             </div>
 
-            <div class="structure-diagram">
-                <div class="transformation">
-                    <div class="entity">
-                        <div class="entity-icon">🏢</div>
-                        <div class="entity-name">A사</div>
-                        <p class="entity-label">글로벌 제약사</p>
-                        <div class="entity-contribution">
-                            <strong>투입 자원</strong>
-                            <ul>
-                                <li>1000억 원 자본</li>
-                                <li>글로벌 유통망</li>
-                                <li>임상시험 노하우</li>
-                                <li>규제 대응 역량</li>
-                            </ul>
+            <div class="diagram-container">
+                <!-- 중앙 둥지 -->
+                <div class="nest-center">
+                    <h3 class="nest-title">둥지 (The Nest)</h3>
+                    <p class="nest-desc">
+                        아이들이 살던 집. 아이들의 세계는 무엇 하나 바뀌지 않는다.
+                        방, 책상, 장난감, 친구, 학교 - 모든 것이 그대로.
+                    </p>
+                    <div class="nest-features">
+                        <div class="nest-feature">
+                            <span class="feature-icon">👧👦</span>
+                            <span>아이들은 항상 이곳에 머묾</span>
                         </div>
-                    </div>
-
-                    <div class="arrow">
-                        <div class="arrow-icon">+</div>
-                        <div class="arrow-label">통합</div>
-                    </div>
-
-                    <div class="entity company-b">
-                        <div class="entity-icon">🧬</div>
-                        <div class="entity-name">B사</div>
-                        <p class="entity-label">바이오벤처</p>
-                        <div class="entity-contribution">
-                            <strong>투입 자원</strong>
-                            <ul>
-                                <li>핵심 신약 기술</li>
-                                <li>연구팀 전원</li>
-                                <li>특허 포트폴리오</li>
-                                <li>혁신 DNA</li>
-                            </ul>
+                        <div class="nest-feature">
+                            <span class="feature-icon">🏫</span>
+                            <span>학교, 친구 관계 유지</span>
+                        </div>
+                        <div class="nest-feature">
+                            <span class="feature-icon">🛏️</span>
+                            <span>익숙한 방과 물건들</span>
+                        </div>
+                        <div class="nest-feature">
+                            <span class="feature-icon">💚</span>
+                            <span>정서적 안정성 극대화</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="arrow" style="margin: 32px auto;">
-                    <div class="arrow-icon">↓</div>
-                    <div class="arrow-label">창조</div>
-                </div>
+                <!-- 부모 순환 -->
+                <div class="parents-rotation">
+                    <div class="parent-space">
+                        <div class="parent-icon">👨</div>
+                        <div class="parent-label">아빠의 숙소</div>
+                        <p class="parent-desc">
+                            작은 원룸 또는 오피스텔<br>
+                            양육 주간이 아닐 때 머무는 공간
+                        </p>
+                    </div>
 
-                <div class="entity joint-venture">
-                    <div class="entity-icon">🏭</div>
-                    <div class="entity-name">조인트 벤처 C</div>
-                    <p class="entity-label">새로운 법인 (Joint Venture)</p>
+                    <div class="rotation-arrows">
+                        <div class="arrow-circle">⟳</div>
+                        <div class="arrow-label">일주일씩<br>교대로<br>둥지 입주</div>
+                    </div>
 
-                    <div class="jv-structure">
-                        <div class="jv-component">
-                            <div class="jv-component-icon">📊</div>
-                            <h3 class="jv-component-title">지분 구조</h3>
-                            <p class="jv-component-desc">
-                                A사 <span class="percentage">60%</span>,
-                                B사 <span class="percentage green">40%</span>
-                                <br><br>
-                                과반수 지분으로 A는 안정성 확보,
-                                B는 실질적 파트너십 유지
-                            </p>
-                        </div>
-
-                        <div class="jv-component">
-                            <div class="jv-component-icon">👥</div>
-                            <h3 class="jv-component-title">통제권</h3>
-                            <p class="jv-component-desc">
-                                이사회 5명 중 A가 과반수 선임
-                                <br><br>
-                                경영의 통제권을 A가 확보하여
-                                의사결정 효율성 보장
-                            </p>
-                        </div>
-
-                        <div class="jv-component">
-                            <div class="jv-component-icon">🔬</div>
-                            <h3 class="jv-component-title">기술 독립성</h3>
-                            <p class="jv-component-desc">
-                                R&D 위원회 별도 구성,
-                                B사 CTO에게 최종 비토권 부여
-                                <br><br>
-                                핵심 기술의 방향성은 B가 지킴
-                            </p>
-                        </div>
-
-                        <div class="jv-component">
-                            <div class="jv-component-icon">🎯</div>
-                            <h3 class="jv-component-title">Earn-out</h3>
-                            <p class="jv-component-desc">
-                                3년 내 FDA 2상 통과 시
-                                B사에 추가 지분 <span class="percentage green">5%</span> 무상 지급
-                                <br><br>
-                                성과 기반 인센티브로 동기 부여
-                            </p>
-                        </div>
+                    <div class="parent-space mom">
+                        <div class="parent-icon">👩</div>
+                        <div class="parent-label">엄마의 숙소</div>
+                        <p class="parent-desc">
+                            작은 원룸 또는 오피스텔<br>
+                            양육 주간이 아닐 때 머무는 공간
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 결과 비교 -->
-        <section class="results">
+        <!-- 3단계 프로세스 -->
+        <section class="process">
             <div class="section-header">
-                <h2 class="section-title">대안적 구조의 결과</h2>
+                <h2 class="section-title">둥지형 양육 3단계 설계</h2>
+                <p class="section-subtitle">구조를 만드는 구체적인 방법</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">둥지 유지</h3>
+                    </div>
+                    <p class="step-content">
+                        아이들은 지금 살고 있는 집에 계속 머문다.
+                        아이들의 방, 책상, 장난감, 그리고 친구 관계와 학교까지,
+                        아이들의 세계는 무엇 하나 바뀌지 않는다.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">부모 교대</h3>
+                    </div>
+                    <p class="step-content">
+                        부모가 일주일씩 교대로 '둥지'에 들어와 아이들을 돌본다.
+                        각자의 양육 주간이 아닐 때 머물 작은 거처를 따로 구한다.
+                        비싼 아파트일 필요 없이 근처 원룸이면 충분하다.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">명확한 규칙</h3>
+                    </div>
+                    <p class="step-content">
+                        공과금/관리비 분담 방식, 사생활 존중 범위, 새 이성 출입 금지 등
+                        명확한 시스템을 설계한다. 감정의 문제가 아닌
+                        아이들의 안정을 위한 명료한 협력 체계.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 비교 섹션 -->
+        <section class="comparison">
+            <div class="section-header">
+                <h2 class="section-title">둥지형 양육의 결과</h2>
                 <p class="section-subtitle">Before & After</p>
             </div>
 
-            <div class="results-grid">
-                <div class="result-card before">
-                    <span class="result-badge">BEFORE</span>
-                    <h3 class="result-title">교착의 1년</h3>
-                    <ul class="result-list">
-                        <li>'사느냐 마느냐' 양자택일</li>
-                        <li>A는 통제권 불안, B는 기술 상실 공포</li>
-                        <li>수십 번의 수정안, 모두 실패</li>
-                        <li>신뢰 소진, 관계 악화</li>
-                        <li>신약 기술은 특허 서류 속에서 잠듦</li>
-                        <li>환자들은 기회를 잃음</li>
+            <div class="comparison-grid">
+                <div class="comparison-card before">
+                    <span class="comparison-badge">BEFORE</span>
+                    <h3 class="comparison-title">전통적 공동양육</h3>
+                    <ul class="comparison-list">
+                        <li>아이들이 일주일마다 짐을 싸서 이동</li>
+                        <li>두 집 모두 아이 방 필요 → 비용 부담</li>
+                        <li>학교·학군 변경 불가피</li>
+                        <li>친구 관계 단절 위험</li>
+                        <li>아이들의 정서적 불안정</li>
+                        <li>소유권 다툼 지속</li>
                     </ul>
                 </div>
 
-                <div class="result-card after">
-                    <span class="result-badge">AFTER</span>
-                    <h3 class="result-title">새로운 구조의 탄생</h3>
-                    <ul class="result-list">
-                        <li>A: 60% 지분 + 통제권 확보</li>
-                        <li>B: 40% 지분 + 기술 독립성 유지</li>
-                        <li>1000억 투자 + 핵심 기술 결합</li>
-                        <li>적대자에서 동료로 전환</li>
-                        <li>성과 기반 Earn-out으로 동기 부여</li>
-                        <li>더 큰 케이크를 함께 만드는 파트너십</li>
+                <div class="comparison-card after">
+                    <span class="comparison-badge">AFTER</span>
+                    <h3 class="comparison-title">둥지형 양육</h3>
+                    <ul class="comparison-list">
+                        <li>아이들은 익숙한 집에서 계속 생활</li>
+                        <li>부모만 작은 숙소 필요 → 비용 절감</li>
+                        <li>학교·친구·일상 모두 유지</li>
+                        <li>정서적 안정성 극대화</li>
+                        <li>소유권 → 협력 체계로 전환</li>
+                        <li>2년 후 자연스럽게 전통 양육으로 전환</li>
                     </ul>
                 </div>
             </div>
@@ -919,32 +977,32 @@
         <!-- 원칙 가이드 -->
         <section class="principles">
             <div class="section-header">
-                <h2 class="section-title">'거래'가 아닌 '구조'를 보라</h2>
+                <h2 class="section-title">관습을 뒤집는 설계의 힘</h2>
                 <p class="section-subtitle">Alternative Structures 실천 가이드</p>
             </div>
 
             <div class="principles-container">
-                <div class="principle-box questions">
+                <div class="principle-box">
                     <h3 class="principle-title">
-                        <span class="principle-icon">❓</span>
-                        핵심 질문
+                        <span class="principle-icon">💡</span>
+                        핵심 원칙
                     </h3>
                     <ul class="principle-list">
-                        <li>우리가 당연하게 여기는 <span class="highlight">'A냐 B냐'의 틀</span> 자체를 의심해 본 적이 있는가?</li>
-                        <li>이 케이크를 나누는 대신, <span class="highlight">함께 더 큰 케이크를 만들 시스템</span>을 설계할 수 있는가?</li>
-                        <li>새로운 법인, 컨소시엄, 특수목적법인 등 <span class="highlight">제3의 구조</span>를 상상해 보았는가?</li>
+                        <li>"이혼하면 아이들이 두 집을 오가는 것이 당연하다"는 <strong>사회적 관습을 의심</strong>하라</li>
+                        <li>"누가 아이를 데려갈 것인가"가 아니라 <strong>"아이들의 안정을 어떻게 지킬 것인가"</strong>로 문제를 재정의하라</li>
+                        <li>소유권 다툼을 <strong>공동 목표를 위한 협력 시스템</strong>으로 전환하라</li>
                     </ul>
                 </div>
 
-                <div class="principle-box checklist">
+                <div class="principle-box questions">
                     <h3 class="principle-title">
-                        <span class="principle-icon">✓</span>
-                        적용 체크리스트
+                        <span class="principle-icon">❓</span>
+                        적용 질문
                     </h3>
                     <ul class="principle-list">
-                        <li>양측의 핵심 이익(통제권, 독립성 등)을 모두 만족시킬 수 있는 <span class="highlight">구조적 장치</span>를 고안했는가?</li>
-                        <li>지분, 권한, 의사결정, 이익 배분을 별도로 설계할 수 있음을 인지하고 있는가?</li>
-                        <li>성과 기반 인센티브(Earn-out 등)로 <span class="highlight">장기적 협력 동기</span>를 부여했는가?</li>
+                        <li>우리가 당연하게 여기는 <strong>'관습적 해결책'</strong>은 무엇인가?</li>
+                        <li>그 관습이 정말 우리의 <strong>진짜 목표(아이들의 안정)</strong>를 달성하는가?</li>
+                        <li>완전히 새로운 구조를 설계한다면 <strong>무엇이 가능</strong>한가?</li>
                     </ul>
                 </div>
             </div>
@@ -952,11 +1010,11 @@
 
         <!-- 푸터 -->
         <footer>
-            <p class="cta">판을 다시 짜는 일</p>
+            <p class="cta">둥지형 양육은 영원한 해법이 아니다</p>
             <p class="cta-desc">
-                그것은 기존의 이해관계를 나누는 '거래'를 넘어,<br>
-                더 큰 가치를 창출하는 새로운 '구조'를 설계하는 창조적 행위이다.<br>
-                당신의 협상 테이블은 어떠한가? 혹시 낡은 틀에 갇혀 있지는 않은가?
+                그러나 가장 격렬한 폭풍우가 치던 시기 동안,<br>
+                아이들의 연약한 세계를 지켜준 가장 단단한 방주였다.<br>
+                당신의 문제가 벽에 부딪혔을 때, 이 원칙은 새로운 길을 열어줄 수 있다.
             </p>
         </footer>
     </div>
