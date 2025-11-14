@@ -3,517 +3,693 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>교착을 돌파하는 ARISE 협상법</title>
     <style>
+        /* 한글 텍스트 최적화 - 필수 */
         * {
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #003E51;
+            --secondary: #00A4B4;
+            --accent: #E87722;
+            --light: #F4F4F4;
+            --text: #1A1A1A;
+            --white: #FFFFFF;
+        }
+
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+            background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+            color: var(--text);
+            line-height: 1.6;
             padding: 20px;
-            color: #333;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 62, 81, 0.12);
+            overflow: hidden;
         }
 
-        .header {
+        /* 헤더 섹션 */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 40px 24px;
             text-align: center;
-            margin-bottom: 35px;
             position: relative;
+            overflow: hidden;
         }
 
-        .header::after {
+        header::before {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
         }
 
-        .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
             letter-spacing: -0.5px;
         }
 
         .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
+            font-size: 1rem;
+            opacity: 0.95;
+            font-weight: 400;
             position: relative;
-            transition: all 0.3s ease;
+            z-index: 1;
         }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
+        /* 프로세스 흐름 */
+        .process-flow {
+            padding: 32px 24px;
+            background: var(--light);
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
-        }
-
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
+        .flow-title {
+            font-size: 1.25rem;
             font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
+            color: var(--primary);
+            margin-bottom: 24px;
             text-align: center;
+        }
+
+        .flow-steps {
+            display: grid;
+            gap: 16px;
+        }
+
+        .step {
+            background: var(--white);
+            border-left: 4px solid var(--secondary);
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
             position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .flow-step::after {
-            content: '→';
-            position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
-        }
-
-        .flow-step:last-child::after {
-            display: none;
+        .step:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 16px rgba(0, 164, 180, 0.15);
         }
 
         .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
+            position: absolute;
+            left: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary);
+            color: var(--white);
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
+            font-size: 0.875rem;
+            box-shadow: 0 2px 8px rgba(0, 164, 180, 0.3);
         }
 
         .step-title {
-            font-size: 13px;
             font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
         }
 
         .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
+        /* 빙산 모델 섹션 */
+        .iceberg-section {
+            padding: 48px 24px;
+            background: var(--white);
         }
 
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
         }
 
-        .priority-title {
-            font-size: 14px;
+        .section-subtitle {
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+
+        .iceberg-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 수면(교착의 표면) */
+        .surface {
+            background: linear-gradient(180deg, rgba(0, 164, 180, 0.1) 0%, rgba(0, 164, 180, 0.2) 100%);
+            border: 2px dashed var(--secondary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .surface::before {
+            content: '표면';
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: var(--white);
+            padding: 4px 12px;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
+            color: var(--secondary);
+            letter-spacing: 1px;
         }
 
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
-
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .fact-item {
+        .surface-content {
             text-align: center;
         }
 
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
-            display: block;
+        .surface-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
         }
 
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
+        .surface-desc {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* 수면선 */
+        .waterline {
+            position: relative;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--secondary) 50%, transparent 100%);
+            margin: 32px 0;
+        }
+
+        .waterline-label {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--white);
+            padding: 8px 20px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--secondary);
+            white-space: nowrap;
+            border: 2px solid var(--secondary);
+            border-radius: 20px;
+        }
+
+        /* 심층(다섯 가지 뿌리) */
+        .depth {
+            background: linear-gradient(180deg, var(--primary) 0%, #002a38 100%);
+            border-radius: 12px;
+            padding: 32px 24px;
+            position: relative;
+        }
+
+        .depth::before {
+            content: '심층';
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: var(--white);
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .depth-title {
+            color: var(--white);
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .roots {
+            display: grid;
+            gap: 16px;
+        }
+
+        .root {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .root:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 119, 34, 0.2);
+        }
+
+        .root-number {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.875rem;
+        }
+
+        .root-title {
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+            padding-right: 48px;
+        }
+
+        .root-desc {
+            color: var(--text);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* 적용 섹션 */
+        .application {
+            background: var(--light);
+            padding: 48px 24px;
+        }
+
+        .checklist {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        .check-category {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .check-category-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .check-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--secondary);
+            color: var(--white);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .check-list {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+        }
+
+        .check-item {
+            padding-left: 28px;
+            position: relative;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .check-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* 경고 섹션 */
+        .warnings {
+            max-width: 800px;
+            margin: 32px auto 0;
+            display: grid;
+            gap: 16px;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fff5f0 0%, var(--white) 100%);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .warning-title {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-icon {
+            font-size: 1.2rem;
+        }
+
+        .warning-desc {
+            color: var(--text);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* 푸터 */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 32px 24px;
+        }
+
+        .cta {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .cta-desc {
+            font-size: 0.95rem;
             opacity: 0.9;
         }
 
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
-        }
-
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .footer-highlight {
-            color: #1A2A57;
-            font-weight: 700;
-        }
-
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
+        /* 반응형 디자인 */
+        @media (min-width: 768px) {
+            body {
+                padding: 40px;
             }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
+
+            header {
+                padding: 60px 40px;
             }
-            
-            .strategy-flow {
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.15rem;
+            }
+
+            .process-flow {
+                padding: 48px 40px;
+            }
+
+            .flow-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            .step:nth-child(3) {
+                grid-column: 1 / -1;
+                max-width: 600px;
+                margin: 0 auto;
+                width: 100%;
+            }
+
+            .iceberg-section {
+                padding: 64px 40px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .roots {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .main-title {
-                font-size: 24px;
+
+            .root:nth-child(5) {
+                grid-column: 1 / -1;
+                max-width: 600px;
+                margin: 0 auto;
+                width: 100%;
             }
+
+            .application {
+                padding: 64px 40px;
+            }
+
+            .checklist {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .warnings {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .flow-steps {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .step:nth-child(3) {
+                grid-column: auto;
+                max-width: none;
+            }
+
+            .roots {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .root:nth-child(4),
+            .root:nth-child(5) {
+                grid-column: auto;
+            }
+
+            .root:nth-child(5) {
+                grid-column: 2 / 3;
+                max-width: none;
+            }
+        }
+
+        /* 접근성 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* 인터랙션 피드백 */
+        .step:active,
+        .root:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
-        </div>
+        <!-- 헤더 -->
+        <header>
+            <h1>교착을 돌파하는 ARISE 협상법</h1>
+            <p class="subtitle">문이 닫혔을 때, 우리는 판을 읽어야 한다</p>
+        </header>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
+        <!-- 프로세스 흐름 -->
+        <section class="process-flow">
+            <h2 class="flow-title">교착에서 돌파까지: 5단계 여정</h2>
+            <div class="flow-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">닫힌 문</div>
+                    <p class="step-desc">스타트업과 대기업의 M&A 협상. 합리적 요구들이 서로를 향한 칼날이 되다.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">교착의 심화</div>
+                    <p class="step-desc">반복되는 실패. 불신이 적대감으로, 소모전이 처절한 벽으로 굳어지다.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">제3의 대안</div>
+                    <p class="step-desc">"우리가 밀고 있는 이 벽은 무엇으로 만들어졌는가?" 상대가 아닌 판 자체를 해부하다.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">해결의 시작</div>
+                    <p class="step-desc">벽의 벽돌을 하나씩 빼내는 작업. 공동의 파이를 상상하고 신뢰를 회복하다.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-title">원칙의 적용</div>
+                    <p class="step-desc">모든 교착은 신호다. 당신의 협상 테이블을 진단하고 판을 다시 짜라.</p>
+                </div>
             </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
-        </div>
+        </section>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
+        <!-- 빙산 모델: 교착의 구조 -->
+        <section class="iceberg-section">
+            <h2 class="section-title">교착의 해부학</h2>
+            <p class="section-subtitle">표면의 증상 아래, 다섯 겹의 구조적 뿌리</p>
 
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
+            <div class="iceberg-container">
+                <!-- 표면: 증상 -->
+                <div class="surface">
+                    <div class="surface-content">
+                        <div class="surface-title">🚫 교착 (증상)</div>
+                        <p class="surface-desc">
+                            합의 불가능, 반복되는 실패, 깊어지는 적대감.<br>
+                            "우리는 더 이상 나아갈 수 없다."
+                        </p>
                     </div>
-                    <div class="section-title">보증보험 청구</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
+                <!-- 수면선 -->
+                <div class="waterline">
+                    <span class="waterline-label">수면 ─ 표면 아래를 보라</span>
+                </div>
+
+                <!-- 심층: 다섯 가지 뿌리 -->
+                <div class="depth">
+                    <h3 class="depth-title">교착을 만드는 다섯 가지 구조적 뿌리</h3>
+                    <div class="roots">
+                        <div class="root">
+                            <div class="root-number">1</div>
+                            <div class="root-title">제로섬 프레임</div>
+                            <p class="root-desc">한정된 파이 앞에서 칼을 든 자들. 한쪽이 얻으면 다른 쪽이 잃는다는 관념이 모든 가능성을 질식시킨다.</p>
+                        </div>
+                        <div class="root">
+                            <div class="root-number">2</div>
+                            <div class="root-title">입장의 고착</div>
+                            <p class="root-desc">최초의 입장이 자존심이 되다. 입장을 바꾸는 것은 패배를 인정하는 꼴. 내용은 사라지고 깃발만 남았다.</p>
+                        </div>
+                        <div class="root">
+                            <div class="root-number">3</div>
+                            <div class="root-title">신뢰의 결핍</div>
+                            <p class="root-desc">반복된 실패가 남긴 감정의 상처. 상대는 이제 파트너가 아니라 이겨야 할 적이다.</p>
+                        </div>
+                        <div class="root">
+                            <div class="root-number">4</div>
+                            <div class="root-title">복잡한 이해관계</div>
+                            <p class="root-desc">테이블에 앉은 사람은 소수, 하지만 뒤에는 투자자, 직원, 가족들. 보이지 않는 그림자들이 어깨를 짓누른다.</p>
+                        </div>
+                        <div class="root">
+                            <div class="root-number">5</div>
+                            <div class="root-title">문화의 충돌</div>
+                            <p class="root-desc">스타트업의 언어는 속도와 자율성, 대기업의 언어는 절차와 안정성. 같은 단어, 다른 세상.</p>
+                        </div>
                     </div>
-                    <div class="section-title">민사소송 & 가압류</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
+            </div>
+        </section>
+
+        <!-- 적용 가이드 -->
+        <section class="application">
+            <h2 class="section-title">당신의 교착을 진단하라</h2>
+            <p class="section-subtitle">구조를 이해하는 것이 모든 돌파의 시작이다</p>
+
+            <div class="checklist">
+                <div class="check-category">
+                    <h3 class="check-category-title">
+                        <span class="check-icon">?</span>
+                        핵심 질문
+                    </h3>
+                    <ul class="check-list">
+                        <li class="check-item">우리는 지금 하나의 파이를 나누고 있는가, 아니면 함께 더 큰 파이를 만들 수 있는가?</li>
+                        <li class="check-item">내가 고수하는 '입장' 뒤에 숨겨진 나의 진짜 욕구와 이익은 무엇인가?</li>
+                        <li class="check-item">과거의 실패 경험이 현재 우리의 판단을 얼마나 지배하고 있는가?</li>
+                    </ul>
+                </div>
+
+                <div class="check-category">
+                    <h3 class="check-category-title">
+                        <span class="check-icon">✓</span>
+                        적용 체크리스트
+                    </h3>
+                    <ul class="check-list">
+                        <li class="check-item">우리 논의가 단 하나의 쟁점(예: 가격)에만 갇혀 있지 않은가?</li>
+                        <li class="check-item">'절대 양보 못 해'라고 말하는 항목이 있는가? 그 이유는 무엇인가?</li>
+                        <li class="check-item">상대의 제안을 들을 때, 선의보다 악의를 먼저 가정하고 있지는 않은가?</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
+            <div class="warnings">
+                <div class="warning">
+                    <div class="warning-title">
+                        <span class="warning-icon">⚠️</span>
+                        분석을 위한 분석
                     </div>
-                    <div class="section-title">사해행위 취소</div>
+                    <p class="warning-desc">교착의 원인 분석이 상대를 비난할 무기가 되어서는 안 된다. 진단은 공동의 문제 해결을 위한 것이다. 분석이 비난으로 변질되는 순간, 해부는 부검이 된다.</p>
                 </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
+                <div class="warning">
+                    <div class="warning-title">
+                        <span class="warning-icon">⚠️</span>
+                        진단이 곧 해결이라는 착각
                     </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
+                    <p class="warning-desc">교착의 원인을 파악한 것은 위대한 첫걸음일 뿐, 해결책 그 자체는 아니다. 지도는 보물 그 자체가 아니다. 지도를 손에 쥐었다면, 이제 함께 길을 떠나야 한다.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
-
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
-        </div>
-
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
-        </div>
+        <!-- 푸터 CTA -->
+        <footer>
+            <p class="cta">모든 교착은 신호이다</p>
+            <p class="cta-desc">기존의 판이 수명을 다했으니 새로운 판을 짜라는 신호이다.</p>
+        </footer>
     </div>
 </body>
 </html>
