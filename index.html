@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>둥지는 그대로, 어른새가 날아오르다</title>
+    <title>동업 끝났다고 투자금 전액 반환? 법은 그렇게 작동하지 않는다</title>
     <style>
         /* 한글 텍스트 최적화 - 필수 */
         * {
@@ -16,18 +16,20 @@
         }
 
         :root {
-            --primary: #0051BA;
-            --secondary: #FFDB00;
-            --accent: #F39200;
-            --light: #E5E5E5;
+            --primary: #635BFF;
+            --secondary: #0A2540;
+            --accent: #00D4FF;
+            --success: #00D924;
+            --warning: #FF6B6B;
+            --light: #F6F9FC;
             --white: #FFFFFF;
-            --text: #111111;
-            --gray: #666666;
+            --text: #1A1F36;
+            --gray: #697386;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
-            background: linear-gradient(135deg, #f0f4ff 0%, var(--white) 100%);
+            background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
             color: var(--text);
             line-height: 1.7;
             padding: 16px;
@@ -39,47 +41,52 @@
             margin: 0 auto;
             background: var(--white);
             border-radius: 24px;
-            box-shadow: 0 10px 50px rgba(0, 81, 186, 0.08);
+            box-shadow: 0 20px 80px rgba(99, 91, 255, 0.1);
             overflow: hidden;
         }
 
         /* 헤더 */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, #003d8f 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: var(--white);
-            padding: 56px 32px;
+            padding: 64px 32px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        header::before,
-        header::after {
-            content: '🏠';
-            position: absolute;
-            font-size: 8rem;
-            opacity: 0.05;
-        }
-
         header::before {
+            content: '💼';
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.08;
             top: -30px;
-            left: -20px;
-            transform: rotate(-15deg);
+            left: -30px;
+            animation: float 6s ease-in-out infinite;
         }
 
         header::after {
-            bottom: -30px;
+            content: '⚖️';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.08;
+            bottom: -20px;
             right: -20px;
-            transform: rotate(15deg);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
         }
 
         h1 {
             font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 16px;
+            font-weight: 900;
+            margin-bottom: 20px;
             position: relative;
             z-index: 1;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
             line-height: 1.3;
         }
 
@@ -89,124 +96,107 @@
             font-weight: 400;
             position: relative;
             z-index: 1;
+            line-height: 1.6;
         }
 
-        /* 문제 상황 */
-        .problem {
-            padding: 56px 32px;
-            background: linear-gradient(180deg, var(--white) 0%, #fff9e6 100%);
+        /* 사례 소개 */
+        .case-intro {
+            padding: 64px 32px;
+            background: linear-gradient(180deg, var(--white) 0%, var(--light) 100%);
+        }
+
+        .case-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .case-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .person-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border: 3px solid var(--light);
+            transition: all 0.3s ease;
             text-align: center;
         }
 
-        .problem-icon {
-            font-size: 5rem;
-            margin-bottom: 24px;
-            animation: float 3s ease-in-out infinite;
+        .person-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(99, 91, 255, 0.15);
+            border-color: var(--primary);
         }
 
-        @keyframes float {
+        .person-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
 
-        .problem-title {
-            font-size: 1.9rem;
+        .person-label {
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .problem-text {
-            max-width: 800px;
-            margin: 0 auto 32px;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: var(--text);
-        }
-
-        .demands {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 24px;
-            align-items: center;
-        }
-
-        .demand-box {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 32px 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            border: 3px solid var(--light);
-            transition: all 0.3s ease;
-        }
-
-        .demand-box:hover {
-            transform: scale(1.03);
-            border-color: var(--accent);
-        }
-
-        .demand-icon {
-            font-size: 3rem;
             margin-bottom: 16px;
         }
 
-        .demand-label {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-
-        .demand-text {
-            font-size: 1rem;
+        .person-role {
+            font-size: 0.9rem;
             color: var(--gray);
-            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .vs {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ff3838 100%);
+        .person-desc {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .highlight-amount {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            margin: 4px 0;
+        }
+
+        .vs-divider {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--warning) 0%, #ff4757 100%);
             color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 1.3rem;
-            box-shadow: 0 4px 16px rgba(255, 56, 56, 0.3);
-        }
-
-        /* 전환점 */
-        .pivot {
-            padding: 64px 32px;
-            background: linear-gradient(135deg, var(--secondary) 0%, #ffd700 100%);
-            text-align: center;
-            position: relative;
-        }
-
-        .pivot::before {
-            content: '💡';
-            position: absolute;
-            font-size: 10rem;
-            opacity: 0.1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .pivot-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .pivot-icon {
-            font-size: 4.5rem;
-            margin-bottom: 24px;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 24px rgba(255, 107, 107, 0.3);
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -215,28 +205,8 @@
             50% { transform: scale(1.1); }
         }
 
-        .pivot-title {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .pivot-text {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: var(--text);
-        }
-
-        .highlight {
-            background: linear-gradient(180deg, transparent 60%, var(--accent) 60%);
-            padding: 2px 6px;
-            font-weight: 800;
-        }
-
-        /* 둥지형 양육 다이어그램 - 핵심 */
-        .nest-diagram {
+        /* 큰 비교 섹션 */
+        .comparison-main {
             padding: 72px 32px;
             background: var(--white);
         }
@@ -249,7 +219,7 @@
         .section-title {
             font-size: 2rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--secondary);
             margin-bottom: 12px;
         }
 
@@ -258,506 +228,568 @@
             color: var(--gray);
         }
 
-        .diagram-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        /* 중앙 둥지 */
-        .nest-center {
-            max-width: 450px;
-            margin: 0 auto 48px;
-            background: linear-gradient(135deg, #fff9e6 0%, var(--white) 100%);
-            border: 4px solid var(--secondary);
-            border-radius: 30px;
-            padding: 48px 40px;
-            text-align: center;
-            box-shadow: 0 12px 40px rgba(255, 219, 0, 0.2);
-            position: relative;
-        }
-
-        .nest-center::before {
-            content: '🏠';
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4rem;
-            background: var(--white);
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 16px rgba(255, 219, 0, 0.3);
-        }
-
-        .nest-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 16px;
-            margin-top: 24px;
-        }
-
-        .nest-desc {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: var(--text);
-            margin-bottom: 24px;
-        }
-
-        .nest-features {
-            display: grid;
-            gap: 12px;
-            text-align: left;
-        }
-
-        .nest-feature {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.95rem;
-            padding: 12px;
-            background: var(--white);
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .feature-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        /* 부모 순환 구조 */
-        .parents-rotation {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 32px;
-            align-items: center;
-        }
-
-        .parent-space {
-            background: linear-gradient(135deg, #f0f4ff 0%, var(--white) 100%);
-            border: 3px dashed var(--primary);
-            border-radius: 24px;
-            padding: 32px 24px;
-            text-align: center;
-            position: relative;
-        }
-
-        .parent-space.mom {
-            border-color: #ff6b9d;
-        }
-
-        .parent-icon {
-            font-size: 3.5rem;
-            margin-bottom: 16px;
-        }
-
-        .parent-label {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-
-        .parent-space.mom .parent-label {
-            color: #ff6b9d;
-        }
-
-        .parent-desc {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--gray);
-        }
-
-        .rotation-arrows {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .arrow-circle {
-            width: 80px;
-            height: 80px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--white);
-            font-weight: 800;
-            box-shadow: 0 4px 20px rgba(243, 146, 0, 0.3);
-            animation: rotate 3s linear infinite;
-        }
-
-        @keyframes rotate {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(180deg); }
-        }
-
-        .arrow-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--accent);
-            text-align: center;
-            line-height: 1.3;
-        }
-
-        /* 3단계 프로세스 */
-        .process {
-            padding: 64px 32px;
-            background: var(--light);
-        }
-
-        .process-steps {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            gap: 24px;
-        }
-
-        .step-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            border-left: 6px solid var(--primary);
-            transition: all 0.3s ease;
-        }
-
-        .step-card:nth-child(2) {
-            border-left-color: var(--secondary);
-        }
-
-        .step-card:nth-child(3) {
-            border-left-color: var(--accent);
-        }
-
-        .step-card:hover {
-            transform: translateX(8px);
-            box-shadow: 0 8px 32px rgba(0, 81, 186, 0.12);
-        }
-
-        .step-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .step-number {
-            width: 48px;
-            height: 48px;
-            background: var(--primary);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .step-card:nth-child(2) .step-number {
-            background: var(--secondary);
-            color: var(--text);
-        }
-
-        .step-card:nth-child(3) .step-number {
-            background: var(--accent);
-        }
-
-        .step-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text);
-        }
-
-        .step-content {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--gray);
-        }
-
-        /* 비교 섹션 */
-        .comparison {
-            padding: 64px 32px;
-            background: var(--white);
-        }
-
         .comparison-grid {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 32px;
+            gap: 40px;
         }
 
         .comparison-card {
             background: var(--white);
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border: 3px solid var(--light);
+            border-radius: 24px;
+            padding: 48px 40px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .comparison-card.before {
-            border-color: #ffcccb;
+        .comparison-card.wrong {
+            border: 4px solid var(--warning);
+            background: linear-gradient(135deg, #fff5f5 0%, var(--white) 100%);
         }
 
-        .comparison-card.after {
-            border-color: #b3e5b3;
-            background: linear-gradient(135deg, #f0fff0 0%, var(--white) 100%);
+        .comparison-card.right {
+            border: 4px solid var(--success);
+            background: linear-gradient(135deg, #f0fff4 0%, var(--white) 100%);
+        }
+
+        .comparison-card:hover {
+            transform: scale(1.03);
         }
 
         .comparison-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 24px;
-            font-size: 0.85rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 32px;
+            border-radius: 48px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
 
-        .before .comparison-badge {
-            background: #ff6b6b;
+        .wrong .comparison-badge {
+            background: linear-gradient(135deg, var(--warning) 0%, #ff4757 100%);
             color: var(--white);
         }
 
-        .after .comparison-badge {
-            background: #4caf50;
+        .right .comparison-badge {
+            background: linear-gradient(135deg, var(--success) 0%, #00b894 100%);
             color: var(--white);
+        }
+
+        .comparison-icon {
+            font-size: 4.5rem;
+            text-align: center;
+            margin: 32px 0 24px;
         }
 
         .comparison-title {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--text);
+            text-align: center;
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+
+        .wrong .comparison-title {
+            color: var(--warning);
+        }
+
+        .right .comparison-title {
+            color: var(--success);
         }
 
         .comparison-list {
             list-style: none;
             display: grid;
-            gap: 12px;
-        }
-
-        .comparison-list li {
-            padding-left: 36px;
-            position: relative;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .before .comparison-list li::before {
-            content: '😢';
-            position: absolute;
-            left: 0;
-            font-size: 1.5rem;
-        }
-
-        .after .comparison-list li::before {
-            content: '✨';
-            position: absolute;
-            left: 0;
-            font-size: 1.5rem;
-        }
-
-        /* 원칙 가이드 */
-        .principles {
-            padding: 64px 32px;
-            background: linear-gradient(135deg, #f0f4ff 0%, var(--light) 100%);
-        }
-
-        .principles-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            gap: 24px;
-        }
-
-        .principle-box {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            border-top: 6px solid var(--primary);
-        }
-
-        .principle-box.questions {
-            border-top-color: var(--accent);
-        }
-
-        .principle-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .principle-icon {
-            font-size: 2rem;
-        }
-
-        .principle-list {
-            list-style: none;
-            display: grid;
             gap: 16px;
         }
 
-        .principle-list li {
-            padding-left: 40px;
+        .comparison-list li {
+            padding-left: 44px;
             position: relative;
             font-size: 1rem;
             line-height: 1.7;
             color: var(--text);
         }
 
-        .principle-list li::before {
-            content: '→';
+        .wrong .comparison-list li::before {
+            content: '❌';
             position: absolute;
             left: 0;
-            color: var(--primary);
-            font-weight: 900;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
         }
 
-        .questions .principle-list li::before {
-            content: '?';
-            width: 28px;
-            height: 28px;
-            background: var(--accent);
+        .right .comparison-list li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+            font-size: 1.8rem;
+        }
+
+        /* 법리 해설 */
+        .legal-explanation {
+            padding: 72px 32px;
+            background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+        }
+
+        .legal-box {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 48px 40px;
+            box-shadow: 0 12px 48px rgba(10, 37, 64, 0.1);
+            border-left: 8px solid var(--secondary);
+        }
+
+        .legal-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .legal-icon {
+            font-size: 2.5rem;
+        }
+
+        .legal-content {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text);
+        }
+
+        .legal-highlight {
+            background: linear-gradient(180deg, transparent 60%, var(--accent) 60%);
+            padding: 2px 6px;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .court-case {
+            margin-top: 24px;
+            padding: 24px;
+            background: var(--light);
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .court-label {
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 프로세스 */
+        .process {
+            padding: 72px 32px;
+            background: var(--white);
+        }
+
+        .process-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: grid;
+            gap: 0;
+            position: relative;
+        }
+
+        .step-card {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 32px;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:not(:last-child)::after {
+            content: '⬇️';
+            position: absolute;
+            bottom: -32px;
+            left: 60px;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            z-index: 2;
+            animation: bounce-down 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce-down {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        .step-card:hover {
+            background: var(--light);
+            transform: translateX(8px);
+        }
+
+        .step-number-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-weight: 900;
+            font-size: 2rem;
+            box-shadow: 0 8px 24px rgba(99, 91, 255, 0.3);
+        }
+
+        .step-icon {
+            font-size: 2rem;
+        }
+
+        .step-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .step-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .step-desc {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        /* 금액 비교 */
+        .amount-comparison {
+            padding: 72px 32px;
+            background: linear-gradient(135deg, #fff9f0 0%, var(--white) 100%);
+        }
+
+        .amount-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .amount-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 48px 32px;
+            text-align: center;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .amount-card.wrong-amount {
+            border: 4px solid var(--warning);
+        }
+
+        .amount-card.right-amount {
+            border: 4px solid var(--success);
+        }
+
+        .amount-card:hover {
+            transform: scale(1.05);
+        }
+
+        .amount-label {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding: 8px 20px;
+            border-radius: 24px;
+            display: inline-block;
+        }
+
+        .wrong-amount .amount-label {
+            background: var(--warning);
+            color: var(--white);
+        }
+
+        .right-amount .amount-label {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .amount-value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        .wrong-amount .amount-value {
+            color: var(--warning);
+        }
+
+        .right-amount .amount-value {
+            color: var(--success);
+        }
+
+        .amount-desc {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--gray);
+        }
+
+        .arrow-divider {
+            font-size: 4rem;
+            color: var(--secondary);
+            animation: slide-right 1.5s ease-in-out infinite;
+        }
+
+        @keyframes slide-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* 실무 팁 */
+        .tips {
+            padding: 72px 32px;
+            background: var(--white);
+        }
+
+        .tips-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            gap: 32px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            border-left: 6px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:nth-child(2) {
+            border-left-color: var(--accent);
+        }
+
+        .tip-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 12px 48px rgba(99, 91, 255, 0.15);
+        }
+
+        .tip-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .tip-icon {
+            font-size: 2.5rem;
+        }
+
+        .tip-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .tip-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 72px 32px;
+            background: var(--light);
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            gap: 24px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 32px 36px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 8px 32px rgba(99, 91, 255, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .faq-q {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .faq-q::before {
+            content: 'Q';
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .faq-a {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text);
+            padding-left: 48px;
         }
 
         /* 푸터 */
         footer {
-            background: linear-gradient(135deg, var(--primary) 0%, #003d8f 100%);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
             color: var(--white);
             text-align: center;
-            padding: 56px 32px;
+            padding: 64px 32px;
             position: relative;
+            overflow: hidden;
         }
 
         footer::before {
-            content: '🕊️';
+            content: '📋';
             position: absolute;
-            font-size: 6rem;
-            opacity: 0.1;
+            font-size: 8rem;
+            opacity: 0.08;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
         .cta {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 800;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             line-height: 1.4;
             position: relative;
             z-index: 1;
         }
 
         .cta-desc {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             opacity: 0.95;
-            line-height: 1.6;
-            max-width: 700px;
+            line-height: 1.7;
+            max-width: 800px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
         }
 
-        /* 반응형 디자인 */
+        /* 반응형 */
         @media (min-width: 768px) {
             body {
                 padding: 32px;
             }
 
             header {
-                padding: 80px 48px;
+                padding: 96px 48px;
             }
 
             h1 {
-                font-size: 3rem;
+                font-size: 3.2rem;
             }
 
-            .problem {
-                padding: 72px 48px;
-            }
-
-            .nest-diagram {
+            .case-intro,
+            .comparison-main,
+            .legal-explanation,
+            .process,
+            .amount-comparison,
+            .tips,
+            .faq {
                 padding: 88px 48px;
             }
 
-            .process {
-                padding: 80px 48px;
-            }
-
-            .process-steps {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .comparison {
-                padding: 80px 48px;
-            }
-
-            .principles {
-                padding: 80px 48px;
-            }
-
-            .principles-container {
+            .tips-container {
                 grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
             }
         }
 
         @media (max-width: 767px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.9rem;
             }
 
-            .demands {
+            .case-grid {
                 grid-template-columns: 1fr;
             }
 
-            .vs {
+            .vs-divider {
                 transform: rotate(90deg);
-                margin: 16px auto;
+                margin: 20px auto;
             }
 
-            .parents-rotation {
+            .amount-grid {
                 grid-template-columns: 1fr;
             }
 
-            .rotation-arrows {
-                flex-direction: row;
-                margin: 16px 0;
-            }
-
-            .arrow-circle {
+            .arrow-divider {
                 transform: rotate(90deg);
+                margin: 20px auto;
             }
 
-            .comparison-grid {
+            .step-card {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .step-card:not(:last-child)::after {
+                left: 50%;
             }
         }
 
@@ -770,9 +802,11 @@
         }
 
         /* 인터랙션 */
-        .demand-box:active,
-        .step-card:active {
-            transform: scale(0.97);
+        .person-card:active,
+        .comparison-card:active,
+        .step-card:active,
+        .tip-card:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
@@ -780,241 +814,291 @@
     <div class="container">
         <!-- 헤더 -->
         <header>
-            <h1>둥지는 그대로,<br>어른새가 날아오르다</h1>
-            <p class="subtitle">교착을 돌파하는 ARISE 협상법: 둥지형 양육 (Bird's Nest Custody)</p>
+            <h1>동업 끝났다고<br>투자금 전액 반환?<br>법은 그렇게 작동하지 않는다</h1>
+            <p class="subtitle">
+                조합계약은 일반 계약과 다르다.<br>
+                '해제'가 아닌 '탈퇴→청산→지분계산'만이 유일한 길이다.
+            </p>
         </header>
 
-        <!-- 문제 상황 -->
-        <section class="problem">
-            <div class="problem-icon">💔</div>
-            <h2 class="problem-title">교착: 누가 아이들을 데려갈 것인가</h2>
-            <p class="problem-text">
-                집은 하나, 아이는 둘. 이혼 후 양육권을 둘러싼 처절한 싸움.
-                아이들의 삶 전체를 뒤흔들지 않고는 어느 누구도 만족할 수 없는 막다른 길.
-            </p>
+        <!-- 사례 소개 -->
+        <section class="case-intro">
+            <h2 class="case-title">
+                <span>💼</span>
+                <span>동업 실패의 전형적 시나리오</span>
+            </h2>
 
-            <div class="demands">
-                <div class="demand-box">
-                    <div class="demand-icon">👨‍👧‍👦</div>
-                    <div class="demand-label">남편의 주장</div>
-                    <p class="demand-text">
-                        "아이들은 이 집에서, 나와 함께 있어야 한다."
+            <div class="case-grid">
+                <div class="person-card">
+                    <div class="person-icon">👨‍💼</div>
+                    <div class="person-label">박대표</div>
+                    <div class="person-role">기술 개발 & 운영</div>
+                    <p class="person-desc">
+                        혁신적인 아이디어와 기술력 보유.<br>
+                        하지만 자금 부족으로 친구에게 손을 벌렸다.<br>
+                        2년 후 사업 실패, 남은 자산은 <span class="highlight-amount">2억 원</span>뿐.
                     </p>
                 </div>
 
-                <div class="vs">VS</div>
+                <div class="vs-divider">VS</div>
 
-                <div class="demand-box">
-                    <div class="demand-icon">👩‍👧‍👦</div>
-                    <div class="demand-label">아내의 주장</div>
-                    <p class="demand-text">
-                        "아이들은 새집에서, 나와 함께 시작해야 한다."
+                <div class="person-card">
+                    <div class="person-icon">👔</div>
+                    <div class="person-label">김이사</div>
+                    <div class="person-role">투자자 & 재무</div>
+                    <p class="person-desc">
+                        친구를 믿고 <span class="highlight-amount">5억 원</span> 투자.<br>
+                        사업 실패 후 "계약 해제하고 5억 전액 돌려달라" 요구.<br>
+                        "안 주면 사기죄로 고소한다"며 협박.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- 전환점 -->
-        <section class="pivot">
-            <div class="pivot-content">
-                <div class="pivot-icon">💡</div>
-                <h2 class="pivot-title">
-                    질문을 바꾸자, 길이 보이다<br>
-                    "어떻게 하면 아이들이<br>이 집에 계속 머물게 할 수 있는가?"
-                </h2>
-                <p class="pivot-text">
-                    <span class="highlight">아이들이 움직이는 것이 아니라, 부모가 움직인다</span>는 발상의 전환.
-                    판 위의 말을 움직이는 것이 아니라, 판 자체를 새로 짜는 것이다.
-                </p>
-            </div>
-        </section>
-
-        <!-- 둥지형 양육 다이어그램 -->
-        <section class="nest-diagram">
+        <!-- 큰 비교 섹션 -->
+        <section class="comparison-main">
             <div class="section-header">
-                <h2 class="section-title">둥지형 양육 (Bird's Nest Custody)</h2>
-                <p class="section-subtitle">아이들은 그대로, 부모가 교대로 이동하는 새로운 구조</p>
-            </div>
-
-            <div class="diagram-container">
-                <!-- 중앙 둥지 -->
-                <div class="nest-center">
-                    <h3 class="nest-title">둥지 (The Nest)</h3>
-                    <p class="nest-desc">
-                        아이들이 살던 집. 아이들의 세계는 무엇 하나 바뀌지 않는다.
-                        방, 책상, 장난감, 친구, 학교 - 모든 것이 그대로.
-                    </p>
-                    <div class="nest-features">
-                        <div class="nest-feature">
-                            <span class="feature-icon">👧👦</span>
-                            <span>아이들은 항상 이곳에 머묾</span>
-                        </div>
-                        <div class="nest-feature">
-                            <span class="feature-icon">🏫</span>
-                            <span>학교, 친구 관계 유지</span>
-                        </div>
-                        <div class="nest-feature">
-                            <span class="feature-icon">🛏️</span>
-                            <span>익숙한 방과 물건들</span>
-                        </div>
-                        <div class="nest-feature">
-                            <span class="feature-icon">💚</span>
-                            <span>정서적 안정성 극대화</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 부모 순환 -->
-                <div class="parents-rotation">
-                    <div class="parent-space">
-                        <div class="parent-icon">👨</div>
-                        <div class="parent-label">아빠의 숙소</div>
-                        <p class="parent-desc">
-                            작은 원룸 또는 오피스텔<br>
-                            양육 주간이 아닐 때 머무는 공간
-                        </p>
-                    </div>
-
-                    <div class="rotation-arrows">
-                        <div class="arrow-circle">⟳</div>
-                        <div class="arrow-label">일주일씩<br>교대로<br>둥지 입주</div>
-                    </div>
-
-                    <div class="parent-space mom">
-                        <div class="parent-icon">👩</div>
-                        <div class="parent-label">엄마의 숙소</div>
-                        <p class="parent-desc">
-                            작은 원룸 또는 오피스텔<br>
-                            양육 주간이 아닐 때 머무는 공간
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3단계 프로세스 -->
-        <section class="process">
-            <div class="section-header">
-                <h2 class="section-title">둥지형 양육 3단계 설계</h2>
-                <p class="section-subtitle">구조를 만드는 구체적인 방법</p>
-            </div>
-
-            <div class="process-steps">
-                <div class="step-card">
-                    <div class="step-header">
-                        <div class="step-number">1</div>
-                        <h3 class="step-title">둥지 유지</h3>
-                    </div>
-                    <p class="step-content">
-                        아이들은 지금 살고 있는 집에 계속 머문다.
-                        아이들의 방, 책상, 장난감, 그리고 친구 관계와 학교까지,
-                        아이들의 세계는 무엇 하나 바뀌지 않는다.
-                    </p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-header">
-                        <div class="step-number">2</div>
-                        <h3 class="step-title">부모 교대</h3>
-                    </div>
-                    <p class="step-content">
-                        부모가 일주일씩 교대로 '둥지'에 들어와 아이들을 돌본다.
-                        각자의 양육 주간이 아닐 때 머물 작은 거처를 따로 구한다.
-                        비싼 아파트일 필요 없이 근처 원룸이면 충분하다.
-                    </p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-header">
-                        <div class="step-number">3</div>
-                        <h3 class="step-title">명확한 규칙</h3>
-                    </div>
-                    <p class="step-content">
-                        공과금/관리비 분담 방식, 사생활 존중 범위, 새 이성 출입 금지 등
-                        명확한 시스템을 설계한다. 감정의 문제가 아닌
-                        아이들의 안정을 위한 명료한 협력 체계.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 비교 섹션 -->
-        <section class="comparison">
-            <div class="section-header">
-                <h2 class="section-title">둥지형 양육의 결과</h2>
-                <p class="section-subtitle">Before & After</p>
+                <h2 class="section-title">김이사의 착각 vs 법의 현실</h2>
+                <p class="section-subtitle">동업계약(조합계약)은 일반 계약과 완전히 다르다</p>
             </div>
 
             <div class="comparison-grid">
-                <div class="comparison-card before">
-                    <span class="comparison-badge">BEFORE</span>
-                    <h3 class="comparison-title">전통적 공동양육</h3>
+                <div class="comparison-card wrong">
+                    <div class="comparison-badge">❌ 잘못된 생각</div>
+                    <div class="comparison-icon">🚫</div>
+                    <h3 class="comparison-title">계약 해제하고<br>투자금 전액 돌려받는다</h3>
                     <ul class="comparison-list">
-                        <li>아이들이 일주일마다 짐을 싸서 이동</li>
-                        <li>두 집 모두 아이 방 필요 → 비용 부담</li>
-                        <li>학교·학군 변경 불가피</li>
-                        <li>친구 관계 단절 위험</li>
-                        <li>아이들의 정서적 불안정</li>
-                        <li>소유권 다툼 지속</li>
+                        <li>일반 계약처럼 '계약 해제' 주장</li>
+                        <li>원상회복으로 투자한 5억 원 전액 반환 요구</li>
+                        <li>"사기죄로 고소하겠다"며 협박</li>
+                        <li>감정적 대응으로 관계 악화</li>
+                        <li>법적 근거 없는 요구로 시간 낭비</li>
                     </ul>
                 </div>
 
-                <div class="comparison-card after">
-                    <span class="comparison-badge">AFTER</span>
-                    <h3 class="comparison-title">둥지형 양육</h3>
+                <div class="comparison-card right">
+                    <div class="comparison-badge">✅ 올바른 방법</div>
+                    <div class="comparison-icon">⚖️</div>
+                    <h3 class="comparison-title">탈퇴 후 청산으로<br>지분만큼만 정산받는다</h3>
                     <ul class="comparison-list">
-                        <li>아이들은 익숙한 집에서 계속 생활</li>
-                        <li>부모만 작은 숙소 필요 → 비용 절감</li>
-                        <li>학교·친구·일상 모두 유지</li>
-                        <li>정서적 안정성 극대화</li>
-                        <li>소유권 → 협력 체계로 전환</li>
-                        <li>2년 후 자연스럽게 전통 양육으로 전환</li>
+                        <li>조합에서 '탈퇴' 통보 (민법 제716조)</li>
+                        <li>탈퇴 시점의 남은 재산(2억) 기준 정산</li>
+                        <li>지분 비율에 따라 금액 계산</li>
+                        <li>감정이 아닌 법리로 대화 주도</li>
+                        <li>명확한 절차로 분쟁 최소화</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- 원칙 가이드 -->
-        <section class="principles">
+        <!-- 법리 해설 -->
+        <section class="legal-explanation">
             <div class="section-header">
-                <h2 class="section-title">관습을 뒤집는 설계의 힘</h2>
-                <p class="section-subtitle">Alternative Structures 실천 가이드</p>
+                <h2 class="section-title">왜 계약 해제가 안 되는가?</h2>
+                <p class="section-subtitle">조합계약의 특수성</p>
             </div>
 
-            <div class="principles-container">
-                <div class="principle-box">
-                    <h3 class="principle-title">
-                        <span class="principle-icon">💡</span>
-                        핵심 원칙
-                    </h3>
-                    <ul class="principle-list">
-                        <li>"이혼하면 아이들이 두 집을 오가는 것이 당연하다"는 <strong>사회적 관습을 의심</strong>하라</li>
-                        <li>"누가 아이를 데려갈 것인가"가 아니라 <strong>"아이들의 안정을 어떻게 지킬 것인가"</strong>로 문제를 재정의하라</li>
-                        <li>소유권 다툼을 <strong>공동 목표를 위한 협력 시스템</strong>으로 전환하라</li>
-                    </ul>
+            <div class="legal-box">
+                <h3 class="legal-title">
+                    <span class="legal-icon">⚖️</span>
+                    <span>민법상 조합계약의 핵심 법리</span>
+                </h3>
+                <div class="legal-content">
+                    <p>
+                        동업계약은 민법상 <span class="legal-highlight">'조합계약'</span>에 해당한다 (민법 제703조).
+                        조합계약이란 2인 이상이 상호 출자하여 공동사업을 경영할 것을 약정하는 계약이다.
+                    </p>
+                    <p style="margin-top: 20px;">
+                        가장 중요한 점은, 조합계약은 그 특수성 때문에
+                        <span class="legal-highlight">일반적인 계약법의 '해제' 규정이 적용되지 않는다</span>는 것이다.
+                        조합원은 탈퇴·제명·해산을 할 수 있을 뿐, 계약 해제로 원상회복을 요구할 수 없다.
+                    </p>
+                    <div class="court-case">
+                        <div class="court-label">
+                            <span>📜</span>
+                            <span>대법원 판례 (1962. 8. 2. 선고 4294민상1606 판결)</span>
+                        </div>
+                        <p>
+                            "조합계약에 있어서는 조합의 해산청구를 하거나 탈퇴를 하거나 다른 조합원을 제명할 수 있을 뿐이고,
+                            계약해제에 관한 계약법 총칙 규정에 의하여 조합계약을 해제하고 상대편에게
+                            원상회복의 의무를 부담시킬 수 없다."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 프로세스 -->
+        <section class="process">
+            <div class="section-header">
+                <h2 class="section-title">그렇다면 어떻게 동업을 끝내는가?</h2>
+                <p class="section-subtitle">탈퇴 → 청산 → 지분계산의 3단계 절차</p>
+            </div>
+
+            <div class="process-container">
+                <div class="process-steps">
+                    <div class="step-card">
+                        <div class="step-number-box">
+                            <div class="step-number">1</div>
+                            <div class="step-icon">🚪</div>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="step-title">조합 탈퇴 (민법 제716조)</h3>
+                            <p class="step-desc">
+                                김이사는 조합에서 '탈퇴'할 수 있다. 조합 기간을 정하지 않았거나,
+                                조합원의 종신까지로 정한 경우에는 각 조합원이 언제든지 탈퇴할 수 있다.
+                                '계약 해제'가 아닌 '탈퇴'가 법적으로 올바른 용어이자 절차이다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number-box">
+                            <div class="step-number">2</div>
+                            <div class="step-icon">📊</div>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="step-title">청산 절차</h3>
+                            <p class="step-desc">
+                                조합원이 탈퇴하면 남은 조합원들과 재산을 정산하게 된다.
+                                이를 '지분 계산'이라고 한다 (민법 제719조).
+                                청산은 탈퇴 당시 조합에 남아있는 재산을 기준으로 이루어진다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number-box">
+                            <div class="step-number">3</div>
+                            <div class="step-icon">💰</div>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="step-title">지분 계산 (민법 제719조)</h3>
+                            <p class="step-desc">
+                                김이사가 돌려받을 수 있는 금액은 최초 투자금 5억 원이 아니라,
+                                탈퇴 시점에 남아있는 회사 자산 2억 원을 기준으로 자신의 지분만큼만 정산받는다.
+                                출자 비율이 50:50이라면, 김이사는 1억 원만 받을 수 있다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 금액 비교 -->
+        <section class="amount-comparison">
+            <div class="section-header">
+                <h2 class="section-title">투자금 vs 지분 정산금</h2>
+                <p class="section-subtitle">김이사가 받을 수 있는 금액의 현실</p>
+            </div>
+
+            <div class="amount-grid">
+                <div class="amount-card wrong-amount">
+                    <div class="amount-label">❌ 요구 금액</div>
+                    <div class="amount-value">5억 원</div>
+                    <p class="amount-desc">
+                        최초 투자금 전액.<br>
+                        법적으로 불가능한 요구.
+                    </p>
                 </div>
 
-                <div class="principle-box questions">
-                    <h3 class="principle-title">
-                        <span class="principle-icon">❓</span>
-                        적용 질문
-                    </h3>
-                    <ul class="principle-list">
-                        <li>우리가 당연하게 여기는 <strong>'관습적 해결책'</strong>은 무엇인가?</li>
-                        <li>그 관습이 정말 우리의 <strong>진짜 목표(아이들의 안정)</strong>를 달성하는가?</li>
-                        <li>완전히 새로운 구조를 설계한다면 <strong>무엇이 가능</strong>한가?</li>
-                    </ul>
+                <div class="arrow-divider">→</div>
+
+                <div class="amount-card right-amount">
+                    <div class="amount-label">✅ 실제 정산금</div>
+                    <div class="amount-value">1억 원</div>
+                    <p class="amount-desc">
+                        남은 자산 2억 × 지분 50%.<br>
+                        법적으로 타당한 금액.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 실무 팁 -->
+        <section class="tips">
+            <div class="section-header">
+                <h2 class="section-title">동업 시작 전 반드시 알아야 할 것</h2>
+                <p class="section-subtitle">사전 예방이 최선의 전략</p>
+            </div>
+
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon">📋</div>
+                        <h3 class="tip-title">동업계약서 구체적 작성</h3>
+                    </div>
+                    <div class="tip-content">
+                        <p>
+                            <strong>출자의 종류와 가액</strong>, <strong>손익분배 비율</strong>,
+                            <strong>업무집행 권한과 책임</strong>, 그리고 가장 중요한
+                            <strong>탈퇴·제명·해산 시 정산 방법</strong>을 명확히 규정해야 한다.
+                            특히 '사업 실패 시 청산 방법'과 '잔여재산 분배 방식'에 대해
+                            구체적인 시나리오를 상정하여 합의해두는 것이 최선이다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon">🏢</div>
+                        <h3 class="tip-title">재산 귀속 관계 명확화</h3>
+                    </div>
+                    <div class="tip-content">
+                        <p>
+                            동업을 위해 출자된 재산은 동업자들의 공동 소유인 <strong>'합유'</strong>가 된다.
+                            만약 부동산 등을 출자했다면, 개인 명의가 아닌 조합 명의로 등기하는 등
+                            재산 귀속 관계를 명확히 해야 한다. 단순히 동업계약을 체결했다는 사실만으로
+                            소유권이 자동으로 조합에 넘어오는 것은 아니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq">
+            <div class="section-header">
+                <h2 class="section-title">자주 묻는 질문</h2>
+                <p class="section-subtitle">동업계약 분쟁 FAQ</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-q">
+                        한 명은 돈을, 다른 한 명은 노동력을 출자했는데, 손실이 나면 노동력을 출자한 사람도 책임을 져야 하는가?
+                    </div>
+                    <div class="faq-a">
+                        그렇다. 노동력 역시 민법상 유효한 출자로 인정된다. 따라서 동업계약서에 손실 부담에 대한
+                        특별한 약정이 없다면, 출자 가액에 비례하여 손실을 부담하는 것이 원칙이다.
+                        만약 지분 비율을 정하지 않았다면 균등한 것으로 추정되므로,
+                        노동력을 출자한 동업자도 사업 실패에 대한 책임을 면할 수 없다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">
+                        동업자가 동업 자금을 마음대로 사용했다면 어떻게 해야 하는가?
+                    </div>
+                    <div class="faq-a">
+                        동업체의 재산은 동업자 전원의 합의에 따라 관리되어야 한다.
+                        만약 한 동업자가 다른 동업자들의 동의 없이 임의로 동업 자금을 개인적인 용도로 사용했다면,
+                        이는 <strong>업무상 횡령죄</strong>에 해당할 수 있다. 형사고소와는 별개로,
+                        민사적으로는 해당 금원의 반환을 청구할 수 있고, 이는 중대한 신뢰 파괴 행위이므로
+                        그 동업자를 '제명'하거나 조합 '해산'을 청구할 사유가 될 수 있다.
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- 푸터 -->
         <footer>
-            <p class="cta">둥지형 양육은 영원한 해법이 아니다</p>
+            <p class="cta">동업 시작 전, 반드시 계약서를 쓰라</p>
             <p class="cta-desc">
-                그러나 가장 격렬한 폭풍우가 치던 시기 동안,<br>
-                아이들의 연약한 세계를 지켜준 가장 단단한 방주였다.<br>
-                당신의 문제가 벽에 부딪혔을 때, 이 원칙은 새로운 길을 열어줄 수 있다.
+                동업은 사랑이 아니다. 명확한 합의와 구체적인 규칙이 필요한 법률관계다.<br>
+                출자 비율, 손익 분배, 탈퇴 시 청산 방법을 명확히 정하지 않으면,<br>
+                사업 실패보다 더 큰 고통은 동업자와의 법적 분쟁이 될 것이다.<br><br>
+                <strong>함부로 시작한 동업은, 함부로 끝낼 수 없다.</strong>
             </p>
         </footer>
     </div>
