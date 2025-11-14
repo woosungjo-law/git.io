@@ -3,10 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>을의 생존 협상법 - 규범이라는 레버리지</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Pretendard:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-purple: #635BFF;
+            --primary-blue: #0A2540;
+            --accent-cyan: #00D4FF;
+            --neutral-dark: #1A1F36;
+            --neutral-light: #F7FAFC;
+            --warning-red: #FF5C5C;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,506 +22,755 @@
         }
 
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(180deg, var(--neutral-light) 0%, #E8EDF2 100%);
+            color: var(--neutral-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 480px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
+            background: white;
+            min-height: 100vh;
             position: relative;
         }
 
-        .header::after {
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
+            padding: 50px 30px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.1);
+            top: -100px;
+            right: -100px;
         }
 
-        .main-title {
+        .hero-label {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-title {
             font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            color: white;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
         }
 
-        .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
+        .hero-subtitle {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 30px;
+        }
+
+        .chess-illustration {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .chess-piece {
+            text-align: center;
+        }
+
+        .chess-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+        }
+
+        .chess-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
             font-weight: 500;
         }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
+        .vs-symbol {
+            position: absolute;
+            left: 50%;
+            top: 25%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
+        /* Wavy Path */
+        .wavy-path {
+            height: 60px;
+            background: white;
             position: relative;
-            transition: all 0.3s ease;
         }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
+        .wavy-path svg {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 62px;
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
+        /* Content Sections */
+        .section {
+            padding: 40px 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
 
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-cyan));
             color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
             font-size: 16px;
+            margin-bottom: 12px;
         }
 
         .section-title {
             font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            line-height: 1.3;
         }
 
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
+        .section-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 16px;
         }
 
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+        .highlight-box {
+            background: rgba(99, 91, 255, 0.08);
+            border-left: 4px solid var(--primary-purple);
+            padding: 20px;
             margin: 25px 0;
-        }
-
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
             border-radius: 8px;
-            padding: 15px;
-            text-align: center;
             position: relative;
         }
 
-        .flow-step::after {
-            content: '→';
+        .highlight-box::before {
+            content: '"';
             position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
+            top: 10px;
+            left: 10px;
+            font-size: 48px;
+            color: var(--primary-purple);
+            opacity: 0.2;
+            font-family: Georgia, serif;
         }
 
-        .flow-step:last-child::after {
-            display: none;
+        .highlight-text {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
         }
 
-        .step-number {
+        /* Hand-drawn Frame */
+        .hand-frame {
+            border: 3px solid var(--primary-blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            position: relative;
+            background: white;
+            box-shadow: 4px 4px 0 rgba(10, 37, 64, 0.1);
+        }
+
+        .hand-frame::before {
+            content: '✓';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--accent-cyan);
+            color: white;
             width: 30px;
             height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
+            font-weight: 900;
         }
 
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
-
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .priority-grid {
+        /* Weapons Grid */
+        .weapons-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
+            gap: 20px;
+            margin: 30px 0;
         }
 
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
+        .weapon-card {
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
+        .weapon-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent-cyan));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .weapon-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .weapon-card:hover {
+            border-color: var(--primary-purple);
+            box-shadow: 0 8px 24px rgba(99, 91, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .weapon-header {
             display: flex;
             align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
-        .priority-icon {
-            margin-right: 8px;
+        .weapon-icon {
+            font-size: 32px;
+        }
+
+        .weapon-title {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        .weapon-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #4B5563;
+        }
+
+        .weapon-example {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #E5E7EB;
             font-size: 14px;
+            color: #6B7280;
         }
 
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
+        .weapon-example strong {
+            color: var(--primary-purple);
             font-weight: 700;
+        }
+
+        /* Case Study Cards */
+        .case-study {
+            background: linear-gradient(135deg, #F9FAFB 0%, #EEF2FF 100%);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 25px 0;
+            border: 2px dashed var(--primary-purple);
+        }
+
+        .case-title {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary-purple);
             margin-bottom: 12px;
             display: flex;
             align-items: center;
+            gap: 8px;
         }
 
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+        .case-content {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #374151;
         }
 
-        .fact-item {
-            text-align: center;
-        }
-
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
-            display: block;
-        }
-
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
-
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
-        }
-
-        .conclusion-title {
-            font-size: 16px;
+        .case-result {
+            margin-top: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 6px;
             font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
+            color: var(--primary-blue);
+            font-size: 15px;
+        }
+
+        /* Arsenal Checklist */
+        .checklist {
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 12px;
+            padding: 30px 24px;
+            margin: 30px 0;
+        }
+
+        .checklist-title {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--accent-cyan);
+        }
+
+        .checklist-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
+        .checklist-icon {
+            font-size: 20px;
+            color: var(--accent-cyan);
+            flex-shrink: 0;
         }
 
-        .footer {
+        /* Arrow Connector */
+        .arrow-down {
             text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
+            font-size: 32px;
+            color: var(--primary-purple);
+            margin: 20px 0;
+            animation: bounce 2s infinite;
         }
 
-        .footer-highlight {
-            color: #1A2A57;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-blue) 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-title {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .cta-text {
+            font-size: 16px;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        .footer {
+            background: #F9FAFB;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #6B7280;
+            line-height: 1.6;
+        }
+
+        .footer-author {
+            margin-top: 12px;
+            font-size: 15px;
             font-weight: 700;
+            color: var(--primary-blue);
         }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .bold {
+        /* Emphasize Text */
+        .emphasize {
+            background: linear-gradient(180deg, transparent 60%, rgba(0, 212, 255, 0.3) 60%);
             font-weight: 700;
-            color: #1A2A57;
+            color: var(--primary-blue);
         }
 
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
+        .bold-purple {
+            font-weight: 700;
+            color: var(--primary-purple);
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero {
+                padding: 40px 24px 50px;
             }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
+
+            .hero-title {
+                font-size: 28px;
             }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
+
+            .section {
+                padding: 32px 24px;
             }
-            
-            .main-title {
-                font-size: 24px;
+
+            .chess-illustration {
+                gap: 30px;
+            }
+
+            .chess-icon {
+                font-size: 48px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
-        </div>
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-label">을의 생존 협상법</div>
+            <h1 class="hero-title">힘없는 자의 분노는<br>소음일 뿐이다</h1>
+            <p class="hero-subtitle">"규범"이라는 레버리지</p>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
+            <div class="chess-illustration">
+                <div class="chess-piece">
+                    <div class="chess-icon">♟</div>
+                    <div class="chess-label">을 (약자)</div>
                 </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
+                <div class="vs-symbol">⚡</div>
+                <div class="chess-piece">
+                    <div class="chess-icon">♔</div>
+                    <div class="chess-label">갑 (강자)</div>
                 </div>
             </div>
         </div>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
+        <!-- Wavy Transition -->
+        <div class="wavy-path">
+            <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+                <path d="M0,30 Q300,0 600,30 T1200,30 L1200,60 L0,60 Z" fill="#635BFF" opacity="0.1"/>
+                <path d="M0,40 Q300,10 600,40 T1200,40 L1200,60 L0,60 Z" fill="white"/>
+            </svg>
         </div>
 
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
+        <!-- Section 1: Problem -->
+        <div class="section">
+            <div class="section-number">1</div>
+            <h2 class="section-title">협상은 동정의 장이 아니다</h2>
+            <p class="section-text">
+                협상 테이블에서 목소리를 높이는 순간, 게임은 이미 끝났다. 분노는 약자임을 스스로 증명하는 것이고, 감정은 논리를 집어삼킨다.
+            </p>
+
+            <div class="highlight-box">
+                <p class="highlight-text">
+                    갑은 당신의 억울함 따위에 관심이 없다. 그들이 저울질하는 건 딱 하나, 당신의 요구가 정당한가 아닌가다.
+                </p>
+            </div>
+
+            <p class="section-text">
+                수많은 '을'이 협상에서 지는 이유는 힘이 없어서가 아니다. <span class="emphasize">자기 요구를 떼쓰기처럼 포장</span>하고, 정당성을 감정으로 대체하기 때문이다.
+            </p>
+        </div>
+
+        <div class="arrow-down">↓</div>
+
+        <!-- Section 2: Solution Intro -->
+        <div class="section">
+            <div class="section-number">2</div>
+            <h2 class="section-title">약자가 쥘 수 있는 무기: 규범</h2>
+            <p class="section-text">
+                떼쓰기와 정당한 요구의 차이는 명확하다. 떼쓰기는 "나는 이렇게 하고 싶다"는 <strong>주관의 영역</strong>이다. 정당한 요구는 "이것이 합당하다"는 <strong>객관의 영역</strong>이다.
+            </p>
+
+            <div class="hand-frame">
+                <p class="section-text" style="margin: 0;">
+                    <span class="bold-purple">규범은 약자가 만드는 게 아니다.</span> 이미 존재한다. 약자는 그것을 발견하고 활용하면 된다.
+                </p>
+            </div>
+
+            <p class="section-text">
+                법, 관행, 상식, 공정성—이것들은 모두 '을'이 '갑'을 움직일 수 있는 레버리지다. 당신의 요구가 법에 부합하거나, 업계 관행에 맞거나, 상식적으로 타당하면, 그 요구는 개인의 욕망이 아니라 <span class="emphasize">'객관적 기준'</span>이 된다.
+            </p>
+        </div>
+
+        <div class="arrow-down">↓</div>
+
+        <!-- Section 3: Four Weapons -->
+        <div class="section">
+            <div class="section-number">3</div>
+            <h2 class="section-title">네 개의 레이어, 네 가지 무기</h2>
+
+            <div class="weapons-grid">
+                <div class="weapon-card">
+                    <div class="weapon-header">
+                        <div class="weapon-icon">⚖️</div>
+                        <div class="weapon-title">법적 규범</div>
                     </div>
-                    <div class="section-title">보증보험 청구</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
+                    <div class="weapon-desc">
+                        공정거래법, 하도급법, 표준계약서는 약자를 보호하기 위해 설계된 방패다.
                     </div>
-                    <div class="section-title">민사소송 & 가압류</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
+                    <div class="weapon-example">
+                        <strong>예시:</strong> "이 조치는 하도급법 제4조 위반입니다"
                     </div>
-                    <div class="section-title">사해행위 취소</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
+                <div class="weapon-card">
+                    <div class="weapon-header">
+                        <div class="weapon-icon">📊</div>
+                        <div class="weapon-title">업계 규범</div>
                     </div>
-                    <div class="section-title">형사고소 검토</div>
+                    <div class="weapon-desc">
+                        모든 산업에는 암묵적 표준이 있다. 광고업계 수정 횟수는 통상 3회, IT 프로젝트 추가 요구사항은 별도 계약이 원칙이다.
+                    </div>
+                    <div class="weapon-example">
+                        <strong>예시:</strong> "업계에서는 이것이 표준입니다"
+                    </div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
+
+                <div class="weapon-card">
+                    <div class="weapon-header">
+                        <div class="weapon-icon">🤝</div>
+                        <div class="weapon-title">사회적 규범</div>
+                    </div>
+                    <div class="weapon-desc">
+                        공정성, 상호성, 투명성—누구도 부정하기 어려운 보편 가치다.
+                    </div>
+                    <div class="weapon-example">
+                        <strong>예시:</strong> "작업 기간 연장 시 추가 비용 요청은 공정한 거래의 원칙"
+                    </div>
+                </div>
+
+                <div class="weapon-card">
+                    <div class="weapon-header">
+                        <div class="weapon-icon">📋</div>
+                        <div class="weapon-title">조직 규범</div>
+                    </div>
+                    <div class="weapon-desc">
+                        아이러니하게도 갑 조직의 내부 규정이 '을'에게 유리한 무기가 될 수 있다.
+                    </div>
+                    <div class="weapon-example">
+                        <strong>예시:</strong> "귀사의 윤리강령 제00조에 따르면..."
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
+        <div class="arrow-down">↓</div>
+
+        <!-- Section 4: Transform Subject -->
+        <div class="section">
+            <div class="section-number">4</div>
+            <h2 class="section-title">주어를 바꾸는 순간, 게임이 달라진다</h2>
+
+            <div class="highlight-box">
+                <p class="highlight-text">
+                    당신이 요구의 주어가 되는 순간, 갑은 당신을 공격하면 된다. 하지만 객관적 기준이 주어가 되는 순간, 갑은 기준을 공격해야 하며, 그건 훨씬 어렵다.
+                </p>
             </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
+
+            <p class="section-text">
+                규범을 무기로 쓰는 핵심은 '주어'를 바꾸는 것이다. <span class="emphasize">"우리가 원해서"가 아니라</span> "업계 표준이", "법이", "귀사의 규정이"라고 말해야 한다.
+            </p>
+
+            <div class="case-study">
+                <div class="case-title">
+                    💼 사례 1: 중소 제조업체 대표
                 </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
+                <div class="case-content">
+                    "한국은행 생산자물가지수 기준, 해당 원자재 가격은 지난 6개월간 28% 상승했습니다. 업계 평균 단가 조정률은 이 상승분의 70%를 반영하는 것이 관행입니다."
+                </div>
+                <div class="case-result">
+                    ✓ 결과: 갑은 침묵했고, 단가는 조정되었다.
+                </div>
             </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
+
+            <div class="case-study">
+                <div class="case-title">
+                    ✍️ 사례 2: 프리랜서 작가
                 </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
+                <div class="case-content">
+                    "계약서 제5조에 따르면 수정은 3회까지입니다. 추가 수정은 별도 계약이 필요합니다. 한국출판문화산업진흥원의 표준계약서도 동일한 조항을 명시하고 있습니다."
                 </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
+                <div class="case-result">
+                    ✓ 결과: 출판사는 추가 비용을 지급했다.
+                </div>
             </div>
         </div>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
+        <div class="arrow-down">↓</div>
+
+        <!-- Section 5: Arsenal -->
+        <div class="section">
+            <div class="section-number">5</div>
+            <h2 class="section-title">무기는 손에 쥐어야 무기다</h2>
+
+            <p class="section-text">
+                규범은 추상이 아니다. 그건 문서, 데이터, 판례, 사례로 구성된 실체다. <span class="emphasize">규범을 무기로 삼으려면</span> 그것을 발견하고 입증할 근거를 확보해야 한다.
+            </p>
+
+            <div class="checklist">
+                <div class="checklist-title">협상 전 준비해야 할 것들</div>
+
+                <div class="checklist-item">
+                    <span class="checklist-icon">📜</span>
+                    <span>관련 법령과 조항</span>
+                </div>
+
+                <div class="checklist-item">
+                    <span class="checklist-icon">📈</span>
+                    <span>업계 표준 데이터와 벤치마크 자료</span>
+                </div>
+
+                <div class="checklist-item">
+                    <span class="checklist-icon">⚖️</span>
+                    <span>유사 사례와 판례</span>
+                </div>
+
+                <div class="checklist-item">
+                    <span class="checklist-icon">📋</span>
+                    <span>갑의 내부 규정 및 가이드라인</span>
+                </div>
+
+                <div class="checklist-item">
+                    <span class="checklist-icon">📊</span>
+                    <span>제3자 보고서와 공신력 있는 출처</span>
+                </div>
             </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
+
+            <p class="section-text" style="margin-top: 24px;">
+                이 준비 없이 테이블에 앉는 건 칼 없이 전장에 나서는 것과 같다.
+            </p>
         </div>
 
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="cta-title">힘은 주어지는 게 아니라<br>만드는 것이다</h2>
+            <p class="cta-text">
+                당신이 할 일은 분노하는 게 아니라 근거를 쌓는 것이다.<br>
+                그것이 '을'을 '떼쓰는 자'가 아닌 '정당한 협상자'로 만드는 유일한 길이다.
+            </p>
+        </div>
+
+        <!-- Footer -->
         <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
+            <p class="footer-text">
+                약자의 무기는 감정이 아니라 규범이다.<br>
+                법, 관행, 상식—이것들을 발견하는 자가 협상을 지배한다.
+            </p>
+            <p class="footer-author">본문 작성 및 인포그래픽 디자인 by 조우성</p>
         </div>
     </div>
+
+    <script>
+        // Scroll-triggered fade-in animation
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Weapon cards stagger animation
+        const weaponCards = document.querySelectorAll('.weapon-card');
+        weaponCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+
+            setTimeout(() => {
+                card.style.transition = 'all 0.6s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 300 + (index * 150));
+        });
+
+        // Case study reveal on scroll
+        const caseStudies = document.querySelectorAll('.case-study');
+        const caseObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideInLeft 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        caseStudies.forEach(study => {
+            caseObserver.observe(study);
+        });
+
+        // Add CSS animation for case studies
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
