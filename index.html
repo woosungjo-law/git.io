@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>당신의 브랜드를 만들어라 🎯</title>
+    <title>당신의 브랜드를 만들어라 | 사마양저의 연출</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,841 +17,863 @@
             overflow-wrap: break-word;
         }
 
-        body {
-            font-family: 'Noto Sans KR', 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #E6F9FA 0%, #F5F0FF 100%);
-            color: #2C3E50;
-            line-height: 1.8;
-            overflow-x: hidden;
+        :root {
+            --primary: #7C3AED;
+            --secondary: #3B82F6;
+            --accent: #F59E0B;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
         }
 
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+            color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Container */
         .container {
-            max-width: 1100px;
+            max-width: 428px;
             margin: 0 auto;
-            padding: 50px 25px;
+            padding: 0;
+            position: relative;
         }
 
         /* Hero Section */
         .hero {
-            text-align: center;
-            padding: 80px 30px;
-            background: linear-gradient(135deg, #7D2AE8 0%, #00C4CC 100%);
-            border-radius: 50px;
-            margin-bottom: 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 24px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(125, 42, 232, 0.3);
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(124, 58, 237, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 50%);
+            animation: gradientShift 8s ease-in-out infinite;
         }
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -5%;
-            width: 250px;
-            height: 250px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite reverse;
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
-        }
-
-        .hero-icon {
-            font-size: 5rem;
-            display: block;
-            margin-bottom: 20px;
-            animation: bounce 2s ease-in-out infinite;
+        .hero-content {
             position: relative;
             z-index: 1;
+            text-align: center;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-15px) scale(1.05); }
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .hero h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 20px;
+            font-size: 3rem;
+            font-weight: 900;
             line-height: 1.2;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #A78BFA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.25rem;
             font-weight: 500;
-            position: relative;
-            z-index: 1;
+            color: #CBD5E1;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
         }
 
         /* Section Common */
-        .section {
-            background: white;
-            border-radius: 40px;
-            padding: 60px 45px;
-            margin-bottom: 50px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        section {
+            padding: 80px 24px;
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-number {
             position: absolute;
-            top: -25px;
-            left: 40px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #FF7262, #FFCD4D);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: white;
-            box-shadow: 0 5px 20px rgba(255, 114, 98, 0.4);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
+            top: 24px;
+            right: 24px;
+            font-size: 6rem;
             font-weight: 900;
-            color: #2C3E50;
-            margin-bottom: 35px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.1;
+            line-height: 1;
         }
 
-        .section-title-icon {
+        h2 {
             font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #E0E7FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .section-text {
-            font-size: 1.2rem;
-            line-height: 2;
-            color: #4A5568;
-            margin-bottom: 25px;
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #CBD5E1;
+            margin-bottom: 20px;
         }
 
         .highlight {
-            background: linear-gradient(180deg, transparent 60%, #FFCD4D 60%);
-            padding: 2px 8px;
+            color: var(--accent);
             font-weight: 700;
-            color: #2C3E50;
-            border-radius: 3px;
+            background: linear-gradient(180deg, transparent 60%, rgba(245, 158, 11, 0.3) 60%);
+            padding: 0 4px;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            margin: 32px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(124, 58, 237, 0.3);
         }
 
         /* Problem Section */
-        .problem-section {
-            background: linear-gradient(135deg, #FFE5E5 0%, #FFF5E5 100%);
-            border-left: 8px solid #FF7262;
-        }
-
-        .invisible-leader {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .invisible-leader svg {
-            max-width: 500px;
+        .problem-visual {
             width: 100%;
-            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
-        }
-
-        /* History Section */
-        .history-section {
-            background: linear-gradient(135deg, #F0E6FF 0%, #E6F3FF 100%);
-            border-left: 8px solid #7D2AE8;
-        }
-
-        .timeline {
-            margin: 50px 0;
-        }
-
-        .timeline-item {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .timeline-marker {
-            min-width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #7D2AE8, #00C4CC);
-            border-radius: 50%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%);
+            border-radius: 20px;
+            margin: 32px 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 20px rgba(125, 42, 232, 0.3);
             position: relative;
-            z-index: 2;
+            overflow: hidden;
         }
 
-        .timeline-item:not(:last-child) .timeline-marker::after {
+        .problem-visual::before {
+            content: '?';
+            font-size: 8rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.2; transform: scale(1.1); }
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
             content: '';
             position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 80px;
-            background: linear-gradient(180deg, #7D2AE8, transparent);
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 48px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
         }
 
         .timeline-content {
-            flex: 1;
-            background: white;
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 16px;
+            border-left: 3px solid var(--accent);
         }
 
-        .timeline-content h3 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #7D2AE8;
-            margin-bottom: 15px;
-        }
-
-        .timeline-content p {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            color: #4A5568;
-        }
-
-        .quote-box {
-            background: linear-gradient(135deg, #2C3E50, #34495E);
-            color: white;
-            padding: 40px;
-            border-radius: 30px;
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: 700;
+        /* Quote */
+        .quote {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(59, 130, 246, 0.3));
+            backdrop-filter: blur(20px);
+            border-left: 4px solid var(--accent);
+            padding: 32px;
             margin: 40px 0;
+            border-radius: 16px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.6;
+            font-style: italic;
             position: relative;
-            box-shadow: 0 10px 40px rgba(44, 62, 80, 0.3);
         }
 
-        .quote-box::before {
+        .quote::before {
             content: '"';
             position: absolute;
-            top: -30px;
-            left: 30px;
-            font-size: 6rem;
-            color: #7D2AE8;
-            font-family: Georgia, serif;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--accent);
             opacity: 0.5;
+            font-family: Georgia, serif;
         }
 
-        /* Principle Section */
-        .principle-section {
-            background: linear-gradient(135deg, #E6FFFA 0%, #E6F3FF 100%);
-            border-left: 8px solid #00C4CC;
-        }
-
-        .principle-grid {
+        /* Principles Grid */
+        .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 20px;
+            margin: 40px 0;
         }
 
         .principle-card {
-            background: white;
-            padding: 35px;
-            border-radius: 25px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border-top: 5px solid #00C4CC;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .principle-card:hover::before {
+            transform: scaleX(1);
         }
 
         .principle-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 196, 204, 0.2);
+            transform: translateX(8px);
+            background: rgba(255, 255, 255, 0.15);
         }
 
-        .principle-card-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+        .principle-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
             display: block;
         }
 
         .principle-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #00C4CC;
-            margin-bottom: 15px;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
         }
 
         .principle-card p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #4A5568;
+            font-size: 1rem;
+            color: #94A3B8;
         }
 
-        /* Modern Section */
-        .modern-section {
-            background: linear-gradient(135deg, #FFF0E6 0%, #FFE5F0 100%);
-            border-left: 8px solid #FF7262;
-        }
-
-        .comparison-container {
+        /* Comparison */
+        .comparison {
             display: grid;
             grid-template-columns: 1fr auto 1fr;
-            gap: 30px;
+            gap: 16px;
             align-items: center;
             margin: 40px 0;
         }
 
         .comparison-box {
-            background: white;
-            padding: 40px;
-            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
-        .comparison-box.past {
-            border-top: 5px solid #95A5A6;
+        .comparison-box.old {
+            border: 2px solid rgba(148, 163, 184, 0.3);
         }
 
-        .comparison-box.present {
-            border-top: 5px solid #FF7262;
-        }
-
-        .comparison-box h3 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .comparison-box.past h3 {
-            color: #95A5A6;
-        }
-
-        .comparison-box.present h3 {
-            color: #FF7262;
+        .comparison-box.new {
+            border: 2px solid var(--accent);
+            background: rgba(245, 158, 11, 0.1);
         }
 
         .comparison-arrow {
-            font-size: 4rem;
-            color: #FF7262;
-            animation: pulse 2s ease-in-out infinite;
+            font-size: 2rem;
+            color: var(--accent);
+            animation: slideRight 1.5s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
+        @keyframes slideRight {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
         }
 
-        .insight-box {
-            background: linear-gradient(135deg, #FF7262, #FFCD4D);
-            color: white;
-            padding: 35px;
-            border-radius: 25px;
-            margin: 35px 0;
-            box-shadow: 0 10px 40px rgba(255, 114, 98, 0.3);
-        }
-
-        .insight-box strong {
-            font-size: 1.3rem;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        .insight-box p {
-            font-size: 1.15rem;
-            line-height: 1.9;
-        }
-
-        /* Action Section */
-        .action-section {
-            background: linear-gradient(135deg, #FFF9E5 0%, #F0E6FF 100%);
-            border-left: 8px solid #FFCD4D;
-        }
-
-        .action-list {
+        /* Action Cards */
+        .action-cards {
             display: flex;
             flex-direction: column;
-            gap: 30px;
-            margin-top: 40px;
+            gap: 24px;
+            margin: 40px 0;
         }
 
-        .action-item {
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            display: flex;
-            gap: 25px;
-            align-items: flex-start;
-            transition: all 0.3s ease;
-            border-left: 6px solid transparent;
+        .action-card {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(59, 130, 246, 0.15));
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .action-item:nth-child(1) {
-            border-left-color: #7D2AE8;
+        .action-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
-        .action-item:nth-child(2) {
-            border-left-color: #00C4CC;
+        .action-card:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
         }
 
-        .action-item:nth-child(3) {
-            border-left-color: #FF7262;
-        }
-
-        .action-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        .action-card:hover::after {
+            opacity: 1;
         }
 
         .action-number {
-            min-width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #FFCD4D, #FF7262);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
-            flex-shrink: 0;
-            box-shadow: 0 5px 20px rgba(255, 205, 77, 0.4);
+            font-size: 1.5rem;
+            font-weight: 900;
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.5);
         }
 
-        .action-content h3 {
-            font-size: 1.7rem;
-            font-weight: 700;
-            color: #2C3E50;
-            margin-bottom: 15px;
+        .action-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+            padding-right: 70px;
         }
 
-        .action-content p {
-            font-size: 1.15rem;
-            line-height: 1.9;
-            color: #4A5568;
-            margin-bottom: 15px;
+        .action-card p {
+            font-size: 1.05rem;
+            margin-bottom: 16px;
         }
 
         .action-example {
-            background: #FFF9E5;
-            padding: 20px;
-            border-radius: 15px;
-            border-left: 4px solid #FFCD4D;
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 3px solid var(--accent);
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 0.95rem;
             font-style: italic;
-            font-size: 1.05rem;
-            color: #5A4A2A;
+            color: #FDE68A;
         }
 
-        /* Closing */
-        .closing {
+        /* CTA Section */
+        .cta-section {
             text-align: center;
-            background: linear-gradient(135deg, #7D2AE8, #00C4CC);
-            color: white;
-            padding: 60px 40px;
-            border-radius: 40px;
-            margin-top: 60px;
-            box-shadow: 0 20px 60px rgba(125, 42, 232, 0.3);
+            padding: 80px 24px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(59, 130, 246, 0.2));
+            backdrop-filter: blur(20px);
         }
 
-        .closing-text {
+        .cta-title {
             font-size: 2rem;
-            font-weight: 700;
-            line-height: 1.8;
-            margin-bottom: 25px;
+            font-weight: 800;
+            margin-bottom: 16px;
         }
 
-        .closing-cta {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: white;
-            color: #7D2AE8;
-            padding: 20px 50px;
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: #CBD5E1;
+            margin-bottom: 32px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
             border-radius: 50px;
-            display: inline-block;
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-            animation: wiggle 3s ease-in-out infinite;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+            min-width: 44px;
+            min-height: 44px;
         }
 
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-2deg); }
-            75% { transform: rotate(2deg); }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(124, 58, 237, 0.6);
         }
 
-        /* Decorative Elements */
-        .sparkle {
-            display: inline-block;
-            animation: sparkle 1.5s ease-in-out infinite;
+        .cta-button:active {
+            transform: translateY(0);
         }
 
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.8); }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            color: #64748B;
+            font-size: 0.9rem;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
+        /* Asymmetric Layout Elements */
+        .asymmetric-accent {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morphShape 8s ease-in-out infinite;
+        }
+
+        .asymmetric-accent.top-right {
+            top: -50px;
+            right: -50px;
+        }
+
+        .asymmetric-accent.bottom-left {
+            bottom: -50px;
+            left: -50px;
+        }
+
+        @keyframes morphShape {
+            0%, 100% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+                transform: rotate(0deg);
             }
-
-            .hero {
-                padding: 60px 25px;
-                border-radius: 30px;
+            50% {
+                border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+                transform: rotate(180deg);
             }
+        }
 
+        /* Responsive Adjustments */
+        @media (max-width: 375px) {
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
 
-            .hero-icon {
-                font-size: 3.5rem;
+            h2 {
+                font-size: 2rem;
             }
 
-            .hero-subtitle {
-                font-size: 1.2rem;
+            .section-number {
+                font-size: 4rem;
             }
 
-            .section {
-                padding: 40px 30px;
-                border-radius: 25px;
-            }
-
-            .section-title {
-                font-size: 1.9rem;
-            }
-
-            .section-text {
-                font-size: 1.05rem;
-            }
-
-            .comparison-container {
+            .comparison {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 12px;
             }
 
             .comparison-arrow {
                 transform: rotate(90deg);
-                font-size: 3rem;
-            }
-
-            .action-item {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                padding: 30px 25px;
-            }
-
-            .principle-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .closing-text {
-                font-size: 1.5rem;
-            }
-
-            .closing-cta {
-                font-size: 1.8rem;
-                padding: 15px 35px;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
+        /* Kinetic Typography */
+        .kinetic-text {
+            display: inline-block;
+            animation: kineticFloat 3s ease-in-out infinite;
+        }
 
-            .section-number {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
+        @keyframes kineticFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
 
-            .section-title {
-                font-size: 1.6rem;
-            }
-
-            .quote-box {
-                padding: 30px 20px;
-                font-size: 1.4rem;
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 <body>
+    <div class="progress-bar" id="progressBar"></div>
+
     <div class="container">
-        <!-- Hero -->
-        <div class="hero">
-            <span class="hero-icon">🎯</span>
-            <h1>당신의 브랜드를<br>만들어라</h1>
-            <p class="hero-subtitle">권위는 주어지지 않는다. 쟁취하는 것이다.</p>
-        </div>
-
-        <!-- Section 1: Problem -->
-        <div class="section problem-section">
-            <div class="section-number">1</div>
-            <h2 class="section-title">
-                <span class="section-title-icon">👻</span>
-                보이지 않는 리더, 김 팀장
-            </h2>
-
-            <div class="invisible-leader">
-                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-                    <!-- 회의실 테이블 -->
-                    <rect x="50" y="180" width="400" height="15" rx="7" fill="#BDC3C7"/>
-
-                    <!-- 팀원들 (활기찬) -->
-                    <g opacity="1">
-                        <circle cx="100" cy="150" r="25" fill="#00C4CC"/>
-                        <text x="93" y="160" font-size="20">😴</text>
-
-                        <circle cx="200" cy="150" r="25" fill="#7D2AE8"/>
-                        <text x="193" y="160" font-size="20">💭</text>
-
-                        <circle cx="300" cy="150" r="25" fill="#FF7262"/>
-                        <text x="293" y="160" font-size="20">📱</text>
-
-                        <circle cx="400" cy="150" r="25" fill="#FFCD4D"/>
-                        <text x="393" y="160" font-size="20">🥱</text>
-                    </g>
-
-                    <!-- 김 팀장 (투명하게) -->
-                    <g opacity="0.2">
-                        <circle cx="250" cy="80" r="30" fill="#95A5A6"/>
-                        <text x="243" y="90" font-size="25">😞</text>
-                        <rect x="220" y="110" width="60" height="40" rx="10" fill="#95A5A6"/>
-                    </g>
-
-                    <!-- 물음표들 -->
-                    <text x="230" y="50" font-size="40" fill="#95A5A6" opacity="0.5">?</text>
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">사마천의 지혜</div>
+                <h1>당신의 브랜드를<br><span class="kinetic-text">만들어라</span></h1>
+                <p class="hero-subtitle">권위는 주어지지 않는다. 쟁취하는 것이다.</p>
+            </div>
+            <div class="scroll-indicator">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M19 12l-7 7-7-7"/>
                 </svg>
             </div>
+        </header>
 
-            <p class="section-text">
-                수요일 오후 3시. 김 팀장이 부임한 첫 주. 그는 <span class="highlight">엑셀 전문가</span>이고,
-                누구보다 성실합니다. 매일 가장 늦게 퇴근하죠.
-            </p>
-            <p class="section-text">
-                하지만 팀원들은 그를 따르지 않습니다. 왜일까요?
-                <span class="highlight">직함(Position)을 받았지만, 리더(Power)가 되지 못했기</span> 때문입니다.
-            </p>
+        <!-- Section 1: Problem -->
+        <section id="section1">
+            <div class="section-number">01</div>
+            <div class="asymmetric-accent top-right"></div>
 
-            <div class="insight-box">
-                <strong>💡 핵심 문제</strong>
-                <p>본질은 능력 부족이 아닙니다. '자기연출'의 실패입니다.
-                세상은 당신이 '보여준' 것, '증명한' 것만을 믿습니다.</p>
+            <h2>보이지 않는 리더</h2>
+
+            <div class="problem-visual"></div>
+
+            <div class="glass-card">
+                <p>수요일 오후 3시, 김 팀장이 부임한 첫 주가 막 지났다. 회의실 공기, 냉랭하다.</p>
+                <p>그는 <span class="highlight">업계에서 알아주는 엑셀 전문가</span>다. 누구보다 성실하다는 것도 모두가 안다. 그런데 팀원들이 그를 따르지 않는다.</p>
+                <p>김 팀장은 '열심히 하겠다'고 했다. 매일 가장 늦게 퇴근한다. 그러나 팀은 요지부동이다.</p>
             </div>
-        </div>
 
-        <!-- Section 2: History -->
-        <div class="section history-section">
-            <div class="section-number">2</div>
-            <h2 class="section-title">
-                <span class="section-title-icon">⚔️</span>
-                사마양저의 극적인 순간
-            </h2>
+            <div class="quote">
+                그는 '팀장'이라는 직함을 받았을 뿐, '리더'라는 자리는 얻지 못했다.
+            </div>
+
+            <h3>본질은 '연출'의 실패다</h3>
+            <p>이 상황의 본질은 능력 문제가 아니다. <span class="highlight">'자기연출'의 완벽한 실패</span>다.</p>
+            <p>사람들은 생각보다 남에게 관심이 없다. 당신의 숨겨진 실력, 그 깊은 의도를 알아주리라 기대해선 안 된다.</p>
+            <p><span class="highlight">세상은 오직 당신이 '보여준' 것, '증명한' 것만을 믿는다.</span></p>
+        </section>
+
+        <!-- Section 2: Historical Case -->
+        <section id="section2">
+            <div class="section-number">02</div>
+            <div class="asymmetric-accent bottom-left"></div>
+
+            <h2>장군의 칼, 군대의 문</h2>
+            <p>사마천은 『사마양저열전』에서 권위가 탄생하는 순간을 극적으로 포착한다.</p>
 
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-marker">📜</div>
                     <div class="timeline-content">
                         <h3>약속</h3>
-                        <p>제나라 경공이 신분이 미천한 사마양저를 장군으로 임명했습니다.
-                        양저는 왕의 총신 장가와 약속합니다: <strong>"내일 정오, 군문에서 만납시다."</strong></p>
+                        <p>제나라 경공이 사마양저를 장군으로 임명했다. 신분이 미천한 그였다.</p>
+                        <p>양저는 왕의 총신 장가를 감군으로 요청하고 약속을 잡는다.</p>
+                        <p style="color: var(--accent); font-weight: 600;">"내일 정오, 군문에서 만납시다."</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-marker">⏰</div>
                     <div class="timeline-content">
                         <h3>준비와 오만</h3>
-                        <p>다음 날, 양저는 먼저 도착해 해시계를 세우고 군법을 정비했습니다.
-                        하지만 오만한 장가는 친지들과 술잔을 기울이며 시간을 보냈죠. 저녁이 되어서야 나타났습니다.</p>
+                        <p>다음 날, 양저는 먼저 도착해 해시계를 세우고 군법을 정비했다.</p>
+                        <p>그러나 장가는 오만했다. 친지들과의 송별 연회를 즐기느라 저녁이 되어서야 나타났다.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-marker">⚡</div>
                     <div class="timeline-content">
                         <h3>결단</h3>
-                        <p>양저는 군법관에게 묻습니다. "약속 시간에 늦은 자의 죄는?"
-                        "참수입니다." 그는 즉시 왕의 총신, 장가의 목을 베었습니다.</p>
+                        <p>양저는 군법관을 불렀다. "약속한 시간에 늦은 자의 죄는 무엇인가?"</p>
+                        <p>"참수입니다."</p>
+                        <p><span class="highlight">양저는 즉시 장가의 목을 베었다.</span></p>
                     </div>
                 </div>
             </div>
 
-            <div class="quote-box">
-                삼군이 모두 진동했다. <span class="sparkle">⚡</span>
+            <div class="quote">
+                삼군이 모두 진동했다.
             </div>
-
-            <p class="section-text">
-                이것은 분노가 아니었습니다. <span class="highlight">철저히 계산된 연출</span>이었습니다.
-                그는 가장 강력한 상징(왕의 총신)을 깨뜨려,
-                <span class="highlight">"법 앞에는 예외가 없다"</span>는 자신의 브랜드를 단번에 각인시켰습니다.
-            </p>
-        </div>
+        </section>
 
         <!-- Section 3: Principles -->
-        <div class="section principle-section">
-            <div class="section-number">3</div>
-            <h2 class="section-title">
-                <span class="section-title-icon">🔑</span>
-                권위 탄생의 3가지 원리
-            </h2>
+        <section id="section3">
+            <div class="section-number">03</div>
 
-            <div class="principle-grid">
+            <h2>권위는 어떻게 탄생하는가</h2>
+            <p>양저의 행동은 단순한 분노의 표출이 아니었다. 이것은 <span class="highlight">철저히 계산된 연출</span>이었다.</p>
+
+            <div class="principles-grid">
                 <div class="principle-card">
-                    <span class="principle-card-icon">🎯</span>
+                    <span class="principle-icon">🎯</span>
                     <h3>상징의 선택</h3>
-                    <p>왕의 총신 장가는 '쇼크'를 위한 완벽한 제물이었습니다.
-                    가장 강력한 상징을 부숴 자신의 브랜드를 세웠습니다.</p>
+                    <p>왕의 총신 장가는 '쇼크'를 위한 완벽한 제물이었다. 가장 강력한 상징을 부숴 자신의 브랜드를 세웠다.</p>
                 </div>
 
                 <div class="principle-card">
-                    <span class="principle-card-icon">⚖️</span>
+                    <span class="principle-icon">⚖️</span>
                     <h3>시스템의 구축</h3>
-                    <p>개인적 원한이 아니라 '군법'이라는 시스템을 내세웠습니다.
-                    법 앞에는 예외가 없다는 절대적 원칙.</p>
+                    <p>개인적 원한이 아니라 '군법'이라는 시스템을 내세웠다. 법 앞에는 예외가 없다는 절대적 원칙.</p>
                 </div>
 
                 <div class="principle-card">
-                    <span class="principle-card-icon">💥</span>
+                    <span class="principle-icon">💥</span>
                     <h3>사건으로 증명</h3>
-                    <p>권위는 '선언'이 아닌 '사건'으로 탄생합니다.
-                    이름과 실체가 일치해야 합니다.</p>
+                    <p>권위는 '선언'이 아닌 '사건'으로 탄생한다. 이름과 실체가 일치해야 한다.</p>
                 </div>
             </div>
-        </div>
+
+            <p style="margin-top: 32px;">사마천은 권위가 <span class="highlight">'선언'이 아닌 '사건'으로 탄생</span>함을 보여준다.</p>
+        </section>
 
         <!-- Section 4: Modern Application -->
-        <div class="section modern-section">
-            <div class="section-number">4</div>
-            <h2 class="section-title">
-                <span class="section-title-icon">🚀</span>
-                당신의 '장가'는 무엇인가?
-            </h2>
+        <section id="section4">
+            <div class="section-number">04</div>
+            <div class="asymmetric-accent top-right"></div>
 
-            <div class="comparison-container">
-                <div class="comparison-box past">
-                    <h3>과거의 참수</h3>
-                    <p>왕의 총신 장가의 목을 베어<br>군법의 절대성 증명</p>
+            <h2>당신의 '장가'는 무엇인가</h2>
+
+            <div class="comparison">
+                <div class="comparison-box old">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 8px;">과거의 참수</h3>
+                    <p style="font-size: 0.95rem;">왕의 총신 장가의 목을 베어 군법의 절대성 증명</p>
                 </div>
 
                 <div class="comparison-arrow">→</div>
 
-                <div class="comparison-box present">
-                    <h3>현대의 참수</h3>
-                    <p>조직 내 만연한 관행과<br>비효율을 공개적으로 해결</p>
+                <div class="comparison-box new">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 8px;">현대의 참수</h3>
+                    <p style="font-size: 0.95rem;">조직 내 만연한 관행과 비효율을 공개적으로 해결</p>
                 </div>
             </div>
 
-            <p class="section-text">
-                오늘날 우리는 누구의 목도 벨 수 없습니다. 하지만 원리는 같습니다.
-                당신의 리더십을 브랜드로 만들고 싶다면, <span class="highlight">당신의 '장가'</span>를 찾아야 합니다.
-            </p>
-
-            <p class="section-text">
-                그것은 조직 내 <span class="highlight">'관행'이라는 이름의 비효율</span>일 수 있습니다.
-                "좋은 게 좋은 것"이라는 안일함이거나, 무책임한 태만일 수 있죠.
-            </p>
-
-            <div class="insight-box">
-                <strong>💡 핵심 통찰</strong>
-                <p>'자기연출'은 거짓 포장이 아닙니다.
-                당신의 핵심 가치를 타인이 인식할 수 있는 '행동'으로 번역하는 치열한 기술입니다.</p>
+            <div class="glass-card">
+                <p>오늘날 우리는 누구의 목도 벨 수 없다. 하지만 원리는 정확히 같다.</p>
+                <p>당신의 전문성, 당신의 리더십을 <span class="highlight">'브랜드'로 만들고 싶다면</span>, 당신의 '장가'를 찾아야 한다.</p>
+                <p>그것은 조직 내에 만연한 '관행'이라는 이름의 비효율일 것이다. 혹은 '좋은 게 좋은 것'이라는 안일함이나, 무책임한 태만일 수 있다.</p>
             </div>
-        </div>
 
-        <!-- Section 5: Action Plan -->
-        <div class="section action-section">
-            <div class="section-number">5</div>
-            <h2 class="section-title">
-                <span class="section-title-icon">✅</span>
-                내일 실천할 3가지
-            </h2>
+            <div class="quote">
+                당신의 브랜드를 세우는 첫 번째 행동은, 당신의 가장 중요한 원칙을 지키기 위해 가장 어려운 상징을 깨뜨리는 것이다.
+            </div>
 
-            <div class="action-list">
-                <div class="action-item">
+            <p>'자기연출'은 거짓 포장이나 쇼맨십이 아니다. 그것은 당신의 핵심 가치와 실력을, <span class="highlight">타인이 인식할 수 있는 '행동'으로 번역하는 치열한 기술</span>이다.</p>
+        </section>
+
+        <!-- Section 5: Action Items -->
+        <section id="section5">
+            <div class="section-number">05</div>
+
+            <h2>내일 실천할 3가지</h2>
+
+            <div class="action-cards">
+                <div class="action-card">
                     <div class="action-number">1</div>
-                    <div class="action-content">
-                        <h3>📢 원칙을 선언하라</h3>
-                        <p>당신이 가장 중요하게 생각하는 업무 원칙 단 하나를 정하세요.
-                        그리고 다음 회의 시작 5분간 그것을 선언하세요.</p>
-                        <div class="action-example">
-                            💬 "앞으로 모든 회의는 30분을 넘기지 않습니다. 결론 없이 끝나지 않습니다."
-                        </div>
+                    <h3>원칙을 선언하라</h3>
+                    <p>당신이 가장 중요하게 생각하는 업무 원칙 단 하나를 정하라. 그리고 다음 회의 시작 5분간 그것을 선언하라.</p>
+                    <div class="action-example">
+                        "앞으로 모든 회의는 30분을 넘기지 않습니다. 결론 없이 끝나지 않습니다."
                     </div>
                 </div>
 
-                <div class="action-item">
+                <div class="action-card">
                     <div class="action-number">2</div>
-                    <div class="action-content">
-                        <h3>⚡ 본보기를 보여라</h3>
-                        <p>그 원칙을 어긴 첫 번째 사례를 찾으세요.
-                        모두가 보는 앞에서, 정중하지만 단호하게 수정하세요. 이것이 현대의 '참수'입니다.</p>
-                        <div class="action-example">
-                            💬 회의가 30분을 넘어가려 할 때: "원칙대로 여기서 끊고, 추가 논의는 메일로 합시다."
-                        </div>
+                    <h3>본보기를 보여라</h3>
+                    <p>그 원칙을 어긴 첫 번째 사례를 찾아라. 모두가 보는 앞에서, 정중하지만 단호하게 수정하라. 이것이 현대의 '참수'다.</p>
+                    <div class="action-example">
+                        회의가 30분을 넘어가려 할 때: "원칙대로 여기서 끊고, 추가 논의는 메일로 합시다."
                     </div>
                 </div>
 
-                <div class="action-item">
+                <div class="action-card">
                     <div class="action-number">3</div>
-                    <div class="action-content">
-                        <h3>📝 일관성을 기록하라</h3>
-                        <p>당신 스스로 그 원칙을 지킨 사례를 일주일에 한 번씩 점검하세요.
-                        당신의 브랜드는 당신의 일관성에서 완성됩니다.</p>
-                    </div>
+                    <h3>일관성을 기록하라</h3>
+                    <p>당신 스스로 그 원칙을 지킨 사례를 일주일에 한 번씩 점검하라. 당신의 브랜드는 당신의 일관성에서 완성된다.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Closing -->
-        <div class="closing">
-            <p class="closing-text">
-                권위는 주어지는 것이 아니라,<br>
-                결정적 행동으로 쟁취하는 것입니다. <span class="sparkle">✨</span>
-            </p>
-            <div class="closing-cta">
-                당신의 브랜드는 내일 시작됩니다 🚀
-            </div>
-        </div>
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 class="cta-title">권위는 쟁취하는 것이다</h2>
+            <p class="cta-subtitle">당신의 브랜드는 내일부터 시작된다</p>
+            <a href="#section5" class="cta-button">지금 시작하기</a>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>사마천의 지혜로 당신의 리더십을 재정의하라</p>
+        </footer>
     </div>
+
+    <script>
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+            document.getElementById('progressBar').style.width = scrollPercentage + '%';
+        });
+
+        // Intersection Observer for Sections
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
