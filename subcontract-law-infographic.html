@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하도급법 전략 - 법은 최후의 무기다</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+            background: #F6F4ED;
+            color: #241C15;
+            line-height: 1.7;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 60px rgba(36, 28, 21, 0.1);
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #FFE01B 0%, #FFF176 100%);
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '⚔️';
+            position: absolute;
+            top: -20px;
+            right: 10%;
+            font-size: 10rem;
+            opacity: 0.15;
+            transform: rotate(15deg);
+        }
+
+        .header::after {
+            content: '⚖️';
+            position: absolute;
+            bottom: -20px;
+            left: 10%;
+            font-size: 10rem;
+            opacity: 0.15;
+            transform: rotate(-15deg);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #241C15;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            color: #E44D26;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .tagline {
+            font-size: 1.3rem;
+            color: #007C89;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, #007C89 0%, #00a0b0 100%);
+            color: white;
+            padding: 40px;
+            margin: 40px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.6;
+            box-shadow: 0 8px 30px rgba(0, 124, 137, 0.3);
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            font-size: 6rem;
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            padding: 60px 40px;
+            background: #F6F4ED;
+        }
+
+        .comparison-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #241C15;
+            margin-bottom: 50px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .comparison-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .comparison-card.wrong {
+            border: 5px solid #E44D26;
+        }
+
+        .comparison-card.right {
+            border: 5px solid #007C89;
+        }
+
+        .card-icon {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .wrong .card-icon {
+            background: linear-gradient(135deg, #E44D26 0%, #ff6b4a 100%);
+        }
+
+        .right .card-icon {
+            background: linear-gradient(135deg, #007C89 0%, #00c9a7 100%);
+        }
+
+        .card-label {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 30px 0 20px 0;
+        }
+
+        .wrong .card-label {
+            color: #E44D26;
+        }
+
+        .right .card-label {
+            color: #007C89;
+        }
+
+        .card-content h3 {
+            font-size: 1.3rem;
+            margin: 20px 0 10px 0;
+            color: #241C15;
+        }
+
+        .card-content p {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .highlight-text {
+            background: #FFE01B;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* Arrow Between Cards */
+        .arrow-container {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .arrow {
+            font-size: 4rem;
+            color: #007C89;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Three Principles */
+        .principles-section {
+            padding: 60px 40px;
+            background: white;
+        }
+
+        .principles-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #241C15;
+            margin-bottom: 50px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .principle-card {
+            background: linear-gradient(135deg, #F6F4ED 0%, #fff 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            border-top: 6px solid #FFE01B;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .principle-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FFE01B 0%, #FFF176 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #241C15;
+            box-shadow: 0 5px 15px rgba(255, 224, 27, 0.4);
+        }
+
+        .principle-card h3 {
+            font-size: 1.5rem;
+            color: #007C89;
+            margin: 30px 0 20px 0;
+            font-weight: 700;
+        }
+
+        .principle-card p {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Legal Framework */
+        .legal-section {
+            padding: 60px 40px;
+            background: #F6F4ED;
+        }
+
+        .legal-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #241C15;
+            margin-bottom: 50px;
+        }
+
+        .legal-box {
+            background: white;
+            border-left: 8px solid #007C89;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .legal-box h3 {
+            font-size: 1.6rem;
+            color: #007C89;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .legal-box blockquote {
+            background: #F6F4ED;
+            border-left: 4px solid #FFE01B;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #241C15;
+            border-radius: 8px;
+        }
+
+        .legal-box .note {
+            background: #FFF9E6;
+            border: 2px dashed #FFE01B;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .legal-box .note h4 {
+            color: #E44D26;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Sword Metaphor Section */
+        .sword-section {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, #241C15 0%, #3d3228 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sword-section::before {
+            content: '🗡️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20rem;
+            opacity: 0.05;
+        }
+
+        .sword-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sword-section p {
+            font-size: 1.4rem;
+            line-height: 1.9;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sword-highlight {
+            color: #FFE01B;
+            font-weight: 700;
+            font-size: 1.6rem;
+        }
+
+        /* Tools Arsenal */
+        .tools-section {
+            padding: 60px 40px;
+            background: white;
+        }
+
+        .tools-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #241C15;
+            margin-bottom: 20px;
+        }
+
+        .tools-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 50px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .tool-card {
+            background: #F6F4ED;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .tool-card:hover {
+            border-color: #FFE01B;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 224, 27, 0.3);
+        }
+
+        .tool-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        .tool-card h4 {
+            font-size: 1.3rem;
+            color: #007C89;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .tool-card p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Final Message */
+        .final-message {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, #FFE01B 0%, #FFF176 100%);
+            text-align: center;
+        }
+
+        .final-message h2 {
+            font-size: 3rem;
+            color: #241C15;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .final-message .big-quote {
+            font-size: 2rem;
+            color: #E44D26;
+            font-weight: 700;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: #241C15;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .footer .author {
+            font-size: 1.2rem;
+            color: #FFE01B;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .arrow-container {
+                transform: rotate(90deg);
+                margin: 40px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 60px 30px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .header .tagline {
+                font-size: 1rem;
+            }
+
+            .quote-box {
+                margin: 30px 20px;
+                padding: 30px;
+                font-size: 1.3rem;
+            }
+
+            .comparison-section,
+            .principles-section,
+            .legal-section,
+            .tools-section {
+                padding: 40px 20px;
+            }
+
+            .comparison-title,
+            .principles-title,
+            .legal-title,
+            .tools-title {
+                font-size: 1.8rem;
+            }
+
+            .comparison-card,
+            .principle-card,
+            .legal-box {
+                padding: 30px 20px;
+            }
+
+            .sword-section {
+                padding: 60px 30px;
+            }
+
+            .sword-section h2 {
+                font-size: 2rem;
+            }
+
+            .sword-section p {
+                font-size: 1.1rem;
+            }
+
+            .final-message h2 {
+                font-size: 2rem;
+            }
+
+            .final-message .big-quote {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            .quote-box {
+                font-size: 1.1rem;
+                padding: 25px;
+            }
+
+            .comparison-card,
+            .principle-card {
+                padding: 25px 15px;
+            }
+
+            .card-label {
+                font-size: 1.4rem;
+            }
+
+            .card-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .principle-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+
+            .comparison-card:hover,
+            .principle-card:hover,
+            .tool-card:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="subtitle">조우성 변호사의 머스트노우 | 하도급법 편</div>
+            <h1>법은 최후의 무기다</h1>
+            <p class="tagline">법을 활용하되, 법으로 가지 마라</p>
+        </header>
+
+        <!-- Opening Quote -->
+        <div class="quote-box">
+            진정한 검객은 칼을 뽑지 않고 이긴다.<br>
+            칼집에 손을 댄 채, 그 서슬 퍼런 기운만으로<br>
+            상대를 굴복시키는 것이 최고의 검술이다.
+        </div>
+
+        <!-- Comparison Section -->
+        <section class="comparison-section">
+            <h2 class="comparison-title">🔄 실패 vs 성공: 극명한 대비</h2>
+
+            <div class="comparison-grid">
+                <!-- Wrong Approach -->
+                <div class="comparison-card wrong">
+                    <div class="card-icon">❌</div>
+                    <div class="card-label">잘못된 접근</div>
+                    <div class="card-content">
+                        <h3>상황</h3>
+                        <p>S사 김 대표는 H건설로부터 <span class="highlight-text">2억 원의 대금이 60-120일 지연</span>되는 상황에 분노했습니다.</p>
+
+                        <h3>대응</h3>
+                        <p>"<span class="highlight-text">이건 명백한 하도급법 위반입니다! 당장 공정거래위원회에 신고하고 법적 조치 취하겠습니다!</span>"</p>
+
+                        <h3>결과</h3>
+                        <p>❌ 협상의 문이 닫혔습니다<br>
+                        ❌ 상대방이 전화를 받지 않습니다<br>
+                        ❌ 관계가 악화되었습니다<br>
+                        ❌ 문제는 해결되지 않았습니다</p>
+                    </div>
+                </div>
+
+                <!-- Right Approach -->
+                <div class="comparison-card right">
+                    <div class="card-icon">✅</div>
+                    <div class="card-label">올바른 접근</div>
+                    <div class="card-content">
+                        <h3>전략 수정</h3>
+                        <p>1. <span class="highlight-text">하도급 전문 변호사</span>에게 법률 검토 의뢰<br>
+                        2. 법률 의견서 기반 '리스크 관리 보고서' 작성</p>
+
+                        <h3>대응</h3>
+                        <p>"본부장님, 내부 법무 검토 결과 현재 상황이 <span class="highlight-text">하도급법상 문제가 될 수 있다는 우려</span>가 제기되었습니다. 저희는 귀사와의 장기적 협력관계를 중요하게 생각하며, <span class="highlight-text">이 문제를 조용히 해결</span>하고 싶습니다."</p>
+
+                        <h3>결과</h3>
+                        <p>✅ 밀린 대금 2억 원을 90일 만기 어음으로 수령<br>
+                        ✅ 법적 분쟁 회피<br>
+                        ✅ 장기적 협력관계 유지<br>
+                        ✅ '규칙을 아는 파트너'로 대우받음</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow-container">
+                <div class="arrow">↓</div>
+                <p style="font-size: 1.3rem; color: #007C89; font-weight: 700; margin-top: 10px;">
+                    법을 위협이 아닌 '정보'로 제시하라
+                </p>
+            </div>
+        </section>
+
+        <!-- Sword Metaphor -->
+        <section class="sword-section">
+            <h2>법은 검(劍)이다</h2>
+            <p>
+                그러나 진정한 검객은 <span class="sword-highlight">칼을 뽑지 않고 이긴다</span>.<br><br>
+                칼집에 손을 댄 채, 그 서슬 퍼른 기운만으로 상대를 굴복시키는 것이 최고의 검술이다.<br><br>
+                법정에서 이기는 것보다 중요한 것은 <span class="sword-highlight">법정까지 가지 않고 정당한 실리를 취하는 것</span>이다.
+            </p>
+        </section>
+
+        <!-- Three Principles -->
+        <section class="principles-section">
+            <h2 class="principles-title">약자가 법을 다루는 3가지 원칙</h2>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-number">1</div>
+                    <h3>법은 최후의 카드</h3>
+                    <p>
+                        법은 첫 번째 카드가 아니라 <strong>최후의 카드</strong>입니다.<br><br>
+                        협상, 중재, 조정의 모든 수단을 동원한 후에야 법정으로 가야 합니다.<br><br>
+                        칼을 너무 빨리 뽑으면 협상의 여지가 사라집니다.
+                    </p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-number">2</div>
+                    <h3>법을 '정보'로 제시하라</h3>
+                    <p>
+                        <strong>"당신을 고소하겠다"</strong> (위협) ❌<br><br>
+                        <strong>"우리 모두에게 법적 리스크가 있다"</strong> (정보) ✅<br><br>
+                        법을 위협이 아닌 객관적 정보로 프레임하면, 상대방도 합리적으로 대응할 수 있습니다.
+                    </p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-number">3</div>
+                    <h3>명분 있는 퇴로 제공</h3>
+                    <p>
+                        상대를 구석으로 몰되, <strong>빠져나갈 사다리를 함께 내려놓아야</strong> 합니다.<br><br>
+                        Win-Win 해결책을 제시하면, 상대방도 체면을 잃지 않고 협상에 응할 수 있습니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legal Framework -->
+        <section class="legal-section">
+            <h2 class="legal-title">📚 법적 근거: 하도급법</h2>
+
+            <div class="legal-box">
+                <h3>하도급법 제13조 제1항 (대금 지급 의무)</h3>
+                <blockquote>
+                    "원사업자가 수급사업자에게 제조등의 위탁을 하는 경우에는 <strong>목적물등의 수령일부터 60일 이내</strong>의 가능한 짧은 기한으로 정한 지급기일까지 하도급대금을 지급하여야 한다"
+                </blockquote>
+            </div>
+
+            <div class="legal-box">
+                <h3>하도급법 제13조 제8항 (지연이자)</h3>
+                <blockquote>
+                    "원사업자가 하도급대금을 목적물등의 수령일부터 60일이 지난 후에 지급하는 경우에는 그 초과기간에 대하여 <strong>연 40% 이내에서 공정거래위원회가 정하여 고시하는 이율에 따른 이자</strong>를 지급하여야 한다"
+                </blockquote>
+                <div class="note">
+                    <h4>💡 핵심 포인트</h4>
+                    <p>60일을 초과한 지연은 그 자체로 법 위반이며, 고의나 과실을 요건으로 하지 않습니다.</p>
+                </div>
+            </div>
+
+            <div class="legal-box">
+                <h3>대법원 판례</h3>
+                <blockquote>
+                    "하도급법은 원사업자의 우월적 지위 남용을 방지하여 공정한 하도급거래질서를 확립하기 위한 <strong>강행규정</strong>"<br>
+                    <small>- 대법원 2013. 9. 26. 선고 2013다26746 판결</small>
+                </blockquote>
+                <blockquote style="margin-top: 20px;">
+                    "하도급대금 지급 지연은 그 자체로 법 위반이며, 원사업자의 <strong>고의나 과실을 요건으로 하지 않는다</strong>"<br>
+                    <small>- 대법원 2018. 3. 13. 선고 2016두59423 판결</small>
+                </blockquote>
+            </div>
+
+            <div class="legal-box">
+                <h3>하도급법 제25조 (제재)</h3>
+                <p style="margin-top: 20px; font-size: 1.1rem; line-height: 1.8;">
+                    • <strong>시정명령</strong>: 공정거래위원회의 행정 조치<br>
+                    • <strong>과징금</strong>: 하도급대금의 2배 이하<br>
+                    • <strong>형사처벌</strong>: 3년 이하 징역 또는 1억 원 이하 벌금
+                </p>
+                <div class="note" style="margin-top: 20px;">
+                    <h4>⚠️ 중요!</h4>
+                    <p>법적 권리 행사는 정당하나, 그 방법이 <strong>사회통념상 허용되는 한도를 넘어서는 안 됩니다</strong> (권리남용 법리).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Arsenal -->
+        <section class="tools-section">
+            <h2 class="tools-title">🛠️ 당신의 무기고</h2>
+            <p class="tools-subtitle">이 무기들을 숙지하고 칼을 갈아두되, 그 칼을 뽑지 않고 이기는 것이 약자의 생존 전략입니다</p>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">⚖️</div>
+                    <h4>공정거래위원회</h4>
+                    <p>하도급법 위반 신고 및 조사 기관. 과징금 부과 및 시정명령 권한 보유.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">🤝</div>
+                    <h4>대한상사중재원</h4>
+                    <p>법정 분쟁 전 중재를 통한 신속하고 경제적인 분쟁 해결 지원.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">👨‍⚖️</div>
+                    <h4>중소기업법률지원단</h4>
+                    <p>중소기업을 위한 무료 법률 상담 및 자문 서비스 제공.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">📋</div>
+                    <h4>하도급 전문 변호사</h4>
+                    <p>법률 검토 및 전략 수립. 법적 리스크 분석 보고서 작성.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">📮</div>
+                    <h4>내용증명 우편</h4>
+                    <p>공식적 의사표시의 증거. 칼을 칼집에서 빼내는 마지막 경고.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">📊</div>
+                    <h4>리스크 관리 보고서</h4>
+                    <p>법률 의견서 기반 객관적 정보 제공. 협상의 레버리지로 활용.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Message -->
+        <section class="final-message">
+            <h2>결론</h2>
+            <p class="big-quote">
+                법을 활용하되, 법으로 가지 마라.<br><br>
+                법은 방패이자 레버리지다.<br>
+                그러나 최선의 승리는 법정까지 가지 않고<br>
+                정당한 실리를 취하는 것이다.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>본 인포그래픽은 법률 정보 제공을 목적으로 하며, 구체적인 법률 자문을 대체할 수 없습니다.</p>
+            <p class="author">조우성 변호사</p>
+            <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.6;">
+                © 2025 Legal Infographic. Design inspired by Mailchimp Brand.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.comparison-card, .principle-card, .legal-box, .tool-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Interactive hover effects
+        document.querySelectorAll('.comparison-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Print functionality
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+        });
+
+        // Dynamic year for footer
+        const yearElement = document.querySelector('.footer p:last-child');
+        if (yearElement) {
+            const currentYear = new Date().getFullYear();
+            yearElement.textContent = yearElement.textContent.replace('2025', currentYear);
+        }
+    </script>
+</body>
+</html>
