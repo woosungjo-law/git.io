@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>승리보다 빛나는 순간 | 함께 완주한 꼴찌의 기록</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #2E3B4E 0%, #00796B 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2E3B4E;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        /* 헤더 영역 */
+        .header {
+            background: linear-gradient(135deg, #00796B 0%, #2E3B4E 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FFA726, #FFD54F);
+        }
+
+        .subtitle {
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .main-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .title-emphasis {
+            color: #FFD54F;
+            display: block;
+            font-size: 48px;
+            margin-top: 10px;
+        }
+
+        .header-desc {
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* 컨텐츠 영역 */
+        .content {
+            padding: 50px 40px;
+        }
+
+        /* 이벤트 정보 카드 */
+        .event-info {
+            background: linear-gradient(135deg, #F5F5F0 0%, #ffffff 100%);
+            border-left: 6px solid #FFA726;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-size: 24px;
+            font-weight: 900;
+            color: #00796B;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        /* 스토리 타임라인 */
+        .story-timeline {
+            position: relative;
+            margin: 60px 0;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #2E3B4E;
+            margin-bottom: 15px;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        .section-subtitle {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .timeline-track {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #00796B 0%, #FFA726 50%, #FFD54F 100%);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: white;
+            border: 2px solid #F5F5F0;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: #00796B;
+            box-shadow: 0 8px 30px rgba(0,121,107,0.15);
+            transform: translateY(-4px);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content:first-child {
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content:last-child {
+            text-align: left;
+        }
+
+        .timeline-marker {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 4px solid #00796B;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 900;
+            color: #00796B;
+            position: relative;
+            z-index: 2;
+            margin: auto;
+            box-shadow: 0 4px 20px rgba(0,121,107,0.2);
+        }
+
+        .marker-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            font-weight: 700;
+            color: #00796B;
+            white-space: nowrap;
+            background: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 2px solid #00796B;
+        }
+
+        .timeline-item:nth-child(odd) .marker-label {
+            right: 100%;
+            margin-right: 15px;
+        }
+
+        .timeline-item:nth-child(even) .marker-label {
+            left: 100%;
+            margin-left: 15px;
+        }
+
+        .timeline-time {
+            font-size: 13px;
+            color: #FFA726;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: #2E3B4E;
+            margin-bottom: 12px;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        .timeline-desc {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .highlight-text {
+            background: linear-gradient(180deg, transparent 60%, #FFD54F 60%);
+            font-weight: 700;
+            color: #2E3B4E;
+            padding: 0 4px;
+        }
+
+        /* 대비 섹션 */
+        .contrast-section {
+            margin: 60px 0;
+            background: linear-gradient(135deg, #F5F5F0 0%, #ffffff 100%);
+            border-radius: 16px;
+            padding: 50px 40px;
+        }
+
+        .contrast-grid {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contrast-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .contrast-card.left {
+            border-top: 6px solid #999;
+        }
+
+        .contrast-card.right {
+            border-top: 6px solid #FFD54F;
+        }
+
+        .contrast-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .contrast-title {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        .contrast-card.left .contrast-title {
+            color: #666;
+        }
+
+        .contrast-card.right .contrast-title {
+            color: #00796B;
+        }
+
+        .contrast-desc {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 900;
+            color: #FFA726;
+        }
+
+        /* 인용문 */
+        .quote-section {
+            background: #2E3B4E;
+            color: white;
+            border-radius: 16px;
+            padding: 50px;
+            margin: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            font-size: 200px;
+            color: rgba(255,255,255,0.05);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-size: 26px;
+            line-height: 1.8;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        .quote-highlight {
+            color: #FFD54F;
+            font-weight: 900;
+        }
+
+        .quote-author {
+            margin-top: 25px;
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        /* 성찰 질문 */
+        .reflection-section {
+            margin: 60px 0;
+        }
+
+        .reflection-card {
+            background: linear-gradient(135deg, #00796B 0%, #2E3B4E 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reflection-card::before {
+            content: '?';
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            font-size: 180px;
+            opacity: 0.05;
+            font-weight: 900;
+        }
+
+        .reflection-question {
+            font-size: 20px;
+            line-height: 1.8;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .reflection-emphasis {
+            color: #FFD54F;
+            font-weight: 900;
+            font-size: 22px;
+        }
+
+        /* 월요일의 지혜 */
+        .wisdom-section {
+            background: linear-gradient(135deg, #FFD54F 0%, #FFA726 100%);
+            border-radius: 16px;
+            padding: 50px 40px;
+            margin: 60px 0;
+        }
+
+        .wisdom-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #2E3B4E;
+            margin-bottom: 30px;
+            text-align: center;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        .wisdom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .wisdom-item {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .wisdom-item:hover {
+            transform: translateY(-6px);
+        }
+
+        .wisdom-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00796B, #2E3B4E);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .wisdom-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #2E3B4E;
+            font-weight: 600;
+        }
+
+        .wisdom-highlight {
+            color: #00796B;
+            font-weight: 900;
+        }
+
+        /* 마무리 메시지 */
+        .closing-section {
+            text-align: center;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #F5F5F0 0%, #ffffff 100%);
+            border-radius: 16px;
+            margin: 60px 0 40px;
+        }
+
+        .closing-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #2E3B4E;
+            margin-bottom: 20px;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        .closing-text {
+            font-size: 17px;
+            line-height: 1.9;
+            color: #444;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .closing-emphasis {
+            font-size: 20px;
+            font-weight: 900;
+            color: #00796B;
+            display: block;
+            margin-top: 20px;
+        }
+
+        /* 푸터 */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 14px;
+            border-top: 2px solid #F5F5F0;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 35px 25px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .title-emphasis {
+                font-size: 32px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .event-info {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 25px 20px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-marker {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                margin: 0;
+            }
+
+            .marker-label {
+                display: none;
+            }
+
+            .timeline-content {
+                text-align: left !important;
+                margin-left: 80px;
+            }
+
+            .contrast-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .vs-divider {
+                transform: rotate(90deg);
+                height: 40px;
+            }
+
+            .quote-text {
+                font-size: 20px;
+            }
+
+            .wisdom-title {
+                font-size: 24px;
+            }
+
+            .wisdom-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .closing-section,
+            .wisdom-section,
+            .contrast-section,
+            .quote-section {
+                padding: 35px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 24px;
+            }
+
+            .title-emphasis {
+                font-size: 28px;
+            }
+
+            .info-value {
+                font-size: 20px;
+            }
+
+            .timeline-title {
+                font-size: 18px;
+            }
+
+            .timeline-desc {
+                font-size: 14px;
+            }
+
+            .contrast-title {
+                font-size: 20px;
+            }
+
+            .quote-text {
+                font-size: 18px;
+            }
+
+            .reflection-question {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <div class="header">
+            <div class="subtitle">Rio 2016 Olympics</div>
+            <h1 class="main-title">
+                승리보다 빛나는 순간
+                <span class="title-emphasis">함께 완주한 꼴찌의 기록</span>
+            </h1>
+            <p class="header-desc">
+                2016년 리우 올림픽 트랙 위에서 펼쳐진 진정한 올림픽 정신의 순간.
+                넘어진 경쟁자를 일으켜 세우고 함께 결승선을 넘은 두 선수의 이야기
+            </p>
+        </div>
+
+        <div class="content">
+            <!-- 이벤트 정보 -->
+            <div class="event-info">
+                <div class="info-item">
+                    <div class="info-label">Event</div>
+                    <div class="info-value">여자 5,000m 예선</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Athletes</div>
+                    <div class="info-value">니키 햄블린 (28세)<br>애비 다고스티노 (24세)</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Final Time</div>
+                    <div class="info-value">17분 10초 02</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Rank</div>
+                    <div class="info-value">꼴찌 (2분 뒤처짐)</div>
+                </div>
+            </div>
+
+            <!-- 스토리 타임라인 -->
+            <div class="story-timeline">
+                <div class="timeline-header">
+                    <h2 class="section-title">트랙 위에서 펼쳐진 15분의 드라마</h2>
+                    <p class="section-subtitle">4년을 준비한 선수들의 꿈과 선택이 교차하는 순간들</p>
+                </div>
+
+                <div class="timeline-track">
+                    <div class="timeline-line"></div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-time">Race Start</div>
+                            <h3 class="timeline-title">4년을 기다린 15분</h3>
+                            <p class="timeline-desc">
+                                햄블린(28세)과 다고스티노(24세), 수억의 눈이 지켜보는 트랙 위에서
+                                <span class="highlight-text">4년의 청춘을 단 15분에 모두 건다</span>.
+                                승리만이 유일한 목표. 그들은 서로의 등을 쫓는 익명의 경쟁자였다.
+                            </p>
+                        </div>
+                        <div class="timeline-marker">
+                            <div class="marker-label">출발</div>
+                            🏃‍♀️
+                        </div>
+                        <div></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div></div>
+                        <div class="timeline-marker">
+                            <div class="marker-label">3km 지점</div>
+                            💥
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">3,000m Point</div>
+                            <h3 class="timeline-title">충돌의 순간</h3>
+                            <p class="timeline-desc">
+                                곡선 주로에서 햄블린이 쓰러진다. 뒤따르던 다고스티노가 피할 겨를 없이 함께 나뒹군다.
+                                <span class="highlight-text">모든 꿈이 산산조각 나는 순간</span>.
+                                절망이 트랙 위를 뒤덮는다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-time">The Choice</div>
+                            <h3 class="timeline-title">첫 번째 선택</h3>
+                            <p class="timeline-desc">
+                                다고스티노가 벌떡 일어선다. 그러나 달리지 않는다.
+                                주저앉은 햄블린에게 다가가 어깨를 붙잡는다.
+                                <span class="highlight-text">"일어나. 같이 가야지."</span>
+                                거친 숨소리 속에서도 단단한 목소리.
+                            </p>
+                        </div>
+                        <div class="timeline-marker">
+                            <div class="marker-label">결정</div>
+                            🤝
+                        </div>
+                        <div></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div></div>
+                        <div class="timeline-marker">
+                            <div class="marker-label">부상</div>
+                            😢
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">Injury</div>
+                            <h3 class="timeline-title">역전된 상황</h3>
+                            <p class="timeline-desc">
+                                이번엔 다고스티노의 무릎이 꺾인다.
+                                <span class="highlight-text">오른쪽 전방십자인대가 끊어지는 고통</span>.
+                                얼굴이 일그러진다. 이제 넘어진 쪽은 다고스티노다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-time">Together</div>
+                            <h3 class="timeline-title">함께 가는 길</h3>
+                            <p class="timeline-desc">
+                                이번에는 햄블린이 멈춰 선다. 동료를 버리지 않는다.
+                                <span class="highlight-text">기록도, 순위도, 메달도 모두 버리고 서로에게 기댄다</span>.
+                                6만 관중의 함성이 침묵으로 바뀐다.
+                            </p>
+                        </div>
+                        <div class="timeline-marker">
+                            <div class="marker-label">연대</div>
+                            💪
+                        </div>
+                        <div></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div></div>
+                        <div class="timeline-marker">
+                            <div class="marker-label">완주</div>
+                            🏁
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">Finish Line</div>
+                            <h3 class="timeline-title">빛나는 꼴찌</h3>
+                            <p class="timeline-desc">
+                                서로를 부축하며 걷고, 또 뛴다.
+                                <span class="highlight-text">17분 10초 02. 순위표 맨 아래의 기록</span>.
+                                그러나 6만 관중이 일어나 박수를 보낸다. 진정한 승리의 순간.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 대비 섹션 -->
+            <div class="contrast-section">
+                <div class="timeline-header">
+                    <h2 class="section-title">무엇을 선택할 것인가</h2>
+                    <p class="section-subtitle">본능과 이성이 명령하는 것 vs 인간이 선택한 것</p>
+                </div>
+
+                <div class="contrast-grid">
+                    <div class="contrast-card left">
+                        <div class="contrast-icon">🥇</div>
+                        <h3 class="contrast-title">승리의 논리</h3>
+                        <p class="contrast-desc">
+                            • 4년의 준비와 희생<br>
+                            • 조국의 명예<br>
+                            • 메달과 기록<br>
+                            • 개인의 꿈<br>
+                            • 본능의 명령: "앞서가라"<br>
+                            • 이성의 속삭임: "기록을 지켜라"<br>
+                            • 라이벌은 제거해야 할 장애물
+                        </p>
+                    </div>
+
+                    <div class="vs-divider">VS</div>
+
+                    <div class="contrast-card right">
+                        <div class="contrast-icon">🤝</div>
+                        <h3 class="contrast-title">인간의 선택</h3>
+                        <p class="contrast-desc">
+                            • 넘어진 동료를 일으켜 세움<br>
+                            • 상호 이해와 우정<br>
+                            • 연대와 페어플레이<br>
+                            • 인간의 존엄<br>
+                            • 마음의 결정: "함께 가자"<br>
+                            • 올림픽 정신의 실천<br>
+                            • 경쟁자는 함께 가야 할 동료
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 인용문 -->
+            <div class="quote-section">
+                <p class="quote-text">
+                    넘어진 라이벌은 제거해야 할 장애물이 아니라,<br>
+                    <span class="quote-highlight">함께 길을 가야 할 동료였다.</span><br><br>
+                    그들이 선택한 것은 메달의 영광이 아닌<br>
+                    <span class="quote-highlight">인간에 대한 예우였다.</span>
+                </p>
+                <div class="quote-author">
+                    - 애비 다고스티노: "그것이 올림픽 정신이라고 생각했다"
+                </div>
+            </div>
+
+            <!-- 성찰 질문 -->
+            <div class="reflection-section">
+                <div class="timeline-header">
+                    <h2 class="section-title">우리는 어떤가</h2>
+                    <p class="section-subtitle">일상은 보이지 않는 트랙 위의 경쟁이다</p>
+                </div>
+
+                <div class="reflection-card">
+                    <p class="reflection-question">
+                        나라면, <span class="reflection-emphasis">내 일생의 꿈이 걸린 그 순간</span><br>
+                        넘어진 경쟁자를 기꺼이 일으켜 세울 수 있었을까?
+                    </p>
+                </div>
+
+                <div class="reflection-card">
+                    <p class="reflection-question">
+                        나의 모든 것을 포기하고<br>
+                        <span class="reflection-emphasis">타인의 고통에 손을 내미는 행위의 무게</span>를<br>
+                        감당할 수 있을까?
+                    </p>
+                </div>
+
+                <div class="reflection-card">
+                    <p class="reflection-question">
+                        동료의 실수가 나의 기회가 되고,<br>
+                        타인의 좌절이 나의 안도가 되는<br>
+                        <span class="reflection-emphasis">오늘의 나는 어떤 선택을 하고 있는가?</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 월요일의 지혜 -->
+            <div class="wisdom-section">
+                <h2 class="wisdom-title">월요일의 지혜: 실천할 수 있는 작은 선택들</h2>
+                <div class="wisdom-grid">
+                    <div class="wisdom-item">
+                        <div class="wisdom-icon">💼</div>
+                        <p class="wisdom-text">
+                            동료의 책상이 유난히 무거워 보인다면,<br>
+                            '<span class="wisdom-highlight">내가 도울 것 없어요?</span>'라고 먼저 물어보라.
+                            당신의 작은 관심이 팀 전체를 일으킨다.
+                        </p>
+                    </div>
+
+                    <div class="wisdom-item">
+                        <div class="wisdom-icon">🛤️</div>
+                        <p class="wisdom-text">
+                            오직 앞만 보고 달리는 스스로를 발견할 때,<br>
+                            잠시 멈춰 <span class="wisdom-highlight">내가 가는 길이 누군가를 넘어뜨리고 있지는 않은지</span> 성찰해보라.
+                        </p>
+                    </div>
+
+                    <div class="wisdom-item">
+                        <div class="wisdom-icon">🤗</div>
+                        <p class="wisdom-text">
+                            힘든 시간을 보내는 친구에게<br>
+                            섣부른 조언보다 <span class="wisdom-highlight">그저 곁을 지키고 이야기를 들어주는 것만으로도</span> 충분하다.
+                        </p>
+                    </div>
+
+                    <div class="wisdom-item">
+                        <div class="wisdom-icon">👨‍👩‍👧‍👦</div>
+                        <p class="wisdom-text">
+                            자녀에게 "오늘 1등 했어?"보다<br>
+                            "<span class="wisdom-highlight">경쟁하면서 무엇을 느꼈니? 넘어진 친구는 없었어?</span>"라고 물어보라.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 마무리 메시지 -->
+            <div class="closing-section">
+                <h2 class="closing-title">진정한 승리는</h2>
+                <p class="closing-text">
+                    400미터 트랙은 그 순간 승패를 가르는 투기장이 아니라,
+                    인간의 존엄을 증명하는 거대한 무대가 되었습니다.
+                    <br><br>
+                    우승자보다 2분이나 뒤처진 17분 10초 02라는 기록은
+                    순위표 맨 아래에 있지만,
+                    <br>
+                    <span class="closing-emphasis">
+                        가장 빛나는 올림픽 정신을 기록한 숫자입니다.
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <!-- 푸터 -->
+        <div class="footer">
+            <p>결과보다 과정의 가치와 동료의 소중함을 기억하는 하루 되시기를</p>
+        </div>
+    </div>
+</body>
+</html>
