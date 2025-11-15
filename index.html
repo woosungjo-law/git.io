@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사마양저의 연출: 당신의 브랜드를 만들어라</title>
+    <title>당신의 무대를 연출하라 🎭</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,711 +18,646 @@
         }
 
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: #F7F5F2;
-            color: #000000;
-            line-height: 1.7;
-            padding: 20px;
+            font-family: 'Quicksand', 'Nunito', sans-serif;
+            background: linear-gradient(180deg, #FFF2B2 0%, #A2D2FF 100%);
+            color: #3D405B;
+            line-height: 1.8;
             overflow-x: hidden;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: #FFFFFF;
-            padding: 40px 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 40px 20px;
         }
 
-        /* 제목 섹션 */
-        .header {
+        /* 헤더 */
+        .hero {
             text-align: center;
-            margin-bottom: 60px;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(61, 64, 91, 0.15);
             position: relative;
+            overflow: hidden;
         }
 
-        .header h1 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-            line-height: 1.3;
-            position: relative;
-            display: inline-block;
-        }
-
-        .header h1::after {
+        .hero::before {
             content: '';
             position: absolute;
-            bottom: -8px;
-            left: 10%;
-            right: 10%;
-            height: 4px;
-            background: #FF6B35;
-            border-radius: 2px;
-            transform: rotate(-0.5deg);
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #A2D2FF, #FFC8DD, #CDB4DB, #FFF2B2);
         }
 
-        .subtitle {
+        .hero h1 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #3D405B;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .hero .emoji {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero p {
             font-size: 1.3rem;
-            color: #555;
-            margin-top: 25px;
-            font-weight: 400;
+            color: #7D7F94;
+            font-weight: 500;
         }
 
-        /* 스케치 박스 공통 스타일 */
-        .sketch-box {
-            background: #FFFFFF;
-            border: 3px solid #000000;
-            border-radius: 15px 12px 18px 10px;
-            padding: 25px;
+        /* 섹션 공통 */
+        .section {
+            background: white;
+            border-radius: 40px;
+            padding: 50px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(61, 64, 91, 0.1);
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Nunito', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #3D405B;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #5A5C73;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, #FFF2B2 60%);
+            padding: 2px 6px;
+            font-weight: 600;
+            color: #3D405B;
+        }
+
+        /* 물결 구분선 */
+        .wave-divider {
+            width: 100%;
+            height: 60px;
+            margin: 30px 0;
+        }
+
+        /* SVG 일러스트 컨테이너 */
+        .illustration-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .illustration-container svg {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .illustration-container svg:hover {
+            transform: scale(1.05);
+        }
+
+        /* 섹션 1: 무대 뒤의 리더 */
+        .section-1 {
+            background: linear-gradient(135deg, #FFC8DD 0%, #FFE4E9 100%);
+        }
+
+        /* 섹션 2: 전설적인 첫 공연 */
+        .section-2 {
+            background: linear-gradient(135deg, #CDB4DB 0%, #E8DFF5 100%);
+        }
+
+        .quote-box {
+            background: #3D405B;
+            color: white;
+            padding: 30px;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
             margin: 30px 0;
             position: relative;
-            box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
-            transform: rotate(-0.3deg);
+            box-shadow: 0 8px 30px rgba(61, 64, 91, 0.3);
         }
 
-        .sketch-box.rotate-right {
-            transform: rotate(0.5deg);
-        }
-
-        .sketch-box.highlight {
-            background: #FFF9F5;
-            border-color: #FF6B35;
-            border-width: 4px;
-        }
-
-        /* 문제 제시 섹션 */
-        .problem-section {
-            background: #F9F9F9;
-            padding: 30px;
-            border-left: 6px solid #000000;
-            margin: 40px 0;
-            position: relative;
-        }
-
-        .problem-section::before {
-            content: '❌';
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            font-size: 2.5rem;
-        }
-
-        .problem-section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            font-weight: 900;
-        }
-
-        .problem-section p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .problem-highlight {
-            background: #FFE8E0;
-            padding: 20px;
-            border-radius: 8px;
-            font-style: italic;
-            font-weight: 700;
-            margin-top: 20px;
-            border-left: 4px solid #FF6B35;
-        }
-
-        /* 핵심 메시지 박스 */
-        .key-message {
-            background: #000000;
-            color: #FFFFFF;
-            padding: 35px;
-            border-radius: 20px 15px 25px 18px;
-            margin: 50px 0;
-            text-align: center;
-            position: relative;
-            transform: rotate(-0.8deg);
-        }
-
-        .key-message::before {
-            content: '💡';
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3rem;
-        }
-
-        .key-message h2 {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            color: #FF6B35;
-        }
-
-        .key-message p {
-            font-size: 1.3rem;
-            line-height: 1.9;
-            font-weight: 700;
-        }
-
-        /* 역사적 사례 섹션 */
-        .history-section {
-            margin: 60px 0;
-            position: relative;
-        }
-
-        .history-title {
-            font-size: 2.2rem;
-            font-weight: 900;
-            margin-bottom: 40px;
-            text-align: center;
-            position: relative;
-        }
-
-        .history-title::before {
-            content: '⚔️';
-            margin-right: 15px;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 40px;
-            border-left: 4px dashed #000000;
-        }
-
-        .timeline-item {
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -47px;
-            top: 10px;
-            width: 14px;
-            height: 14px;
-            background: #FF6B35;
-            border: 3px solid #000000;
-            border-radius: 50%;
-        }
-
-        .timeline-content {
-            background: #FFF9F5;
-            padding: 25px;
-            border-radius: 12px 18px 10px 15px;
-            border: 2px solid #E5E5E5;
-        }
-
-        .timeline-content h3 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-            color: #FF6B35;
-        }
-
-        .timeline-content p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .timeline-quote {
-            background: #000000;
-            color: #FFFFFF;
-            padding: 25px;
-            border-radius: 10px;
-            font-style: italic;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin: 20px 0;
-            text-align: center;
-            position: relative;
-        }
-
-        .timeline-quote::before {
+        .quote-box::before {
             content: '"';
-            font-size: 4rem;
             position: absolute;
-            top: -10px;
+            top: -20px;
             left: 20px;
-            color: #FF6B35;
+            font-size: 5rem;
+            color: #CDB4DB;
             font-family: Georgia, serif;
         }
 
-        /* 원리 분석 섹션 */
-        .principle-section {
-            background: linear-gradient(135deg, #FFF9F5 0%, #FFFFFF 100%);
-            padding: 40px;
-            border: 4px solid #000000;
-            border-radius: 20px;
-            margin: 50px 0;
-            position: relative;
-            transform: rotate(0.4deg);
+        /* 섹션 3: 당신의 무대 만들기 */
+        .section-3 {
+            background: linear-gradient(135deg, #A2D2FF 0%, #D4E7FF 100%);
         }
 
-        .principle-section h2 {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .principle-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .principle-card {
-            background: #FFFFFF;
+        .insight-box {
+            background: white;
             padding: 25px;
-            border: 3px solid #000000;
-            border-radius: 15px 10px 12px 18px;
-            position: relative;
-        }
-
-        .principle-card::before {
-            content: '→';
-            position: absolute;
-            top: -15px;
-            left: 15px;
-            font-size: 2rem;
-            font-weight: 900;
-            color: #FF6B35;
-        }
-
-        .principle-card h3 {
-            font-size: 1.3rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-            margin-top: 10px;
-        }
-
-        .principle-card p {
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        /* 현대 적용 섹션 */
-        .modern-section {
-            margin: 60px 0;
-        }
-
-        .modern-section h2 {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        .modern-section h2::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: #FF6B35;
-            margin: 15px auto 0;
-            border-radius: 2px;
-        }
-
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 20px;
-            align-items: center;
-            margin: 40px 0;
-        }
-
-        .comparison-item {
-            background: #F9F9F9;
-            padding: 30px;
-            border-radius: 15px;
-            border: 3px solid #000000;
-            text-align: center;
-        }
-
-        .comparison-item.old {
-            background: #FFE8E0;
-        }
-
-        .comparison-item.new {
-            background: #E8FFE0;
-        }
-
-        .comparison-arrow {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #FF6B35;
-        }
-
-        .comparison-item h3 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-        }
-
-        .comparison-item p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        /* 실천 방안 섹션 */
-        .action-section {
-            background: #FF6B35;
-            color: #FFFFFF;
-            padding: 50px 40px;
             border-radius: 20px;
-            margin: 60px 0;
-            position: relative;
+            border-left: 6px solid #A2D2FF;
+            margin: 25px 0;
+            box-shadow: 0 5px 20px rgba(162, 210, 255, 0.2);
         }
 
-        .action-section h2 {
-            font-size: 2.2rem;
-            font-weight: 900;
-            margin-bottom: 40px;
-            text-align: center;
+        /* 섹션 4: 실천 체크리스트 */
+        .section-4 {
+            background: linear-gradient(135deg, #FFF2B2 0%, #FFF9D9 100%);
         }
 
         .action-list {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 25px;
+            margin-top: 40px;
         }
 
         .action-item {
-            background: #FFFFFF;
-            color: #000000;
+            background: white;
             padding: 30px;
-            border-radius: 15px 12px 18px 10px;
-            border: 4px solid #000000;
-            position: relative;
-            transform: rotate(-0.5deg);
+            border-radius: 25px;
+            box-shadow: 0 5px 25px rgba(61, 64, 91, 0.1);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .action-item:nth-child(2) {
-            transform: rotate(0.3deg);
-        }
-
-        .action-item:nth-child(3) {
-            transform: rotate(-0.2deg);
+        .action-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(61, 64, 91, 0.2);
         }
 
         .action-number {
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            background: #000000;
-            color: #FF6B35;
-            width: 45px;
-            height: 45px;
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #FFC8DD, #CDB4DB);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            font-weight: 900;
-            border: 3px solid #FFFFFF;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
         }
 
-        .action-item h3 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-            margin-top: 10px;
-            color: #FF6B35;
+        .action-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #3D405B;
+            margin-bottom: 10px;
         }
 
-        .action-item p {
-            font-size: 1.1rem;
+        .action-content p {
+            font-size: 1.05rem;
             line-height: 1.8;
+            color: #5A5C73;
         }
 
-        /* 마무리 메시지 */
+        .example {
+            background: #FFF9D9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 10px;
+            font-style: italic;
+            font-size: 1rem;
+            border-left: 3px solid #FFC8DD;
+        }
+
+        /* 마무리 */
         .closing {
             text-align: center;
-            margin: 60px 0 20px;
-            padding: 40px;
-            background: #F9F9F9;
-            border-radius: 15px;
-            border: 3px dashed #000000;
+            background: white;
+            padding: 50px 30px;
+            border-radius: 40px;
+            margin-top: 50px;
+            box-shadow: 0 15px 50px rgba(61, 64, 91, 0.15);
         }
 
-        .closing p {
-            font-size: 1.3rem;
-            font-weight: 700;
-            line-height: 1.9;
-            font-style: italic;
-        }
-
-        .closing .highlight-text {
-            color: #FF6B35;
-            font-weight: 900;
+        .closing-text {
             font-size: 1.5rem;
-            display: block;
-            margin-top: 20px;
-        }
-
-        /* 손그림 화살표 */
-        .arrow-sketch {
-            width: 100%;
-            height: 60px;
-            margin: 20px 0;
-        }
-
-        /* 강조 밑줄 */
-        .underline-sketch {
-            position: relative;
-            display: inline;
-            background: linear-gradient(180deg, transparent 60%, #FFE8E0 60%);
             font-weight: 700;
+            color: #3D405B;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .closing-highlight {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #A2D2FF, #FFC8DD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 애니메이션 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .wiggle-animation {
+            animation: wiggle 2s ease-in-out infinite;
         }
 
         /* 반응형 */
         @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
-            }
-
-            .header h1 {
+            .hero h1 {
                 font-size: 2rem;
             }
 
-            .subtitle {
-                font-size: 1.1rem;
+            .hero .emoji {
+                font-size: 3rem;
             }
 
-            .history-title,
-            .modern-section h2,
-            .action-section h2 {
-                font-size: 1.8rem;
+            .section {
+                padding: 30px 25px;
+                border-radius: 25px;
             }
 
-            .key-message h2 {
-                font-size: 1.6rem;
+            .section-title {
+                font-size: 1.7rem;
             }
 
-            .key-message p {
-                font-size: 1.1rem;
+            .section-text {
+                font-size: 1.05rem;
             }
 
-            .principle-grid {
-                grid-template-columns: 1fr;
+            .action-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
             }
 
-            .comparison {
-                grid-template-columns: 1fr;
-            }
-
-            .comparison-arrow {
-                transform: rotate(90deg);
-            }
-
-            .timeline {
-                padding-left: 30px;
-            }
-
-            .action-section {
-                padding: 40px 20px;
+            .illustration-container svg {
+                max-width: 100%;
             }
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-
             .container {
                 padding: 20px 15px;
             }
 
-            .header h1 {
+            .hero {
+                padding: 40px 20px;
+                border-radius: 25px;
+            }
+
+            .hero h1 {
                 font-size: 1.6rem;
             }
 
-            .subtitle {
-                font-size: 1rem;
+            .section-title {
+                font-size: 1.5rem;
             }
 
-            .sketch-box {
-                padding: 20px;
+            .closing-text {
+                font-size: 1.2rem;
             }
 
-            .problem-section {
-                padding: 20px;
-            }
-
-            .key-message {
-                padding: 25px;
-            }
-
-            .action-item {
-                padding: 25px 20px;
+            .closing-highlight {
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 헤더 -->
-        <header class="header">
-            <h1>사마양저의 연출:<br>당신의 브랜드를 만들어라</h1>
-            <p class="subtitle">권위는 주어지는 것이 아니라, 쟁취하는 것이다</p>
-        </header>
-
-        <!-- 문제 제시 -->
-        <section class="problem-section">
-            <h2>김 팀장의 딜레마</h2>
-            <p>수요일 오후 3시, 김 팀장이 부임한 첫 주가 막 지났다. 회의실 공기, 냉랭하다.</p>
-            <p>그는 업계에서 알아주는 엑셀 전문가다. 누구보다 성실하다는 것도 모두가 안다. 그런데 팀원들이 그를 따르지 않는다.</p>
-            <p>김 팀장은 '열심히 하겠다'고 했다. 매일 가장 늦게 퇴근한다. 그러나 팀은 요지부동이다.</p>
-            <div class="problem-highlight">
-                그는 '팀장'이라는 직함을 받았을 뿐, '리더'라는 자리는 얻지 못했다.
-            </div>
-        </section>
-
-        <!-- 핵심 메시지 -->
-        <div class="key-message">
-            <h2>본질은 '연출'의 실패다</h2>
-            <p>이 상황의 본질은 능력 문제가 아니다. '자기연출'의 완벽한 실패다.</p>
-            <p style="margin-top: 20px; font-size: 1.4rem;">세상은 오직 당신이 '보여준' 것, '증명한' 것만을 믿는다.</p>
+        <!-- 히어로 섹션 -->
+        <div class="hero">
+            <span class="emoji">🎭</span>
+            <h1>당신의 무대를 연출하라</h1>
+            <p>리더십이란 스포트라이트 아래 서는 용기입니다</p>
         </div>
 
-        <!-- 역사적 사례 -->
-        <section class="history-section">
-            <h2 class="history-title">장군의 칼, 군대의 문</h2>
+        <!-- 섹션 1: 무대 뒤의 리더 -->
+        <div class="section section-1">
+            <h2 class="section-title">🌑 무대 뒤에 숨은 리더</h2>
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>약속</h3>
-                        <p>제나라 경공이 사마양저를 장군으로 임명했다. 신분이 미천한 그였다.</p>
-                        <p>양저는 왕의 총신 장가를 감군으로 요청하고 약속을 잡았다.</p>
-                        <div class="timeline-quote">
-                            내일 정오, 군문에서 만납시다
-                        </div>
-                    </div>
-                </div>
+            <div class="illustration-container">
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 무대 커튼 -->
+                    <rect x="0" y="0" width="250" height="400" fill="#8B3A62" opacity="0.7"/>
+                    <rect x="350" y="0" width="250" height="400" fill="#8B3A62" opacity="0.7"/>
 
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>준비</h3>
-                        <p>다음 날, 양저는 먼저 도착해 해시계를 세우고 군법을 정비했다.</p>
-                        <p>그러나 장가는 오만했다. 친지들과의 송별 연회를 즐기느라 저녁이 되어서야 나타났다.</p>
-                    </div>
-                </div>
+                    <!-- 빈 무대 -->
+                    <ellipse cx="300" cy="350" rx="150" ry="30" fill="#E8DFF5" opacity="0.5"/>
+                    <circle cx="300" cy="200" r="80" fill="#FFF9D9" opacity="0.3"/>
 
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>처형</h3>
-                        <p>양저는 군법관을 불렀다. "약속한 시간에 늦은 자의 죄는 무엇인가?"</p>
-                        <p>"참수입니다."</p>
-                        <p>양저는 즉시 장가의 목을 베었다.</p>
-                        <div class="timeline-quote">
-                            삼군이 모두 진동했다
-                        </div>
-                    </div>
-                </div>
+                    <!-- 커튼 뒤의 작은 캐릭터 (김 팀장) -->
+                    <g class="float-animation">
+                        <circle cx="100" cy="280" r="25" fill="#FFC8DD"/>
+                        <circle cx="93" cy="275" r="4" fill="#3D405B"/>
+                        <circle cx="107" cy="275" r="4" fill="#3D405B"/>
+                        <path d="M 95 285 Q 100 290 105 285" stroke="#3D405B" stroke-width="2" fill="none"/>
+                        <rect x="75" y="305" width="50" height="60" rx="10" fill="#A2D2FF"/>
+                        <line x1="75" y1="320" x2="50" y2="340" stroke="#FFC8DD" stroke-width="6" stroke-linecap="round"/>
+                        <line x1="125" y1="320" x2="150" y2="340" stroke="#FFC8DD" stroke-width="6" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- 지루해하는 관객들 -->
+                    <g opacity="0.6">
+                        <circle cx="450" cy="300" r="20" fill="#CDB4DB"/>
+                        <text x="445" y="310" font-size="24">😴</text>
+
+                        <circle cx="520" cy="280" r="20" fill="#CDB4DB"/>
+                        <text x="515" y="290" font-size="24">🥱</text>
+
+                        <circle cx="480" cy="340" r="20" fill="#CDB4DB"/>
+                        <text x="475" y="350" font-size="24">😑</text>
+                    </g>
+
+                    <!-- 물음표 -->
+                    <text x="280" y="150" font-size="60" fill="#3D405B" opacity="0.3" class="wiggle-animation">?</text>
+                </svg>
             </div>
-        </section>
 
-        <!-- 원리 분석 -->
-        <section class="principle-section">
-            <h2>권위는 어떻게 탄생하는가</h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px;">
-                양저의 행동은 단순한 분노의 표출이 아니었다. 이것은 철저히 계산된 연출이었다.
+            <p class="section-text">
+                수요일 오후 3시, 김 팀장이 부임한 첫 주. 그는 <span class="highlight">엑셀 전문가</span>이고, 누구보다 성실합니다.
+                매일 가장 늦게 퇴근하죠. 하지만 팀원들은 그를 따르지 않습니다.
+            </p>
+            <p class="section-text">
+                왜일까요? 그는 분명 존재하는데, 팀원들에게는 <span class="highlight">없는 사람이나 마찬가지</span>입니다.
+                마치 무대 뒤에 숨어있는 배우처럼, 관객(팀원)들은 빈 무대만 바라보고 있습니다.
             </p>
 
-            <div class="principle-grid">
-                <div class="principle-card">
-                    <h3>상징의 선택</h3>
-                    <p>왕의 총신 장가는 '쇼크'를 위한 완벽한 제물이었다. 가장 강력한 상징을 부숴 자신의 브랜드를 세웠다.</p>
-                </div>
-
-                <div class="principle-card">
-                    <h3>시스템의 구축</h3>
-                    <p>개인적 원한이 아니라 '군법'이라는 시스템을 내세웠다. 법 앞에는 예외가 없다는 절대적 원칙.</p>
-                </div>
-
-                <div class="principle-card">
-                    <h3>행동의 증명</h3>
-                    <p>권위는 '선언'이 아닌 '사건'으로 탄생한다. 이름과 실체가 일치해야 한다.</p>
-                </div>
+            <div class="insight-box">
+                <strong>💡 핵심 통찰:</strong> 직함(Position)은 무대 티켓일 뿐입니다.
+                스포트라이트 아래 서지 않으면, 관객은 당신을 볼 수 없습니다.
             </div>
-        </section>
+        </div>
 
-        <!-- 현대 적용 -->
-        <section class="modern-section">
-            <h2>오늘날 당신의 '장가'는 무엇인가</h2>
+        <svg class="wave-divider" viewBox="0 0 1200 100" preserveAspectRatio="none">
+            <path d="M0,50 Q300,80 600,50 T1200,50 L1200,100 L0,100 Z" fill="white" opacity="0.3"/>
+        </svg>
 
-            <div class="comparison">
-                <div class="comparison-item old">
-                    <h3>과거의 참수</h3>
-                    <p>왕의 총신 장가의 목을 베어 군법의 절대성을 증명</p>
-                </div>
+        <!-- 섹션 2: 전설적인 첫 공연 -->
+        <div class="section section-2">
+            <h2 class="section-title">⚔️ 전설적인 첫 공연</h2>
 
-                <div class="comparison-arrow">→</div>
+            <div class="illustration-container">
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 무대 조명 -->
+                    <circle cx="300" cy="200" r="150" fill="#FFF2B2" opacity="0.4"/>
+                    <circle cx="300" cy="200" r="120" fill="#FFF2B2" opacity="0.3"/>
 
-                <div class="comparison-item new">
-                    <h3>현대의 참수</h3>
-                    <p>조직 내 만연한 관행과 비효율을 공개적으로 해결</p>
-                </div>
+                    <!-- 사마양저 (중앙의 캐릭터) -->
+                    <g class="float-animation">
+                        <!-- 몸 -->
+                        <circle cx="300" cy="200" r="35" fill="#FFD4A3"/>
+                        <!-- 눈 -->
+                        <circle cx="290" cy="195" r="5" fill="#3D405B"/>
+                        <circle cx="310" cy="195" r="5" fill="#3D405B"/>
+                        <!-- 입 (단호한 표정) -->
+                        <line x1="290" y1="210" x2="310" y2="210" stroke="#3D405B" stroke-width="3" stroke-linecap="round"/>
+                        <!-- 몸통 -->
+                        <rect x="265" y="235" width="70" height="90" rx="15" fill="#8B3A62"/>
+                        <!-- 팔 (칼 들고 있는) -->
+                        <line x1="265" y1="250" x2="230" y2="270" stroke="#FFD4A3" stroke-width="10" stroke-linecap="round"/>
+                        <line x1="335" y1="250" x2="370" y2="230" stroke="#FFD4A3" stroke-width="10" stroke-linecap="round"/>
+                        <!-- 칼 -->
+                        <rect x="370" y="215" width="8" height="40" fill="#C0C0C0"/>
+                        <polygon points="374,210 374,215 384,205" fill="#E0E0E0"/>
+                        <circle cx="374" cy="258" r="6" fill="#D4AF37"/>
+                    </g>
+
+                    <!-- 해시계 -->
+                    <g>
+                        <circle cx="450" cy="280" r="40" fill="#FFF9D9" stroke="#3D405B" stroke-width="3"/>
+                        <line x1="450" y1="280" x2="450" y2="250" stroke="#3D405B" stroke-width="3"/>
+                        <text x="430" y="350" font-size="16" fill="#3D405B" font-weight="600">정오</text>
+                    </g>
+
+                    <!-- 놀란 관중들 -->
+                    <g>
+                        <text x="50" y="340" font-size="40">😱</text>
+                        <text x="120" y="360" font-size="40">😲</text>
+                        <text x="500" y="340" font-size="40">😨</text>
+                        <text x="540" y="370" font-size="40">😰</text>
+                    </g>
+
+                    <!-- 진동 효과 -->
+                    <text x="150" y="100" font-size="30" fill="#3D405B" opacity="0.5" class="wiggle-animation">⚡⚡⚡</text>
+                    <text x="400" y="120" font-size="30" fill="#3D405B" opacity="0.5" class="wiggle-animation">⚡⚡⚡</text>
+                </svg>
             </div>
 
-            <div class="sketch-box highlight">
-                <p style="font-size: 1.2rem; font-weight: 700; line-height: 1.9;">
-                    당신의 브랜드를 세우는 첫 번째 행동은,
-                    <span class="underline-sketch">당신의 가장 중요한 원칙을 지키기 위해 가장 어려운 상징을 깨뜨리는 것</span>이다.
-                </p>
+            <p class="section-text">
+                기원전 5세기, 제나라. 신분이 미천한 사마양저가 장군으로 임명됩니다.
+                그는 왕의 총신 장가와 <span class="highlight">"내일 정오, 군문에서 만나자"</span>고 약속합니다.
+            </p>
+            <p class="section-text">
+                다음 날, 양저는 먼저 도착해 해시계를 세우고 군법을 정비했습니다.
+                하지만 오만한 장가는 친지들과 술잔을 기울이며 시간을 보냅니다. 저녁이 되어서야 나타났죠.
+            </p>
+            <p class="section-text">
+                양저는 군법관에게 묻습니다. "약속 시간에 늦은 자의 죄는?" "참수입니다."
+                그는 즉시 왕의 총신, 장가의 목을 베었습니다.
+            </p>
+
+            <div class="quote-box">
+                삼군이 모두 진동했다.
             </div>
 
-            <div class="sketch-box rotate-right">
-                <p style="font-size: 1.15rem; line-height: 1.8;">
-                    '자기연출'은 거짓 포장이나 쇼맨십이 아니다.
-                    그것은 당신의 핵심 가치와 실력을, 타인이 인식할 수 있는 '행동'으로 번역하는 치열한 기술이다.
-                </p>
-            </div>
-        </section>
+            <p class="section-text">
+                이것은 분노가 아니었습니다. <span class="highlight">철저히 계산된 첫 공연</span>이었습니다.
+                그는 가장 강력한 상징(왕의 총신)을 무대 위에서 깨뜨려,
+                <span class="highlight">"법 앞에는 예외가 없다"</span>는 자신의 브랜드를 단 한 번에 각인시켰습니다.
+            </p>
 
-        <!-- 실천 방안 -->
-        <section class="action-section">
-            <h2>내일 실천할 3가지</h2>
+            <div class="insight-box">
+                <strong>💡 핵심 통찰:</strong> 권위는 '선언'이 아닌 '사건'으로 탄생합니다.
+                무대 위의 극적인 순간이 당신의 브랜드를 만듭니다.
+            </div>
+        </div>
+
+        <svg class="wave-divider" viewBox="0 0 1200 100" preserveAspectRatio="none">
+            <path d="M0,50 Q300,20 600,50 T1200,50 L1200,100 L0,100 Z" fill="white" opacity="0.3"/>
+        </svg>
+
+        <!-- 섹션 3: 당신의 무대 만들기 -->
+        <div class="section section-3">
+            <h2 class="section-title">🎨 당신의 무대를 만들어라</h2>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 작업대 -->
+                    <rect x="150" y="250" width="300" height="15" rx="7" fill="#8B7355"/>
+                    <rect x="170" y="265" width="20" height="100" fill="#A0826D"/>
+                    <rect x="410" y="265" width="20" height="100" fill="#A0826D"/>
+
+                    <!-- 연출가 캐릭터 -->
+                    <g class="float-animation">
+                        <circle cx="300" cy="180" r="30" fill="#FFD4A3"/>
+                        <circle cx="292" cy="175" r="4" fill="#3D405B"/>
+                        <circle cx="308" cy="175" r="4" fill="#3D405B"/>
+                        <path d="M 295 188 Q 300 192 305 188" stroke="#3D405B" stroke-width="2" fill="none"/>
+                        <rect x="270" y="210" width="60" height="70" rx="12" fill="#A2D2FF"/>
+                        <line x1="270" y1="230" x2="240" y2="250" stroke="#FFD4A3" stroke-width="8" stroke-linecap="round"/>
+                        <line x1="330" y1="230" x2="360" y2="250" stroke="#FFD4A3" stroke-width="8" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- 도구들 -->
+                    <g>
+                        <!-- 연필 -->
+                        <rect x="180" y="220" width="10" height="50" fill="#FFC8DD" transform="rotate(-20 185 245)"/>
+                        <polygon points="185,215 180,220 190,220" fill="#3D405B"/>
+
+                        <!-- 자 -->
+                        <rect x="380" y="225" width="60" height="8" fill="#FFF2B2"/>
+                        <line x1="380" y1="225" x2="380" y2="233" stroke="#3D405B" stroke-width="1"/>
+                        <line x1="410" y1="225" x2="410" y2="233" stroke="#3D405B" stroke-width="1"/>
+                        <line x1="440" y1="225" x2="440" y2="233" stroke="#3D405B" stroke-width="1"/>
+
+                        <!-- 브랜드 도안 (종이) -->
+                        <rect x="250" y="230" width="100" height="30" rx="5" fill="white" stroke="#3D405B" stroke-width="2"/>
+                        <text x="270" y="250" font-size="16" fill="#3D405B" font-weight="700">MY BRAND</text>
+                    </g>
+
+                    <!-- 반짝이는 별들 -->
+                    <text x="140" y="150" font-size="30" class="wiggle-animation">✨</text>
+                    <text x="430" y="170" font-size="30" class="wiggle-animation">✨</text>
+                    <text x="320" y="120" font-size="40" class="wiggle-animation">💡</text>
+
+                    <!-- 하트 -->
+                    <text x="200" y="200" font-size="25" class="float-animation">💖</text>
+                    <text x="380" y="190" font-size="25" class="float-animation">💖</text>
+                </svg>
+            </div>
+
+            <p class="section-text">
+                오늘날 우리는 누구의 목도 벨 수 없습니다. 하지만 원리는 같습니다.
+                당신의 리더십을 브랜드로 만들고 싶다면, <span class="highlight">당신의 '장가'</span>를 찾아야 합니다.
+            </p>
+            <p class="section-text">
+                그것은 조직 내 만연한 <span class="highlight">'관행'이라는 이름의 비효율</span>일 수 있습니다.
+                "좋은 게 좋은 것"이라는 안일함이거나, 무책임한 태만일 수 있죠.
+            </p>
+            <p class="section-text">
+                새로 부임한 리더가 첫 주에, 모두가 불가능하다 말했던 고질적 문제를 공개적으로 해결하는 것.
+                이것이 <span class="highlight">현대의 '참수'</span>입니다.
+            </p>
+
+            <div class="insight-box">
+                <strong>💡 핵심 통찰:</strong> '자기연출'은 거짓 포장이 아닙니다.
+                당신의 핵심 가치를 타인이 인식할 수 있는 '행동'으로 번역하는 치열한 기술입니다.
+            </div>
+        </div>
+
+        <svg class="wave-divider" viewBox="0 0 1200 100" preserveAspectRatio="none">
+            <path d="M0,50 Q300,80 600,50 T1200,50 L1200,100 L0,100 Z" fill="white" opacity="0.3"/>
+        </svg>
+
+        <!-- 섹션 4: 실천 체크리스트 -->
+        <div class="section section-4">
+            <h2 class="section-title">✅ 내일 당신의 무대: 리허설 3단계</h2>
+
+            <div class="illustration-container">
+                <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 체크리스트 보드 -->
+                    <rect x="100" y="50" width="400" height="220" rx="20" fill="white" stroke="#3D405B" stroke-width="4"/>
+
+                    <!-- 캐릭터 -->
+                    <g class="float-animation">
+                        <circle cx="300" cy="150" r="40" fill="#FFD4A3"/>
+                        <circle cx="288" cy="145" r="5" fill="#3D405B"/>
+                        <circle cx="312" cy="145" r="5" fill="#3D405B"/>
+                        <path d="M 290 160 Q 300 168 310 160" stroke="#3D405B" stroke-width="3" fill="none"/>
+                        <line x1="340" y1="130" x2="380" y2="110" stroke="#FFD4A3" stroke-width="12" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- 체크 마크 -->
+                    <text x="360" y="120" font-size="50" class="wiggle-animation">✓</text>
+
+                    <!-- 별 장식 -->
+                    <text x="120" y="80" font-size="30">⭐</text>
+                    <text x="450" y="90" font-size="30">⭐</text>
+                    <text x="250" y="250" font-size="30">⭐</text>
+                </svg>
+            </div>
 
             <div class="action-list">
                 <div class="action-item">
                     <div class="action-number">1</div>
-                    <h3>원칙을 선언하라</h3>
-                    <p>당신이 가장 중요하게 생각하는 업무 원칙 단 하나를 정하라. 그리고 다음 회의 시작 5분간 그것을 선언하라.</p>
-                    <p style="margin-top: 15px; padding-left: 20px; border-left: 3px solid #FF6B35; font-style: italic;">
-                        예: "앞으로 모든 회의는 30분을 넘기지 않습니다. 결론 없이 끝나지 않습니다."
-                    </p>
+                    <div class="action-content">
+                        <h3>📢 원칙을 선언하라</h3>
+                        <p>당신이 가장 중요하게 생각하는 업무 원칙 단 하나를 정하세요.
+                        그리고 다음 회의 시작 5분간 그것을 선언하세요.</p>
+                        <div class="example">
+                            💬 예: "앞으로 모든 회의는 30분을 넘기지 않습니다. 결론 없이 끝나지 않습니다."
+                        </div>
+                    </div>
                 </div>
 
                 <div class="action-item">
                     <div class="action-number">2</div>
-                    <h3>본보기를 보여라</h3>
-                    <p>그 원칙을 어긴 첫 번째 사례를 찾아라. 모두가 보는 앞에서, 정중하지만 단호하게 수정하라. 이것이 현대의 '참수'다.</p>
-                    <p style="margin-top: 15px; padding-left: 20px; border-left: 3px solid #FF6B35; font-style: italic;">
-                        예: 회의가 30분을 넘어가려 할 때, "원칙대로 여기서 끊고, 추가 논의는 메일로 합시다."
-                    </p>
+                    <div class="action-content">
+                        <h3>⚡ 본보기를 보여라</h3>
+                        <p>그 원칙을 어긴 첫 번째 사례를 찾으세요.
+                        모두가 보는 앞에서, 정중하지만 단호하게 수정하세요. 이것이 현대의 '참수'입니다.</p>
+                        <div class="example">
+                            💬 예: 회의가 30분을 넘어가려 할 때, "원칙대로 여기서 끊고, 추가 논의는 메일로 합시다."
+                        </div>
+                    </div>
                 </div>
 
                 <div class="action-item">
                     <div class="action-number">3</div>
-                    <h3>일관성을 기록하라</h3>
-                    <p>당신 스스로 그 원칙을 지킨 사례를 일주일에 한 번씩 점검하라. 당신의 브랜드는 당신의 일관성에서 완성된다.</p>
+                    <div class="action-content">
+                        <h3>📝 일관성을 기록하라</h3>
+                        <p>당신 스스로 그 원칙을 지킨 사례를 일주일에 한 번씩 점검하세요.
+                        당신의 브랜드는 당신의 일관성에서 완성됩니다.</p>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
 
         <!-- 마무리 -->
         <div class="closing">
-            <p>
-                권위는 피를 묻히며 쟁취하는 것이다.<br>
-                당신의 원칙을 행동으로 증명하라.
+            <p class="closing-text">
+                권위는 주어지는 것이 아니라, <br>
+                무대 위에서 쟁취하는 것입니다. 🎭
             </p>
-            <span class="highlight-text">당신의 브랜드는 오늘 당신이 한 행동에서 시작된다.</span>
+            <p class="closing-highlight">
+                당신의 첫 공연은 내일 시작됩니다 ✨
+            </p>
         </div>
     </div>
 </body>
