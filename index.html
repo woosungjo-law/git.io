@@ -3,516 +3,726 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>사마양저의 연출: 당신의 브랜드를 만들어라</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #F7F5F2;
+            color: #000000;
+            line-height: 1.7;
             padding: 20px;
-            color: #333;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
+            background: #FFFFFF;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
+        /* 제목 섹션 */
         .header {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 60px;
             position: relative;
         }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            position: relative;
+            display: inline-block;
         }
 
-        .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: #FF6B35;
+            border-radius: 2px;
+            transform: rotate(-0.5deg);
         }
 
         .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
+            font-size: 1.3rem;
+            color: #555;
+            margin-top: 25px;
+            font-weight: 400;
         }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
+        /* 스케치 박스 공통 스타일 */
+        .sketch-box {
+            background: #FFFFFF;
+            border: 3px solid #000000;
+            border-radius: 15px 12px 18px 10px;
+            padding: 25px;
+            margin: 30px 0;
             position: relative;
-            transition: all 0.3s ease;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            transform: rotate(-0.3deg);
         }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
+        .sketch-box.rotate-right {
+            transform: rotate(0.5deg);
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
+        .sketch-box.highlight {
+            background: #FFF9F5;
+            border-color: #FF6B35;
+            border-width: 4px;
         }
 
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
+        /* 문제 제시 섹션 */
+        .problem-section {
+            background: #F9F9F9;
+            padding: 30px;
+            border-left: 6px solid #000000;
+            margin: 40px 0;
+            position: relative;
         }
 
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
+        .problem-section::before {
+            content: '❌';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 2.5rem;
         }
 
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
+        .problem-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
             font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
         }
 
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
+        .problem-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
         }
 
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
+        .problem-highlight {
+            background: #FFE8E0;
+            padding: 20px;
             border-radius: 8px;
-            padding: 15px;
+            font-style: italic;
+            font-weight: 700;
+            margin-top: 20px;
+            border-left: 4px solid #FF6B35;
+        }
+
+        /* 핵심 메시지 박스 */
+        .key-message {
+            background: #000000;
+            color: #FFFFFF;
+            padding: 35px;
+            border-radius: 20px 15px 25px 18px;
+            margin: 50px 0;
+            text-align: center;
+            position: relative;
+            transform: rotate(-0.8deg);
+        }
+
+        .key-message::before {
+            content: '💡';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+        }
+
+        .key-message h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #FF6B35;
+        }
+
+        .key-message p {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            font-weight: 700;
+        }
+
+        /* 역사적 사례 섹션 */
+        .history-section {
+            margin: 60px 0;
+            position: relative;
+        }
+
+        .history-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 40px;
             text-align: center;
             position: relative;
         }
 
-        .flow-step::after {
+        .history-title::before {
+            content: '⚔️';
+            margin-right: 15px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            border-left: 4px dashed #000000;
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -47px;
+            top: 10px;
+            width: 14px;
+            height: 14px;
+            background: #FF6B35;
+            border: 3px solid #000000;
+            border-radius: 50%;
+        }
+
+        .timeline-content {
+            background: #FFF9F5;
+            padding: 25px;
+            border-radius: 12px 18px 10px 15px;
+            border: 2px solid #E5E5E5;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #FF6B35;
+        }
+
+        .timeline-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .timeline-quote {
+            background: #000000;
+            color: #FFFFFF;
+            padding: 25px;
+            border-radius: 10px;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .timeline-quote::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            color: #FF6B35;
+            font-family: Georgia, serif;
+        }
+
+        /* 원리 분석 섹션 */
+        .principle-section {
+            background: linear-gradient(135deg, #FFF9F5 0%, #FFFFFF 100%);
+            padding: 40px;
+            border: 4px solid #000000;
+            border-radius: 20px;
+            margin: 50px 0;
+            position: relative;
+            transform: rotate(0.4deg);
+        }
+
+        .principle-section h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .principle-card {
+            background: #FFFFFF;
+            padding: 25px;
+            border: 3px solid #000000;
+            border-radius: 15px 10px 12px 18px;
+            position: relative;
+        }
+
+        .principle-card::before {
             content: '→';
             position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
+            top: -15px;
+            left: 15px;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #FF6B35;
         }
 
-        .flow-step:last-child::after {
-            display: none;
+        .principle-card h3 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            margin-top: 10px;
         }
 
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
+        .principle-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* 현대 적용 섹션 */
+        .modern-section {
+            margin: 60px 0;
+        }
+
+        .modern-section h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modern-section h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #FF6B35;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .comparison-item {
+            background: #F9F9F9;
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #000000;
+            text-align: center;
+        }
+
+        .comparison-item.old {
+            background: #FFE8E0;
+        }
+
+        .comparison-item.new {
+            background: #E8FFE0;
+        }
+
+        .comparison-arrow {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #FF6B35;
+        }
+
+        .comparison-item h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .comparison-item p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* 실천 방안 섹션 */
+        .action-section {
+            background: #FF6B35;
+            color: #FFFFFF;
+            padding: 50px 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+            position: relative;
+        }
+
+        .action-section h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .action-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .action-item {
+            background: #FFFFFF;
+            color: #000000;
+            padding: 30px;
+            border-radius: 15px 12px 18px 10px;
+            border: 4px solid #000000;
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .action-item:nth-child(2) {
+            transform: rotate(0.3deg);
+        }
+
+        .action-item:nth-child(3) {
+            transform: rotate(-0.2deg);
+        }
+
+        .action-number {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            background: #000000;
+            color: #FF6B35;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
-        }
-
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
-
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
-
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
-
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .fact-item {
-            text-align: center;
-        }
-
-        .fact-number {
-            font-size: 24px;
+            font-size: 1.5rem;
             font-weight: 900;
-            color: #D4AF37;
+            border: 3px solid #FFFFFF;
+        }
+
+        .action-item h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            color: #FF6B35;
+        }
+
+        .action-item p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* 마무리 메시지 */
+        .closing {
+            text-align: center;
+            margin: 60px 0 20px;
+            padding: 40px;
+            background: #F9F9F9;
+            border-radius: 15px;
+            border: 3px dashed #000000;
+        }
+
+        .closing p {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.9;
+            font-style: italic;
+        }
+
+        .closing .highlight-text {
+            color: #FF6B35;
+            font-weight: 900;
+            font-size: 1.5rem;
             display: block;
+            margin-top: 20px;
         }
 
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
-
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
+        /* 손그림 화살표 */
+        .arrow-sketch {
+            width: 100%;
+            height: 60px;
             margin: 20px 0;
         }
 
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .footer-highlight {
-            color: #1A2A57;
+        /* 강조 밑줄 */
+        .underline-sketch {
+            position: relative;
+            display: inline;
+            background: linear-gradient(180deg, transparent 60%, #FFE8E0 60%);
             font-weight: 700;
         }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
-        }
-
+        /* 반응형 */
         @media (max-width: 768px) {
             .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
+                padding: 30px 20px;
             }
-            
-            .content-grid {
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .history-title,
+            .modern-section h2,
+            .action-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .key-message h2 {
+                font-size: 1.6rem;
+            }
+
+            .key-message p {
+                font-size: 1.1rem;
+            }
+
+            .principle-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
             }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
+
+            .comparison {
+                grid-template-columns: 1fr;
             }
-            
-            .main-title {
-                font-size: 24px;
+
+            .comparison-arrow {
+                transform: rotate(90deg);
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .action-section {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .sketch-box {
+                padding: 20px;
+            }
+
+            .problem-section {
+                padding: 20px;
+            }
+
+            .key-message {
+                padding: 25px;
+            }
+
+            .action-item {
+                padding: 25px 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
+        <!-- 헤더 -->
+        <header class="header">
+            <h1>사마양저의 연출:<br>당신의 브랜드를 만들어라</h1>
+            <p class="subtitle">권위는 주어지는 것이 아니라, 쟁취하는 것이다</p>
+        </header>
+
+        <!-- 문제 제시 -->
+        <section class="problem-section">
+            <h2>김 팀장의 딜레마</h2>
+            <p>수요일 오후 3시, 김 팀장이 부임한 첫 주가 막 지났다. 회의실 공기, 냉랭하다.</p>
+            <p>그는 업계에서 알아주는 엑셀 전문가다. 누구보다 성실하다는 것도 모두가 안다. 그런데 팀원들이 그를 따르지 않는다.</p>
+            <p>김 팀장은 '열심히 하겠다'고 했다. 매일 가장 늦게 퇴근한다. 그러나 팀은 요지부동이다.</p>
+            <div class="problem-highlight">
+                그는 '팀장'이라는 직함을 받았을 뿐, '리더'라는 자리는 얻지 못했다.
+            </div>
+        </section>
+
+        <!-- 핵심 메시지 -->
+        <div class="key-message">
+            <h2>본질은 '연출'의 실패다</h2>
+            <p>이 상황의 본질은 능력 문제가 아니다. '자기연출'의 완벽한 실패다.</p>
+            <p style="margin-top: 20px; font-size: 1.4rem;">세상은 오직 당신이 '보여준' 것, '증명한' 것만을 믿는다.</p>
         </div>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
-        </div>
+        <!-- 역사적 사례 -->
+        <section class="history-section">
+            <h2 class="history-title">장군의 칼, 군대의 문</h2>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
-
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>약속</h3>
+                        <p>제나라 경공이 사마양저를 장군으로 임명했다. 신분이 미천한 그였다.</p>
+                        <p>양저는 왕의 총신 장가를 감군으로 요청하고 약속을 잡았다.</p>
+                        <div class="timeline-quote">
+                            내일 정오, 군문에서 만납시다
+                        </div>
                     </div>
-                    <div class="section-title">보증보험 청구</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>준비</h3>
+                        <p>다음 날, 양저는 먼저 도착해 해시계를 세우고 군법을 정비했다.</p>
+                        <p>그러나 장가는 오만했다. 친지들과의 송별 연회를 즐기느라 저녁이 되어서야 나타났다.</p>
                     </div>
-                    <div class="section-title">민사소송 & 가압류</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>처형</h3>
+                        <p>양저는 군법관을 불렀다. "약속한 시간에 늦은 자의 죄는 무엇인가?"</p>
+                        <p>"참수입니다."</p>
+                        <p>양저는 즉시 장가의 목을 베었다.</p>
+                        <div class="timeline-quote">
+                            삼군이 모두 진동했다
+                        </div>
                     </div>
-                    <div class="section-title">사해행위 취소</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
+            </div>
+        </section>
+
+        <!-- 원리 분석 -->
+        <section class="principle-section">
+            <h2>권위는 어떻게 탄생하는가</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px;">
+                양저의 행동은 단순한 분노의 표출이 아니었다. 이것은 철저히 계산된 연출이었다.
+            </p>
+
+            <div class="principle-grid">
+                <div class="principle-card">
+                    <h3>상징의 선택</h3>
+                    <p>왕의 총신 장가는 '쇼크'를 위한 완벽한 제물이었다. 가장 강력한 상징을 부숴 자신의 브랜드를 세웠다.</p>
+                </div>
+
+                <div class="principle-card">
+                    <h3>시스템의 구축</h3>
+                    <p>개인적 원한이 아니라 '군법'이라는 시스템을 내세웠다. 법 앞에는 예외가 없다는 절대적 원칙.</p>
+                </div>
+
+                <div class="principle-card">
+                    <h3>행동의 증명</h3>
+                    <p>권위는 '선언'이 아닌 '사건'으로 탄생한다. 이름과 실체가 일치해야 한다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 현대 적용 -->
+        <section class="modern-section">
+            <h2>오늘날 당신의 '장가'는 무엇인가</h2>
+
+            <div class="comparison">
+                <div class="comparison-item old">
+                    <h3>과거의 참수</h3>
+                    <p>왕의 총신 장가의 목을 베어 군법의 절대성을 증명</p>
+                </div>
+
+                <div class="comparison-arrow">→</div>
+
+                <div class="comparison-item new">
+                    <h3>현대의 참수</h3>
+                    <p>조직 내 만연한 관행과 비효율을 공개적으로 해결</p>
                 </div>
             </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
-                </div>
+            <div class="sketch-box highlight">
+                <p style="font-size: 1.2rem; font-weight: 700; line-height: 1.9;">
+                    당신의 브랜드를 세우는 첫 번째 행동은,
+                    <span class="underline-sketch">당신의 가장 중요한 원칙을 지키기 위해 가장 어려운 상징을 깨뜨리는 것</span>이다.
+                </p>
             </div>
-        </div>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
+            <div class="sketch-box rotate-right">
+                <p style="font-size: 1.15rem; line-height: 1.8;">
+                    '자기연출'은 거짓 포장이나 쇼맨십이 아니다.
+                    그것은 당신의 핵심 가치와 실력을, 타인이 인식할 수 있는 '행동'으로 번역하는 치열한 기술이다.
+                </p>
             </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
+        </section>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
-        </div>
+        <!-- 실천 방안 -->
+        <section class="action-section">
+            <h2>내일 실천할 3가지</h2>
 
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
+            <div class="action-list">
+                <div class="action-item">
+                    <div class="action-number">1</div>
+                    <h3>원칙을 선언하라</h3>
+                    <p>당신이 가장 중요하게 생각하는 업무 원칙 단 하나를 정하라. 그리고 다음 회의 시작 5분간 그것을 선언하라.</p>
+                    <p style="margin-top: 15px; padding-left: 20px; border-left: 3px solid #FF6B35; font-style: italic;">
+                        예: "앞으로 모든 회의는 30분을 넘기지 않습니다. 결론 없이 끝나지 않습니다."
+                    </p>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-number">2</div>
+                    <h3>본보기를 보여라</h3>
+                    <p>그 원칙을 어긴 첫 번째 사례를 찾아라. 모두가 보는 앞에서, 정중하지만 단호하게 수정하라. 이것이 현대의 '참수'다.</p>
+                    <p style="margin-top: 15px; padding-left: 20px; border-left: 3px solid #FF6B35; font-style: italic;">
+                        예: 회의가 30분을 넘어가려 할 때, "원칙대로 여기서 끊고, 추가 논의는 메일로 합시다."
+                    </p>
+                </div>
+
+                <div class="action-item">
+                    <div class="action-number">3</div>
+                    <h3>일관성을 기록하라</h3>
+                    <p>당신 스스로 그 원칙을 지킨 사례를 일주일에 한 번씩 점검하라. 당신의 브랜드는 당신의 일관성에서 완성된다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 마무리 -->
+        <div class="closing">
+            <p>
+                권위는 피를 묻히며 쟁취하는 것이다.<br>
+                당신의 원칙을 행동으로 증명하라.
+            </p>
+            <span class="highlight-text">당신의 브랜드는 오늘 당신이 한 행동에서 시작된다.</span>
         </div>
     </div>
 </body>
