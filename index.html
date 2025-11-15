@@ -6,7 +6,7 @@
     <title>사마양저의 연출: 당신의 브랜드를 만들어라</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,810 +18,571 @@
         }
 
         :root {
-            --primary: #00C4CC;
-            --secondary: #7C3AED;
-            --accent: #FF6F61;
-            --bg: #FFFFFF;
-            --text-dark: #1F2937;
-            --text-medium: #6B7280;
-            --text-light: #9CA3AF;
-            --border: #E5E7EB;
+            --primary: #2563EB;
+            --secondary: #DC2626;
+            --accent: #F59E0B;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-600: #6B7280;
+            --gray-900: #1F2937;
         }
 
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text-dark);
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-900);
             line-height: 1.7;
-            overflow-x: hidden;
+            font-weight: 400;
         }
 
         .container {
-            max-width: 960px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 48px 24px;
         }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+
+        /* Card Base */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Ripple Effect */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .card:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Grid Sizes */
+        .span-12 { grid-column: span 12; }
+        .span-8 { grid-column: span 8; }
+        .span-6 { grid-column: span 6; }
+        .span-4 { grid-column: span 4; }
 
         /* Hero */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #1E40AF 100%);
+            color: white;
             text-align: center;
-            padding: 100px 24px;
-        }
-
-        .hero-icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 32px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            color: var(--text-dark);
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.125rem, 3vw, 1.375rem);
-            font-weight: 500;
-            color: var(--text-medium);
-            max-width: 600px;
-            margin: 0 auto 48px;
+            padding: 64px 32px;
         }
 
         .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
             padding: 8px 20px;
-            background: var(--primary);
-            color: white;
             border-radius: 100px;
             font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        /* Section */
-        section {
-            padding: 100px 0;
-        }
-
-        .section-label {
-            display: inline-block;
-            font-size: 0.875rem;
             font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--primary);
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
-            font-weight: 800;
-            line-height: 1.3;
-            margin-bottom: 16px;
-            color: var(--text-dark);
-        }
-
-        .section-desc {
-            font-size: 1.125rem;
-            color: var(--text-medium);
-            margin-bottom: 48px;
-            line-height: 1.6;
-        }
-
-        /* Icon */
-        .icon-circle {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             margin-bottom: 24px;
+            backdrop-filter: blur(10px);
         }
 
-        .icon-circle.primary {
-            background: rgba(0, 196, 204, 0.1);
-        }
-
-        .icon-circle.secondary {
-            background: rgba(124, 58, 237, 0.1);
-        }
-
-        .icon-circle.accent {
-            background: rgba(255, 111, 97, 0.1);
-        }
-
-        .icon-svg {
-            width: 32px;
-            height: 32px;
-        }
-
-        /* Problem Card */
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-
-        .problem-card {
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            transition: all 0.3s ease;
-        }
-
-        .problem-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 196, 204, 0.1);
-        }
-
-        .problem-title {
-            font-size: 1.25rem;
-            font-weight: 700;
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
             margin-bottom: 16px;
-            color: var(--text-dark);
         }
 
-        .problem-text {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--text-medium);
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            opacity: 0.95;
         }
 
-        /* Quote */
-        .quote {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
-            color: white;
-            padding: 48px;
-            border-radius: 16px;
-            margin: 48px 0;
-            text-align: center;
-        }
-
-        .quote-text {
-            font-size: clamp(1.125rem, 3vw, 1.5rem);
-            font-weight: 600;
-            line-height: 1.6;
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding: 60px 0;
-        }
-
-        .timeline-item {
-            display: flex;
-            gap: 32px;
-            margin-bottom: 48px;
-            position: relative;
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 31px;
-            top: 80px;
-            bottom: -48px;
-            width: 2px;
-            background: var(--border);
-        }
-
-        .timeline-item:last-child::before {
-            display: none;
-        }
-
-        .timeline-icon {
-            flex-shrink: 0;
-        }
-
-        .timeline-content {
-            flex: 1;
-        }
-
-        .timeline-step {
+        /* Typography */
+        .card-label {
             display: inline-block;
             font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 0.1em;
-            color: var(--text-light);
-            margin-bottom: 8px;
-        }
-
-        .timeline-title {
-            font-size: 1.375rem;
-            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary);
             margin-bottom: 12px;
-            color: var(--text-dark);
         }
 
-        .timeline-text {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--text-medium);
-        }
+        .card-label.secondary { color: var(--secondary); }
+        .card-label.accent { color: var(--accent); }
 
-        .timeline-highlight {
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        /* Impact */
-        .impact {
-            background: var(--accent);
-            color: white;
-            padding: 60px 48px;
-            border-radius: 16px;
-            text-align: center;
-            margin: 60px 0;
-        }
-
-        .impact-text {
-            font-size: clamp(1.5rem, 4vw, 2.25rem);
-            font-weight: 800;
-            line-height: 1.3;
-        }
-
-        /* Principles */
-        .principles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            margin: 48px 0;
-        }
-
-        .principle-card {
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            transition: all 0.3s ease;
-        }
-
-        .principle-card:hover {
-            border-color: var(--secondary);
-            transform: scale(1.02);
-        }
-
-        .principle-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--secondary);
-            line-height: 1;
-            margin-bottom: 16px;
-        }
-
-        .principle-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-dark);
-        }
-
-        .principle-text {
-            font-size: 0.9375rem;
-            line-height: 1.7;
-            color: var(--text-medium);
-        }
-
-        /* Comparison */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-            margin: 48px 0;
-        }
-
-        .comparison-card {
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .comparison-card.past {
-            border-color: var(--secondary);
-        }
-
-        .comparison-card.present {
-            border-color: var(--accent);
-        }
-
-        .comparison-label {
-            font-size: 0.875rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            margin-bottom: 16px;
-        }
-
-        .comparison-card.past .comparison-label {
-            color: var(--secondary);
-        }
-
-        .comparison-card.present .comparison-label {
-            color: var(--accent);
-        }
-
-        .comparison-title {
+        .card-title {
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 900;
+            line-height: 1.3;
             margin-bottom: 16px;
-            color: var(--text-dark);
+            color: var(--gray-900);
         }
 
-        .comparison-text {
+        .card-text {
             font-size: 1rem;
-            line-height: 1.7;
-            color: var(--text-medium);
+            font-weight: 400;
+            line-height: 1.8;
+            color: var(--gray-600);
         }
 
-        /* Action Items */
-        .action-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            margin: 48px 0;
+        .card-text strong {
+            font-weight: 700;
+            color: var(--gray-900);
         }
 
-        .action-item {
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            display: flex;
-            gap: 32px;
-            transition: all 0.3s ease;
-        }
-
-        .action-item:hover {
-            border-color: var(--accent);
-            transform: translateX(8px);
-        }
-
-        .action-number {
-            flex-shrink: 0;
+        /* Problem Cards */
+        .problem-icon {
             width: 56px;
             height: 56px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
+            background: var(--gray-100);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.75rem;
-            font-weight: 800;
+            margin-bottom: 20px;
         }
 
-        .action-content {
-            flex: 1;
+        /* Quote Card */
+        .quote-card {
+            background: var(--gray-900);
+            color: white;
+            text-align: center;
+            padding: 48px 32px;
         }
 
-        .action-title {
-            font-size: 1.25rem;
+        .quote-text {
+            font-size: 1.75rem;
             font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-dark);
+            line-height: 1.5;
+            position: relative;
         }
 
-        .action-text {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--text-medium);
+        .quote-text::before,
+        .quote-text::after {
+            content: '"';
+            font-size: 3rem;
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .quote-text::before {
+            top: -20px;
+            left: 0;
+        }
+
+        /* Timeline */
+        .timeline-card {
+            border-left: 4px solid var(--gray-200);
+            transition: border-color 0.3s;
+        }
+
+        .timeline-card:hover {
+            border-left-color: var(--primary);
+        }
+
+        .timeline-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 900;
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+
+        .timeline-card:nth-child(2) .timeline-number {
+            background: var(--accent);
+        }
+
+        .timeline-card:nth-child(3) .timeline-number {
+            background: var(--secondary);
+        }
+
+        /* Impact Card */
+        .impact-card {
+            background: linear-gradient(135deg, var(--secondary) 0%, #B91C1C 100%);
+            color: white;
+            text-align: center;
+            padding: 64px 32px;
+        }
+
+        .impact-text {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            line-height: 1.3;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Principle Cards */
+        .principle-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        /* Comparison */
+        .comparison-past {
+            border-top: 4px solid var(--secondary);
+        }
+
+        .comparison-present {
+            border-top: 4px solid var(--accent);
+        }
+
+        /* Action Cards */
+        .action-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            font-weight: 900;
+            font-size: 1.5rem;
             margin-bottom: 16px;
         }
 
         .action-example {
-            background: rgba(255, 111, 97, 0.05);
+            background: var(--gray-100);
             border-left: 3px solid var(--accent);
             padding: 16px 20px;
             border-radius: 8px;
+            margin-top: 16px;
             font-size: 0.9375rem;
             font-style: italic;
-            color: var(--text-medium);
         }
 
         /* CTA */
-        .cta {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        .cta-card {
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-900) 100%);
             color: white;
-            padding: 80px 48px;
-            border-radius: 16px;
-            text-align: center;
-            margin: 80px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 48px 40px;
         }
 
-        .cta-title {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
-            font-weight: 800;
-            margin-bottom: 16px;
+        .cta-content h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 8px;
         }
 
-        .cta-text {
+        .cta-content p {
             font-size: 1.125rem;
-            margin-bottom: 32px;
-            opacity: 0.95;
+            opacity: 0.9;
         }
 
         .cta-button {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 16px 40px;
-            background: white;
-            color: var(--secondary);
+            padding: 16px 32px;
+            background: var(--accent);
+            color: white;
             text-decoration: none;
             border-radius: 100px;
             font-weight: 700;
             font-size: 1.0625rem;
-            transition: all 0.3s ease;
-            min-height: 56px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
         }
 
         .cta-button:hover {
+            background: #D97706;
             transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 60px 24px;
-            color: var(--text-light);
-            font-size: 0.9375rem;
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .bento-grid {
+                gap: 16px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .span-8,
+            .span-6,
+            .span-4 {
+                grid-column: span 12;
+            }
+
             .hero {
-                min-height: 80vh;
-                padding: 80px 24px;
+                padding: 48px 24px;
             }
 
-            section {
-                padding: 80px 0;
-            }
-
-            .problem-grid,
-            .principles-grid,
-            .comparison-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline-item {
-                gap: 24px;
-            }
-
-            .timeline-item::before {
-                left: 31px;
-            }
-
-            .action-item {
-                flex-direction: column;
-                gap: 24px;
+            .quote-card,
+            .impact-card {
                 padding: 32px 24px;
             }
 
-            .quote,
-            .impact,
-            .cta {
-                padding: 40px 32px;
+            .cta-card {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
             }
         }
 
         /* Accessibility */
         @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+            .card {
+                transition: none;
+            }
+
+            .card::after {
+                transition: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Hero -->
-    <section class="hero">
-        <svg class="hero-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="38" stroke="#00C4CC" stroke-width="3"/>
-            <path d="M30 35 L40 25 L50 35" stroke="#00C4CC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="35" y="32" width="10" height="20" stroke="#00C4CC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <h1>사마양저의 연출:<br>당신의 브랜드를 만들어라</h1>
-        <p class="hero-subtitle">권위는 주어지지 않는다. 행동으로 쟁취하는 것이다.</p>
-        <div class="hero-badge">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <rect x="2" y="4" width="12" height="10" rx="1" stroke="white" stroke-width="1.5"/>
-                <path d="M4 4V3C4 2.5 4.5 2 5 2H11C11.5 2 12 2.5 12 3V4" stroke="white" stroke-width="1.5"/>
-            </svg>
-            사마천의 지혜
-        </div>
-    </section>
-
     <div class="container">
-        <!-- Problem Section -->
-        <section>
-            <div class="section-label">Problem</div>
-            <h2 class="section-title">보이지 않는 리더</h2>
-            <p class="section-desc">직함은 있지만, 권위는 없는 리더의 딜레마</p>
-
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <div class="icon-circle primary">
-                        <svg class="icon-svg" viewBox="0 0 32 32" fill="none">
-                            <circle cx="16" cy="12" r="6" stroke="#00C4CC" stroke-width="2"/>
-                            <path d="M6 26C6 20 10 18 16 18C22 18 26 20 26 26" stroke="#00C4CC" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M16 18L16 22" stroke="#00C4CC" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="problem-title">김 팀장의 실패</h3>
-                    <p class="problem-text">
-                        업계 최고의 엑셀 전문가, 가장 성실한 직원. 그러나 팀원들은 그를 따르지 않는다.
-                    </p>
-                </div>
-
-                <div class="problem-card">
-                    <div class="icon-circle secondary">
-                        <svg class="icon-svg" viewBox="0 0 32 32" fill="none">
-                            <circle cx="16" cy="16" r="10" stroke="#7C3AED" stroke-width="2"/>
-                            <path d="M16 11V16L20 18" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="problem-title">치명적 착각</h3>
-                    <p class="problem-text">
-                        '팀장'이라는 직함을 받았을 뿐, '리더'라는 자리는 얻지 못했다.
-                    </p>
-                </div>
-
-                <div class="problem-card">
-                    <div class="icon-circle accent">
-                        <svg class="icon-svg" viewBox="0 0 32 32" fill="none">
-                            <path d="M8 16L14 10L18 14L24 8" stroke="#FF6F61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M19 8H24V13" stroke="#FF6F61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="problem-title">연출의 실패</h3>
-                    <p class="problem-text">
-                        자신의 등장을 알리지 못했고, 원칙을 행동으로 증명하지도 못했다.
-                    </p>
-                </div>
+        <div class="bento-grid">
+            <!-- Hero -->
+            <div class="card hero span-12 visible">
+                <div class="hero-badge">사마천, 당신의 무기가 되는 순간</div>
+                <h1>사마양저의 연출:<br>당신의 브랜드를 만들어라</h1>
+                <p class="hero-subtitle">권위는 직함이 아닌, 행동으로 쟁취하는 것이다</p>
             </div>
 
-            <div class="quote">
-                <p class="quote-text">세상은 오직 당신이 '보여준' 것, '증명한' 것만을 믿는다.</p>
-            </div>
-        </section>
-
-        <!-- Historical Case -->
-        <section>
-            <div class="section-label">Historical Case</div>
-            <h2 class="section-title">장군의 칼, 군대의 문</h2>
-            <p class="section-desc">사마천이 포착한 권위 탄생의 순간</p>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <div class="icon-circle primary">
-                            <svg class="icon-svg" viewBox="0 0 32 32" fill="none">
-                                <rect x="8" y="6" width="16" height="20" rx="2" stroke="#00C4CC" stroke-width="2"/>
-                                <path d="M12 12H20M12 16H20M12 20H16" stroke="#00C4CC" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-step">STEP 1</div>
-                        <h3 class="timeline-title">약속</h3>
-                        <p class="timeline-text">
-                            제나라 경공이 사마양저를 장군으로 임명했다. 양저는 왕의 총신 장가를 감군으로 요청했다.
-                            <br><br>
-                            "내일 정오, 군문에서 만납시다."
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <div class="icon-circle secondary">
-                            <svg class="icon-svg" viewBox="0 0 32 32" fill="none">
-                                <circle cx="16" cy="16" r="10" stroke="#7C3AED" stroke-width="2"/>
-                                <path d="M16 11V16L20 18" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-step">STEP 2</div>
-                        <h3 class="timeline-title">준비와 오만</h3>
-                        <p class="timeline-text">
-                            양저는 먼저 도착해 해시계를 세우고 군법을 정비했다.
-                            <br><br>
-                            그러나 오만한 장가는 친지들과 연회를 즐기며 저녁이 되어서야 나타났다.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <div class="icon-circle accent">
-                            <svg class="icon-svg" viewBox="0 0 32 32" fill="none">
-                                <path d="M8 8L24 24M8 24L24 8" stroke="#FF6F61" stroke-width="2.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-step">STEP 3</div>
-                        <h3 class="timeline-title">결단</h3>
-                        <p class="timeline-text">
-                            양저는 군법관을 불렀다. "약속한 시간에 늦은 자의 죄는?"
-                            <br>
-                            "참수입니다."
-                            <br><br>
-                            <span class="timeline-highlight">양저는 즉시 장가의 목을 베었다.</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="impact">
-                <p class="impact-text">삼군이 모두 진동했다.</p>
-            </div>
-        </section>
-
-        <!-- Principles -->
-        <section>
-            <div class="section-label">Principles</div>
-            <h2 class="section-title">권위는 어떻게 탄생하는가</h2>
-            <p class="section-desc">철저히 계산된 연출의 3가지 원리</p>
-
-            <div class="principles-grid">
-                <div class="principle-card">
-                    <div class="principle-number">01</div>
-                    <h3 class="principle-title">상징의 선택</h3>
-                    <p class="principle-text">
-                        왕의 총신 장가는 '쇼크'를 위한 완벽한 제물이었다. 가장 강력한 상징을 부숴 자신의 브랜드를 세웠다.
-                    </p>
-                </div>
-
-                <div class="principle-card">
-                    <div class="principle-number">02</div>
-                    <h3 class="principle-title">시스템의 구축</h3>
-                    <p class="principle-text">
-                        개인적 원한이 아니라 '군법'이라는 시스템을 내세웠다. 법 앞에는 예외가 없다는 절대적 원칙.
-                    </p>
-                </div>
-
-                <div class="principle-card">
-                    <div class="principle-number">03</div>
-                    <h3 class="principle-title">사건으로 증명</h3>
-                    <p class="principle-text">
-                        권위는 '선언'이 아닌 '사건'으로 탄생한다. 이름과 실체가 일치해야 한다.
-                    </p>
-                </div>
-            </div>
-
-            <div class="quote">
-                <p class="quote-text">그는 가장 강력한 상징을 부숴 자신의 브랜드를 세웠다.</p>
-            </div>
-        </section>
-
-        <!-- Modern Application -->
-        <section>
-            <div class="section-label">Modern Application</div>
-            <h2 class="section-title">당신의 '장가'는 무엇인가</h2>
-            <p class="section-desc">현대의 리더가 깨뜨려야 할 상징</p>
-
-            <div class="comparison-grid">
-                <div class="comparison-card past">
-                    <div class="icon-circle secondary">
-                        <svg class="icon-svg" viewBox="0 0 32 32" fill="none">
-                            <path d="M8 8L24 24M8 24L24 8" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="comparison-label">과거의 참수</div>
-                    <h3 class="comparison-title">왕의 총신</h3>
-                    <p class="comparison-text">
-                        장가의 목을 베어 군법의 절대성을 증명
-                    </p>
-                </div>
-
-                <div class="comparison-card present">
-                    <div class="icon-circle accent">
-                        <svg class="icon-svg" viewBox="0 0 32 32" fill="none">
-                            <path d="M6 16L12 22L26 8" stroke="#FF6F61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="comparison-label">현대의 참수</div>
-                    <h3 class="comparison-title">만연한 관행</h3>
-                    <p class="comparison-text">
-                        조직 내 비효율과 안일함을 공개적으로 해결
-                    </p>
-                </div>
-            </div>
-
-            <div class="quote">
-                <p class="quote-text">
-                    '자기연출'은 당신의 핵심 가치를, 타인이 인식할 수 있는 '행동'으로 번역하는 치열한 기술이다.
+            <!-- Problem 1 -->
+            <div class="card span-8">
+                <div class="problem-icon">👤</div>
+                <span class="card-label">Problem</span>
+                <h2 class="card-title">김 팀장은 왜 실패했는가?</h2>
+                <p class="card-text">
+                    업계 최고의 엑셀 전문가, 누구보다 성실한 직원. 그러나 팀원들은 그를 따르지 않는다.
+                    <strong>직함은 받았지만, 리더의 자리는 얻지 못했다.</strong>
                 </p>
             </div>
-        </section>
 
-        <!-- Action Items -->
-        <section>
-            <div class="section-label">Action Plan</div>
-            <h2 class="section-title">내일 실천할 3가지</h2>
-            <p class="section-desc">당신의 브랜드는 일관성에서 완성된다</p>
+            <!-- Problem 2 -->
+            <div class="card span-4">
+                <div class="problem-icon">⚠️</div>
+                <span class="card-label secondary">Warning</span>
+                <h2 class="card-title">치명적 착각</h2>
+                <p class="card-text">
+                    Position(직함)이 곧 Power(힘)라는 믿음. 이것이 모든 실패의 시작이다.
+                </p>
+            </div>
 
-            <div class="action-grid">
-                <div class="action-item">
-                    <div class="action-number">1</div>
-                    <div class="action-content">
-                        <h3 class="action-title">원칙을 선언하라</h3>
-                        <p class="action-text">
-                            당신이 가장 중요하게 생각하는 업무 원칙 단 하나를 정하라. 그리고 다음 회의 시작 5분간 그것을 선언하라.
-                        </p>
-                        <div class="action-example">
-                            "앞으로 모든 회의는 30분을 넘기지 않습니다. 결론 없이 끝나지 않습니다."
-                        </div>
-                    </div>
-                </div>
+            <!-- Essence Quote -->
+            <div class="card quote-card span-12">
+                <p class="quote-text">세상은 오직 당신이 '보여준' 것, '증명한' 것만을 믿는다</p>
+            </div>
 
-                <div class="action-item">
-                    <div class="action-number">2</div>
-                    <div class="action-content">
-                        <h3 class="action-title">본보기를 보여라</h3>
-                        <p class="action-text">
-                            그 원칙을 어긴 첫 번째 사례를 찾아라. 모두가 보는 앞에서, 정중하지만 단호하게 수정하라. 이것이 현대의 '참수'다.
-                        </p>
-                        <div class="action-example">
-                            회의가 30분을 넘어가려 할 때: "원칙대로 여기서 끊고, 추가 논의는 메일로 합시다."
-                        </div>
-                    </div>
-                </div>
+            <!-- Timeline 1 -->
+            <div class="card timeline-card span-4">
+                <div class="timeline-number">1</div>
+                <span class="card-label">약속</span>
+                <h3 class="card-title">정오의 약속</h3>
+                <p class="card-text">
+                    사마양저가 왕의 총신 장가와 약속을 잡았다. "내일 정오, 군문에서 만납시다."
+                </p>
+            </div>
 
-                <div class="action-item">
-                    <div class="action-number">3</div>
-                    <div class="action-content">
-                        <h3 class="action-title">일관성을 기록하라</h3>
-                        <p class="action-text">
-                            당신 스스로 그 원칙을 지킨 사례를 일주일에 한 번씩 점검하라. 당신의 브랜드는 당신의 일관성에서 완성된다.
-                        </p>
-                    </div>
+            <!-- Timeline 2 -->
+            <div class="card timeline-card span-4">
+                <div class="timeline-number">2</div>
+                <span class="card-label">준비</span>
+                <h3 class="card-title">해시계와 오만</h3>
+                <p class="card-text">
+                    양저는 해시계를 세우고 군법을 정비했다. 장가는 연회를 즐기며 저녁에야 도착했다.
+                </p>
+            </div>
+
+            <!-- Timeline 3 -->
+            <div class="card timeline-card span-4">
+                <div class="timeline-number">3</div>
+                <span class="card-label secondary">결단</span>
+                <h3 class="card-title">참수</h3>
+                <p class="card-text">
+                    "늦은 자의 죄는?" "참수입니다." <strong>양저는 즉시 장가의 목을 베었다.</strong>
+                </p>
+            </div>
+
+            <!-- Impact -->
+            <div class="card impact-card span-12">
+                <p class="impact-text">삼군이 모두 진동했다</p>
+            </div>
+
+            <!-- Principle 1 -->
+            <div class="card span-4">
+                <div class="principle-number">01</div>
+                <span class="card-label">Principle</span>
+                <h3 class="card-title">상징의 선택</h3>
+                <p class="card-text">
+                    왕의 총신 장가는 '쇼크'를 위한 완벽한 제물이었다. 가장 강력한 상징을 부숴 브랜드를 세웠다.
+                </p>
+            </div>
+
+            <!-- Principle 2 -->
+            <div class="card span-4">
+                <div class="principle-number">02</div>
+                <span class="card-label">Principle</span>
+                <h3 class="card-title">시스템의 구축</h3>
+                <p class="card-text">
+                    개인적 원한이 아니라 '군법'이라는 시스템을 내세웠다. 법 앞에는 예외가 없다.
+                </p>
+            </div>
+
+            <!-- Principle 3 -->
+            <div class="card span-4">
+                <div class="principle-number">03</div>
+                <span class="card-label">Principle</span>
+                <h3 class="card-title">사건으로 증명</h3>
+                <p class="card-text">
+                    권위는 '선언'이 아닌 '사건'으로 탄생한다. 이름과 실체가 일치해야 한다.
+                </p>
+            </div>
+
+            <!-- Comparison Past -->
+            <div class="card comparison-past span-6">
+                <span class="card-label secondary">과거의 참수</span>
+                <h3 class="card-title">왕의 총신</h3>
+                <p class="card-text">
+                    장가의 목을 베어 군법의 절대성을 증명했다. 피로 권위를 쟁취했다.
+                </p>
+            </div>
+
+            <!-- Comparison Present -->
+            <div class="card comparison-present span-6">
+                <span class="card-label accent">현대의 참수</span>
+                <h3 class="card-title">만연한 관행</h3>
+                <p class="card-text">
+                    조직 내 비효율과 안일함을 공개적으로 해결하는 것. 이것이 당신의 '장가'다.
+                </p>
+            </div>
+
+            <!-- Action 1 -->
+            <div class="card span-4">
+                <div class="action-badge">1</div>
+                <span class="card-label accent">Action</span>
+                <h3 class="card-title">원칙을 선언하라</h3>
+                <p class="card-text">
+                    가장 중요한 업무 원칙 하나를 정하고, 다음 회의 시작 5분간 선언하라.
+                </p>
+                <div class="action-example">
+                    "모든 회의는 30분을 넘기지 않습니다. 결론 없이 끝나지 않습니다."
                 </div>
             </div>
-        </section>
 
-        <!-- CTA -->
-        <div class="cta">
-            <h2 class="cta-title">권위는 쟁취하는 것이다</h2>
-            <p class="cta-text">당신의 브랜드는 내일부터 시작된다</p>
-            <a href="#" class="cta-button">
-                <span>지금 시작하기</span>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </a>
+            <!-- Action 2 -->
+            <div class="card span-4">
+                <div class="action-badge">2</div>
+                <span class="card-label accent">Action</span>
+                <h3 class="card-title">본보기를 보여라</h3>
+                <p class="card-text">
+                    원칙을 어긴 첫 사례를 찾아 모두가 보는 앞에서 정중하지만 단호하게 수정하라.
+                </p>
+                <div class="action-example">
+                    "원칙대로 여기서 끊고, 추가 논의는 메일로 합시다."
+                </div>
+            </div>
+
+            <!-- Action 3 -->
+            <div class="card span-4">
+                <div class="action-badge">3</div>
+                <span class="card-label accent">Action</span>
+                <h3 class="card-title">일관성을 기록하라</h3>
+                <p class="card-text">
+                    당신 스스로 원칙을 지킨 사례를 일주일에 한 번씩 점검하라. <strong>브랜드는 일관성에서 완성된다.</strong>
+                </p>
+            </div>
+
+            <!-- CTA -->
+            <div class="card cta-card span-12">
+                <div class="cta-content">
+                    <h2>권위는 쟁취하는 것이다</h2>
+                    <p>당신의 브랜드는 내일부터 시작된다</p>
+                </div>
+                <a href="#" class="cta-button">
+                    <span>지금 시작하기</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p>사마천의 지혜로 당신의 리더십을 재정의하라</p>
-    </footer>
+    <script>
+        // Intersection Observer for Lazy Loading Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards except hero
+        document.querySelectorAll('.card:not(.visible)').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Staggered animation delay
+        document.querySelectorAll('.card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.05}s`;
+        });
+    </script>
 </body>
 </html>
