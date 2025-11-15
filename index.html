@@ -1,519 +1,862 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>세입자 권리 보호 가이드 | 계약갱신청구권 완벽 해설</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
 
-        body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap');
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
-        }
+    :root {
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-dark: #1e40af;
+      --accent: #f59e0b;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
 
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
-            position: relative;
-        }
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--gray-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
-        }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px;
+    }
 
-        .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
+    /* Hero Section */
+    .hero {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 64px 48px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-xl);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
 
-        .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
-        }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 8px 20px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
 
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
+    .hero h1 {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
-        }
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--gray-700);
+      margin-bottom: 32px;
+      font-weight: 500;
+    }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
-        }
+    .hero-tags {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
+    .tag {
+      background: var(--gray-100);
+      color: var(--gray-700);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
 
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
+    /* Card Sections */
+    .section {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 48px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-xl);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
 
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 3px solid var(--primary);
+    }
 
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
+    .section-icon {
+      font-size: 36px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
 
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
+    .section-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
 
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-        }
+    /* Case Study */
+    .case-study {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 6px solid var(--accent);
+      padding: 32px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
 
-        .flow-step::after {
-            content: '→';
-            position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
-        }
+    .case-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .flow-step:last-child::after {
-            display: none;
-        }
+    .case-content {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--gray-800);
+    }
 
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
-        }
+    /* Answer Box */
+    .answer-box {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      border-left: 6px solid var(--primary);
+      padding: 32px;
+      border-radius: 16px;
+      margin-top: 24px;
+    }
 
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
+    .answer-box .icon {
+      font-size: 24px;
+      margin-right: 8px;
+    }
 
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
+    .answer-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
 
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
+    .answer-content {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--gray-800);
+    }
 
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
+    /* Highlight Box */
+    .highlight {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.05));
+      border: 2px solid var(--primary);
+      padding: 24px;
+      border-radius: 12px;
+      margin: 24px 0;
+      font-weight: 600;
+      color: var(--primary-dark);
+      font-size: 17px;
+    }
 
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
+    /* Key Points */
+    .key-points {
+      display: grid;
+      gap: 24px;
+      margin: 32px 0;
+    }
 
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
+    .key-point {
+      background: var(--gray-50);
+      padding: 24px;
+      border-radius: 16px;
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+    }
 
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
+    .key-point:hover {
+      transform: translateX(8px);
+      box-shadow: var(--shadow-md);
+    }
 
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
+    .key-point-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
+    .key-point-content {
+      font-size: 16px;
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
 
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
 
-        .fact-item {
-            text-align: center;
-        }
+    .stat-card {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 32px 24px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.3s ease;
+    }
 
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
-            display: block;
-        }
+    .stat-card:hover {
+      transform: translateY(-4px);
+    }
 
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
+    .stat-number {
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-family: 'Noto Serif KR', serif;
+    }
 
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
-        }
+    .stat-label {
+      font-size: 15px;
+      opacity: 0.95;
+      font-weight: 500;
+    }
 
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
+    /* Tips List */
+    .tips-list {
+      counter-reset: tip-counter;
+    }
 
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
-        }
+    .tip-item {
+      background: var(--gray-50);
+      padding: 24px 24px 24px 72px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      position: relative;
+      border: 2px solid var(--gray-200);
+      transition: all 0.3s ease;
+    }
 
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
-        }
+    .tip-item:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+    }
 
-        .footer-highlight {
-            color: #1A2A57;
-            font-weight: 700;
-        }
+    .tip-item::before {
+      counter-increment: tip-counter;
+      content: counter(tip-counter);
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+    }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
+    .tip-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
 
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
-        }
+    .tip-content {
+      font-size: 16px;
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
 
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
-        }
+    /* FAQ */
+    .faq-item {
+      background: white;
+      border: 2px solid var(--gray-200);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
-            }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .main-title {
-                font-size: 24px;
-            }
-        }
-    </style>
+    .faq-item:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .faq-question {
+      padding: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-900);
+      background: var(--gray-50);
+    }
+
+    .faq-question::before {
+      content: "Q";
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .faq-answer {
+      padding: 24px;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--gray-700);
+      background: white;
+    }
+
+    .faq-answer::before {
+      content: "A";
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: var(--accent);
+      color: white;
+      border-radius: 6px;
+      text-align: center;
+      line-height: 24px;
+      font-weight: 700;
+      margin-right: 12px;
+      font-size: 14px;
+    }
+
+    /* Legal References */
+    .legal-refs {
+      background: var(--gray-900);
+      color: white;
+      padding: 32px;
+      border-radius: 16px;
+      margin-top: 24px;
+    }
+
+    .legal-refs-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: white;
+    }
+
+    .legal-refs ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .legal-refs li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .legal-refs li:last-child {
+      border-bottom: none;
+    }
+
+    .legal-refs li::before {
+      content: "⚖️";
+      margin-right: 12px;
+    }
+
+    /* Footer */
+    .footer {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 32px;
+      text-align: center;
+      color: var(--gray-700);
+      margin-top: 40px;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .footer-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+
+    .footer-content {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 40px 24px;
+        margin-bottom: 24px;
+        border-radius: 20px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+
+      .hero-subtitle {
+        font-size: 17px;
+        margin-bottom: 24px;
+      }
+
+      .section {
+        padding: 32px 24px;
+        margin-bottom: 24px;
+        border-radius: 20px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .section-icon {
+        font-size: 28px;
+      }
+
+      .case-study,
+      .answer-box {
+        padding: 24px;
+        border-radius: 12px;
+      }
+
+      .case-title,
+      .answer-title {
+        font-size: 18px;
+      }
+
+      .case-content,
+      .answer-content {
+        font-size: 16px;
+      }
+
+      .highlight {
+        padding: 20px;
+        font-size: 16px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .stat-card {
+        padding: 24px;
+      }
+
+      .stat-number {
+        font-size: 32px;
+      }
+
+      .tip-item {
+        padding: 20px 20px 20px 64px;
+      }
+
+      .tip-item::before {
+        left: 16px;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+
+      .tip-title {
+        font-size: 16px;
+      }
+
+      .tip-content {
+        font-size: 15px;
+      }
+
+      .faq-question {
+        padding: 20px;
+        font-size: 16px;
+      }
+
+      .faq-answer {
+        padding: 20px;
+        font-size: 15px;
+      }
+
+      .legal-refs {
+        padding: 24px;
+      }
+
+      .legal-refs-title {
+        font-size: 18px;
+      }
+
+      .legal-refs li {
+        font-size: 14px;
+      }
+    }
+
+    /* Animations */
+    @keyframes slideInFromLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-left {
+      animation: slideInFromLeft 0.6s ease-out;
+    }
+
+    .animate-right {
+      animation: slideInFromRight 0.6s ease-out;
+    }
+
+    /* Performance optimization */
+    .section,
+    .stat-card,
+    .tip-item,
+    .faq-item,
+    .key-point {
+      will-change: transform;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
-        </div>
-
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
-
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="section-title">보증보험 청구</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <div class="section-title">민사소송 & 가압류</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
-                    </div>
-                    <div class="section-title">사해행위 취소</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
-                </div>
-            </div>
-        </div>
-
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
-
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
-        </div>
-
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
-        </div>
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="hero-badge">세입자 권리 보호 가이드</div>
+      <h1>"실거주 핑계로 집 빼라고 한다면?"<br>세입자의 현명한 대처법</h1>
+      <p class="hero-subtitle">2+2년 계약갱신청구권과 전월세 상한제 완벽 해설</p>
+      <div class="hero-tags">
+        <span class="tag">계약갱신청구권</span>
+        <span class="tag">전월세 5% 제한</span>
+        <span class="tag">실거주 거절</span>
+        <span class="tag">손해배상청구</span>
+      </div>
     </div>
+
+    <!-- Stats Section -->
+    <div class="section visible">
+      <div class="section-header">
+        <span class="section-icon">📊</span>
+        <h2 class="section-title">핵심 수치로 보는 세입자 권리</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">2+2년</div>
+          <div class="stat-label">계약갱신청구권 기간</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5%</div>
+          <div class="stat-label">최대 임대료 인상 제한</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">6개월전</div>
+          <div class="stat-label">갱신청구 가능 시점</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3개월분</div>
+          <div class="stat-label">최소 손해배상액</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case Study Section -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📖</span>
+        <h2 class="section-title">실제 사례로 이해하기</h2>
+      </div>
+      <div class="case-study">
+        <div class="case-title">🏠 김 씨의 고민</div>
+        <div class="case-content">
+          <p style="margin-bottom: 16px;">김 모씨는 2021년 9월, 서울의 한 아파트에서 <strong>전세 보증금 5억 원</strong>에 2년 계약을 맺고 거주하기 시작했습니다. 계약 만료를 3개월 앞둔 시점, 집주인 박 대표는 김 모씨에게 연락해 "주변 전셋값이 6억 5천만 원까지 올랐으니 재계약하려면 <strong>보증금을 1억 5천만 원 더 올려줘야 한다</strong>"고 통보했습니다.</p>
+
+          <p style="margin-bottom: 16px;">김 모씨는 2020년 개정된 주택임대차보호법에 따라 계약갱신청구권을 사용할 수 있다는 이야기를 들었지만, 구체적인 내용에 대해서는 잘 알지 못했습니다. 보증금 1억 5천만 원 증액은 도저히 감당할 수 없는 금액이었습니다.</p>
+
+          <p style="margin-bottom: 16px;">김 모씨는 고민 끝에 박 대표에게 계약갱신청구권을 사용하겠다고 밝혔습니다. 그러자 박 대표는 <strong>"안타깝지만 내년에 딸이 결혼해서 이 집에 들어와 살기로 했다"</strong>며 실거주를 이유로 계약 갱신을 거절할 수 있다고 말했습니다.</p>
+
+          <p>만약 박 대표의 말이 사실이라면 어쩔 수 없지만, 혹시 박 대표가 자신을 쫓아내기 위해 거짓말을 하는 것은 아닐지 의심스러웠습니다. <strong>과연 김 모씨는 이 위기를 어떻게 해결해야 할까요?</strong></p>
+        </div>
+      </div>
+
+      <div class="answer-box">
+        <div class="answer-title">
+          <span class="icon">💡</span>
+          변호사의 답변
+        </div>
+        <div class="answer-content">
+          <p>김 모씨는 2020년 개정된 주택임대차보호법에 따라 <strong>계약갱신청구권을 1회에 한해 행사</strong>할 수 있습니다. 김 모씨는 박 대표의 보증금 인상 요구를 거절하고 <strong>5% 이내의 증액만을 수용</strong>하며 계약 갱신을 주장할 수 있습니다.</p>
+          <p style="margin-top: 12px;">특히, 박 대표가 딸의 실거주를 이유로 갱신을 거절할 경우, <strong>추후 갱신 기간 내에 실제로 거주하지 않고 제3자에게 임대하면 손해배상을 청구할 수 있다</strong>는 점을 명확히 고지하여 임대인의 거짓 주장을 사전에 막는 것이 중요합니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legal Explanation Section -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">⚖️</span>
+        <h2 class="section-title">법리 해설</h2>
+      </div>
+
+      <p style="margin-bottom: 24px; font-size: 17px; line-height: 1.8;">2020년 7월 31일 개정된 주택임대차보호법은 임차인의 주거 안정을 위해 중요한 내용을 담고 있습니다. 그 핵심은 바로 <strong>계약갱신청구권</strong>과 <strong>전월세 상한제</strong>입니다.</p>
+
+      <div class="key-points">
+        <div class="key-point">
+          <div class="key-point-title">
+            <span>📜</span>
+            계약갱신청구권 (주택임대차보호법 제6조의3)
+          </div>
+          <div class="key-point-content">
+            임차인은 <strong>1회에 한해 2년의 계약 갱신</strong>을 요구할 수 있습니다. 이는 임대차 계약 만료 <strong>6개월 전부터 2개월 전까지</strong> 행사할 수 있으며, 이 권리를 행사하면 임대인은 정당한 사유 없이 갱신을 거절할 수 없습니다.
+          </div>
+        </div>
+
+        <div class="key-point">
+          <div class="key-point-title">
+            <span>💰</span>
+            전월세 상한제 (주택임대차보호법 제7조)
+          </div>
+          <div class="key-point-content">
+            임대료 증액은 기존 임대료의 <strong>5% 이내로 제한</strong>됩니다. 김 모씨의 사례에서 박 대표가 요구한 보증금 1억 5천만 원 증액(30% 증액)은 명백히 위법입니다. 김 모씨는 5% 이내인 <strong>2,500만 원 증액만 수용</strong>하겠다고 주장할 수 있습니다.
+          </div>
+        </div>
+
+        <div class="key-point">
+          <div class="key-point-title">
+            <span>🏡</span>
+            실거주 거절 사유의 함정
+          </div>
+          <div class="key-point-content">
+            임대인 본인이나 직계존속·직계비속이 실제 거주하려는 경우에는 갱신을 거절할 수 있습니다. 그러나 이를 악용하는 사례가 많아 법은 강력한 보호장치를 마련했습니다. <strong>실거주를 이유로 갱신을 거절한 후, 갱신되었을 기간이 끝나기 전에 정당한 사유 없이 제3자에게 임대하면 임차인에게 손해배상</strong>을 해야 합니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight">
+        ⚖️ <strong>헌법재판소</strong>도 이 제도가 임대인의 재산권을 과도하게 침해하지 않는다고 판단했습니다 (헌법재판소 2024. 2. 28. 선고 2020헌마1343 등 결정).
+      </div>
+
+      <div class="highlight">
+        ⚖️ <strong>서울중앙지방법원 2023. 1. 13. 선고 2022가단5187479 판결</strong>은 임대인이 실거주를 이유로 갱신을 거절한 후, 갱신되었을 기간이 끝나기 전에 정당한 사유 없이 제3자에게 임대하면 임차인에게 손해배상을 해야 한다고 판시했습니다.
+      </div>
+    </div>
+
+    <!-- Practical Tips Section -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">💼</span>
+        <h2 class="section-title">실무상 핵심 Tip</h2>
+      </div>
+
+      <div class="tips-list">
+        <div class="tip-item">
+          <div class="tip-title">계약갱신요구는 서면으로: 확실한 증거를 남기세요</div>
+          <div class="tip-content">
+            구두로 계약 갱신을 요구하는 것도 법적 효력은 있지만, 추후 분쟁이 발생했을 때 입증하기 어렵습니다. 따라서 <strong>내용증명 우편이나 문자 메시지, 이메일 등 기록이 남는 방법</strong>으로 계약 만료일 6개월 전부터 2개월 전까지 갱신 요구 의사를 명확히 전달해야 합니다.
+          </div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-title">실거주 거절 사유를 명확히 확인: 진위 여부를 따져야 합니다</div>
+          <div class="tip-content">
+            임대인이 실거주를 이유로 갱신을 거절했다면, 반드시 <strong>어떤 가족이 언제부터 실거주할 계획인지</strong>를 서면으로 확인해야 합니다. 임대인에게 증명 자료를 요구할 수도 있습니다. 만약 임대인이 구체적인 계획을 제시하지 못하거나 답변을 회피한다면 거짓일 가능성이 높습니다.
+          </div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-title">손해배상 청구 준비: 갱신 거절 후 동향을 파악하세요</div>
+          <div class="tip-content">
+            만약 실거주를 이유로 계약이 해지되었다면, 이사 나간 후에도 해당 주택에 새로운 임차인이 들어왔는지 <strong>지속적으로 확인</strong>해야 합니다. 확정일자 정보공개 제도를 활용하거나, 부동산 중개업소에 문의하는 등의 방법을 통해 박 대표의 거짓말을 입증할 증거를 확보할 수 있습니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">❓</span>
+        <h2 class="section-title">자주 묻는 질문 (FAQ)</h2>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">계약갱신청구권은 언제부터 행사할 수 있나요?</div>
+        <div class="faq-answer">
+          계약갱신청구권은 임대차 계약 만료일 기준으로 <strong>6개월 전부터 2개월 전까지</strong>의 기간 내에 행사할 수 있습니다. 다만, 2020년 12월 10일 이전에 체결되거나 갱신된 계약의 경우에는 계약 만료일 <strong>1개월 전까지</strong> 행사할 수 있습니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">임대인이 실거주를 이유로 갱신을 거절했는데, 나중에 다른 사람에게 집을 임대했다면 어떻게 대응할 수 있나요?</div>
+        <div class="faq-answer">
+          임대인이 직계존비속의 실거주를 이유로 갱신을 거절했으나, 갱신되었을 기간(2년) 만료 전에 제3자에게 임대한 경우, 임차인은 <strong>주택임대차보호법 제6조의3 제5항</strong>에 따라 손해배상을 청구할 수 있습니다. 손해배상액은 ①<strong>3개월분 월차임 상당액</strong>, ②갱신거절 당시 월차임과 신규 임차인의 월차임 차액의 2년분, ③임차인이 입은 손해액 중 <strong>가장 큰 금액</strong>으로 산정됩니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">전세 계약을 월세로 전환할 때도 임대료 증액 제한 5%가 적용되나요?</div>
+        <div class="faq-answer">
+          네, 전월세 전환 시에도 임대료 증액 제한 5%가 적용됩니다. 또한 전세금을 월세로 전환하는 경우 <strong>「주택임대차보호법 시행령」 제9조</strong>에 따라 <strong>연 5.25%의 전환율</strong>이 적용됩니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- Legal References Section -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📚</span>
+        <h2 class="section-title">관련 법령 및 판례</h2>
+      </div>
+
+      <div class="legal-refs">
+        <div class="legal-refs-title">법률 근거</div>
+        <ul>
+          <li>주택임대차보호법 제6조의3 (계약갱신 요구 등)</li>
+          <li>주택임대차보호법 제7조 (차임 등의 증감청구권)</li>
+          <li>주택임대차보호법 시행령 제9조 (월차임 전환 시 산정률)</li>
+          <li>헌법재판소 2024. 2. 28. 선고 2020헌마1343 등 결정</li>
+          <li>서울중앙지방법원 2023. 1. 13. 선고 2022가단5187479 판결</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-title">⚠️ 중요 안내사항</div>
+      <div class="footer-content">
+        본 내용은 일반적인 법률 정보 제공을 목적으로 하며, 개별 사안에 대한 법률 자문을 대체할 수 없습니다.<br>
+        구체적인 법률 문제는 전문 변호사와 상담하시기 바랍니다.<br>
+        <strong style="color: var(--primary); margin-top: 12px; display: block;">세입자의 권리, 정확히 알고 지켜야 합니다.</strong>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+  </script>
 </body>
 </html>
