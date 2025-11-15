@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사정변경 계약해제 - 법률 인포그래픽</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+            background: linear-gradient(135deg, #f4f4f4 0%, #e0e0e0 100%);
+            color: #161616;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #0f62fe 0%, #1192e8 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation Timeline */
+        .nav-timeline {
+            display: flex;
+            justify-content: space-around;
+            background: #525252;
+            padding: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-item {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .nav-item:hover {
+            background: #0f62fe;
+            transform: translateY(-2px);
+        }
+
+        .nav-item.active {
+            background: #0f62fe;
+        }
+
+        /* Content Sections */
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0f62fe;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #0f62fe;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #1192e8;
+        }
+
+        /* Case Study - Narrative Section */
+        .case-study {
+            background: linear-gradient(135deg, #f4f4f4 0%, #e8e8e8 100%);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 6px solid #da1e28;
+            position: relative;
+        }
+
+        .case-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.2;
+        }
+
+        .case-study h3 {
+            font-size: 1.5rem;
+            color: #da1e28;
+            margin-bottom: 20px;
+        }
+
+        .case-study p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Process Flow */
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .process-step {
+            background: white;
+            border: 3px solid #0f62fe;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(15, 98, 254, 0.2);
+        }
+
+        .process-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f62fe;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.3rem;
+            color: #0f62fe;
+            margin: 20px 0 15px 0;
+        }
+
+        .process-step p {
+            font-size: 0.95rem;
+            color: #525252;
+        }
+
+        /* Iceberg Model */
+        .iceberg-container {
+            max-width: 800px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .iceberg-surface {
+            background: linear-gradient(180deg, #1192e8 0%, #0f62fe 100%);
+            border-radius: 12px 12px 0 0;
+            padding: 40px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .iceberg-surface h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .water-line {
+            height: 3px;
+            background: repeating-linear-gradient(
+                90deg,
+                #525252,
+                #525252 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            position: relative;
+        }
+
+        .water-line::after {
+            content: '수면 (표면적 문제)';
+            position: absolute;
+            right: 20px;
+            top: -12px;
+            background: #525252;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .iceberg-deep {
+            background: linear-gradient(180deg, #f4f4f4 0%, #e0e0e0 100%);
+            border-radius: 0 0 12px 12px;
+            padding: 40px;
+        }
+
+        .iceberg-deep h3 {
+            font-size: 1.5rem;
+            color: #0f62fe;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .principle-box {
+            background: white;
+            border-left: 6px solid #0f62fe;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .principle-box h4 {
+            color: #0f62fe;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .principle-box blockquote {
+            font-style: italic;
+            color: #525252;
+            border-left: 3px solid #1192e8;
+            padding-left: 15px;
+            margin: 15px 0;
+        }
+
+        /* Key Requirements Grid */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .requirement-card {
+            background: linear-gradient(135deg, #f4f4f4 0%, white 100%);
+            border-radius: 12px;
+            padding: 30px;
+            border-top: 5px solid #1192e8;
+            transition: all 0.3s ease;
+        }
+
+        .requirement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .requirement-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .requirement-card h4 {
+            font-size: 1.3rem;
+            color: #0f62fe;
+            margin-bottom: 15px;
+        }
+
+        .requirement-card p {
+            font-size: 0.95rem;
+            color: #525252;
+            line-height: 1.7;
+        }
+
+        /* Conclusion Box */
+        .conclusion {
+            background: linear-gradient(135deg, #0f62fe 0%, #1192e8 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 12px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conclusion::before {
+            content: '✓';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 15rem;
+            opacity: 0.1;
+            font-weight: 700;
+        }
+
+        .conclusion h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .conclusion p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            position: relative;
+        }
+
+        /* Alert Box */
+        .alert-box {
+            background: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .alert-box h4 {
+            color: #856404;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .alert-box p {
+            color: #856404;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #525252;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .case-study {
+                padding: 25px;
+            }
+
+            .nav-timeline {
+                flex-direction: column;
+            }
+
+            .nav-item {
+                width: 100%;
+            }
+
+            .process-flow,
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .conclusion {
+                padding: 30px 20px;
+            }
+
+            .conclusion h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .case-study h3 {
+                font-size: 1.2rem;
+            }
+
+            .process-step,
+            .requirement-card {
+                padding: 20px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+
+            .nav-timeline {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>사정변경 계약해제</h1>
+            <p>예상치 못한 상황, 계약을 무를 수 있을까요?</p>
+        </header>
+
+        <!-- Navigation Timeline -->
+        <nav class="nav-timeline">
+            <div class="nav-item active">① 사례</div>
+            <div class="nav-item">② 쟁점</div>
+            <div class="nav-item">③ 법적 근거</div>
+            <div class="nav-item">④ 결론</div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Section 1: Case Study -->
+            <section class="section">
+                <h2 class="section-title">I. 정 대표의 무산된 글로벌 진출</h2>
+                <div class="case-study">
+                    <div class="case-icon">📋</div>
+                    <h3>초기 상황</h3>
+                    <p>중소기업 정 대표는 동남아시아 A국 유통업체와 <span class="highlight">5년 독점 수출계약</span>을 체결했습니다.</p>
+                    <p>투자 금액: <span class="highlight">3억 원</span> (계약금 + 초기 설비)</p>
+                </div>
+
+                <div class="process-flow" style="margin-top: 30px;">
+                    <div class="process-step" data-step="1">
+                        <h4>계약 체결</h4>
+                        <p>5년 독점 수출계약<br>3억 원 투자</p>
+                    </div>
+                    <div class="process-step" data-step="2">
+                        <h4>⚡ 위기 발생</h4>
+                        <p>A국 군사 쿠데타<br>새 정부 수립</p>
+                    </div>
+                    <div class="process-step" data-step="3">
+                        <h4>❌ 치명타</h4>
+                        <p>관세 200% 부과<br>제품 가격 3배 상승</p>
+                    </div>
+                    <div class="process-step" data-step="4">
+                        <h4>❓ 딜레마</h4>
+                        <p>계약 해제 가능?<br>투자금 회수는?</p>
+                    </div>
+                </div>
+
+                <div class="alert-box">
+                    <h4>⚠️ 핵심 문제</h4>
+                    <p>계약서에 '불가항력' 조항은 있지만, 정부 정책 변경에 대한 명확한 언급이 없는 상황. 5년간 계약에 묶이면 회사 존폐 위기!</p>
+                </div>
+            </section>
+
+            <!-- Section 2: Core Issue -->
+            <section class="section">
+                <h2 class="section-title">II. 핵심 쟁점</h2>
+                <div class="iceberg-container">
+                    <div class="iceberg-surface">
+                        <h3>표면적 문제</h3>
+                        <p style="font-size: 1.2rem; margin-top: 15px;">계약을 해제하고 투자금을 돌려받을 수 있는가?</p>
+                    </div>
+                    <div class="water-line"></div>
+                    <div class="iceberg-deep">
+                        <h3>심층 쟁점</h3>
+                        <p style="text-align: center; font-size: 1.05rem; color: #525252; margin-bottom: 30px;">
+                            계약 체결 당시 <strong>아무도 예상하지 못한 중대한 상황 변화</strong>로<br>
+                            계약 목적 달성이 불가능해진 경우,<br>
+                            이를 이유로 계약에서 벗어날 수 있는가?
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Legal Basis -->
+            <section class="section">
+                <h2 class="section-title">III. 법적 근거 및 해석</h2>
+
+                <div class="principle-box">
+                    <h4>민법 제2조 (신의성실의 원칙)</h4>
+                    <blockquote>"권리의 행사와 의무의 이행은 신의에 좇아 성실히 하여야 한다."</blockquote>
+                    <p style="margin-top: 15px; color: #525252;">
+                        <strong>쉬운 해석:</strong> 계약은 '보이지 않는 내비게이션'처럼 작동합니다.
+                        목적지를 설정하면 당시의 교통상황(계약의 기초)을 바탕으로 경로를 약속합니다.
+                        하지만 갑자기 <strong>지진으로 유일한 다리가 무너져</strong> 목적지 도착이 불가능해졌다면,
+                        내비게이션이 "경로를 재탐색하거나 주행을 종료하시겠습니까?"라고 묻듯,
+                        법도 계약 해제의 길을 열어줍니다.
+                    </p>
+                </div>
+
+                <div class="principle-box" style="margin-top: 30px;">
+                    <h4>대법원 2007. 3. 29. 선고 2004다31302 판결</h4>
+                    <blockquote>
+                        "계약 성립의 기초가 된 사정이 현저히 변경되고 당사자가 계약 당시 이를 예견할 수 없었으며,
+                        그로 인하여 계약을 그대로 유지하는 것이 당사자의 이해에 중대한 불균형을 초래하거나
+                        계약을 체결한 목적을 달성할 수 없는 경우에는, 계약준수 원칙의 예외로서
+                        사정변경을 이유로 계약을 해제하거나 변경할 수 있다"
+                    </blockquote>
+                    <p style="margin-top: 15px; color: #525252;">
+                        <strong>핵심:</strong> 계약의 '기초 공사'에 해당하는 전제가 무너졌다면,
+                        그 위에 지은 계약이라는 건물도 유지할 수 없습니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 4: Requirements -->
+            <section class="section">
+                <h2 class="section-title">IV. 사정변경이 인정되는 4가지 요건</h2>
+
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <div class="requirement-icon">🔮</div>
+                        <h4>1. 예측 불가능성</h4>
+                        <p>
+                            단순 경기 악화나 사업 계획 틀어짐은 불충분.
+                            <strong>전쟁, 자연재해, 급격한 정부 정책 변경</strong> 등
+                            누구도 예상치 못한 사건이어야 합니다.
+                        </p>
+                    </div>
+
+                    <div class="requirement-card">
+                        <div class="requirement-icon">✋</div>
+                        <h4>2. 귀책사유 없음</h4>
+                        <p>
+                            사정변경이 발생한 원인이 계약 해제를 주장하는 당사자에게 있다면,
+                            이를 이유로 계약을 해제할 수 없습니다.
+                        </p>
+                    </div>
+
+                    <div class="requirement-card">
+                        <div class="requirement-icon">📊</div>
+                        <h4>3. 충분한 증거</h4>
+                        <p>
+                            계약 당시 상황, 상황의 급변, 계약 목적 달성 불가를 입증할
+                            <strong>객관적 자료</strong>(뉴스, 정부 발표, 공문 등)가 필수입니다.
+                        </p>
+                    </div>
+
+                    <div class="requirement-card">
+                        <div class="requirement-icon">📮</div>
+                        <h4>4. 명확한 의사표시</h4>
+                        <p>
+                            사정변경의 구체적 내용과 계약 해제 의사를
+                            <strong>내용증명 우편</strong>으로 상대방에게 통보해야 합니다.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Conclusion -->
+            <section class="section">
+                <h2 class="section-title">V. 정 대표의 사례, 결론은?</h2>
+
+                <div class="conclusion">
+                    <h3>✓ 계약 해제 및 투자금 반환 청구 가능</h3>
+                    <p>
+                        정 대표는 <strong>사정변경을 이유로 계약을 해제</strong>하고
+                        이미 지급한 투자금의 반환을 청구할 수 있습니다.
+                    </p>
+                    <p style="margin-top: 20px;">
+                        <strong>이유:</strong> 군사 쿠데타와 급격한 관세 정책 변경은
+                        계약 당시 합리적으로 예견할 수 있었던 위험의 범위를 넘어선
+                        <strong>'현저한 사정변경'</strong>에 해당합니다.
+                        특히 계약의 핵심 목적인 '수출을 통한 이윤 창출'이 사실상 불가능해져,
+                        계약을 그대로 유지하는 것은 <strong>신의성실 원칙</strong>에 반합니다.
+                    </p>
+                </div>
+
+                <div style="background: white; border: 3px solid #0f62fe; border-radius: 12px; padding: 40px; margin-top: 30px;">
+                    <h3 style="color: #0f62fe; font-size: 1.8rem; margin-bottom: 25px; text-align: center;">
+                        💡 이것만은 꼭 기억하세요!
+                    </h3>
+
+                    <div style="display: grid; gap: 20px;">
+                        <div style="border-left: 5px solid #1192e8; padding-left: 20px;">
+                            <h4 style="color: #0f62fe; font-size: 1.2rem; margin-bottom: 10px;">
+                                ✓ 예측 불가능성이 핵심
+                            </h4>
+                            <p style="color: #525252;">
+                                단순 손해나 계획 차질은 부족. 전쟁, 재해, 급격한 정책 변경 등
+                                <strong>누구도 예상치 못한 사건</strong>이어야 합니다.
+                            </p>
+                        </div>
+
+                        <div style="border-left: 5px solid #1192e8; padding-left: 20px;">
+                            <h4 style="color: #0f62fe; font-size: 1.2rem; margin-bottom: 10px;">
+                                ✓ 나의 잘못이 없어야
+                            </h4>
+                            <p style="color: #525252;">
+                                사정변경의 원인이 본인에게 있다면 계약 해제 불가능합니다.
+                            </p>
+                        </div>
+
+                        <div style="border-left: 5px solid #1192e8; padding-left: 20px;">
+                            <h4 style="color: #0f62fe; font-size: 1.2rem; margin-bottom: 10px;">
+                                ✓ 증거가 모든 것을 말한다
+                            </h4>
+                            <p style="color: #525252;">
+                                계약 당시 상황, 상황 변화, 목적 달성 불가를 입증할
+                                <strong>객관적 자료</strong>를 철저히 확보하세요.
+                            </p>
+                        </div>
+
+                        <div style="border-left: 5px solid #1192e8; padding-left: 20px;">
+                            <h4 style="color: #0f62fe; font-size: 1.2rem; margin-bottom: 10px;">
+                                ✓ 내용증명으로 의사 표시
+                            </h4>
+                            <p style="color: #525252;">
+                                구두가 아닌, 사정변경의 구체적 내용과 계약 해제 의사를 명시한
+                                <strong>내용증명 우편</strong>으로 통보하세요.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>본 인포그래픽은 법률 정보 제공을 목적으로 하며, 구체적인 법률 자문을 대체할 수 없습니다.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">
+                © 2025 Legal Infographic. Design inspired by IBM Design Language.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('.nav-item').forEach((item, index) => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+
+                const sections = document.querySelectorAll('.section');
+                if (sections[index]) {
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Interactive process steps
+        document.querySelectorAll('.process-step').forEach(step => {
+            step.addEventListener('click', function() {
+                this.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+            });
+        });
+
+        // Print functionality
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+        });
+    </script>
+</body>
+</html>
