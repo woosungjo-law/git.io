@@ -6,7 +6,7 @@
     <title>사마양저의 연출: 당신의 브랜드를 만들어라</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,511 +18,511 @@
         }
 
         :root {
-            --bg-primary: #F8FAFC;
-            --bg-secondary: #F1F5F9;
-            --text-primary: #0F172A;
-            --text-secondary: #475569;
-            --text-muted: #64748B;
-            --border: #E2E8F0;
-            --card-bg: #FFFFFF;
-            --thesis-accent: #3B82F6;
-            --argument-accent: #8B5CF6;
-            --conclusion-accent: #F59E0B;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --cream: #FFF8E7;
+            --cream-dark: #FFF0CC;
+            --brown: #92400E;
+            --brown-light: #B45309;
+            --orange: #D97706;
+            --orange-light: #F59E0B;
+            --text-dark: #451A03;
+            --text-medium: #78350F;
         }
 
         body {
             font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
-            font-weight: 400;
-            padding: 40px 20px;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-size: 16px;
+            padding: 20px;
+            max-width: 640px;
+            margin: 0 auto;
         }
 
+        /* Header */
         .header {
-            max-width: 1400px;
-            margin: 0 auto 48px;
             text-align: center;
+            margin-bottom: 48px;
+            padding: 32px 20px;
+            position: relative;
+        }
+
+        .header-sketch {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
 
         .header-title {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 12px;
-            color: var(--text-primary);
+            font-size: clamp(1.5rem, 6vw, 2rem);
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            color: var(--brown);
+            position: relative;
+            z-index: 1;
         }
 
         .header-subtitle {
-            font-size: 1.125rem;
+            font-size: 1.0625rem;
             font-weight: 400;
-            color: var(--text-secondary);
+            color: var(--text-medium);
+            line-height: 1.6;
         }
 
-        /* Kanban Board */
-        .kanban-board {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+        /* Point Card */
+        .point {
+            background: white;
+            border-radius: 16px;
+            padding: 28px 24px;
+            margin-bottom: 32px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(146, 64, 14, 0.08);
+            border: 2px dashed var(--brown-light);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.6s ease forwards;
         }
 
-        /* Lane */
-        .lane {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 20px;
-            min-height: 600px;
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .lane-header {
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 3px solid;
-        }
+        .point:nth-child(1) { animation-delay: 0.2s; }
+        .point:nth-child(2) { animation-delay: 0.4s; }
+        .point:nth-child(3) { animation-delay: 0.6s; }
+        .point:nth-child(4) { animation-delay: 0.8s; }
+        .point:nth-child(5) { animation-delay: 1s; }
 
-        .lane-header.thesis {
-            border-bottom-color: var(--thesis-accent);
-        }
-
-        .lane-header.arguments {
-            border-bottom-color: var(--argument-accent);
-        }
-
-        .lane-header.conclusion {
-            border-bottom-color: var(--conclusion-accent);
-        }
-
-        .lane-title {
-            font-size: 0.875rem;
+        .point-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--orange);
+            color: white;
+            border-radius: 50%;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
-        }
-
-        .lane-header.thesis .lane-title {
-            color: var(--thesis-accent);
-        }
-
-        .lane-header.arguments .lane-title {
-            color: var(--argument-accent);
-        }
-
-        .lane-header.conclusion .lane-title {
-            color: var(--conclusion-accent);
-        }
-
-        .lane-desc {
-            font-size: 0.9375rem;
-            font-weight: 400;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* Card */
-        .card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 24px;
+            font-size: 1.125rem;
             margin-bottom: 16px;
-            box-shadow: var(--shadow-sm);
-            border-left: 4px solid;
-            transition: all 0.3s ease;
+            transform: rotate(-3deg);
         }
 
-        .card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-
-        .lane.thesis .card {
-            border-left-color: var(--thesis-accent);
-        }
-
-        .lane.arguments .card {
-            border-left-color: var(--argument-accent);
-        }
-
-        .lane.conclusion .card {
-            border-left-color: var(--conclusion-accent);
-        }
-
-        .card-label {
-            display: inline-block;
-            font-size: 0.75rem;
+        .point-title {
+            font-size: 1.25rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 4px 12px;
-            border-radius: 100px;
             margin-bottom: 12px;
-        }
-
-        .lane.thesis .card-label {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--thesis-accent);
-        }
-
-        .lane.arguments .card-label {
-            background: rgba(139, 92, 246, 0.1);
-            color: var(--argument-accent);
-        }
-
-        .lane.conclusion .card-label {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--conclusion-accent);
-        }
-
-        .card-title {
-            font-size: 1.125rem;
-            font-weight: 700;
+            color: var(--brown);
             line-height: 1.4;
-            margin-bottom: 12px;
-            color: var(--text-primary);
         }
 
-        .card-text {
+        .point-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 16px;
+        }
+
+        .point-highlight {
+            background: var(--cream-dark);
+            border-left: 4px solid var(--orange);
+            padding: 16px;
+            border-radius: 8px;
             font-size: 0.9375rem;
-            font-weight: 400;
             line-height: 1.7;
-            color: var(--text-secondary);
+            color: var(--text-dark);
+            font-weight: 600;
+            position: relative;
         }
 
-        .card-text strong {
-            font-weight: 700;
-            color: var(--text-primary);
+        /* Detail Toggle */
+        .point-detail {
+            margin-top: 16px;
+            padding: 20px;
+            background: var(--cream-dark);
+            border-radius: 12px;
+            display: none;
+            border: 2px solid var(--orange-light);
         }
 
-        .card-highlight {
-            background: rgba(245, 158, 11, 0.1);
-            border-left: 3px solid var(--conclusion-accent);
-            padding: 12px 16px;
-            border-radius: 4px;
+        .point-detail.active {
+            display: block;
+            animation: expandIn 0.3s ease;
+        }
+
+        @keyframes expandIn {
+            from {
+                opacity: 0;
+                transform: scaleY(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+        .toggle-btn {
+            display: inline-block;
             margin-top: 12px;
+            padding: 10px 20px;
+            background: var(--orange);
+            color: white;
+            border: none;
+            border-radius: 100px;
             font-size: 0.875rem;
-            font-style: italic;
-            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            min-height: 44px;
         }
 
-        /* Special Cards */
-        .card-hero {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-            border-left-width: 6px;
-        }
-
-        .card-impact {
-            background: var(--text-primary);
-            color: white;
-            border-left-color: var(--conclusion-accent);
-        }
-
-        .card-impact .card-title {
-            color: white;
-        }
-
-        .card-impact .card-text {
-            color: rgba(255, 255, 255, 0.9);
+        .toggle-btn:active {
+            transform: scale(0.95);
+            background: var(--brown-light);
         }
 
         /* Timeline */
+        .timeline {
+            margin: 20px 0;
+        }
+
         .timeline-item {
             display: flex;
             gap: 16px;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
+            position: relative;
         }
 
-        .timeline-item:last-child {
-            margin-bottom: 0;
+        .timeline-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 17px;
+            top: 36px;
+            width: 2px;
+            height: calc(100% + 8px);
+            background: var(--orange-light);
+            opacity: 0.3;
         }
 
-        .timeline-number {
+        .timeline-dot {
             flex-shrink: 0;
-            width: 32px;
-            height: 32px;
-            background: var(--argument-accent);
-            color: white;
+            width: 36px;
+            height: 36px;
+            background: var(--orange);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
             font-weight: 700;
             font-size: 0.875rem;
+            border: 3px solid var(--cream);
+            box-shadow: 0 2px 6px rgba(146, 64, 14, 0.2);
         }
 
-        .timeline-content {
-            flex: 1;
-        }
-
-        .timeline-title {
+        .timeline-content h4 {
+            font-size: 1.0625rem;
             font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 6px;
+        }
+
+        .timeline-content p {
             font-size: 0.9375rem;
-            margin-bottom: 4px;
-            color: var(--text-primary);
-        }
-
-        .timeline-text {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.7;
+            color: var(--text-medium);
         }
 
         /* Action List */
         .action-list {
             list-style: none;
+            margin-top: 20px;
         }
 
         .action-item {
-            padding-left: 0;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--cream-dark);
+            border-radius: 12px;
+            border-left: 5px solid var(--orange);
         }
 
-        .action-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .action-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            background: var(--conclusion-accent);
-            color: white;
-            border-radius: 50%;
+        .action-item h4 {
+            font-size: 1.0625rem;
             font-weight: 700;
-            font-size: 0.875rem;
-            margin-right: 12px;
+            color: var(--brown);
+            margin-bottom: 10px;
         }
 
-        .action-title {
-            font-weight: 700;
+        .action-item p {
             font-size: 0.9375rem;
-            margin-bottom: 8px;
-            color: var(--text-primary);
+            line-height: 1.7;
+            color: var(--text-medium);
+            margin-bottom: 12px;
         }
 
-        .action-text {
+        .action-example {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 8px;
             font-size: 0.875rem;
+            font-style: italic;
+            color: var(--text-dark);
+            border: 1px dashed var(--brown-light);
+        }
+
+        /* SVG Sketch Elements */
+        .sketch-arrow {
+            width: 100%;
+            height: 60px;
+            margin: 20px 0;
+        }
+
+        .sketch-circle {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 80px;
+            height: 80px;
+            opacity: 0.6;
+        }
+
+        /* Quote */
+        .quote {
+            background: var(--brown);
+            color: var(--cream);
+            padding: 32px 24px;
+            border-radius: 16px;
+            margin: 40px 0;
+            text-align: center;
+            position: relative;
+            border: 3px solid var(--brown-light);
+            transform: rotate(-1deg);
+        }
+
+        .quote-text {
+            font-size: 1.125rem;
+            font-weight: 700;
             line-height: 1.6;
-            color: var(--text-secondary);
-            margin-left: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-medium);
+            font-size: 0.875rem;
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .kanban-board {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-
-            .lane {
-                min-height: auto;
-            }
-        }
-
-        @media (max-width: 640px) {
+        @media (min-width: 640px) {
             body {
-                padding: 24px 16px;
+                padding: 40px 20px;
             }
 
-            .card {
-                padding: 20px;
-            }
-
-            .lane {
-                padding: 16px;
+            .point {
+                padding: 36px 32px;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1 class="header-title">사마양저의 연출: 당신의 브랜드를 만들어라</h1>
-        <p class="header-subtitle">권위는 직함이 아닌, 행동으로 증명된 자기연출로 쟁취한다</p>
+        <svg class="header-sketch" viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 30 Q 100 10, 200 30 T 390 30" stroke="#D97706" stroke-width="3" stroke-linecap="round" fill="none" stroke-dasharray="5,5"/>
+        </svg>
+        <h1 class="header-title">사마양저의 연출:<br>당신의 브랜드를 만들어라</h1>
+        <p class="header-subtitle">권위는 직함이 아닌, 행동으로 증명하는 자기연출이다</p>
     </div>
 
-    <div class="kanban-board">
-        <!-- Lane 1: Thesis -->
-        <div class="lane thesis">
-            <div class="lane-header thesis">
-                <div class="lane-title">핵심 주장 (Thesis)</div>
-                <div class="lane-desc">권위 탄생의 본질</div>
-            </div>
-
-            <div class="card card-hero">
-                <span class="card-label">핵심 명제</span>
-                <h3 class="card-title">실력과 평판의 간극</h3>
-                <p class="card-text">
-                    <strong>세상은 오직 당신이 '보여준' 것, '증명한' 것만을 믿는다.</strong>
-                    실력과 평판 사이에는 거대한 간극이 존재한다. 이 간극을 메우는 전략적 기술이 바로 '자기연출'이다.
-                </p>
-            </div>
-
-            <div class="card">
-                <span class="card-label">문제</span>
-                <h3 class="card-title">김 팀장의 실패</h3>
-                <p class="card-text">
-                    업계 최고의 엑셀 전문가, 누구보다 성실한 직원. 그러나 팀원들은 그를 따르지 않는다.
-                    <strong>직함(Position)을 받았을 뿐, 리더의 권위(Power)는 얻지 못했다.</strong>
-                </p>
-            </div>
-
-            <div class="card">
-                <span class="card-label">본질</span>
-                <h3 class="card-title">자기연출의 실패</h3>
-                <p class="card-text">
-                    이 상황의 본질은 능력 문제가 아니다. '자기연출'의 완벽한 실패다.
-                    자신의 등장을 분명하게 알리지 못했고, 원칙을 행동으로 증명하지도 못했다.
-                </p>
-            </div>
+    <!-- Point 1: Problem -->
+    <div class="point">
+        <svg class="sketch-circle" viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="35" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="3,3" opacity="0.5"/>
+        </svg>
+        <div class="point-number">1</div>
+        <h2 class="point-title">직함 ≠ 권위</h2>
+        <p class="point-text">
+            김 팀장은 '팀장'이라는 직함을 받았지만, 팀원들은 그를 따르지 않는다.
+            업계 최고의 전문가이고 성실하지만, 리더의 권위는 얻지 못했다.
+        </p>
+        <div class="point-highlight">
+            💡 Position(직함) ≠ Power(권위)
         </div>
-
-        <!-- Lane 2: Arguments -->
-        <div class="lane arguments">
-            <div class="lane-header arguments">
-                <div class="lane-title">주요 근거 (Arguments)</div>
-                <div class="lane-desc">역사적 증거와 원리</div>
-            </div>
-
-            <div class="card">
-                <span class="card-label">역사적 사례</span>
-                <h3 class="card-title">사마양저의 3단계 연출</h3>
-                <div class="timeline-item">
-                    <div class="timeline-number">1</div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">약속 (무대 설정)</div>
-                        <div class="timeline-text">"내일 정오, 군문에서 만납시다." 왕의 총신 장가와 약속을 잡다.</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">2</div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">준비 (시스템 구축)</div>
-                        <div class="timeline-text">해시계를 세우고 군법을 정비. 장가는 저녁에야 도착.</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">3</div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">참수 (극적 실행)</div>
-                        <div class="timeline-text">"늦은 자의 죄는?" "참수입니다." 즉시 장가의 목을 베었다.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card card-impact">
-                <h3 class="card-title">삼군이 모두 진동했다</h3>
-                <p class="card-text">
-                    권위는 주어지는 것이 아니라, 피를 묻히며 쟁취하는 것이다.
-                </p>
-            </div>
-
-            <div class="card">
-                <span class="card-label">원리 1</span>
-                <h3 class="card-title">상징의 선택</h3>
-                <p class="card-text">
-                    왕의 총신 장가는 '쇼크'를 위한 완벽한 제물이었다.
-                    <strong>가장 강력한 상징을 부숴 자신의 브랜드를 세웠다.</strong>
-                </p>
-            </div>
-
-            <div class="card">
-                <span class="card-label">원리 2</span>
-                <h3 class="card-title">시스템 구축</h3>
-                <p class="card-text">
-                    개인적 원한이 아니라 '군법'이라는 시스템을 내세웠다. 법 앞에는 예외가 없다는 절대적 원칙.
-                </p>
-            </div>
-
-            <div class="card">
-                <span class="card-label">원리 3</span>
-                <h3 class="card-title">사건으로 증명</h3>
-                <p class="card-text">
-                    권위는 '선언'이 아닌 '사건'으로 탄생한다.
-                    형명(形名)의 일치: 이름과 실체가 같아야 한다.
-                    양저는 '장군'이란 이름값을 '처형'으로 증명했다.
-                </p>
-            </div>
-
-            <div class="card">
-                <span class="card-label">현대 적용</span>
-                <h3 class="card-title">당신의 '장가'를 찾아라</h3>
-                <p class="card-text">
-                    조직 내 만연한 '관행'이라는 이름의 비효율, '좋은 게 좋은 것'이라는 안일함.
-                    <strong>고질적인 문제를 공개적으로 해결하는 것이 현대의 '참수'다.</strong>
-                </p>
-            </div>
-        </div>
-
-        <!-- Lane 3: Conclusion -->
-        <div class="lane conclusion">
-            <div class="lane-header conclusion">
-                <div class="lane-title">결론 & 실천 (Conclusion)</div>
-                <div class="lane-desc">핵심 메시지와 행동 지침</div>
-            </div>
-
-            <div class="card">
-                <span class="card-label">정의</span>
-                <h3 class="card-title">자기연출의 본질</h3>
-                <p class="card-text">
-                    '자기연출'은 거짓 포장이나 쇼맨십이 아니다.
-                    <strong>당신의 핵심 가치와 실력을 타인이 인식할 수 있는 '행동'으로 번역하는 치열한 기술이다.</strong>
-                </p>
-            </div>
-
-            <div class="card">
-                <span class="card-label">실천법</span>
-                <h3 class="card-title">내일 실천할 3가지</h3>
-                <ul class="action-list">
-                    <li class="action-item">
-                        <div class="action-title">
-                            <span class="action-number">1</span>
-                            원칙을 선언하라
-                        </div>
-                        <p class="action-text">
-                            가장 중요한 업무 원칙 하나를 정하고, 다음 회의 시작 5분간 선언하라.
-                        </p>
-                        <div class="card-highlight">
-                            "앞으로 모든 회의는 30분을 넘기지 않습니다. 결론 없이 끝나지 않습니다."
-                        </div>
-                    </li>
-                    <li class="action-item">
-                        <div class="action-title">
-                            <span class="action-number">2</span>
-                            본보기를 보여라
-                        </div>
-                        <p class="action-text">
-                            원칙을 어긴 첫 사례를 찾아 모두가 보는 앞에서 정중하지만 단호하게 수정하라.
-                        </p>
-                        <div class="card-highlight">
-                            "원칙대로 여기서 끊고, 추가 논의는 메일로 합시다."
-                        </div>
-                    </li>
-                    <li class="action-item">
-                        <div class="action-title">
-                            <span class="action-number">3</span>
-                            일관성을 기록하라
-                        </div>
-                        <p class="action-text">
-                            당신 스스로 원칙을 지킨 사례를 일주일에 한 번씩 점검하라.
-                        </p>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card card-hero">
-                <span class="card-label">핵심 메시지</span>
-                <h3 class="card-title">브랜드는 일관성에서 완성된다</h3>
-                <p class="card-text">
-                    당신의 브랜드를 세우는 첫 번째 행동은,
-                    <strong>당신의 가장 중요한 원칙을 지키기 위해 가장 어려운 상징을 깨뜨리는 것이다.</strong>
-                </p>
-            </div>
+        <button class="toggle-btn" onclick="toggleDetail(1)">자세히 보기 👇</button>
+        <div class="point-detail" id="detail-1">
+            <p><strong>왜 실패했을까?</strong></p>
+            <p>그는 분명 존재하는데, 구성원들에게는 없는 사람이나 마찬가지다.
+            자신의 등장을 분명하게 알리지 못했고, 원칙을 행동으로 증명하지도 못했다.</p>
         </div>
     </div>
+
+    <!-- Arrow -->
+    <svg class="sketch-arrow" viewBox="0 0 100 60" fill="none">
+        <path d="M10 30 L 85 30 M 75 20 L 85 30 L 75 40" stroke="#D97706" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <!-- Point 2: Essence -->
+    <div class="point">
+        <div class="point-number">2</div>
+        <h2 class="point-title">자기연출의 실패</h2>
+        <p class="point-text">
+            문제의 본질은 능력이 아니라 '자기연출'의 실패다.
+            실력과 평판 사이에는 거대한 간극이 존재한다.
+        </p>
+        <div class="point-highlight">
+            💬 "세상은 오직 당신이 '보여준' 것, '증명한' 것만을 믿는다"
+        </div>
+        <button class="toggle-btn" onclick="toggleDetail(2)">자세히 보기 👇</button>
+        <div class="point-detail" id="detail-2">
+            <p><strong>자기연출이란?</strong></p>
+            <p>거짓 포장이나 쇼맨십이 아니다. 당신의 핵심 가치와 실력을 타인이 인식할 수 있는 '행동'으로 번역하는 치열한 기술이다.</p>
+        </div>
+    </div>
+
+    <!-- Point 3: Historical Case -->
+    <div class="point">
+        <div class="point-number">3</div>
+        <h2 class="point-title">사마양저의 3단계 연출</h2>
+        <p class="point-text">
+            사마천은 권위가 탄생하는 순간을 극적으로 포착한다.
+            신분이 미천한 사마양저가 어떻게 장군의 권위를 쟁취했는가?
+        </p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot">1</div>
+                <div class="timeline-content">
+                    <h4>약속 (무대 설정)</h4>
+                    <p>"내일 정오, 군문에서 만납시다" — 왕의 총신 장가와 약속을 잡다</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">2</div>
+                <div class="timeline-content">
+                    <h4>준비 (시스템 구축)</h4>
+                    <p>해시계를 세우고 군법을 정비. 장가는 저녁에야 도착</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">3</div>
+                <div class="timeline-content">
+                    <h4>참수 (극적 실행)</h4>
+                    <p>"늦은 자의 죄는?" "참수입니다." 즉시 장가의 목을 베었다</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote">
+            <p class="quote-text">삼군이 모두 진동했다</p>
+        </div>
+
+        <button class="toggle-btn" onclick="toggleDetail(3)">왜 이렇게 했을까? 👇</button>
+        <div class="point-detail" id="detail-3">
+            <p><strong>철저히 계산된 연출</strong></p>
+            <p>• 왕의 총신 장가는 '쇼크'를 위한 완벽한 제물이었다<br>
+            • 개인적 원한이 아니라 '군법'이라는 시스템을 내세웠다<br>
+            • 가장 강력한 상징을 부숴 자신의 브랜드를 세웠다</p>
+        </div>
+    </div>
+
+    <!-- Point 4: Principles -->
+    <div class="point">
+        <div class="point-number">4</div>
+        <h2 class="point-title">권위 탄생의 원리</h2>
+        <p class="point-text">
+            권위는 '선언'이 아닌 '사건'으로 탄생한다.
+            이름과 실체가 일치해야 한다 (형명의 일치).
+        </p>
+        <div class="point-highlight">
+            ⚔️ 양저는 '장군'이란 이름값을 '처형'이라는 압도적 실체로 증명했다
+        </div>
+        <button class="toggle-btn" onclick="toggleDetail(4)">현대에 어떻게 적용할까? 👇</button>
+        <div class="point-detail" id="detail-4">
+            <p><strong>당신의 '장가'를 찾아라</strong></p>
+            <p>조직 내 만연한 '관행'이라는 이름의 비효율, '좋은 게 좋은 것'이라는 안일함, 무책임한 태만.
+            새로 부임한 리더가 첫 주에 고질적인 문제를 공개적으로 해결하는 것이 현대의 '참수'다.</p>
+        </div>
+    </div>
+
+    <!-- Point 5: Action Plan -->
+    <div class="point">
+        <div class="point-number">5</div>
+        <h2 class="point-title">내일 실천할 3가지</h2>
+        <p class="point-text">
+            당신의 브랜드는 일관성에서 완성된다.
+            지금 당장 실천할 수 있는 구체적인 행동 지침.
+        </p>
+
+        <ul class="action-list">
+            <li class="action-item">
+                <h4>① 원칙을 선언하라</h4>
+                <p>가장 중요한 업무 원칙 하나를 정하고, 다음 회의 시작 5분간 선언하라</p>
+                <div class="action-example">
+                    "앞으로 모든 회의는 30분을 넘기지 않습니다. 결론 없이 끝나지 않습니다."
+                </div>
+            </li>
+            <li class="action-item">
+                <h4>② 본보기를 보여라</h4>
+                <p>원칙을 어긴 첫 사례를 찾아 모두가 보는 앞에서 정중하지만 단호하게 수정하라</p>
+                <div class="action-example">
+                    "원칙대로 여기서 끊고, 추가 논의는 메일로 합시다."
+                </div>
+            </li>
+            <li class="action-item">
+                <h4>③ 일관성을 기록하라</h4>
+                <p>당신 스스로 원칙을 지킨 사례를 일주일에 한 번씩 점검하라</p>
+            </li>
+        </ul>
+
+        <div class="point-highlight">
+            🎯 당신의 브랜드를 세우는 첫 번째 행동은, 당신의 가장 중요한 원칙을 지키기 위해 가장 어려운 상징을 깨뜨리는 것이다
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>권위는 주어지는 것이 아니라, 행동으로 쟁취하는 것이다</p>
+    </div>
+
+    <script>
+        function toggleDetail(num) {
+            const detail = document.getElementById('detail-' + num);
+            const btn = detail.previousElementSibling;
+
+            if (detail.classList.contains('active')) {
+                detail.classList.remove('active');
+                btn.textContent = '자세히 보기 👇';
+            } else {
+                detail.classList.add('active');
+                btn.textContent = '접기 👆';
+            }
+        }
+    </script>
 </body>
 </html>
