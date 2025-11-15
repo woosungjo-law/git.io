@@ -6,59 +6,37 @@
     <title>사마양저의 연출: 당신의 브랜드를 만들어라</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             word-break: keep-all;
+            word-wrap: break-word;
             overflow-wrap: break-word;
         }
 
         :root {
-            --primary: #6366F1;
-            --secondary: #8B5CF6;
-            --accent: #F59E0B;
-            --dark-bg: #0A0E27;
-            --dark-card: #131832;
-            --text-primary: #F8FAFC;
-            --text-secondary: #CBD5E1;
-            --text-muted: #94A3B8;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --gradient-primary: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-            --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
-            --gradient-bg: linear-gradient(180deg, #0A0E27 0%, #1E1B4B 50%, #312E81 100%);
+            --dark-gray: #1A1A1A;
+            --gold: #C5A572;
+            --crimson: #DC143C;
+            --off-white: #FAFAFA;
+            --black: #0A0A0A;
+            --light-gray: #E8E8E8;
+            --medium-gray: #666666;
         }
 
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--off-white);
+            color: var(--black);
+            line-height: 1.7;
             overflow-x: hidden;
-            background-image: var(--gradient-bg);
-            background-attachment: fixed;
         }
 
-        /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: var(--gradient-primary);
-            z-index: 9999;
-            transition: width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Container */
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -71,598 +49,565 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 120px 24px 80px;
+            background: linear-gradient(135deg, var(--dark-gray) 0%, #2A2A2A 100%);
+            color: var(--off-white);
             position: relative;
+            padding: 80px 24px;
         }
 
-        .hero::before {
+        .hero::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at 50% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-            pointer-events: none;
+            height: 120px;
+            background: linear-gradient(to bottom, transparent, var(--off-white));
         }
 
         .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-block;
             padding: 8px 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
+            border: 2px solid var(--gold);
             border-radius: 100px;
             font-size: 0.875rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--gold);
             margin-bottom: 32px;
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            text-transform: uppercase;
         }
 
         .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(2rem, 6vw, 4rem);
             font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #FFFFFF 0%, #A78BFA 50%, #F59E0B 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+            line-height: 1.2;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-highlight {
+            color: var(--crimson);
+            position: relative;
+            display: inline-block;
         }
 
         .hero-subtitle {
             font-size: clamp(1.125rem, 3vw, 1.5rem);
             font-weight: 500;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 48px;
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
-        }
-
-        .scroll-indicator {
-            width: 32px;
-            height: 52px;
-            border: 2px solid var(--glass-border);
-            border-radius: 20px;
+            color: var(--gold);
+            max-width: 700px;
+            margin: 0 auto;
             position: relative;
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
-        }
-
-        .scroll-indicator::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 4px;
-            animation: scrollDot 2s ease-in-out infinite;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes scrollDot {
-            0%, 100% {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-            50% {
-                opacity: 0.3;
-                transform: translateX(-50%) translateY(16px);
-            }
+            z-index: 1;
         }
 
         /* Section */
         section {
-            padding: 80px 0;
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 64px;
+            padding: 120px 0;
         }
 
         .section-label {
             display: inline-block;
-            padding: 6px 16px;
-            background: var(--gradient-accent);
-            border-radius: 100px;
             font-size: 0.875rem;
             font-weight: 700;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
+            color: var(--gold);
             margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--gold);
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Noto Serif KR', serif;
             font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 16px;
+            line-height: 1.3;
+            margin-bottom: 24px;
+            color: var(--dark-gray);
         }
 
         .section-desc {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
+            font-size: 1.25rem;
+            color: var(--medium-gray);
+            margin-bottom: 64px;
+            line-height: 1.6;
         }
 
-        /* Bento Grid */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 24px;
-            margin-bottom: 80px;
-        }
-
-        .bento-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 40px;
+        /* Problem Card */
+        .problem-card {
+            background: var(--dark-gray);
+            color: var(--off-white);
+            padding: 60px;
+            border-radius: 8px;
             position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0;
-            transform: translateY(40px);
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
 
-        .bento-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .bento-card::before {
-            content: '';
+        .problem-card::before {
+            content: '⚠';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.1) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            top: 30px;
+            right: 40px;
+            font-size: 4rem;
+            opacity: 0.1;
         }
 
-        .bento-card:hover::before {
-            opacity: 1;
-        }
-
-        .bento-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-
-        .bento-card.large {
-            grid-column: span 12;
-        }
-
-        .bento-card.medium {
-            grid-column: span 6;
-        }
-
-        .bento-card.small {
-            grid-column: span 4;
-        }
-
-        .card-icon {
-            width: 56px;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--gradient-primary);
-            border-radius: 16px;
+        .problem-title {
+            font-family: 'Noto Serif KR', serif;
             font-size: 1.75rem;
-            margin-bottom: 24px;
-        }
-
-        .card-title {
-            font-size: 1.5rem;
             font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--gold);
+        }
+
+        .problem-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
             margin-bottom: 16px;
-            line-height: 1.3;
         }
 
-        .card-text {
-            font-size: 1.0625rem;
-            line-height: 1.7;
-            color: var(--text-secondary);
+        /* Quote */
+        .quote {
+            background: linear-gradient(135deg, var(--crimson) 0%, #B01030 100%);
+            color: white;
+            padding: 48px 60px;
+            border-radius: 8px;
+            margin: 60px 0;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(220, 20, 60, 0.2);
         }
 
-        .highlight {
-            color: var(--accent);
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-family: Georgia, serif;
+            font-size: 6rem;
+            line-height: 1;
+            opacity: 0.2;
+        }
+
+        .quote-text {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(1.25rem, 3vw, 2rem);
             font-weight: 600;
-            background: linear-gradient(180deg, transparent 60%, rgba(245, 158, 11, 0.2) 60%);
-            padding: 0 4px;
+            line-height: 1.6;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
         }
 
         /* Timeline */
         .timeline {
             position: relative;
-            padding: 40px 0;
+            padding: 60px 0 60px 80px;
         }
 
         .timeline::before {
             content: '';
             position: absolute;
-            left: 28px;
+            left: 32px;
             top: 0;
             bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            width: 3px;
+            background: linear-gradient(to bottom, var(--gold) 0%, var(--crimson) 100%);
         }
 
         .timeline-item {
             position: relative;
-            padding-left: 88px;
-            margin-bottom: 48px;
+            margin-bottom: 80px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
         }
 
         .timeline-marker {
             position: absolute;
-            left: 0;
+            left: -80px;
             top: 0;
-            width: 56px;
-            height: 56px;
-            background: var(--gradient-primary);
+            width: 64px;
+            height: 64px;
+            background: var(--gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.1);
+            font-size: 1.75rem;
+            box-shadow: 0 0 0 8px var(--off-white), 0 0 0 12px var(--light-gray);
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .timeline-content {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 32px;
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 8px var(--off-white), 0 0 0 12px var(--light-gray);
+            }
+            50% {
+                box-shadow: 0 0 0 8px var(--off-white), 0 0 0 16px rgba(197, 165, 114, 0.3);
+            }
+        }
+
+        .timeline-marker.crimson {
+            background: var(--crimson);
+        }
+
+        .timeline-step {
+            display: inline-block;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 12px;
         }
 
         .timeline-title {
-            font-size: 1.25rem;
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            color: var(--dark-gray);
         }
 
         .timeline-text {
             font-size: 1.0625rem;
-            line-height: 1.7;
-            color: var(--text-secondary);
+            line-height: 1.8;
+            color: var(--medium-gray);
         }
 
-        /* Quote */
-        .quote-card {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--glass-border);
-            border-left: 4px solid var(--accent);
-            border-radius: 24px;
-            padding: 40px;
-            margin: 48px 0;
-            position: relative;
+        .timeline-highlight {
+            color: var(--crimson);
+            font-weight: 700;
         }
 
-        .quote-card::before {
-            content: '"';
-            position: absolute;
-            top: 16px;
-            left: 24px;
-            font-family: Georgia, serif;
-            font-size: 5rem;
-            line-height: 1;
-            color: var(--accent);
-            opacity: 0.3;
-        }
-
-        .quote-text {
-            font-size: 1.375rem;
-            font-weight: 600;
-            line-height: 1.6;
-            font-style: italic;
-            padding-left: 48px;
+        /* Shock Quote */
+        .shock-quote {
+            background: var(--black);
+            color: var(--crimson);
+            padding: 60px;
+            text-align: center;
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(1.75rem, 4vw, 3rem);
+            font-weight: 900;
+            margin: 80px 0;
+            border-left: 8px solid var(--crimson);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
         /* Principles Grid */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin: 48px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin: 60px 0;
         }
 
         .principle-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 32px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .principle-card::after {
+        .principle-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 4px;
-            background: var(--gradient-primary);
+            background: var(--gold);
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .principle-card:hover::after {
-            transform: scaleX(1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .principle-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(99, 102, 241, 0.3);
+            transform: scale(1.02);
+            border-color: var(--gold);
+            box-shadow: 0 12px 40px rgba(197, 165, 114, 0.15);
+        }
+
+        .principle-card:hover::before {
+            transform: scaleX(1);
         }
 
         .principle-number {
+            font-family: 'Noto Serif KR', serif;
             font-size: 3rem;
             font-weight: 900;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--gold);
             line-height: 1;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .principle-title {
-            font-size: 1.25rem;
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.375rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            color: var(--dark-gray);
         }
 
         .principle-text {
             font-size: 1rem;
             line-height: 1.7;
-            color: var(--text-secondary);
+            color: var(--medium-gray);
         }
 
-        /* Action Cards */
-        .action-cards {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            margin-top: 48px;
+        /* Comparison */
+        .comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin: 60px 0;
         }
 
-        .action-card {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 40px;
+        .comparison-box {
+            background: var(--dark-gray);
+            color: var(--off-white);
+            padding: 48px;
+            border-radius: 8px;
             position: relative;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .action-card:hover {
-            transform: translateX(8px);
-            border-color: rgba(245, 158, 11, 0.5);
+        .comparison-box.modern {
+            background: var(--crimson);
         }
 
-        .action-number {
-            position: absolute;
-            top: 32px;
-            right: 32px;
-            width: 64px;
-            height: 64px;
-            background: var(--gradient-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
-            font-weight: 900;
-            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
+        .comparison-label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            opacity: 0.8;
         }
 
-        .action-title {
+        .comparison-title {
+            font-family: 'Noto Serif KR', serif;
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 16px;
-            padding-right: 80px;
+        }
+
+        .comparison-text {
+            font-size: 1.0625rem;
+            line-height: 1.7;
+        }
+
+        /* Action Items */
+        .action-items {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin: 60px 0;
+        }
+
+        .action-item {
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-left: 6px solid var(--crimson);
+            border-radius: 8px;
+            padding: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .action-item:hover {
+            transform: translateX(8px);
+            border-color: var(--crimson);
+            box-shadow: 0 12px 40px rgba(220, 20, 60, 0.1);
+        }
+
+        .action-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--crimson);
+            color: white;
+            border-radius: 50%;
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .action-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--dark-gray);
         }
 
         .action-text {
             font-size: 1.0625rem;
             line-height: 1.7;
-            color: var(--text-secondary);
+            color: var(--medium-gray);
             margin-bottom: 16px;
         }
 
         .action-example {
-            background: rgba(245, 158, 11, 0.1);
-            border-left: 3px solid var(--accent);
+            background: rgba(220, 20, 60, 0.05);
+            border-left: 3px solid var(--crimson);
             padding: 16px 20px;
-            border-radius: 8px;
-            font-size: 0.9375rem;
+            border-radius: 4px;
             font-style: italic;
-            color: var(--text-muted);
+            color: var(--medium-gray);
+            font-size: 0.9375rem;
         }
 
-        /* CTA Section */
-        .cta-section {
+        /* CTA */
+        .cta {
+            background: linear-gradient(135deg, var(--dark-gray) 0%, #2A2A2A 100%);
+            color: var(--off-white);
+            padding: 100px 60px;
             text-align: center;
-            padding: 120px 24px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            border-radius: 32px;
-            margin: 80px auto;
+            border-radius: 8px;
+            margin: 80px 0;
         }
 
         .cta-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 900;
             margin-bottom: 24px;
+            color: var(--gold);
         }
 
         .cta-text {
             font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 48px;
+            color: var(--off-white);
         }
 
         .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 48px;
-            background: var(--gradient-accent);
+            display: inline-block;
+            padding: 18px 48px;
+            background: var(--crimson);
             color: white;
             text-decoration: none;
             border-radius: 100px;
             font-weight: 700;
             font-size: 1.125rem;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
             min-height: 56px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 48px rgba(245, 158, 11, 0.5);
+            box-shadow: 0 12px 48px rgba(220, 20, 60, 0.4);
+            background: #B01030;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 48px 24px;
-            color: var(--text-muted);
+            padding: 60px 24px;
+            color: var(--medium-gray);
             font-size: 0.9375rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        /* Decorative Elements */
+        .arrow-sketch {
+            width: 60px;
+            height: 40px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .arrow-sketch::before {
+            content: '↓';
+            font-size: 2.5rem;
+            color: var(--gold);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .hero {
-                padding: 80px 24px 60px;
+                min-height: 80vh;
+                padding: 60px 24px;
             }
 
             section {
-                padding: 60px 0;
+                padding: 80px 0;
             }
 
-            .section-header {
-                margin-bottom: 48px;
+            .problem-card,
+            .quote {
+                padding: 40px 32px;
             }
 
-            .bento-grid {
-                gap: 16px;
-            }
-
-            .bento-card {
-                padding: 32px 24px;
-            }
-
-            .bento-card.large,
-            .bento-card.medium,
-            .bento-card.small {
-                grid-column: span 12;
-            }
-
-            .timeline::before {
-                left: 20px;
-            }
-
-            .timeline-item {
-                padding-left: 72px;
+            .timeline {
+                padding: 40px 0 40px 60px;
             }
 
             .timeline-marker {
-                width: 40px;
-                height: 40px;
+                left: -60px;
+                width: 48px;
+                height: 48px;
                 font-size: 1.25rem;
             }
 
-            .timeline-content {
-                padding: 24px;
-            }
-
-            .quote-card {
-                padding: 32px 24px;
-            }
-
-            .quote-text {
-                font-size: 1.125rem;
-                padding-left: 32px;
+            .shock-quote {
+                padding: 40px 32px;
             }
 
             .principles-grid {
                 grid-template-columns: 1fr;
             }
 
-            .action-card {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                padding: 60px 32px;
+            }
+
+            .action-item {
                 padding: 32px 24px;
             }
-
-            .action-number {
-                top: 24px;
-                right: 24px;
-                width: 56px;
-                height: 56px;
-                font-size: 1.5rem;
-            }
-
-            .action-title {
-                padding-right: 72px;
-            }
-
-            .cta-section {
-                padding: 80px 24px;
-            }
         }
 
-        /* Animations */
-        @keyframes gradientFlow {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .animate-gradient {
-            background-size: 200% 200%;
-            animation: gradientFlow 8s ease infinite;
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Accessibility */
@@ -678,120 +623,103 @@
     </style>
 </head>
 <body>
-    <div class="progress-bar" id="progressBar"></div>
-
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-badge">
-            <span>📖</span>
-            사마천의 지혜
-        </div>
-        <h1>사마양저의 연출:<br>당신의 브랜드를 만들어라</h1>
+        <div class="hero-badge">사마천, 당신의 무기가 되는 순간</div>
+        <h1>사마양저의 <span class="hero-highlight">연출</span>:<br>당신의 브랜드를 만들어라</h1>
         <p class="hero-subtitle">권위는 주어지지 않는다. 행동으로 쟁취하는 것이다.</p>
-        <div class="scroll-indicator"></div>
     </section>
 
     <div class="container">
         <!-- Problem Section -->
-        <section>
-            <div class="section-header">
-                <div class="section-label">Problem</div>
-                <h2 class="section-title">보이지 않는 리더</h2>
-                <p class="section-desc">직함은 받았지만, 권위를 얻지 못한 리더의 딜레마</p>
+        <section class="fade-in">
+            <div class="section-label">Problem</div>
+            <h2 class="section-title">보이지 않는 리더</h2>
+            <p class="section-desc">직함은 있지만, 권위는 없는 리더의 딜레마</p>
+
+            <div class="problem-card">
+                <h3 class="problem-title">김 팀장의 실패</h3>
+                <p class="problem-text">
+                    수요일 오후 3시. 부임 첫 주가 막 지났다. 회의실 공기는 냉랭하다.
+                    그는 업계 최고의 엑셀 전문가이고, 누구보다 성실하다. 매일 가장 늦게 퇴근한다.
+                </p>
+                <p class="problem-text">
+                    하지만 팀원들은 그를 따르지 않는다. 보고서는 마감 직전에 올라오고, 회의는 산만하다.
+                </p>
             </div>
 
-            <div class="bento-grid">
-                <div class="bento-card large">
-                    <div class="card-icon">👻</div>
-                    <h3 class="card-title">김 팀장의 실패</h3>
-                    <p class="card-text">
-                        수요일 오후 3시. 부임 첫 주가 지났다. 그는 <span class="highlight">업계 최고의 엑셀 전문가</span>이고, 누구보다 성실하다.
-                        매일 가장 늦게 퇴근한다. 하지만 팀원들은 그를 따르지 않는다.
-                    </p>
-                </div>
-
-                <div class="bento-card medium">
-                    <div class="card-icon">⚠️</div>
-                    <h3 class="card-title">치명적 착각</h3>
-                    <p class="card-text">
-                        그는 '팀장'이라는 <span class="highlight">직함(Position)</span>이 곧 힘(Power)이라고 믿었다.
-                        하지만 직함을 받았을 뿐, '리더'라는 자리는 얻지 못했다.
-                    </p>
-                </div>
-
-                <div class="bento-card medium">
-                    <div class="card-icon">🎭</div>
-                    <h3 class="card-title">연출의 실패</h3>
-                    <p class="card-text">
-                        본질은 능력 부족이 아니다. <span class="highlight">'자기연출'의 완벽한 실패</span>다.
-                        자신의 등장을 알리지 못했고, 원칙을 행동으로 증명하지도 못했다.
-                    </p>
-                </div>
-            </div>
-
-            <div class="quote-card">
+            <div class="quote">
                 <p class="quote-text">
-                    세상은 오직 당신이 '보여준' 것, '증명한' 것만을 믿는다.
+                    그는 '팀장'이라는 직함을 받았을 뿐, '리더'라는 자리는 얻지 못했다.
+                </p>
+            </div>
+
+            <div class="problem-card">
+                <h3 class="problem-title">본질은 '연출'의 실패다</h3>
+                <p class="problem-text">
+                    이 상황의 본질은 능력 문제가 아니다. <strong>'자기연출'의 완벽한 실패</strong>다.
+                    김 팀장은 자신의 등장을 분명하게 알리지 못했고, 자신의 원칙을 행동으로 증명하지도 못했다.
+                </p>
+                <p class="problem-text">
+                    세상은 오직 당신이 <strong>'보여준' 것, '증명한' 것만을 믿는다.</strong>
                 </p>
             </div>
         </section>
 
         <!-- Historical Case -->
-        <section>
-            <div class="section-header">
-                <div class="section-label">Historical Case</div>
-                <h2 class="section-title">장군의 칼, 군대의 문</h2>
-                <p class="section-desc">사마천이 포착한 권위 탄생의 순간</p>
-            </div>
+        <section class="fade-in">
+            <div class="section-label">Historical Case</div>
+            <h2 class="section-title">장군의 칼, 군대의 문</h2>
+            <p class="section-desc">사마천이 포착한 권위 탄생의 순간</p>
 
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-marker">📜</div>
-                    <div class="timeline-content">
-                        <h4 class="timeline-title">약속</h4>
-                        <p class="timeline-text">
-                            제나라 경공이 신분이 미천한 사마양저를 장군으로 임명했다.
-                            양저는 왕의 총신 장가를 감군으로 요청하고 약속을 잡았다.
-                            "내일 정오, 군문에서 만납시다."
-                        </p>
-                    </div>
+                    <div class="timeline-step">STEP 1</div>
+                    <h3 class="timeline-title">약속</h3>
+                    <p class="timeline-text">
+                        제나라 경공이 신분이 미천한 사마양저를 장군으로 임명했다.
+                        양저는 왕의 총신 장가를 감군으로 요청하고 약속을 잡았다.
+                        <br><br>
+                        "내일 정오, 군문에서 만납시다."
+                    </p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-marker">⏰</div>
-                    <div class="timeline-content">
-                        <h4 class="timeline-title">준비와 오만</h4>
-                        <p class="timeline-text">
-                            다음 날, 양저는 먼저 도착해 해시계를 세우고 군법을 정비했다.
-                            그러나 오만한 장가는 친지들과 연회를 즐기며 저녁이 되어서야 나타났다.
-                        </p>
-                    </div>
+                    <div class="timeline-step">STEP 2</div>
+                    <h3 class="timeline-title">준비와 오만</h3>
+                    <p class="timeline-text">
+                        다음 날, 양저는 먼저 도착해 해시계를 세우고 군법을 정비했다.
+                        <br><br>
+                        그러나 오만한 장가는 친지들과 연회를 즐기며 저녁이 되어서야 나타났다.
+                    </p>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-marker">⚔️</div>
-                    <div class="timeline-content">
-                        <h4 class="timeline-title">결단</h4>
-                        <p class="timeline-text">
-                            양저는 군법관을 불렀다. "약속한 시간에 늦은 자의 죄는?"
-                            "참수입니다." <span class="highlight">양저는 즉시 장가의 목을 베었다.</span>
-                        </p>
-                    </div>
+                    <div class="timeline-marker crimson">⚔️</div>
+                    <div class="timeline-step">STEP 3</div>
+                    <h3 class="timeline-title">결단</h3>
+                    <p class="timeline-text">
+                        양저는 군법관을 불렀다. "약속한 시간에 늦은 자의 죄는?"
+                        <br>
+                        "참수입니다."
+                        <br><br>
+                        <span class="timeline-highlight">양저는 즉시 장가의 목을 베었다.</span>
+                    </p>
                 </div>
             </div>
 
-            <div class="quote-card animate-gradient">
-                <p class="quote-text">삼군이 모두 진동했다.</p>
+            <div class="shock-quote">
+                삼군이 모두 진동했다.
             </div>
         </section>
 
         <!-- Principles -->
-        <section>
-            <div class="section-header">
-                <div class="section-label">Principles</div>
-                <h2 class="section-title">권위는 어떻게 탄생하는가</h2>
-                <p class="section-desc">철저히 계산된 연출의 3가지 원리</p>
-            </div>
+        <section class="fade-in">
+            <div class="section-label">Principles</div>
+            <h2 class="section-title">권위는 어떻게 탄생하는가</h2>
+            <p class="section-desc">철저히 계산된 연출의 3가지 원리</p>
 
             <div class="principles-grid">
                 <div class="principle-card">
@@ -822,7 +750,7 @@
                 </div>
             </div>
 
-            <div class="quote-card">
+            <div class="quote">
                 <p class="quote-text">
                     그는 가장 강력한 상징을 부숴 자신의 브랜드를 세웠다.
                 </p>
@@ -830,54 +758,44 @@
         </section>
 
         <!-- Modern Application -->
-        <section>
-            <div class="section-header">
-                <div class="section-label">Modern Application</div>
-                <h2 class="section-title">당신의 '장가'는 무엇인가</h2>
-                <p class="section-desc">현대의 리더가 깨뜨려야 할 상징</p>
-            </div>
+        <section class="fade-in">
+            <div class="section-label">Modern Application</div>
+            <h2 class="section-title">당신의 '장가'는 무엇인가</h2>
+            <p class="section-desc">현대의 리더가 깨뜨려야 할 상징</p>
 
-            <div class="bento-grid">
-                <div class="bento-card medium">
-                    <h3 class="card-title">과거의 참수</h3>
-                    <p class="card-text">
-                        왕의 총신 장가의 목을 베어 군법의 절대성을 증명
+            <div class="comparison">
+                <div class="comparison-box">
+                    <div class="comparison-label">과거의 참수</div>
+                    <h3 class="comparison-title">왕의 총신</h3>
+                    <p class="comparison-text">
+                        장가의 목을 베어 군법의 절대성을 증명
                     </p>
                 </div>
 
-                <div class="bento-card medium">
-                    <h3 class="card-title">현대의 참수</h3>
-                    <p class="card-text">
-                        조직 내 만연한 관행과 비효율을 공개적으로 해결
-                    </p>
-                </div>
-
-                <div class="bento-card large">
-                    <h3 class="card-title">자기연출의 본질</h3>
-                    <p class="card-text">
-                        '자기연출'은 거짓 포장이나 쇼맨십이 아니다.
-                        당신의 핵심 가치와 실력을, <span class="highlight">타인이 인식할 수 있는 '행동'으로 번역하는 치열한 기술</span>이다.
+                <div class="comparison-box modern">
+                    <div class="comparison-label">현대의 참수</div>
+                    <h3 class="comparison-title">만연한 관행</h3>
+                    <p class="comparison-text">
+                        조직 내 비효율과 안일함을 공개적으로 해결
                     </p>
                 </div>
             </div>
 
-            <div class="quote-card">
+            <div class="quote">
                 <p class="quote-text">
-                    당신의 브랜드를 세우는 첫 번째 행동은, 당신의 가장 중요한 원칙을 지키기 위해 가장 어려운 상징을 깨뜨리는 것이다.
+                    '자기연출'은 당신의 핵심 가치를, 타인이 인식할 수 있는 '행동'으로 번역하는 치열한 기술이다.
                 </p>
             </div>
         </section>
 
         <!-- Action Items -->
-        <section>
-            <div class="section-header">
-                <div class="section-label">Action Plan</div>
-                <h2 class="section-title">내일 실천할 3가지</h2>
-                <p class="section-desc">당신의 브랜드는 일관성에서 완성된다</p>
-            </div>
+        <section class="fade-in">
+            <div class="section-label">Action Plan</div>
+            <h2 class="section-title">내일 실천할 3가지</h2>
+            <p class="section-desc">당신의 브랜드는 일관성에서 완성된다</p>
 
-            <div class="action-cards">
-                <div class="action-card">
+            <div class="action-items">
+                <div class="action-item">
                     <div class="action-number">1</div>
                     <h3 class="action-title">원칙을 선언하라</h3>
                     <p class="action-text">
@@ -889,7 +807,7 @@
                     </div>
                 </div>
 
-                <div class="action-card">
+                <div class="action-item">
                     <div class="action-number">2</div>
                     <h3 class="action-title">본보기를 보여라</h3>
                     <p class="action-text">
@@ -901,7 +819,7 @@
                     </div>
                 </div>
 
-                <div class="action-card">
+                <div class="action-item">
                     <div class="action-number">3</div>
                     <h3 class="action-title">일관성을 기록하라</h3>
                     <p class="action-text">
@@ -913,7 +831,7 @@
         </section>
 
         <!-- CTA -->
-        <div class="cta-section">
+        <div class="cta fade-in">
             <h2 class="cta-title">권위는 쟁취하는 것이다</h2>
             <p class="cta-text">당신의 브랜드는 내일부터 시작된다</p>
             <a href="#" class="cta-button">
@@ -928,46 +846,25 @@
     </footer>
 
     <script>
-        // Progress Bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('progressBar').style.width = scrolled + '%';
-        });
-
-        // Intersection Observer for Bento Cards
+        // Intersection Observer for scroll animations
         const observerOptions = {
             threshold: 0.15,
-            rootMargin: '0px 0px -80px 0px'
+            rootMargin: '0px 0px -100px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.bento-card').forEach(card => {
-            observer.observe(card);
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
         });
 
-        // Mouse tracking for bento cards
-        document.querySelectorAll('.bento-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                card.style.setProperty('--mouse-x', x + '%');
-                card.style.setProperty('--mouse-y', y + '%');
-            });
-        });
-
-        // Smooth scroll
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
