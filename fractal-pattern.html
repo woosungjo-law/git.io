@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전체는 어떻게 부분에 숨나 - 프랙탈</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0D0D0D;
+            --violet: #A259FF;
+            --cyan: #1ABCFE;
+            --orange: #F24E1E;
+            --green: #0ACF83;
+            --bg: #FAFAFA;
+            --bg-light: #FFFFFF;
+            --text: #1A1A1A;
+            --text-light: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+
+        .hero-title .highlight {
+            color: var(--violet);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .hero-illustration {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .fractal-shape {
+            position: absolute;
+            border: 4px solid var(--violet);
+            border-radius: 50%;
+            animation: pulse 3s infinite;
+            border-style: dashed;
+        }
+
+        .fractal-shape:nth-child(1) {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-style: solid;
+        }
+
+        .fractal-shape:nth-child(2) {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border-color: var(--cyan);
+            animation-delay: 0.5s;
+            border-style: dotted;
+        }
+
+        .fractal-shape:nth-child(3) {
+            width: 45%;
+            height: 45%;
+            top: 27.5%;
+            left: 27.5%;
+            border-color: var(--orange);
+            animation-delay: 1s;
+        }
+
+        .fractal-shape:nth-child(4) {
+            width: 25%;
+            height: 25%;
+            top: 37.5%;
+            left: 37.5%;
+            border-color: var(--green);
+            animation-delay: 1.5s;
+            border-style: solid;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+            50% { transform: scale(1.08) rotate(5deg); opacity: 1; }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--violet);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50%;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .section-number::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px dashed var(--violet);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 2.2;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .section-content p {
+            margin-bottom: 28px;
+        }
+
+        .section-content strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Story Card */
+        .story-card {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            position: relative;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            border: 2px solid rgba(162, 89, 255, 0.15);
+            transition: border-color 0.3s ease;
+        }
+
+        .story-card:hover {
+            border-color: rgba(162, 89, 255, 0.3);
+        }
+
+        .story-card::before {
+            content: '✦';
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            font-size: 24px;
+            color: var(--violet);
+            animation: twinkle 2s infinite;
+        }
+
+        .story-card::after {
+            content: '~';
+            position: absolute;
+            bottom: -10px;
+            right: 40px;
+            font-size: 32px;
+            color: var(--cyan);
+            font-weight: 300;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* Insight Box */
+        .insight-box {
+            background: linear-gradient(135deg, var(--violet) 0%, #7C3AED 100%);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .insight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .insight-box p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        .insight-box strong {
+            color: #FFE066;
+        }
+
+        /* Visual Metaphor */
+        .metaphor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .metaphor-card {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .metaphor-card::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: var(--green);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .metaphor-card:hover {
+            transform: translateY(-6px) rotate(-1deg);
+            border-color: var(--cyan);
+            box-shadow: 0 12px 32px rgba(26, 188, 254, 0.15);
+        }
+
+        .metaphor-card:hover::after {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .metaphor-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            transition: transform 0.3s ease;
+        }
+
+        .metaphor-card:hover .metaphor-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .metaphor-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .metaphor-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Fractal Demo */
+        .fractal-demo {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            border: 3px dashed var(--cyan);
+            position: relative;
+        }
+
+        .fractal-demo::before,
+        .fractal-demo::after {
+            content: '✦';
+            position: absolute;
+            font-size: 16px;
+            color: var(--green);
+        }
+
+        .fractal-demo::before {
+            top: 15px;
+            left: 20px;
+        }
+
+        .fractal-demo::after {
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .fractal-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .fractal-item {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .fractal-item:hover {
+            transform: rotate(10deg);
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 86px solid var(--cyan);
+            position: relative;
+            filter: drop-shadow(0 4px 8px rgba(26, 188, 254, 0.3));
+        }
+
+        .triangle.small {
+            border-left-width: 30px;
+            border-right-width: 30px;
+            border-bottom-width: 52px;
+            border-bottom-color: var(--green);
+            filter: drop-shadow(0 4px 8px rgba(10, 207, 131, 0.3));
+        }
+
+        .triangle.tiny {
+            border-left-width: 15px;
+            border-right-width: 15px;
+            border-bottom-width: 26px;
+            border-bottom-color: var(--violet);
+            filter: drop-shadow(0 4px 8px rgba(162, 89, 255, 0.3));
+        }
+
+        .equals {
+            font-size: 2rem;
+            color: var(--orange);
+            font-weight: 700;
+            animation: wiggle 2s infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, var(--orange) 0%, #DC2626 100%);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .warning-box::before {
+            content: '⚠';
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            font-size: 30px;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .warning-box p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        /* Conclusion */
+        .conclusion {
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .final-message {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .final-message .key {
+            color: var(--violet);
+            position: relative;
+        }
+
+        .final-message .key::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, rgba(162, 89, 255, 0.3), rgba(26, 188, 254, 0.3));
+            border-radius: 4px;
+            transform: skewX(-5deg);
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, #2D2D2D 100%);
+            color: white;
+            padding: 16px 36px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .share-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--violet);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+            opacity: 0.3;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+        }
+
+        .share-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .share-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .share-btn svg {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .share-btn:hover svg {
+            transform: rotate(15deg);
+        }
+
+        .share-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .story-card {
+                padding: 28px;
+            }
+
+            .final-message {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-illustration {
+                width: 150px;
+                height: 150px;
+            }
+
+            .metaphor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-illustration">
+                <div class="fractal-shape"></div>
+                <div class="fractal-shape"></div>
+                <div class="fractal-shape"></div>
+                <div class="fractal-shape"></div>
+            </div>
+            <h1 class="hero-title">
+                전체는 어떻게<br>
+                <span class="highlight">부분</span>에 숨나
+            </h1>
+            <p class="hero-subtitle">feat. 프랙탈(Fractal)</p>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A259FF" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Section 1: The Crack -->
+        <section class="section">
+            <div class="section-number">1</div>
+            <h2 class="section-title">미세한 균열의 예언</h2>
+
+            <div class="story-card">
+                <div class="section-content">
+                    <p>
+                        오래된 백자(白瓷) 표면의 실금.<br>
+                        눈여겨보지 않으면 모를 상처.
+                    </p>
+                    <p>
+                        그러나 그 찰나의 목격은 묘한 불안을 남겼다.<br>
+                        그 작은 흠집이 이미 그릇의 <strong>전체 운명</strong>을 예고하고 있음을 직감했다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="metaphor-grid">
+                <div class="metaphor-card">
+                    <div class="metaphor-icon">💬</div>
+                    <div class="metaphor-title">사소한 말실수</div>
+                    <div class="metaphor-desc">무심코 내뱉은 한마디가 당신의 가치관을 드러낸다</div>
+                </div>
+                <div class="metaphor-card">
+                    <div class="metaphor-icon">😐</div>
+                    <div class="metaphor-title">무심한 표정</div>
+                    <div class="metaphor-desc">순간의 반응이 내면의 진심을 보여준다</div>
+                </div>
+                <div class="metaphor-card">
+                    <div class="metaphor-icon">✋</div>
+                    <div class="metaphor-title">습관적인 손동작</div>
+                    <div class="metaphor-desc">반복되는 행동이 성격의 무늬를 새긴다</div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <p>
+                    이게 그냥 '작은' 실수나 버릇일까?<br><br>
+                    <strong>아니다.</strong><br>
+                    거대한 빙산의 일각이고,<br>
+                    전체를 압축한 암호다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: Pattern -->
+        <section class="section">
+            <div class="section-number">2</div>
+            <h2 class="section-title">패턴, 그 전조(前兆)에 대하여</h2>
+
+            <div class="section-content">
+                <p>
+                    사람들은 애써 외면한다.<br>
+                    "이 작은 건 그냥 작은 것일 뿐"이라고,<br>
+                    "전체와는 상관없는 예외"라고.
+                </p>
+            </div>
+
+            <div class="warning-box">
+                <p>
+                    하지만 그 미세한 어긋남,<br>
+                    그 사소한 불협화음은<br>
+                    <strong>이미 전체의 붕괴를 연주 중이다.</strong><br><br>
+                    우리는 그것을 <strong>'조짐'</strong>이라 부른다.
+                </p>
+            </div>
+
+            <div class="section-content">
+                <p>
+                    이건 신비주의 같은 게 아니다.<br>
+                    가장 냉철한 관찰의 결과다.
+                </p>
+                <p>
+                    어떤 것도 홀로 존재하지 않고,<br>
+                    어떤 부분도 전체와 유리되지 않는다.
+                </p>
+            </div>
+
+            <div class="insight-box">
+                <p>
+                    나뭇잎 하나의 잎맥 무늬는<br>
+                    그 나무 전체의 생장 방식을 담고 있다.<br><br>
+                    <strong>한 방울의 물이 거대한 바다를 증언하듯이.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: Fractal -->
+        <section class="section">
+            <div class="section-number">3</div>
+            <h2 class="section-title">부분에 새겨진 전체, 프랙탈</h2>
+
+            <div class="section-content">
+                <p>
+                    이 오래된 직관에 과학이<br>
+                    <strong>'프랙탈(Fractal)'</strong>이란 이름을 붙였다.
+                </p>
+            </div>
+
+            <div class="fractal-demo">
+                <h3 style="color: var(--violet); font-weight: 600; margin-bottom: 20px;">자기 유사성 (Self-Similarity)</h3>
+                <div class="fractal-visual">
+                    <div class="fractal-item">
+                        <div class="triangle"></div>
+                    </div>
+                    <span class="equals">=</span>
+                    <div class="fractal-item">
+                        <div class="triangle small"></div>
+                    </div>
+                    <span class="equals">=</span>
+                    <div class="fractal-item">
+                        <div class="triangle tiny"></div>
+                    </div>
+                </div>
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-top: 20px;">
+                    작은 구조가 전체와 닮은 꼴로 끝없이 되풀이되는 구조
+                </p>
+            </div>
+
+            <div class="insight-box">
+                <p>
+                    이걸 인간의 삶에 가져오는 순간,<br>
+                    <strong>서늘한 진실</strong>과 마주한다.<br><br>
+                    나의 가장 사소한 습관,<br>
+                    무의식적인 선택,<br>
+                    찰나의 망설임조차<br><br>
+                    <strong>내 삶 전체의 거대한 구조와 정확히 닮아있다.</strong><br><br>
+                    그건 내 '일부'가 아니다.<br>
+                    <strong>그게 곧 '나'다.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: Pattern's Persistence -->
+        <section class="section">
+            <div class="section-number">4</div>
+            <h2 class="section-title">무늬의 엄중함</h2>
+
+            <div class="section-content">
+                <p>
+                    그래서 '근본'을 바꿔야 한다고들 말한다.
+                </p>
+                <p>
+                    하지만 프랙탈의 통찰은 그보다 더 엄중하다.<br>
+                    변화의 가능성보다 <strong>패턴의 집요함</strong>을 먼저 가리킨다.
+                </p>
+            </div>
+
+            <div class="warning-box">
+                <p>
+                    작은 것을 바꾸면 전체가 바뀔 수 있다는 희망.<br><br>
+                    어쩌면 그건,<br>
+                    <strong>작은 것이 이미 전체를 규정한다는 절망의 다른 이름일지 모른다.</strong>
+                </p>
+            </div>
+
+            <div class="section-content">
+                <p>
+                    우리가 할 수 있는 건,<br>
+                    어쩌면 변화가 아니라 <strong>'인지'</strong>뿐일까.
+                </p>
+                <p>
+                    내 삶의 무늬,<br>
+                    그 끈질긴 패턴을 그저 직시하는 것.
+                </p>
+            </div>
+
+            <div class="story-card">
+                <div class="section-content">
+                    <p style="margin-bottom: 0;">
+                        백자의 그 작은 균열은<br>
+                        미래의 파손을 '예고'한 게 아니었다.<br><br>
+                        <strong>이미 '시작된' 파손 그 자체였다.</strong><br><br>
+                        시작 속에 끝이 들어와 있었다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section conclusion">
+            <div class="final-message">
+                한 사람의 생(生)이라는 복잡한 무늬는,<br>
+                실은 아주 작은 한 점의 <span class="key">기미</span>에서<br>
+                이미 완성되어 있었던 셈이다.
+            </div>
+
+            <button class="share-btn" onclick="shareContent()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="18" cy="5" r="3"/>
+                    <circle cx="6" cy="12" r="3"/>
+                    <circle cx="18" cy="19" r="3"/>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                </svg>
+                <span>공유하기</span>
+            </button>
+        </section>
+    </div>
+
+    <div class="toast" id="toast">링크가 복사되었습니다</div>
+
+    <footer class="footer">
+        <p>· · ·</p>
+    </footer>
+
+    <script>
+        // Scroll Animation
+        function revealOnScroll() {
+            const sections = document.querySelectorAll('.section');
+            const triggerPoint = window.innerHeight * 0.85;
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < triggerPoint) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        // Share Function
+        function shareContent() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '전체는 어떻게 부분에 숨나 - 프랙탈',
+                    text: '작은 부분이 전체를 반영한다는 프랙탈적 통찰',
+                    url: window.location.href
+                }).catch(err => console.log('Error sharing:', err));
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    showToast();
+                });
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+    </script>
+</body>
+</html>
