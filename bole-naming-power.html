@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>백락일고 - 명명의 힘</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      word-break: keep-all;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    :root {
+      --primary: #FFE01B;
+      --secondary: #241C15;
+      --accent: #F2A477;
+      --accent-light: #FFDDC1;
+      --bg: #FFF9E5;
+      --bg-card: #FFFFFF;
+      --text: #3D3D3D;
+      --text-light: #666666;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 17px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* Playful Header */
+    .header {
+      text-align: center;
+      padding: 48px 0 40px;
+      position: relative;
+    }
+
+    .header-deco {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+
+    .header-title {
+      font-family: 'Gamja Flower', cursive;
+      font-size: clamp(40px, 10vw, 56px);
+      color: var(--secondary);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .header-subtitle {
+      font-size: 18px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    /* Playful Cards */
+    .card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(36, 28, 21, 0.08);
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(36, 28, 21, 0.12);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 24px 24px 0 0;
+    }
+
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--primary);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-icon {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    .card-number {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-family: 'Gamja Flower', cursive;
+      font-size: 48px;
+      color: var(--primary);
+      opacity: 0.3;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-family: 'Gamja Flower', cursive;
+      font-size: 26px;
+      color: var(--secondary);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .card-text {
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .card-text:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Quote Box - Playful Style */
+    .quote-box {
+      background: var(--accent-light);
+      padding: 20px 24px;
+      border-radius: 16px;
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .quote-box::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      font-family: 'Gamja Flower', cursive;
+      font-size: 60px;
+      color: var(--accent);
+      opacity: 0.5;
+      line-height: 1;
+    }
+
+    .quote-text {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--secondary);
+      line-height: 1.7;
+    }
+
+    /* Classical Text Block */
+    .classical-block {
+      background: var(--secondary);
+      color: var(--bg);
+      padding: 28px 24px;
+      border-radius: 20px;
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    .classical-chinese {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 0.1em;
+    }
+
+    .classical-korean {
+      font-size: 15px;
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+
+    /* Radial Diagram - Naming Power */
+    .radial-diagram {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      height: 320px;
+      margin: 32px auto;
+    }
+
+    .radial-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Gamja Flower', cursive;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--secondary);
+      z-index: 10;
+      box-shadow: 0 4px 20px rgba(255, 224, 27, 0.4);
+    }
+
+    .radial-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 3px dashed var(--accent);
+      border-radius: 50%;
+      opacity: 0.4;
+    }
+
+    .radial-ring.ring-1 {
+      width: 180px;
+      height: 180px;
+    }
+
+    .radial-ring.ring-2 {
+      width: 260px;
+      height: 260px;
+    }
+
+    .radial-item {
+      position: absolute;
+      background: var(--bg-card);
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      white-space: nowrap;
+    }
+
+    .radial-item.item-1 {
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .radial-item.item-2 {
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
+
+    .radial-item.item-3 {
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .radial-item.item-4 {
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+    }
+
+    /* Mutual Relationship Illustration */
+    .mutual-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 24px 0;
+      flex-wrap: wrap;
+    }
+
+    .mutual-entity {
+      background: var(--primary);
+      padding: 16px 24px;
+      border-radius: 50px;
+      font-family: 'Gamja Flower', cursive;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--secondary);
+    }
+
+    .mutual-arrows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .mutual-arrows span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: linear-gradient(135deg, var(--primary), var(--accent-light));
+      padding: 24px;
+      border-radius: 16px;
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    .highlight-text {
+      font-family: 'Gamja Flower', cursive;
+      font-size: 22px;
+      color: var(--secondary);
+      line-height: 1.5;
+    }
+
+    /* Final CTA */
+    .final-section {
+      text-align: center;
+      padding: 48px 0;
+    }
+
+    .final-question {
+      font-family: 'Gamja Flower', cursive;
+      font-size: clamp(24px, 6vw, 32px);
+      color: var(--secondary);
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .final-answer {
+      font-size: 18px;
+      color: var(--accent);
+      font-weight: 700;
+      padding: 16px 32px;
+      background: var(--secondary);
+      border-radius: 50px;
+      display: inline-block;
+    }
+
+    /* Playful Decorations */
+    .deco-star {
+      position: absolute;
+      color: var(--primary);
+      opacity: 0.3;
+      animation: twinkle 2s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.2); }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .container {
+        padding: 24px 20px 60px;
+      }
+
+      .card {
+        padding: 28px 24px;
+      }
+
+      .card-title {
+        font-size: 24px;
+      }
+
+      .radial-diagram {
+        height: 280px;
+      }
+
+      .radial-center {
+        width: 80px;
+        height: 80px;
+        font-size: 18px;
+      }
+
+      .radial-ring.ring-1 {
+        width: 150px;
+        height: 150px;
+      }
+
+      .radial-ring.ring-2 {
+        width: 220px;
+        height: 220px;
+      }
+
+      .radial-item {
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+
+      .mutual-diagram {
+        flex-direction: column;
+      }
+
+      .mutual-arrows {
+        transform: rotate(90deg);
+      }
+    }
+
+    @media (max-width: 360px) {
+      .header-title {
+        font-size: 36px;
+      }
+
+      .classical-chinese {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <svg class="header-deco" width="120" height="40" viewBox="0 0 120 40" fill="none">
+        <path d="M10 20 Q30 5 60 20 Q90 35 110 20" stroke="#FFE01B" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+      <h1 class="header-title">백락일고<br>伯樂一顧</h1>
+      <p class="header-subtitle">명명하는 순간, 세계가 바뀐다</p>
+    </header>
+
+    <!-- Card 1: The Paradox -->
+    <article class="card">
+      <div class="card-number">1</div>
+      <div class="card-icon">🐎</div>
+      <h2 class="card-title">천리마는 늘 있다</h2>
+
+      <div class="classical-block">
+        <div class="classical-chinese">千里馬常在 而伯樂不常有</div>
+        <div class="classical-korean">천리마는 늘 있으나, 백락은 늘 있지 않다<br>— 한유 『잡설』</div>
+      </div>
+
+      <p class="card-text">
+        천리마가 불행한 건 능력이 부족해서가 아니다.
+        아무도 그에게 <strong>'천리마'</strong>라는 이름을 붙여주지 않기 때문이다.
+      </p>
+    </article>
+
+    <!-- Card 2: Power of Naming -->
+    <article class="card">
+      <div class="card-number">2</div>
+      <div class="card-icon">✨</div>
+      <h2 class="card-title">명명은 창조다</h2>
+
+      <p class="card-text">
+        백락이 말 한 마리를 보고 고개를 끄덕이면, 그 말은 천리마가 되었다.
+        수천 필의 말 사이에서 딱 한 마리를 지목하는 순간, 운명이 바뀐다.
+      </p>
+
+      <div class="quote-box">
+        <div class="quote-text">
+          이건 발견이 아니다.<br>
+          창조에 가깝다.
+        </div>
+      </div>
+
+      <!-- Radial Diagram -->
+      <div class="radial-diagram">
+        <div class="radial-ring ring-1"></div>
+        <div class="radial-ring ring-2"></div>
+        <div class="radial-center">명명<br>命名</div>
+        <div class="radial-item item-1">운명 결정</div>
+        <div class="radial-item item-2">권력 행사</div>
+        <div class="radial-item item-3">책임 부여</div>
+        <div class="radial-item item-4">현실 창조</div>
+      </div>
+
+      <p class="card-text">
+        세종이 성삼문을 학사로 명명하는 순간 학자가 되었고,
+        정약용이 아들에게 "학자가 되어야 한다"고 쓴 편지가 평생을 규정했다.
+      </p>
+    </article>
+
+    <!-- Card 3: Mutual Creation -->
+    <article class="card">
+      <div class="card-number">3</div>
+      <div class="card-icon">🔄</div>
+      <h2 class="card-title">서로가 서로를 완성한다</h2>
+
+      <p class="card-text">
+        재미있는 역설이 있다. 천리마가 백락을 만들기도 한다는 것.
+        백락이 백락일 수 있었던 건, 그가 본 말이 정말로 천리마였기 때문이다.
+      </p>
+
+      <div class="mutual-diagram">
+        <div class="mutual-entity">백락</div>
+        <div class="mutual-arrows">
+          <span>→ 명명한다</span>
+          <span>← 증명한다</span>
+        </div>
+        <div class="mutual-entity">천리마</div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-text">
+          진짜 만남은 일방향이 아니다.<br>
+          서로가 서로를 완성시킨다.
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 4: Algorithm Problem -->
+    <article class="card">
+      <div class="card-number">4</div>
+      <div class="card-icon">🤖</div>
+      <h2 class="card-title">알고리즘이 놓친 것</h2>
+
+      <p class="card-text">
+        요즘은 평가의 시대다. 데이터가 사람을 규정하고, 알고리즘이 적합성을 판단한다.
+      </p>
+
+      <div class="quote-box">
+        <div class="quote-text">
+          그런데 알고리즘은 명명하지 못한다.<br>
+          패턴을 읽을 뿐, 가능성을 창조하지는 못한다.
+        </div>
+      </div>
+
+      <p class="card-text">
+        누군가를 천리마라고 부를 용기를 가진 사람이 드물다.
+        명명은 위험하니까. 내가 틀릴 수 있다.
+      </p>
+
+      <p class="card-text">
+        더 큰 문제는 따로 있다.
+        <strong>우리가 백락만 기다린다는 것.</strong>
+      </p>
+    </article>
+
+    <!-- Card 5: Self-Naming -->
+    <article class="card">
+      <div class="card-number">5</div>
+      <div class="card-icon">🎨</div>
+      <h2 class="card-title">스스로를 명명하는 용기</h2>
+
+      <p class="card-text">
+        반 고흐는 생전에 그림 한 점을 팔았다. 그래도 매일 그렸다.
+        백락이 없어도 자신을 화가라고 불렀다.
+      </p>
+
+      <div class="highlight-box">
+        <div class="highlight-text">
+          누군가를 천리마로 부를 용기.<br>
+          그리고 스스로를 천리마로 부를 용기.<br>
+          둘 다 필요하다.
+        </div>
+      </div>
+    </article>
+
+    <!-- Final Section -->
+    <section class="final-section">
+      <div class="final-question">
+        당신은 누구를 명명할 것인가?<br>
+        당신 자신을 무엇이라 부를 것인가?
+      </div>
+      <div class="final-answer">
+        명명하는 순간, 모든 게 달라진다
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Scroll animation
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.card').forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+      observer.observe(card);
+    });
+
+    // Final section animation
+    const finalSection = document.querySelector('.final-section');
+    finalSection.style.opacity = '0';
+    finalSection.style.transform = 'translateY(20px)';
+    finalSection.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    observer.observe(finalSection);
+  </script>
+</body>
+</html>
