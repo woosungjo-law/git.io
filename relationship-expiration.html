@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관계의 유통기한</title>
+
+    <!--
+    ====================================
+    최종 디자인 결정 사항
+    ====================================
+
+    컬러 팔레트:
+    - Primary: #2D5A5A (깊은 청록색) - 성찰과 깊이
+    - Secondary: #C4A35A (황금색) - 기억과 가을
+    - Accent: #E07A5F (테라코타) - 감정의 따뜻함
+    - Background: #FAF8F5 (따뜻한 오프화이트)
+    - Text: #2C3E3E (부드러운 검정)
+
+    스토리 구조:
+    1. 인트로 - 중국 속담으로 시선 포착
+    2. 불편한 진실 - 관계의 유통기한
+    3. 만료된 관계를 붙드는 이유
+    4. 자연스럽게 멀어지는 법
+    5. 결론 - 지나칠 용기
+
+    주요 인터랙션:
+    - 스크롤 진행률 표시기
+    - 섹션별 fade-in/slide-up 애니메이션
+    - Doodle 스타일 시각 요소
+    - 공유하기 버튼
+    ====================================
+    -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2D5A5A;
+            --secondary: #C4A35A;
+            --accent: #E07A5F;
+            --bg: #FAF8F5;
+            --text: #2C3E3E;
+            --text-light: #5A6868;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 16px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Container */
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section:nth-child(even) {
+            transition-delay: 0.1s;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            height: 12px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cpath d='M0,10 Q50,0 100,10 T200,10' fill='none' stroke='%23C4A35A' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+            background-size: contain;
+            opacity: 0.7;
+        }
+
+        .proverb {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 32px 24px;
+            margin: 32px 0;
+            box-shadow: 0 4px 20px rgba(45, 90, 90, 0.08);
+            position: relative;
+        }
+
+        .proverb::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 80px;
+            color: var(--secondary);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .proverb-chinese {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .proverb-korean {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .proverb-meaning {
+            font-size: 1.1rem;
+            color: var(--text);
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .scroll-hint {
+            margin-top: 60px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-hint svg {
+            width: 32px;
+            height: 32px;
+            color: var(--accent);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Content Sections */
+        .section-number {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 32px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title .underline {
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'%3E%3Cpath d='M0,5 Q25,2 50,5 T100,5' fill='none' stroke='%23E07A5F' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .content-block {
+            margin-bottom: 32px;
+        }
+
+        .content-block p {
+            margin-bottom: 24px;
+            font-size: 1rem;
+            line-height: 2;
+            letter-spacing: -0.01em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary) 0%, #3D6A6A 100%);
+            color: var(--white);
+            padding: 32px 28px;
+            border-radius: 16px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(45, 90, 90, 0.2);
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%23FFFFFF' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E") repeat;
+            opacity: 0.3;
+        }
+
+        .highlight-box p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Reason Cards */
+        .reason-list {
+            margin: 24px 0;
+        }
+
+        .reason-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(45, 90, 90, 0.08);
+            border-left: 4px solid var(--accent);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(45, 90, 90, 0.12);
+        }
+
+        .reason-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: var(--secondary);
+            color: var(--white);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .reason-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .reason-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Insight Section */
+        .insight-section {
+            background: linear-gradient(180deg, rgba(196, 163, 90, 0.08) 0%, transparent 100%);
+            border-radius: 20px;
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .insight-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+        }
+
+        .insight-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--primary);
+            line-height: 1.9;
+        }
+
+        /* Conclusion */
+        .conclusion {
+            text-align: center;
+            padding-bottom: 100px;
+        }
+
+        .final-question {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .final-message {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 600;
+            padding: 20px;
+            border: 2px dashed var(--accent);
+            border-radius: 12px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .final-message::before,
+        .final-message::after {
+            content: '✦';
+            position: absolute;
+            color: var(--secondary);
+            font-size: 1rem;
+        }
+
+        .final-message::before {
+            top: -12px;
+            left: 20px;
+        }
+
+        .final-message::after {
+            bottom: -12px;
+            right: 20px;
+        }
+
+        /* Share Button */
+        .share-section {
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 16px 32px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .share-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(45, 90, 90, 0.35);
+        }
+
+        .share-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .share-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .share-btn svg {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .share-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text);
+            color: var(--white);
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 2000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Doodle Decorations */
+        .doodle-star {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            opacity: 0.3;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 0 40px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            opacity: 0.6;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .proverb {
+                padding: 24px 20px;
+            }
+
+            .proverb-chinese {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero visible">
+            <div>
+                <h1 class="hero-title">관계의 유통기한</h1>
+
+                <div class="proverb">
+                    <p class="proverb-chinese">有緣千里 來相會, 无緣對面 不相逢</p>
+                    <p class="proverb-korean">유연천리 래상회, 무연대면 불상봉</p>
+                    <p class="proverb-meaning">
+                        인연이 있으면 천 리 밖에서도 만나고,<br>
+                        없으면 마주 봐도 못 만난다.
+                    </p>
+                </div>
+
+                <p style="color: var(--text-light); font-size: 1rem; margin-top: 24px;">
+                    우리는 이 말을 낭만으로만 읽는다.<br>
+                    운명적 만남 같은 걸로.<br><br>
+                    그런데 이 속담이 정말 하고 싶은 말은 따로 있다.<br>
+                    <strong style="color: var(--accent);">시작이 아니라 끝이다.</strong>
+                </p>
+
+                <div class="scroll-hint">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M19 12l-7 7-7-7"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: The Uncomfortable Truth -->
+        <section>
+            <div class="section-number">CHAPTER 01</div>
+            <h2 class="section-title">
+                불편한 진실
+                <span class="underline"></span>
+            </h2>
+
+            <div class="content-block">
+                <p>
+                    A는 10년 지기 친구 때문에 고민이다. 한 달에 한 번 만난다.
+                    대화 소재는 이미 바닥났다. 과거 얘기만 반복한다.
+                </p>
+                <p>
+                    "그래도 오래 알았는데 끊을 수는 없잖아요."
+                </p>
+                <p>
+                    변호사 생활하며 파트너십 분쟁을 많이 봤다. 대부분 이미 끝난 관계를
+                    억지로 끌다 터진다. 서로한테 도움 안 되는데도 '함께한 세월'이란
+                    이유로 버틴다. 끝은 법정이다.
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <p>
+                    대화가 의무가 되는 순간,<br>
+                    만남이 부담이 되는 순간,<br>
+                    침묵이 어색해지는 순간.<br><br>
+                    <strong>그게 신호다.</strong><br><br>
+                    상한 음식 계속 먹으면 탈 난다.<br>
+                    시간 지난 관계 억지로 유지하면 양쪽 다 상처받는다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: Why We Fear Goodbyes -->
+        <section>
+            <div class="section-number">CHAPTER 02</div>
+            <h2 class="section-title">
+                작별을 두려워하는 이유
+                <span class="underline"></span>
+            </h2>
+
+            <div class="content-block">
+                <p>왜 못 끝낼까.</p>
+            </div>
+
+            <div class="reason-list">
+                <div class="reason-card">
+                    <span class="reason-number">1</span>
+                    <h3 class="reason-title">문화적 압박</h3>
+                    <p class="reason-desc">
+                        관계 유지는 성공, 작별은 실패. 그렇게 배웠다.
+                        SNS는 끊임없이 '연결'을 강요한다. 친구 수, 팔로워 수가
+                        인간관계 능력의 증표가 됐다.
+                    </p>
+                </div>
+
+                <div class="reason-card">
+                    <span class="reason-number">2</span>
+                    <h3 class="reason-title">과거 집착</h3>
+                    <p class="reason-desc">
+                        "예전엔 좋았는데." 이 한 마디로 지금 불편함을 정당화한다.
+                        봄 지나면 여름 온다. 봄 끝났다고 봄 원망하나.
+                        계절 바뀌는 게 자연스럽듯, 관계도 그렇다.
+                    </p>
+                </div>
+
+                <div class="reason-card">
+                    <span class="reason-number">3</span>
+                    <h3 class="reason-title">방법의 부재</h3>
+                    <p class="reason-desc">
+                        우리 교육은 관계 맺기만 가르친다. 네트워킹, 소통, 협업.
+                        정작 중요한 건 적절히 끝낼 줄 아는 능력인데.
+                    </p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p>
+                    성숙은 관계를 오래 끄는 데 있지 않다.<br>
+                    <strong>필요한 만큼만 함께하고 깨끗이 정리하는 데 있다.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: Natural Drifting -->
+        <section>
+            <div class="section-number">CHAPTER 03</div>
+            <h2 class="section-title">
+                자연스럽게 멀어지는 법
+                <span class="underline"></span>
+            </h2>
+
+            <div class="content-block">
+                <p>
+                    사실 관계는 끝내는 게 아니다.<br>
+                    <strong>그냥 멀어지는 거다.</strong>
+                </p>
+                <p>
+                    연락이 뜸해진다. 한 달에 한 번이던 게 두 달에 한 번이 된다.
+                    그러다 석 달, 반년. 어느새 일 년. 특별한 이유는 없다.
+                    그저 각자 바빠진 거다. 각자 삶이 다른 방향으로 흘러간 거다.
+                </p>
+                <p>
+                    이게 자연스럽다. 억지로 연락하려 애쓰지 않는 게 오히려 예의다.
+                    상대도 부담스럽다. 할 말 없는데 억지로 만나는 것만큼 피곤한 일도 없다.
+                </p>
+            </div>
+
+            <div class="insight-section">
+                <div class="insight-icon">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="28" stroke="#C4A35A" stroke-width="2" stroke-dasharray="4 4"/>
+                        <path d="M20 32C20 25 25 20 32 20" stroke="#2D5A5A" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M44 32C44 39 39 44 32 44" stroke="#E07A5F" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <p class="insight-text">
+                    천리 건너온 인연이라도 영원하지 않다.<br>
+                    배울 것 다 배우고, 나눌 것 다 나누었으면<br>
+                    <strong>각자 길 가면 된다.</strong><br><br>
+                    좋았던 기억은 남는다. 가끔 생각난다.<br>
+                    그 정도면 충분하다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: Conclusion -->
+        <section class="conclusion">
+            <div class="section-number">INSIGHT</div>
+            <h2 class="section-title">
+                대면하고도 지나칠 용기
+                <span class="underline"></span>
+            </h2>
+
+            <div class="content-block">
+                <p>
+                    모든 만남이 깊은 관계로 이어져야 한다는 강박.<br>
+                    여기서 벗어나야 한다.
+                </p>
+                <p>
+                    가벼운 인사로 충분한 관계도 있다.<br>
+                    대면하고도 스쳐 지나가는 인연<br>
+                    억지로 붙들 필요 없다.
+                </p>
+            </div>
+
+            <div class="final-question">
+                지금 당신 곁 인연은 어떤가.<br>
+                천리 건너온 것인가,<br>
+                아니면 이미 대면하고도 지나친 것인가.
+            </div>
+
+            <div class="final-message">
+                그 물음에 정직할 때,<br>
+                우리는 비로소 관계의 주인이 된다.
+            </div>
+
+            <div class="share-section">
+                <button class="share-btn" onclick="shareContent()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="18" cy="5" r="3"/>
+                        <circle cx="6" cy="12" r="3"/>
+                        <circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    </svg>
+                    <span>공유하기</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast" id="toast">링크가 복사되었습니다</div>
+
+    <footer class="footer">
+        <p>· · ·</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        function updateProgressBar() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        // Scroll Animation
+        function revealOnScroll() {
+            const sections = document.querySelectorAll('section:not(.hero)');
+            const triggerPoint = window.innerHeight * 0.8;
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+
+                if (sectionTop < triggerPoint) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        // Share Function
+        function shareContent() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '관계의 유통기한',
+                    text: '모든 인연에는 유통기한이 있다는, 그 불편한 진실.',
+                    url: window.location.href
+                }).catch(err => console.log('Error sharing:', err));
+            } else {
+                // Fallback: Copy URL with toast notification
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    showToast();
+                }).catch(err => {
+                    console.log('Error copying:', err);
+                });
+            }
+        }
+
+        // Toast Notification
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // Event Listeners
+        window.addEventListener('scroll', () => {
+            updateProgressBar();
+            revealOnScroll();
+        });
+
+        // Initial call
+        updateProgressBar();
+        revealOnScroll();
+    </script>
+</body>
+</html>
