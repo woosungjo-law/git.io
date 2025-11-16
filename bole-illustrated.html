@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>백락일고 - 명명하는 순간 세계가 바뀐다</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      word-break: keep-all;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    body {
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #FFF8F0;
+      color: #3D405B;
+      line-height: 1.8;
+      font-size: 17px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 40px 0;
+      position: relative;
+    }
+
+    .hero-illustration {
+      margin-bottom: 32px;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #3D405B;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: #6B6B8A;
+      font-weight: 600;
+    }
+
+    /* Scene Cards */
+    .scene-card {
+      background: white;
+      border-radius: 24px;
+      padding: 32px 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 30px rgba(61, 64, 91, 0.08);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .scene-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scene-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      border-radius: 24px 24px 0 0;
+    }
+
+    .scene-card:nth-child(odd)::before {
+      background: linear-gradient(90deg, #A2D2FF, #CDB4DB);
+    }
+
+    .scene-card:nth-child(even)::before {
+      background: linear-gradient(90deg, #FFC8DD, #FFF2B2);
+    }
+
+    .scene-number {
+      display: inline-block;
+      background: #FFF2B2;
+      color: #3D405B;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 36px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .scene-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #3D405B;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .scene-illustration {
+      margin: 24px 0;
+      text-align: center;
+    }
+
+    .scene-text {
+      font-size: 16px;
+      color: #4A4A6A;
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .scene-text:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Quote Bubble */
+    .quote-bubble {
+      background: #A2D2FF;
+      color: #3D405B;
+      padding: 20px 24px;
+      border-radius: 20px;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.6;
+      text-align: center;
+      position: relative;
+      margin: 24px 0;
+    }
+
+    .quote-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 12px solid transparent;
+      border-top-color: #A2D2FF;
+      border-bottom: 0;
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: linear-gradient(135deg, #FFC8DD, #FFF2B2);
+      padding: 24px;
+      border-radius: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.6;
+      margin: 24px 0;
+    }
+
+    /* Chinese Text */
+    .chinese-quote {
+      background: #CDB4DB;
+      padding: 28px 24px;
+      border-radius: 20px;
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    .chinese-text {
+      font-size: 20px;
+      font-weight: 800;
+      color: #3D405B;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .chinese-meaning {
+      font-size: 15px;
+      color: #4A4A6A;
+      line-height: 1.6;
+    }
+
+    /* Final Section */
+    .final-section {
+      text-align: center;
+      padding: 48px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .final-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .final-question {
+      font-size: 24px;
+      font-weight: 800;
+      color: #3D405B;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .final-answer {
+      font-size: 18px;
+      color: #4A4A6A;
+      line-height: 1.7;
+    }
+
+    /* SVG Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes blink {
+      0%, 90%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.1); }
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2deg); }
+    }
+
+    @keyframes grow {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(1.05); }
+    }
+
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .blink-animation {
+      animation: blink 4s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .sparkle-animation {
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    .sway-animation {
+      animation: sway 4s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+
+    .grow-animation {
+      animation: grow 3s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+
+    /* Hover Effects */
+    .scene-illustration svg {
+      transition: transform 0.3s ease;
+    }
+
+    .scene-illustration:hover svg {
+      transform: scale(1.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 380px) {
+      .container {
+        padding: 24px 20px 60px;
+      }
+
+      .scene-card {
+        padding: 28px 24px;
+      }
+
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .scene-title {
+        font-size: 20px;
+      }
+
+      .chinese-text {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-illustration">
+        <svg width="200" height="160" viewBox="0 0 200 160" fill="none">
+          <!-- Wise old man with glasses -->
+          <g class="float-animation">
+            <!-- Body -->
+            <ellipse cx="100" cy="130" rx="35" ry="25" fill="#CDB4DB"/>
+            <!-- Head -->
+            <circle cx="100" cy="70" r="32" fill="#FFF2B2"/>
+            <!-- Hair -->
+            <path d="M70 55 Q100 45 130 55 Q125 48 100 50 Q75 48 70 55" fill="#888" opacity="0.6"/>
+            <!-- Eyes with glasses -->
+            <circle cx="88" cy="68" r="10" stroke="#3D405B" stroke-width="2.5" fill="none"/>
+            <circle cx="112" cy="68" r="10" stroke="#3D405B" stroke-width="2.5" fill="none"/>
+            <line x1="98" y1="68" x2="102" y2="68" stroke="#3D405B" stroke-width="2"/>
+            <g class="blink-animation">
+              <circle cx="88" cy="68" r="3" fill="#3D405B"/>
+              <circle cx="112" cy="68" r="3" fill="#3D405B"/>
+            </g>
+            <!-- Smile -->
+            <path d="M90 82 Q100 88 110 82" stroke="#3D405B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Beard -->
+            <path d="M85 90 Q100 105 115 90" stroke="#999" stroke-width="3" fill="none" opacity="0.5"/>
+          </g>
+          <!-- Sparkles -->
+          <g class="sparkle-animation">
+            <path d="M50 40 L52 45 L57 47 L52 49 L50 54 L48 49 L43 47 L48 45 Z" fill="#FFC8DD"/>
+            <path d="M150 50 L152 55 L157 57 L152 59 L150 64 L148 59 L143 57 L148 55 Z" fill="#A2D2FF"/>
+            <path d="M160 90 L161 93 L164 94 L161 95 L160 98 L159 95 L156 94 L159 93 Z" fill="#FFF2B2"/>
+          </g>
+        </svg>
+      </div>
+      <h1 class="hero-title">백락일고<br>伯樂一顧</h1>
+      <p class="hero-subtitle">명명하는 순간, 세계가 바뀐다</p>
+    </section>
+
+    <!-- Scene 1: The Paradox -->
+    <article class="scene-card">
+      <div class="scene-number">1</div>
+      <h2 class="scene-title">천리마는 어디에나 있다</h2>
+
+      <div class="chinese-quote">
+        <div class="chinese-text">千里馬常在<br>而伯樂不常有</div>
+        <div class="chinese-meaning">천리마는 늘 있으나<br>백락은 늘 있지 않다</div>
+      </div>
+
+      <div class="scene-illustration">
+        <svg width="280" height="140" viewBox="0 0 280 140" fill="none">
+          <!-- Multiple horses, one special -->
+          <g>
+            <!-- Regular horses -->
+            <g opacity="0.4">
+              <ellipse cx="50" cy="100" rx="25" ry="18" fill="#999"/>
+              <circle cx="50" cy="75" r="12" fill="#999"/>
+              <rect x="40" y="105" width="6" height="25" fill="#888" rx="3"/>
+              <rect x="54" y="105" width="6" height="25" fill="#888" rx="3"/>
+            </g>
+            <g opacity="0.4">
+              <ellipse cx="120" cy="105" rx="25" ry="18" fill="#999"/>
+              <circle cx="120" cy="80" r="12" fill="#999"/>
+              <rect x="110" y="110" width="6" height="25" fill="#888" rx="3"/>
+              <rect x="124" y="110" width="6" height="25" fill="#888" rx="3"/>
+            </g>
+            <!-- Special horse (glowing) -->
+            <g class="float-animation">
+              <ellipse cx="200" cy="95" rx="28" ry="20" fill="#FFC8DD"/>
+              <circle cx="200" cy="68" r="14" fill="#FFC8DD"/>
+              <rect x="189" y="102" width="7" height="28" fill="#E0A0B0" rx="3"/>
+              <rect x="204" y="102" width="7" height="28" fill="#E0A0B0" rx="3"/>
+              <!-- Mane -->
+              <path d="M195 58 Q200 50 205 58" stroke="#CDB4DB" stroke-width="3" fill="none"/>
+              <!-- Eye -->
+              <circle cx="196" cy="66" r="3" fill="#3D405B"/>
+              <!-- Sparkle -->
+              <path d="M225 55 L227 60 L232 62 L227 64 L225 69 L223 64 L218 62 L223 60 Z" fill="#FFF2B2" class="sparkle-animation"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <p class="scene-text">
+        한유의 『잡설』에 나오는 이야기.
+        천리마가 불행한 건 능력이 부족해서가 아니다.
+      </p>
+
+      <div class="highlight-box">
+        아무도 그에게 '천리마'라는<br>이름을 붙여주지 않기 때문이다
+      </div>
+    </article>
+
+    <!-- Scene 2: The Act of Naming -->
+    <article class="scene-card">
+      <div class="scene-number">2</div>
+      <h2 class="scene-title">명명은 발견이 아니라 창조다</h2>
+
+      <div class="scene-illustration">
+        <svg width="260" height="160" viewBox="0 0 260 160" fill="none">
+          <!-- Bo Le pointing at horse -->
+          <g>
+            <!-- Person -->
+            <ellipse cx="80" cy="130" rx="30" ry="22" fill="#A2D2FF"/>
+            <circle cx="80" cy="85" r="24" fill="#FFF2B2"/>
+            <!-- Eyes -->
+            <g class="blink-animation">
+              <circle cx="72" cy="83" r="3" fill="#3D405B"/>
+              <circle cx="88" cy="83" r="3" fill="#3D405B"/>
+            </g>
+            <!-- Smile -->
+            <path d="M72 93 Q80 98 88 93" stroke="#3D405B" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Pointing arm -->
+            <path d="M100 115 L160 90" stroke="#FFF2B2" stroke-width="12" stroke-linecap="round"/>
+            <circle cx="160" cy="90" r="8" fill="#FFF2B2"/>
+            <!-- Speech bubble -->
+            <g>
+              <path d="M90 50 Q130 50 130 35 Q130 20 100 20 Q70 20 70 35 Q70 50 90 50 L85 60 L90 50" fill="white" stroke="#3D405B" stroke-width="2"/>
+              <text x="100" y="40" text-anchor="middle" font-size="14" font-weight="700" fill="#3D405B">천리마!</text>
+            </g>
+          </g>
+          <!-- Horse transforming -->
+          <g class="grow-animation">
+            <ellipse cx="190" cy="110" rx="32" ry="24" fill="#FFC8DD"/>
+            <circle cx="190" cy="78" r="18" fill="#FFC8DD"/>
+            <rect x="177" y="120" width="8" height="32" fill="#E0A0B0" rx="4"/>
+            <rect x="195" y="120" width="8" height="32" fill="#E0A0B0" rx="4"/>
+            <!-- Crown appearing -->
+            <path d="M180 58 L185 68 L190 60 L195 68 L200 58" stroke="#FFF2B2" stroke-width="3" fill="#FFF2B2"/>
+            <!-- Sparkles -->
+            <path d="M220 70 L222 75 L227 77 L222 79 L220 84 L218 79 L213 77 L218 75 Z" fill="#FFF2B2" class="sparkle-animation"/>
+            <path d="M165 65 L166 68 L169 69 L166 70 L165 73 L164 70 L161 69 L164 68 Z" fill="#A2D2FF" class="sparkle-animation" style="animation-delay: 0.5s"/>
+          </g>
+        </svg>
+      </div>
+
+      <p class="scene-text">
+        백락이 말 한 마리를 보고 고개를 끄덕이면, 그 말은 천리마가 되었다.
+      </p>
+
+      <div class="quote-bubble">
+        이건 발견이 아니다.<br>창조에 가깝다.
+      </div>
+
+      <p class="scene-text">
+        세종이 집현전 학사들을 뽑을 때도 그랬다. 세종을 만나기 전, 성삼문은 천재였을까? 세종이 그를 학사로 명명하는 순간 학자가 된 건 아닐까.
+      </p>
+    </article>
+
+    <!-- Scene 3: Mutual Creation -->
+    <article class="scene-card">
+      <div class="scene-number">3</div>
+      <h2 class="scene-title">서로가 서로를 완성한다</h2>
+
+      <div class="scene-illustration">
+        <svg width="240" height="140" viewBox="0 0 240 140" fill="none">
+          <!-- Two-way arrows between Bo Le and Horse -->
+          <g>
+            <!-- Bo Le (simplified) -->
+            <circle cx="60" cy="70" r="28" fill="#A2D2FF"/>
+            <text x="60" y="78" text-anchor="middle" font-size="20" font-weight="800" fill="#3D405B">伯</text>
+
+            <!-- Horse (simplified) -->
+            <circle cx="180" cy="70" r="28" fill="#FFC8DD"/>
+            <text x="180" y="78" text-anchor="middle" font-size="20" font-weight="800" fill="#3D405B">馬</text>
+
+            <!-- Arrows -->
+            <g class="float-animation">
+              <path d="M95 60 L145 60" stroke="#CDB4DB" stroke-width="4" stroke-linecap="round"/>
+              <path d="M140 55 L150 60 L140 65" fill="#CDB4DB"/>
+              <text x="120" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#3D405B">명명</text>
+            </g>
+
+            <g class="float-animation" style="animation-delay: 1.5s">
+              <path d="M145 80 L95 80" stroke="#FFF2B2" stroke-width="4" stroke-linecap="round"/>
+              <path d="M100 75 L90 80 L100 85" fill="#FFF2B2"/>
+              <text x="120" y="95" text-anchor="middle" font-size="12" font-weight="700" fill="#3D405B">증명</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <p class="scene-text">
+        『여씨춘추』를 보면 백락 이전에도 말을 잘 보는 사람들이 있었다.
+        하지만 그들의 이름은 남지 않았다.
+      </p>
+
+      <div class="highlight-box">
+        백락이 백락일 수 있었던 건<br>그가 본 말이 정말로<br>천리마였기 때문이다
+      </div>
+
+      <p class="scene-text">
+        진짜 만남은 일방향이 아니다.
+        백락은 천리마를 명명하고, 천리마는 백락을 증명한다.
+      </p>
+    </article>
+
+    <!-- Scene 4: Algorithm vs Human -->
+    <article class="scene-card">
+      <div class="scene-number">4</div>
+      <h2 class="scene-title">알고리즘이 놓친 것</h2>
+
+      <div class="scene-illustration">
+        <svg width="240" height="120" viewBox="0 0 240 120" fill="none">
+          <!-- Robot/Algorithm -->
+          <g opacity="0.6">
+            <rect x="40" y="40" width="50" height="60" rx="8" fill="#999"/>
+            <rect x="50" y="50" width="12" height="8" rx="2" fill="#666"/>
+            <rect x="68" y="50" width="12" height="8" rx="2" fill="#666"/>
+            <rect x="55" y="70" width="20" height="4" rx="2" fill="#666"/>
+            <!-- Binary -->
+            <text x="65" y="32" text-anchor="middle" font-size="10" fill="#999">01010</text>
+          </g>
+
+          <!-- vs -->
+          <text x="120" y="75" text-anchor="middle" font-size="18" font-weight="800" fill="#3D405B">vs</text>
+
+          <!-- Human with heart -->
+          <g>
+            <circle cx="175" cy="65" r="30" fill="#FFC8DD"/>
+            <g class="blink-animation">
+              <circle cx="167" cy="62" r="4" fill="#3D405B"/>
+              <circle cx="183" cy="62" r="4" fill="#3D405B"/>
+            </g>
+            <path d="M167 75 Q175 82 183 75" stroke="#3D405B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Heart -->
+            <path d="M205 50 C205 45 210 45 212 48 C214 45 219 45 219 50 C219 55 212 62 212 62 C212 62 205 55 205 50" fill="#FF6B6B" class="sparkle-animation"/>
+          </g>
+        </svg>
+      </div>
+
+      <p class="scene-text">
+        요즘은 평가의 시대다. 데이터가 사람을 규정한다.
+        알고리즘이 적합성을 판단한다.
+      </p>
+
+      <div class="quote-bubble">
+        그런데 알고리즘은<br>명명하지 못한다.<br>패턴을 읽을 뿐이다.
+      </div>
+
+      <p class="scene-text">
+        진정한 백락은 사라지고 있다.
+        누군가를 천리마라고 부를 용기를 가진 사람은 드물다.
+        명명은 위험하니까. 내가 틀릴 수 있다.
+      </p>
+    </article>
+
+    <!-- Scene 5: Self-Naming -->
+    <article class="scene-card">
+      <div class="scene-number">5</div>
+      <h2 class="scene-title">스스로를 명명하는 용기</h2>
+
+      <div class="scene-illustration">
+        <svg width="220" height="160" viewBox="0 0 220 160" fill="none">
+          <!-- Van Gogh painting -->
+          <g>
+            <!-- Person with palette -->
+            <ellipse cx="110" cy="135" rx="35" ry="20" fill="#A2D2FF"/>
+            <circle cx="110" cy="95" r="26" fill="#FFF2B2"/>
+            <!-- Beard -->
+            <path d="M95 108 Q110 118 125 108" stroke="#FFA500" stroke-width="4" fill="none" opacity="0.7"/>
+            <!-- Eyes -->
+            <g class="blink-animation">
+              <circle cx="102" cy="92" r="3" fill="#3D405B"/>
+              <circle cx="118" cy="92" r="3" fill="#3D405B"/>
+            </g>
+            <!-- Determined smile -->
+            <path d="M102 102 Q110 106 118 102" stroke="#3D405B" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Palette -->
+            <ellipse cx="70" cy="115" rx="20" ry="12" fill="#CDB4DB" class="sway-animation"/>
+            <circle cx="65" cy="112" r="4" fill="#FFC8DD"/>
+            <circle cx="72" cy="108" r="4" fill="#A2D2FF"/>
+            <circle cx="78" cy="114" r="4" fill="#FFF2B2"/>
+            <!-- Paintbrush -->
+            <rect x="140" y="100" width="40" height="6" rx="3" fill="#8B4513" transform="rotate(-30 140 100)"/>
+          </g>
+          <!-- Canvas with stars -->
+          <g class="float-animation">
+            <rect x="150" y="30" width="60" height="50" rx="4" fill="#1a1a40" stroke="#CDB4DB" stroke-width="2"/>
+            <path d="M165 45 L167 50 L172 52 L167 54 L165 59 L163 54 L158 52 L163 50 Z" fill="#FFF2B2" class="sparkle-animation"/>
+            <path d="M185 50 L186 53 L189 54 L186 55 L185 58 L184 55 L181 54 L184 53 Z" fill="#FFF2B2" class="sparkle-animation" style="animation-delay: 0.7s"/>
+            <path d="M175 62 L176 65 L179 66 L176 67 L175 70 L174 67 L171 66 L174 65 Z" fill="#FFF2B2" class="sparkle-animation" style="animation-delay: 1.4s"/>
+          </g>
+          <!-- Self-label -->
+          <text x="110" y="25" text-anchor="middle" font-size="14" font-weight="700" fill="#3D405B">나는 화가다</text>
+        </svg>
+      </div>
+
+      <p class="scene-text">
+        반 고흐는 생전에 그림 한 점을 팔았다.
+        그래도 매일 그렸다.
+      </p>
+
+      <div class="highlight-box">
+        백락이 없어도<br>자신을 화가라고 불렀다
+      </div>
+
+      <p class="scene-text">
+        동생 테오는 백락이라기보다 증인이었다.
+        형의 자기 명명을 믿어준 사람.
+      </p>
+    </article>
+
+    <!-- Final -->
+    <section class="final-section">
+      <div class="scene-illustration">
+        <svg width="180" height="100" viewBox="0 0 180 100" fill="none">
+          <!-- Mirror -->
+          <rect x="50" y="10" width="80" height="80" rx="12" fill="#CDB4DB" opacity="0.3"/>
+          <rect x="55" y="15" width="70" height="70" rx="8" fill="white"/>
+          <!-- Person looking in mirror -->
+          <g class="float-animation">
+            <circle cx="90" cy="50" r="20" fill="#FFC8DD"/>
+            <g class="blink-animation">
+              <circle cx="84" cy="48" r="3" fill="#3D405B"/>
+              <circle cx="96" cy="48" r="3" fill="#3D405B"/>
+            </g>
+            <path d="M84 58 Q90 62 96 58" stroke="#3D405B" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </g>
+          <!-- Sparkles around mirror -->
+          <path d="M45 20 L47 25 L52 27 L47 29 L45 34 L43 29 L38 27 L43 25 Z" fill="#FFF2B2" class="sparkle-animation"/>
+          <path d="M135 30 L137 35 L142 37 L137 39 L135 44 L133 39 L128 37 L133 35 Z" fill="#A2D2FF" class="sparkle-animation" style="animation-delay: 0.8s"/>
+          <path d="M140 70 L141 73 L144 74 L141 75 L140 78 L139 75 L136 74 L139 73 Z" fill="#FFC8DD" class="sparkle-animation" style="animation-delay: 1.2s"/>
+        </svg>
+      </div>
+
+      <div class="final-question">
+        당신은 누구를 명명할 것인가?<br>
+        당신 자신을 무엇이라 부를 것인가?
+      </div>
+
+      <div class="final-answer">
+        <strong>명명하는 순간,<br>모든 게 달라진다.</strong>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scene-card, .final-section').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
