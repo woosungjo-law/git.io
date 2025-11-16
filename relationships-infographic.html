@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>천 명의 팔로워보다 한 명의 동료</title>
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #141414;
+      --bg-tertiary: #1e1e1e;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-muted: #666666;
+      --accent: #4ade80;
+      --accent-dim: rgba(74, 222, 128, 0.15);
+      --accent-glow: rgba(74, 222, 128, 0.3);
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.8;
+      font-size: 18px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 80px 24px;
+    }
+
+    .hero-number {
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 900;
+      font-size: clamp(120px, 25vw, 280px);
+      color: var(--text-muted);
+      opacity: 0.15;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-label {
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+      font-weight: 600;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 40px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title .accent {
+      color: var(--accent);
+      display: inline-block;
+    }
+
+    .hero-contrast {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .contrast-item {
+      text-align: center;
+    }
+
+    .contrast-number {
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 900;
+      font-size: clamp(48px, 10vw, 72px);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .contrast-number.dim {
+      color: var(--text-muted);
+    }
+
+    .contrast-number.highlight {
+      color: var(--accent);
+    }
+
+    .contrast-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .contrast-vs {
+      font-size: 24px;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--text-muted), transparent);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    /* Content Sections */
+    .section {
+      padding: 120px 0;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 48px;
+    }
+
+    /* Paradox Section */
+    .paradox-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 48px 0;
+    }
+
+    .paradox-card {
+      background: var(--bg-secondary);
+      padding: 32px;
+      border-radius: 16px;
+      border: 1px solid var(--bg-tertiary);
+    }
+
+    .paradox-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .paradox-stat {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-family: 'Pretendard', sans-serif;
+    }
+
+    .paradox-label {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Quote Highlight */
+    .quote-highlight {
+      background: var(--accent-dim);
+      border-left: 4px solid var(--accent);
+      padding: 32px 40px;
+      margin: 48px 0;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.7;
+      border-radius: 0 12px 12px 0;
+    }
+
+    /* Chinese Wisdom */
+    .wisdom-block {
+      background: var(--bg-secondary);
+      padding: 64px 48px;
+      border-radius: 24px;
+      text-align: center;
+      margin: 64px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wisdom-block::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .wisdom-source {
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+    }
+
+    .wisdom-chinese {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(36px, 8vw, 56px);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+      color: var(--accent);
+    }
+
+    .wisdom-korean {
+      font-size: 20px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .wisdom-meaning {
+      font-size: 18px;
+      line-height: 1.8;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Tree Metaphor */
+    .tree-visual {
+      position: relative;
+      height: 400px;
+      margin: 64px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tree-svg {
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+    }
+
+    .tree-label {
+      position: absolute;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tree-label.roots {
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .tree-label.branches {
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .tree-label::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* Comparison */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: center;
+      margin: 48px 0;
+    }
+
+    .comparison-side {
+      text-align: center;
+      padding: 32px;
+      background: var(--bg-secondary);
+      border-radius: 16px;
+    }
+
+    .comparison-side.wrong {
+      opacity: 0.6;
+    }
+
+    .comparison-side.right {
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    .comparison-number {
+      font-size: 56px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .comparison-text {
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+
+    .comparison-arrow {
+      font-size: 32px;
+      color: var(--accent);
+    }
+
+    /* Body Text */
+    .body-text {
+      font-size: 18px;
+      line-height: 1.9;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .body-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Key Insight */
+    .key-insight {
+      background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+      padding: 48px;
+      border-radius: 20px;
+      margin: 64px 0;
+      position: relative;
+    }
+
+    .key-insight::before {
+      content: '핵심';
+      position: absolute;
+      top: -12px;
+      left: 48px;
+      background: var(--accent);
+      color: var(--bg-primary);
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .key-insight-text {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* Action Section */
+    .action-section {
+      background: var(--bg-secondary);
+      padding: 64px;
+      border-radius: 24px;
+      text-align: center;
+      margin: 64px 0;
+    }
+
+    .action-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+
+    .action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .action-item:hover {
+      transform: translateX(8px);
+    }
+
+    .action-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--accent-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .action-text {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    /* Final Message */
+    .final-message {
+      text-align: center;
+      padding: 120px 0;
+    }
+
+    .final-quote {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 900;
+      line-height: 1.4;
+      margin-bottom: 48px;
+    }
+
+    .final-quote .accent {
+      color: var(--accent);
+    }
+
+    .final-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      body {
+        font-size: 16px;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+
+      .hero {
+        padding: 60px 20px;
+      }
+
+      .hero-contrast {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .contrast-vs {
+        transform: rotate(90deg);
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .paradox-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .paradox-card {
+        padding: 24px;
+      }
+
+      .quote-highlight {
+        padding: 24px 28px;
+        font-size: 18px;
+      }
+
+      .wisdom-block {
+        padding: 48px 32px;
+      }
+
+      .tree-visual {
+        height: 320px;
+      }
+
+      .comparison {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .comparison-arrow {
+        transform: rotate(90deg);
+      }
+
+      .comparison-side {
+        padding: 24px;
+      }
+
+      .key-insight {
+        padding: 40px 32px;
+      }
+
+      .key-insight-text {
+        font-size: 20px;
+      }
+
+      .action-section {
+        padding: 48px 32px;
+      }
+
+      .action-item {
+        padding: 14px;
+      }
+
+      .final-message {
+        padding: 80px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .contrast-number {
+        font-size: 40px;
+      }
+
+      .wisdom-chinese {
+        font-size: 32px;
+        letter-spacing: 0.05em;
+      }
+
+      .comparison-number {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-number">1000</div>
+    <div class="hero-content">
+      <div class="hero-label">Essay on Connection</div>
+      <h1 class="hero-title">
+        천 명의 팔로워보다<br>
+        <span class="accent">한 명의 동료</span>
+      </h1>
+      <div class="hero-contrast">
+        <div class="contrast-item">
+          <div class="contrast-number dim">1,000</div>
+          <div class="contrast-label">팔로워</div>
+        </div>
+        <div class="contrast-vs">vs</div>
+        <div class="contrast-item">
+          <div class="contrast-number highlight">1</div>
+          <div class="contrast-label">진짜 동료</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">SCROLL</div>
+  </section>
+
+  <!-- Paradox Section -->
+  <section class="section" id="paradox">
+    <div class="container">
+      <div class="section-divider"></div>
+      <h2 style="font-family: 'Noto Serif KR', serif; font-size: 32px; font-weight: 700; margin-bottom: 24px;">연결의 역설</h2>
+      <p class="body-text">
+        회식 자리다. 열두 명이 앉아 있다. 다들 스마트폰만 본다.
+        화면 속에서 누군가와 대화하고, 좋아요를 누르고, 댓글을 단다.
+        옆 사람 얼굴은 안 본다. 이름도 모른다.
+      </p>
+
+      <div class="paradox-grid">
+        <div class="paradox-card">
+          <div class="paradox-icon">🌐</div>
+          <div class="paradox-stat">MAX</div>
+          <div class="paradox-label">역사상 가장 많은<br>연결의 시대</div>
+        </div>
+        <div class="paradox-card">
+          <div class="paradox-icon">🕳️</div>
+          <div class="paradox-stat">MAX</div>
+          <div class="paradox-label">역사상 가장<br>외로운 시대</div>
+        </div>
+      </div>
+
+      <div class="quote-highlight">
+        연결은 많아졌는데 깊이는 얕아졌다.<br>
+        넓고 얕은 그물 위를 걷는 기분이다. 언제 빠질지 모른다.
+      </div>
+    </div>
+  </section>
+
+  <!-- Wisdom Section -->
+  <section class="section" id="wisdom">
+    <div class="container">
+      <div class="section-divider"></div>
+      <h2 style="font-family: 'Noto Serif KR', serif; font-size: 32px; font-weight: 700; margin-bottom: 24px;">고전의 지혜</h2>
+
+      <div class="wisdom-block">
+        <div class="wisdom-source">공자 『논어』 위정편</div>
+        <div class="wisdom-chinese">近者悅 遠者來</div>
+        <div class="wisdom-korean">근자열 원자래</div>
+        <div class="wisdom-meaning">
+          가까운 사람이 기뻐하면<br>
+          먼 데 사람도 온다
+        </div>
+      </div>
+
+      <p class="body-text">
+        <strong>신뢰와 진정성은 자기장이다.</strong> 사람을 끌어당긴다.
+        도덕 문제가 아니다. 거의 자연법칙이다.
+      </p>
+
+      <p class="body-text">
+        임금이 신하를 진심으로 대하면 소문이 퍼진다.
+        먼 나라 인재가 알아서 온다. 끌어모으지 않아도.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tree Metaphor Section -->
+  <section class="section" id="tree">
+    <div class="container">
+      <div class="section-divider"></div>
+      <h2 style="font-family: 'Noto Serif KR', serif; font-size: 32px; font-weight: 700; margin-bottom: 24px;">뿌리와 가지</h2>
+
+      <div class="tree-visual">
+        <svg class="tree-svg" viewBox="0 0 400 400" fill="none">
+          <!-- Roots -->
+          <path d="M200 220 L200 350" stroke="#4ade80" stroke-width="4"/>
+          <path d="M200 280 L140 340" stroke="#4ade80" stroke-width="3"/>
+          <path d="M200 280 L260 340" stroke="#4ade80" stroke-width="3"/>
+          <path d="M200 310 L120 360" stroke="#4ade80" stroke-width="2"/>
+          <path d="M200 310 L280 360" stroke="#4ade80" stroke-width="2"/>
+          <path d="M200 250 L160 320" stroke="#4ade80" stroke-width="2"/>
+          <path d="M200 250 L240 320" stroke="#4ade80" stroke-width="2"/>
+
+          <!-- Trunk -->
+          <rect x="190" y="180" width="20" height="80" fill="#666"/>
+
+          <!-- Branches (dimmed) -->
+          <path d="M200 180 L200 80" stroke="#444" stroke-width="3"/>
+          <path d="M200 140 L140 100" stroke="#444" stroke-width="2" opacity="0.5"/>
+          <path d="M200 140 L260 100" stroke="#444" stroke-width="2" opacity="0.5"/>
+          <path d="M200 120 L160 60" stroke="#444" stroke-width="2" opacity="0.4"/>
+          <path d="M200 120 L240 60" stroke="#444" stroke-width="2" opacity="0.4"/>
+          <path d="M200 100 L180 40" stroke="#444" stroke-width="1" opacity="0.3"/>
+          <path d="M200 100 L220 40" stroke="#444" stroke-width="1" opacity="0.3"/>
+        </svg>
+        <div class="tree-label branches" style="color: #666;">가지 (먼 관계)</div>
+        <div class="tree-label roots" style="color: var(--accent);">뿌리 (가까운 관계)</div>
+      </div>
+
+      <div class="key-insight">
+        <div class="key-insight-text">
+          나무는 위로 뻗기 전에 아래로 내린다.<br>
+          뿌리가 깊어야 가지가 뻗는다.
+        </div>
+      </div>
+
+      <p class="body-text">
+        우리는 이걸 거꾸로 한다. 먼 데부터 쫓는다.
+        온라인 친구 수천 명을 먼저 만들려 하고, 옆 사람은 나중이다.
+        <strong>뿌리 없이 가지만 키운다.</strong> 당연히 흔들린다. 바람 불면 쓰러진다.
+      </p>
+    </div>
+  </section>
+
+  <!-- Density Section -->
+  <section class="section" id="density">
+    <div class="container">
+      <div class="section-divider"></div>
+      <h2 style="font-family: 'Noto Serif KR', serif; font-size: 32px; font-weight: 700; margin-bottom: 24px;">밀도의 법칙</h2>
+
+      <p class="body-text">
+        진심은 못 숨긴다. 가까운 사람 대하는 태도가 먼 사람한테도 보인다.
+        회사에서 직원 함부로 대하는 사람, 거래처 가서도 티 난다.
+        가족한테 무심한 사람, 친구한테도 그렇다.
+      </p>
+
+      <div class="comparison">
+        <div class="comparison-side wrong">
+          <div class="comparison-number">1000명</div>
+          <div class="comparison-text">얕게 아는 것</div>
+        </div>
+        <div class="comparison-arrow">&lt;</div>
+        <div class="comparison-side right">
+          <div class="comparison-number">10명</div>
+          <div class="comparison-text">깊게 아는 것</div>
+        </div>
+      </div>
+
+      <div class="quote-highlight">
+        팔로워 수가 중요한 게 아니다.<br>
+        관계 하나하나의 밀도가 영향력을 만든다.
+      </div>
+    </div>
+  </section>
+
+  <!-- Action Section -->
+  <section class="section" id="action">
+    <div class="container">
+      <div class="section-divider"></div>
+
+      <div class="action-section">
+        <h2 class="action-title">오늘부터 시작하기</h2>
+        <div class="action-list">
+          <div class="action-item">
+            <div class="action-icon">👋</div>
+            <div class="action-text">옆 사람한테 말 걸어보자</div>
+          </div>
+          <div class="action-item">
+            <div class="action-icon">📛</div>
+            <div class="action-text">이름 불러보자</div>
+          </div>
+          <div class="action-item">
+            <div class="action-icon">❓</div>
+            <div class="action-text">뭐 하는지 물어보자</div>
+          </div>
+          <div class="action-item">
+            <div class="action-icon">📱</div>
+            <div class="action-text">폰 내려놓고 눈 보자</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Message -->
+  <section class="section final-message">
+    <div class="container">
+      <div class="final-quote">
+        가까운 사람이 웃으면<br>
+        <span class="accent">세상이 온다</span>
+      </div>
+      <p class="final-subtitle">
+        화려한 인맥 쫓기 전에 지금 옆에 있는 사람부터 챙겨야 한다.<br>
+        그게 오히려 더 넓은 세계로 가는 길이다.<br><br>
+        <strong style="color: var(--text-primary);">뿌리 깊어야 나무 크다.</strong>
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Smooth scroll hint removal
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    let scrolled = false;
+
+    window.addEventListener('scroll', () => {
+      if (!scrolled && window.scrollY > 100) {
+        scrolled = true;
+        scrollIndicator.style.opacity = '0';
+        scrollIndicator.style.transition = 'opacity 0.5s ease';
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>
