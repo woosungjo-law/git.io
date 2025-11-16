@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>안으로는 칼날, 밖으로는 강물</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #fafafa;
+            --accent: #dc2626;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --gray-800: #262626;
+            --space-unit: 8px;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--secondary);
+            color: var(--primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Progress Indicator */
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100vh;
+            background: var(--gray-200);
+            z-index: 1000;
+        }
+
+        .progress-fill {
+            width: 100%;
+            height: 0%;
+            background: var(--accent);
+            transition: height 0.15s ease-out;
+        }
+
+        /* Section Counter */
+        .section-counter {
+            position: fixed;
+            bottom: calc(var(--space-unit) * 4);
+            right: calc(var(--space-unit) * 3);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gray-400);
+            z-index: 100;
+            font-feature-settings: 'tnum';
+        }
+
+        /* Snap Scroll Sections */
+        section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: calc(var(--space-unit) * 10) calc(var(--space-unit) * 3);
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+            padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 3);
+        }
+
+        .hero-title {
+            font-size: clamp(32px, 10vw, 48px);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: calc(var(--space-unit) * 4);
+            opacity: 0;
+            transform: translateY(40px);
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+        }
+
+        .hero-title span {
+            display: block;
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 12px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.8s forwards;
+        }
+
+        .hero-quote {
+            font-size: 15px;
+            line-height: 1.8;
+            max-width: 320px;
+            margin: calc(var(--space-unit) * 6) auto 0;
+            color: var(--gray-400);
+            opacity: 0;
+            animation: fadeIn 0.8s ease 1.2s forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--secondary);
+        }
+
+        .section-number {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: calc(var(--space-unit) * 2);
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .section-title {
+            font-size: clamp(28px, 7vw, 36px);
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: calc(var(--space-unit) * 4);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-body {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--gray-800);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section-body p {
+            margin-bottom: calc(var(--space-unit) * 3);
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: calc(var(--space-unit) * 2);
+            margin: calc(var(--space-unit) * 4) 0;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .bento-item {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: calc(var(--space-unit) * 3);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 120px;
+        }
+
+        .bento-item--large {
+            grid-column: 1 / -1;
+        }
+
+        .bento-item--accent {
+            background: var(--accent);
+        }
+
+        .bento-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: calc(var(--space-unit) * 1);
+        }
+
+        .bento-value {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .bento-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Highlight Text */
+        .highlight {
+            position: relative;
+            display: inline;
+            background: linear-gradient(to top, var(--accent) 30%, transparent 30%);
+            padding: 0 2px;
+        }
+
+        /* Quote Block */
+        .quote-block {
+            background: var(--gray-100);
+            padding: calc(var(--space-unit) * 4);
+            margin: calc(var(--space-unit) * 4) 0;
+            border-left: 4px solid var(--primary);
+            font-style: italic;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .quote-block p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--gray-600);
+        }
+
+        /* Comparison Layout */
+        .comparison {
+            margin: calc(var(--space-unit) * 4) 0;
+            opacity: 0;
+        }
+
+        .comparison-item {
+            padding: calc(var(--space-unit) * 3) 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: calc(var(--space-unit) * 1);
+        }
+
+        .comparison-label--wrong {
+            color: var(--accent);
+        }
+
+        .comparison-label--right {
+            color: var(--primary);
+        }
+
+        .comparison-text {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* Kinetic Typography */
+        .kinetic-text {
+            font-size: clamp(20px, 5vw, 24px);
+            font-weight: 900;
+            line-height: 1.4;
+            text-align: center;
+            margin: calc(var(--space-unit) * 6) 0;
+        }
+
+        .kinetic-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px) rotateX(-90deg);
+            transform-origin: bottom;
+        }
+
+        /* Final CTA */
+        .final-section {
+            background: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+        }
+
+        .final-question {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: calc(var(--space-unit) * 6);
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .final-options {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--space-unit) * 3);
+            opacity: 0;
+        }
+
+        .option {
+            padding: calc(var(--space-unit) * 3);
+            border: 2px solid var(--gray-600);
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .option:active {
+            border-color: var(--accent);
+            background: rgba(220, 38, 38, 0.1);
+        }
+
+        .option-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: calc(var(--space-unit) * 1);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: calc(var(--space-unit) * 4) 0;
+            font-size: 13px;
+            color: var(--gray-400);
+            opacity: 0;
+        }
+
+        /* Animation States */
+        .animate-in .section-number {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+        }
+
+        .animate-in .section-title {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+        }
+
+        .animate-in .section-body {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+        }
+
+        .animate-in .bento-grid {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+        }
+
+        .animate-in .quote-block {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+        }
+
+        .animate-in .comparison {
+            opacity: 1;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+        }
+
+        .animate-in .final-question {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+        }
+
+        .animate-in .final-options {
+            opacity: 1;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+        }
+
+        .animate-in .footer {
+            opacity: 1;
+            transition: all 0.8s ease 0.8s;
+        }
+
+        .animate-in .kinetic-word {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        /* Scroll Hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: calc(var(--space-unit) * 4);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--gray-400);
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* Touch Optimization */
+        .touchable {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="section-counter" id="sectionCounter">01 / 05</div>
+
+    <!-- Section 1: Hero -->
+    <section class="hero" data-section="1">
+        <h1 class="hero-title">
+            안으로는 칼날
+            <span>밖으로는 강물</span>
+        </h1>
+        <p class="hero-subtitle">채근담이 묻는 현대의 미덕</p>
+        <p class="hero-quote">
+            "좋고 싫은 마음이 너무 확연하면 사물과의 관계가 멀어지고, 현명한 것과 어리석음을 구별하는 마음이 너무 뚜렷하면 사람들과 오래 친해질 수 없다."
+        </p>
+        <div class="scroll-hint">SCROLL</div>
+    </section>
+
+    <!-- Section 2: The Seduction -->
+    <section class="content-section" data-section="2">
+        <div class="section-number">01</div>
+        <h2 class="section-title">선명함이라는<br>달콤한 유혹</h2>
+        <div class="section-body">
+            <p>사람은 본능적으로 세상을 <span class="highlight">나누고 싶어</span> 한다.</p>
+
+            <div class="bento-grid">
+                <div class="bento-item">
+                    <div class="bento-label">구분</div>
+                    <div class="bento-value">선 vs 악</div>
+                </div>
+                <div class="bento-item">
+                    <div class="bento-label">구분</div>
+                    <div class="bento-value">아군 vs 적군</div>
+                </div>
+                <div class="bento-item bento-item--large bento-item--accent">
+                    <div class="bento-text">
+                        딱 떨어지는 구분은 혼돈스러운 세상에 질서를 부여하고, '나'라는 존재의 좌표를 확인시켜주는 <strong>달콤한 유혹</strong>이다.
+                    </div>
+                </div>
+            </div>
+
+            <p>문제는 그 잣대가 너무 뚜렷하고 확고해질 때 생긴다. 그것은 <span class="highlight">관계의 숨 쉴 틈</span>을 막아버린다.</p>
+        </div>
+    </section>
+
+    <!-- Section 3: Digital Arena -->
+    <section class="content-section" data-section="3">
+        <div class="section-number">02</div>
+        <h2 class="section-title">모두가 재판관이 된<br>디지털 광장</h2>
+        <div class="section-body">
+            <p>익명이라는 스크린 뒤에서, 우리의 '좋고 싫음'은 개인의 취향을 넘어 <span class="highlight">집단의 윤리</span>가 되어버린다.</p>
+
+            <div class="quote-block">
+                <p>디지털 광장에서 '좋아요'와 '싫어요'는 취향을 넘어선 즉각적인 심판의 망치가 된다.</p>
+            </div>
+
+            <p>타인을 향한 뚜렷한 잣대는 곧 자신을 향한 잣대가 되어, 누구도 실수할 수 없고 누구도 관용을 베풀 수 없는 <span class="highlight">황량한 세계</span>를 구축한다.</p>
+        </div>
+    </section>
+
+    <!-- Section 4: Redirecting -->
+    <section class="content-section" data-section="4">
+        <div class="section-number">03</div>
+        <h2 class="section-title">잣대의 방향을<br>바꾸는 일</h2>
+        <div class="section-body">
+            <div class="quote-block">
+                <p>"훌륭한 사람은 안으로는 엄하고 분명해야 하지만 밖으로는 언제나 원만하고 넉넉해야 한다."</p>
+            </div>
+
+            <p>잣대의 <span class="highlight">'방향'을 바꾸라</span>는 준엄한 명령이다.</p>
+
+            <div class="comparison">
+                <div class="comparison-item">
+                    <div class="comparison-label comparison-label--wrong">현대의 비극</div>
+                    <div class="comparison-text">자신에게는 한없이 넉넉하고,<br>타인에게는 병적으로 엄격하다</div>
+                </div>
+                <div class="comparison-item">
+                    <div class="comparison-label comparison-label--right">채근담의 지혜</div>
+                    <div class="comparison-text">안으로는 칼날을 세우고,<br>밖으로는 강물처럼 흐른다</div>
+                </div>
+            </div>
+
+            <div class="kinetic-text" id="kineticText">
+                진정한 훌륭함은 자신을 향한 엄격함과 세상을 향한 넉넉함 사이의 균형에서 온다.
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Final -->
+    <section class="final-section" data-section="5">
+        <div class="final-question">
+            우리의 손에 들린<br>잣대는 지금<br>무엇을 하고 있는가?
+        </div>
+
+        <div class="final-options">
+            <div class="option touchable">
+                <div class="option-label">파괴의 칼</div>
+                선명한 잣대로 모두를 밀어내<br>불모지를 만든다
+            </div>
+            <div class="option touchable">
+                <div class="option-label">생성의 덕</div>
+                넉넉한 품으로 만물을 길러내는<br>살리는 덕을 따른다
+            </div>
+        </div>
+
+        <div class="footer">
+            선택은 오롯이 지금,<br>이 글을 읽는 우리의 몫이다.
+        </div>
+    </section>
+
+    <script>
+        // Progress and Section Counter
+        const progressFill = document.getElementById('progressFill');
+        const sectionCounter = document.getElementById('sectionCounter');
+        const sections = document.querySelectorAll('section');
+        const totalSections = sections.length;
+
+        function updateProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressFill.style.height = scrollPercent + '%';
+
+            // Update section counter
+            let currentSection = 1;
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2) {
+                    currentSection = index + 1;
+                }
+            });
+            sectionCounter.textContent = String(currentSection).padStart(2, '0') + ' / ' + String(totalSections).padStart(2, '0');
+        }
+
+        window.addEventListener('scroll', updateProgress, { passive: true });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+
+                    // Kinetic typography animation
+                    if (entry.target.querySelector('#kineticText')) {
+                        animateKineticText();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Kinetic Typography Animation
+        function animateKineticText() {
+            const kineticText = document.getElementById('kineticText');
+            if (!kineticText || kineticText.dataset.animated) return;
+
+            const text = kineticText.textContent;
+            const words = text.split(' ');
+            kineticText.innerHTML = '';
+            kineticText.dataset.animated = 'true';
+
+            words.forEach((word, index) => {
+                const span = document.createElement('span');
+                span.className = 'kinetic-word';
+                span.textContent = word + ' ';
+                span.style.transitionDelay = (index * 0.08) + 's';
+                span.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+                kineticText.appendChild(span);
+            });
+
+            setTimeout(() => {
+                const kineticWords = kineticText.querySelectorAll('.kinetic-word');
+                kineticWords.forEach(word => {
+                    word.style.opacity = '1';
+                    word.style.transform = 'translateY(0) rotateX(0)';
+                });
+            }, 100);
+        }
+
+        // Touch feedback
+        const touchables = document.querySelectorAll('.touchable');
+        touchables.forEach(el => {
+            el.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            }, { passive: true });
+
+            el.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+            }, { passive: true });
+        });
+
+        // Initial animation for first section
+        setTimeout(() => {
+            sections[0].classList.add('animate-in');
+        }, 100);
+    </script>
+</body>
+</html>
