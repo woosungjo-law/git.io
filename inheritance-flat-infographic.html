@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사망보험금 vs 퇴직금 - 상속재산의 비밀</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    word-break: keep-all;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+:root {
+    --primary: #0077B6;
+    --secondary: #00B4D8;
+    --tertiary: #90E0EF;
+    --accent: #CAF0F8;
+    --text: #03045E;
+}
+
+body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.7;
+    background: var(--accent);
+    color: var(--text);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+h1 {
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card-number {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary) 0%, #0088CC 100%);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.illustration {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.illustration svg {
+    width: 100%;
+    height: auto;
+    max-width: 320px;
+    transition: all 0.3s ease;
+}
+
+.illustration svg:hover {
+    transform: scale(1.03);
+}
+
+p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: var(--text);
+}
+
+.highlight {
+    background: linear-gradient(180deg, transparent 50%, var(--tertiary) 50%);
+    padding: 0 4px;
+    font-weight: 600;
+}
+
+.amount {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.comparison-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.comp-item {
+    background: linear-gradient(135deg, var(--accent) 0%, #FFFFFF 100%);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid var(--tertiary);
+}
+
+.comp-item h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.comp-item p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.insight {
+    background: linear-gradient(135deg, var(--secondary) 0%, #10C4E8 100%);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 24px 0;
+    font-weight: 600;
+}
+
+.tip-box {
+    background: var(--accent);
+    border-left: 4px solid var(--primary);
+    padding: 16px 24px;
+    border-radius: 0 12px 12px 0;
+    margin: 24px 0;
+}
+
+.tip-box h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.key-message {
+    background: linear-gradient(135deg, var(--text) 0%, #041E42 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 16px;
+    text-align: center;
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out 0.5s forwards;
+}
+
+.key-message h3 {
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.key-message p {
+    color: white;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 48px 20px 32px;
+    color: var(--text);
+    opacity: 0.6;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+    .card, header, .key-message {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 48px 40px;
+    }
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+    h1 {
+        font-size: 36px;
+    }
+    h2 {
+        font-size: 26px;
+    }
+    .card {
+        padding: 40px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 64px 60px;
+    }
+    h1 {
+        font-size: 42px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    .card {
+        padding: 48px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>사망보험금 vs 퇴직금</h1>
+        <div class="subtitle">상속재산과 고유재산의 경계</div>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-number">1</div>
+            <h2>분쟁의 시작</h2>
+            <div class="illustration">
+                <svg viewBox="0 0 280 160" role="img" aria-label="상속 분쟁 상황을 보여주는 가족 실루엣">
+                    <rect x="120" y="30" width="40" height="60" rx="4" fill="var(--tertiary)" stroke="var(--text)" stroke-width="2"/>
+                    <text x="140" y="55" text-anchor="middle" font-size="11" fill="var(--text)" font-weight="700">퇴직금</text>
+                    <text x="140" y="72" text-anchor="middle" font-size="10" fill="var(--primary)" font-weight="600">3억</text>
+                    <rect x="170" y="30" width="40" height="60" rx="4" fill="var(--secondary)" stroke="var(--text)" stroke-width="2"/>
+                    <text x="190" y="55" text-anchor="middle" font-size="11" fill="white" font-weight="700">보험금</text>
+                    <text x="190" y="72" text-anchor="middle" font-size="10" fill="white" font-weight="600">3.5억</text>
+                    <circle cx="70" cy="120" r="16" fill="var(--accent)" stroke="var(--text)" stroke-width="2"/>
+                    <line x1="70" y1="136" x2="70" y2="155" stroke="var(--text)" stroke-width="2"/>
+                    <text x="70" y="118" text-anchor="middle" font-size="9" fill="var(--text)" font-weight="600">배우자</text>
+                    <circle cx="140" cy="120" r="16" fill="var(--accent)" stroke="var(--text)" stroke-width="2"/>
+                    <line x1="140" y1="136" x2="140" y2="155" stroke="var(--text)" stroke-width="2"/>
+                    <text x="140" y="118" text-anchor="middle" font-size="9" fill="var(--text)" font-weight="600">장남</text>
+                    <circle cx="210" cy="120" r="16" fill="var(--accent)" stroke="var(--text)" stroke-width="2"/>
+                    <line x1="210" y1="136" x2="210" y2="155" stroke="var(--text)" stroke-width="2"/>
+                    <text x="210" y="118" text-anchor="middle" font-size="9" fill="var(--text)" font-weight="600">차녀</text>
+                    <path d="M85 115 L125 90" stroke="var(--primary)" stroke-width="2" stroke-dasharray="4 3"/>
+                    <path d="M140 104 L165 90" stroke="var(--primary)" stroke-width="2" stroke-dasharray="4 3"/>
+                    <path d="M195 115 L195 90" stroke="var(--primary)" stroke-width="2" stroke-dasharray="4 3"/>
+                </svg>
+            </div>
+            <p>김임원이 남긴 <span class="amount">퇴직금 3억 원</span>과 <span class="amount">사망보험금 3.5억 원</span>. 가족들은 서로 다른 주장을 펼쳤다.</p>
+            <div class="insight">
+                핵심 쟁점: "누가 보험료를 냈는가"가 아니라, "법과 계약이 누구에게 권리를 부여하는가"
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-number">2</div>
+            <h2>법적 성격 구분</h2>
+            <div class="illustration">
+                <svg viewBox="0 0 280 180" role="img" aria-label="고유재산과 상속재산의 구분">
+                    <rect x="20" y="40" width="110" height="100" rx="8" fill="var(--secondary)" stroke="var(--text)" stroke-width="2"/>
+                    <text x="75" y="70" text-anchor="middle" font-size="14" fill="white" font-weight="700">사망보험금</text>
+                    <text x="75" y="95" text-anchor="middle" font-size="12" fill="white" font-weight="600">= 고유재산</text>
+                    <text x="75" y="120" text-anchor="middle" font-size="11" fill="white">수익자 단독 취득</text>
+                    <rect x="150" y="40" width="110" height="100" rx="8" fill="var(--tertiary)" stroke="var(--text)" stroke-width="2"/>
+                    <text x="205" y="70" text-anchor="middle" font-size="14" fill="var(--text)" font-weight="700">퇴직금</text>
+                    <text x="205" y="95" text-anchor="middle" font-size="12" fill="var(--text)" font-weight="600">= 상속재산</text>
+                    <text x="205" y="120" text-anchor="middle" font-size="11" fill="var(--text)">법정상속분 분배</text>
+                    <line x1="140" y1="90" x2="140" y2="90" stroke="var(--text)" stroke-width="3"/>
+                    <text x="140" y="95" text-anchor="middle" font-size="20" fill="var(--primary)" font-weight="900">≠</text>
+                </svg>
+            </div>
+            <p><span class="highlight">사망보험금</span>은 보험 '계약'의 효력에 따라 수익자가 직접 갖는 권리이다. 상속을 통해 물려받는 것이 아니다.</p>
+            <div class="tip-box">
+                <h4>주의사항</h4>
+                <p>세법에서는 상속세 부과를 위해 보험금을 '상속재산으로 간주'하지만, 민법상 재산 분할 기준과는 별개이다.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-number">3</div>
+            <h2>보험금 분배 원리</h2>
+            <div class="illustration">
+                <svg viewBox="0 0 280 200" role="img" aria-label="보험 수익자별 분배 흐름도">
+                    <rect x="90" y="20" width="100" height="40" rx="6" fill="var(--primary)" stroke="var(--text)" stroke-width="2"/>
+                    <text x="140" y="45" text-anchor="middle" font-size="13" fill="white" font-weight="700">사망보험금</text>
+                    <line x1="110" y1="60" x2="70" y2="85" stroke="var(--text)" stroke-width="2"/>
+                    <line x1="140" y1="60" x2="140" y2="85" stroke="var(--text)" stroke-width="2"/>
+                    <line x1="170" y1="60" x2="210" y2="85" stroke="var(--text)" stroke-width="2"/>
+                    <rect x="30" y="85" width="80" height="50" rx="6" fill="var(--tertiary)" stroke="var(--text)" stroke-width="2"/>
+                    <text x="70" y="105" text-anchor="middle" font-size="11" fill="var(--text)" font-weight="700">A보험 2억</text>
+                    <text x="70" y="122" text-anchor="middle" font-size="10" fill="var(--primary)">법정상속인</text>
+                    <rect x="120" y="85" width="80" height="50" rx="6" fill="var(--secondary)" stroke="var(--text)" stroke-width="2"/>
+                    <text x="160" y="105" text-anchor="middle" font-size="11" fill="white" font-weight="700">B보험 1억</text>
+                    <text x="160" y="122" text-anchor="middle" font-size="10" fill="white">배우자</text>
+                    <rect x="210" y="85" width="60" height="50" rx="6" fill="var(--secondary)" stroke="var(--text)" stroke-width="2"/>
+                    <text x="240" y="105" text-anchor="middle" font-size="11" fill="white" font-weight="700">C보험</text>
+                    <text x="240" y="122" text-anchor="middle" font-size="10" fill="white">장남</text>
+                    <line x1="70" y1="135" x2="70" y2="155" stroke="var(--text)" stroke-width="2"/>
+                    <line x1="160" y1="135" x2="160" y2="155" stroke="var(--text)" stroke-width="2"/>
+                    <line x1="240" y1="135" x2="240" y2="155" stroke="var(--text)" stroke-width="2"/>
+                    <text x="70" y="175" text-anchor="middle" font-size="10" fill="var(--text)" font-weight="600">3/7:2/7:2/7</text>
+                    <text x="160" y="175" text-anchor="middle" font-size="10" fill="var(--text)" font-weight="600">전액 배우자</text>
+                    <text x="240" y="175" text-anchor="middle" font-size="10" fill="var(--text)" font-weight="600">전액 장남</text>
+                </svg>
+            </div>
+            <p>수익자가 <span class="highlight">'법정상속인'</span>으로 지정된 경우에도 상속재산이 아닌 고유재산이지만, 분배 비율은 민법상 법정상속분을 따른다.</p>
+            <div class="comparison-box">
+                <div class="comp-item">
+                    <h4>배우자</h4>
+                    <p>3/7 (약 42.9%)</p>
+                </div>
+                <div class="comp-item">
+                    <h4>자녀 각각</h4>
+                    <p>2/7 (약 28.6%)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-number">4</div>
+            <h2>최종 분배 결과</h2>
+            <div class="illustration">
+                <svg viewBox="0 0 280 180" role="img" aria-label="최종 분배 결과 파이차트">
+                    <circle cx="140" cy="90" r="70" fill="var(--accent)" stroke="var(--text)" stroke-width="2"/>
+                    <path d="M140 90 L140 20 A70 70 0 0 1 200 130 Z" fill="var(--primary)"/>
+                    <path d="M140 90 L200 130 A70 70 0 0 1 80 130 Z" fill="var(--secondary)"/>
+                    <path d="M140 90 L80 130 A70 70 0 0 1 140 20 Z" fill="var(--tertiary)"/>
+                    <circle cx="140" cy="90" r="25" fill="white"/>
+                    <text x="140" y="95" text-anchor="middle" font-size="11" fill="var(--text)" font-weight="700">퇴직금</text>
+                    <rect x="20" y="165" width="12" height="12" rx="2" fill="var(--primary)"/>
+                    <text x="38" y="175" font-size="11" fill="var(--text)" font-weight="600">배우자 3/7</text>
+                    <rect x="120" y="165" width="12" height="12" rx="2" fill="var(--secondary)"/>
+                    <text x="138" y="175" font-size="11" fill="var(--text)" font-weight="600">장남 2/7</text>
+                    <rect x="210" y="165" width="12" height="12" rx="2" fill="var(--tertiary)"/>
+                    <text x="228" y="175" font-size="11" fill="var(--text)" font-weight="600">차녀 2/7</text>
+                </svg>
+            </div>
+            <p><span class="highlight">퇴직금 3억 원</span>만 법정상속분에 따라 분배. 보험금은 각 수익자의 고유재산으로 귀속된다.</p>
+            <div class="insight">
+                실무 Tip: 상속을 포기해도 수익자로 지정된 사망보험금은 수령 가능! 빚은 피하고 보험금은 챙길 수 있다.
+            </div>
+        </div>
+    </div>
+
+    <div class="key-message">
+        <h3>핵심 결론</h3>
+        <p>사망보험금은 <strong>수익자의 고유재산</strong><br>퇴직금은 <strong>상속재산</strong><br><br>법과 계약이 부여한 권리를 기준으로<br>재산의 성격을 명확히 구분해야 분쟁을 예방할 수 있다.</p>
+    </div>
+
+    <footer>
+        민법 제1009조 | 상속세 및 증여세법 제8조 | 대법원 2015다236820
+    </footer>
+</div>
+</body>
+</html>
