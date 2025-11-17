@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하도급 계약 지위 승계의 함정 - 망가 가이드</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', 'Noto Sans JP', sans-serif;
+            background: #F5F5F5;
+            line-height: 1.6;
+        }
+
+        .manga-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .manga-page {
+            position: relative;
+            background: #FFFFFF;
+            border-bottom: 3px solid #000;
+            padding: 20px;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .panel {
+            position: relative;
+            border: 3px solid #000;
+            background: #FFF;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .panel-content {
+            position: relative;
+            min-height: 200px;
+            padding: 20px;
+        }
+
+        /* Screen Tone Effects */
+        .screen-tone {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 2px, #000 2px, #000 3px);
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .screen-tone-dark {
+            opacity: 0.15;
+        }
+
+        /* Speed Lines */
+        .speed-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 30%, #000 100%);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .focus-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: conic-gradient(from 0deg at 50% 50%, #000 0deg, transparent 2deg, transparent 8deg, #000 10deg, transparent 12deg, transparent 18deg, #000 20deg, transparent 22deg, transparent 28deg, #000 30deg, transparent 32deg, transparent 38deg, #000 40deg, transparent 42deg, transparent 48deg, #000 50deg, transparent 52deg, transparent 58deg, #000 60deg, transparent 62deg, transparent 68deg, #000 70deg, transparent 72deg, transparent 78deg, #000 80deg, transparent 82deg, transparent 88deg, #000 90deg, transparent 92deg, transparent 98deg, #000 100deg, transparent 102deg, transparent 108deg, #000 110deg, transparent 112deg, transparent 118deg, #000 120deg, transparent 122deg, transparent 128deg, #000 130deg, transparent 132deg, transparent 138deg, #000 140deg, transparent 142deg, transparent 148deg, #000 150deg, transparent 152deg, transparent 158deg, #000 160deg, transparent 162deg, transparent 168deg, #000 170deg, transparent 172deg, transparent 178deg, #000 180deg, transparent 182deg, transparent 188deg, #000 190deg, transparent 192deg, transparent 198deg, #000 200deg, transparent 202deg, transparent 208deg, #000 210deg, transparent 212deg, transparent 218deg, #000 220deg, transparent 222deg, transparent 228deg, #000 230deg, transparent 232deg, transparent 238deg, #000 240deg, transparent 242deg, transparent 248deg, #000 250deg, transparent 252deg, transparent 258deg, #000 260deg, transparent 262deg, transparent 268deg, #000 270deg, transparent 272deg, transparent 278deg, #000 280deg, transparent 282deg, transparent 288deg, #000 290deg, transparent 292deg, transparent 298deg, #000 300deg, transparent 302deg, transparent 308deg, #000 310deg, transparent 312deg, transparent 318deg, #000 320deg, transparent 322deg, transparent 328deg, #000 330deg, transparent 332deg, transparent 338deg, #000 340deg, transparent 342deg, transparent 348deg, #000 350deg, transparent 352deg, transparent 358deg, #000 360deg);
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        /* Speech Bubbles - RTL positioning */
+        .manga-bubble {
+            position: absolute;
+            background: #FFF;
+            border: 2px solid #000;
+            border-radius: 20px;
+            padding: 12px 16px;
+            max-width: 250px;
+            font-size: 0.95rem;
+            z-index: 10;
+        }
+
+        .manga-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            border: 10px solid transparent;
+            border-top-color: #000;
+        }
+
+        .manga-bubble.right {
+            right: 20px;
+        }
+
+        .manga-bubble.right::after {
+            right: 30px;
+        }
+
+        .manga-bubble.left {
+            left: 20px;
+        }
+
+        .manga-bubble.left::after {
+            left: 30px;
+        }
+
+        .manga-bubble.center {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .manga-bubble.center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .manga-bubble.top::after {
+            bottom: auto;
+            top: -15px;
+            border-top-color: transparent;
+            border-bottom-color: #000;
+        }
+
+        .thought-bubble {
+            border-radius: 50%;
+            background: #FFF;
+        }
+
+        .thought-bubble::after {
+            border: none;
+            width: 10px;
+            height: 10px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .shout-bubble {
+            background: #FFF;
+            border: 3px solid #000;
+            border-radius: 0;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
+        }
+
+        /* Ruby Text for Legal Terms */
+        ruby {
+            ruby-position: over;
+        }
+
+        rt {
+            font-size: 0.6em;
+            color: #666;
+        }
+
+        /* Sound Effects */
+        .sfx {
+            position: absolute;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #000;
+            transform: rotate(-15deg);
+            z-index: 15;
+            text-shadow: 2px 2px 0 #FFF, -2px -2px 0 #FFF, 2px -2px 0 #FFF, -2px 2px 0 #FFF;
+        }
+
+        .sfx-large {
+            font-size: 3rem;
+        }
+
+        .sfx-red {
+            color: #FF0000;
+        }
+
+        /* Emotion Symbols */
+        .emotion {
+            position: absolute;
+            font-size: 1.5rem;
+            z-index: 15;
+        }
+
+        /* Title Panel */
+        .title-panel {
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+            color: #FFF;
+            text-align: center;
+            padding: 40px 20px;
+            border: none;
+        }
+
+        .title-panel h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0 #000;
+        }
+
+        .title-panel .subtitle {
+            font-size: 1.2rem;
+            color: #FFD700;
+        }
+
+        /* Character SVG Container */
+        .character {
+            position: absolute;
+            z-index: 5;
+        }
+
+        /* Panel Layouts */
+        .panel-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .grid-2col {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .grid-diagonal {
+            grid-template-columns: 2fr 1fr;
+        }
+
+        .panel-large {
+            min-height: 350px;
+        }
+
+        .panel-medium {
+            min-height: 250px;
+        }
+
+        .panel-small {
+            min-height: 150px;
+        }
+
+        /* Narration Box */
+        .narration {
+            background: #000;
+            color: #FFF;
+            padding: 10px 15px;
+            font-size: 0.875rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: #FFF3CD;
+            border: 2px solid #FFD700;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .legal-box {
+            background: #E3F2FD;
+            border-left: 5px solid #1976D2;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .warning-box {
+            background: #FFEBEE;
+            border-left: 5px solid #D32F2F;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        /* Page Turn Animation */
+        @keyframes pageTurn {
+            0% { transform: perspective(1000px) rotateY(0deg); }
+            50% { transform: perspective(1000px) rotateY(-5deg); }
+            100% { transform: perspective(1000px) rotateY(0deg); }
+        }
+
+        .page-turn-effect {
+            animation: pageTurn 0.5s ease-in-out;
+        }
+
+        /* Scroll Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Impact Lines */
+        .impact {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,0.1) 10px,
+                rgba(0,0,0,0.1) 12px
+            );
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .manga-container {
+                margin: 0;
+            }
+
+            .manga-bubble {
+                max-width: 180px;
+                font-size: 0.85rem;
+            }
+
+            .title-panel h1 {
+                font-size: 1.5rem;
+            }
+
+            .sfx {
+                font-size: 1.5rem;
+            }
+
+            .sfx-large {
+                font-size: 2rem;
+            }
+        }
+
+        /* Character Expression Classes */
+        .sweat-drop {
+            position: absolute;
+            width: 8px;
+            height: 15px;
+            background: linear-gradient(to bottom, #87CEEB, #4169E1);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .anger-mark {
+            position: absolute;
+            font-size: 1.2rem;
+            color: #FF0000;
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 1rem;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <div class="manga-container">
+        <!-- Title Page -->
+        <div class="manga-page">
+            <div class="title-panel">
+                <h1>사라진 내 돈 2억!</h1>
+                <div class="subtitle">하도급 계약 승계의 함정</div>
+                <svg width="200" height="200" viewBox="0 0 200 200" style="margin-top: 20px;">
+                    <!-- Money flying away -->
+                    <rect x="60" y="80" width="80" height="40" fill="#85BB65" stroke="#000" stroke-width="2"/>
+                    <text x="100" y="105" text-anchor="middle" font-size="16" font-weight="bold">₩200,000,000</text>
+                    <path d="M 140 85 Q 160 70 180 75" stroke="#000" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                    <path d="M 145 95 Q 165 90 185 85" stroke="#000" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                    <text x="100" y="150" text-anchor="middle" font-size="12" fill="#FFF">원사업자 변경 시 주의사항</text>
+                </svg>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <!-- Page 2: Introduction -->
+        <div class="manga-page">
+            <div class="narration" style="position: relative;">
+                서울 강남 오피스 빌딩 리모델링 공사 현장...
+            </div>
+
+            <div class="panel panel-large" style="margin-top: 60px;">
+                <div class="screen-tone"></div>
+                <div class="panel-content">
+                    <!-- Park Character - Working happily -->
+                    <svg class="character" style="bottom: 20px; left: 50%; transform: translateX(-50%);" width="180" height="250" viewBox="0 0 180 250">
+                        <!-- Body -->
+                        <rect x="60" y="100" width="60" height="80" fill="#4169E1" stroke="#000" stroke-width="3"/>
+                        <!-- Head -->
+                        <circle cx="90" cy="60" r="40" fill="#FFE4C4" stroke="#000" stroke-width="3"/>
+                        <!-- Hair -->
+                        <path d="M 50 50 Q 90 20 130 50" stroke="#000" stroke-width="3" fill="#333"/>
+                        <!-- Eyes - Happy -->
+                        <path d="M 70 55 Q 75 50 80 55" stroke="#000" stroke-width="3" fill="none"/>
+                        <path d="M 100 55 Q 105 50 110 55" stroke="#000" stroke-width="3" fill="none"/>
+                        <!-- Smile -->
+                        <path d="M 75 75 Q 90 85 105 75" stroke="#000" stroke-width="3" fill="none"/>
+                        <!-- Arms -->
+                        <rect x="30" y="110" width="30" height="15" fill="#4169E1" stroke="#000" stroke-width="3"/>
+                        <rect x="120" y="110" width="30" height="15" fill="#4169E1" stroke="#000" stroke-width="3"/>
+                        <!-- Legs -->
+                        <rect x="65" y="180" width="20" height="50" fill="#333" stroke="#000" stroke-width="3"/>
+                        <rect x="95" y="180" width="20" height="50" fill="#333" stroke="#000" stroke-width="3"/>
+                        <!-- Hard hat -->
+                        <ellipse cx="90" cy="30" rx="45" ry="15" fill="#FFD700" stroke="#000" stroke-width="3"/>
+                    </svg>
+
+                    <div class="manga-bubble right" style="top: 20px;">
+                        전기 설비 공사 <ruby>공정률<rt>진행률</rt></ruby> 60% 달성!<br>
+                        순조롭게 진행되고 있어!
+                    </div>
+
+                    <div class="sparkle" style="top: 30px; left: 150px;">✨</div>
+                    <div class="sparkle" style="top: 50px; right: 80px;">✨</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>박 대표의 상황:</strong><br>
+                • 계약금액: 5억 원<br>
+                • 공정률: 60% 달성<br>
+                • 기성대금 3억 원 중 1억 원만 수령<br>
+                • <span style="color: #D32F2F; font-weight: bold;">미지급 대금: 2억 원</span>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <!-- Page 3: The Shock -->
+        <div class="manga-page">
+            <div class="panel panel-large">
+                <div class="focus-lines"></div>
+                <div class="panel-content">
+                    <div class="sfx sfx-large sfx-red" style="top: 20px; left: 50%; transform: translateX(-50%) rotate(-10deg);">
+                        충격!!
+                    </div>
+
+                    <!-- Shocked Park -->
+                    <svg class="character" style="bottom: 30px; left: 30%;" width="150" height="200" viewBox="0 0 150 200">
+                        <!-- Body -->
+                        <rect x="45" y="80" width="60" height="70" fill="#4169E1" stroke="#000" stroke-width="3"/>
+                        <!-- Head -->
+                        <circle cx="75" cy="45" r="35" fill="#FFE4C4" stroke="#000" stroke-width="3"/>
+                        <!-- Hair -->
+                        <path d="M 40 35 Q 75 10 110 35" stroke="#000" stroke-width="3" fill="#333"/>
+                        <!-- Shocked Eyes -->
+                        <circle cx="60" cy="40" r="12" fill="#FFF" stroke="#000" stroke-width="3"/>
+                        <circle cx="60" cy="40" r="5" fill="#000"/>
+                        <circle cx="90" cy="40" r="12" fill="#FFF" stroke="#000" stroke-width="3"/>
+                        <circle cx="90" cy="40" r="5" fill="#000"/>
+                        <!-- Shocked Mouth -->
+                        <ellipse cx="75" cy="65" rx="15" ry="10" fill="#000"/>
+                        <!-- Sweat -->
+                        <path d="M 115 30 Q 120 35 118 45" stroke="#87CEEB" stroke-width="3" fill="none"/>
+                    </svg>
+
+                    <!-- Document -->
+                    <svg style="position: absolute; right: 30px; top: 100px;" width="120" height="150" viewBox="0 0 120 150">
+                        <rect x="10" y="10" width="100" height="130" fill="#FFF" stroke="#000" stroke-width="2"/>
+                        <text x="60" y="40" text-anchor="middle" font-size="10" font-weight="bold">통보서</text>
+                        <line x1="20" y1="50" x2="100" y2="50" stroke="#000" stroke-width="1"/>
+                        <text x="60" y="70" text-anchor="middle" font-size="8">대한건설(주)</text>
+                        <text x="60" y="85" text-anchor="middle" font-size="8">→</text>
+                        <text x="60" y="100" text-anchor="middle" font-size="8">미래건설(주)</text>
+                        <text x="60" y="120" text-anchor="middle" font-size="7" fill="#D32F2F">지위 양도</text>
+                    </svg>
+
+                    <div class="manga-bubble left" style="bottom: 80px; max-width: 200px;">
+                        대한건설이 경영난으로<br>
+                        <ruby>원도급<rt>메인 계약</rt></ruby> 계약 지위를<br>
+                        미래건설에 양도했다고?!
+                    </div>
+
+                    <div class="emotion" style="top: 60px; left: 60px;">💦</div>
+                    <div class="emotion" style="top: 80px; left: 45px;">💦</div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ 위기 상황 발생!</strong><br>
+                원사업자가 갑자기 변경되면서 미지급 대금의 회수가 불투명해졌습니다.
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <!-- Page 4: Conflict with New Contractor -->
+        <div class="manga-page">
+            <div class="panel panel-large">
+                <div class="screen-tone screen-tone-dark"></div>
+                <div class="panel-content">
+                    <!-- Villain Character - Mirae Construction Rep -->
+                    <svg class="character" style="top: 100px; right: 20px;" width="160" height="220" viewBox="0 0 160 220">
+                        <!-- Body -->
+                        <rect x="50" y="90" width="60" height="80" fill="#333" stroke="#000" stroke-width="3"/>
+                        <!-- Head -->
+                        <circle cx="80" cy="50" r="38" fill="#FFE4C4" stroke="#000" stroke-width="3"/>
+                        <!-- Slicked back hair -->
+                        <path d="M 42 40 Q 80 20 118 40 L 118 30 Q 80 10 42 30 Z" fill="#000" stroke="#000" stroke-width="2"/>
+                        <!-- Smug Eyes -->
+                        <line x1="60" y1="45" x2="75" y2="48" stroke="#000" stroke-width="3"/>
+                        <line x1="85" y1="48" x2="100" y2="45" stroke="#000" stroke-width="3"/>
+                        <!-- Smug Smile -->
+                        <path d="M 65 65 Q 80 60 95 65" stroke="#000" stroke-width="3" fill="none"/>
+                        <!-- Tie -->
+                        <polygon points="80,90 75,105 80,170 85,105" fill="#8B0000" stroke="#000" stroke-width="2"/>
+                    </svg>
+
+                    <div class="shout-bubble" style="top: 20px; right: 20px; max-width: 280px;">
+                        <strong style="color: #D32F2F;">우리는 대한건설의<br>
+                        채무를 승계하지 않았소!</strong><br><br>
+                        앞으로 발생할 공사대금만<br>
+                        지급할 것이오!
+                    </div>
+
+                    <!-- Sad Park -->
+                    <svg class="character" style="bottom: 20px; left: 20px;" width="120" height="180" viewBox="0 0 120 180">
+                        <!-- Body -->
+                        <rect x="30" y="70" width="60" height="70" fill="#4169E1" stroke="#000" stroke-width="3"/>
+                        <!-- Head -->
+                        <circle cx="60" cy="40" r="30" fill="#FFE4C4" stroke="#000" stroke-width="3"/>
+                        <!-- Sad Eyes -->
+                        <path d="M 45 35 Q 50 40 55 35" stroke="#000" stroke-width="2" fill="none"/>
+                        <path d="M 65 35 Q 70 40 75 35" stroke="#000" stroke-width="2" fill="none"/>
+                        <!-- Sad Mouth -->
+                        <path d="M 50 55 Q 60 50 70 55" stroke="#000" stroke-width="3" fill="none"/>
+                        <!-- Sweat drops -->
+                        <path d="M 85 25 L 88 35" stroke="#87CEEB" stroke-width="2"/>
+                    </svg>
+
+                    <div class="manga-bubble left" style="bottom: 100px;">
+                        그러면 2억 원은<br>
+                        어떻게 하라는 거죠...?
+                    </div>
+
+                    <div class="sfx" style="top: 150px; left: 50%;">덜컥...</div>
+                </div>
+            </div>
+
+            <div class="panel panel-medium">
+                <div class="speed-lines"></div>
+                <div class="panel-content">
+                    <div class="sfx sfx-large sfx-red" style="top: 10px; right: 30px;">
+                        이게 끝이 아니다!!
+                    </div>
+
+                    <div class="shout-bubble" style="top: 80px; left: 50%; transform: translateX(-50%); max-width: 300px;">
+                        게다가 잔여 공사대금도<br>
+                        <strong style="color: #D32F2F; font-size: 1.2rem;">2억 → 1.5억으로 삭감!</strong>
+                    </div>
+
+                    <div class="emotion" style="bottom: 30px; right: 50px;">😱</div>
+                </div>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+
+        <!-- Page 5: The Contract Clause Discovery -->
+        <div class="manga-page">
+            <div class="panel panel-large">
+                <div class="focus-lines"></div>
+                <div class="panel-content">
+                    <div class="sfx sfx-large" style="top: 10px; left: 50%; transform: translateX(-50%);">
+                        잠깐!!
+                    </div>
+
+                    <!-- Park with document -->
+                    <svg class="character" style="bottom: 30px; left: 50%; transform: translateX(-50%);" width="200" height="250" viewBox="0 0 200 250">
+                        <!-- Body -->
+                        <rect x="70" y="100" width="60" height="80" fill="#4169E1" stroke="#000" stroke-width="3"/>
+                        <!-- Head -->
+                        <circle cx="100" cy="60" r="40" fill="#FFE4C4" stroke="#000" stroke-width="3"/>
+                        <!-- Hair -->
+                        <path d="M 60 50 Q 100 20 140 50" stroke="#000" stroke-width="3" fill="#333"/>
+                        <!-- Determined Eyes -->
+                        <circle cx="85" cy="55" r="10" fill="#FFF" stroke="#000" stroke-width="3"/>
+                        <circle cx="85" cy="55" r="4" fill="#000"/>
+                        <circle cx="115" cy="55" r="10" fill="#FFF" stroke="#000" stroke-width="3"/>
+                        <circle cx="115" cy="55" r="4" fill="#000"/>
+                        <!-- Sparkle in eyes -->
+                        <circle cx="87" cy="53" r="2" fill="#FFF"/>
+                        <circle cx="117" cy="53" r="2" fill="#FFF"/>
+                        <!-- Determined mouth -->
+                        <path d="M 85 75 L 115 75" stroke="#000" stroke-width="3"/>
+                        <!-- Arms holding document -->
+                        <rect x="40" y="110" width="40" height="12" fill="#4169E1" stroke="#000" stroke-width="3"/>
+                        <rect x="120" y="110" width="40" height="12" fill="#4169E1" stroke="#000" stroke-width="3"/>
+                        <!-- Document in hands -->
+                        <rect x="55" y="125" width="90" height="70" fill="#FFFACD" stroke="#000" stroke-width="2"/>
+                        <text x="100" y="145" text-anchor="middle" font-size="9" font-weight="bold">하도급 계약서</text>
+                        <rect x="65" y="155" width="70" height="30" fill="#FFF" stroke="#D32F2F" stroke-width="2"/>
+                        <text x="100" y="172" text-anchor="middle" font-size="6" fill="#D32F2F">제○조 지위양도</text>
+                    </svg>
+
+                    <div class="sparkle" style="top: 100px; left: 40px;">✨</div>
+                    <div class="sparkle" style="top: 120px; right: 40px;">✨</div>
+                    <div class="sparkle" style="top: 80px; left: 60px;">✨</div>
+                </div>
+            </div>
+
+            <div class="legal-box" style="border: 3px solid #FFD700; background: #FFFACD;">
+                <strong style="font-size: 1.1rem;">📜 계약서 조항 발견!</strong><br><br>
+                <div style="background: #FFF; padding: 15px; border-radius: 5px; border: 2px solid #000;">
+                    <strong>"원사업자의 지위가 제3자에게 양도되는 경우,<br>
+                    <span style="color: #D32F2F; font-size: 1.1rem;">하도급 계약상 권리·의무도 함께 이전된다"</span></strong>
+                </div>
+                <br>
+                <div style="text-align: center;">
+                    <span style="font-size: 1.5rem;">💡</span> 이 조항이 박 대표를 구한다!
+                </div>
+            </div>
+
+            <div class="panel panel-medium">
+                <div class="panel-content">
+                    <svg class="character" style="top: 50%; left: 50%; transform: translate(-50%, -50%);" width="150" height="150" viewBox="0 0 150 150">
+                        <!-- Confident Park -->
+                        <circle cx="75" cy="50" r="35" fill="#FFE4C4" stroke="#000" stroke-width="3"/>
+                        <path d="M 40 40 Q 75 15 110 40" stroke="#000" stroke-width="3" fill="#333"/>
+                        <!-- Confident eyes -->
+                        <circle cx="60" cy="45" r="8" fill="#FFF" stroke="#000" stroke-width="2"/>
+                        <circle cx="60" cy="45" r="4" fill="#000"/>
+                        <circle cx="90" cy="45" r="8" fill="#FFF" stroke="#000" stroke-width="2"/>
+                        <circle cx="90" cy="45" r="4" fill="#000"/>
+                        <!-- Confident smile -->
+                        <path d="M 60 65 Q 75 75 90 65" stroke="#000" stroke-width="3" fill="none"/>
+                        <!-- Fist -->
+                        <rect x="100" y="90" width="30" height="25" fill="#FFE4C4" stroke="#000" stroke-width="3" rx="5"/>
+                    </svg>
+
+                    <div class="manga-bubble center" style="top: 10px;">
+                        미래건설은 대한건설의<br>
+                        <ruby>채무<rt>빚</rt></ruby>를 승계한 거야!<br>
+                        <strong>지급 거부는 부당해!</strong>
+                    </div>
+
+                    <div class="sfx" style="bottom: 20px; right: 30px;">희망!!</div>
+                </div>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+
+        <!-- Page 6: Legal Solutions -->
+        <div class="manga-page">
+            <div class="narration" style="position: relative;">
+                법적 대응 방안 - 변호사의 조언
+            </div>
+
+            <div class="panel panel-large" style="margin-top: 50px;">
+                <div class="panel-content">
+                    <!-- Lawyer Character -->
+                    <svg class="character" style="top: 80px; right: 20px;" width="140" height="200" viewBox="0 0 140 200">
+                        <!-- Body - Suit -->
+                        <rect x="40" y="80" width="60" height="80" fill="#1a1a1a" stroke="#000" stroke-width="3"/>
+                        <!-- Head -->
+                        <circle cx="70" cy="45" r="35" fill="#FFE4C4" stroke="#000" stroke-width="3"/>
+                        <!-- Professional hair -->
+                        <path d="M 35 35 Q 70 15 105 35 L 105 25 Q 70 5 35 25 Z" fill="#333" stroke="#000" stroke-width="2"/>
+                        <!-- Glasses -->
+                        <rect x="50" y="38" width="18" height="12" fill="none" stroke="#000" stroke-width="2" rx="2"/>
+                        <rect x="72" y="38" width="18" height="12" fill="none" stroke="#000" stroke-width="2" rx="2"/>
+                        <line x1="68" y1="44" x2="72" y2="44" stroke="#000" stroke-width="2"/>
+                        <!-- Eyes behind glasses -->
+                        <circle cx="59" cy="44" r="3" fill="#000"/>
+                        <circle cx="81" cy="44" r="3" fill="#000"/>
+                        <!-- Smile -->
+                        <path d="M 58 62 Q 70 68 82 62" stroke="#000" stroke-width="2" fill="none"/>
+                        <!-- White shirt collar -->
+                        <path d="M 55 80 L 70 90 L 85 80" fill="#FFF" stroke="#000" stroke-width="2"/>
+                        <!-- Tie -->
+                        <polygon points="70,90 67,100 70,160 73,100" fill="#8B0000" stroke="#000" stroke-width="1"/>
+                    </svg>
+
+                    <div class="manga-bubble right" style="top: 20px; max-width: 260px;">
+                        박 대표님, 걱정 마세요!<br>
+                        두 가지 강력한 방법이 있습니다!
+                    </div>
+                </div>
+            </div>
+
+            <div class="legal-box">
+                <strong style="color: #1976D2; font-size: 1.2rem;">📌 대응 방안 1</strong><br>
+                <h3 style="margin: 10px 0;"><ruby>하도급대금 직접지급<rt>발주자에게 직접 청구</rt></ruby> 요청</h3>
+                <p><strong>하도급법 제14조 제1항</strong> 적용</p>
+                <ul style="margin-left: 20px;">
+                    <li>원사업자가 지급정지, 파산 등으로 지급 불능 시</li>
+                    <li>발주자에게 직접 대금 지급 요청 가능</li>
+                    <li>대한건설의 경영난 = 이 조항 해당!</li>
+                </ul>
+            </div>
+
+            <div class="legal-box">
+                <strong style="color: #1976D2; font-size: 1.2rem;">📌 대응 방안 2</strong><br>
+                <h3 style="margin: 10px 0;">공정거래위원회 신고</h3>
+                <p>미래건설의 위반 행위:</p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>하도급법 제16조</strong> - 부당한 하도급대금 결정 금지</li>
+                    <li><strong>하도급법 제3조의4</strong> - 부당한 특약 금지</li>
+                    <li>행정적 구제 + 협상력 확보!</li>
+                </ul>
+            </div>
+            <div class="page-number">6</div>
+        </div>
+
+        <!-- Page 7: Practical Tips -->
+        <div class="manga-page">
+            <div class="panel panel-medium">
+                <div class="screen-tone"></div>
+                <div class="panel-content" style="text-align: center;">
+                    <div class="sfx sfx-large" style="top: 20px; left: 50%; transform: translateX(-50%);">
+                        실무 TIP!!
+                    </div>
+
+                    <svg style="margin-top: 80px;" width="100" height="100" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" fill="#FFD700" stroke="#000" stroke-width="3"/>
+                        <text x="50" y="60" text-anchor="middle" font-size="40" font-weight="bold">💡</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="border-color: #4CAF50;">
+                <strong style="color: #4CAF50;">✅ TIP 1: 공사비 승계 합의서 작성</strong><br>
+                원사업자 변경 시 <strong>3자 합의서</strong> 필수!
+                <ul style="margin-left: 20px; margin-top: 5px;">
+                    <li>기존 원사업자</li>
+                    <li>새로운 원사업자</li>
+                    <li>수급사업자 (나!)</li>
+                </ul>
+                → 미지급 금액, 지급 주체, 기한 명시
+            </div>
+
+            <div class="highlight-box" style="border-color: #FF9800;">
+                <strong style="color: #FF9800;">✅ TIP 2: 계약서 조항 확인</strong><br>
+                반드시 포함시켜야 할 조항:<br>
+                <div style="background: #FFF; padding: 10px; margin-top: 5px; border: 1px solid #000;">
+                    "원사업자의 지위가 제3자에게 양도되는 경우,<br>
+                    하도급 계약상 <strong>권리·의무도 함께 이전</strong>된다"
+                </div>
+            </div>
+
+            <div class="highlight-box" style="border-color: #F44336;">
+                <strong style="color: #F44336;">✅ TIP 3: 즉시 직접지급 요청</strong><br>
+                원사업자 변경 통보 받으면 <strong>지체 없이</strong><br>
+                발주자에게 <ruby>직접지급<rt>Direct Payment</rt></ruby> 요청!
+            </div>
+            <div class="page-number">7</div>
+        </div>
+
+        <!-- Page 8: Victory -->
+        <div class="manga-page">
+            <div class="panel panel-large">
+                <div class="focus-lines"></div>
+                <div class="panel-content">
+                    <!-- Victorious Park -->
+                    <svg class="character" style="bottom: 30px; left: 50%; transform: translateX(-50%);" width="200" height="280" viewBox="0 0 200 280">
+                        <!-- Body -->
+                        <rect x="70" y="120" width="60" height="80" fill="#4169E1" stroke="#000" stroke-width="3"/>
+                        <!-- Head -->
+                        <circle cx="100" cy="70" r="45" fill="#FFE4C4" stroke="#000" stroke-width="3"/>
+                        <!-- Hair -->
+                        <path d="M 55 60 Q 100 25 145 60" stroke="#000" stroke-width="3" fill="#333"/>
+                        <!-- Victory Eyes -->
+                        <path d="M 80 65 Q 85 60 90 65" stroke="#000" stroke-width="3" fill="none"/>
+                        <path d="M 110 65 Q 115 60 120 65" stroke="#000" stroke-width="3" fill="none"/>
+                        <!-- Big Smile -->
+                        <path d="M 80 90 Q 100 105 120 90" stroke="#000" stroke-width="4" fill="#FFF"/>
+                        <!-- Arms raised -->
+                        <rect x="30" y="90" width="40" height="15" fill="#4169E1" stroke="#000" stroke-width="3" transform="rotate(-45, 50, 97)"/>
+                        <rect x="130" y="90" width="40" height="15" fill="#4169E1" stroke="#000" stroke-width="3" transform="rotate(45, 150, 97)"/>
+                        <!-- Hands -->
+                        <circle cx="35" cy="75" r="12" fill="#FFE4C4" stroke="#000" stroke-width="3"/>
+                        <circle cx="165" cy="75" r="12" fill="#FFE4C4" stroke="#000" stroke-width="3"/>
+                        <!-- V sign -->
+                        <line x1="160" y1="65" x2="155" y2="55" stroke="#FFE4C4" stroke-width="8"/>
+                        <line x1="160" y1="65" x2="165" y2="55" stroke="#FFE4C4" stroke-width="8"/>
+                        <line x1="160" y1="65" x2="155" y2="55" stroke="#000" stroke-width="2"/>
+                        <line x1="160" y1="65" x2="165" y2="55" stroke="#000" stroke-width="2"/>
+                    </svg>
+
+                    <div class="sfx sfx-large" style="top: 20px; left: 50%; transform: translateX(-50%) rotate(-5deg); color: #FFD700; text-shadow: 3px 3px 0 #000;">
+                        승리!!
+                    </div>
+
+                    <div class="sparkle" style="top: 60px; left: 30px; font-size: 2rem;">✨</div>
+                    <div class="sparkle" style="top: 80px; right: 30px; font-size: 2rem;">✨</div>
+                    <div class="sparkle" style="top: 100px; left: 60px; font-size: 1.5rem;">✨</div>
+                    <div class="sparkle" style="top: 120px; right: 60px; font-size: 1.5rem;">✨</div>
+
+                    <div class="manga-bubble center" style="bottom: 80px;">
+                        계약서 조항과 하도급법으로<br>
+                        내 권리를 지킬 수 있어!
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #4CAF50, #8BC34A); color: #FFF; padding: 20px; text-align: center; border-radius: 10px; margin: 10px;">
+                <h2 style="margin-bottom: 10px;">🎯 핵심 포인트</h2>
+                <p style="font-size: 1.1rem;">
+                    <strong>계약서에 명시된 지위승계 조항</strong>이 있다면<br>
+                    새로운 원사업자는 <strong>미지급 채무도 함께 승계</strong>합니다!<br><br>
+                    <strong>하도급법</strong>을 활용하여 적극적으로 권리를 보호하세요!
+                </p>
+            </div>
+            <div class="page-number">8</div>
+        </div>
+
+        <!-- Page 9: Legal References -->
+        <div class="manga-page">
+            <div class="panel panel-medium">
+                <div class="panel-content" style="padding-top: 40px;">
+                    <h2 style="text-align: center; margin-bottom: 20px;">📚 관련 법률 및 판례</h2>
+                </div>
+            </div>
+
+            <div class="legal-box">
+                <strong>📖 주요 법률</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><ruby>하도급법<rt>하도급거래 공정화에 관한 법률</rt></ruby> 제14조<br>
+                        <small>→ 하도급대금의 직접 지급</small></li>
+                    <li>하도급법 제13조의2<br>
+                        <small>→ 건설하도급 계약이행 및 대금지급 보증</small></li>
+                    <li>상법 제530조의10<br>
+                        <small>→ 분할승계회사의 권리·의무</small></li>
+                </ul>
+            </div>
+
+            <div class="legal-box">
+                <strong>⚖️ 주요 판례</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>대법원 2013. 9. 12. 선고 2011다6311 판결</strong><br>
+                        <small>→ 직접 지급 합의 시 수급사업자의 청구권 인정</small></li>
+                    <li><strong>대법원 2014. 1. 23. 선고 2013다214437 판결</strong><br>
+                        <small>→ 계약상 지위 양도와 채무 승계</small></li>
+                </ul>
+            </div>
+            <div class="page-number">9</div>
+        </div>
+
+        <!-- Final Page: End -->
+        <div class="manga-page">
+            <div class="panel panel-large" style="background: linear-gradient(135deg, #1a1a1a, #4a4a4a);">
+                <div class="panel-content" style="color: #FFF; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 400px;">
+                    <h1 style="font-size: 2.5rem; margin-bottom: 20px;">終</h1>
+                    <p style="font-size: 1.2rem; margin-bottom: 30px;">
+                        하도급 계약, 알고 대응하면<br>
+                        내 권리를 지킬 수 있습니다!
+                    </p>
+
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 0 20px;">
+                        <p style="font-size: 0.9rem;">
+                            💼 전문가 상담이 필요하시면<br>
+                            법률 전문가에게 문의하세요.
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 30px; font-size: 0.8rem; color: #999;">
+                        본 콘텐츠는 법률 정보 제공을 목적으로 하며,<br>
+                        구체적인 사안은 전문가와 상담하시기 바랍니다.
+                    </div>
+                </div>
+            </div>
+            <div class="page-number" style="color: #FFF;">END</div>
+        </div>
+    </div>
+
+    <script>
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.panel').forEach(panel => {
+            observer.observe(panel);
+        });
+
+        // Page turn effect on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const st = window.pageYOffset || document.documentElement.scrollTop;
+            const pages = document.querySelectorAll('.manga-page');
+
+            pages.forEach(page => {
+                const rect = page.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    if (st > lastScrollTop) {
+                        page.classList.add('page-turn-effect');
+                        setTimeout(() => page.classList.remove('page-turn-effect'), 500);
+                    }
+                }
+            });
+
+            lastScrollTop = st <= 0 ? 0 : st;
+        }, { passive: true });
+
+        // Add hover effects to panels
+        document.querySelectorAll('.panel').forEach(panel => {
+            panel.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.01)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+
+            panel.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
