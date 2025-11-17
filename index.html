@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>하도급 대금 지연이자의 비밀</title>
     <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -14,506 +15,570 @@
         }
 
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            font-family: 'Pretendard', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            background: #FFFFFF;
+            color: #1A1A1A;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 900px;
+        .scroll-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 720px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
+            background: #FFFFFF;
         }
 
-        .header {
+        .panel {
+            width: 100%;
+            margin: 0 0 80px 0;
+            padding: 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .panel.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .wide-cut {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            background: #F5F5F5;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .full-width-cut {
+            width: 100%;
+            min-height: 300px;
+            background: linear-gradient(135deg, #4A90E2 0%, #FF6B9D 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            border-radius: 8px;
+        }
+
+        .title-section {
             text-align: center;
-            margin-bottom: 35px;
-            position: relative;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F0F4FF 100%);
         }
 
-        .header::after {
+        .title-section h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #1A1A1A;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .title-section .subtitle {
+            font-size: 1.2rem;
+            color: #4A90E2;
+            font-weight: 700;
+        }
+
+        .webtoon-bubble {
+            position: absolute;
+            background: #FFFFFF;
+            border: 3px solid #1A1A1A;
+            border-radius: 20px;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            max-width: 280px;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        .webtoon-bubble::after {
             content: '';
             position: absolute;
             bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+            left: 30px;
+            border-width: 15px 10px 0;
+            border-style: solid;
+            border-color: #1A1A1A transparent transparent;
         }
 
-        .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
-        }
-
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-        }
-
-        .flow-step::after {
-            content: '→';
+        .webtoon-bubble::before {
+            content: '';
             position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
+            bottom: -10px;
+            left: 33px;
+            border-width: 12px 7px 0;
+            border-style: solid;
+            border-color: #FFFFFF transparent transparent;
+            z-index: 1;
         }
 
-        .flow-step:last-child::after {
-            display: none;
+        .thought-bubble {
+            background: #FFF9E6;
+            border-color: #FFD93D;
         }
 
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
+        .thought-bubble::after {
+            border-color: #FFD93D transparent transparent;
         }
 
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
+        .thought-bubble::before {
+            border-color: #FFF9E6 transparent transparent;
         }
 
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
-
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
-
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .fact-item {
+        .insight-box {
+            background: linear-gradient(135deg, #E8F4FF 0%, #FFE8F0 100%);
+            padding: 40px 30px;
             text-align: center;
-        }
-
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
-            display: block;
-        }
-
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
-
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
-        }
-
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
+            font-size: 1.3rem;
             font-weight: 500;
+            color: #1A1A1A;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(74, 144, 226, 0.3);
+            line-height: 1.8;
         }
 
-        .footer-highlight {
-            color: #1A2A57;
+        .insight-box strong {
+            color: #FF6B9D;
             font-weight: 700;
         }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
+        .legal-box {
+            background: #F8F9FA;
+            border-left: 5px solid #4A90E2;
+            padding: 25px;
+            margin: 20px;
+            font-size: 1rem;
+            border-radius: 0 8px 8px 0;
         }
 
-        .bold {
+        .legal-box h3 {
+            color: #4A90E2;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .number-highlight {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #FF6B9D;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .calculation-box {
+            background: #1A1A1A;
+            color: #FFFFFF;
+            padding: 30px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1rem;
+            line-height: 2;
+        }
+
+        .calculation-box .result {
+            color: #FFD93D;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #1A2A57;
+            margin-top: 15px;
         }
 
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
+        .tip-box {
+            background: #E8FFE8;
+            border: 2px solid #4CAF50;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
+        .tip-box h4 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .character-intro {
+            text-align: center;
+            padding: 20px;
+            background: #F5F5F5;
+            border-radius: 12px;
+        }
+
+        .character-intro h3 {
+            color: #4A90E2;
+            margin-top: 15px;
+        }
+
+        .divider {
+            height: 2px;
+            background: #E0E0E0;
+            margin: 60px 20px;
+        }
+
+        .spacer {
+            height: 120px;
+        }
+
+        .end-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #F0F4FF 0%, #FFFFFF 100%);
+        }
+
+        .end-section h2 {
+            font-size: 2rem;
+            color: #4A90E2;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
             }
-            
-            .main-title {
-                font-size: 24px;
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 428px) {
+            .title-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .webtoon-bubble {
+                font-size: 0.95rem;
+                max-width: 220px;
+                padding: 12px 15px;
+            }
+
+            .insight-box {
+                font-size: 1.1rem;
+                padding: 30px 20px;
+            }
+
+            .number-highlight {
+                font-size: 2.5rem;
+            }
+
+            .calculation-box {
+                font-size: 0.9rem;
+                padding: 20px;
+            }
+
+            .legal-box {
+                padding: 20px;
+                margin: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
+    <div class="scroll-container">
+        <!-- Title Section -->
+        <div class="panel title-section">
+            <h1>"계약서에 이자 규정이 없는데요?"</h1>
+            <p class="subtitle">당신이 몰랐던 하도급 대금 지연이자의 비밀</p>
         </div>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
+        <!-- Panel 1: Character Introduction -->
+        <div class="panel">
+            <div class="character-intro">
+                <svg viewBox="0 0 200 200" width="150" height="150">
+                    <circle cx="100" cy="80" r="50" fill="#FFE0B2" stroke="#1A1A1A" stroke-width="2"/>
+                    <circle cx="85" cy="75" r="5" fill="#1A1A1A"/>
+                    <circle cx="115" cy="75" r="5" fill="#1A1A1A"/>
+                    <path d="M 85 95 Q 100 105 115 95" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+                    <path d="M 60 50 Q 100 30 140 50 Q 145 70 140 75 L 60 75 Q 55 70 60 50" fill="#2C3E50" stroke="#1A1A1A" stroke-width="2"/>
+                    <rect x="75" y="130" width="50" height="60" rx="5" fill="#4A90E2" stroke="#1A1A1A" stroke-width="2"/>
+                    <rect x="85" y="145" width="30" height="5" rx="2" fill="#FFFFFF"/>
+                </svg>
+                <h3>박 대표</h3>
+                <p>중소기업 '기술전자(주)' 대표</p>
             </div>
         </div>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
+        <!-- Panel 2: The Problem -->
+        <div class="panel">
+            <div class="wide-cut">
+                <svg viewBox="0 0 720 405" width="100%" height="100%">
+                    <!-- Office Background -->
+                    <rect x="0" y="0" width="720" height="405" fill="#F5F5F5"/>
+                    <rect x="50" y="200" width="300" height="180" rx="10" fill="#8B4513" stroke="#1A1A1A" stroke-width="2"/>
+                    <rect x="60" y="210" width="280" height="20" fill="#A0522D"/>
 
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="section-title">보증보험 청구</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
+                    <!-- Character (worried) -->
+                    <circle cx="200" cy="150" r="60" fill="#FFE0B2" stroke="#1A1A1A" stroke-width="2.5"/>
+                    <circle cx="180" cy="145" r="6" fill="#1A1A1A"/>
+                    <circle cx="220" cy="145" r="6" fill="#1A1A1A"/>
+                    <path d="M 180 175 Q 200 165 220 175" stroke="#1A1A1A" stroke-width="2.5" fill="none"/>
+                    <path d="M 165 125 Q 170 120 180 125" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+                    <path d="M 220 125 Q 230 120 235 125" stroke="#1A1A1A" stroke-width="2" fill="none"/>
+                    <path d="M 150 100 Q 200 70 250 100 Q 255 130 250 135 L 150 135 Q 145 130 150 100" fill="#2C3E50" stroke="#1A1A1A" stroke-width="2"/>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <div class="section-title">민사소송 & 가압류</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
-            </div>
+                    <!-- Calendar -->
+                    <rect x="500" y="100" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="2"/>
+                    <rect x="500" y="100" width="180" height="40" rx="10" fill="#FF6B9D"/>
+                    <text x="590" y="128" text-anchor="middle" fill="#FFFFFF" font-weight="bold" font-size="20">6월 13일</text>
+                    <text x="590" y="200" text-anchor="middle" fill="#FF0000" font-weight="bold" font-size="24">90일 경과!</text>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
-                    </div>
-                    <div class="section-title">사해행위 취소</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
+                    <!-- Money flying away -->
+                    <text x="450" y="80" font-size="30">💸</text>
+                    <text x="480" y="60" font-size="25">💸</text>
+                    <text x="420" y="50" font-size="20">💸</text>
+                </svg>
+                <div class="webtoon-bubble" style="top: 20px; right: 20px;">
+                    납품한 지 90일이 지났는데... 아직도 대금을 못 받았어...
                 </div>
             </div>
         </div>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
+        <!-- Panel 3: Company Response -->
+        <div class="panel">
+            <div class="wide-cut">
+                <svg viewBox="0 0 720 405" width="100%" height="100%">
+                    <rect x="0" y="0" width="720" height="405" fill="#E8E8E8"/>
+
+                    <!-- Phone -->
+                    <rect x="250" y="100" width="220" height="200" rx="20" fill="#1A1A1A"/>
+                    <rect x="260" y="120" width="200" height="160" rx="10" fill="#FFFFFF"/>
+
+                    <!-- Message bubbles on phone -->
+                    <rect x="270" y="130" width="140" height="40" rx="10" fill="#E8E8E8"/>
+                    <text x="280" y="155" font-size="12" fill="#1A1A1A">지연이자 주세요</text>
+
+                    <rect x="310" y="180" width="140" height="60" rx="10" fill="#4A90E2"/>
+                    <text x="320" y="200" font-size="11" fill="#FFFFFF">계약서에</text>
+                    <text x="320" y="215" font-size="11" fill="#FFFFFF">지연이자 조항이</text>
+                    <text x="320" y="230" font-size="11" fill="#FFFFFF">없습니다 ❌</text>
+
+                    <!-- Angry emoji -->
+                    <text x="500" y="200" font-size="80">😤</text>
+                </svg>
+                <div class="webtoon-bubble thought-bubble" style="bottom: 30px; left: 20px;">
+                    계약서에 없다고? 정말 받을 수 없는 건가...?
                 </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
             </div>
         </div>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
+        <div class="spacer"></div>
+
+        <!-- Insight Box 1 -->
+        <div class="panel">
+            <div class="insight-box">
+                잠깐! 🛑<br><br>
+                <strong>계약서에 없어도</strong><br>
+                법으로 보호받을 수 있습니다!
             </div>
         </div>
 
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
+        <!-- Panel 4: The Law -->
+        <div class="panel">
+            <div class="legal-box">
+                <h3>📜 하도급법 제13조 제8항</h3>
+                <p>원사업자가 하도급대금을 지연 지급할 경우, <strong>공정거래위원회가 고시한 이율</strong>에 따른 지연이자를 지급해야 합니다.</p>
+                <br>
+                <p style="color: #FF6B9D; font-weight: 700;">이것은 <strong>강행규정</strong>입니다!</p>
+            </div>
         </div>
+
+        <!-- Panel 5: The Truth -->
+        <div class="panel">
+            <div class="full-width-cut" style="flex-direction: column;">
+                <p style="color: #FFFFFF; font-size: 1.5rem; margin-bottom: 20px;">상법상 이율</p>
+                <p style="color: #FFFFFF; font-size: 2rem; text-decoration: line-through; opacity: 0.7;">연 6%</p>
+                <p style="color: #FFD93D; font-size: 1.2rem; margin: 20px 0;">⬇️ 하도급법이 우선! ⬇️</p>
+                <div class="number-highlight pulse" style="background: #FFFFFF; border-radius: 20px; padding: 30px 50px;">
+                    연 15.5%
+                </div>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <!-- Panel 6: Calculation -->
+        <div class="panel">
+            <div class="insight-box">
+                박 대표의 지연이자를<br>계산해볼까요? 🧮
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="calculation-box">
+                <strong>📊 지연이자 계산 공식</strong><br><br>
+                지연이자 = 하도급 대금 × 연 15.5% × (지연일수 ÷ 365일)<br><br>
+                <strong>박 대표의 경우:</strong><br>
+                • 하도급 대금: 1억 원<br>
+                • 납품일: 3월 15일<br>
+                • 법정 지급기일: 5월 14일 (60일 후)<br>
+                • 실제 지급일: 6월 13일<br>
+                • 지연일수: 30일<br><br>
+                <div class="result">
+                    = 100,000,000 × 0.155 × (30 ÷ 365)<br>
+                    = <strong>약 1,273,973원!</strong> 💰
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 7: Victory -->
+        <div class="panel">
+            <div class="wide-cut">
+                <svg viewBox="0 0 720 405" width="100%" height="100%">
+                    <rect x="0" y="0" width="720" height="405" fill="#FFF9E6"/>
+
+                    <!-- Happy character -->
+                    <circle cx="360" cy="180" r="80" fill="#FFE0B2" stroke="#1A1A1A" stroke-width="2.5"/>
+                    <circle cx="330" cy="170" r="8" fill="#1A1A1A"/>
+                    <circle cx="390" cy="170" r="8" fill="#1A1A1A"/>
+                    <path d="M 320 210 Q 360 240 400 210" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+                    <path d="M 290 130 Q 360 90 430 130 Q 435 170 430 175 L 290 175 Q 285 170 290 130" fill="#2C3E50" stroke="#1A1A1A" stroke-width="2"/>
+
+                    <!-- Raised fist -->
+                    <path d="M 450 150 L 480 100" stroke="#FFE0B2" stroke-width="25" stroke-linecap="round"/>
+                    <circle cx="480" cy="90" r="20" fill="#FFE0B2" stroke="#1A1A1A" stroke-width="2"/>
+
+                    <!-- Sparkles -->
+                    <text x="250" y="100" font-size="40">✨</text>
+                    <text x="450" y="80" font-size="40">✨</text>
+                    <text x="200" y="250" font-size="30">💪</text>
+                    <text x="500" y="250" font-size="30">⚖️</text>
+
+                    <!-- Money -->
+                    <text x="300" y="350" font-size="50">💵</text>
+                    <text x="380" y="350" font-size="50">💵</text>
+                </svg>
+                <div class="webtoon-bubble" style="top: 20px; left: 50%; transform: translateX(-50%);">
+                    법이 나를 보호하고 있었구나!
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Practical Tips Section -->
+        <div class="panel">
+            <div class="insight-box">
+                실무에서 꼭 기억하세요! 📝
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="tip-box">
+                <h4>💡 TIP 1: 60일 법정 지급기일</h4>
+                <p>계약서에 지급기일이 60일을 초과하도록 되어 있어도, 법정 지급기일(60일)이 우선 적용됩니다!</p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="tip-box">
+                <h4>💡 TIP 2: 내용증명 발송</h4>
+                <p>지연이자를 청구할 때는 <strong>내용증명</strong>으로 하도급법 제13조 제8항을 근거로 명시하세요. 지연일수와 계산 내역을 상세히 첨부하면 효과적입니다.</p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="tip-box">
+                <h4>💡 TIP 3: 공정거래위원회 신고</h4>
+                <p>원사업자가 버틸 경우, 공정거래위원회에 신고하거나 <strong>하도급분쟁조정협의회</strong>에 조정을 신청하세요. 소송보다 비용과 시간이 적게 듭니다!</p>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <!-- FAQ Section -->
+        <div class="panel">
+            <div class="insight-box">
+                자주 묻는 질문 ❓
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="legal-box">
+                <h3>Q. 계약서에 연 10%로 약정했다면?</h3>
+                <p>하도급법상 이율(연 15.5%)보다 낮으면 <strong>법정 이율이 우선</strong> 적용됩니다. 더 높게 약정했다면 그 약정이 적용됩니다.</p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="legal-box">
+                <h3>Q. 어음으로 지급받아도 지연이자가 발생하나요?</h3>
+                <p>네! 어음 만기일까지 지급이 지연되면 지연이자가 발생합니다. 하도급법 제13조 제6항에 따라 어음 할인료도 원사업자가 부담해야 합니다.</p>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <!-- End Section -->
+        <div class="panel end-section">
+            <h2>기억하세요!</h2>
+            <div class="insight-box">
+                계약서에 없어도<br>
+                <strong>하도급법이 당신을 보호합니다</strong><br><br>
+                지연이자율: <strong style="font-size: 1.8rem;">연 15.5%</strong><br><br>
+                대법원 2010두16561 판결<br>
+                대법원 2010다106283 판결
+            </div>
+        </div>
+
+        <div class="spacer"></div>
     </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all panels
+        document.querySelectorAll('.panel').forEach(panel => {
+            observer.observe(panel);
+        });
+
+        // Parallax effect for scroll
+        let scrollY = 0;
+        window.addEventListener('scroll', () => {
+            scrollY = window.pageYOffset;
+            document.documentElement.style.setProperty('--scroll', scrollY);
+        });
+    </script>
 </body>
 </html>
