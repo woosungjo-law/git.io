@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변비 관리 가이드 - 그래픽 노블</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: #E8E8E8;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #F7F7F7;
+            padding: 40px;
+            border: 6px solid #111;
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, #111 1px, transparent 1px);
+            background-size: 4px 4px;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #111;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 6px;
+            background: #E04040;
+            margin: 16px auto 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .panel {
+            border: 4px solid #111;
+            background: white;
+            padding: 24px;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, #111 1px, transparent 1px);
+            background-size: 4px 4px;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .panel:hover {
+            box-shadow: 0 0 0 4px #E04040;
+            transform: translateY(-4px);
+        }
+
+        .panel-number {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            background: #FFC040;
+            color: #111;
+            font-weight: 900;
+            font-size: 1.2rem;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #111;
+            z-index: 10;
+        }
+
+        .panel-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #4040A0;
+            margin-bottom: 16px;
+            text-align: center;
+            border-bottom: 3px solid #111;
+            padding-bottom: 8px;
+        }
+
+        .illustration {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .bubble {
+            position: relative;
+            background: white;
+            border: 3px solid #111;
+            border-radius: 20px;
+            padding: 16px;
+            margin: 12px 0;
+            font-size: 1rem;
+            z-index: 5;
+        }
+
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: #111;
+            border-bottom: 0;
+        }
+
+        .bubble.right::after {
+            left: auto;
+            right: 30px;
+        }
+
+        .bubble.thought {
+            border-radius: 50%;
+            padding: 20px;
+        }
+
+        .bubble.thought::after {
+            border: none;
+            background: #111;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            bottom: -16px;
+        }
+
+        .bubble.thought::before {
+            content: '';
+            position: absolute;
+            bottom: -28px;
+            left: 36px;
+            background: #111;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .highlight {
+            color: #E04040;
+            font-weight: 700;
+        }
+
+        .highlight-blue {
+            color: #4040A0;
+            font-weight: 700;
+        }
+
+        .warning-text {
+            background: #E04040;
+            color: white;
+            padding: 4px 8px;
+            font-weight: 700;
+            display: inline-block;
+            transform: rotate(-2deg);
+        }
+
+        .success-text {
+            background: #40A040;
+            color: white;
+            padding: 4px 8px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .sfx {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #E04040;
+            text-align: center;
+            transform: rotate(-5deg);
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #FFC040;
+        }
+
+        .info-box {
+            background: #FFF8DC;
+            border: 3px solid #111;
+            padding: 12px;
+            margin: 12px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .info-box h4 {
+            color: #4040A0;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+        }
+
+        .info-box li {
+            margin: 6px 0;
+        }
+
+        .panel-large {
+            grid-column: span 2;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .avoid-box {
+            background: #FFE0E0;
+            border: 3px solid #E04040;
+            padding: 12px;
+        }
+
+        .good-box {
+            background: #E0FFE0;
+            border: 3px solid #40A040;
+            padding: 12px;
+        }
+
+        .avoid-box h5, .good-box h5 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: #4040A0;
+            margin: 10px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 4px solid #111;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+
+        .wiggle:hover {
+            animation: wiggle 0.3s ease infinite;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-large {
+                grid-column: span 1;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .panel {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>변비 관리 가이드</h1>
+
+        <div class="grid">
+            <!-- Panel 1: Diagnosis -->
+            <div class="panel wiggle">
+                <div class="panel-number">1</div>
+                <div class="panel-title">진단 결과</div>
+
+                <div class="illustration">
+                    <svg viewBox="0 0 200 200" width="160" height="160">
+                        <!-- Doctor -->
+                        <circle cx="100" cy="50" r="28" fill="#FFC040" stroke="#111" stroke-width="3"/>
+                        <circle cx="92" cy="46" r="3" fill="#111"/>
+                        <circle cx="108" cy="46" r="3" fill="#111"/>
+                        <path d="M 90 58 Q 100 64 110 58" stroke="#111" stroke-width="2" fill="none"/>
+                        <rect x="75" y="75" width="50" height="70" fill="#4040A0" stroke="#111" stroke-width="3" rx="5"/>
+                        <!-- Stethoscope -->
+                        <circle cx="100" cy="95" r="10" fill="#E04040" stroke="#111" stroke-width="2"/>
+                        <!-- Clipboard -->
+                        <rect x="130" y="85" width="40" height="50" fill="#F7F7F7" stroke="#111" stroke-width="2"/>
+                        <rect x="140" y="80" width="20" height="10" fill="#FFC040" stroke="#111" stroke-width="2"/>
+                        <line x1="135" y1="95" x2="165" y2="95" stroke="#111" stroke-width="2"/>
+                        <line x1="135" y1="105" x2="165" y2="105" stroke="#111" stroke-width="2"/>
+                        <line x1="135" y1="115" x2="155" y2="115" stroke="#111" stroke-width="2"/>
+                    </svg>
+                </div>
+
+                <div class="bubble">
+                    CT 검사 결과가 나왔습니다. <span class="highlight">심한 변비</span>로 인해 대장과 직장에 대변이 많이 정체되어 있어요.
+                </div>
+
+                <div class="info-box">
+                    <h4>CT 소견 (2025.11.15)</h4>
+                    <ul>
+                        <li>직장에 대변 심하게 정체</li>
+                        <li>직장 벽 약간 두꺼워짐</li>
+                        <li><span class="highlight">경미한 직장염</span> 가능성</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Panel 2: CRP Warning -->
+            <div class="panel wiggle">
+                <div class="panel-number">2</div>
+                <div class="panel-title">염증 수치 확인</div>
+
+                <div class="illustration">
+                    <svg viewBox="0 0 200 200" width="160" height="160">
+                        <!-- Test tube -->
+                        <rect x="80" y="40" width="40" height="120" fill="#FFE0E0" stroke="#111" stroke-width="3" rx="20"/>
+                        <rect x="75" y="35" width="50" height="15" fill="#4040A0" stroke="#111" stroke-width="3"/>
+                        <!-- Danger sign -->
+                        <polygon points="100,80 120,110 80,110" fill="#E04040" stroke="#111" stroke-width="3"/>
+                        <text x="100" y="105" text-anchor="middle" fill="white" font-weight="bold" font-size="16">!</text>
+                        <!-- Arrow pointing up -->
+                        <path d="M 140 90 L 160 70 L 155 70 L 155 50 L 165 50 L 165 70 L 160 70" fill="#E04040" stroke="#111" stroke-width="2"/>
+                    </svg>
+                </div>
+
+                <div class="sfx">주의!</div>
+
+                <div class="bubble">
+                    혈액검사에서 <span class="highlight">CRP가 41.3</span>으로 나왔어요. 정상은 5 이하인데, <span class="warning-text">상당히 높은 염증 수치</span>입니다.
+                </div>
+            </div>
+
+            <!-- Panel 3: Treatment Success -->
+            <div class="panel wiggle">
+                <div class="panel-number">3</div>
+                <div class="panel-title">치료 성공!</div>
+
+                <div class="illustration">
+                    <svg viewBox="0 0 200 200" width="160" height="160">
+                        <!-- Happy patient -->
+                        <circle cx="100" cy="60" r="30" fill="#FFC040" stroke="#111" stroke-width="3"/>
+                        <circle cx="88" cy="55" r="4" fill="#111"/>
+                        <circle cx="112" cy="55" r="4" fill="#111"/>
+                        <path d="M 85 70 Q 100 82 115 70" stroke="#111" stroke-width="3" fill="none"/>
+                        <!-- Body in bed -->
+                        <rect x="50" y="100" width="100" height="60" fill="#4040A0" stroke="#111" stroke-width="3" rx="10"/>
+                        <!-- Blanket -->
+                        <rect x="50" y="120" width="100" height="40" fill="#87CEEB" stroke="#111" stroke-width="3"/>
+                        <!-- Success star -->
+                        <polygon points="160,40 165,55 180,55 168,65 172,80 160,70 148,80 152,65 140,55 155,55" fill="#FFC040" stroke="#111" stroke-width="2"/>
+                    </svg>
+                </div>
+
+                <div class="bubble right">
+                    <span class="success-text">치료 완료!</span><br>
+                    주말 동안 약물 + 관장 치료로 대변이 많이 배출되었어요. 증상이 호전되어 퇴원합니다!
+                </div>
+            </div>
+
+            <!-- Panel 4: Prevention - Large Panel -->
+            <div class="panel panel-large wiggle">
+                <div class="panel-number">4</div>
+                <div class="panel-title">재발 방지 - 가장 중요!</div>
+
+                <div class="illustration">
+                    <svg viewBox="0 0 400 150" width="100%" height="150">
+                        <!-- Water -->
+                        <g transform="translate(50, 20)">
+                            <rect x="0" y="20" width="40" height="80" fill="#87CEEB" stroke="#111" stroke-width="3" rx="5"/>
+                            <text x="20" y="120" text-anchor="middle" font-weight="bold" font-size="12">수분</text>
+                            <text x="20" y="135" text-anchor="middle" font-size="10">1.5~2L/일</text>
+                        </g>
+                        <!-- Vegetables -->
+                        <g transform="translate(140, 20)">
+                            <circle cx="20" cy="50" r="25" fill="#40A040" stroke="#111" stroke-width="3"/>
+                            <circle cx="35" cy="65" r="20" fill="#90EE90" stroke="#111" stroke-width="3"/>
+                            <text x="25" y="120" text-anchor="middle" font-weight="bold" font-size="12">식이섬유</text>
+                        </g>
+                        <!-- Clock -->
+                        <g transform="translate(230, 20)">
+                            <circle cx="25" cy="50" r="30" fill="white" stroke="#111" stroke-width="3"/>
+                            <line x1="25" y1="50" x2="25" y2="30" stroke="#111" stroke-width="3"/>
+                            <line x1="25" y1="50" x2="38" y2="50" stroke="#111" stroke-width="3"/>
+                            <text x="25" y="120" text-anchor="middle" font-weight="bold" font-size="12">규칙적 배변</text>
+                        </g>
+                        <!-- Exercise -->
+                        <g transform="translate(320, 20)">
+                            <circle cx="25" cy="30" r="15" fill="#FFC040" stroke="#111" stroke-width="3"/>
+                            <line x1="25" y1="45" x2="25" y2="75" stroke="#111" stroke-width="3"/>
+                            <line x1="10" y1="55" x2="40" y2="55" stroke="#111" stroke-width="3"/>
+                            <line x1="25" y1="75" x2="15" y2="95" stroke="#111" stroke-width="3"/>
+                            <line x1="25" y1="75" x2="35" y2="95" stroke="#111" stroke-width="3"/>
+                            <text x="25" y="120" text-anchor="middle" font-weight="bold" font-size="12">운동</text>
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="bubble">
+                    <span class="highlight-blue">80세 고령</span>이시고 직장염까지 있었으니, 재발하면 더 위험해요! 이 4가지를 꼭 지켜주세요:
+                </div>
+
+                <div class="info-box">
+                    <ul>
+                        <li><strong>수분:</strong> 하루 1.5~2리터 (의식적으로!)</li>
+                        <li><strong>식이섬유:</strong> 채소, 과일, 통곡물</li>
+                        <li><strong>규칙적 배변:</strong> 매일 같은 시간에</li>
+                        <li><strong>가벼운 운동:</strong> 걷기, 스트레칭</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Panel 5: Medicine -->
+            <div class="panel wiggle">
+                <div class="panel-number">5</div>
+                <div class="panel-title">변비약 복용</div>
+
+                <div class="illustration">
+                    <svg viewBox="0 0 200 200" width="140" height="140">
+                        <!-- Pill bottle -->
+                        <rect x="70" y="60" width="60" height="90" fill="white" stroke="#111" stroke-width="3" rx="10"/>
+                        <rect x="75" y="50" width="50" height="20" fill="#E04040" stroke="#111" stroke-width="3"/>
+                        <!-- Pills -->
+                        <ellipse cx="90" cy="100" rx="12" ry="8" fill="#FFC040" stroke="#111" stroke-width="2"/>
+                        <ellipse cx="110" cy="110" rx="12" ry="8" fill="#FFC040" stroke="#111" stroke-width="2"/>
+                        <!-- Check mark -->
+                        <circle cx="150" cy="70" r="20" fill="#40A040" stroke="#111" stroke-width="3"/>
+                        <path d="M 140 70 L 148 78 L 162 60" stroke="white" stroke-width="4" fill="none"/>
+                    </svg>
+                </div>
+
+                <div class="bubble thought">
+                    처방받은 변비약을 <span class="highlight">반드시</span> 복용! 딱딱해지기 전에 예방하는 게 핵심!
+                </div>
+            </div>
+
+            <!-- Panel 6: Warning Signs -->
+            <div class="panel wiggle">
+                <div class="panel-number">6</div>
+                <div class="panel-title">위험 신호</div>
+
+                <div class="sfx">응급!</div>
+
+                <div class="illustration">
+                    <svg viewBox="0 0 200 200" width="120" height="120">
+                        <!-- Alarm -->
+                        <circle cx="100" cy="80" r="40" fill="#E04040" stroke="#111" stroke-width="4"/>
+                        <text x="100" y="90" text-anchor="middle" fill="white" font-weight="bold" font-size="36">!</text>
+                        <!-- Ringing effect -->
+                        <path d="M 55 60 Q 50 55 55 50" stroke="#111" stroke-width="3" fill="none"/>
+                        <path d="M 145 60 Q 150 55 145 50" stroke="#111" stroke-width="3" fill="none"/>
+                    </svg>
+                </div>
+
+                <div class="bubble">
+                    이런 증상이 나타나면 <span class="warning-text">즉시 병원</span>으로!
+                </div>
+
+                <div class="info-box" style="background: #FFE0E0;">
+                    <ul>
+                        <li>3일 이상 배변 없음</li>
+                        <li>심한 복통</li>
+                        <li>구토/식욕부진</li>
+                        <li>혈변</li>
+                        <li>발열</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Panel 7: Food Guide -->
+            <div class="panel panel-large wiggle">
+                <div class="panel-number">7</div>
+                <div class="panel-title">음식 가이드</div>
+
+                <div class="two-column">
+                    <div class="avoid-box">
+                        <h5>🚫 피할 것</h5>
+                        <ul>
+                            <li>떡</li>
+                            <li>바나나</li>
+                            <li>감</li>
+                            <li>치즈</li>
+                        </ul>
+                    </div>
+                    <div class="good-box">
+                        <h5>👍 권장 음식</h5>
+                        <ul>
+                            <li>요거트</li>
+                            <li>고구마</li>
+                            <li>사과, 배</li>
+                            <li>미역국</li>
+                            <li>현미밥</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="bubble" style="background: #FFF8DC;">
+                    <strong>2주 후 외래 진료</strong> 꼭 받으세요! CRP 수치가 정상으로 돌아왔는지 확인해야 해요.
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>본문 작성 및 인포그래픽 디자인 by 조우성</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add subtle animation on scroll
+        const panels = document.querySelectorAll('.panel');
+
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        panels.forEach((panel, index) => {
+            panel.style.opacity = '0';
+            panel.style.transform = 'translateY(20px)';
+            panel.style.transition = `all 0.5s ease ${index * 0.1}s`;
+            observer.observe(panel);
+        });
+    </script>
+</body>
+</html>
