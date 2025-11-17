@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전체는 어떻게 부분에 숨나 - 프랙탈 인포그래픽</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    word-break: keep-all;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+:root {
+    --primary: #E76F51;
+    --secondary: #F4A261;
+    --tertiary: #E9C46A;
+    --accent: #F1FAEE;
+    --text: #264653;
+}
+
+body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.7;
+    background: var(--accent);
+    color: var(--text);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+h1 {
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card-number {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary) 0%, #F08060 100%);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.illustration {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.illustration svg {
+    width: 100%;
+    height: auto;
+    max-width: 280px;
+    transition: all 0.3s ease;
+}
+
+.illustration svg:hover {
+    transform: scale(1.05);
+}
+
+p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: var(--text);
+}
+
+.highlight {
+    background: linear-gradient(180deg, transparent 50%, var(--tertiary) 50%);
+    padding: 0 4px;
+    font-weight: 600;
+}
+
+.quote {
+    background: linear-gradient(135deg, var(--accent) 0%, #FFFFFF 100%);
+    border-left: 4px solid var(--primary);
+    padding: 16px 24px;
+    margin: 24px 0;
+    border-radius: 0 8px 8px 0;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.insight {
+    background: linear-gradient(135deg, var(--secondary) 0%, #F6B070 100%);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 24px 0;
+    font-weight: 600;
+}
+
+.key-message {
+    background: linear-gradient(135deg, var(--text) 0%, #345B6E 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: 16px;
+    text-align: center;
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out 0.5s forwards;
+}
+
+.key-message h3 {
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.key-message p {
+    color: white;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 48px 20px 32px;
+    color: var(--text);
+    opacity: 0.6;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+    .card, header, .key-message {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 48px 40px;
+    }
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+    h1 {
+        font-size: 36px;
+    }
+    h2 {
+        font-size: 26px;
+    }
+    .card {
+        padding: 40px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 64px 60px;
+    }
+    h1 {
+        font-size: 42px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    .card {
+        padding: 48px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>전체는 어떻게 부분에 숨나</h1>
+        <div class="subtitle">feat. 프랙탈</div>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-number">1</div>
+            <h2>기미의 발견</h2>
+            <div class="illustration">
+                <svg viewBox="0 0 200 160" role="img" aria-label="균열이 있는 도자기">
+                    <ellipse cx="100" cy="90" rx="70" ry="40" fill="var(--accent)" stroke="var(--text)" stroke-width="3"/>
+                    <ellipse cx="100" cy="78" rx="62" ry="32" fill="none" stroke="var(--text)" stroke-width="2" opacity="0.3"/>
+                    <path d="M75 85 L85 88 L95 86 L105 90 L115 87 L125 89" stroke="var(--primary)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <circle cx="90" cy="87" r="2" fill="var(--primary)"/>
+                    <circle cx="110" cy="88" r="1.5" fill="var(--primary)"/>
+                    <path d="M95 80 L95 86" stroke="var(--primary)" stroke-width="2"/>
+                    <path d="M115 82 L115 87" stroke="var(--primary)" stroke-width="2"/>
+                </svg>
+            </div>
+            <p>오래된 백자 표면의 <span class="highlight">미세한 균열</span>. 그 작은 흠집이 이미 그릇의 전체 운명을 예고하고 있었다.</p>
+            <div class="quote">
+                "사소한 말실수, 무심한 표정, 습관적인 손동작 — 이것은 거대한 빙산의 일각이며, 전체를 압축한 암호다."
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-number">2</div>
+            <h2>패턴의 전조</h2>
+            <div class="illustration">
+                <svg viewBox="0 0 200 160" role="img" aria-label="수면 위아래의 빙산">
+                    <rect x="0" y="80" width="200" height="80" fill="var(--tertiary)" opacity="0.3"/>
+                    <path d="M100 20 L140 80 L60 80 Z" fill="var(--secondary)" stroke="var(--text)" stroke-width="2"/>
+                    <path d="M100 80 L150 140 L50 140 Z" fill="var(--primary)" stroke="var(--text)" stroke-width="2" opacity="0.8"/>
+                    <line x1="0" y1="80" x2="200" y2="80" stroke="var(--text)" stroke-width="2" stroke-dasharray="8 4"/>
+                    <text x="170" y="70" font-size="11" fill="var(--text)" font-weight="600">보이는 것</text>
+                    <text x="165" y="125" font-size="11" fill="var(--text)" font-weight="600">숨겨진 것</text>
+                </svg>
+            </div>
+            <p>사람들은 애써 외면한다. 하지만 그 <span class="highlight">미세한 어긋남</span>은 이미 전체의 붕괴를 연주 중이다.</p>
+            <div class="insight">
+                이건 신비주의가 아니다. 가장 냉철한 관찰의 결과다. 어떤 부분도 전체와 유리되지 않는다.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-number">3</div>
+            <h2>프랙탈의 진실</h2>
+            <div class="illustration">
+                <svg viewBox="0 0 200 180" role="img" aria-label="자기유사성을 보여주는 삼각형 프랙탈">
+                    <path d="M100 20 L170 140 L30 140 Z" fill="none" stroke="var(--text)" stroke-width="3"/>
+                    <path d="M100 80 L130 140 L70 140 Z" fill="var(--tertiary)" stroke="var(--text)" stroke-width="2"/>
+                    <path d="M65 80 L100 80 L82.5 50 Z" fill="var(--secondary)" stroke="var(--text)" stroke-width="2"/>
+                    <path d="M135 80 L100 80 L117.5 50 Z" fill="var(--secondary)" stroke="var(--text)" stroke-width="2"/>
+                    <circle cx="100" cy="105" r="3" fill="var(--primary)"/>
+                    <circle cx="82.5" cy="65" r="2" fill="var(--primary)"/>
+                    <circle cx="117.5" cy="65" r="2" fill="var(--primary)"/>
+                    <text x="100" y="170" text-anchor="middle" font-size="12" fill="var(--primary)" font-weight="700">자기 유사성</text>
+                </svg>
+            </div>
+            <p>과학이 '프랙탈'이란 이름을 붙였다. <span class="highlight">작은 구조가 전체와 닮은 꼴</span>로 끝없이 되풀이되는 구조.</p>
+            <div class="quote">
+                "나의 가장 사소한 습관, 무의식적 선택조차 내 삶 전체의 거대한 구조와 정확히 닮아있다. 그건 내 '일부'가 아니라, 그게 곧 '나'다."
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-number">4</div>
+            <h2>무늬의 엄중함</h2>
+            <div class="illustration">
+                <svg viewBox="0 0 200 160" role="img" aria-label="반복되는 패턴과 균열">
+                    <rect x="40" y="40" width="120" height="80" rx="8" fill="var(--accent)" stroke="var(--text)" stroke-width="2"/>
+                    <rect x="55" y="55" width="90" height="50" rx="6" fill="white" stroke="var(--text)" stroke-width="2"/>
+                    <rect x="70" y="68" width="60" height="24" rx="4" fill="var(--tertiary)" stroke="var(--text)" stroke-width="2" opacity="0.6"/>
+                    <path d="M60 75 L70 78 L80 76 L90 80 L100 77 L110 79 L120 76 L130 78 L140 75" stroke="var(--primary)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <circle cx="100" cy="30" r="6" fill="var(--primary)" opacity="0.8"/>
+                    <path d="M100 36 L100 55" stroke="var(--primary)" stroke-width="2" stroke-dasharray="4 3"/>
+                </svg>
+            </div>
+            <p>변화의 가능성보다 <span class="highlight">패턴의 집요함</span>을 먼저 가리킨다. 작은 것이 이미 전체를 규정한다.</p>
+            <div class="insight">
+                백자의 균열은 미래를 '예고'한 게 아니었다. 이미 시작된 파손 그 자체였다. 시작 속에 끝이 들어와 있었다.
+            </div>
+        </div>
+    </div>
+
+    <div class="key-message">
+        <h3>핵심 통찰</h3>
+        <p>한 사람의 생(生)이라는 복잡한 무늬는,<br>아주 작은 한 점의 기미에서 <strong>이미 완성되어 있었다.</strong><br><br>우리가 할 수 있는 것은 '인지' — 내 삶의 무늬를 직시하는 것.</p>
+    </div>
+
+    <footer>
+        프랙탈: 부분이 전체를 품고 있다
+    </footer>
+</div>
+</body>
+</html>
