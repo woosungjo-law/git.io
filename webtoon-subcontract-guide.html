@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하도급 계약 승계의 함정 - 웹툰 가이드</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Black+Han+Sans&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background: #f5f5f5;
+            line-height: 1.6;
+            color: #000000;
+        }
+
+        .webtoon-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .cut-wrapper {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cut-content {
+            position: relative;
+            min-height: 300px;
+            padding: 30px;
+        }
+
+        .background-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .character-layer {
+            position: relative;
+            z-index: 10;
+        }
+
+        .text-layer {
+            position: relative;
+            z-index: 100;
+        }
+
+        .effect-layer {
+            position: absolute;
+            z-index: 200;
+            pointer-events: none;
+        }
+
+        .webtoon-speech {
+            background: rgba(255,255,255,0.95);
+            border: 3px solid #000;
+            border-radius: 12px;
+            padding: 15px 20px;
+            position: relative;
+            display: inline-block;
+            max-width: 70%;
+            margin: 10px 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .webtoon-speech.left {
+            margin-left: 20px;
+        }
+
+        .webtoon-speech.right {
+            margin-left: auto;
+            margin-right: 20px;
+            display: block;
+            text-align: left;
+        }
+
+        .webtoon-speech.center {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        .speech-tail-left::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 30px;
+            border-width: 15px 10px 0;
+            border-style: solid;
+            border-color: #000 transparent transparent;
+        }
+
+        .speech-tail-left::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 32px;
+            border-width: 12px 8px 0;
+            border-style: solid;
+            border-color: rgba(255,255,255,0.95) transparent transparent;
+            z-index: 1;
+        }
+
+        .speech-tail-right::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 30px;
+            border-width: 15px 10px 0;
+            border-style: solid;
+            border-color: #000 transparent transparent;
+        }
+
+        .speech-tail-right::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 32px;
+            border-width: 12px 8px 0;
+            border-style: solid;
+            border-color: rgba(255,255,255,0.95) transparent transparent;
+            z-index: 1;
+        }
+
+        .title-cut {
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 60px 30px;
+        }
+
+        .title-text {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .subtitle-text {
+            font-size: 1.3rem;
+            color: #ffcc00;
+            font-weight: 700;
+        }
+
+        .effect-text {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 2.2rem;
+            color: #000;
+            text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff;
+            opacity: 0.9;
+        }
+
+        .effect-text-red {
+            color: #ff3333;
+        }
+
+        .narration-box {
+            background: #000000;
+            color: #ffffff;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border-radius: 0;
+        }
+
+        .info-box {
+            background: #fff3cd;
+            border: 2px solid #ffcc00;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .legal-box {
+            background: #e3f2fd;
+            border-left: 5px solid #0066cc;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .warning-box {
+            background: #ffebee;
+            border-left: 5px solid #ff3333;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .highlight {
+            color: #ff3333;
+            font-weight: 700;
+        }
+
+        .emphasis {
+            color: #0066cc;
+            font-weight: 700;
+        }
+
+        .speed-lines {
+            background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.08) 100%);
+        }
+
+        .focus-lines {
+            background: repeating-conic-gradient(
+                from 0deg at 50% 50%,
+                transparent 0deg,
+                transparent 8deg,
+                rgba(0,0,0,0.05) 10deg,
+                transparent 12deg
+            );
+        }
+
+        .emotion-icon {
+            font-size: 2rem;
+            position: absolute;
+        }
+
+        .character-svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .caption {
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .tip-number {
+            display: inline-block;
+            background: #0066cc;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .faq-question {
+            background: #f0f0f0;
+            padding: 15px;
+            font-weight: 700;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .faq-answer {
+            background: #ffffff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        @media (max-width: 767px) {
+            .webtoon-speech {
+                font-size: 0.95rem;
+                max-width: 85%;
+                padding: 12px 15px;
+            }
+            .title-text {
+                font-size: 1.8rem;
+            }
+            .effect-text {
+                font-size: 1.6rem;
+            }
+            .cut-content {
+                padding: 20px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .webtoon-speech {
+                font-size: 1.05rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .webtoon-speech {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="webtoon-container">
+
+        <div class="cut-wrapper">
+            <div class="title-cut">
+                <div class="title-text">사라진 내 돈 2억!</div>
+                <div class="subtitle-text">하도급 계약 승계의 함정</div>
+                <svg width="150" height="100" viewBox="0 0 150 100" style="margin-top: 30px;">
+                    <rect x="25" y="30" width="100" height="50" fill="#85bb65" stroke="#fff" stroke-width="2" rx="5"/>
+                    <text x="75" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">200,000,000</text>
+                    <path d="M 125 40 Q 140 30 155 35" stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="4,4" opacity="0.7"/>
+                    <path d="M 130 55 Q 145 50 160 45" stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="4,4" opacity="0.7"/>
+                </svg>
+                <div class="caption" style="color: #ccc; margin-top: 20px;">원사업자 변경 시 반드시 알아야 할 것들</div>
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="narration-box">
+                서울 강남 오피스 빌딩 리모델링 공사 현장
+            </div>
+            <div class="cut-content" style="min-height: 400px;">
+                <div class="background-layer speed-lines"></div>
+
+                <div class="character-layer" style="text-align: center; padding-top: 20px;">
+                    <svg class="character-svg" width="200" height="250" viewBox="0 0 200 250">
+                        <rect x="70" y="110" width="60" height="90" fill="#4169e1" stroke="#000" stroke-width="3"/>
+                        <circle cx="100" cy="65" r="45" fill="#ffe4c4" stroke="#000" stroke-width="3"/>
+                        <path d="M 55 55 Q 100 25 145 55" stroke="#000" stroke-width="3" fill="#333"/>
+                        <path d="M 80 60 Q 85 55 90 60" stroke="#000" stroke-width="3" fill="none"/>
+                        <path d="M 110 60 Q 115 55 120 60" stroke="#000" stroke-width="3" fill="none"/>
+                        <path d="M 85 85 Q 100 95 115 85" stroke="#000" stroke-width="3" fill="none"/>
+                        <ellipse cx="100" cy="30" rx="50" ry="18" fill="#ffd700" stroke="#000" stroke-width="3"/>
+                        <rect x="35" y="120" width="35" height="12" fill="#4169e1" stroke="#000" stroke-width="3"/>
+                        <rect x="130" y="120" width="35" height="12" fill="#4169e1" stroke="#000" stroke-width="3"/>
+                    </svg>
+                </div>
+
+                <div class="text-layer">
+                    <div class="webtoon-speech left speech-tail-left">
+                        전기 설비 공사 <strong>공정률 60%</strong> 달성!<br>
+                        이대로만 가면 순조롭게 마무리할 수 있겠어!
+                    </div>
+                </div>
+
+                <div class="effect-layer" style="top: 30px; right: 40px;">
+                    <span style="font-size: 2rem;">✨</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong style="font-size: 1.1rem;">박 대표의 현재 상황</strong>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li>계약금액: <strong>5억 원</strong></li>
+                    <li>공정률: <strong>60%</strong> 달성</li>
+                    <li>기성대금 3억 원 중 <strong>1억 원만 수령</strong></li>
+                    <li class="highlight">미지급 대금: 2억 원</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="cut-content" style="min-height: 350px;">
+                <div class="background-layer focus-lines"></div>
+
+                <div class="effect-layer" style="top: 20px; left: 50%; transform: translateX(-50%);">
+                    <div class="effect-text effect-text-red">충격!</div>
+                </div>
+
+                <div class="character-layer" style="text-align: center; padding-top: 80px;">
+                    <svg class="character-svg" width="180" height="220" viewBox="0 0 180 220">
+                        <rect x="60" y="100" width="60" height="80" fill="#4169e1" stroke="#000" stroke-width="3"/>
+                        <circle cx="90" cy="55" r="40" fill="#ffe4c4" stroke="#000" stroke-width="3"/>
+                        <path d="M 50 45 Q 90 15 130 45" stroke="#000" stroke-width="3" fill="#333"/>
+                        <circle cx="75" cy="50" r="12" fill="#fff" stroke="#000" stroke-width="3"/>
+                        <circle cx="75" cy="50" r="5" fill="#000"/>
+                        <circle cx="105" cy="50" r="12" fill="#fff" stroke="#000" stroke-width="3"/>
+                        <circle cx="105" cy="50" r="5" fill="#000"/>
+                        <ellipse cx="90" cy="75" rx="12" ry="8" fill="#000"/>
+                        <path d="M 135 35 Q 140 42 138 52" stroke="#87ceeb" stroke-width="4" fill="none"/>
+                    </svg>
+                </div>
+
+                <div class="text-layer" style="margin-top: 20px;">
+                    <div class="webtoon-speech center speech-tail-left">
+                        대한건설이 <span class="highlight">경영난</span>으로<br>
+                        원도급 계약 지위를 미래건설에 양도했다고?!
+                    </div>
+                </div>
+
+                <div class="effect-layer" style="top: 100px; right: 30px;">
+                    <span style="font-size: 1.8rem;">💧</span>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>위기 상황 발생!</strong><br>
+                원사업자가 갑자기 변경되면서 미지급 대금 회수가 불투명해졌습니다.
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="narration-box">
+                미래건설 사무실에서...
+            </div>
+            <div class="cut-content" style="min-height: 450px;">
+                <div class="background-layer" style="background: rgba(0,0,0,0.05);"></div>
+
+                <div class="character-layer" style="display: flex; justify-content: space-between; padding: 20px;">
+                    <svg width="140" height="200" viewBox="0 0 140 200">
+                        <rect x="40" y="90" width="60" height="80" fill="#4169e1" stroke="#000" stroke-width="3"/>
+                        <circle cx="70" cy="50" r="35" fill="#ffe4c4" stroke="#000" stroke-width="3"/>
+                        <path d="M 35 40 Q 70 15 105 40" stroke="#000" stroke-width="3" fill="#333"/>
+                        <path d="M 55 45 Q 60 50 65 45" stroke="#000" stroke-width="2" fill="none"/>
+                        <path d="M 75 45 Q 80 50 85 45" stroke="#000" stroke-width="2" fill="none"/>
+                        <path d="M 58 65 Q 70 60 82 65" stroke="#000" stroke-width="3" fill="none"/>
+                    </svg>
+
+                    <svg width="150" height="200" viewBox="0 0 150 200">
+                        <rect x="45" y="90" width="60" height="80" fill="#333" stroke="#000" stroke-width="3"/>
+                        <circle cx="75" cy="50" r="38" fill="#ffe4c4" stroke="#000" stroke-width="3"/>
+                        <path d="M 37 40 Q 75 15 113 40 L 113 28 Q 75 8 37 28 Z" fill="#000" stroke="#000" stroke-width="2"/>
+                        <line x1="55" y1="45" x2="68" y2="48" stroke="#000" stroke-width="3"/>
+                        <line x1="82" y1="48" x2="95" y2="45" stroke="#000" stroke-width="3"/>
+                        <path d="M 62 68 Q 75 62 88 68" stroke="#000" stroke-width="3" fill="none"/>
+                        <polygon points="75,90 71,102 75,170 79,102" fill="#8b0000" stroke="#000" stroke-width="2"/>
+                    </svg>
+                </div>
+
+                <div class="text-layer">
+                    <div class="webtoon-speech right speech-tail-right" style="background: rgba(255,230,230,0.95);">
+                        <strong class="highlight">우리는 대한건설의 채무를 승계하지 않았소!</strong><br><br>
+                        앞으로 발생할 공사대금만 지급할 것이오!
+                    </div>
+
+                    <div style="height: 30px;"></div>
+
+                    <div class="webtoon-speech left speech-tail-left">
+                        그러면 미지급된 2억 원은<br>
+                        어떻게 하라는 건가요...?
+                    </div>
+                </div>
+
+                <div class="effect-layer" style="bottom: 30px; left: 50%;">
+                    <span style="font-size: 1.5rem;">💢</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="cut-content" style="min-height: 300px;">
+                <div class="background-layer speed-lines"></div>
+
+                <div class="effect-layer" style="top: 20px; left: 50%; transform: translateX(-50%);">
+                    <div class="effect-text effect-text-red" style="font-size: 2.5rem;">설상가상!</div>
+                </div>
+
+                <div class="text-layer" style="padding-top: 100px;">
+                    <div class="webtoon-speech center" style="background: rgba(255,200,200,0.95); max-width: 85%;">
+                        <strong style="font-size: 1.3rem;">게다가 잔여 공사대금도</strong><br><br>
+                        <span style="font-size: 1.5rem; color: #ff3333; font-weight: 900;">
+                            2억 원 → 1억 5천만 원으로 삭감!
+                        </span>
+                    </div>
+                </div>
+
+                <div class="effect-layer" style="bottom: 50px; right: 50px;">
+                    <span style="font-size: 2.5rem;">❗</span>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>이중고에 빠진 박 대표</strong><br>
+                미지급 대금 2억 원 + 일방적 계약 변경으로 5천만 원 추가 손실 위기!
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="cut-content" style="min-height: 400px;">
+                <div class="background-layer focus-lines"></div>
+
+                <div class="effect-layer" style="top: 20px; left: 50%; transform: translateX(-50%);">
+                    <div class="effect-text" style="color: #0066cc;">잠깐!</div>
+                </div>
+
+                <div class="character-layer" style="text-align: center; padding-top: 80px;">
+                    <svg class="character-svg" width="220" height="280" viewBox="0 0 220 280">
+                        <rect x="80" y="130" width="60" height="90" fill="#4169e1" stroke="#000" stroke-width="3"/>
+                        <circle cx="110" cy="80" r="45" fill="#ffe4c4" stroke="#000" stroke-width="3"/>
+                        <path d="M 65 70 Q 110 35 155 70" stroke="#000" stroke-width="3" fill="#333"/>
+                        <circle cx="95" cy="75" r="10" fill="#fff" stroke="#000" stroke-width="3"/>
+                        <circle cx="95" cy="75" r="4" fill="#000"/>
+                        <circle cx="97" cy="73" r="2" fill="#fff"/>
+                        <circle cx="125" cy="75" r="10" fill="#fff" stroke="#000" stroke-width="3"/>
+                        <circle cx="125" cy="75" r="4" fill="#000"/>
+                        <circle cx="127" cy="73" r="2" fill="#fff"/>
+                        <path d="M 95 100 L 125 100" stroke="#000" stroke-width="3"/>
+                        <rect x="50" y="140" width="30" height="10" fill="#4169e1" stroke="#000" stroke-width="3" transform="rotate(-20, 65, 145)"/>
+                        <rect x="140" y="140" width="30" height="10" fill="#4169e1" stroke="#000" stroke-width="3" transform="rotate(20, 155, 145)"/>
+                        <rect x="70" y="160" width="80" height="60" fill="#fffacd" stroke="#000" stroke-width="2"/>
+                        <text x="110" y="180" text-anchor="middle" font-size="10" font-weight="bold">하도급 계약서</text>
+                        <rect x="80" y="190" width="60" height="20" fill="#fff" stroke="#ff3333" stroke-width="2"/>
+                        <text x="110" y="204" text-anchor="middle" font-size="7" fill="#ff3333">지위양도 조항</text>
+                    </svg>
+                </div>
+
+                <div class="effect-layer" style="top: 120px; left: 40px;">
+                    <span style="font-size: 2rem;">✨</span>
+                </div>
+                <div class="effect-layer" style="top: 140px; right: 40px;">
+                    <span style="font-size: 2rem;">✨</span>
+                </div>
+            </div>
+
+            <div class="legal-box" style="border: 3px solid #ffd700; background: #fffacd;">
+                <strong style="font-size: 1.2rem; color: #000;">계약서 조항 발견!</strong>
+                <div style="background: #fff; padding: 15px; margin-top: 15px; border-radius: 5px; border: 2px solid #000;">
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        "원사업자의 지위가 제3자에게 양도되는 경우,<br>
+                        <strong class="highlight" style="font-size: 1.2rem;">하도급 계약상 권리와 의무도 함께 이전된다"</strong>
+                    </p>
+                </div>
+                <div style="text-align: center; margin-top: 15px; font-size: 1.1rem;">
+                    💡 이 조항이 박 대표를 구한다!
+                </div>
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="cut-content" style="min-height: 350px;">
+                <div class="background-layer speed-lines"></div>
+
+                <div class="character-layer" style="text-align: center; padding-top: 30px;">
+                    <svg class="character-svg" width="180" height="220" viewBox="0 0 180 220">
+                        <rect x="60" y="100" width="60" height="80" fill="#4169e1" stroke="#000" stroke-width="3"/>
+                        <circle cx="90" cy="55" r="40" fill="#ffe4c4" stroke="#000" stroke-width="3"/>
+                        <path d="M 50 45 Q 90 15 130 45" stroke="#000" stroke-width="3" fill="#333"/>
+                        <circle cx="75" cy="50" r="10" fill="#fff" stroke="#000" stroke-width="3"/>
+                        <circle cx="75" cy="50" r="4" fill="#000"/>
+                        <circle cx="105" cy="50" r="10" fill="#fff" stroke="#000" stroke-width="3"/>
+                        <circle cx="105" cy="50" r="4" fill="#000"/>
+                        <path d="M 75 75 Q 90 85 105 75" stroke="#000" stroke-width="4" fill="none"/>
+                        <rect x="120" y="110" width="30" height="20" fill="#ffe4c4" stroke="#000" stroke-width="3" rx="5"/>
+                    </svg>
+                </div>
+
+                <div class="text-layer" style="margin-top: 20px;">
+                    <div class="webtoon-speech center speech-tail-left">
+                        미래건설은 대한건설의 <strong class="emphasis">채무를 승계</strong>한 거야!<br><br>
+                        지급 거부는 <strong class="highlight">부당해!</strong>
+                    </div>
+                </div>
+
+                <div class="effect-layer" style="bottom: 50px; left: 30px;">
+                    <div class="effect-text" style="font-size: 1.8rem;">희망!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="narration-box">
+                변호사의 조언 - 법적 대응 방안
+            </div>
+            <div class="cut-content" style="min-height: 300px;">
+                <div class="character-layer" style="text-align: center; padding: 30px;">
+                    <svg class="character-svg" width="160" height="200" viewBox="0 0 160 200">
+                        <rect x="50" y="90" width="60" height="80" fill="#1a1a1a" stroke="#000" stroke-width="3"/>
+                        <circle cx="80" cy="50" r="38" fill="#ffe4c4" stroke="#000" stroke-width="3"/>
+                        <path d="M 42 40 Q 80 15 118 40 L 118 28 Q 80 8 42 28 Z" fill="#333" stroke="#000" stroke-width="2"/>
+                        <rect x="60" y="42" width="16" height="10" fill="none" stroke="#000" stroke-width="2" rx="2"/>
+                        <rect x="84" y="42" width="16" height="10" fill="none" stroke="#000" stroke-width="2" rx="2"/>
+                        <line x1="76" y1="47" x2="84" y2="47" stroke="#000" stroke-width="2"/>
+                        <circle cx="68" cy="47" r="3" fill="#000"/>
+                        <circle cx="92" cy="47" r="3" fill="#000"/>
+                        <path d="M 68 68 Q 80 74 92 68" stroke="#000" stroke-width="2" fill="none"/>
+                        <path d="M 65 90 L 80 100 L 95 90" fill="#fff" stroke="#000" stroke-width="2"/>
+                        <polygon points="80,100 77,108 80,170 83,108" fill="#8b0000" stroke="#000" stroke-width="1"/>
+                    </svg>
+                </div>
+
+                <div class="text-layer">
+                    <div class="webtoon-speech center speech-tail-left">
+                        박 대표님, 걱정하지 마세요!<br>
+                        <strong class="emphasis">두 가지 강력한 대응 방법</strong>이 있습니다!
+                    </div>
+                </div>
+            </div>
+
+            <div class="legal-box">
+                <strong style="color: #0066cc; font-size: 1.2rem;">대응 방안 1</strong>
+                <h3 style="margin: 15px 0;">하도급대금 직접지급 요청</h3>
+                <p><strong>하도급법 제14조 제1항</strong> 적용</p>
+                <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                    <li>원사업자가 지급정지, 파산 등으로 지급 불능 시</li>
+                    <li><strong class="emphasis">발주자에게 직접 대금 지급 요청 가능</strong></li>
+                    <li>대한건설의 경영난 = 이 조항 해당!</li>
+                </ul>
+            </div>
+
+            <div class="legal-box">
+                <strong style="color: #0066cc; font-size: 1.2rem;">대응 방안 2</strong>
+                <h3 style="margin: 15px 0;">공정거래위원회 신고</h3>
+                <p>미래건설의 위반 행위:</p>
+                <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                    <li><strong>하도급법 제16조</strong> - 부당한 하도급대금 결정 금지</li>
+                    <li><strong>하도급법 제3조의4</strong> - 부당한 특약 금지</li>
+                    <li class="emphasis">행정적 구제 + 협상력 확보!</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="cut-content" style="min-height: 200px; text-align: center; padding-top: 50px;">
+                <div class="effect-text" style="font-size: 2.8rem; margin-bottom: 30px;">실무 TIP</div>
+                <svg width="100" height="100" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#ffcc00" stroke="#000" stroke-width="3"/>
+                    <text x="50" y="65" text-anchor="middle" font-size="50" font-weight="bold">💡</text>
+                </svg>
+            </div>
+
+            <div class="success-box">
+                <div style="margin-bottom: 15px;">
+                    <span class="tip-number">1</span>
+                    <strong>공사비 승계 합의서 작성</strong>
+                </div>
+                <p style="margin-left: 40px; line-height: 1.7;">
+                    원사업자 변경 시 <strong>3자 합의서</strong> 필수!<br>
+                    (기존 원사업자 + 새 원사업자 + 수급사업자)<br>
+                    미지급 금액, 지급 주체, 기한을 명시
+                </p>
+            </div>
+
+            <div class="success-box">
+                <div style="margin-bottom: 15px;">
+                    <span class="tip-number">2</span>
+                    <strong>계약서 조항 확인</strong>
+                </div>
+                <p style="margin-left: 40px; line-height: 1.7;">
+                    반드시 포함시켜야 할 조항:<br>
+                    <em>"원사업자의 지위가 제3자에게 양도되는 경우,<br>
+                    하도급 계약상 <strong class="highlight">권리와 의무도 함께 이전</strong>된다"</em>
+                </p>
+            </div>
+
+            <div class="success-box">
+                <div style="margin-bottom: 15px;">
+                    <span class="tip-number">3</span>
+                    <strong>즉시 직접지급 요청</strong>
+                </div>
+                <p style="margin-left: 40px; line-height: 1.7;">
+                    원사업자 변경 통보 받으면 <strong class="highlight">지체 없이</strong><br>
+                    발주자에게 직접지급 요청!
+                </p>
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="cut-content" style="min-height: 400px;">
+                <div class="background-layer focus-lines"></div>
+
+                <div class="effect-layer" style="top: 30px; left: 50%; transform: translateX(-50%);">
+                    <div class="effect-text" style="font-size: 3rem; color: #ffd700; text-shadow: 3px 3px 0 #000;">승리!</div>
+                </div>
+
+                <div class="character-layer" style="text-align: center; padding-top: 100px;">
+                    <svg class="character-svg" width="220" height="280" viewBox="0 0 220 280">
+                        <rect x="80" y="140" width="60" height="90" fill="#4169e1" stroke="#000" stroke-width="3"/>
+                        <circle cx="110" cy="90" r="50" fill="#ffe4c4" stroke="#000" stroke-width="3"/>
+                        <path d="M 60 80 Q 110 40 160 80" stroke="#000" stroke-width="3" fill="#333"/>
+                        <path d="M 90 85 Q 95 80 100 85" stroke="#000" stroke-width="3" fill="none"/>
+                        <path d="M 120 85 Q 125 80 130 85" stroke="#000" stroke-width="3" fill="none"/>
+                        <path d="M 90 115 Q 110 130 130 115" stroke="#000" stroke-width="4" fill="#fff"/>
+                        <rect x="40" y="130" width="40" height="12" fill="#4169e1" stroke="#000" stroke-width="3" transform="rotate(-45, 60, 136)"/>
+                        <rect x="140" y="130" width="40" height="12" fill="#4169e1" stroke="#000" stroke-width="3" transform="rotate(45, 160, 136)"/>
+                        <circle cx="45" cy="110" r="12" fill="#ffe4c4" stroke="#000" stroke-width="3"/>
+                        <circle cx="175" cy="110" r="12" fill="#ffe4c4" stroke="#000" stroke-width="3"/>
+                        <line x1="170" y1="100" x2="165" y2="90" stroke="#ffe4c4" stroke-width="8"/>
+                        <line x1="170" y1="100" x2="175" y2="90" stroke="#ffe4c4" stroke-width="8"/>
+                        <line x1="170" y1="100" x2="165" y2="90" stroke="#000" stroke-width="2"/>
+                        <line x1="170" y1="100" x2="175" y2="90" stroke="#000" stroke-width="2"/>
+                    </svg>
+                </div>
+
+                <div class="effect-layer" style="top: 80px; left: 30px;">
+                    <span style="font-size: 2.5rem;">✨</span>
+                </div>
+                <div class="effect-layer" style="top: 100px; right: 30px;">
+                    <span style="font-size: 2.5rem;">✨</span>
+                </div>
+                <div class="effect-layer" style="top: 130px; left: 50px;">
+                    <span style="font-size: 1.8rem;">✨</span>
+                </div>
+                <div class="effect-layer" style="top: 150px; right: 50px;">
+                    <span style="font-size: 1.8rem;">✨</span>
+                </div>
+
+                <div class="text-layer" style="margin-top: 30px;">
+                    <div class="webtoon-speech center speech-tail-left">
+                        계약서 조항과 하도급법으로<br>
+                        <strong class="emphasis">내 권리를 지킬 수 있어!</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #4caf50, #8bc34a); color: #fff; padding: 25px; text-align: center; border-radius: 10px; margin: 20px;">
+                <h2 style="margin-bottom: 15px; font-size: 1.5rem;">핵심 포인트</h2>
+                <p style="font-size: 1.15rem; line-height: 1.8;">
+                    <strong>계약서에 명시된 지위승계 조항</strong>이 있다면<br>
+                    새로운 원사업자는 <strong>미지급 채무도 함께 승계</strong>합니다!<br><br>
+                    <strong>하도급법</strong>을 활용하여 적극적으로 권리를 보호하세요!
+                </p>
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="cut-content" style="padding: 30px;">
+                <h2 style="text-align: center; margin-bottom: 25px; font-size: 1.4rem;">자주 묻는 질문 (FAQ)</h2>
+
+                <div style="margin-bottom: 20px;">
+                    <div class="faq-question">
+                        Q1. 원사업자가 미지급 대금에 대한 책임이 없다고 주장하는데, 계약서 조항보다 우선하나요?
+                    </div>
+                    <div class="faq-answer">
+                        <strong>아니요.</strong> 원사업자가 주장하는 '채무 비승계'는 계약서에 명시된 조항보다 우선할 수 없습니다. 계약서의 조항은 당사자 간 합의된 내용이므로, 새로운 원사업자는 이 조항에 따라 미지급 대금에 대한 책임을 부담하는 것이 원칙입니다. 이를 이행하지 않으면 <strong>계약 위반이자 하도급법 위반</strong>에 해당합니다.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="faq-question">
+                        Q2. 새로운 원사업자가 계약 내용을 불리하게 변경하려 할 때, 공사를 중단해도 괜찮나요?
+                    </div>
+                    <div class="faq-answer">
+                        <strong>신중한 접근이 필요합니다.</strong> 공사를 중단하기 전에 반드시 <strong>서면으로 변경 거부 의사</strong>를 명확히 통보해야 합니다. 민법상 동시이행의 항변권을 근거로 공사를 중단할 수 있지만, 추가적인 법적 분쟁을 야기할 수 있으므로 <strong>전문가의 도움</strong>을 받아 법적 절차를 검토하는 것이 바람직합니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div class="cut-content" style="padding: 30px;">
+                <h2 style="text-align: center; margin-bottom: 25px; font-size: 1.4rem;">관련 법률 및 판례</h2>
+
+                <div class="legal-box">
+                    <strong>주요 법률</strong>
+                    <ul style="margin-left: 20px; margin-top: 15px; line-height: 2;">
+                        <li>하도급거래 공정화에 관한 법률 <strong>제14조</strong><br>
+                            <span style="color: #666; font-size: 0.9rem;">→ 하도급대금의 직접 지급</span></li>
+                        <li>하도급거래 공정화에 관한 법률 <strong>제13조의2</strong><br>
+                            <span style="color: #666; font-size: 0.9rem;">→ 건설하도급 계약이행 및 대금지급 보증</span></li>
+                        <li>상법 <strong>제530조의10</strong><br>
+                            <span style="color: #666; font-size: 0.9rem;">→ 분할승계회사의 권리와 의무</span></li>
+                    </ul>
+                </div>
+
+                <div class="legal-box">
+                    <strong>주요 판례</strong>
+                    <ul style="margin-left: 20px; margin-top: 15px; line-height: 2;">
+                        <li><strong>대법원 2013. 9. 12. 선고 2011다6311 판결</strong><br>
+                            <span style="color: #666; font-size: 0.9rem;">→ 직접 지급 합의 시 수급사업자의 청구권 인정</span></li>
+                        <li><strong>대법원 2014. 1. 23. 선고 2013다214437 판결</strong><br>
+                            <span style="color: #666; font-size: 0.9rem;">→ 계약상 지위 양도와 채무 승계</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="cut-wrapper">
+            <div style="background: linear-gradient(135deg, #1a1a1a, #4a4a4a); color: #fff; text-align: center; padding: 60px 30px;">
+                <div style="font-size: 3rem; margin-bottom: 25px;">END</div>
+                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
+                    하도급 계약, 알고 대응하면<br>
+                    내 권리를 지킬 수 있습니다!
+                </p>
+
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; max-width: 500px; margin: 0 auto;">
+                    <p style="font-size: 1rem;">
+                        전문가 상담이 필요하시면<br>
+                        법률 전문가에게 문의하세요.
+                    </p>
+                </div>
+
+                <div style="margin-top: 30px; font-size: 0.85rem; color: #999;">
+                    본 콘텐츠는 법률 정보 제공을 목적으로 하며,<br>
+                    구체적인 사안은 전문가와 상담하시기 바랍니다.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
