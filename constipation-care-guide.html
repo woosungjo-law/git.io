@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변비 관리 가이드 - Playful Infographic</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+        :root {
+            /* Headspace Brand Colors */
+            --primary: #F47344;
+            --secondary: #FFB600;
+            --accent: #5C9EAD;
+            /* Playful Variations */
+            --primary-light: #FF9B7A;
+            --primary-subtle: rgba(244, 115, 68, 0.1);
+            --secondary-light: #FFD54F;
+            --accent-light: #8FC4D6;
+            /* Neutrals */
+            --bg: #FFFBF7;
+            --surface: #FFFFFF;
+            --text: #2E2E2E;
+            --text-light: #6B6B6B;
+            /* Effects */
+            --shadow-soft: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-playful: 0 8px 24px rgba(0,0,0,0.12);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            /* Danger Colors */
+            --danger: #E74C3C;
+            --danger-light: rgba(231, 76, 60, 0.1);
+            --success: #27AE60;
+            --success-light: rgba(39, 174, 96, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--primary-subtle) 0%, rgba(255, 182, 0, 0.1) 100%);
+            border-radius: var(--radius-lg);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--secondary);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 150px;
+            height: 150px;
+            background: var(--accent);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-top: 1rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-playful);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 80px;
+        }
+
+        /* Diagnosis Card */
+        .diagnosis-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .diagnosis-card h2 {
+            color: white;
+            justify-content: center;
+        }
+
+        .diagnosis-main {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: var(--radius-md);
+        }
+
+        /* Finding List */
+        .finding-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .finding-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            background: var(--bg);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--accent);
+        }
+
+        .finding-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            color: var(--accent);
+        }
+
+        .finding-content {
+            flex: 1;
+        }
+
+        .finding-title {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: var(--danger-light);
+            border: 2px solid var(--danger);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .warning-box h3 {
+            color: var(--danger);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .warning-list li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .warning-list li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Success Box */
+        .success-box {
+            background: var(--success-light);
+            border: 2px solid var(--success);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .success-box h3 {
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .success-list li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .success-list li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Tip Cards Grid */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 2rem;
+        }
+
+        .tip-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            border-top: 5px solid var(--secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-6px) rotate(-1deg);
+        }
+
+        .tip-card:nth-child(2):hover {
+            transform: translateY(-6px) rotate(1deg);
+        }
+
+        .tip-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .tip-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Speech Bubble */
+        .speech-bubble {
+            position: relative;
+            background: var(--primary-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 40px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-top-color: var(--primary-subtle);
+        }
+
+        /* CRP Highlight */
+        .crp-box {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--text);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin: 1rem 0;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+        }
+
+        /* Food Section */
+        .food-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 1.5rem;
+        }
+
+        .food-avoid {
+            background: #FFF0F0;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 2px dashed var(--danger);
+        }
+
+        .food-good {
+            background: #F0FFF4;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 2px dashed var(--success);
+        }
+
+        .food-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .food-avoid .food-title {
+            color: var(--danger);
+        }
+
+        .food-good .food-title {
+            color: var(--success);
+        }
+
+        .food-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .food-list li {
+            padding: 0.4rem 0;
+            font-size: 1rem;
+        }
+
+        /* Treatment Progress */
+        .progress-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .progress-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--success));
+            border-radius: 2px;
+        }
+
+        .progress-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 1rem 1.5rem;
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .progress-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--surface);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+        }
+
+        .progress-item:last-child::before {
+            border-color: var(--success);
+            background: var(--success);
+        }
+
+        /* Important Note */
+        .important-note {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .important-note h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .important-note p {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .bounce-icon {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            p { font-size: 1rem; }
+
+            .container {
+                padding: 20px 16px;
+            }
+
+            header {
+                padding: 40px 16px;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                margin-bottom: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <svg class="bounce-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" style="margin-bottom: 20px;">
+                <circle cx="40" cy="40" r="35" stroke="#F47344" stroke-width="4"/>
+                <path d="M25 45 Q40 55 55 45" stroke="#F47344" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="30" cy="32" r="4" fill="#F47344"/>
+                <circle cx="50" cy="32" r="4" fill="#F47344"/>
+            </svg>
+            <h1>변비 관리 가이드</h1>
+            <p class="subtitle">80세 어르신을 위한 건강 관리 안내서</p>
+        </header>
+
+        <main>
+            <!-- 주요 진단 -->
+            <section class="section fade-in">
+                <div class="card diagnosis-card">
+                    <h2>
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 4 L20 12 L28 14 L22 20 L24 28 L16 24 L8 28 L10 20 L4 14 L12 12 Z" stroke="white" stroke-width="2" fill="rgba(255,255,255,0.3)"/>
+                        </svg>
+                        핵심 진단
+                    </h2>
+                    <div class="diagnosis-main">
+                        심한 변비 (변비로 인한 대변 정체)
+                    </div>
+                    <p style="opacity: 0.9;">직장에 대변이 오래 정체되어 장벽에 경미한 염증이 발생한 상태입니다</p>
+                </div>
+            </section>
+
+            <!-- CT 검사 소견 -->
+            <section class="section fade-in">
+                <div class="card">
+                    <h2>
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect x="4" y="8" width="24" height="18" rx="3" stroke="#F47344" stroke-width="2.5"/>
+                            <path d="M10 14 L14 18 L22 10" stroke="#F47344" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        CT 검사 소견
+                    </h2>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem;">2025년 11월 15일 검사 결과</p>
+
+                    <ul class="finding-list">
+                        <li class="finding-item">
+                            <svg class="finding-icon" viewBox="0 0 40 40" fill="none">
+                                <circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="2.5"/>
+                                <path d="M12 20 L18 26 L28 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            </svg>
+                            <div class="finding-content">
+                                <div class="finding-title">주요 발견</div>
+                                <p style="margin: 0;">대장과 직장에 대변이 심하게 막혀있고, 직장 벽이 약간 두꺼워진 상태</p>
+                            </div>
+                        </li>
+                        <li class="finding-item">
+                            <svg class="finding-icon" viewBox="0 0 40 40" fill="none">
+                                <circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="2.5"/>
+                                <path d="M20 12 L20 22 M20 26 L20 28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            </svg>
+                            <div class="finding-content">
+                                <div class="finding-title">결론</div>
+                                <p style="margin: 0;">대변에 의한 경미한 직장염 가능성 (stercoral proctitis)</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="speech-bubble">
+                        <strong>다행히 이상 없는 항목들:</strong><br>
+                        복부 림프절 비대 없음, 담도 확장 없음, 이전 수술 부위 안정적
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <h3>혈액검사 결과</h3>
+                        <div class="crp-box pulse">
+                            CRP 41.3 (정상: 5 이하)
+                        </div>
+                        <p style="color: var(--danger); font-weight: 600;">상당히 높은 염증 수치 - 추적 관찰 필요</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 치료 경과 -->
+            <section class="section fade-in">
+                <div class="card">
+                    <h2>
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 6 L16 26 M6 16 L26 16" stroke="#F47344" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        치료 경과
+                    </h2>
+
+                    <div class="progress-timeline">
+                        <div class="progress-item">
+                            <strong>주말 치료</strong>
+                            <p style="margin: 0.5rem 0 0 0;">경구 약물 + 관장 치료 시행</p>
+                        </div>
+                        <div class="progress-item">
+                            <strong>치료 효과</strong>
+                            <p style="margin: 0.5rem 0 0 0;">다량의 대변 배출 성공</p>
+                        </div>
+                        <div class="progress-item">
+                            <strong>퇴원</strong>
+                            <p style="margin: 0.5rem 0 0 0;">보존적 치료로 증상 호전되어 퇴원</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 꼭 조심하셔야 할 사항 -->
+            <section class="section fade-in">
+                <h2 style="text-align: center; margin-bottom: 2rem;">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="vertical-align: middle;">
+                        <path d="M20 4 L36 32 L4 32 Z" stroke="#E74C3C" stroke-width="3" fill="none"/>
+                        <path d="M20 14 L20 22 M20 26 L20 28" stroke="#E74C3C" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    꼭 조심하셔야 할 사항
+                </h2>
+
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <svg class="tip-icon" viewBox="0 0 64 64" fill="none">
+                            <path d="M32 8 L32 16 M32 48 L32 56 M16 32 L8 32 M56 32 L48 32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="3"/>
+                            <path d="M24 32 Q32 44 40 32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        <div class="tip-title">1. 충분한 수분 섭취</div>
+                        <p>하루 <strong>1.5~2리터</strong> 이상<br>노인은 갈증을 덜 느끼므로<br><strong>의식적으로</strong> 물 마시기</p>
+                    </div>
+                    <div class="tip-card">
+                        <svg class="tip-icon" viewBox="0 0 64 64" fill="none">
+                            <path d="M20 48 Q32 56 44 48 L44 20 Q32 12 20 20 Z" stroke="currentColor" stroke-width="3"/>
+                            <path d="M28 28 L28 40 M36 28 L36 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        <div class="tip-title">2. 식이섬유 섭취</div>
+                        <p>채소, 과일, 통곡물을<br>매일 꾸준히 섭취</p>
+                    </div>
+                    <div class="tip-card">
+                        <svg class="tip-icon" viewBox="0 0 64 64" fill="none">
+                            <circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="3"/>
+                            <path d="M32 16 L32 32 L44 32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        <div class="tip-title">3. 규칙적인 배변 습관</div>
+                        <p>매일 <strong>같은 시간</strong>에<br>화장실 가기</p>
+                    </div>
+                    <div class="tip-card">
+                        <svg class="tip-icon" viewBox="0 0 64 64" fill="none">
+                            <path d="M20 44 L32 32 L44 44" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M32 32 L32 48" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="32" cy="20" r="8" stroke="currentColor" stroke-width="3"/>
+                        </svg>
+                        <div class="tip-title">4. 가벼운 운동</div>
+                        <p>걷기, 스트레칭으로<br>장 운동 촉진</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 변비약 복용 -->
+            <section class="section fade-in">
+                <div class="important-note">
+                    <h3>
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="display: inline; vertical-align: middle;">
+                            <rect x="8" y="6" width="16" height="20" rx="3" stroke="white" stroke-width="2.5"/>
+                            <path d="M12 12 L20 12 M12 16 L20 16 M12 20 L16 20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        변비약 복용 필수
+                    </h3>
+                    <p>퇴원 시 처방받으신 변비약(완하제)을 반드시 복용하세요.<br>
+                    변이 딱딱해지기 전에 <strong>미리 예방</strong>하는 것이 가장 중요합니다!</p>
+                </div>
+            </section>
+
+            <!-- 즉시 병원 가야 하는 위험 신호 -->
+            <section class="section fade-in">
+                <div class="warning-box">
+                    <h3>
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M14 4 L24 22 L4 22 Z" stroke="#E74C3C" stroke-width="2.5" fill="none"/>
+                            <path d="M14 10 L14 15 M14 18 L14 19" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                        즉시 병원 가야 하는 위험 신호
+                    </h3>
+                    <ul class="warning-list">
+                        <li>3일 이상 배변이 없을 때</li>
+                        <li>심한 복통이 생길 때</li>
+                        <li>구토나 식욕부진</li>
+                        <li>혈변이 나올 때</li>
+                        <li>발열 (CRP가 높았으므로 염증 악화 주의)</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h3>
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <circle cx="14" cy="14" r="11" stroke="#27AE60" stroke-width="2.5"/>
+                            <path d="M9 14 L12 17 L19 10" stroke="#27AE60" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        정기 추적관찰
+                    </h3>
+                    <ul class="success-list">
+                        <li>2주 후 외래 진료 꼭 받으세요</li>
+                        <li>CRP 수치 재확인 필요 (염증이 가라앉았는지 확인)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 음식 가이드 -->
+            <section class="section fade-in">
+                <div class="card">
+                    <h2>
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 4 L16 28 M8 10 L16 4 L24 10" stroke="#F47344" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="8" cy="16" r="4" stroke="#F47344" stroke-width="2.5"/>
+                            <circle cx="24" cy="16" r="4" stroke="#F47344" stroke-width="2.5"/>
+                        </svg>
+                        음식 가이드
+                    </h2>
+
+                    <div class="food-grid">
+                        <div class="food-avoid">
+                            <div class="food-title">🚫 피할 것</div>
+                            <ul class="food-list">
+                                <li>떡</li>
+                                <li>바나나</li>
+                                <li>감</li>
+                                <li>치즈</li>
+                            </ul>
+                        </div>
+                        <div class="food-good">
+                            <div class="food-title">👍 권장 음식</div>
+                            <ul class="food-list">
+                                <li>요거트</li>
+                                <li>고구마</li>
+                                <li>사과, 배</li>
+                                <li>미역국</li>
+                                <li>현미밥</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 최종 메시지 -->
+            <section class="fade-in">
+                <div class="card" style="background: linear-gradient(135deg, var(--bg) 0%, rgba(244, 115, 68, 0.05) 100%); border: 3px solid var(--primary); text-align: center;">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style="margin-bottom: 1rem;" class="bounce-icon">
+                        <path d="M32 12 C20 12 12 20 12 32 C12 44 20 52 32 52 C44 52 52 44 52 32" stroke="#F47344" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M52 32 L32 32 L32 16" stroke="#F47344" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3 style="color: var(--primary); font-size: 1.5rem;">기억해주세요</h3>
+                    <p style="font-size: 1.2rem; line-height: 1.9;">
+                        80세 고령이시고 직장염까지 있었던 상태라<br>
+                        <strong style="color: var(--danger);">변비가 재발하면 더 위험할 수 있습니다.</strong><br><br>
+                        <span style="background: var(--secondary); padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 700;">수분</span> +
+                        <span style="background: var(--secondary); padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 700;">식이섬유</span> +
+                        <span style="background: var(--secondary); padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 700;">약물 복용</span><br>
+                        이 가장 중요합니다!
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>본문 작성 및 인포그래픽 디자인 by 조우성</p>
+        </footer>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
