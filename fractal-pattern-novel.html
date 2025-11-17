@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="법률 컬럼 그래픽 노블 - 프랙탈과 패턴의 진실">
+<title>전체는 어떻게 부분에 숨나 | 그래픽 노블</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-paper: #F7F7F7;
+  --color-ink: #111;
+  --color-accent-red: #E04040;
+  --color-accent-blue: #4040A0;
+  --color-accent-yellow: #FFC040;
+  --color-accent-green: #40A040;
+  --color-shadow: rgba(0, 0, 0, 0.15);
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --font-primary: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, 'Malgun Gothic', sans-serif;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: linear-gradient(135deg, #FAFAFA 0%, #F0F0F0 100%);
+  color: var(--color-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+.comic-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(20px, 5vw, 48px);
+}
+
+.comic-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg);
+}
+
+.comic-header h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--color-ink);
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.02em;
+}
+
+.comic-header .subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--color-accent-blue);
+  font-weight: 700;
+}
+
+.comic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: clamp(20px, 4vw, 32px);
+}
+
+.panel {
+  background: var(--color-paper);
+  border: 4px solid var(--color-ink);
+  padding: clamp(24px, 5vw, 40px);
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: visible;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.3s ease;
+}
+
+.panel.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.panel:hover {
+  transform: translateY(-6px);
+  box-shadow: 8px 12px 24px var(--color-shadow);
+}
+
+.panel-number {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 4px 12px;
+  font-weight: 900;
+  font-size: 0.9rem;
+  z-index: 10;
+}
+
+.panel-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.bubble {
+  background: #FFF;
+  border: 3px solid var(--color-ink);
+  border-radius: 20px;
+  padding: 14px 18px;
+  position: absolute;
+  z-index: 15;
+  max-width: min(280px, 85%);
+  box-shadow: 3px 3px 0 var(--color-shadow);
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.5;
+  opacity: 0;
+  transform: scale(0);
+  animation: bubblePop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+}
+
+.bubble-bottom::after {
+  border-top-color: var(--color-ink);
+  bottom: -24px;
+  left: 30px;
+}
+
+.bubble-bottom-right::after {
+  border-top-color: var(--color-ink);
+  bottom: -24px;
+  right: 30px;
+}
+
+.bubble-left::after {
+  border-right-color: var(--color-ink);
+  left: -24px;
+  top: 20px;
+}
+
+.bubble-thought {
+  border-style: dashed;
+  border-radius: 30px;
+  background: #FFFEF0;
+}
+
+.bubble-thought::after {
+  display: none;
+}
+
+.bubble-thought::before {
+  content: '○ ○';
+  position: absolute;
+  bottom: -20px;
+  left: 20px;
+  font-size: 0.6rem;
+  color: var(--color-ink);
+  letter-spacing: 4px;
+}
+
+.bubble-emphasis {
+  background: var(--color-accent-yellow);
+  border-width: 4px;
+  font-weight: 700;
+}
+
+.bubble-cold {
+  background: #E8EEF4;
+  border-color: var(--color-accent-blue);
+}
+
+.bubble-narration {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  font-style: italic;
+  color: #555;
+  max-width: 100%;
+  padding: 10px 0;
+  position: relative;
+}
+
+.bubble-narration::after {
+  display: none;
+}
+
+.character-name {
+  font-weight: 900;
+  color: var(--color-accent-blue);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+}
+
+.sfx {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  color: var(--color-accent-red);
+  -webkit-text-stroke: 2px var(--color-ink);
+  text-shadow: 3px 3px 0 var(--color-ink);
+  position: absolute;
+  z-index: 20;
+  transform: rotate(-8deg);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.svg-scene {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  display: block;
+}
+
+.pattern-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.05;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.halftone {
+  background: radial-gradient(circle, var(--color-ink) 1.5px, transparent 1.5px);
+  background-size: 8px 8px;
+}
+
+.fractal-pattern {
+  background:
+    linear-gradient(45deg, transparent 45%, var(--color-ink) 45%, var(--color-ink) 55%, transparent 55%),
+    linear-gradient(-45deg, transparent 45%, var(--color-ink) 45%, var(--color-ink) 55%, transparent 55%);
+  background-size: 20px 20px;
+}
+
+.crack-pattern {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpath d='M10 10 L30 25 L45 20 L60 35 L80 30 L90 45' stroke='%23111' stroke-width='0.5' fill='none'/%3E%3C/svg%3E");
+}
+
+.comic-footer {
+  text-align: center;
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.insight-box {
+  background: linear-gradient(135deg, var(--color-accent-blue) 0%, #5050B0 100%);
+  color: #FFF;
+  padding: var(--space-md);
+  border-radius: 8px;
+  margin-top: var(--space-md);
+  font-weight: 500;
+  position: relative;
+  z-index: 10;
+}
+
+.insight-box strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+@keyframes bubblePop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes crackSpread {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 2px var(--color-accent-red)); }
+  50% { filter: drop-shadow(0 0 8px var(--color-accent-red)); }
+}
+
+.crack-line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: crackSpread 2s ease-out forwards;
+}
+
+.pulse {
+  animation: pulseGlow 2s infinite;
+}
+
+@media (max-width: 640px) {
+  .panel {
+    min-height: 480px;
+    padding: 20px;
+  }
+
+  .bubble {
+    max-width: 90%;
+    font-size: 0.9rem;
+    padding: 12px 14px;
+  }
+
+  .sfx {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .comic-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .panel:nth-child(5) {
+    grid-column: 1 / -1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+</style>
+</head>
+<body>
+<div class="comic-wrapper">
+  <header class="comic-header">
+    <h1>전체는 어떻게 부분에 숨나</h1>
+    <div class="subtitle">feat. 프랙탈</div>
+  </header>
+
+  <main class="comic-grid">
+    <article class="panel" id="panel-1">
+      <div class="panel-number">1</div>
+      <div class="pattern-bg crack-pattern"></div>
+
+      <div class="panel-content">
+        <svg class="svg-scene" viewBox="0 0 200 200" aria-label="오래된 백자에서 균열을 발견하는 장면">
+          <ellipse cx="100" cy="120" rx="60" ry="40" stroke="#111" stroke-width="3" fill="none"/>
+          <ellipse cx="100" cy="110" rx="55" ry="35" stroke="#111" stroke-width="2" fill="none" opacity="0.3"/>
+          <path class="crack-line pulse" d="M85 115 L92 118 L98 116 L105 120 L112 117" stroke="#E04040" stroke-width="2" fill="none"/>
+          <circle cx="70" cy="60" r="22" stroke="#111" stroke-width="3" fill="none"/>
+          <circle cx="64" cy="56" r="2.5" fill="#111"/>
+          <circle cx="76" cy="56" r="2.5" fill="#111"/>
+          <path d="M64 66 Q70 62 76 66" stroke="#111" stroke-width="2" fill="none"/>
+          <line x1="70" y1="82" x2="70" y2="105" stroke="#111" stroke-width="3"/>
+          <line x1="70" y1="88" x2="85" y2="110" stroke="#111" stroke-width="3"/>
+          <line x1="70" y1="88" x2="55" y2="95" stroke="#111" stroke-width="3"/>
+        </svg>
+
+        <div class="bubble bubble-thought" style="top: 15px; left: 10px; animation-delay: 0.3s;">
+          아주 미세한 균열이었다. 오래된 백자 표면의 실금...
+        </div>
+
+        <div class="bubble bubble-bottom" style="bottom: 80px; right: 15px; animation-delay: 0.8s;">
+          <span class="character-name">지호</span>
+          눈여겨보지 않으면 모를 상처인데... 왜 이렇게 불안하지?
+        </div>
+      </div>
+
+      <div class="bubble-narration" style="animation-delay: 1.2s;">
+        그 작은 흠집이 이미 그릇의 전체 운명을 예고하고 있음을 직감했다.
+      </div>
+    </article>
+
+    <article class="panel" id="panel-2">
+      <div class="panel-number">2</div>
+      <div class="pattern-bg halftone"></div>
+
+      <div class="panel-content">
+        <svg class="svg-scene" viewBox="0 0 200 180" aria-label="두 인물이 대화하는 장면">
+          <circle cx="60" cy="50" r="20" stroke="#111" stroke-width="3" fill="none"/>
+          <circle cx="54" cy="46" r="2" fill="#111"/>
+          <circle cx="66" cy="46" r="2" fill="#111"/>
+          <path d="M54 56 Q60 60 66 56" stroke="#111" stroke-width="2" fill="none"/>
+          <line x1="60" y1="70" x2="60" y2="110" stroke="#111" stroke-width="3"/>
+          <line x1="60" y1="80" x2="45" y2="95" stroke="#111" stroke-width="3"/>
+          <line x1="60" y1="80" x2="75" y2="90" stroke="#111" stroke-width="3"/>
+
+          <circle cx="140" cy="45" r="22" stroke="#111" stroke-width="3" fill="none"/>
+          <rect x="128" y="38" width="10" height="6" stroke="#111" stroke-width="2" fill="none"/>
+          <rect x="142" y="38" width="10" height="6" stroke="#111" stroke-width="2" fill="none"/>
+          <path d="M132 54 Q140 52 148 54" stroke="#111" stroke-width="2" fill="none"/>
+          <line x1="140" y1="67" x2="140" y2="115" stroke="#111" stroke-width="3"/>
+          <line x1="140" y1="78" x2="125" y2="92" stroke="#111" stroke-width="3"/>
+          <line x1="140" y1="78" x2="158" y2="88" stroke="#111" stroke-width="3"/>
+          <rect x="120" y="115" width="40" height="25" stroke="#111" stroke-width="2" fill="none" opacity="0.5"/>
+        </svg>
+
+        <div class="bubble bubble-bottom" style="top: 8px; left: 5px; animation-delay: 0.4s;">
+          <span class="character-name">지호</span>
+          사소한 말실수, 무심한 표정... 이것도 다 의미가 있는 걸까요?
+        </div>
+
+        <div class="bubble bubble-emphasis bubble-bottom-right" style="top: 85px; right: 10px; animation-delay: 0.9s;">
+          <span class="character-name">현서 변호사</span>
+          '하나를 보면 열을 안다'는 옛말, 성급한 판단이 아니에요.
+        </div>
+
+        <div class="bubble bubble-cold bubble-left" style="bottom: 60px; left: 25px; animation-delay: 1.4s;">
+          존재의 본질을 꿰뚫는 <strong>통찰</strong>이죠.
+        </div>
+      </div>
+    </article>
+
+    <article class="panel" id="panel-3">
+      <div class="panel-number">3</div>
+      <div class="pattern-bg fractal-pattern"></div>
+
+      <div class="panel-content">
+        <svg class="svg-scene" viewBox="0 0 200 200" aria-label="프랙탈 패턴을 보여주는 나뭇잎">
+          <path d="M100 20 Q120 60 100 100 Q80 60 100 20" stroke="#111" stroke-width="3" fill="none"/>
+          <line x1="100" y1="20" x2="100" y2="100" stroke="#111" stroke-width="2"/>
+          <path d="M100 40 L115 50" stroke="#111" stroke-width="1.5"/>
+          <path d="M100 50 L85 58" stroke="#111" stroke-width="1.5"/>
+          <path d="M100 60 L118 68" stroke="#111" stroke-width="1.5"/>
+          <path d="M100 70 L82 76" stroke="#111" stroke-width="1.5"/>
+          <path d="M100 80 L112 86" stroke="#111" stroke-width="1.5"/>
+
+          <path d="M60 120 Q68 135 60 150 Q52 135 60 120" stroke="#111" stroke-width="2" fill="none" opacity="0.6"/>
+          <line x1="60" y1="120" x2="60" y2="150" stroke="#111" stroke-width="1"/>
+          <path d="M60 128 L66 132" stroke="#111" stroke-width="1"/>
+          <path d="M60 136 L54 139" stroke="#111" stroke-width="1"/>
+
+          <path d="M140 130 Q145 140 140 150 Q135 140 140 130" stroke="#111" stroke-width="2" fill="none" opacity="0.6"/>
+          <line x1="140" y1="130" x2="140" y2="150" stroke="#111" stroke-width="1"/>
+          <path d="M140 136 L144 139" stroke="#111" stroke-width="1"/>
+          <path d="M140 142 L136 144" stroke="#111" stroke-width="1"/>
+
+          <text x="100" y="180" text-anchor="middle" font-size="12" fill="#4040A0" font-weight="700">자기 유사성</text>
+        </svg>
+
+        <div class="sfx" style="top: 10px; right: 20px;">프랙탈!</div>
+
+        <div class="bubble bubble-bottom" style="top: 50px; left: 8px; animation-delay: 0.5s;">
+          <span class="character-name">현서 변호사</span>
+          과학은 이걸 '프랙탈'이라 불러요. 작은 구조가 전체와 닮은 꼴로 되풀이되는 것.
+        </div>
+
+        <div class="bubble bubble-thought" style="bottom: 55px; right: 12px; animation-delay: 1s;">
+          나뭇잎 하나의 잎맥이 나무 전체의 생장 방식을 담고 있다...
+        </div>
+      </div>
+    </article>
+
+    <article class="panel" id="panel-4">
+      <div class="panel-number">4</div>
+      <div class="pattern-bg"></div>
+
+      <div class="panel-content">
+        <svg class="svg-scene" viewBox="0 0 200 160" aria-label="충격받은 표정의 인물">
+          <circle cx="100" cy="70" r="35" stroke="#111" stroke-width="4" fill="none"/>
+          <circle cx="88" cy="62" r="4" fill="#111"/>
+          <circle cx="112" cy="62" r="4" fill="#111"/>
+          <ellipse cx="100" cy="82" rx="8" ry="10" stroke="#111" stroke-width="2" fill="none"/>
+          <line x1="100" y1="105" x2="100" y2="155" stroke="#111" stroke-width="3"/>
+          <line x1="100" y1="115" x2="75" y2="135" stroke="#111" stroke-width="3"/>
+          <line x1="100" y1="115" x2="125" y2="135" stroke="#111" stroke-width="3"/>
+
+          <line x1="70" y1="45" x2="60" y2="35" stroke="#111" stroke-width="2"/>
+          <line x1="130" y1="45" x2="140" y2="35" stroke="#111" stroke-width="2"/>
+          <line x1="100" y1="30" x2="100" y2="18" stroke="#111" stroke-width="2"/>
+        </svg>
+
+        <div class="bubble bubble-cold bubble-bottom" style="top: 8px; left: 10px; max-width: 300px; animation-delay: 0.4s;">
+          나의 가장 사소한 습관, 무의식적 선택조차 내 삶 전체의 구조와 <strong>정확히</strong> 닮아있어요.
+        </div>
+
+        <div class="bubble bubble-emphasis bubble-bottom-right" style="bottom: 85px; right: 15px; animation-delay: 1s;">
+          <span class="character-name">지호</span>
+          그럼... 작은 것이 이미 전체를 규정한다는 건가요?
+        </div>
+
+        <div class="bubble bubble-thought" style="bottom: 25px; left: 20px; animation-delay: 1.5s;">
+          희망일까, 절망일까...
+        </div>
+      </div>
+    </article>
+
+    <article class="panel" id="panel-5">
+      <div class="panel-number">5</div>
+      <div class="pattern-bg halftone"></div>
+
+      <div class="panel-content">
+        <svg class="svg-scene" viewBox="0 0 200 180" aria-label="깨진 백자와 깨달음">
+          <ellipse cx="100" cy="100" rx="50" ry="35" stroke="#111" stroke-width="3" fill="none"/>
+          <path d="M75 95 L82 98 L88 96 L95 100 L102 97 L110 102 L118 98 L125 101" stroke="#E04040" stroke-width="3" fill="none"/>
+          <path d="M85 85 L88 96" stroke="#E04040" stroke-width="2" fill="none"/>
+          <path d="M110 88 L110 102" stroke="#E04040" stroke-width="2" fill="none"/>
+
+          <circle cx="100" cy="40" r="5" fill="#FFC040" opacity="0.8"/>
+          <line x1="100" y1="28" x2="100" y2="22" stroke="#FFC040" stroke-width="2"/>
+          <line x1="110" y1="32" x2="115" y2="28" stroke="#FFC040" stroke-width="2"/>
+          <line x1="90" y1="32" x2="85" y2="28" stroke="#FFC040" stroke-width="2"/>
+          <line x1="112" y1="40" x2="118" y2="40" stroke="#FFC040" stroke-width="2"/>
+          <line x1="88" y1="40" x2="82" y2="40" stroke="#FFC040" stroke-width="2"/>
+        </svg>
+
+        <div class="bubble bubble-cold bubble-bottom" style="top: 12px; right: 15px; max-width: 320px; animation-delay: 0.6s;">
+          그 작은 균열은 미래의 파손을 '예고'한 게 아니었어요. 이미 <strong>시작된</strong> 파손 그 자체였죠.
+        </div>
+
+        <div class="bubble-narration" style="animation-delay: 1.2s;">
+          시작 속에 끝이 들어와 있었다.
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <strong>핵심 통찰</strong>
+        한 사람의 생(生)이라는 복잡한 무늬는, 아주 작은 한 점의 기미에서 이미 완성되어 있다. 우리가 할 수 있는 것은, 어쩌면 변화가 아니라 '인지'—내 삶의 무늬, 그 끈질긴 패턴을 직시하는 것일지 모른다.
+      </div>
+    </article>
+  </main>
+
+  <footer class="comic-footer">
+    <p>프랙탈의 통찰: 부분이 전체를 품고 있다</p>
+  </footer>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.panel').forEach(panel => observer.observe(panel));
+
+document.querySelectorAll('.panel').forEach(panel => {
+  panel.addEventListener('mouseenter', () => {
+    panel.style.transform = 'translateY(-6px) scale(1.01)';
+  });
+  panel.addEventListener('mouseleave', () => {
+    panel.style.transform = 'translateY(0) scale(1)';
+  });
+});
+</script>
+</body>
+</html>
