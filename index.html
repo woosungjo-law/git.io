@@ -3,591 +3,762 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하도급 대금 지연이자의 비밀</title>
+    <title>하도급 대금 지연이자의 비밀 - 비주얼 노블</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR:wght@700;900&display=swap');
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            word-break: keep-all;
         }
 
         body {
-            font-family: 'Courier New', 'Noto Sans KR', monospace;
-            background: linear-gradient(135deg, #FFFEF0 0%, #F4ECD8 100%);
-            color: #2B2B2B;
-            line-height: 1.5;
-            padding: 20px;
-            filter: sepia(0.1);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Vintage Banner */
-        .banner {
-            text-align: center;
-            padding: 30px 20px;
-            border: 6px double #2B2B2B;
-            background: #FFFEF0;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .banner::before,
-        .banner::after {
-            content: '★';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2rem;
-            color: #C41E3A;
-        }
-
-        .banner::before {
-            left: 20px;
-        }
-
-        .banner::after {
-            right: 20px;
-        }
-
-        .banner h1 {
-            font-family: 'Georgia', 'Noto Serif KR', serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: #2B2B2B;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .banner .subtitle {
-            font-size: 1.2rem;
-            color: #C41E3A;
-            font-weight: 700;
-            font-style: italic;
-        }
-
-        /* Strip Container */
-        .strip {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
-            max-width: 1200px;
-            margin: 40px auto;
-            border: 6px double #2B2B2B;
-            background: #FFFEF0;
-            box-shadow: inset 0 0 0 2px #FFFEF0;
-        }
-
-        .panel {
-            border-right: 3px solid #2B2B2B;
-            padding: 20px;
-            background: #FFFEF0;
-            position: relative;
-            min-height: 300px;
+            font-family: 'Pretendard', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            background: #1A1A2E;
+            color: #FFFFFF;
+            overflow: hidden;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        .panel:last-child {
-            border-right: none;
+        .game-container {
+            position: relative;
+            width: 100%;
+            max-width: 1280px;
+            aspect-ratio: 16 / 9;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 3px solid #00D9FF;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
         }
 
-        .panel::before {
-            content: '';
+        /* Background Layer */
+        .background-layer {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: radial-gradient(circle, #2B2B2B 1.5px, transparent 1.5px);
-            background-size: 6px 6px;
-            opacity: 0.08;
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            transition: opacity 0.5s ease;
         }
 
-        .panel-content {
-            position: relative;
-            z-index: 1;
-            flex-grow: 1;
+        .bg-office {
+            background: linear-gradient(180deg, #2C3E50 0%, #34495E 50%, #2C3E50 100%);
+        }
+
+        .bg-office::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 30%;
+            height: 40%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .bg-office::after {
+            content: '';
+            position: absolute;
+            top: 60%;
+            left: 5%;
+            width: 90%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .bg-consultation {
+            background: linear-gradient(180deg, #1E3A5F 0%, #2C5282 50%, #1E3A5F 100%);
+        }
+
+        .bg-court {
+            background: linear-gradient(180deg, #4A1A1A 0%, #6B2C2C 50%, #4A1A1A 100%);
+        }
+
+        /* Character Layer */
+        .character-layer {
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 35%;
+            height: 85%;
+            z-index: 2;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .character-layer.visible {
+            opacity: 1;
+        }
+
+        .character-layer.right {
+            left: auto;
+            right: 10%;
+        }
+
+        /* Dialogue Box */
+        .dialogue-box {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 5%;
+            height: 32%;
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid #FFFFFF;
+            border-radius: 12px;
+            padding: 20px 24px;
+            z-index: 3;
+        }
+
+        .character-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #00D9FF;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .dialogue-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #FFFFFF;
+            min-height: 80px;
+        }
+
+        .dialogue-text .highlight {
+            color: #FF6B9D;
+            font-weight: 700;
+        }
+
+        .dialogue-text .important {
+            color: #00D9FF;
+            font-weight: 700;
+        }
+
+        /* Click indicator */
+        .click-indicator {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Choice Buttons */
+        .choice-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            width: 60%;
+            max-width: 500px;
+        }
+
+        .choice-container.visible {
+            display: flex;
+        }
+
+        .choice-btn {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #4A90E2;
+            border-radius: 8px;
+            padding: 15px 20px;
+            color: #FFFFFF;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .choice-btn:hover {
+            background: #4A90E2;
+            transform: translateX(10px);
+            box-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
+        }
+
+        /* UI Buttons */
+        .ui-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 5;
+            display: flex;
+            gap: 10px;
+        }
+
+        .ui-btn {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            padding: 6px 12px;
+            color: #FFFFFF;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .ui-btn:hover {
+            background: rgba(74, 144, 226, 0.7);
+        }
+
+        .ui-btn.active {
+            background: #FF6B9D;
+            border-color: #FF6B9D;
+        }
+
+        /* Scene Counter */
+        .scene-counter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 5;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Title Screen */
+        .title-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            z-index: 10;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
         }
 
-        /* Speech Bubbles */
-        .comic-bubble {
-            position: relative;
-            background: #FFFEF0;
-            border: 3px solid #2B2B2B;
-            border-radius: 15px;
-            padding: 12px;
-            margin: 10px 0;
-            font-size: 0.95rem;
-            text-align: center;
-            max-width: 200px;
-        }
-
-        .comic-bubble::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border: 8px solid transparent;
-            border-top-color: #2B2B2B;
-            border-bottom: 0;
-        }
-
-        .comic-bubble::before {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border: 5px solid transparent;
-            border-top-color: #FFFEF0;
-            border-bottom: 0;
-            z-index: 1;
-        }
-
-        .thought-bubble {
-            background: #FFD700;
-            border-color: #2B2B2B;
-        }
-
-        .thought-bubble::before {
-            border-top-color: #FFD700;
-        }
-
-        /* Sound Effects */
-        .sound-effect {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #C41E3A;
-            text-transform: uppercase;
-            text-align: center;
-            transform: rotate(-5deg);
-            margin: 10px 0;
-            text-shadow: 2px 2px 0 #FFD700;
-        }
-
-        /* Accent Colors */
-        .accent-red {
-            color: #C41E3A;
+        .title-screen h1 {
+            font-size: 2.5rem;
             font-weight: 700;
+            color: #00D9FF;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
         }
 
-        .accent-yellow {
-            background: #FFD700;
-            padding: 2px 4px;
-            font-weight: 700;
-        }
-
-        /* Narration Box */
-        .narration-box {
-            background: #F4ECD8;
-            border: 4px double #2B2B2B;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 1200px;
-            font-size: 0.85rem;
-            font-style: italic;
-            line-height: 1.7;
-        }
-
-        .narration-box h3 {
-            font-family: 'Georgia', 'Noto Serif KR', serif;
+        .title-screen p {
             font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: #C41E3A;
-            font-style: normal;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
         }
 
-        .narration-box strong {
-            color: #C41E3A;
-            font-style: normal;
-        }
-
-        /* Strip Title */
-        .strip-title {
-            text-align: center;
-            font-family: 'Georgia', 'Noto Serif KR', serif;
-            font-size: 1.5rem;
+        .start-btn {
+            background: linear-gradient(135deg, #FF6B9D, #00D9FF);
+            border: none;
+            border-radius: 30px;
+            padding: 15px 50px;
+            color: #FFFFFF;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 10px;
-            color: #2B2B2B;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        /* Big Number */
-        .big-number {
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+        }
+
+        /* End Screen */
+        .end-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .end-screen.visible {
+            display: flex;
+        }
+
+        .end-screen h2 {
             font-size: 2rem;
-            font-weight: 900;
-            color: #C41E3A;
-            text-align: center;
+            color: #00D9FF;
+            margin-bottom: 30px;
         }
 
-        /* Punchline Panel */
-        .punchline {
-            background: #FFD700 !important;
+        .end-screen .summary {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #FFFFFF;
+            max-width: 600px;
         }
 
-        .punchline::before {
-            opacity: 0.05;
+        .end-screen .highlight {
+            color: #FF6B9D;
+            font-weight: 700;
+            font-size: 1.5rem;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 20px;
-            border: 4px double #2B2B2B;
-            background: #FFFEF0;
+        .restart-btn {
             margin-top: 30px;
-            font-family: 'Georgia', 'Noto Serif KR', serif;
+            background: #4A90E2;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            color: #FFFFFF;
+            font-size: 1rem;
+            cursor: pointer;
         }
 
-        .footer .highlight {
-            font-size: 2rem;
-            font-weight: 900;
-            color: #C41E3A;
-            display: block;
-            margin: 10px 0;
+        .restart-btn:hover {
+            background: #FF6B9D;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .strip {
-                grid-template-columns: repeat(2, 1fr);
+            .game-container {
+                aspect-ratio: 4 / 3;
             }
 
-            .panel:nth-child(2) {
-                border-right: none;
+            .dialogue-box {
+                height: 40%;
             }
 
-            .panel:nth-child(3) {
-                border-top: 3px solid #2B2B2B;
+            .character-name {
+                font-size: 1rem;
             }
 
-            .panel:nth-child(4) {
-                border-top: 3px solid #2B2B2B;
+            .dialogue-text {
+                font-size: 0.95rem;
             }
 
-            .banner h1 {
-                font-size: 2rem;
-            }
-
-            .banner::before,
-            .banner::after {
-                display: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .strip {
-                grid-template-columns: 1fr;
-            }
-
-            .panel {
-                border-right: none;
-                border-bottom: 3px solid #2B2B2B;
-            }
-
-            .panel:last-child {
-                border-bottom: none;
+            .title-screen h1 {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Vintage Banner -->
-        <div class="banner">
-            <h1>하도급 대금 이자 극장</h1>
-            <p class="subtitle">"계약서에 이자 규정이 없는데요?" - 당신이 몰랐던 비밀</p>
+    <div class="game-container">
+        <!-- Title Screen -->
+        <div class="title-screen" id="titleScreen">
+            <h1>하도급 대금 지연이자의 비밀</h1>
+            <p>"계약서에 이자 규정이 없는데요?"</p>
+            <button class="start-btn" onclick="startGame()">시작하기</button>
         </div>
 
-        <!-- Strip 1: The Problem -->
-        <div class="strip-title">제1화: 90일의 기다림</div>
-        <div class="strip">
-            <div class="panel">
-                <div class="panel-content">
-                    <svg viewBox="0 0 200 250" width="100" height="125">
-                        <circle cx="100" cy="80" r="35" fill="#FFD700" stroke="#2B2B2B" stroke-width="4"/>
-                        <circle cx="88" cy="75" r="4" fill="#2B2B2B"/>
-                        <circle cx="112" cy="75" r="4" fill="#2B2B2B"/>
-                        <path d="M 88 95 Q 100 105 112 95" stroke="#2B2B2B" stroke-width="3" fill="none"/>
-                        <rect x="78" y="110" width="44" height="70" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="3"/>
-                        <rect x="85" y="125" width="30" height="8" fill="#FFFEF0"/>
-                        <text x="100" y="210" text-anchor="middle" font-size="14" font-weight="bold">박 대표</text>
-                    </svg>
-                    <div class="comic-bubble">
-                        부품 납품 완료!
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-content">
-                    <svg viewBox="0 0 200 250" width="100" height="125">
-                        <rect x="60" y="60" width="80" height="120" fill="#FFFEF0" stroke="#2B2B2B" stroke-width="4"/>
-                        <text x="100" y="100" text-anchor="middle" font-size="12" font-weight="bold">달력</text>
-                        <text x="100" y="130" text-anchor="middle" font-size="16" font-weight="bold" fill="#C41E3A">4월 14일</text>
-                        <text x="100" y="160" text-anchor="middle" font-size="11">지급 예정일</text>
-                    </svg>
-                    <div class="comic-bubble">
-                        30일 후면 대금이...
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-content">
-                    <svg viewBox="0 0 200 250" width="100" height="125">
-                        <circle cx="100" cy="80" r="35" fill="#FFD700" stroke="#2B2B2B" stroke-width="4"/>
-                        <circle cx="88" cy="75" r="4" fill="#2B2B2B"/>
-                        <circle cx="112" cy="75" r="4" fill="#2B2B2B"/>
-                        <path d="M 88 95 Q 100 85 112 95" stroke="#2B2B2B" stroke-width="3" fill="none"/>
-                        <path d="M 85 65 Q 88 60 92 65" stroke="#2B2B2B" stroke-width="2" fill="none"/>
-                        <path d="M 108 65 Q 112 60 115 65" stroke="#2B2B2B" stroke-width="2" fill="none"/>
-                        <rect x="78" y="110" width="44" height="70" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="3"/>
-                        <text x="100" y="210" text-anchor="middle" font-size="12" fill="#C41E3A">90일 경과...</text>
-                    </svg>
-                    <div class="sound-effect">
-                        기다림...
-                    </div>
-                </div>
-            </div>
-            <div class="panel punchline">
-                <div class="panel-content">
-                    <div class="big-number">1억 원</div>
-                    <div class="comic-bubble thought-bubble">
-                        지연이자라도 받아야겠어!
-                    </div>
-                    <div class="sound-effect">결심!</div>
-                </div>
-            </div>
-        </div>
-        <div class="narration-box">
-            <h3>📜 법률 해설</h3>
-            <p>박 대표는 3월 15일 납품 후, 약속된 4월 14일이 지나도 대금을 받지 못했습니다.
-            <strong>하도급법 제13조 제1항</strong>은 원사업자가 목적물 수령일로부터 <strong>60일 이내</strong>에
-            대금을 지급해야 한다고 명시합니다.</p>
+        <!-- Background Layer -->
+        <div class="background-layer bg-office" id="background"></div>
+
+        <!-- Character Layer -->
+        <div class="character-layer" id="character">
+            <svg viewBox="0 0 400 800" width="100%" height="100%" id="characterSvg">
+                <!-- Default: Park CEO -->
+            </svg>
         </div>
 
-        <!-- Strip 2: The Rejection -->
-        <div class="strip-title">제2화: 대기업의 거부</div>
-        <div class="strip">
-            <div class="panel">
-                <div class="panel-content">
-                    <svg viewBox="0 0 200 250" width="100" height="125">
-                        <circle cx="100" cy="80" r="35" fill="#FFD700" stroke="#2B2B2B" stroke-width="4"/>
-                        <circle cx="88" cy="75" r="4" fill="#2B2B2B"/>
-                        <circle cx="112" cy="75" r="4" fill="#2B2B2B"/>
-                        <path d="M 88 95 Q 100 105 112 95" stroke="#2B2B2B" stroke-width="3" fill="none"/>
-                        <rect x="78" y="110" width="44" height="70" fill="#2B2B2B"/>
-                    </svg>
-                    <div class="comic-bubble">
-                        지연이자를 주세요!
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-content">
-                    <svg viewBox="0 0 200 250" width="100" height="125">
-                        <rect x="60" y="50" width="80" height="100" fill="#C41E3A" stroke="#2B2B2B" stroke-width="4"/>
-                        <rect x="75" y="70" width="50" height="30" fill="#FFFEF0" stroke="#2B2B2B" stroke-width="2"/>
-                        <text x="100" y="90" text-anchor="middle" font-size="9" font-weight="bold">미래전자</text>
-                        <rect x="85" y="120" width="30" height="20" fill="#2B2B2B"/>
-                    </svg>
-                    <div class="comic-bubble">
-                        계약서에 조항이 없습니다!
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="big-number" style="text-decoration: line-through; opacity: 0.6;">연 6%</div>
-                    <div class="comic-bubble">
-                        줘도 상법상 6%만!
-                    </div>
-                </div>
-            </div>
-            <div class="panel punchline">
-                <div class="panel-content">
-                    <svg viewBox="0 0 200 250" width="100" height="125">
-                        <circle cx="100" cy="80" r="35" fill="#FFD700" stroke="#2B2B2B" stroke-width="4"/>
-                        <circle cx="88" cy="75" r="6" fill="#2B2B2B"/>
-                        <circle cx="112" cy="75" r="6" fill="#2B2B2B"/>
-                        <path d="M 85 100 Q 100 90 115 100" stroke="#2B2B2B" stroke-width="3" fill="none"/>
-                        <text x="80" y="55" font-size="20">?</text>
-                        <text x="115" y="55" font-size="20">?</text>
-                    </svg>
-                    <div class="sound-effect">충격!</div>
-                </div>
-            </div>
-        </div>
-        <div class="narration-box">
-            <h3>📜 법률 해설</h3>
-            <p>미래전자는 "계약서에 지연이자 조항이 없다"며 거부했습니다.
-            하지만 이는 <strong>법적 근거가 전혀 없는 주장</strong>입니다!
-            <strong>하도급법 제13조 제8항</strong>은 강행규정으로, 계약서에 없어도 <strong>자동 적용</strong>됩니다.</p>
+        <!-- Dialogue Box -->
+        <div class="dialogue-box" id="dialogueBox" onclick="nextDialogue()">
+            <div class="character-name" id="charName">???</div>
+            <div class="dialogue-text" id="dialogueText"></div>
+            <div class="click-indicator">클릭하여 계속 ▼</div>
         </div>
 
-        <!-- Strip 3: The Truth -->
-        <div class="strip-title">제3화: 법의 진실</div>
-        <div class="strip">
-            <div class="panel">
-                <div class="panel-content">
-                    <svg viewBox="0 0 200 250" width="100" height="125">
-                        <rect x="50" y="80" width="100" height="80" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="3"/>
-                        <polygon points="100,50 50,80 150,80" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="3"/>
-                        <rect x="70" y="100" width="20" height="40" fill="#FFFEF0"/>
-                        <rect x="110" y="100" width="20" height="40" fill="#FFFEF0"/>
-                        <text x="100" y="190" text-anchor="middle" font-size="12" font-weight="bold">대법원</text>
-                    </svg>
-                    <div class="comic-bubble">
-                        하도급법이 우선!
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="sound-effect">강행규정!</div>
-                    <div class="comic-bubble thought-bubble">
-                        계약서에 없어도 자동 적용!
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-content">
-                    <div style="text-align: center;">
-                        <div style="text-decoration: line-through; opacity: 0.5; margin-bottom: 10px;">
-                            <div style="font-size: 0.9rem;">상법상</div>
-                            <div style="font-size: 1.5rem; font-weight: 900;">연 6%</div>
-                        </div>
-                        <div style="font-size: 1.2rem; font-weight: 900;">VS</div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel punchline">
-                <div class="panel-content">
-                    <div style="text-align: center;">
-                        <div style="font-size: 0.9rem;">하도급법</div>
-                        <div class="big-number">연 15.5%</div>
-                    </div>
-                    <div class="sound-effect">반전!</div>
-                </div>
-            </div>
-        </div>
-        <div class="narration-box">
-            <h3>📜 법률 해설</h3>
-            <p><strong>대법원 2010. 10. 28. 선고 2010두16561 판결</strong>은 하도급법이 정한 이율이
-            민법이나 상법상 이율보다 <strong>우선 적용</strong>된다고 판시했습니다.
-            현재 공정거래위원회가 고시한 이율은 <strong>연 15.5%</strong>입니다!</p>
+        <!-- Choice Container -->
+        <div class="choice-container" id="choiceContainer"></div>
+
+        <!-- UI Controls -->
+        <div class="ui-controls">
+            <button class="ui-btn" id="autoBtn" onclick="toggleAuto()">AUTO</button>
+            <button class="ui-btn" onclick="skipDialogue()">SKIP</button>
         </div>
 
-        <!-- Strip 4: The Calculation -->
-        <div class="strip-title">제4화: 승리의 계산</div>
-        <div class="strip">
-            <div class="panel">
-                <div class="panel-content">
-                    <div style="font-size: 0.85rem; text-align: center;">
-                        <strong>공식</strong><br>
-                        대금 × 15.5% × (지연일수 ÷ 365)
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-content">
-                    <div style="font-size: 0.85rem; text-align: left;">
-                        • 납품일: 3/15<br>
-                        • 법정기일: 5/14<br>
-                        • 지급일: 6/13<br>
-                        • <span class="accent-red">지연: 30일</span>
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-content">
-                    <div style="font-size: 0.8rem; text-align: center; font-family: monospace;">
-                        1억 × 0.155<br>
-                        × (30 ÷ 365)<br>
-                        =
-                    </div>
-                </div>
-            </div>
-            <div class="panel punchline">
-                <div class="panel-content">
-                    <div class="big-number">1,273,973원!</div>
-                    <div class="sound-effect">대박!</div>
-                </div>
-            </div>
-        </div>
-        <div class="narration-box">
-            <h3>📜 실무 TIP</h3>
-            <p>• <strong>60일 초과 약정은 무효!</strong> 법정 지급기일이 자동 적용됩니다.<br>
-            • <strong>내용증명으로 청구!</strong> 하도급법 제13조 제8항을 근거로 명시하세요.<br>
-            • <strong>공정위 신고 활용!</strong> 하도급분쟁조정협의회도 좋은 방법입니다.</p>
-        </div>
+        <!-- Scene Counter -->
+        <div class="scene-counter" id="sceneCounter">SCENE 1</div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>기억하세요!</p>
-            <span class="highlight">계약서에 없어도 연 15.5%</span>
-            <p>하도급법이 당신을 보호합니다!</p>
-            <p style="font-size: 0.8rem; margin-top: 15px;">
-                관련 판례: 대법원 2010두16561 / 대법원 2010다106283
-            </p>
+        <!-- End Screen -->
+        <div class="end-screen" id="endScreen">
+            <h2>핵심 정리</h2>
+            <div class="summary">
+                <p>계약서에 지연이자 조항이 없어도</p>
+                <p class="highlight">연 15.5%</p>
+                <p>하도급법이 당신을 보호합니다!</p>
+                <br>
+                <p>대법원 2010두16561 판결</p>
+                <p>하도급법 제13조 제8항 (강행규정)</p>
+            </div>
+            <button class="restart-btn" onclick="restartGame()">다시 보기</button>
         </div>
     </div>
 
     <script>
-        // Add typewriter effect for narration boxes
-        document.querySelectorAll('.narration-box p').forEach(p => {
-            p.style.opacity = '0';
-            p.style.transform = 'translateY(10px)';
-            p.style.transition = 'all 0.5s ease';
-        });
+        // Game State
+        let currentScene = 0;
+        let currentDialogue = 0;
+        let isTyping = false;
+        let autoMode = false;
+        let fullText = '';
 
-        // Intersection Observer for animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const narration = entry.target.querySelector('.narration-box p');
-                    if (narration) {
-                        setTimeout(() => {
-                            narration.style.opacity = '1';
-                            narration.style.transform = 'translateY(0)';
-                        }, 300);
+        // Character SVGs
+        const characters = {
+            park_normal: `
+                <circle cx="200" cy="150" r="80" fill="#FFE0B2" stroke="#2B2B2B" stroke-width="2"/>
+                <circle cx="175" cy="140" r="8" fill="#2B2B2B"/>
+                <circle cx="225" cy="140" r="8" fill="#2B2B2B"/>
+                <path d="M 175 175 Q 200 185 225 175" stroke="#2B2B2B" stroke-width="3" fill="none"/>
+                <path d="M 140 100 Q 200 60 260 100 Q 265 140 260 145 L 140 145 Q 135 140 140 100" fill="#2C3E50" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="160" y="230" width="80" height="250" fill="#4A90E2" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="175" y="260" width="50" height="8" fill="#FFFFFF"/>
+                <path d="M 160 230 L 140 330 L 160 330 Z" fill="#4A90E2" stroke="#2B2B2B" stroke-width="2"/>
+                <path d="M 240 230 L 260 330 L 240 330 Z" fill="#4A90E2" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="170" y="480" width="25" height="150" fill="#2C3E50" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="205" y="480" width="25" height="150" fill="#2C3E50" stroke="#2B2B2B" stroke-width="2"/>
+                <text x="200" y="700" text-anchor="middle" font-size="24" fill="#FFFFFF">박 대표</text>
+            `,
+            park_worried: `
+                <circle cx="200" cy="150" r="80" fill="#FFE0B2" stroke="#2B2B2B" stroke-width="2"/>
+                <circle cx="175" cy="140" r="8" fill="#2B2B2B"/>
+                <circle cx="225" cy="140" r="8" fill="#2B2B2B"/>
+                <path d="M 175 185 Q 200 175 225 185" stroke="#2B2B2B" stroke-width="3" fill="none"/>
+                <path d="M 165 120 Q 170 115 180 120" stroke="#2B2B2B" stroke-width="2" fill="none"/>
+                <path d="M 220 120 Q 230 115 235 120" stroke="#2B2B2B" stroke-width="2" fill="none"/>
+                <path d="M 140 100 Q 200 60 260 100 Q 265 140 260 145 L 140 145 Q 135 140 140 100" fill="#2C3E50" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="160" y="230" width="80" height="250" fill="#4A90E2" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="175" y="260" width="50" height="8" fill="#FFFFFF"/>
+                <rect x="170" y="480" width="25" height="150" fill="#2C3E50" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="205" y="480" width="25" height="150" fill="#2C3E50" stroke="#2B2B2B" stroke-width="2"/>
+                <text x="200" y="700" text-anchor="middle" font-size="24" fill="#FFFFFF">박 대표</text>
+            `,
+            park_happy: `
+                <circle cx="200" cy="150" r="80" fill="#FFE0B2" stroke="#2B2B2B" stroke-width="2"/>
+                <circle cx="175" cy="140" r="8" fill="#2B2B2B"/>
+                <circle cx="225" cy="140" r="8" fill="#2B2B2B"/>
+                <path d="M 170 170 Q 200 200 230 170" stroke="#2B2B2B" stroke-width="3" fill="none"/>
+                <path d="M 140 100 Q 200 60 260 100 Q 265 140 260 145 L 140 145 Q 135 140 140 100" fill="#2C3E50" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="160" y="230" width="80" height="250" fill="#4A90E2" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="175" y="260" width="50" height="8" fill="#FFFFFF"/>
+                <rect x="170" y="480" width="25" height="150" fill="#2C3E50" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="205" y="480" width="25" height="150" fill="#2C3E50" stroke="#2B2B2B" stroke-width="2"/>
+                <text x="200" y="700" text-anchor="middle" font-size="24" fill="#FFFFFF">박 대표</text>
+            `,
+            lawyer: `
+                <circle cx="200" cy="150" r="80" fill="#FFE0B2" stroke="#2B2B2B" stroke-width="2"/>
+                <circle cx="175" cy="140" r="8" fill="#2B2B2B"/>
+                <circle cx="225" cy="140" r="8" fill="#2B2B2B"/>
+                <rect x="160" cy="130" width="20" height="25" fill="none" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="220" cy="130" width="20" height="25" fill="none" stroke="#2B2B2B" stroke-width="2"/>
+                <path d="M 180 175 Q 200 185 220 175" stroke="#2B2B2B" stroke-width="3" fill="none"/>
+                <path d="M 145 105 Q 200 70 255 105 Q 258 135 255 140 L 145 140 Q 142 135 145 105" fill="#1A1A1A" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="160" y="230" width="80" height="250" fill="#1A1A1A" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="185" y="250" width="30" height="40" fill="#FFFFFF"/>
+                <rect x="170" y="480" width="25" height="150" fill="#1A1A1A" stroke="#2B2B2B" stroke-width="2"/>
+                <rect x="205" y="480" width="25" height="150" fill="#1A1A1A" stroke="#2B2B2B" stroke-width="2"/>
+                <text x="200" y="700" text-anchor="middle" font-size="24" fill="#FFFFFF">변호사</text>
+            `,
+            company: `
+                <rect x="120" y="100" width="160" height="200" fill="#C41E3A" stroke="#2B2B2B" stroke-width="3"/>
+                <rect x="150" y="140" width="100" height="60" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="2"/>
+                <text x="200" y="180" text-anchor="middle" font-size="16" font-weight="bold">미래전자</text>
+                <rect x="170" y="230" width="60" height="50" fill="#2B2B2B"/>
+                <text x="200" y="400" text-anchor="middle" font-size="24" fill="#FFFFFF">대기업</text>
+            `
+        };
+
+        // Scenes Data
+        const scenes = [
+            {
+                id: 'intro',
+                dialogues: [
+                    { char: '나레이션', text: '중소기업 기술전자(주)의 박 대표는 대기업 미래전자(주)와 스마트폰 부품 제조 계약을 맺었습니다.', sprite: 'park_normal', bg: 'office' },
+                    { char: '박 대표', text: '계약서에 납품 후 30일 이내에 현금으로 대금을 지급한다고 명시되어 있어. 3월 15일에 납품을 완료했으니...', sprite: 'park_normal', bg: 'office' },
+                    { char: '박 대표', text: '4월 14일이면 <span class="important">1억 원</span>을 받을 수 있겠군!', sprite: 'park_normal', bg: 'office' },
+                ],
+                next: 1
+            },
+            {
+                id: 'problem',
+                dialogues: [
+                    { char: '나레이션', text: '하지만 약속된 지급일이 지나도 대금은 지급되지 않았습니다...', sprite: 'park_worried', bg: 'office' },
+                    { char: '박 대표', text: '벌써 <span class="highlight">90일</span>이나 지났는데... 6월 13일이 되어서야 겨우 대금을 받았어.', sprite: 'park_worried', bg: 'office' },
+                    { char: '박 대표', text: '지연된 기간에 대한 이자라도 받아야겠어!', sprite: 'park_worried', bg: 'office' },
+                ],
+                next: 2
+            },
+            {
+                id: 'rejection',
+                dialogues: [
+                    { char: '미래전자 담당자', text: '지연이자요? <span class="highlight">계약서에 지연이자 조항이 없습니다.</span>', sprite: 'company', bg: 'office' },
+                    { char: '미래전자 담당자', text: '설령 지급하더라도 일반 상거래에 적용되는 <span class="important">연 6%</span>의 이율만 인정할 수 있습니다.', sprite: 'company', bg: 'office' },
+                ],
+                choice: {
+                    question: '박 대표는 어떻게 해야 할까요?',
+                    options: [
+                        { text: '포기한다 - 계약서에 없으니 어쩔 수 없다', next: 3 },
+                        { text: '법률 상담을 받는다', next: 4 },
+                        { text: '연 6%라도 받겠다고 한다', next: 3 }
+                    ]
+                }
+            },
+            {
+                id: 'wrong_choice',
+                dialogues: [
+                    { char: '나레이션', text: '잠깐! 그렇게 포기하면 안 됩니다!', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '변호사', text: '대기업의 주장을 그대로 받아들이면 <span class="highlight">큰 손해</span>를 봅니다. 법률 상담을 받아보세요.', sprite: 'lawyer', bg: 'consultation' },
+                ],
+                next: 4
+            },
+            {
+                id: 'consultation',
+                dialogues: [
+                    { char: '변호사', text: '박 대표님, 미래전자의 주장은 <span class="highlight">법적 근거가 전혀 없습니다!</span>', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '박 대표', text: '정말요? 계약서에 지연이자 조항이 없는데요?', sprite: 'park_worried', bg: 'consultation' },
+                    { char: '변호사', text: '<span class="important">하도급법 제13조 제8항</span>은 강행규정입니다. 계약서에 없어도 자동으로 적용됩니다!', sprite: 'lawyer', bg: 'consultation' },
+                ],
+                next: 5
+            },
+            {
+                id: 'law_explanation',
+                dialogues: [
+                    { char: '변호사', text: '하도급법은 원사업자가 목적물 수령일로부터 <span class="important">60일 이내</span>에 대금을 지급하도록 의무화하고 있습니다.', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '변호사', text: '60일을 초과하면 그 초과 기간에 대해 <span class="highlight">지연이자</span>를 지급해야 합니다.', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '박 대표', text: '그럼 이자율은 어떻게 되나요?', sprite: 'park_normal', bg: 'consultation' },
+                ],
+                choice: {
+                    question: '하도급 대금 지연이자율은?',
+                    options: [
+                        { text: '상법상 연 6%', next: 6 },
+                        { text: '소송촉진법상 연 15%', next: 6 },
+                        { text: '공정거래위원회 고시 연 15.5%', next: 7 }
+                    ]
+                }
+            },
+            {
+                id: 'wrong_rate',
+                dialogues: [
+                    { char: '변호사', text: '아닙니다! <span class="highlight">대법원 2010두16561 판결</span>에 따르면...', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '변호사', text: '하도급법이 정한 이율이 민법이나 상법상 이율보다 <span class="important">우선 적용</span>됩니다!', sprite: 'lawyer', bg: 'consultation' },
+                ],
+                next: 7
+            },
+            {
+                id: 'correct_rate',
+                dialogues: [
+                    { char: '변호사', text: '정확합니다! 공정거래위원회가 고시한 이율은 <span class="highlight">연 15.5%</span>입니다!', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '변호사', text: '이는 상법상 이율(연 6%)이나 소송촉진법상 이율(연 15%)보다 높습니다.', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '박 대표', text: '그럼 제가 받을 수 있는 금액은 얼마인가요?', sprite: 'park_happy', bg: 'consultation' },
+                ],
+                next: 8
+            },
+            {
+                id: 'calculation',
+                dialogues: [
+                    { char: '변호사', text: '계산해보겠습니다. 납품일 3월 15일로부터 60일이 지난 <span class="important">5월 14일</span>이 법정 지급기일입니다.', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '변호사', text: '실제 지급일이 6월 13일이니, 지연일수는 <span class="highlight">30일</span>입니다.', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '변호사', text: '지연이자 = 1억 원 × 15.5% × (30 ÷ 365) = <span class="highlight">약 1,273,973원!</span>', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '박 대표', text: '127만 원이나 받을 수 있다니! 대기업이 말한 6%와는 완전히 다르네요!', sprite: 'park_happy', bg: 'consultation' },
+                ],
+                next: 9
+            },
+            {
+                id: 'tips',
+                dialogues: [
+                    { char: '변호사', text: '실무 팁을 알려드리겠습니다. 첫째, 60일 초과하는 지급기일 약정은 <span class="important">무효</span>입니다.', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '변호사', text: '둘째, 지연이자 청구는 <span class="highlight">내용증명</span>으로 하도급법 제13조 제8항을 근거로 명시하세요.', sprite: 'lawyer', bg: 'consultation' },
+                    { char: '변호사', text: '셋째, 원사업자가 버티면 <span class="important">공정거래위원회 신고</span>나 하도급분쟁조정협의회에 조정을 신청하세요.', sprite: 'lawyer', bg: 'consultation' },
+                ],
+                next: 10
+            },
+            {
+                id: 'ending',
+                dialogues: [
+                    { char: '박 대표', text: '감사합니다! "계약서에 없다"는 주장이 법적 근거가 없다는 걸 알게 되었습니다.', sprite: 'park_happy', bg: 'consultation' },
+                    { char: '변호사', text: '기억하세요. <span class="highlight">하도급법은 강행규정</span>입니다. 계약서에 없어도 당신을 보호합니다!', sprite: 'lawyer', bg: 'consultation' },
+                ],
+                end: true
+            }
+        ];
+
+        // Game Functions
+        function startGame() {
+            document.getElementById('titleScreen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('titleScreen').style.display = 'none';
+            }, 500);
+            currentScene = 0;
+            currentDialogue = 0;
+            showScene();
+        }
+
+        function showScene() {
+            const scene = scenes[currentScene];
+            document.getElementById('sceneCounter').textContent = `SCENE ${currentScene + 1}`;
+            showDialogue();
+        }
+
+        function showDialogue() {
+            const scene = scenes[currentScene];
+            if (currentDialogue >= scene.dialogues.length) {
+                if (scene.choice) {
+                    showChoices(scene.choice);
+                } else if (scene.end) {
+                    showEndScreen();
+                } else {
+                    currentScene = scene.next;
+                    currentDialogue = 0;
+                    showScene();
+                }
+                return;
+            }
+
+            const dialogue = scene.dialogues[currentDialogue];
+
+            // Update character
+            const charLayer = document.getElementById('character');
+            if (dialogue.sprite && characters[dialogue.sprite]) {
+                document.getElementById('characterSvg').innerHTML = characters[dialogue.sprite];
+                charLayer.classList.add('visible');
+            } else {
+                charLayer.classList.remove('visible');
+            }
+
+            // Update background
+            const bgLayer = document.getElementById('background');
+            bgLayer.className = 'background-layer';
+            if (dialogue.bg === 'consultation') {
+                bgLayer.classList.add('bg-consultation');
+            } else if (dialogue.bg === 'court') {
+                bgLayer.classList.add('bg-court');
+            } else {
+                bgLayer.classList.add('bg-office');
+            }
+
+            // Update character name
+            document.getElementById('charName').textContent = dialogue.char;
+
+            // Typewriter effect
+            typeWriter(dialogue.text);
+        }
+
+        function typeWriter(text) {
+            isTyping = true;
+            fullText = text;
+            const textElement = document.getElementById('dialogueText');
+            textElement.innerHTML = '';
+            let i = 0;
+            let inTag = false;
+            let currentTag = '';
+
+            function type() {
+                if (i < text.length) {
+                    const char = text.charAt(i);
+
+                    if (char === '<') {
+                        inTag = true;
+                        currentTag = char;
+                    } else if (char === '>') {
+                        inTag = false;
+                        currentTag += char;
+                        textElement.innerHTML += currentTag;
+                        currentTag = '';
+                    } else if (inTag) {
+                        currentTag += char;
+                    } else {
+                        textElement.innerHTML += char;
+                    }
+
+                    i++;
+                    setTimeout(type, 30);
+                } else {
+                    isTyping = false;
+                    if (autoMode) {
+                        setTimeout(nextDialogue, 2000);
                     }
                 }
-            });
-        }, { threshold: 0.5 });
+            }
+            type();
+        }
 
-        document.querySelectorAll('.narration-box').forEach(box => {
-            observer.observe(box);
-        });
+        function nextDialogue() {
+            if (isTyping) {
+                document.getElementById('dialogueText').innerHTML = fullText;
+                isTyping = false;
+                return;
+            }
+            currentDialogue++;
+            showDialogue();
+        }
 
-        // Hover effect for panels
-        document.querySelectorAll('.panel').forEach(panel => {
-            panel.addEventListener('mouseenter', () => {
-                panel.style.transform = 'scale(1.02)';
-                panel.style.transition = 'transform 0.2s ease';
+        function showChoices(choice) {
+            const container = document.getElementById('choiceContainer');
+            container.innerHTML = '';
+
+            choice.options.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                btn.textContent = option.text;
+                btn.onclick = () => selectChoice(option.next);
+                container.appendChild(btn);
             });
-            panel.addEventListener('mouseleave', () => {
-                panel.style.transform = 'scale(1)';
-            });
-        });
+
+            container.classList.add('visible');
+        }
+
+        function selectChoice(nextScene) {
+            document.getElementById('choiceContainer').classList.remove('visible');
+            currentScene = nextScene;
+            currentDialogue = 0;
+            showScene();
+        }
+
+        function toggleAuto() {
+            autoMode = !autoMode;
+            const btn = document.getElementById('autoBtn');
+            btn.classList.toggle('active');
+        }
+
+        function skipDialogue() {
+            if (isTyping) {
+                document.getElementById('dialogueText').innerHTML = fullText;
+                isTyping = false;
+            } else {
+                nextDialogue();
+            }
+        }
+
+        function showEndScreen() {
+            document.getElementById('endScreen').classList.add('visible');
+        }
+
+        function restartGame() {
+            document.getElementById('endScreen').classList.remove('visible');
+            currentScene = 0;
+            currentDialogue = 0;
+            showScene();
+        }
     </script>
 </body>
 </html>
