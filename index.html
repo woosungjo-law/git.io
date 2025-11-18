@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>가면을 쓰면 왜 괴물이 되는가 - 그래픽 노블</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Black+Han+Sans&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,506 +13,1068 @@
         }
 
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
+        /* 타이틀 시퀀스 */
+        .title-sequence {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #000 0%, #1a1a2e 100%);
             position: relative;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
-            position: relative;
-        }
-
-        .header::after {
+        .title-sequence::before {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(220,20,60,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.6; }
         }
 
         .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 4rem;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(220,20,60,0.5);
+            animation: fadeInTitle 2s ease-in;
         }
 
         .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
+            font-size: 1.5rem;
+            color: #dc143c;
+            margin-bottom: 1rem;
+            animation: fadeInTitle 2.5s ease-in;
         }
 
-        .content-grid {
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            font-size: 0.9rem;
+            color: #888;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes fadeInTitle {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 챕터 헤더 */
+        .chapter-header {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+            border-bottom: 3px solid #dc143c;
+        }
+
+        .chapter-number {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 8rem;
+            color: rgba(220,20,60,0.2);
+            position: absolute;
+            left: 2rem;
+        }
+
+        .chapter-title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* 만화 패널 컨테이너 */
+        .comic-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 패널 */
+        .panel {
+            background: #1a1a2e;
+            border: 3px solid #2d2d44;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .panel-full {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .panel-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
+            min-height: 60vh;
         }
 
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
+        .panel-content {
+            padding: 3rem;
             position: relative;
-            transition: all 0.3s ease;
+            z-index: 2;
         }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
+        /* 배경 효과 */
+        .bg-city {
+            background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(26,26,46,0.9) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%231a1a2e" width="1000" height="600"/><rect fill="%23dc143c" opacity="0.1" x="50" y="300" width="80" height="300"/><rect fill="%23dc143c" opacity="0.15" x="200" y="200" width="100" height="400"/><rect fill="%23dc143c" opacity="0.1" x="400" y="250" width="90" height="350"/><rect fill="%23dc143c" opacity="0.12" x="600" y="150" width="110" height="450"/><rect fill="%23dc143c" opacity="0.1" x="800" y="220" width="95" height="380"/></svg>');
+            background-size: cover;
+            background-position: center;
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
+        .bg-dark {
+            background: radial-gradient(circle at center, #2d2d44 0%, #0a0a0a 100%);
         }
 
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
+        .bg-primitive {
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(26,26,46,0.9) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%23321100" width="1000" height="600"/><circle fill="%23ff6600" opacity="0.3" cx="500" cy="100" r="80"/></svg>');
+            background-size: cover;
         }
 
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-        }
-
-        .flow-step::after {
-            content: '→';
+        /* 캐릭터 실루엣 */
+        .character {
             position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
+            width: 200px;
+            height: 400px;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+            clip-path: polygon(40% 0%, 60% 0%, 65% 15%, 70% 30%, 60% 50%, 65% 70%, 70% 100%, 30% 100%, 35% 70%, 40% 50%, 30% 30%, 35% 15%);
+            opacity: 0.6;
         }
 
-        .flow-step:last-child::after {
-            display: none;
+        /* 스마트폰 */
+        .smartphone {
+            width: 200px;
+            height: 400px;
+            background: #000;
+            border: 8px solid #2d2d44;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 0 40px rgba(220,20,60,0.3);
+            margin: 0 auto;
         }
 
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
+        .smartphone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0a 100%);
+            border-radius: 12px;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .instagram-post {
+            background: #fff;
+            color: #000;
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.7rem;
+        }
+
+        .instagram-image {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
+            font-size: 2rem;
         }
 
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
+        /* 말풍선 */
+        .speech-bubble {
+            background: #fff;
+            color: #000;
+            padding: 1.5rem;
+            border-radius: 20px;
+            position: relative;
+            margin: 2rem;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
 
-        .step-desc {
-            font-size: 11px;
-            color: #666;
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid #fff;
+        }
+
+        .thought-bubble {
+            background: #e8e8e8;
+            color: #333;
+            padding: 1.2rem;
+            border-radius: 50%;
+            position: relative;
+            margin: 1rem;
+            font-size: 0.9rem;
+            max-width: 250px;
             line-height: 1.4;
         }
 
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
+        /* 나레이션 박스 */
+        .narration {
+            background: rgba(0,0,0,0.85);
+            border-left: 4px solid #dc143c;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-style: italic;
             border-radius: 4px;
         }
 
-        .priority-title {
-            font-size: 14px;
+        .narration-emphasis {
+            color: #dc143c;
             font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
+            font-style: normal;
+        }
+
+        /* 강조 텍스트 */
+        .big-text {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            color: #dc143c;
+            text-shadow: 0 0 20px rgba(220,20,60,0.5);
+            margin: 2rem 0;
+            line-height: 1.3;
+        }
+
+        .medium-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+
+        /* 타임라인 */
+        .timeline-item {
             display: flex;
             align-items: center;
+            margin: 1.5rem 0;
         }
 
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
+        .timeline-time {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 2rem;
+            color: #dc143c;
+            min-width: 150px;
         }
 
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
+        .timeline-content {
+            flex: 1;
+            padding-left: 2rem;
+            border-left: 3px solid #dc143c;
         }
 
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .key-facts-content {
+        /* 비교 패널 */
+        .compare-panel {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
         }
 
-        .fact-item {
-            text-align: center;
-        }
-
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
-            display: block;
-        }
-
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
-
-        .conclusion {
-            background: #f8f9fa;
+        .compare-item {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
             border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
+        .compare-title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #dc143c;
         }
 
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
-        }
-
-        .footer {
+        /* 아이콘 */
+        .icon-large {
+            font-size: 5rem;
             text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
+            margin: 2rem 0;
+            opacity: 0.3;
         }
 
-        .footer-highlight {
-            color: #1A2A57;
-            font-weight: 700;
+        /* 키보드 타이핑 효과 */
+        .typing {
+            border-right: 2px solid #dc143c;
+            animation: blink 1s infinite;
         }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: #dc143c; }
         }
 
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
+        /* 글리치 효과 */
+        .glitch {
+            position: relative;
+            animation: glitch 3s infinite;
         }
 
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            33% { transform: translate(-2px, 2px); }
+            66% { transform: translate(2px, -2px); }
         }
 
+        /* 페이드인 애니메이션 */
+        .fade-in {
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 반응형 */
         @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
-            }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .main-title {
-                font-size: 24px;
-            }
+            .main-title { font-size: 2rem; }
+            .subtitle { font-size: 1rem; }
+            .chapter-number { font-size: 4rem; }
+            .chapter-title { font-size: 1.8rem; }
+            .panel-split { grid-template-columns: 1fr; }
+            .compare-panel { grid-template-columns: 1fr; }
+            .big-text { font-size: 1.8rem; }
+            .smartphone { width: 160px; height: 320px; }
+        }
+
+        /* 스크롤바 스타일 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #dc143c;
+            border-radius: 5px;
+        }
+
+        /* 페이지 구분선 */
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent 0%, #dc143c 50%, transparent 100%);
+            margin: 4rem 0;
+        }
+
+        /* 중요 메시지 박스 */
+        .key-message {
+            background: linear-gradient(135deg, rgba(220,20,60,0.2) 0%, rgba(220,20,60,0.05) 100%);
+            border: 2px solid #dc143c;
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* 손가락 포인팅 */
+        .finger {
+            font-size: 4rem;
+            animation: point 1.5s ease-in-out infinite;
+        }
+
+        @keyframes point {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
-        </div>
+    <!-- 타이틀 시퀀스 -->
+    <section class="title-sequence">
+        <h1 class="main-title">
+            가면을 쓰면<br>
+            왜 괴물이 되는가
+        </h1>
+        <p class="subtitle">악플의 심리학: 진화심리학적 관점</p>
+        <div class="scroll-hint">▼ 스크롤하여 계속 읽기 ▼</div>
+    </section>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
-        </div>
+    <!-- 챕터 1: 어둠 속의 손가락질 -->
+    <section class="chapter-header">
+        <div class="chapter-number">01</div>
+        <h2 class="chapter-title">어둠 속의 손가락질</h2>
+    </section>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
-
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
+    <div class="comic-container">
+        <!-- 패널 1: 시간과 장소 -->
+        <div class="panel panel-full bg-city fade-in">
+            <div class="panel-content">
+                <div class="timeline-item">
+                    <div class="timeline-time">23:40</div>
+                    <div class="timeline-content">
+                        <div class="medium-text">목요일 밤</div>
+                        <p>마포구 공덕동, 좁은 오피스텔</p>
                     </div>
-                    <div class="section-title">보증보험 청구</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
+                <div class="character" style="right: 10%; bottom: 0;"></div>
             </div>
+        </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <div class="section-title">민사소송 & 가압류</div>
+        <!-- 패널 2: 김민석의 하루 -->
+        <div class="panel panel-split">
+            <div class="panel-content bg-dark">
+                <div class="speech-bubble">
+                    "네, 알겠습니다..."<br>
+                    "죄송합니다..."<br>
+                    "바로 처리하겠습니다..."
                 </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
+                <p style="text-align: center; margin-top: 2rem; color: #888;">
+                    하루 종일 고개 숙이며 살았다
+                </p>
             </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
-                    </div>
-                    <div class="section-title">사해행위 취소</div>
+            <div class="panel-content bg-dark">
+                <div class="thought-bubble">
+                    박 부장의 꼰대 같은 훈계가<br>
+                    아직도 속을 울렁거리게 했다
                 </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
+                <div class="thought-bubble" style="margin-top: 3rem;">
+                    3차 회식까지...<br>
+                    언제까지 이래야 하나
                 </div>
             </div>
         </div>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
+        <!-- 패널 3: 스마트폰 -->
+        <div class="panel panel-full bg-dark fade-in">
+            <div class="panel-content" style="text-align: center;">
+                <div class="narration">
+                    침대에 구겨진 채, 습관처럼 인스타그램을 켰다
                 </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
+                <div class="smartphone">
+                    <div class="smartphone-screen">
+                        <div class="instagram-post">
+                            <div style="font-weight: 700; margin-bottom: 0.5rem;">💪 헬스유튜버</div>
+                            <div class="instagram-image">🏋️</div>
+                            <div style="font-weight: 700;">"노력은 배신하지 않는다!"</div>
+                            <div style="color: #888; font-size: 0.6rem; margin-top: 0.3rem;">
+                                📍 5성급 호텔 수영장
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
             </div>
         </div>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
+        <!-- 패널 4: 감정의 폭발 -->
+        <div class="panel panel-full" style="background: radial-gradient(circle, #dc143c 0%, #0a0a0a 100%);">
+            <div class="panel-content">
+                <div class="big-text">
+                    뜨거운 것이<br>
+                    치밀어 올랐다
+                </div>
+                <div class="narration">
+                    질투라고 하기엔 좀 더 지저분하고,<br>
+                    화라고 하기엔 찌질한 감정이었다
+                </div>
             </div>
         </div>
 
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
+        <!-- 패널 5: 익명 전환 -->
+        <div class="panel panel-split">
+            <div class="panel-content bg-dark">
+                <div class="medium-text" style="color: #dc143c;">익명 계정으로 로그인</div>
+                <div style="margin: 2rem 0; text-align: center;">
+                    <div style="width: 120px; height: 120px; background: #555; border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                        👤
+                    </div>
+                </div>
+                <div class="narration">
+                    프로필 사진도 없는 회색 동그라미<br>
+                    <span class="narration-emphasis">세상에서 가장 안전한 '투명 망토'</span>
+                </div>
+            </div>
+            <div class="panel-content bg-dark">
+                <div style="background: #fff; color: #000; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+                    <div style="font-size: 0.9rem; color: #dc143c; font-weight: 700;">댓글 작성 중...</div>
+                    <div style="margin-top: 1rem; font-size: 1.1rem;">
+                        "약물 써서 만든 몸으로 노력 타령 좀 그만하시죠. <span style="color: #dc143c; font-weight: 700;">역겨우니까.</span>"
+                    </div>
+                    <div class="typing" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #ddd; font-size: 0.8rem; color: #888;">
+                        전송하시겠습니까?
+                    </div>
+                </div>
+                <div class="finger" style="text-align: center;">👆</div>
+            </div>
+        </div>
+
+        <!-- 패널 6: 쾌감 -->
+        <div class="panel panel-full" style="background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);">
+            <div class="panel-content">
+                <div class="narration">
+                    전송 버튼을 꾹 눌렀다.<br>
+                    차가운 액정의 감촉이 손끝에 닿았다.
+                </div>
+                <div class="big-text" style="margin: 3rem 0;">
+                    묘한 쾌감
+                </div>
+                <div class="medium-text" style="text-align: center;">
+                    꽉 막혔던 속이 뻥 뚫리는 기분이었다
+                </div>
+            </div>
+        </div>
+
+        <!-- 핵심 메시지 -->
+        <div class="key-message">
+            가면을 쓰면, 우리는 평소엔 상상도 못 할<br>
+            <span style="color: #dc143c;">용감한 겁쟁이</span>가 된다
+        </div>
+
+        <div class="narration" style="font-size: 1.3rem;">
+            길가에 떨어진 쓰레기도 눈치 보며 줍던 그 착한 김 대리가,<br>
+            왜 이 작은 스마트폰 안에서는 사나운 사냥개가 되는 것일까?
         </div>
     </div>
+
+    <div class="divider"></div>
+
+    <!-- 챕터 2: 고장 난 평판 CCTV -->
+    <section class="chapter-header">
+        <div class="chapter-number">02</div>
+        <h2 class="chapter-title">고장 난 '평판 CCTV'</h2>
+    </section>
+
+    <div class="comic-container">
+        <!-- 패널 7: 뇌의 착각 -->
+        <div class="panel panel-full bg-dark">
+            <div class="panel-content">
+                <div class="big-text">사실 이것은<br>뇌의 착각</div>
+                <div class="narration">
+                    우리 뇌가 오작동을 일으켰기 때문이다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 8: 원시시대 -->
+        <div class="panel panel-full bg-primitive fade-in">
+            <div class="panel-content">
+                <div class="timeline-item">
+                    <div class="timeline-time">20만년 전</div>
+                    <div class="timeline-content">
+                        <div class="medium-text">원시 시대</div>
+                        <p>모두가 서로를 아는 작은 마을</p>
+                    </div>
+                </div>
+
+                <div class="speech-bubble" style="margin-top: 3rem;">
+                    <strong>로빈 던바 교수 (옥스퍼드 대학)</strong><br><br>
+                    "인간의 언어는 원래 <span style="color: #dc143c;">'뒷담화'</span>를 위해 생겨났다"
+                </div>
+
+                <div class="narration">
+                    누가 착한지, 누가 나쁜 놈인지 정보를 나누는 게<br>
+                    <span class="narration-emphasis">생존에 필수</span>였기 때문이다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 9: 평판의 중요성 -->
+        <div class="panel panel-full" style="background: linear-gradient(135deg, #321100 0%, #0a0a0a 100%);">
+            <div class="panel-content">
+                <div class="medium-text" style="color: #ff6600;">그 시절, 남을 함부로 공격하는 건</div>
+                <div class="big-text" style="color: #ff6600;">자살행위</div>
+
+                <div class="compare-panel" style="margin-top: 3rem;">
+                    <div class="compare-item">
+                        <div style="font-size: 3rem; text-align: center;">❌</div>
+                        <div style="margin-top: 1rem; text-align: center; line-height: 1.6;">
+                            "쟤 성격 파탄자래"<br>
+                            ↓<br>
+                            무리에서 추방<br>
+                            ↓<br>
+                            맹수에게 잡아먹힘
+                        </div>
+                    </div>
+                    <div class="compare-item">
+                        <div style="font-size: 3rem; text-align: center;">✅</div>
+                        <div style="margin-top: 1rem; text-align: center; line-height: 1.6;">
+                            좋은 평판 유지<br>
+                            ↓<br>
+                            무리 내 생존<br>
+                            ↓<br>
+                            유전자 전달 성공
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 10: 평판 계산기 -->
+        <div class="panel panel-full bg-dark">
+            <div class="panel-content">
+                <div class="speech-bubble">
+                    <strong>로버트 트리버스 (진화생물학자)</strong><br><br>
+                    우리 뇌 속에는 <span style="color: #dc143c; font-weight: 700;">'평판 계산기'</span> 같은 장치가 들어있다
+                </div>
+
+                <div style="margin: 3rem 0; padding: 2rem; background: rgba(220,20,60,0.1); border-radius: 8px;">
+                    <div style="font-size: 1.3rem; line-height: 2; text-align: center;">
+                        "내가 쟤를 때리면 속은 시원하겠지?<br>
+                        <span style="color: #dc143c; font-weight: 700;">하지만</span><br>
+                        내 평판이 깎이면 더 손해잖아."
+                    </div>
+                </div>
+
+                <div class="narration">
+                    이 계산기가 쉴 새 없이 돌아가며<br>
+                    우리의 주먹과 입을 단속했다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 11: 사회적 CCTV -->
+        <div class="panel panel-full" style="background: radial-gradient(circle, #2d2d44 0%, #0a0a0a 100%);">
+            <div class="panel-content" style="text-align: center;">
+                <div class="icon-large">📹</div>
+                <div class="big-text">머릿속 CCTV</div>
+                <div class="narration">
+                    마치 머릿속에 '사회적 CCTV'가<br>
+                    항상 켜져 있는 셈이었다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 12: 인터넷의 등장 -->
+        <div class="panel panel-full" style="background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0a 100%);">
+            <div class="panel-content">
+                <div class="big-text glitch">문제는</div>
+                <div class="medium-text" style="margin: 2rem 0; line-height: 1.8;">
+                    인터넷 세상이<br>
+                    20만 년 전과는<br>
+                    <span style="color: #dc143c; font-size: 2rem;">너무 다르다</span>는 점이다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 13: 거대한 광장 -->
+        <div class="panel panel-split">
+            <div class="panel-content" style="background: rgba(50,17,0,0.5);">
+                <div class="compare-title">20만 년 전</div>
+                <div class="icon-large">👥</div>
+                <div style="text-align: center; font-size: 1.2rem; line-height: 1.8;">
+                    서로 아는<br>
+                    150명의 작은 마을<br>
+                    <span style="color: #ff6600;">✓ 얼굴 보며 대화</span><br>
+                    <span style="color: #ff6600;">✓ 평판 추적 가능</span>
+                </div>
+            </div>
+            <div class="panel-content" style="background: rgba(26,26,46,0.8);">
+                <div class="compare-title">현재</div>
+                <div class="icon-large">🌐</div>
+                <div style="text-align: center; font-size: 1.2rem; line-height: 1.8;">
+                    모르는 사람들<br>
+                    수백만 명의 거대한 광장<br>
+                    <span style="color: #dc143c;">✗ 익명 소통</span><br>
+                    <span style="color: #dc143c;">✗ 평판 CCTV 없음</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 핵심 메시지 2 -->
+        <div class="key-message">
+            인터넷이라는 숲에서<br>
+            우리 뇌의 <span style="color: #dc143c;">'평판 계산기'</span>는<br>
+            <span style="font-size: 2rem;">전원이 꺼져버린다</span>
+        </div>
+
+        <!-- 패널 14: 뇌의 판단 -->
+        <div class="panel panel-full bg-dark">
+            <div class="panel-content">
+                <div style="background: rgba(220,20,60,0.1); padding: 3rem; border-radius: 8px; border: 2px solid #dc143c;">
+                    <div style="font-size: 1.5rem; line-height: 2; text-align: center;">
+                        "어라? 내가 욕을 해도<br>
+                        <span style="color: #dc143c;">아무도 나인 줄 모르네?</span><br><br>
+                        내 평판도 안 깎이네?"
+                    </div>
+                </div>
+
+                <div class="narration" style="margin-top: 3rem;">
+                    뇌는 이 상황을 <span class="narration-emphasis">'안전하다'</span>고 판단한다
+                </div>
+
+                <div class="medium-text" style="margin-top: 2rem; text-align: center;">
+                    그러니 유전자에 새겨진<br>
+                    '내 편'과 '남의 편'을 가르는 본능만 남는다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 15: 오작동 -->
+        <div class="panel panel-full" style="background: radial-gradient(circle, #dc143c 0%, #0a0a0a 100%);">
+            <div class="panel-content">
+                <div class="big-text">오작동</div>
+                <div class="narration" style="font-size: 1.4rem; margin-top: 2rem;">
+                    김 대리가 나빠서가 아니라,<br>
+                    낡은 원시인의 뇌가<br>
+                    최신 스마트폰 환경에 적응하지 못해 생긴<br>
+                    <span class="narration-emphasis">'시스템 에러'</span>인 셈이다
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 챕터 3: 방아쇠를 당긴 건 누구인가 -->
+    <section class="chapter-header">
+        <div class="chapter-number">03</div>
+        <h2 class="chapter-title">방아쇠를 당긴 건 누구인가</h2>
+    </section>
+
+    <div class="comic-container">
+        <!-- 패널 16: 핑계는 안 된다 -->
+        <div class="panel panel-full bg-dark">
+            <div class="panel-content">
+                <div class="big-text">그렇다고...</div>
+                <div style="margin: 3rem 0; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 8px; text-align: center; font-size: 1.3rem; line-height: 2;">
+                    "아, 내 뇌가 원래 그렇다"<br>
+                    라고 핑계를 댈 수는 없다
+                </div>
+                <div class="narration">
+                    익명이라고 해서<br>
+                    <span class="narration-emphasis">모두가 악플러가 되는 건 아니기</span> 때문이다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 17: 다른 선택들 -->
+        <div class="panel panel-split">
+            <div class="panel-content" style="background: rgba(0,100,0,0.2);">
+                <div style="text-align: center;">
+                    <div style="font-size: 4rem;">💚</div>
+                    <div style="margin-top: 1rem; font-size: 1.3rem; line-height: 1.8;">
+                        "힘내세요!"<br>
+                        <span style="color: #4caf50; font-size: 1rem;">응원 댓글</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-content" style="background: rgba(100,100,100,0.2);">
+                <div style="text-align: center;">
+                    <div style="font-size: 4rem;">🚶</div>
+                    <div style="margin-top: 1rem; font-size: 1.3rem; line-height: 1.8;">
+                        그냥 지나가기<br>
+                        <span style="color: #999; font-size: 1rem;">침묵</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 18: 스티븐 제이 굴드 -->
+        <div class="panel panel-full bg-dark">
+            <div class="panel-content">
+                <div class="speech-bubble">
+                    <strong>스티븐 제이 굴드 (고생물학자)</strong><br><br>
+                    "모든 행동이 생존을 위해 만들어진 건 아니다"
+                </div>
+
+                <div class="narration" style="margin-top: 2rem;">
+                    익명 뒤에 숨어 공격하는 건<br>
+                    생존 본능이라기보다,<br>
+                    그냥 뇌가 복잡해지면서 생긴<br>
+                    <span class="narration-emphasis">나쁜 '부작용'</span>일 수도 있다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 19: 총과 방아쇠 -->
+        <div class="panel panel-full" style="background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);">
+            <div class="panel-content" style="text-align: center;">
+                <div class="speech-bubble" style="max-width: 600px; margin: 2rem auto;">
+                    <strong>리처드 르원틴 (유전학자)</strong><br><br>
+                    "유전자 탓만 하지 마라"
+                </div>
+
+                <div class="key-message" style="margin: 3rem 0; font-size: 1.5rem;">
+                    진화가 우리 손에 <span style="color: #dc143c;">총</span>을 쥐여줬다면,<br>
+                    <span style="color: #dc143c; font-size: 2rem;">방아쇠</span>를 당기게 만든 건<br>
+                    바로 우리가 사는 <span style="color: #dc143c;">세상</span>이다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 20: 한국 사회 -->
+        <div class="panel panel-full" style="background: radial-gradient(circle, #2d2d44 0%, #0a0a0a 100%);">
+            <div class="panel-content">
+                <div class="big-text">한국 사회</div>
+
+                <div style="margin: 3rem 0; display: grid; gap: 1.5rem;">
+                    <div style="background: rgba(220,20,60,0.1); padding: 1.5rem; border-left: 4px solid #dc143c; border-radius: 4px;">
+                        <div style="font-size: 1.3rem; font-weight: 700;">숨 막히는 비교</div>
+                    </div>
+                    <div style="background: rgba(220,20,60,0.1); padding: 1.5rem; border-left: 4px solid #dc143c; border-radius: 4px;">
+                        <div style="font-size: 1.3rem; font-weight: 700;">1등만 기억하는 경쟁</div>
+                    </div>
+                    <div style="background: rgba(220,20,60,0.1); padding: 1.5rem; border-left: 4px solid #dc143c; border-radius: 4px;">
+                        <div style="font-size: 1.3rem; font-weight: 700;">갑질에 시달리는 직장 생활</div>
+                    </div>
+                </div>
+
+                <div class="narration" style="margin-top: 3rem;">
+                    이 거대한 <span class="narration-emphasis">압력밥솥</span> 같은 현실 속에서<br>
+                    김 대리의 스트레스는 곪을 대로 곪아 있었다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 21: 시한폭탄 -->
+        <div class="panel panel-full" style="background: linear-gradient(180deg, #0a0a0a 0%, #dc143c 50%, #0a0a0a 100%);">
+            <div class="panel-content" style="text-align: center;">
+                <div style="font-size: 5rem; margin: 2rem 0;">💣</div>
+                <div class="big-text">시한폭탄</div>
+                <div class="narration" style="margin-top: 2rem; font-size: 1.3rem;">
+                    '익명'이라는 숨구멍을 만나자,<br>
+                    억눌린 화가 폭발한 것이다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 22: 진짜 원인 -->
+        <div class="panel panel-full bg-dark">
+            <div class="panel-content">
+                <div class="key-message">
+                    김 대리의 손가락을 움직인 건<br>
+                    유전자라기보다,<br>
+                    <span style="color: #dc143c; font-size: 1.8rem;">병든 사회</span>가<br>
+                    그의 마음에 심어놓은<br>
+                    시한폭탄일지도 모른다
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 챕터 4: 거울 앞에 서는 용기 -->
+    <section class="chapter-header">
+        <div class="chapter-number">04</div>
+        <h2 class="chapter-title">거울 앞에 서는 용기</h2>
+    </section>
+
+    <div class="comic-container">
+        <!-- 패널 23: 진실 -->
+        <div class="panel panel-full bg-dark">
+            <div class="panel-content">
+                <div class="big-text">결국</div>
+                <div class="medium-text" style="margin: 3rem 0; line-height: 2; text-align: center;">
+                    악플은 남을 향한 공격이 아니다
+                </div>
+                <div class="key-message" style="font-size: 1.5rem;">
+                    사실은<br>
+                    <span style="color: #dc143c; font-size: 2rem;">"나 지금 너무 힘들고 비참해"</span><br>
+                    라고 외치는<br>
+                    자기 자신을 향한 비명이다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 24: 비겁한 용기 -->
+        <div class="panel panel-full" style="background: radial-gradient(circle, #2d2d44 0%, #0a0a0a 100%);">
+            <div class="panel-content" style="text-align: center;">
+                <div style="font-size: 5rem; margin: 2rem 0;">🎭</div>
+                <div class="narration" style="font-size: 1.4rem;">
+                    안전한 가면 뒤에 숨어서만 낼 수 있는<br>
+                    <span class="narration-emphasis">비겁한 용기</span>일 뿐이다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 25: 계속될 본능 -->
+        <div class="panel panel-full bg-dark">
+            <div class="panel-content">
+                <div class="medium-text" style="margin-bottom: 2rem;">
+                    물론 우리 뇌의 낡은 경보 장치는<br>
+                    앞으로도 계속 울릴 것이다
+                </div>
+
+                <div style="background: rgba(220,20,60,0.2); padding: 2rem; border-radius: 8px; text-align: center; border: 2px solid #dc143c;">
+                    <div style="font-size: 1.5rem; color: #dc143c; font-weight: 700; animation: blink 1s infinite;">
+                        ⚠️ "공격해! 아무도 안 보잖아!" ⚠️
+                    </div>
+                </div>
+
+                <div class="narration" style="margin-top: 3rem; font-size: 1.3rem;">
+                    <span class="narration-emphasis">하지만</span><br>
+                    그 본능을 멈춰 세우는 것이야말로<br>
+                    진짜 '사람'이 할 일이다
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 26: 선택 -->
+        <div class="panel panel-full" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+            <div class="panel-content">
+                <div class="big-text">우리는 선택할 수 있다</div>
+
+                <div class="compare-panel" style="margin-top: 3rem;">
+                    <div class="compare-item" style="border: 2px solid #dc143c;">
+                        <div style="font-size: 3rem; text-align: center;">🗿</div>
+                        <div class="compare-title" style="text-align: center; color: #dc143c;">원시인</div>
+                        <div style="margin-top: 1rem; text-align: center; line-height: 1.8;">
+                            모니터라는 차가운 벽 뒤에 숨어<br>
+                            돌을 던지는
+                        </div>
+                    </div>
+                    <div class="compare-item" style="border: 2px solid #4caf50;">
+                        <div style="font-size: 3rem; text-align: center;">🪞</div>
+                        <div class="compare-title" style="text-align: center; color: #4caf50;">인간</div>
+                        <div style="margin-top: 1rem; text-align: center; line-height: 1.8;">
+                            그 벽을 거울삼아<br>
+                            내 표정을 들여다보는
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 27: 본능을 안다는 것 -->
+        <div class="panel panel-full" style="background: radial-gradient(circle, #dc143c 0%, #0a0a0a 100%);">
+            <div class="panel-content" style="text-align: center;">
+                <div class="key-message" style="font-size: 2rem; padding: 3rem;">
+                    본능을 안다는 건,<br><br>
+                    <span style="color: #fff; font-size: 2.5rem;">본능의 노예가<br>되지 않겠다는<br>선언이다</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 패널 28: 거울 속 얼굴 -->
+        <div class="panel panel-full" style="background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);">
+            <div class="panel-content">
+                <div class="narration" style="font-size: 1.3rem; margin-bottom: 3rem;">
+                    김 대리의 손가락이 다시 움찔거릴 때,<br>
+                    그가 느껴야 할 건 통쾌함이 아니라
+                </div>
+
+                <div style="margin: 3rem 0; text-align: center;">
+                    <div style="width: 300px; height: 400px; background: #000; border: 10px solid #2d2d44; border-radius: 20px; margin: 0 auto; display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 0 50px rgba(220,20,60,0.5);">
+                        <div style="font-size: 6rem; filter: blur(2px) grayscale(1);">😠</div>
+                        <div style="position: absolute; bottom: 2rem; font-size: 0.9rem; color: #dc143c;">
+                            검은 화면에 비친<br>자신의 일그러진 얼굴
+                        </div>
+                    </div>
+                </div>
+
+                <div class="medium-text" style="text-align: center; margin-top: 3rem; line-height: 2;">
+                    아무도 보지 않을 때 드러나는 모습,<br>
+                    그게 어쩌면 그 사람의<br>
+                    <span style="color: #dc143c; font-size: 2rem;">진짜 맨얼굴</span>일 테니까
+                </div>
+            </div>
+        </div>
+
+        <!-- 최종 메시지 -->
+        <div class="panel panel-full" style="background: #0a0a0a;">
+            <div class="panel-content" style="text-align: center;">
+                <div style="margin: 5rem 0;">
+                    <div style="font-size: 5rem; margin-bottom: 2rem;">🎭</div>
+                    <div class="big-text" style="font-size: 3.5rem; line-height: 1.5; margin-bottom: 3rem;">
+                        당신의 가면 속 얼굴은,<br>
+                        지금 웃고 있는가?
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 엔딩 크레딧 -->
+    <div style="background: #000; padding: 5rem 2rem; text-align: center; border-top: 3px solid #dc143c;">
+        <div style="font-family: 'Black Han Sans', sans-serif; font-size: 2rem; margin-bottom: 2rem; color: #dc143c;">
+            가면을 쓰면 왜 괴물이 되는가
+        </div>
+        <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+            악플의 심리학: 진화심리학적 관점
+        </div>
+        <div style="margin-top: 3rem; color: #666; font-size: 0.9rem;">
+            참고: 로빈 던바, 로버트 트리버스, 스티븐 제이 굴드, 리처드 르원틴
+        </div>
+        <div style="margin-top: 5rem; font-size: 0.8rem; color: #444;">
+            Graphic Novel by HTML/CSS
+        </div>
+    </div>
+
+    <script>
+        // 스크롤 애니메이션
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.panel').forEach(panel => {
+            panel.style.opacity = '0';
+            panel.style.transform = 'translateY(50px)';
+            panel.style.transition = 'opacity 1s ease, transform 1s ease';
+            observer.observe(panel);
+        });
+
+        // 부드러운 스크롤
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
