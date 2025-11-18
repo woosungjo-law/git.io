@@ -1,519 +1,785 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>가면 뒤의 얼굴: 익명성과 공격성의 심리학</title>
 
-        body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <style>
+    /* === 글로벌 리셋 === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
-        }
+    /* === 루트 변수 === */
+    :root {
+      --color-primary: #2c3e50;
+      --color-secondary: #34495e;
+      --color-accent: #e74c3c;
+      --color-accent-light: #ff6b6b;
+      --color-bg: #ffffff;
+      --color-bg-alt: #f8f9fa;
+      --color-text: #2c3e50;
+      --color-text-light: #7f8c8d;
+      --color-border: #ecf0f1;
 
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
-            position: relative;
-        }
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.333rem;
+      --text-xl: 1.777rem;
+      --text-2xl: 2.369rem;
+      --text-3xl: 3.157rem;
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
-        }
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 32px;
+      --space-xl: 48px;
+      --space-2xl: 64px;
+      --space-3xl: 96px;
 
-        .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      --duration-fast: 0.2s;
+      --duration-normal: 0.3s;
+      --duration-slow: 0.6s;
+    }
 
-        .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
-        }
+    /* === 베이스 === */
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: var(--text-base);
+      line-height: 1.7;
+      color: var(--color-text);
+      background: var(--color-bg);
+      overflow-x: hidden;
+    }
 
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
+    /* === 타이포그래피 === */
+    h1 {
+      font-size: clamp(32px, 8vw, 50px);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-lg);
+    }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
-        }
+    h2 {
+      font-size: clamp(24px, 6vw, 38px);
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-md);
+    }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
-        }
+    h3 {
+      font-size: clamp(18px, 5vw, 28px);
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: var(--space-sm);
+    }
 
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
+    p {
+      font-size: clamp(15px, 4vw, 18px);
+      line-height: 1.8;
+      margin-bottom: var(--space-md);
+      color: var(--color-text);
+    }
 
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
+    /* === 레이아웃 === */
+    .container {
+      max-width: 428px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 5vw, 24px);
+    }
 
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
+    section {
+      padding: var(--space-3xl) 0;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s var(--ease-smooth);
+    }
 
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
+    section:first-of-type {
+      padding-top: var(--space-2xl);
+    }
 
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
+    /* === 진행도 바 === */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+      width: 0%;
+      z-index: 10000;
+      transition: width 0.1s ease-out;
+      box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+    }
 
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-        }
+    /* === 히어로 섹션 === */
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
 
-        .flow-step::after {
-            content: '→';
-            position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
-        }
+    .hero-label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-sm);
+      opacity: 0.9;
+    }
 
-        .flow-step:last-child::after {
-            display: none;
-        }
+    .hero-title {
+      color: var(--color-primary);
+      margin-bottom: var(--space-md);
+    }
 
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
-        }
+    .hero-subtitle {
+      font-size: var(--text-lg);
+      color: var(--color-text-light);
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: var(--space-xl);
+    }
 
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
+    .highlight {
+      color: var(--color-accent);
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
 
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
+    /* === 통계 카드 === */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+      margin: var(--space-xl) 0;
+    }
 
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
+    .stat-card {
+      background: var(--color-bg-alt);
+      padding: var(--space-md);
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+      transition: all var(--duration-normal) var(--ease-smooth);
+    }
 
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
 
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
+    .stat-number {
+      font-size: var(--text-2xl);
+      font-weight: 800;
+      color: var(--color-accent);
+      line-height: 1;
+      margin-bottom: var(--space-xs);
+    }
 
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
+    .stat-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-light);
+      line-height: 1.4;
+    }
 
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
+    /* === 인용구 === */
+    .quote {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      padding: var(--space-xl) var(--space-md);
+      border-radius: 24px;
+      margin: var(--space-2xl) 0;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
+    .quote::before {
+      content: '"';
+      font-size: 120px;
+      font-family: Georgia, serif;
+      position: absolute;
+      top: -20px;
+      left: 10px;
+      opacity: 0.1;
+      line-height: 1;
+    }
 
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
+    .quote-text {
+      font-size: var(--text-lg);
+      font-weight: 500;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+      color: white;
+      margin-bottom: 0;
+    }
 
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
+    /* === 프로세스 다이어그램 === */
+    .process {
+      margin: var(--space-2xl) 0;
+    }
 
-        .fact-item {
-            text-align: center;
-        }
+    .process-step {
+      position: relative;
+      padding-left: var(--space-xl);
+      margin-bottom: var(--space-xl);
+    }
 
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
-            display: block;
-        }
+    .process-step:last-child {
+      margin-bottom: 0;
+    }
 
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
+    .process-step::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      box-shadow: 0 0 0 8px rgba(231, 76, 60, 0.1);
+    }
 
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
-        }
+    .process-step::after {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 32px;
+      width: 2px;
+      height: calc(100% - 16px);
+      background: var(--color-border);
+    }
 
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
+    .process-step:last-child::after {
+      display: none;
+    }
 
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
-        }
+    .process-title {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--space-xs);
+    }
 
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
-        }
+    .process-desc {
+      font-size: var(--text-base);
+      color: var(--color-text-light);
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
 
-        .footer-highlight {
-            color: #1A2A57;
-            font-weight: 700;
-        }
+    /* === 비교 카드 === */
+    .comparison {
+      margin: var(--space-2xl) 0;
+    }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
+    .compare-grid {
+      display: grid;
+      gap: var(--space-md);
+    }
 
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
-        }
+    .compare-card {
+      padding: var(--space-md);
+      border-radius: 16px;
+      border: 2px solid;
+      transition: all var(--duration-normal) var(--ease-smooth);
+    }
 
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
-        }
+    .compare-card.before {
+      border-color: #27ae60;
+      background: rgba(39, 174, 96, 0.05);
+    }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
-            }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .main-title {
-                font-size: 24px;
-            }
-        }
-    </style>
+    .compare-card.after {
+      border-color: var(--color-accent);
+      background: rgba(231, 76, 60, 0.05);
+    }
+
+    .compare-label {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .compare-card.before .compare-label {
+      color: #27ae60;
+    }
+
+    .compare-card.after .compare-label {
+      color: var(--color-accent);
+    }
+
+    .compare-title {
+      font-size: var(--text-xl);
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      line-height: 1.3;
+    }
+
+    .compare-desc {
+      font-size: var(--text-base);
+      color: var(--color-text-light);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    /* === 아이콘 박스 === */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+      margin: var(--space-xl) 0;
+    }
+
+    .icon-box {
+      background: var(--color-bg-alt);
+      padding: var(--space-md);
+      border-radius: 16px;
+      text-align: center;
+      transition: all var(--duration-normal) var(--ease-smooth);
+    }
+
+    .icon-box:hover {
+      transform: scale(1.03);
+      background: white;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .icon {
+      font-size: 48px;
+      margin-bottom: var(--space-sm);
+      display: block;
+      filter: grayscale(0.3);
+    }
+
+    .icon-label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.4;
+    }
+
+    /* === 섹션 헤더 === */
+    .section-header {
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-number {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-title {
+      color: var(--color-primary);
+    }
+
+    /* === 강조 텍스트 === */
+    .emphasis {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--color-primary);
+      margin: var(--space-xl) 0;
+      padding-left: var(--space-md);
+      border-left: 4px solid var(--color-accent);
+    }
+
+    /* === CTA 섹션 === */
+    .cta {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: white;
+      padding: var(--space-2xl) var(--space-md);
+      border-radius: 32px;
+      text-align: center;
+      margin: var(--space-2xl) 0;
+    }
+
+    .cta-title {
+      font-size: var(--text-2xl);
+      font-weight: 800;
+      color: white;
+      margin-bottom: var(--space-md);
+      line-height: 1.3;
+    }
+
+    .cta-text {
+      font-size: var(--text-lg);
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    /* === 푸터 === */
+    .footer {
+      padding: var(--space-2xl) 0;
+      text-align: center;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer-text {
+      font-size: var(--text-sm);
+      color: var(--color-text-light);
+      margin-bottom: 0;
+    }
+
+    /* === 차트 스타일 === */
+    .chart-container {
+      margin: var(--space-xl) 0;
+    }
+
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .bar-label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bar-value {
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+
+    .bar-track {
+      height: 12px;
+      background: var(--color-bg-alt);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+      border-radius: 6px;
+      transition: width 1s var(--ease-smooth);
+      width: 0;
+    }
+
+    section.visible .bar-fill {
+      width: var(--width);
+    }
+
+    /* === 모바일 최적화 === */
+    @media (max-width: 428px) {
+      :root {
+        --space-xl: 32px;
+        --space-2xl: 48px;
+        --space-3xl: 64px;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .icon-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* === 접근성 === */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* === 터치 최적화 === */
+    a, button {
+      min-width: 44px;
+      min-height: 44px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* === GPU 가속 === */
+    .animated {
+      will-change: transform, opacity;
+      transform: translateZ(0);
+    }
+  </style>
 </head>
 <body>
+  <div class="progress-bar"></div>
+
+  <!-- 히어로 섹션 -->
+  <section class="hero visible">
     <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
-        </div>
-
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
-
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="section-title">보증보험 청구</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <div class="section-title">민사소송 & 가압류</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
-                    </div>
-                    <div class="section-title">사해행위 취소</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
-                </div>
-            </div>
-        </div>
-
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
-
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
-        </div>
-
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
-        </div>
+      <div class="hero-label">인간본성의 이해</div>
+      <h1 class="hero-title">가면을 쓰면<br>왜 <span class="highlight">괴물</span>이 되는가</h1>
+      <p class="hero-subtitle">익명성이 우리 뇌의 안전장치를 해제할 때, 20만 년 된 본능이 깨어난다</p>
     </div>
+  </section>
+
+  <!-- 섹션 1: 익명성의 역설 -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <h2 class="section-title">어둠 속의 용기</h2>
+      </div>
+
+      <p>목요일 밤 11시. 회식 후 지친 김민석 대리는 침대에 누워 스마트폰을 켰다. 화면에 뜬 건 화려한 SNS 사진들. 순간 치밀어 오르는 감정.</p>
+
+      <div class="quote">
+        <p class="quote-text">가면을 쓰면, 우리는 평소엔 상상도 못 할 용감한 겁쟁이가 된다</p>
+      </div>
+
+      <p class="emphasis">익명 계정으로 전환. 댓글 작성. 전송. 짧은 찰나의 쾌감.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-number">73%</div>
+          <div class="stat-label">온라인에서 더 공격적으로 변한다고 응답</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2.4배</div>
+          <div class="stat-label">익명 상황에서 부정적 표현 증가율</div>
+        </div>
+      </div>
+
+      <p>길거리 쓰레기도 눈치 보며 줍던 착한 사람이, 작은 스마트폰 안에서는 왜 사나운 사냥개가 될까?</p>
+    </div>
+  </section>
+
+  <!-- 섹션 2: 고장 난 평판 계산기 -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <h2 class="section-title">고장 난 평판 CCTV</h2>
+      </div>
+
+      <p>20만 년 전, 우리 조상들은 모두가 서로를 아는 작은 마을에 살았다. 옥스퍼드 대학의 로빈 던바 교수는 "인간의 언어는 원래 뒷담화를 위해 생겨났다"고 지적했다.</p>
+
+      <div class="icon-grid">
+        <div class="icon-box">
+          <span class="icon">🏘️</span>
+          <div class="icon-label">원시 마을<br>150명 규모</div>
+        </div>
+        <div class="icon-box">
+          <span class="icon">🌐</span>
+          <div class="icon-label">온라인 광장<br>수백만 명</div>
+        </div>
+        <div class="icon-box">
+          <span class="icon">👁️</span>
+          <div class="icon-label">사회적 감시<br>평판 기록</div>
+        </div>
+        <div class="icon-box">
+          <span class="icon">👤</span>
+          <div class="icon-label">익명성<br>추적 불가</div>
+        </div>
+      </div>
+
+      <div class="process">
+        <div class="process-step">
+          <div class="process-title">평판 계산기 작동</div>
+          <div class="process-desc">원시 사회: "쟤를 때리면 속은 시원하지만, 내 평판이 깎이면 더 손해"</div>
+        </div>
+        <div class="process-step">
+          <div class="process-title">CCTV 역할</div>
+          <div class="process-desc">뇌 속 사회적 감시 장치가 주먹과 입을 단속</div>
+        </div>
+        <div class="process-step">
+          <div class="process-title">전원 차단</div>
+          <div class="process-desc">인터넷에서는 "아무도 나인 줄 모르네? 평판도 안 깎이네?"</div>
+        </div>
+        <div class="process-step">
+          <div class="process-title">본능만 남음</div>
+          <div class="process-desc">진화된 '내 편 vs 남의 편' 구분 본능이 폭발</div>
+        </div>
+      </div>
+
+      <div class="quote">
+        <p class="quote-text">인터넷이라는 숲에서 우리 뇌의 평판 계산기는 전원이 꺼져버린다</p>
+      </div>
+
+      <p>낡은 원시인의 뇌가 최신 스마트폰 환경에 적응하지 못해 생긴 오작동이다.</p>
+    </div>
+  </section>
+
+  <!-- 섹션 3: 방아쇠를 당긴 건 -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <h2 class="section-title">방아쇠를 당긴 건 누구인가</h2>
+      </div>
+
+      <div class="comparison">
+        <div class="compare-grid">
+          <div class="compare-card before">
+            <div class="compare-label">진화가 준 것</div>
+            <h3 class="compare-title">총</h3>
+            <p class="compare-desc">익명 상황에서 공격할 수 있는 잠재적 능력</p>
+          </div>
+          <div class="compare-card after">
+            <div class="compare-label">사회가 만든 것</div>
+            <h3 class="compare-title">방아쇠</h3>
+            <p class="compare-desc">스트레스, 비교, 좌절감이 실제 공격을 촉발</p>
+          </div>
+        </div>
+      </div>
+
+      <p>리처드 르원틴의 경고: "유전자 탓만 하지 마라"</p>
+
+      <div class="quote">
+        <p class="quote-text">진화가 우리 손에 총을 쥐여줬다면, 방아쇠를 당기게 만든 건 바로 우리가 사는 세상이다</p>
+      </div>
+
+      <div class="chart-container">
+        <h3>현대인의 스트레스 요인</h3>
+        <div class="bar-chart">
+          <div class="bar-item">
+            <div class="bar-label">
+              <span>과도한 경쟁과 비교</span>
+              <span class="bar-value">89%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" style="--width: 89%"></div>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">
+              <span>직장 내 갑질과 스트레스</span>
+              <span class="bar-value">76%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" style="--width: 76%"></div>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">
+              <span>경제적 불안</span>
+              <span class="bar-value">82%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" style="--width: 82%"></div>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">
+              <span>사회적 소외감</span>
+              <span class="bar-value">68%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" style="--width: 68%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="emphasis">억눌린 화가 '익명'이라는 숨구멍을 만나 폭발하는 순간, 악플이 탄생한다.</p>
+    </div>
+  </section>
+
+  <!-- 섹션 4: 거울 앞에 서는 용기 -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">04</div>
+        <h2 class="section-title">거울 앞에 서는 용기</h2>
+      </div>
+
+      <p>악플은 남을 향한 공격이 아니다. "나 지금 너무 힘들고 비참해"라고 외치는 자기 자신을 향한 비명이다.</p>
+
+      <div class="cta">
+        <h3 class="cta-title">우리는 선택할 수 있다</h3>
+        <p class="cta-text">모니터라는 차가운 벽 뒤에 숨어 돌을 던지는 원시인으로 남을지, 아니면 그 벽을 거울 삼아 내 표정을 들여다볼지를.</p>
+      </div>
+
+      <div class="quote">
+        <p class="quote-text">본능을 안다는 건, 본능의 노예가 되지 않겠다는 선언이다</p>
+      </div>
+
+      <p>뇌의 낡은 경보 장치는 앞으로도 계속 울릴 것이다. "공격해! 아무도 안 보잖아!" 하지만 그 본능을 멈춰 세우는 것이야말로 진짜 사람이 할 일이다.</p>
+
+      <p class="emphasis">아무도 보지 않을 때 드러나는 모습, 그게 어쩌면 그 사람의 진짜 맨얼굴일 테니까.</p>
+
+      <div style="margin-top: 64px; text-align: center;">
+        <p style="font-size: 24px; font-weight: 700; color: var(--color-primary); margin-bottom: 16px;">당신의 가면 속 얼굴은</p>
+        <p style="font-size: 32px; font-weight: 800; color: var(--color-accent);">지금 웃고 있는가?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <div class="footer">
+    <div class="container">
+      <p class="footer-text">진화심리학으로 이해하는 인간 본성</p>
+    </div>
+  </div>
+
+  <script>
+    // 진행도 바
+    function updateProgress() {
+      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      document.querySelector('.progress-bar').style.width = scrolled + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // Intersection Observer
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // 초기 업데이트
+    updateProgress();
+  </script>
 </body>
 </html>
