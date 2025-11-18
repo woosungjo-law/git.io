@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>존 우든의 리더십 - 선수 이전에 사람이다</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -14,506 +18,669 @@
         }
 
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 900px;
+        .webtoon-container {
+            max-width: 800px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
+        /* 컷(씬) 기본 구조 */
+        .scene {
             position: relative;
+            width: 100%;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .header::after {
+        .scene-large { min-height: 700px; }
+        .scene-medium { min-height: 500px; }
+        .scene-small { min-height: 350px; }
+
+        /* 컷 구분선 */
+        .scene:not(:last-child)::after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+            width: 90%;
+            height: 2px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(0,0,0,0.1),
+                transparent
+            );
         }
 
-        .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
+        /* 배경 색상 */
+        .bg-gray { background: linear-gradient(135deg, #e0e0e0, #f5f5f5); }
+        .bg-blue { background: linear-gradient(135deg, #e3f2fd, #f5f5f5); }
+        .bg-brown { background: linear-gradient(135deg, #efebe9, #f5f5f5); }
+        .bg-gold { background: linear-gradient(135deg, #fff9c4, #f5f5f5); }
+        .bg-white { background: #ffffff; }
 
-        .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
-        }
-
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
+        /* 캐릭터 */
+        .character {
             display: inline-block;
-            margin: 0 4px;
+            margin: 20px;
         }
 
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
+        .character svg {
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
         }
 
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
+        /* 말풍선 시스템 */
+        .speech-bubble {
             position: relative;
+            display: inline-block;
+            max-width: 600px;
+            padding: 20px 25px;
+            background: white;
+            border: 3px solid #333;
+            border-radius: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+            word-break: keep-all;
+            margin: 15px;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
         }
 
-        .flow-step::after {
-            content: '→';
+        .speech-bubble strong {
+            color: #d32f2f;
+            font-weight: 700;
+        }
+
+        /* 말풍선 꼬리 */
+        .speech-bubble.tail-bottom::after {
+            content: '';
             position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
+            bottom: -20px;
+            left: 50px;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-top-color: white;
+            border-bottom: 0;
         }
 
-        .flow-step:last-child::after {
+        .speech-bubble.tail-bottom::before {
+            content: '';
+            position: absolute;
+            bottom: -26px;
+            left: 47px;
+            width: 0;
+            height: 0;
+            border: 23px solid transparent;
+            border-top-color: #333;
+            border-bottom: 0;
+            z-index: -1;
+        }
+
+        .speech-bubble.tail-top::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50px;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-bottom-color: white;
+            border-top: 0;
+        }
+
+        .speech-bubble.tail-top::before {
+            content: '';
+            position: absolute;
+            top: -26px;
+            left: 47px;
+            width: 0;
+            height: 0;
+            border: 23px solid transparent;
+            border-bottom-color: #333;
+            border-top: 0;
+            z-index: -1;
+        }
+
+        /* 생각 말풍선 */
+        .thought-bubble {
+            border: 3px dashed #666;
+            background: #f0f0f0;
+        }
+
+        /* 외침 말풍선 */
+        .shout-bubble {
+            background: #fff59d;
+            border: 4px solid #f57c00;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* 나레이션 박스 */
+        .narration-box {
+            background: rgba(0,0,0,0.85);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            max-width: 700px;
+            padding: 25px 30px;
+            font-size: 17px;
+            line-height: 1.8;
+            box-shadow: none;
+        }
+
+        .narration-box::before,
+        .narration-box::after {
             display: none;
         }
 
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
-        }
-
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
-
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
-
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
-
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .fact-item {
+        /* 제목 스타일 */
+        .title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 3rem;
             text-align: center;
-        }
-
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
-            display: block;
-        }
-
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
-
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
-        }
-
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
             color: #333;
+            margin: 30px 20px;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            line-height: 1.3;
         }
 
-        .footer {
+        .subtitle {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 1.5rem;
             text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
             color: #666;
-            font-weight: 500;
-        }
-
-        .footer-highlight {
-            color: #1A2A57;
+            margin: 20px;
             font-weight: 700;
         }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .bold {
+        /* 강조 텍스트 */
+        .highlight {
+            background: linear-gradient(transparent 60%, #ffeb3b 60%);
             font-weight: 700;
-            color: #1A2A57;
+            padding: 0 5px;
         }
 
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
+        /* 숫자 강조 */
+        .number-big {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 4rem;
+            color: #FFD700;
+            text-shadow:
+                3px 3px 0 #333,
+                -1px -1px 0 #333,
+                1px -1px 0 #333,
+                -1px 1px 0 #333;
+            display: inline-block;
+            margin: 10px;
         }
 
+        /* 집중선 효과 */
+        .focus-lines {
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-conic-gradient(
+                    from 0deg at 50% 50%,
+                    transparent 0deg 3deg,
+                    rgba(255, 215, 0, 0.15) 3deg 4deg
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 속도선 효과 */
+        .speed-lines {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 15px,
+                rgba(0,0,0,0.05) 15px,
+                rgba(0,0,0,0.05) 18px
+            );
+            pointer-events: none;
+        }
+
+        /* 효과음 */
+        .sound-effect {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 2.5rem;
+            color: #FF6B6B;
+            text-shadow:
+                3px 3px 0 #fff,
+                -3px -3px 0 #fff,
+                3px -3px 0 #fff,
+                -3px 3px 0 #fff,
+                0 0 10px rgba(255,107,107,0.5);
+            display: inline-block;
+            margin: 15px;
+            animation: vibrate 0.3s ease-in-out infinite;
+        }
+
+        @keyframes vibrate {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-2px, 2px) rotate(-1deg); }
+            50% { transform: translate(2px, -2px) rotate(1deg); }
+            75% { transform: translate(-2px, -2px) rotate(-1deg); }
+        }
+
+        /* 캐릭터 애니메이션 */
+        .character-enter {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 질문 스타일 */
+        .question-box {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 3px solid #1976d2;
+            border-radius: 15px;
+            padding: 25px 30px;
+            max-width: 650px;
+            margin: 20px;
+            font-size: 19px;
+            font-weight: 700;
+            color: #0d47a1;
+            box-shadow: 5px 5px 0 rgba(25, 118, 210, 0.2);
+        }
+
+        /* 인용 스타일 */
+        .quote-box {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-left: 6px solid #f57c00;
+            padding: 25px 30px;
+            max-width: 650px;
+            margin: 25px;
+            font-size: 18px;
+            font-style: italic;
+            color: #e65100;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 레이아웃 */
+        .flex-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .flex-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            z-index: 1;
+            position: relative;
+        }
+
+        /* 반응형 */
         @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
+            .title {
+                font-size: 2rem;
             }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
+
+            .subtitle {
+                font-size: 1.2rem;
             }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
+
+            .speech-bubble {
+                font-size: 16px;
+                max-width: 90%;
             }
-            
-            .main-title {
-                font-size: 24px;
+
+            .number-big {
+                font-size: 3rem;
+            }
+
+            .narration-box {
+                font-size: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
-        </div>
+    <div class="webtoon-container">
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
-        </div>
+        <!-- 컷 1: 오프닝 - 팀장의 고민 -->
+        <section class="scene scene-large bg-gray">
+            <div class="flex-column">
+                <div class="title">존 우든의 리더십</div>
+                <div class="subtitle">"선수 이전에 사람이다"</div>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
+                <svg width="150" height="180" viewBox="0 0 150 180" class="character character-enter">
+                    <!-- 팀장 캐릭터 -->
+                    <ellipse cx="75" cy="60" rx="45" ry="50" fill="#5D5D5D"/>
+                    <circle cx="60" cy="50" r="5" fill="#333"/>
+                    <circle cx="90" cy="50" r="5" fill="#333"/>
+                    <path d="M 55 70 Q 75 65 95 70" stroke="#333" stroke-width="3" fill="none"/>
+                    <rect x="40" y="110" width="70" height="60" rx="5" fill="#7d7d7d"/>
+                    <line x1="40" y1="130" x2="15" y2="150" stroke="#7d7d7d" stroke-width="8"/>
+                    <line x1="110" y1="130" x2="135" y2="150" stroke="#7d7d7d" stroke-width="8"/>
+                </svg>
 
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
+                <div class="question-box">
+                    "분기 실적 발표를 앞둔 팀장이 묻는다...<br>
+                    <strong>팀원들의 성장도 중요하지만,<br>
+                    당장 눈앞의 목표를 달성하지 못하면<br>
+                    우리 팀 자체가 위험하다.</strong><br><br>
+                    지금 이 순간, 무엇이 더 급한가?"
+                </div>
+
+                <div class="speech-bubble thought-bubble">
+                    모든 리더가 직면하는 딜레마...<br>
+                    단기 성과 vs 장기 성장
+                </div>
+            </div>
+        </section>
+
+        <!-- 컷 2: 존 우든 등장 -->
+        <section class="scene scene-medium bg-brown">
+            <div class="focus-lines"></div>
+            <div class="flex-column">
+                <div class="sound-effect">등장!</div>
+
+                <svg width="160" height="190" viewBox="0 0 160 190" class="character">
+                    <!-- 존 우든 코치 -->
+                    <ellipse cx="80" cy="60" rx="48" ry="52" fill="#8B6F47"/>
+                    <circle cx="65" cy="55" r="6" fill="#333"/>
+                    <circle cx="95" cy="55" r="6" fill="#333"/>
+                    <path d="M 60 75 Q 80 82 100 75" stroke="#333" stroke-width="3" fill="none"/>
+                    <rect x="45" y="115" width="70" height="65" rx="8" fill="#A0826D"/>
+                    <line x1="45" y1="140" x2="20" y2="165" stroke="#A0826D" stroke-width="10"/>
+                    <line x1="115" y1="140" x2="140" y2="165" stroke="#A0826D" stroke-width="10"/>
+                    <!-- 휘슬 -->
+                    <circle cx="50" cy="100" r="4" fill="#FFD700"/>
+                    <line x1="50" y1="100" x2="50" y2="115" stroke="#FFD700" stroke-width="2"/>
+                </svg>
+
+                <div class="speech-bubble shout-bubble tail-top">
+                    NCAA 역사상 가장 위대한 코치<br>
+                    <strong>존 우든 (John Wooden)</strong>
+                </div>
+
+                <div class="flex-row" style="margin-top: 20px;">
+                    <div class="number-big">88승 2패</div>
+                    <div class="number-big">10번 우승</div>
+                </div>
+
+                <div class="speech-bubble">
+                    그는 숫자로 증명했다.<br>
+                    <span class="highlight">사람을 먼저 세우는 것이야말로<br>
+                    가장 확실한 성과 창출 방법</span>이라는 것을!
+                </div>
+            </div>
+        </section>
+
+        <!-- 컷 3: 핵심 철학 클라이맥스 -->
+        <section class="scene scene-large bg-gold">
+            <div class="focus-lines"></div>
+            <div class="flex-column">
+                <div class="quote-box" style="font-size: 22px; font-weight: 700; max-width: 700px;">
+                    "코치의 책임은<br>
+                    선수를 먼저 <strong>한 사람</strong>으로,<br>
+                    그리고 두 번째로 <strong>농구 선수</strong>로<br>
+                    발전시키는 것이다."<br>
+                    <div style="text-align: right; margin-top: 15px; font-size: 18px;">- 존 우든</div>
+                </div>
+
+                <svg width="180" height="200" viewBox="0 0 180 200" class="character">
+                    <!-- 우든 코치 큰 버전 -->
+                    <ellipse cx="90" cy="65" rx="55" ry="58" fill="#8B6F47"/>
+                    <circle cx="72" cy="58" r="7" fill="#333"/>
+                    <circle cx="108" cy="58" r="7" fill="#333"/>
+                    <path d="M 70 82 Q 90 92 110 82" stroke="#333" stroke-width="4" fill="none"/>
+                    <rect x="50" y="125" width="80" height="70" rx="10" fill="#A0826D"/>
+                    <line x1="50" y1="150" x2="20" y2="180" stroke="#A0826D" stroke-width="12"/>
+                    <line x1="130" y1="150" x2="160" y2="180" stroke="#A0826D" stroke-width="12"/>
+                </svg>
+
+                <div class="narration-box">
+                    동양 고전의 '수신제가치국평천하(修身齊家治國平天下)'와 같은 맥락이다.<br>
+                    <strong>자신을 바로 세운 사람만이 조직을 바로 세울 수 있다.</strong><br>
+                    바로 선 조직만이 진정한 성과를 낸다.
+                </div>
+
+                <div class="speech-bubble shout-bubble" style="margin-top: 20px;">
+                    단순한 휴머니즘이 아니다.<br>
+                    <strong>철저하게 검증된 성과 창출 전략</strong>이다!
+                </div>
+            </div>
+        </section>
+
+        <!-- 컷 4: 카림 압둘 자바 사례 -->
+        <section class="scene scene-medium bg-blue">
+            <div class="flex-column">
+                <div class="subtitle" style="color: #1976d2;">카림 압둘 자바와의 대화</div>
+
+                <div class="flex-row">
+                    <svg width="140" height="170" viewBox="0 0 140 170" class="character">
+                        <!-- 우든 -->
+                        <ellipse cx="70" cy="55" rx="42" ry="45" fill="#8B6F47"/>
+                        <circle cx="58" cy="50" r="5" fill="#333"/>
+                        <circle cx="82" cy="50" r="5" fill="#333"/>
+                        <path d="M 55 68 Q 70 75 85 68" stroke="#333" stroke-width="3" fill="none"/>
+                        <rect x="40" y="100" width="60" height="60" rx="7" fill="#A0826D"/>
+                    </svg>
+
+                    <svg width="140" height="190" viewBox="0 0 140 190" class="character">
+                        <!-- 카림 -->
+                        <ellipse cx="70" cy="50" rx="38" ry="42" fill="#4A90E2"/>
+                        <circle cx="60" cy="45" r="5" fill="#333"/>
+                        <circle cx="80" cy="45" r="5" fill="#333"/>
+                        <circle cx="60" cy="45" r="2" fill="#fff"/>
+                        <circle cx="80" cy="45" r="2" fill="#fff"/>
+                        <path d="M 58 60 Q 70 65 82 60" stroke="#333" stroke-width="3" fill="none"/>
+                        <rect x="45" y="92" width="50" height="75" rx="6" fill="#5FA3E8"/>
+                        <text x="70" y="125" font-family="Arial" font-size="18" fill="#fff" text-anchor="middle" font-weight="bold">33</text>
+                    </svg>
+                </div>
+
+                <div class="speech-bubble tail-top" style="max-width: 650px;">
+                    "카림, 네가 라커룸에서 후배들에게<br>
+                    어떤 말을 할 때...<br><br>
+                    그들은 <strong>네 기술이 아니라</strong><br>
+                    <span class="highlight">네 태도를 배운다.</span><br><br>
+                    <strong>너는 어떤 사람이 되고 싶은가?"</strong>
+                </div>
+
+                <div class="narration-box" style="margin-top: 25px;">
+                    이것이 우든 방식이다.<br>
+                    선수의 <strong>기량보다 먼저 그의 인격</strong>을.<br>
+                    경기 결과보다 먼저 <strong>일상의 선택</strong>을.<br>
+                    우승 트로피보다 먼저 <strong>팀원 간의 신뢰</strong>를 물었다.
+                </div>
+            </div>
+        </section>
+
+        <!-- 컷 5: 과정의 탁월함 -->
+        <section class="scene scene-small bg-white">
+            <div class="flex-column">
+                <div class="subtitle" style="color: #5d5d5d;">과정의 탁월함</div>
+
+                <svg width="200" height="120" viewBox="0 0 200 120">
+                    <!-- 양말 일러스트 -->
+                    <path d="M 60 40 Q 60 25 75 25 L 125 25 Q 140 25 140 40 L 140 70 Q 140 90 120 95 Q 100 100 80 95 Q 60 90 60 70 Z"
+                          fill="#e0e0e0" stroke="#333" stroke-width="2"/>
+                    <line x1="75" y1="35" x2="125" y2="35" stroke="#666" stroke-width="1.5"/>
+                    <line x1="75" y1="45" x2="125" y2="45" stroke="#666" stroke-width="1.5"/>
+                    <line x1="75" y1="55" x2="125" y2="55" stroke="#666" stroke-width="1.5"/>
+                </svg>
+
+                <div class="speech-bubble">
+                    우든은 선수들에게<br>
+                    <strong>양말 신는 법부터 가르쳤다.</strong>
+                </div>
+
+                <div class="quote-box" style="max-width: 600px; font-size: 16px;">
+                    주름 없이 양말을 신어야 물집이 생기지 않는다.<br>
+                    물집이 없어야 연습에 집중할 수 있다.<br>
+                    매일의 연습이 쌓여야 중요한 순간에 빛을 발한다.
+                </div>
+
+                <div class="speech-bubble shout-bubble">
+                    <span class="highlight">작은 것에 대한 책임감</span>이<br>
+                    큰 것을 만든다!
+                </div>
+            </div>
+        </section>
+
+        <!-- 컷 6: 현대 조직에 대한 질문 -->
+        <section class="scene scene-small bg-gray">
+            <div class="speed-lines"></div>
+            <div class="flex-column">
+                <div class="question-box">
+                    현대 조직은 어떨까?
+                </div>
+
+                <div class="flex-row" style="gap: 40px; margin: 20px 0;">
+                    <div style="text-align: center;">
+                        <svg width="100" height="120" viewBox="0 0 100 120">
+                            <ellipse cx="50" cy="40" rx="30" ry="32" fill="#9e9e9e"/>
+                            <circle cx="42" cy="36" r="3" fill="#333"/>
+                            <circle cx="58" cy="36" r="3" fill="#333"/>
+                            <path d="M 40 50 Q 50 45 60 50" stroke="#333" stroke-width="2" fill="none"/>
+                            <rect x="30" y="72" width="40" height="40" rx="4" fill="#bdbdbd"/>
+                        </svg>
+                        <div style="font-size: 14px; color: #666; margin-top: 10px;">
+                            프로젝트 결과만<br>추궁하는 리더
+                        </div>
                     </div>
-                    <div class="section-title">보증보험 청구</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
+                    <div style="font-size: 2rem; color: #666;">VS</div>
+
+                    <div style="text-align: center;">
+                        <svg width="100" height="120" viewBox="0 0 100 120">
+                            <ellipse cx="50" cy="40" rx="30" ry="32" fill="#4A90E2"/>
+                            <circle cx="42" cy="36" r="3" fill="#333"/>
+                            <circle cx="58" cy="36" r="3" fill="#333"/>
+                            <circle cx="42" cy="36" r="1.5" fill="#fff"/>
+                            <circle cx="58" cy="36" r="1.5" fill="#fff"/>
+                            <path d="M 38 48 Q 50 54 62 48" stroke="#333" stroke-width="2" fill="none"/>
+                            <rect x="30" y="72" width="40" height="40" rx="4" fill="#5FA3E8"/>
+                        </svg>
+                        <div style="font-size: 14px; color: #1976d2; margin-top: 10px; font-weight: 700;">
+                            구성원의 과정까지<br>함께 돌아보는 리더
+                        </div>
                     </div>
-                    <div class="section-title">민사소송 & 가압류</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
+
+                <div class="speech-bubble shout-bubble">
+                    누가 <strong>지속가능한 성과</strong>를 만들까?
                 </div>
             </div>
+        </section>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
+        <!-- 컷 7: 마무리 - 독자에게 던지는 질문 -->
+        <section class="scene scene-large bg-brown">
+            <div class="focus-lines"></div>
+            <div class="flex-column">
+                <div class="quote-box" style="font-size: 20px; max-width: 650px; background: linear-gradient(135deg, #ffe0b2, #ffcc80);">
+                    "성공은 최선을 다했다는<br>
+                    <strong>내면의 만족</strong>이다."<br>
+                    <div style="text-align: right; margin-top: 10px;">- 존 우든</div>
+                </div>
+
+                <svg width="170" height="195" viewBox="0 0 170 195" class="character">
+                    <!-- 우든 코치 최종 -->
+                    <ellipse cx="85" cy="60" rx="50" ry="54" fill="#8B6F47"/>
+                    <circle cx="70" cy="55" r="6" fill="#333"/>
+                    <circle cx="100" cy="55" r="6" fill="#333"/>
+                    <path d="M 67 75 Q 85 85 103 75" stroke="#333" stroke-width="4" fill="none"/>
+                    <rect x="48" y="116" width="74" height="68" rx="9" fill="#A0826D"/>
+                    <line x1="48" y1="142" x2="20" y2="170" stroke="#A0826D" stroke-width="11"/>
+                    <line x1="122" y1="142" x2="150" y2="170" stroke="#A0826D" stroke-width="11"/>
+                    <!-- 트로피 -->
+                    <path d="M 20 35 L 25 25 L 35 25 L 40 35 L 38 50 Q 30 55 22 50 Z" fill="#FFD700" stroke="#DAA520" stroke-width="2"/>
+                    <rect x="27" y="50" width="6" height="8" fill="#DAA520"/>
+                    <rect x="24" y="58" width="12" height="4" fill="#DAA520"/>
+                </svg>
+
+                <div class="narration-box" style="max-width: 700px; font-size: 18px;">
+                    <strong>역설이다.</strong><br>
+                    성과를 직접 추구하지 않고 사람을 키울 때,<br>
+                    가장 큰 성과가 찾아온다.<br><br>
+                    우든은 선수들에게 이겼는지보다<br>
+                    최선을 다했는지를 물었다.<br>
+                    결과적으로 그 어떤 코치보다 많이 이겼다.
+                </div>
+
+                <div class="speech-bubble shout-bubble" style="font-size: 21px; max-width: 680px; margin-top: 25px;">
+                    당신이 오늘 한 명의 팀원을<br>
+                    한 명의 온전한 사람으로 대할 때,<br>
+                    당신은 이미 우든의 길을 걷기 시작한 것이다.
+                </div>
+
+                <div style="margin: 30px 0;">
+                    <svg width="120" height="140" viewBox="0 0 120 140" class="character">
+                        <!-- 독자(당신) -->
+                        <ellipse cx="60" cy="45" rx="35" ry="38" fill="#9E9E9E"/>
+                        <circle cx="50" cy="40" r="4" fill="#333"/>
+                        <circle cx="70" cy="40" r="4" fill="#333"/>
+                        <circle cx="50" cy="40" r="2" fill="#fff"/>
+                        <circle cx="70" cy="40" r="2" fill="#fff"/>
+                        <path d="M 48 55 Q 60 60 72 55" stroke="#333" stroke-width="3" fill="none"/>
+                        <rect x="35" y="83" width="50" height="50" rx="6" fill="#BDBDBD"/>
+                    </svg>
+                </div>
+
+                <div class="question-box" style="font-size: 22px; max-width: 600px; background: linear-gradient(135deg, #ffecb3, #ffe082); border-color: #f57c00;">
+                    <strong>"당신은 어떤 사람이<br>되고 싶은가?"</strong><br><br>
+                    그 질문이 당신의 팀을,<br>
+                    그리고 당신 자신을 변화시킬 것이다.
+                </div>
+
+                <div style="margin-top: 40px; padding: 30px; background: rgba(255,215,0,0.1); border-radius: 10px; max-width: 700px;">
+                    <div style="font-size: 15px; color: #666; line-height: 1.8; text-align: center;">
+                        <strong>함께 성장한 사람들과 나눈 진짜 신뢰.</strong><br>
+                        <strong>그들이 만들어낸 지속가능한 탁월함.</strong><br><br>
+                        그것이 우든의 10개 우승 반지보다 더 소중한 것이었다.
                     </div>
-                    <div class="section-title">사해행위 취소</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
                 </div>
             </div>
+        </section>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
+        <!-- 푸터 -->
+        <section style="background: #333; color: white; padding: 40px 20px; text-align: center;">
+            <div style="font-family: 'Noto Sans KR', sans-serif; font-size: 14px; line-height: 1.8;">
+                <strong>존 우든의 리더십</strong><br>
+                "선수 이전에 사람이다"<br>
+                10번의 우승이 증명한 단 하나의 진실<br><br>
+                <div style="font-size: 12px; color: #999; margin-top: 20px;">
+                    Webtoon Narrative Generator v2.0
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
-
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
-        </div>
-
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
-        </div>
     </div>
 </body>
 </html>
