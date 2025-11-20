@@ -1,519 +1,716 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영웅은 없다: 기사회생과 정치의 품격</title>
+  <style>
+    /* 필수: 한글 단어 보호 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
 
-        body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
+    /* 폰트 로드 */
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
-        }
+    :root {
+      /* 컬러 시스템 - 모노크롬 + 강조색 */
+      --color-bg: #fafafa;
+      --color-surface: #ffffff;
+      --color-text-primary: #1a1a1a;
+      --color-text-secondary: #525252;
+      --color-text-tertiary: #737373;
+      --color-accent: #f59e0b;
+      --color-border: #e5e5e5;
+      --color-border-strong: #d4d4d4;
 
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
-            position: relative;
-        }
+      /* 타이포그래피 스케일 (1.25 비율) */
+      --font-xs: 0.8rem;
+      --font-sm: 0.875rem;
+      --font-base: 1rem;
+      --font-lg: 1.25rem;
+      --font-xl: 1.563rem;
+      --font-2xl: 1.953rem;
+      --font-3xl: 2.441rem;
+      --font-4xl: 3.052rem;
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
-        }
+      /* 스페이싱 (8px 그리드) */
+      --space-1: 0.5rem;
+      --space-2: 1rem;
+      --space-3: 1.5rem;
+      --space-4: 2rem;
+      --space-6: 3rem;
+      --space-8: 4rem;
+      --space-12: 6rem;
+    }
 
-        .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      font-size: var(--font-base);
+      overflow-x: hidden;
+    }
 
-        .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
-        }
+    /* 컨테이너 */
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: var(--space-4) var(--space-3);
+    }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
+    /* 히어로 섹션 */
+    .hero {
+      padding: var(--space-12) 0 var(--space-8);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
 
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
-        }
+    .hero-subtitle {
+      font-size: var(--font-sm);
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-3);
+      font-weight: 500;
+    }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
-        }
+    .hero-title {
+      font-size: var(--font-4xl);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: var(--space-2);
+      letter-spacing: -0.02em;
+    }
 
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
+    .hero-title-accent {
+      color: var(--color-accent);
+    }
 
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
+    .hero-description {
+      font-size: var(--font-lg);
+      color: var(--color-text-secondary);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
 
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
+    /* 핵심 데이터 대시보드 */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-2);
+      margin: var(--space-8) 0;
+      padding: var(--space-6) 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
 
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
+    .stat-card {
+      text-align: center;
+      padding: var(--space-4);
+      background: var(--color-surface);
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
+    .stat-card:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
 
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
+    .stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--font-3xl);
+      font-weight: 700;
+      color: var(--color-accent);
+      display: block;
+      margin-bottom: var(--space-1);
+    }
 
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-        }
+    .stat-label {
+      font-size: var(--font-sm);
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
 
-        .flow-step::after {
-            content: '→';
-            position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
-        }
+    /* 타임라인 */
+    .timeline {
+      position: relative;
+      margin: var(--space-12) 0;
+    }
 
-        .flow-step:last-child::after {
-            display: none;
-        }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        var(--color-border-strong) 5%,
+        var(--color-border-strong) 95%,
+        transparent 100%);
+    }
 
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
-        }
+    .timeline-item {
+      position: relative;
+      padding-left: 72px;
+      margin-bottom: var(--space-8);
+      opacity: 0;
+      transform: translateX(-24px);
+      animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
 
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
+    .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.3s; }
 
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
 
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
+    .timeline-marker {
+      position: absolute;
+      left: 0;
+      top: 4px;
+      width: 48px;
+      height: 48px;
+      background: var(--color-surface);
+      border: 2px solid var(--color-border-strong);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: var(--font-sm);
+      color: var(--color-text-secondary);
+      z-index: 2;
+    }
 
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
+    .timeline-marker.active {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: white;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+    }
 
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
+    .timeline-content {
+      background: var(--color-surface);
+      padding: var(--space-4);
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-accent);
+    }
 
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
+    .timeline-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--font-sm);
+      color: var(--color-accent);
+      font-weight: 700;
+      margin-bottom: var(--space-1);
+    }
 
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
+    .timeline-title {
+      font-size: var(--font-xl);
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+      line-height: 1.3;
+    }
 
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
+    .timeline-description {
+      font-size: var(--font-base);
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
 
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
+    /* 챕터 섹션 */
+    .chapter {
+      margin: var(--space-12) 0;
+    }
 
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
+    .chapter-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--font-xs);
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-2);
+      display: block;
+    }
 
-        .fact-item {
-            text-align: center;
-        }
+    .chapter-title {
+      font-size: var(--font-2xl);
+      font-weight: 800;
+      margin-bottom: var(--space-4);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
 
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
-            display: block;
-        }
+    .chapter-content {
+      font-size: var(--font-lg);
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      margin-bottom: var(--space-3);
+    }
 
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
+    .chapter-content p {
+      margin-bottom: var(--space-3);
+    }
 
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
-        }
+    /* 강조 표시 */
+    .highlight {
+      background: linear-gradient(to top, rgba(245, 158, 11, 0.2) 50%, transparent 50%);
+      padding: 0 4px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
 
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
+    .emphasis {
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
 
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
-        }
+    /* 인용구 스타일 */
+    .quote-block {
+      background: var(--color-surface);
+      border-left: 4px solid var(--color-accent);
+      padding: var(--space-4);
+      margin: var(--space-6) 0;
+      font-size: var(--font-lg);
+      font-style: italic;
+      color: var(--color-text-secondary);
+      border-radius: 0 8px 8px 0;
+    }
 
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
-        }
+    /* Bento Grid - 핵심 메시지 */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--space-2);
+      margin: var(--space-8) 0;
+    }
 
-        .footer-highlight {
-            color: #1A2A57;
-            font-weight: 700;
-        }
+    .bento-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: var(--space-4);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
+    .bento-item:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    }
 
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
-        }
+    .bento-large {
+      grid-column: span 8;
+    }
 
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
-        }
+    .bento-small {
+      grid-column: span 4;
+    }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
-            }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .main-title {
-                font-size: 24px;
-            }
-        }
-    </style>
+    .bento-full {
+      grid-column: span 12;
+    }
+
+    .bento-title {
+      font-size: var(--font-xl);
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+      line-height: 1.3;
+    }
+
+    .bento-text {
+      font-size: var(--font-base);
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    .bento-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--font-4xl);
+      font-weight: 700;
+      color: var(--color-accent);
+      display: block;
+      margin-bottom: var(--space-2);
+    }
+
+    /* 결론 섹션 */
+    .conclusion {
+      background: var(--color-text-primary);
+      color: var(--color-bg);
+      padding: var(--space-8) var(--space-6);
+      margin: var(--space-12) 0;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .conclusion-label {
+      font-size: var(--font-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-3);
+      font-weight: 600;
+    }
+
+    .conclusion-text {
+      font-size: var(--font-2xl);
+      font-weight: 700;
+      line-height: 1.4;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .conclusion-highlight {
+      color: var(--color-accent);
+    }
+
+    /* 푸터 */
+    .footer {
+      text-align: center;
+      padding: var(--space-8) 0 var(--space-4);
+      color: var(--color-text-tertiary);
+      font-size: var(--font-sm);
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--space-12);
+    }
+
+    /* 모바일 최적화 */
+    @media (max-width: 768px) {
+      :root {
+        --font-2xl: 1.5rem;
+        --font-3xl: 1.875rem;
+        --font-4xl: 2.25rem;
+      }
+
+      .container {
+        padding: var(--space-3) var(--space-2);
+      }
+
+      .hero {
+        padding: var(--space-8) 0 var(--space-6);
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+      }
+
+      .timeline::before {
+        left: 16px;
+      }
+
+      .timeline-item {
+        padding-left: 56px;
+      }
+
+      .timeline-marker {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-xs);
+      }
+
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bento-large,
+      .bento-small,
+      .bento-full {
+        grid-column: span 1;
+      }
+
+      .chapter-content {
+        font-size: var(--font-base);
+      }
+
+      .conclusion {
+        padding: var(--space-6) var(--space-4);
+      }
+
+      .conclusion-text {
+        font-size: var(--font-xl);
+      }
+    }
+
+    /* 터치 타겟 최소 크기 */
+    @media (hover: none) and (pointer: coarse) {
+      .stat-card,
+      .bento-item {
+        min-height: 44px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
+  <!-- 히어로 섹션 -->
+  <div class="container">
+    <section class="hero">
+      <div class="hero-subtitle">론스타 ISDS 소송 판정 취소</div>
+      <h1 class="hero-title">
+        <span class="hero-title-accent">영웅은 없다</span><br>
+        기사회생과 정치의 품격
+      </h1>
+      <p class="hero-description">
+        4,000억 원의 기적적 승리 뒤에 숨겨진 진실,<br>
+        그리고 우리가 기억해야 할 것들
+      </p>
+    </section>
+
+    <!-- 핵심 데이터 대시보드 -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-value">4,000억</span>
+        <div class="stat-label">배상 판정 취소 금액</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">73억</span>
+        <div class="stat-label">상대방 부담 소송비용</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">1%</span>
+        <div class="stat-label">판정 취소 성공 확률</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">13년</span>
+        <div class="stat-label">실무진이 견딘 시간</div>
+      </div>
+    </section>
+
+    <!-- 타임라인 -->
+    <section class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-marker">2012</div>
+        <div class="timeline-content">
+          <div class="timeline-year">2012년</div>
+          <h3 class="timeline-title">소송의 시작</h3>
+          <p class="timeline-description">
+            론스타가 한국 정부를 상대로 국제투자분쟁(ISDS) 소송 제기.
+            22년에 걸친 긴 싸움의 시작점.
+          </p>
         </div>
+      </div>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
+      <div class="timeline-item">
+        <div class="timeline-marker">2022</div>
+        <div class="timeline-content">
+          <div class="timeline-year">2022년</div>
+          <h3 class="timeline-title">패배 판정</h3>
+          <p class="timeline-description">
+            국제 중재 재판부, 한국 정부에 배상 판정 선고.
+            이자 포함 4,000억 원의 천문학적 금액이 위기에 처함.
+          </p>
         </div>
+      </div>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
+      <div class="timeline-item">
+        <div class="timeline-marker active">2025</div>
+        <div class="timeline-content">
+          <div class="timeline-year">2025년 11월 18일</div>
+          <h3 class="timeline-title">기적적 반전</h3>
+          <p class="timeline-description">
+            취소위원회가 2022년 판정을 '전면 무효' 선언.
+            '낙타가 바늘구멍 통과하기'만큼 어려운 1% 확률의 승리.
+          </p>
         </div>
+      </div>
+    </section>
 
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="section-title">보증보험 청구</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
+    <!-- Bento Grid - 핵심 메시지 -->
+    <section class="bento-grid">
+      <div class="bento-item bento-large">
+        <h3 class="bento-title">완전한 종결이 아닌 '원점 회귀'</h3>
+        <p class="bento-text">
+          이번 판결은 '취소(Annulment)'로, 완전한 종결이 아닌 2012년 소송 제기 시점으로의 복귀를 의미합니다.
+          론스타가 재소송을 제기할 가능성은 여전히 남아 있습니다.
+        </p>
+      </div>
+      <div class="bento-item bento-small">
+        <span class="bento-number">22년</span>
+        <p class="bento-text">끌어온 악연의 고리는 아직 끊어지지 않았을지도 모릅니다</p>
+      </div>
+    </section>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <div class="section-title">민사소송 & 가압류</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
-            </div>
+    <!-- 챕터 1 -->
+    <article class="chapter">
+      <span class="chapter-number">Chapter 01</span>
+      <h2 class="chapter-title">벼랑 끝에서 돌아온 4,000억</h2>
+      <div class="chapter-content">
+        <p>
+          2025년 11월 18일, 낭보가 날아들었다. 국제투자분쟁(ISDS) 취소위원회가 2022년의 배상 판정을 뒤집고
+          <span class="highlight">'전면 무효'를 선언</span>한 것이다. 이자까지 합쳐 무려 4,000억 원.
+          자칫하면 국민의 지갑에서 론스타라는 거대 자본의 주머니로 흘러 들어갈 뻔했던 천문학적인 돈이
+          벼랑 끝에서 멈춰 섰다.
+        </p>
+        <p>
+          이것은 단순한 승리가 아니다. 국제 중재 분야에서 한 번 내려진 판정을 뒤집는 것은
+          <span class="emphasis">'낙타가 바늘구멍 통과하기'만큼 어렵다</span>고들 한다.
+          확률 1%의 희박한 가능성, 그 좁은 문을 뚫고 기어이 '판정 취소'를 받아낸 건 기적에 가까운 일이다.
+        </p>
+      </div>
+    </article>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
-                    </div>
-                    <div class="section-title">사해행위 취소</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
+    <!-- 챕터 2 -->
+    <article class="chapter">
+      <span class="chapter-number">Chapter 02</span>
+      <h2 class="chapter-title">샴페인을 터뜨리기엔 이른 이유</h2>
+      <div class="chapter-content">
+        <p>
+          그러나 이 기적 같은 소식이 여의도 정치권에 닿자마자, 본질은 흐려지고 소란스러운 생색내기가 시작됐다.
+          "내 결단 덕분이다", "내가 장관 시절에 기틀을 다졌다"며 저마다 마이크를 잡는다.
+        </p>
+        <p class="quote-block">
+          "지금은 영웅 놀이를 할 때가 아니라, 다시 시작될지 모를 전쟁을 대비해
+          증거를 보존하고 신발 끈을 동여매야 할 때다."
+        </p>
+        <p>
+          하지만 냉정하게 보자. 이번 판결의 핵심은 '취소(Annulment)'다.
+          이것은 '완전한 종결'을 의미하는 게 아니라, 2012년 소송이 제기된 그 '원점'으로 돌아갔다는 뜻이다.
+          4,000억 원의 빚은 사라졌지만, <span class="highlight">22년을 끌어온 악연의 고리는 아직 끊어지지 않았을지도 모른다</span>는 얘기다.
+        </p>
+      </div>
+    </article>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
-                </div>
-            </div>
-        </div>
+    <!-- 챕터 3 -->
+    <article class="chapter">
+      <span class="chapter-number">Chapter 03</span>
+      <h2 class="chapter-title">영웅은 없다, 집요한 기록이 있을 뿐</h2>
+      <div class="chapter-content">
+        <p>
+          이 기적적인 반전 드라마의 진짜 주인공은 누구인가. 마이크 앞에 선 정치인들이 아니다.
+          그것은 <span class="emphasis">"승산이 없다"는 주변의 비관론 속에서도 판결문의 절차적 오류를
+          현미경처럼 들여다보며 끈질기게 파고든 실무진들</span>이다.
+        </p>
+        <p>
+          국제 사회가 인정한 이번 승리는 치밀한 법리 검토와 밤샘 노동이 층층이 쌓여 만들어낸 '기록의 승리'다.
+          그들이 찾아낸 논리적 허점이 아니었다면, 4,000억 원은 공중분해 되었을 것이다.
+        </p>
+        <p class="quote-block">
+          "이 승리는 한 명의 영웅이 칼을 휘둘러 얻어낸 전리품이 아니라,
+          이름 없는 실무자들이 볼펜 끝으로 쌓아 올린 둑이 범람하는 물길을 막아낸 결과다."
+        </p>
+      </div>
+    </article>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
+    <!-- 챕터 4 -->
+    <article class="chapter">
+      <span class="chapter-number">Chapter 04</span>
+      <h2 class="chapter-title">'나 때문'이라는 오만, '당신 덕분'이라는 품격</h2>
+      <div class="chapter-content">
+        <p>
+          큰일이 이루어졌을 때, 성숙한 태도는 무엇인가. 그것은 "내가 잘해서"라고 외치는 것이 아니라,
+          보이지 않는 곳에서 묵묵히 제 몫을 해낸 이들에게 <span class="highlight">"당신 덕분"</span>이라고
+          고개를 숙이는 것이다.
+        </p>
+        <p>
+          이제 소란은 좀 가라앉혀야 한다. 대신 이번 승소의 노하우를 매뉴얼로 남겨 훗날을 대비하자는
+          전문가들의 조언에 귀를 기울여야 한다. 엘리엇이든 메이슨이든, 앞으로 닥쳐올 또 다른 파도 앞에서
+          이 '절차적 방어 논리'는 강력한 무기가 될 테니까.
+        </p>
+        <p>
+          정치인들의 공치사(功致辭)가 시끄러운 오늘, 나는 오히려 그 소란 뒤편에 있는 고요함을 본다.
+          승소 소식을 듣고도 기뻐 날뛰기보다, 조용히 다음 소송을 대비해 서류를 정리하고 있을
+          어느 과장의 덤덤한 손길을 상상한다.
+        </p>
+      </div>
+    </article>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
-        </div>
+    <!-- 결론 섹션 -->
+    <section class="conclusion">
+      <div class="conclusion-label">결론</div>
+      <p class="conclusion-text">
+        제발 함부로 "내가 했다"고 말하지 말자.
+        이 위대한 '원점 회귀'는 그 누구의 영웅적 결단 때문이 아니라,
+        <span class="conclusion-highlight">묵묵히 자리를 지킨 사람들의 피땀 덕분(德分)</span>이다.
+        4,000억 원이라는 숫자보다 더 무거운 것은, 바로 그들이 견뎌낸 13년의 시간이다.
+      </p>
+    </section>
 
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
-        </div>
-    </div>
+    <!-- 푸터 -->
+    <footer class="footer">
+      <p>2025 · 기사회생과 정치의 품격에 관한 고찰</p>
+    </footer>
+  </div>
+
+  <script>
+    // 스크롤 애니메이션 - Intersection Observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // 애니메이션 대상 요소들
+    document.querySelectorAll('.chapter, .bento-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      observer.observe(el);
+    });
+
+    // 스크롤 진행률 표시 (선택적)
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.scrollY;
+          const height = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = (scrolled / height) * 100;
+
+          // 타임라인 마커 활성화
+          document.querySelectorAll('.timeline-marker').forEach((marker, index) => {
+            const item = marker.closest('.timeline-item');
+            const itemTop = item.offsetTop;
+            const itemHeight = item.offsetHeight;
+
+            if (scrolled > itemTop - window.innerHeight / 2 &&
+                scrolled < itemTop + itemHeight) {
+              marker.classList.add('active');
+            } else {
+              marker.classList.remove('active');
+            }
+          });
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  </script>
 </body>
 </html>
