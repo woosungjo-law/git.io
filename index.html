@@ -6,9 +6,10 @@
     <title>문질빈빈 - 겉과 속의 조화</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nanum+Pen+Script&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
+        /* ===== RESET & KOREAN TEXT OPTIMIZATION ===== */
         * {
             margin: 0;
             padding: 0;
@@ -18,203 +19,246 @@
             overflow-wrap: break-word;
         }
 
+        /* ===== COLOR SYSTEM ===== */
         :root {
-            --milk-beige: #F4E4C1;
-            --pulp-white: #EAE7C6;
-            --mustard: #E8A87C;
-            --dusty-rose: #C38D9E;
-            --brown-ink: #5C4B37;
-            --light-brown: #8B7355;
+            --dark-navy: #1A1F3A;
+            --light-navy: #2D3561;
+            --ivory: #FAF8F3;
+            --soft-white: #FFFFFF;
+            --coral: #FF6B6B;
+            --mint: #4ECDC4;
+            --warm-gray: #F5F3EF;
+            --text-primary: #1A1F3A;
+            --text-secondary: #5A5F7D;
         }
 
+        /* ===== BODY & LAYOUT ===== */
         body {
-            font-family: 'Quicksand', sans-serif;
-            background-color: var(--milk-beige);
-            background-image:
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 31px,
-                    rgba(139, 115, 85, 0.08) 31px,
-                    rgba(139, 115, 85, 0.08) 32px
-                ),
-                radial-gradient(ellipse at 20% 30%, rgba(232, 168, 124, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(195, 141, 158, 0.05) 0%, transparent 50%);
-            color: var(--brown-ink);
-            line-height: 1.8;
-            padding: 2rem 1rem;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--warm-gray) 100%);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding: 0;
+            margin: 0;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .notebook {
-            max-width: 900px;
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
+        }
+
+        /* ===== HEADER ===== */
+        .hero {
+            text-align: center;
+            padding: clamp(2rem, 6vw, 4rem) 1rem;
+            margin-bottom: clamp(2rem, 4vw, 3rem);
             position: relative;
         }
 
-        /* Notebook binding holes */
-        .notebook::before {
-            content: '';
-            position: absolute;
-            left: -20px;
-            top: 0;
-            bottom: 0;
-            width: 40px;
-            background:
-                radial-gradient(circle at 20px 60px, rgba(139, 115, 85, 0.15) 8px, transparent 8px),
-                radial-gradient(circle at 20px 180px, rgba(139, 115, 85, 0.15) 8px, transparent 8px),
-                radial-gradient(circle at 20px 300px, rgba(139, 115, 85, 0.15) 8px, transparent 8px),
-                radial-gradient(circle at 20px 420px, rgba(139, 115, 85, 0.15) 8px, transparent 8px),
-                radial-gradient(circle at 20px 540px, rgba(139, 115, 85, 0.15) 8px, transparent 8px);
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            animation: fadeInDown 1s ease-out;
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--coral), var(--mint));
+            color: var(--soft-white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease-out;
         }
 
         .main-title {
-            font-family: 'Gaegu', cursive;
-            font-size: clamp(1.8rem, 5vw, 3rem);
-            color: var(--brown-ink);
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 900;
+            color: var(--dark-navy);
             margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .main-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--mustard);
-            filter: url(#inkPaper);
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
 
         .subtitle {
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--light-brown);
-            margin-top: 1.5rem;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: var(--text-secondary);
+            font-weight: 500;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
         }
 
+        /* ===== BENTO GRID SYSTEM ===== */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: clamp(2rem, 4vw, 3rem);
+        }
+
+        /* ===== CARD STYLES ===== */
         .card {
-            background: var(--pulp-white);
-            background-image:
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(232, 168, 124, 0.03) 2px,
-                    rgba(232, 168, 124, 0.03) 4px
-                );
-            border: 2px dashed var(--mustard);
-            border-radius: 20px;
-            padding: clamp(1.5rem, 4vw, 2.5rem);
-            margin-bottom: 2rem;
+            background: var(--soft-white);
+            border-radius: 24px;
+            padding: clamp(1.8rem, 4vw, 2.5rem);
+            box-shadow: 0 4px 24px rgba(26, 31, 58, 0.08);
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeInUp 0.8s ease-out backwards;
-        }
-
-        .card:nth-child(1) { animation-delay: 0.2s; }
-        .card:nth-child(2) { animation-delay: 0.4s; }
-        .card:nth-child(3) { animation-delay: 0.6s; }
-        .card:nth-child(4) { animation-delay: 0.8s; }
-
-        .card:hover {
-            transform: scale(1.02) rotate(0.5deg);
-            box-shadow: 8px 8px 20px rgba(92, 75, 55, 0.15);
-        }
-
-        .card:hover .scribble {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .scribble {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             opacity: 0;
-            transition: all 0.4s ease;
-            pointer-events: none;
-            z-index: 10;
+            transform: translateY(30px);
+        }
+
+        /* WOW FEATURE 1: Intersection Observer Animation */
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* WOW FEATURE 2: 3D Tilt Hover Effect */
+        .card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-8px);
+            box-shadow: 0 12px 40px rgba(26, 31, 58, 0.15);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .card-icon.coral {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 107, 107, 0.05));
+        }
+
+        .card-icon.mint {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(78, 205, 196, 0.05));
+        }
+
+        .card-icon.purple {
+            background: linear-gradient(135deg, rgba(138, 97, 206, 0.15), rgba(138, 97, 206, 0.05));
+        }
+
+        .card-icon.gold {
+            background: linear-gradient(135deg, rgba(250, 177, 60, 0.15), rgba(250, 177, 60, 0.05));
         }
 
         .card-title {
-            font-family: 'Gaegu', cursive;
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
-            color: var(--brown-ink);
-            margin-bottom: 1.2rem;
-            position: relative;
-            padding-left: 1rem;
+            font-size: clamp(1.5rem, 3.5vw, 2rem);
+            font-weight: 800;
+            color: var(--dark-navy);
+            margin-bottom: 1rem;
+            line-height: 1.3;
         }
 
-        .card-title::before {
-            content: '✦';
-            position: absolute;
-            left: -10px;
-            color: var(--dusty-rose);
-            filter: url(#inkPaper);
+        .card-text {
+            font-size: clamp(1rem, 2.2vw, 1.1rem);
+            color: var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom: 1rem;
         }
 
+        .card-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== QUOTE BOX ===== */
         .quote-box {
-            background: rgba(232, 168, 124, 0.1);
-            border-left: 4px solid var(--dusty-rose);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 15px 15px 0;
-            font-family: 'Nanum Pen Script', cursive;
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            line-height: 2;
+            background: linear-gradient(135deg, var(--dark-navy), var(--light-navy));
+            color: var(--soft-white);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            margin: clamp(2rem, 4vw, 3rem) 0;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(26, 31, 58, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        .hanja {
-            font-size: clamp(1rem, 2.2vw, 1.2rem);
-            color: var(--light-brown);
-            letter-spacing: 0.1em;
+        .quote-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease-out;
         }
 
-        .emphasis {
-            background: linear-gradient(180deg, transparent 60%, rgba(232, 168, 124, 0.3) 60%);
-            padding: 0 0.3rem;
-            font-weight: 600;
+        .quote-icon {
+            font-size: 3rem;
+            opacity: 0.2;
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
         }
 
-        p {
-            margin-bottom: 1.2rem;
-            font-size: clamp(1rem, 2vw, 1.15rem);
-            text-indent: 1em;
+        .quote-hanja {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
         }
 
-        .illustration-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 2rem 0;
-            gap: 2rem;
-            flex-wrap: wrap;
+        .quote-korean {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 500;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
-        .svg-sketch {
-            filter: url(#inkPaper);
-            animation: drawIn 1.5s ease-out backwards;
+        /* ===== HIGHLIGHT ===== */
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, rgba(255, 107, 107, 0.3) 60%);
+            padding: 0 0.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
-        .floating {
-            animation: float 3s ease-in-out infinite;
+        /* ===== CONCLUSION SECTION ===== */
+        .conclusion {
+            background: var(--dark-navy);
+            color: var(--soft-white);
+            border-radius: 28px;
+            padding: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-top: clamp(2rem, 4vw, 3rem);
+            box-shadow: 0 12px 48px rgba(26, 31, 58, 0.25);
+            opacity: 0;
+            transform: translateY(30px);
         }
 
+        .conclusion.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease-out;
+        }
+
+        .conclusion-hanja {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--coral), var(--mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .conclusion-text {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* ===== ANIMATIONS ===== */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -225,7 +269,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -233,313 +277,200 @@
             }
         }
 
-        @keyframes drawIn {
-            from {
-                opacity: 0;
-                stroke-dashoffset: 1000;
-            }
-            to {
-                opacity: 1;
-                stroke-dashoffset: 0;
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .conclusion {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            font-family: 'Gaegu', cursive;
-            font-size: clamp(1.3rem, 3vw, 1.8rem);
-            color: var(--dusty-rose);
-        }
-
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            body {
-                padding: 1rem 0.5rem;
+            .container {
+                padding: 1.5rem 1rem;
             }
 
-            .notebook::before {
-                display: none;
+            .bento-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .card {
-                margin-bottom: 1.5rem;
+                padding: 1.5rem;
             }
 
-            .illustration-container {
-                gap: 1rem;
+            .card:hover {
+                transform: perspective(1000px) rotateX(1deg) rotateY(-1deg) translateY(-4px);
+            }
+
+            .hero {
+                padding: 2rem 0.5rem;
+                margin-bottom: 2rem;
             }
         }
 
-        /* SVG Filters - Hidden but essential */
-        .svg-defs {
-            position: absolute;
-            width: 0;
-            height: 0;
+        @media (min-width: 769px) {
+            /* Desktop: Make first card span 2 columns */
+            .card:first-child {
+                grid-column: span 2;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- SVG Filters Definition -->
-    <svg class="svg-defs">
-        <defs>
-            <filter id="inkPaper">
-                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="1"/>
-                <feDisplacementMap in="SourceGraphic" scale="3"/>
-            </filter>
-
-            <filter id="inkBleed">
-                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="4" seed="2"/>
-                <feDisplacementMap in="SourceGraphic" scale="5"/>
-            </filter>
-        </defs>
-    </svg>
-
-    <div class="notebook">
-        <header>
+    <div class="container">
+        <!-- HERO SECTION -->
+        <header class="hero">
+            <div class="hero-badge">논어의 지혜</div>
             <h1 class="main-title">겉과 속 모두 채워야 진짜다</h1>
-            <p class="subtitle">논어가 건네는 2,500년 전 조언</p>
-
-            <!-- Main illustration -->
-            <div class="illustration-container">
-                <svg class="svg-sketch floating" width="120" height="120" viewBox="0 0 120 120">
-                    <circle cx="60" cy="60" r="50" fill="none" stroke="#E8A87C" stroke-width="3"
-                            stroke-dasharray="1000" style="animation-delay: 0.3s"/>
-                    <path d="M40,60 Q60,30 80,60 T60,90" fill="none" stroke="#C38D9E" stroke-width="2.5"
-                          stroke-dasharray="1000" style="animation-delay: 0.5s"/>
-                    <circle cx="45" cy="50" r="3" fill="#5C4B37"/>
-                    <circle cx="75" cy="50" r="3" fill="#5C4B37"/>
-                </svg>
-            </div>
+            <p class="subtitle">2,500년 전 공자가 건네는 완성에 대한 조언</p>
         </header>
 
-        <main>
-            <!-- Card 1: Introduction & Quote -->
+        <!-- QUOTE BOX -->
+        <div class="quote-box">
+            <div class="quote-icon">"</div>
+            <p class="quote-hanja">質勝文則野, 文勝質則史, 文質彬彬, 然後君子</p>
+            <p class="quote-korean">질승문즉야, 문승질즉사, 문질빈빈, 연후군자</p>
+        </div>
+
+        <!-- BENTO GRID CARDS -->
+        <div class="bento-grid">
+            <!-- Card 1: Introduction -->
             <article class="card">
-                <div class="scribble">
-                    <svg width="100" height="100" viewBox="0 0 100 100">
-                        <path d="M20,50 Q50,20 80,50 T50,80 Z" fill="none" stroke="#E8A87C"
-                              stroke-width="2" opacity="0.4" filter="url(#inkBleed)"/>
-                    </svg>
-                </div>
-
+                <div class="card-icon coral">📖</div>
                 <h2 class="card-title">본질만으론 부족하다</h2>
-
-                <div class="quote-box">
-                    <p class="hanja">質勝文則野, 文勝質則史, 文質彬彬, 然後君子</p>
-                    <p style="text-indent: 0; margin-top: 1rem;">
-                        질승문즉야, 문승질즉사, 문질빈빈, 연후군자
-                    </p>
-                </div>
-
-                <p>
+                <p class="card-text">
                     본질이 형식을 압도하면 거칠어지고, 형식이 본질을 넘어서면 겉치레만 남는다.
                     본질과 형식이 적절히 어우러질 때 비로소 군자라 부를 만하다는 얘기다.
                 </p>
-
-                <p>
+                <p class="card-text">
                     공자가 제자 자하와 나눈 이 대화를 처음 읽었을 때, 단순한 처세의 기술쯤으로 여겼다.
-                    <span class="emphasis">하지만 곱씹을수록 이건 그런 얕은 조언이 아니었다.</span>
+                    <span class="highlight">하지만 곱씹을수록 이건 그런 얕은 조언이 아니었다.</span>
                     공자는 인간이라면 누구나 평생 마주해야 할 근본적 긴장에 대해 말하고 있었던 것이다.
                 </p>
-
-                <div class="illustration-container">
-                    <svg class="svg-sketch" width="80" height="80" viewBox="0 0 80 80">
-                        <rect x="15" y="20" width="50" height="40" rx="5" fill="none"
-                              stroke="#C38D9E" stroke-width="2.5" stroke-dasharray="1000"/>
-                        <line x1="25" y1="35" x2="55" y2="35" stroke="#8B7355" stroke-width="1.5"/>
-                        <line x1="25" y1="45" x2="55" y2="45" stroke="#8B7355" stroke-width="1.5"/>
-                    </svg>
-                </div>
             </article>
 
-            <!-- Card 2: Those trapped in substance -->
+            <!-- Card 2: Trapped in Substance -->
             <article class="card">
-                <div class="scribble">
-                    <svg width="120" height="120" viewBox="0 0 120 120">
-                        <circle cx="60" cy="60" r="40" fill="none" stroke="#C38D9E"
-                                stroke-width="3" opacity="0.3" filter="url(#inkBleed)"/>
-                        <line x1="30" y1="30" x2="90" y2="90" stroke="#E8A87C" stroke-width="2" opacity="0.4"/>
-                    </svg>
-                </div>
-
+                <div class="card-icon mint">🔒</div>
                 <h2 class="card-title">본질에 갇힌 사람들</h2>
-
-                <div class="illustration-container">
-                    <svg class="svg-sketch" width="100" height="100" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="35" fill="none" stroke="#E8A87C"
-                                stroke-width="3" stroke-dasharray="1000"/>
-                        <circle cx="50" cy="50" r="25" fill="none" stroke="#E8A87C"
-                                stroke-width="2" stroke-dasharray="1000" style="animation-delay: 0.2s"/>
-                        <circle cx="50" cy="50" r="15" fill="none" stroke="#E8A87C"
-                                stroke-width="2" stroke-dasharray="1000" style="animation-delay: 0.4s"/>
-                        <path d="M40,45 L45,50 L40,55" fill="none" stroke="#5C4B37" stroke-width="2"/>
-                        <path d="M60,45 L55,50 L60,55" fill="none" stroke="#5C4B37" stroke-width="2"/>
-                    </svg>
-                </div>
-
-                <p>
+                <p class="card-text">
                     우리 주변엔 실력은 뛰어난데 빛을 보지 못하는 사람들이 있다.
                     기술은 일류인데 그걸 남에게 설명하는 데는 영 재주가 없다.
                     깊이 있는 통찰을 품고 있어도 다른 이들이 알아들을 언어로 번역하지 못한다.
-                    본질만 붙들고 있다가 결국 세상과 단절되는 경우다.
                 </p>
-
-                <p>
+                <p class="card-text">
                     공자가 말한 '야(野)'는 단지 거칠다는 뜻이 아니다.
-                    <span class="emphasis">소통 불능의 고립, 자기 세계에 갇힌 무능함을 가리킨다.</span>
+                    <span class="highlight">소통 불능의 고립, 자기 세계에 갇힌 무능함을 가리킨다.</span>
                     아무리 좋은 것도 전달되지 않으면 존재하지 않는 거나 마찬가지다.
                 </p>
             </article>
 
-            <!-- Card 3: Those drunk on form -->
+            <!-- Card 3: Drunk on Form -->
             <article class="card">
-                <div class="scribble">
-                    <svg width="100" height="100" viewBox="0 0 100 100">
-                        <rect x="20" y="20" width="60" height="60" fill="none" stroke="#E8A87C"
-                              stroke-width="2.5" opacity="0.3" filter="url(#inkBleed)"/>
-                        <line x1="20" y1="20" x2="80" y2="80" stroke="#C38D9E" stroke-width="2" opacity="0.4"/>
-                        <line x1="80" y1="20" x2="20" y2="80" stroke="#C38D9E" stroke-width="2" opacity="0.4"/>
-                    </svg>
-                </div>
-
+                <div class="card-icon purple">✨</div>
                 <h2 class="card-title">형식에 취한 사람들</h2>
-
-                <div class="illustration-container">
-                    <svg class="svg-sketch" width="100" height="100" viewBox="0 0 100 100">
-                        <rect x="20" y="25" width="60" height="50" rx="8" fill="none"
-                              stroke="#C38D9E" stroke-width="3" stroke-dasharray="1000"/>
-                        <rect x="25" y="30" width="50" height="40" rx="6" fill="none"
-                              stroke="#C38D9E" stroke-width="2" stroke-dasharray="5,5"/>
-                        <circle cx="50" cy="50" r="5" fill="none" stroke="#8B7355" stroke-width="2"/>
-                        <path d="M30,50 L45,50 M55,50 L70,50" stroke="#8B7355" stroke-width="1.5"/>
-                    </svg>
-                </div>
-
-                <p>
+                <p class="card-text">
                     반대쪽엔 포장의 달인들이 있다.
                     화려한 프레젠테이션 뒤에 별 내용이 없고, 세련된 말솜씨로 빈약한 생각을 덮는다.
                     이런 사람들은 한동안 잘나가는 것처럼 보인다. 실제로도 잘나간다.
                 </p>
-
-                <p>
+                <p class="card-text">
                     하지만 시간은 정직해서, 겉만 번드르르한 건 결국 들통 난다.
                     공자가 경계한 '사(史)'는 형식과 절차만 따지는 관료적 인간형을 뜻한다.
-                    <span class="emphasis">내용 없는 형식은 곧 시들 수밖에 없다.</span>
+                    <span class="highlight">내용 없는 형식은 곧 시들 수밖에 없다.</span>
                 </p>
             </article>
 
-            <!-- Card 4: Balance - The Dual Completion -->
+            <!-- Card 4: Dual Completion -->
             <article class="card">
-                <div class="scribble">
-                    <svg width="120" height="120" viewBox="0 0 120 120">
-                        <path d="M60,20 L80,60 L60,100 L40,60 Z" fill="none" stroke="#C38D9E"
-                              stroke-width="3" opacity="0.3" filter="url(#inkBleed)"/>
-                        <circle cx="60" cy="60" r="30" fill="none" stroke="#E8A87C"
-                                stroke-width="2" opacity="0.4" filter="url(#inkBleed)"/>
-                    </svg>
-                </div>
-
+                <div class="card-icon gold">⚖️</div>
                 <h2 class="card-title">균형이 아니라 이중 완성</h2>
-
-                <div class="illustration-container">
-                    <svg class="svg-sketch" width="120" height="100" viewBox="0 0 120 100">
-                        <circle cx="40" cy="50" r="25" fill="none" stroke="#E8A87C"
-                                stroke-width="3" stroke-dasharray="1000"/>
-                        <circle cx="80" cy="50" r="25" fill="none" stroke="#C38D9E"
-                                stroke-width="3" stroke-dasharray="1000" style="animation-delay: 0.2s"/>
-                        <path d="M40,50 L80,50" stroke="#5C4B37" stroke-width="2.5"
-                              stroke-dasharray="1000" style="animation-delay: 0.4s"/>
-                        <circle cx="60" cy="50" r="8" fill="#8B7355" opacity="0.3"/>
-                        <text x="40" y="55" font-size="12" text-anchor="middle" fill="#5C4B37"
-                              font-family="Nanum Pen Script">質</text>
-                        <text x="80" y="55" font-size="12" text-anchor="middle" fill="#5C4B37"
-                              font-family="Nanum Pen Script">文</text>
-                    </svg>
-                </div>
-
-                <p>
+                <p class="card-text">
                     그렇다면 문질빈빈은 뭔가. 두 극단의 중간쯤 되는 안전한 지대? 천만에.
                     이건 훨씬 가혹한 요구다. 깊이 있는 전문성과 그걸 전달하는 소통력.
                     진정성 있는 내용과 그걸 매력적으로 만드는 표현력.
                     진지한 사유와 감각적인 전달. 이 모든 걸 다 갖추라는 얘기다.
                 </p>
-
-                <p>
+                <p class="card-text">
                     어느 하나만 탁월해서는 안 되고, 둘 다 탁월해야 한다.
                     그래서 공자는 이걸 '군자'라는 최고 경지로 규정했다.
-                    <span class="emphasis">균형이 아니라 두 차원의 완성. 당연히 어렵다.</span>
+                    <span class="highlight">균형이 아니라 두 차원의 완성. 당연히 어렵다.</span>
                 </p>
+            </article>
 
-                <p>
+            <!-- Card 5: Professional Balance -->
+            <article class="card">
+                <div class="card-icon coral">🎯</div>
+                <h2 class="card-title">전문가의 줄타기</h2>
+                <p class="card-text">
                     전문가로 산다는 건 결국 이 긴장 속에서 줄타기하는 일이다.
                     실력만 믿고 세상과의 대화를 등한시하면 고립된다.
                     포장과 홍보에만 매달리면 결국 밑천이 드러난다.
-                    진짜 전문가는 자기 분야에서 최고가 되는 동시에,
-                    그 가치를 남들에게 제대로 전달할 줄 아는 사람이다.
+                    진짜 전문가는 자기 분야에서 최고가 되는 동시에, 그 가치를 남들에게 제대로 전달할 줄 아는 사람이다.
                 </p>
-
-                <p>
+                <p class="card-text">
                     문질빈빈은 한 번 도달하면 끝나는 목표가 아니다.
                     평생 유지해야 하는 역동적 균형이다.
                     내공을 쌓으면서 동시에 전달력을 갈고닦아야 한다.
                     어느 한쪽도 멈출 수 없다.
-                    전달 안 되는 깊이는 의미가 없고, 내용 없는 화려함은 비루하다.
                 </p>
+            </article>
 
-                <p>
+            <!-- Card 6: Modern Relevance -->
+            <article class="card">
+                <div class="card-icon mint">💡</div>
+                <h2 class="card-title">2,500년의 통찰</h2>
+                <p class="card-text">
                     현대 사회는 이 둘을 분리하려 든다.
                     전문가는 전문가답게 어렵게 말하고, 커뮤니케이터는 그걸 쉽게 풀어주면 된다는 식이다.
                     하지만 2,500년 전 공자의 말은 여전히 유효하다.
-                    <span class="emphasis">진짜 탁월함은 깊이와 표현, 내용과 형식이 하나가 될 때만 가능하다.</span>
+                </p>
+                <p class="card-text">
+                    <span class="highlight">진짜 탁월함은 깊이와 표현, 내용과 형식이 하나가 될 때만 가능하다.</span>
+                    전달 안 되는 깊이는 의미가 없고, 내용 없는 화려함은 비루하다.
                 </p>
             </article>
-        </main>
+        </div>
 
-        <!-- Conclusion -->
+        <!-- CONCLUSION -->
         <footer class="conclusion">
-            <svg class="svg-sketch floating" width="60" height="60" viewBox="0 0 60 60" style="display: inline-block; vertical-align: middle; margin-right: 1rem;">
-                <path d="M10,30 Q30,10 50,30 Q30,50 10,30" fill="none" stroke="#C38D9E"
-                      stroke-width="2.5" stroke-dasharray="1000"/>
-                <circle cx="30" cy="30" r="8" fill="#E8A87C" opacity="0.4"/>
-            </svg>
-            <div style="display: inline-block; vertical-align: middle;">
-                文質彬彬<br>
-                <span style="font-size: 0.8em; color: var(--light-brown);">
-                    단순한 균형이 아니라, 완성의 다른 이름
-                </span>
-            </div>
+            <div class="conclusion-hanja">文質彬彬</div>
+            <p class="conclusion-text">단순한 균형이 아니라, 완성의 다른 이름</p>
         </footer>
     </div>
 
     <script>
-        // Add subtle parallax effect on scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const cards = document.querySelectorAll('.card');
+        // WOW FEATURE 1: Intersection Observer for Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-            cards.forEach((card, index) => {
-                const speed = (index + 1) * 0.05;
-                card.style.transform = `translateY(${scrolled * speed}px)`;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
+        }, observerOptions);
+
+        // Observe all cards, quote box, and conclusion
+        document.querySelectorAll('.card, .quote-box, .conclusion').forEach(el => {
+            observer.observe(el);
         });
 
-        // Ink spread effect on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                }, index * 200);
+        // WOW FEATURE 2: Enhanced 3D Tilt Effect on Mouse Move
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
             });
         });
     </script>
