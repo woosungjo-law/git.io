@@ -3,517 +3,545 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>문질빈빈 - 겉과 속의 조화</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nanum+Pen+Script&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        :root {
+            --milk-beige: #F4E4C1;
+            --pulp-white: #EAE7C6;
+            --mustard: #E8A87C;
+            --dusty-rose: #C38D9E;
+            --brown-ink: #5C4B37;
+            --light-brown: #8B7355;
         }
 
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--milk-beige);
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 31px,
+                    rgba(139, 115, 85, 0.08) 31px,
+                    rgba(139, 115, 85, 0.08) 32px
+                ),
+                radial-gradient(ellipse at 20% 30%, rgba(232, 168, 124, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(195, 141, 158, 0.05) 0%, transparent 50%);
+            color: var(--brown-ink);
+            line-height: 1.8;
+            padding: 2rem 1rem;
             min-height: 100vh;
-            padding: 20px;
-            color: #333;
         }
 
-        .container {
+        .notebook {
             max-width: 900px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
             position: relative;
         }
 
-        .header::after {
+        /* Notebook binding holes */
+        .notebook::before {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+            left: -20px;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            background:
+                radial-gradient(circle at 20px 60px, rgba(139, 115, 85, 0.15) 8px, transparent 8px),
+                radial-gradient(circle at 20px 180px, rgba(139, 115, 85, 0.15) 8px, transparent 8px),
+                radial-gradient(circle at 20px 300px, rgba(139, 115, 85, 0.15) 8px, transparent 8px),
+                radial-gradient(circle at 20px 420px, rgba(139, 115, 85, 0.15) 8px, transparent 8px),
+                radial-gradient(circle at 20px 540px, rgba(139, 115, 85, 0.15) 8px, transparent 8px);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            animation: fadeInDown 1s ease-out;
         }
 
         .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            font-family: 'Gaegu', cursive;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: var(--brown-ink);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--mustard);
+            filter: url(#inkPaper);
         }
 
         .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--light-brown);
+            margin-top: 1.5rem;
         }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
+        .card {
+            background: var(--pulp-white);
+            background-image:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(232, 168, 124, 0.03) 2px,
+                    rgba(232, 168, 124, 0.03) 4px
+                );
+            border: 2px dashed var(--mustard);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 2rem;
             position: relative;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease-out backwards;
         }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+        .card:nth-child(4) { animation-delay: 0.8s; }
+
+        .card:hover {
+            transform: scale(1.02) rotate(0.5deg);
+            box-shadow: 8px 8px 20px rgba(92, 75, 55, 0.15);
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
+        .card:hover .scribble {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
 
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-        }
-
-        .flow-step::after {
-            content: '→';
+        .scribble {
             position: absolute;
-            right: -22px;
             top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            z-index: 10;
         }
 
-        .flow-step:last-child::after {
-            display: none;
+        .card-title {
+            font-family: 'Gaegu', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            color: var(--brown-ink);
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-left: 1rem;
         }
 
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
+        .card-title::before {
+            content: '✦';
+            position: absolute;
+            left: -10px;
+            color: var(--dusty-rose);
+            filter: url(#inkPaper);
+        }
+
+        .quote-box {
+            background: rgba(232, 168, 124, 0.1);
+            border-left: 4px solid var(--dusty-rose);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 15px 15px 0;
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            line-height: 2;
+        }
+
+        .hanja {
+            font-size: clamp(1rem, 2.2vw, 1.2rem);
+            color: var(--light-brown);
+            letter-spacing: 0.1em;
+        }
+
+        .emphasis {
+            background: linear-gradient(180deg, transparent 60%, rgba(232, 168, 124, 0.3) 60%);
+            padding: 0 0.3rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            text-indent: 1em;
+        }
+
+        .illustration-container {
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
-        }
-
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
-
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
             align-items: center;
+            margin: 2rem 0;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
+        .svg-sketch {
+            filter: url(#inkPaper);
+            animation: drawIn 1.5s ease-out backwards;
         }
 
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
 
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+        @keyframes drawIn {
+            from {
+                opacity: 0;
+                stroke-dashoffset: 1000;
+            }
+            to {
+                opacity: 1;
+                stroke-dashoffset: 0;
+            }
         }
 
-        .fact-item {
-            text-align: center;
-        }
-
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
-            display: block;
-        }
-
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
-        }
-
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
-        }
-
-        .footer {
             text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .footer-highlight {
-            color: #1A2A57;
-            font-weight: 700;
-        }
-
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
+            margin-top: 3rem;
+            padding: 2rem;
+            font-family: 'Gaegu', cursive;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--dusty-rose);
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
+            body {
+                padding: 1rem 0.5rem;
             }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
+
+            .notebook::before {
+                display: none;
             }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
+
+            .card {
+                margin-bottom: 1.5rem;
             }
-            
-            .main-title {
-                font-size: 24px;
+
+            .illustration-container {
+                gap: 1rem;
             }
+        }
+
+        /* SVG Filters - Hidden but essential */
+        .svg-defs {
+            position: absolute;
+            width: 0;
+            height: 0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
-        </div>
+    <!-- SVG Filters Definition -->
+    <svg class="svg-defs">
+        <defs>
+            <filter id="inkPaper">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="1"/>
+                <feDisplacementMap in="SourceGraphic" scale="3"/>
+            </filter>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
-        </div>
+            <filter id="inkBleed">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="4" seed="2"/>
+                <feDisplacementMap in="SourceGraphic" scale="5"/>
+            </filter>
+        </defs>
+    </svg>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
+    <div class="notebook">
+        <header>
+            <h1 class="main-title">겉과 속 모두 채워야 진짜다</h1>
+            <p class="subtitle">논어가 건네는 2,500년 전 조언</p>
 
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="section-title">보증보험 청구</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
+            <!-- Main illustration -->
+            <div class="illustration-container">
+                <svg class="svg-sketch floating" width="120" height="120" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="#E8A87C" stroke-width="3"
+                            stroke-dasharray="1000" style="animation-delay: 0.3s"/>
+                    <path d="M40,60 Q60,30 80,60 T60,90" fill="none" stroke="#C38D9E" stroke-width="2.5"
+                          stroke-dasharray="1000" style="animation-delay: 0.5s"/>
+                    <circle cx="45" cy="50" r="3" fill="#5C4B37"/>
+                    <circle cx="75" cy="50" r="3" fill="#5C4B37"/>
+                </svg>
             </div>
+        </header>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <div class="section-title">민사소송 & 가압류</div>
+        <main>
+            <!-- Card 1: Introduction & Quote -->
+            <article class="card">
+                <div class="scribble">
+                    <svg width="100" height="100" viewBox="0 0 100 100">
+                        <path d="M20,50 Q50,20 80,50 T50,80 Z" fill="none" stroke="#E8A87C"
+                              stroke-width="2" opacity="0.4" filter="url(#inkBleed)"/>
+                    </svg>
                 </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
-                    </div>
-                    <div class="section-title">사해행위 취소</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
+                <h2 class="card-title">본질만으론 부족하다</h2>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="section-title">형사고소 검토</div>
+                <div class="quote-box">
+                    <p class="hanja">質勝文則野, 文勝質則史, 文質彬彬, 然後君子</p>
+                    <p style="text-indent: 0; margin-top: 1rem;">
+                        질승문즉야, 문승질즉사, 문질빈빈, 연후군자
+                    </p>
                 </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
-                </div>
-            </div>
-        </div>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
+                <p>
+                    본질이 형식을 압도하면 거칠어지고, 형식이 본질을 넘어서면 겉치레만 남는다.
+                    본질과 형식이 적절히 어우러질 때 비로소 군자라 부를 만하다는 얘기다.
+                </p>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
-        </div>
+                <p>
+                    공자가 제자 자하와 나눈 이 대화를 처음 읽었을 때, 단순한 처세의 기술쯤으로 여겼다.
+                    <span class="emphasis">하지만 곱씹을수록 이건 그런 얕은 조언이 아니었다.</span>
+                    공자는 인간이라면 누구나 평생 마주해야 할 근본적 긴장에 대해 말하고 있었던 것이다.
+                </p>
 
-        <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
-        </div>
+                <div class="illustration-container">
+                    <svg class="svg-sketch" width="80" height="80" viewBox="0 0 80 80">
+                        <rect x="15" y="20" width="50" height="40" rx="5" fill="none"
+                              stroke="#C38D9E" stroke-width="2.5" stroke-dasharray="1000"/>
+                        <line x1="25" y1="35" x2="55" y2="35" stroke="#8B7355" stroke-width="1.5"/>
+                        <line x1="25" y1="45" x2="55" y2="45" stroke="#8B7355" stroke-width="1.5"/>
+                    </svg>
+                </div>
+            </article>
+
+            <!-- Card 2: Those trapped in substance -->
+            <article class="card">
+                <div class="scribble">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="40" fill="none" stroke="#C38D9E"
+                                stroke-width="3" opacity="0.3" filter="url(#inkBleed)"/>
+                        <line x1="30" y1="30" x2="90" y2="90" stroke="#E8A87C" stroke-width="2" opacity="0.4"/>
+                    </svg>
+                </div>
+
+                <h2 class="card-title">본질에 갇힌 사람들</h2>
+
+                <div class="illustration-container">
+                    <svg class="svg-sketch" width="100" height="100" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="35" fill="none" stroke="#E8A87C"
+                                stroke-width="3" stroke-dasharray="1000"/>
+                        <circle cx="50" cy="50" r="25" fill="none" stroke="#E8A87C"
+                                stroke-width="2" stroke-dasharray="1000" style="animation-delay: 0.2s"/>
+                        <circle cx="50" cy="50" r="15" fill="none" stroke="#E8A87C"
+                                stroke-width="2" stroke-dasharray="1000" style="animation-delay: 0.4s"/>
+                        <path d="M40,45 L45,50 L40,55" fill="none" stroke="#5C4B37" stroke-width="2"/>
+                        <path d="M60,45 L55,50 L60,55" fill="none" stroke="#5C4B37" stroke-width="2"/>
+                    </svg>
+                </div>
+
+                <p>
+                    우리 주변엔 실력은 뛰어난데 빛을 보지 못하는 사람들이 있다.
+                    기술은 일류인데 그걸 남에게 설명하는 데는 영 재주가 없다.
+                    깊이 있는 통찰을 품고 있어도 다른 이들이 알아들을 언어로 번역하지 못한다.
+                    본질만 붙들고 있다가 결국 세상과 단절되는 경우다.
+                </p>
+
+                <p>
+                    공자가 말한 '야(野)'는 단지 거칠다는 뜻이 아니다.
+                    <span class="emphasis">소통 불능의 고립, 자기 세계에 갇힌 무능함을 가리킨다.</span>
+                    아무리 좋은 것도 전달되지 않으면 존재하지 않는 거나 마찬가지다.
+                </p>
+            </article>
+
+            <!-- Card 3: Those drunk on form -->
+            <article class="card">
+                <div class="scribble">
+                    <svg width="100" height="100" viewBox="0 0 100 100">
+                        <rect x="20" y="20" width="60" height="60" fill="none" stroke="#E8A87C"
+                              stroke-width="2.5" opacity="0.3" filter="url(#inkBleed)"/>
+                        <line x1="20" y1="20" x2="80" y2="80" stroke="#C38D9E" stroke-width="2" opacity="0.4"/>
+                        <line x1="80" y1="20" x2="20" y2="80" stroke="#C38D9E" stroke-width="2" opacity="0.4"/>
+                    </svg>
+                </div>
+
+                <h2 class="card-title">형식에 취한 사람들</h2>
+
+                <div class="illustration-container">
+                    <svg class="svg-sketch" width="100" height="100" viewBox="0 0 100 100">
+                        <rect x="20" y="25" width="60" height="50" rx="8" fill="none"
+                              stroke="#C38D9E" stroke-width="3" stroke-dasharray="1000"/>
+                        <rect x="25" y="30" width="50" height="40" rx="6" fill="none"
+                              stroke="#C38D9E" stroke-width="2" stroke-dasharray="5,5"/>
+                        <circle cx="50" cy="50" r="5" fill="none" stroke="#8B7355" stroke-width="2"/>
+                        <path d="M30,50 L45,50 M55,50 L70,50" stroke="#8B7355" stroke-width="1.5"/>
+                    </svg>
+                </div>
+
+                <p>
+                    반대쪽엔 포장의 달인들이 있다.
+                    화려한 프레젠테이션 뒤에 별 내용이 없고, 세련된 말솜씨로 빈약한 생각을 덮는다.
+                    이런 사람들은 한동안 잘나가는 것처럼 보인다. 실제로도 잘나간다.
+                </p>
+
+                <p>
+                    하지만 시간은 정직해서, 겉만 번드르르한 건 결국 들통 난다.
+                    공자가 경계한 '사(史)'는 형식과 절차만 따지는 관료적 인간형을 뜻한다.
+                    <span class="emphasis">내용 없는 형식은 곧 시들 수밖에 없다.</span>
+                </p>
+            </article>
+
+            <!-- Card 4: Balance - The Dual Completion -->
+            <article class="card">
+                <div class="scribble">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <path d="M60,20 L80,60 L60,100 L40,60 Z" fill="none" stroke="#C38D9E"
+                              stroke-width="3" opacity="0.3" filter="url(#inkBleed)"/>
+                        <circle cx="60" cy="60" r="30" fill="none" stroke="#E8A87C"
+                                stroke-width="2" opacity="0.4" filter="url(#inkBleed)"/>
+                    </svg>
+                </div>
+
+                <h2 class="card-title">균형이 아니라 이중 완성</h2>
+
+                <div class="illustration-container">
+                    <svg class="svg-sketch" width="120" height="100" viewBox="0 0 120 100">
+                        <circle cx="40" cy="50" r="25" fill="none" stroke="#E8A87C"
+                                stroke-width="3" stroke-dasharray="1000"/>
+                        <circle cx="80" cy="50" r="25" fill="none" stroke="#C38D9E"
+                                stroke-width="3" stroke-dasharray="1000" style="animation-delay: 0.2s"/>
+                        <path d="M40,50 L80,50" stroke="#5C4B37" stroke-width="2.5"
+                              stroke-dasharray="1000" style="animation-delay: 0.4s"/>
+                        <circle cx="60" cy="50" r="8" fill="#8B7355" opacity="0.3"/>
+                        <text x="40" y="55" font-size="12" text-anchor="middle" fill="#5C4B37"
+                              font-family="Nanum Pen Script">質</text>
+                        <text x="80" y="55" font-size="12" text-anchor="middle" fill="#5C4B37"
+                              font-family="Nanum Pen Script">文</text>
+                    </svg>
+                </div>
+
+                <p>
+                    그렇다면 문질빈빈은 뭔가. 두 극단의 중간쯤 되는 안전한 지대? 천만에.
+                    이건 훨씬 가혹한 요구다. 깊이 있는 전문성과 그걸 전달하는 소통력.
+                    진정성 있는 내용과 그걸 매력적으로 만드는 표현력.
+                    진지한 사유와 감각적인 전달. 이 모든 걸 다 갖추라는 얘기다.
+                </p>
+
+                <p>
+                    어느 하나만 탁월해서는 안 되고, 둘 다 탁월해야 한다.
+                    그래서 공자는 이걸 '군자'라는 최고 경지로 규정했다.
+                    <span class="emphasis">균형이 아니라 두 차원의 완성. 당연히 어렵다.</span>
+                </p>
+
+                <p>
+                    전문가로 산다는 건 결국 이 긴장 속에서 줄타기하는 일이다.
+                    실력만 믿고 세상과의 대화를 등한시하면 고립된다.
+                    포장과 홍보에만 매달리면 결국 밑천이 드러난다.
+                    진짜 전문가는 자기 분야에서 최고가 되는 동시에,
+                    그 가치를 남들에게 제대로 전달할 줄 아는 사람이다.
+                </p>
+
+                <p>
+                    문질빈빈은 한 번 도달하면 끝나는 목표가 아니다.
+                    평생 유지해야 하는 역동적 균형이다.
+                    내공을 쌓으면서 동시에 전달력을 갈고닦아야 한다.
+                    어느 한쪽도 멈출 수 없다.
+                    전달 안 되는 깊이는 의미가 없고, 내용 없는 화려함은 비루하다.
+                </p>
+
+                <p>
+                    현대 사회는 이 둘을 분리하려 든다.
+                    전문가는 전문가답게 어렵게 말하고, 커뮤니케이터는 그걸 쉽게 풀어주면 된다는 식이다.
+                    하지만 2,500년 전 공자의 말은 여전히 유효하다.
+                    <span class="emphasis">진짜 탁월함은 깊이와 표현, 내용과 형식이 하나가 될 때만 가능하다.</span>
+                </p>
+            </article>
+        </main>
+
+        <!-- Conclusion -->
+        <footer class="conclusion">
+            <svg class="svg-sketch floating" width="60" height="60" viewBox="0 0 60 60" style="display: inline-block; vertical-align: middle; margin-right: 1rem;">
+                <path d="M10,30 Q30,10 50,30 Q30,50 10,30" fill="none" stroke="#C38D9E"
+                      stroke-width="2.5" stroke-dasharray="1000"/>
+                <circle cx="30" cy="30" r="8" fill="#E8A87C" opacity="0.4"/>
+            </svg>
+            <div style="display: inline-block; vertical-align: middle;">
+                文質彬彬<br>
+                <span style="font-size: 0.8em; color: var(--light-brown);">
+                    단순한 균형이 아니라, 완성의 다른 이름
+                </span>
+            </div>
+        </footer>
     </div>
+
+    <script>
+        // Add subtle parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach((card, index) => {
+                const speed = (index + 1) * 0.05;
+                card.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Ink spread effect on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                }, index * 200);
+            });
+        });
+    </script>
 </body>
 </html>
