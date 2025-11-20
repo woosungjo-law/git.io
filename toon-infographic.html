@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영웅은 없다: 4,000억 원의 진실</title>
+
+    <!-- Google Fonts: Modern Sans-serif (NO handwriting) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           RESET & ROOT VARIABLES
+        ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color Palette - Professional Toon Style */
+            --primary-purple: #5B4DFF;
+            --secondary-pink: #FF6B9D;
+            --accent-yellow: #FFD93D;
+            --text-dark: #1A1A2E;
+            --text-gray: #6B6B83;
+            --bg-gradient-1: #F8F9FF;
+            --bg-gradient-2: #FFF5F7;
+            --card-white: #FFFFFF;
+            --shadow-light: rgba(91, 77, 255, 0.1);
+            --shadow-medium: rgba(91, 77, 255, 0.15);
+            --shadow-hover: rgba(91, 77, 255, 0.3);
+
+            /* Typography */
+            --font-primary: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-accent: 'Poppins', sans-serif;
+
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+
+            /* Border Radius - Toon Style */
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 36px;
+        }
+
+        /* ============================================
+           GLOBAL STYLES
+        ============================================ */
+        body {
+            font-family: var(--font-primary);
+            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+            padding: var(--spacing-md);
+
+            /* Korean Text Optimization - CRITICAL */
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* ============================================
+           HEADER SECTION
+        ============================================ */
+        .header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-xl) var(--spacing-md);
+            background: var(--card-white);
+            border-radius: var(--radius-xl);
+            box-shadow: 0 10px 40px var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative gradient background */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-pink), var(--accent-yellow));
+        }
+
+        .header-emoji {
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: var(--spacing-sm);
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.2;
+            word-break: keep-all;
+        }
+
+        .main-title .highlight {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-gray);
+            font-weight: 600;
+            word-break: keep-all;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: var(--accent-yellow);
+            color: var(--text-dark);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-lg);
+            font-family: var(--font-accent);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-top: var(--spacing-md);
+            box-shadow: 0 4px 15px rgba(255, 217, 61, 0.3);
+        }
+
+        /* ============================================
+           CARD SYSTEM - Toon Style
+        ============================================ */
+        .card {
+            background: var(--card-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: 0 8px 30px var(--shadow-light);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+            /* WOW FACTOR 1: Scroll Fade-In Animation */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Staggered animation delay */
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+
+        /* WOW FACTOR 2: 3D Hover Effect */
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px var(--shadow-hover);
+        }
+
+        /* Card Header with Color Accents */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 3px solid var(--primary-purple);
+        }
+
+        .card-icon {
+            font-size: clamp(2rem, 5vw, 3rem);
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.3;
+            word-break: keep-all;
+        }
+
+        .card-content {
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            color: var(--text-dark);
+            line-height: 1.8;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* ============================================
+           SPECIAL ELEMENTS
+        ============================================ */
+
+        /* Number Badge - Toon Style */
+        .number-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            color: white;
+            font-family: var(--font-accent);
+            font-weight: 800;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-md);
+            box-shadow: 0 6px 20px var(--shadow-medium);
+            margin: 0 var(--spacing-xs);
+            white-space: nowrap;
+        }
+
+        /* Highlight Text */
+        .highlight-text {
+            background: linear-gradient(135deg, var(--secondary-pink), #FF8FB3);
+            color: white;
+            padding: 4px 12px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+        }
+
+        /* Bullet List - Custom Styled */
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: var(--spacing-md) 0;
+        }
+
+        .bullet-list li {
+            padding: var(--spacing-sm) 0;
+            padding-left: 2.5rem;
+            position: relative;
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .bullet-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--primary-purple);
+            font-size: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Callout Box - Important Messages */
+        .callout {
+            background: linear-gradient(135deg, rgba(91, 77, 255, 0.08), rgba(255, 107, 157, 0.08));
+            border-left: 5px solid var(--secondary-pink);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .callout-title {
+            font-size: clamp(1.125rem, 3vw, 1.375rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .callout-content {
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* Key Point - Eye-catching Box */
+        .key-point {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            color: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            font-weight: 700;
+            line-height: 1.6;
+            margin: var(--spacing-lg) 0;
+            box-shadow: 0 10px 35px var(--shadow-medium);
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+
+        .comparison-card {
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: transform 0.3s ease;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .comparison-card:hover {
+            transform: scale(1.05);
+        }
+
+        .comparison-card.wrong {
+            background: linear-gradient(135deg, #FFE5E5, #FFD6D6);
+            border: 3px solid #FF6B6B;
+        }
+
+        .comparison-card.right {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            border: 3px solid #4CAF50;
+        }
+
+        .comparison-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .comparison-title {
+            font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+            font-weight: 800;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-dark);
+        }
+
+        .comparison-text {
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Stats Box */
+        .stats-box {
+            background: linear-gradient(135deg, rgba(255, 217, 61, 0.2), rgba(255, 217, 61, 0.1));
+            border: 3px solid var(--accent-yellow);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            margin: var(--spacing-md) 0;
+        }
+
+        .stats-label {
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            font-weight: 600;
+            color: var(--text-gray);
+            margin-bottom: var(--spacing-sm);
+            word-break: keep-all;
+        }
+
+        .stats-value {
+            font-family: var(--font-accent);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+
+        /* Icon Grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            text-align: center;
+        }
+
+        .icon-item {
+            font-size: clamp(2rem, 5vw, 3rem);
+            padding: var(--spacing-sm);
+            background: rgba(91, 77, 255, 0.05);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+
+        .icon-item:hover {
+            background: rgba(91, 77, 255, 0.15);
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* Connector Arrow */
+        .connector {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin: var(--spacing-sm) 0;
+            color: var(--primary-purple);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .footer {
+            background: var(--card-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            margin-top: var(--spacing-xl);
+            box-shadow: 0 8px 30px var(--shadow-light);
+            color: var(--text-gray);
+            font-size: clamp(0.875rem, 2vw, 1rem);
+        }
+
+        .footer-highlight {
+            color: var(--primary-purple);
+            font-weight: 700;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN - Media Queries
+        ============================================ */
+
+        /* Tablet */
+        @media (max-width: 1024px) {
+            :root {
+                --spacing-xl: 2rem;
+                --spacing-lg: 1.5rem;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            body {
+                padding: var(--spacing-sm);
+            }
+
+            :root {
+                --spacing-xl: 1.5rem;
+                --spacing-lg: 1.25rem;
+                --spacing-md: 1rem;
+            }
+
+            .header {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+
+            .card {
+                padding: var(--spacing-md);
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .icon-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .number-badge {
+                display: block;
+                margin: var(--spacing-xs) 0;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .card-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .key-point {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* ============================================
+           ACCESSIBILITY & PRINT
+        ============================================ */
+
+        /* Focus states for accessibility */
+        a:focus, button:focus {
+            outline: 3px solid var(--primary-purple);
+            outline-offset: 2px;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header class="header">
+            <span class="header-emoji">⚖️</span>
+            <h1 class="main-title">
+                <span class="highlight">영웅은 없다</span>
+            </h1>
+            <p class="subtitle">기사회생(起死回生)과 정치의 품격</p>
+            <div class="date-badge">2025.11.18</div>
+        </header>
+
+        <!-- CARD 1: The Victory -->
+        <article class="card">
+            <div class="card-header">
+                <span class="card-icon">💰</span>
+                <h2 class="card-title">벼랑 끝에서 돌아온 4,000억 원</h2>
+            </div>
+            <div class="card-content">
+                <p>2025년 11월 18일, 낭보가 날아들었다. <span class="highlight-text">국제투자분쟁(ISDS) 취소위원회</span>가 2022년의 배상 판정을 뒤집고 <span class="highlight-text">전면 무효</span>를 선언했다.</p>
+
+                <ul class="bullet-list">
+                    <li>이자 포함 총 <span class="number-badge">4,000억 원</span> 절약</li>
+                    <li>소송 비용 <span class="number-badge">73억 원</span> 상대방 부담</li>
+                    <li>국제 중재에서 판정 취소 확률: <span class="highlight-text">단 1%</span></li>
+                </ul>
+
+                <div class="stats-box">
+                    <div class="stats-label">기적의 확률</div>
+                    <div class="stats-value">1%</div>
+                    <div class="stats-label">낙타가 바늘구멍을 통과하는 확률</div>
+                </div>
+            </div>
+        </article>
+
+        <div class="connector">⬇️</div>
+
+        <div class="key-point">
+            🎯 판정 취소를 받아낸 것은 기적에 가까운 일이다!
+        </div>
+
+        <div class="connector">⬇️</div>
+
+        <!-- CARD 2: The Warning -->
+        <article class="card">
+            <div class="card-header">
+                <span class="card-icon">⚠️</span>
+                <h2 class="card-title">샴페인을 터뜨리기엔 이른 이유</h2>
+            </div>
+            <div class="card-content">
+                <p>정치권에서는 저마다 "내가 했다"며 생색내기에 바쁘다. 하지만 냉정하게 보자.</p>
+
+                <div class="callout">
+                    <div class="callout-title">
+                        <span>🔍</span>
+                        <span>핵심: 이것은 '취소(Annulment)'다!</span>
+                    </div>
+                    <div class="callout-content">
+                        <ul class="bullet-list">
+                            <li>완전한 종결이 아닌 <span class="highlight-text">원점 회귀</span></li>
+                            <li>론스타는 언제든 다시 소송 가능</li>
+                            <li>22년 악연의 고리는 아직 끊어지지 않았다</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p style="margin-top: 1.5rem; font-weight: 600; font-size: 1.125rem;">
+                    상황이 이럴진대, 정치권이 서로 "나 때문이다"라고 외치며 샴페인을 터뜨리는 모습은 얼마나 위태로운가.
+                </p>
+            </div>
+        </article>
+
+        <div class="connector">⬇️</div>
+
+        <div class="key-point">
+            지금은 영웅 놀이를 할 때가 아니라,<br>
+            다시 시작될지 모를 전쟁을 대비해 신발 끈을 동여매야 할 때다!
+        </div>
+
+        <div class="connector">⬇️</div>
+
+        <!-- CARD 3: The Real Heroes -->
+        <article class="card">
+            <div class="card-header">
+                <span class="card-icon">🏆</span>
+                <h2 class="card-title">진짜 주인공은 누구인가?</h2>
+            </div>
+            <div class="card-content">
+                <p style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center;">
+                    마이크 앞에 선 정치인들? <span style="font-size: 2rem; color: #FF6B6B;">❌</span>
+                </p>
+
+                <div class="icon-grid">
+                    <div class="icon-item">📄</div>
+                    <div class="icon-item">🔬</div>
+                    <div class="icon-item">💼</div>
+                    <div class="icon-item">⚖️</div>
+                    <div class="icon-item">📊</div>
+                    <div class="icon-item">🖊️</div>
+                    <div class="icon-item">💡</div>
+                    <div class="icon-item">⏰</div>
+                </div>
+
+                <p style="font-size: 1.5rem; text-align: center; margin: 1.5rem 0; font-weight: 800;">
+                    <span class="highlight-text">이름 없는 실무진들</span>
+                </p>
+
+                <ul class="bullet-list">
+                    <li>"승산 없다"는 비관론 속에서도 포기하지 않았다</li>
+                    <li>판결문의 절차적 오류를 현미경처럼 들여다봤다</li>
+                    <li>밤샘 노동으로 치밀한 법리를 쌓았다</li>
+                    <li>볼펜 끝으로 쌓아 올린 둑이 4,000억 원을 막았다</li>
+                </ul>
+
+                <div class="callout" style="margin-top: 1.5rem;">
+                    <p style="font-size: 1.125rem; font-weight: 600; line-height: 1.8;">
+                        이 승리는 한 명의 영웅이 칼을 휘둘러 얻어낸 전리품이 아니라, 이름 없는 실무자들이 볼펜 끝으로 쌓아 올린 둑이 범람하는 물길을 막아낸 결과다.
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <div class="connector">⬇️</div>
+
+        <!-- CARD 4: The Lesson -->
+        <article class="card">
+            <div class="card-header">
+                <span class="card-icon">🎯</span>
+                <h2 class="card-title">정치의 품격이란?</h2>
+            </div>
+            <div class="card-content">
+                <div class="comparison-grid">
+                    <div class="comparison-card wrong">
+                        <div class="comparison-icon">❌</div>
+                        <div class="comparison-title">오만</div>
+                        <div class="comparison-text">
+                            "내가 잘해서"<br>
+                            "내 결단 덕분"<br>
+                            "나 때문이다"
+                        </div>
+                    </div>
+                    <div class="comparison-card right">
+                        <div class="comparison-icon">✅</div>
+                        <div class="comparison-title">품격</div>
+                        <div class="comparison-text">
+                            "당신 덕분"<br>
+                            "행운의 덕택"<br>
+                            "우리가 함께"
+                        </div>
+                    </div>
+                </div>
+
+                <p style="text-align: center; font-size: 1.25rem; margin-top: 1.5rem; font-weight: 600; line-height: 1.8;">
+                    성숙한 태도는 보이지 않는 곳에서 묵묵히 제 몫을 해낸 이들에게 <span class="highlight-text">"당신 덕분"</span>이라고 고개를 숙이는 것이다.
+                </p>
+            </div>
+        </article>
+
+        <div class="connector">⬇️</div>
+
+        <div class="key-point">
+            이 위대한 '원점 회귀'는<br>
+            누구의 영웅적 결단 때문이 아니라,<br>
+            묵묵히 자리를 지킨 사람들의 피땀 덕분(德分)이다
+        </div>
+
+        <!-- CARD 5: The Weight of Time -->
+        <article class="card" style="border: 3px solid var(--secondary-pink);">
+            <div class="card-content" style="text-align: center;">
+                <p style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem;">
+                    4,000억 원이라는 숫자보다 더 무거운 것은?
+                </p>
+
+                <div class="stats-box">
+                    <div class="stats-label">그들이 견뎌낸</div>
+                    <div class="stats-value" style="background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">13년</div>
+                    <div class="stats-label">시간의 무게</div>
+                </div>
+
+                <p style="font-size: 1.125rem; font-weight: 600; margin-top: 1.5rem; line-height: 1.8;">
+                    소송 제기 2012년부터 판정 취소 2025년까지,<br>
+                    13년간 포기하지 않은 집념과 헌신
+                </p>
+            </div>
+        </article>
+
+        <div class="connector">⬇️</div>
+
+        <!-- CARD 6: Action Items -->
+        <article class="card" style="background: linear-gradient(135deg, rgba(91, 77, 255, 0.05), rgba(255, 107, 157, 0.05));">
+            <div class="card-header">
+                <span class="card-icon">📋</span>
+                <h2 class="card-title">지금 해야 할 일</h2>
+            </div>
+            <div class="card-content">
+                <ul class="bullet-list">
+                    <li>소란 가라앉히기 - 생색내기를 멈추고 실무에 집중</li>
+                    <li>승소 노하우를 매뉴얼로 남기기 - 미래를 위한 자산 구축</li>
+                    <li>엘리엇, 메이슨 등 다음 파도 대비하기 - 언제든 올 수 있다</li>
+                    <li>절차적 방어 논리를 강력한 무기로 만들기 - 이번 경험을 체계화</li>
+                    <li>이름 없는 실무자들에게 진심 어린 감사 전하기</li>
+                </ul>
+
+                <div style="background: white; border-radius: var(--radius-md); padding: var(--spacing-md); margin-top: 1.5rem; text-align: center;">
+                    <p style="font-size: 1.25rem; font-weight: 700; color: var(--text-dark);">
+                        제발 함부로 "내가 했다"고 말하지 말자
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p><strong class="footer-highlight">출처:</strong> 영웅은 없다: 기사회생(起死回生)과 정치의 품격</p>
+            <p style="margin-top: 0.5rem;">Modern Toon Infographic Design © 2025</p>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem;">
+                Designed with ❤️ by Elite Design Team (Sarah • Jean • Devin)
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
