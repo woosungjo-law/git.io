@@ -3,517 +3,550 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>민사소송 vs 형사소송 | 증인 선서거부 완벽 가이드</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        :root {
+            --navy: #1A2B4F;
+            --cyan: #00D9FF;
+            --coral: #FF6B9D;
+            --cream: #FFFBF0;
+            --light-gray: #F5F7FA;
+            --text-dark: #2C3E50;
+            --shadow-sm: 0 2px 8px rgba(26, 43, 79, 0.08);
+            --shadow-md: 0 8px 24px rgba(26, 43, 79, 0.12);
+            --shadow-lg: 0 16px 48px rgba(26, 43, 79, 0.16);
         }
 
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--cream) 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
+            padding: 2rem 1rem;
         }
 
-        .header {
+        /* Hero Header */
+        .hero {
             text-align: center;
-            margin-bottom: 35px;
+            padding: 3rem 1rem 4rem;
             position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
         }
 
-        .header::after {
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--cyan), var(--coral));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 900;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: #5A6C84;
+            font-weight: 500;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Intro Card */
+        .intro-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .intro-card p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Card Styles */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card::before {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--cyan), var(--coral));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
         }
 
-        .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
+        .card.visible::before {
+            transform: scaleX(1);
         }
 
-        .subtitle {
-            font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
+        .card:hover {
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: var(--shadow-lg);
         }
 
-        .content-grid {
+        /* Card Headers */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cyan-icon {
+            background: linear-gradient(135deg, #00D9FF, #00A8CC);
+            color: white;
+        }
+
+        .coral-icon {
+            background: linear-gradient(135deg, #FF6B9D, #E83A6F);
+            color: white;
+        }
+
+        .purple-icon {
+            background: linear-gradient(135deg, #A78BFA, #7C3AED);
+            color: white;
+        }
+
+        .card-title {
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1.3;
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
+        .comparison-item {
+            background: var(--light-gray);
+            border-radius: 16px;
+            padding: 1.8rem;
             transition: all 0.3s ease;
         }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
+        .comparison-item:hover {
+            background: white;
+            box-shadow: var(--shadow-sm);
         }
 
-        .section-header {
+        .comparison-item h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
+            gap: 0.5rem;
         }
 
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
+        .comparison-item ul {
+            list-style: none;
+            padding: 0;
         }
 
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
+        .comparison-item li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
             position: relative;
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
 
-        .flow-step::after {
-            content: '→';
+        .comparison-item li::before {
+            content: '▪';
             position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
+            left: 0;
+            color: var(--cyan);
+            font-size: 1.2rem;
         }
 
-        .flow-step:last-child::after {
-            display: none;
+        /* Section Divider */
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cyan), var(--coral), transparent);
+            margin: 3rem 0;
+            border-radius: 10px;
+            opacity: 0.3;
         }
 
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
-        }
-
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
-
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
-
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
-
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .fact-item {
-            text-align: center;
-        }
-
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
-            display: block;
-        }
-
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
-
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
-        }
-
-        .conclusion-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
-        }
-
+        /* Footer */
         .footer {
             text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
+            padding: 3rem 1rem;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
         }
 
-        .footer-highlight {
-            color: #1A2A57;
-            font-weight: 700;
+        .footer-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 1rem;
         }
 
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
+        .hashtags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-top: 1.5rem;
         }
 
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
+        .hashtag {
+            background: white;
+            color: var(--navy);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
         }
 
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
+        .hashtag:hover {
+            background: var(--navy);
+            color: white;
+            transform: translateY(-2px);
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
+                padding: 1.5rem 1rem;
             }
-            
-            .content-grid {
+
+            .hero {
+                padding: 2rem 1rem 2.5rem;
+            }
+
+            .intro-card {
+                padding: 2rem 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .bento-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: 1.5rem;
             }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
+
+            .card {
+                padding: 2rem 1.5rem;
             }
-            
-            .main-title {
-                font-size: 24px;
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
+
+            .card-header {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animation Delays */
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Strong emphasis */
+        strong {
+            color: var(--navy);
+            font-weight: 700;
+        }
+
+        /* Highlight badges */
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--cyan), #00A8CC);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin: 0 0.2rem;
+        }
+
+        .badge-coral {
+            background: linear-gradient(135deg, var(--coral), #E83A6F);
+        }
+
+        /* Number badge */
+        .num-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--cyan);
+            color: white;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-badge">법률 실무 가이드</div>
+            <h1>민사소송 vs 형사소송<br>증인 선서거부</h1>
+            <p class="subtitle">법정 증인으로 출석할 때 반드시 알아야 할 결정적 차이점</p>
         </div>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
+        <!-- Intro Card -->
+        <div class="intro-card">
+            <p>법정에서 증인으로 출석했을 때, 선서를 거부할 수 있을까요?<br>
+            <strong>민사소송과 형사소송은 완전히 다른 규율 체계</strong>를 가지고 있습니다.</p>
         </div>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
-
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
+        <!-- Main Content Grid -->
+        <div class="bento-grid">
+            <!-- Card 1: Legal Basis -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon cyan-icon">📚</div>
+                    <div>
+                        <div class="card-title">1️⃣ 법적 근거의 차이</div>
                     </div>
-                    <div class="section-title">보증보험 청구</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h4><span class="num-badge" style="background: var(--cyan);">民</span>민사소송</h4>
+                        <ul>
+                            <li><strong>민사소송법 제324조</strong>에서 선서거부권을 명시적으로 인정</li>
+                            <li>증인이 자기 또는 친족 등과 <span class="badge">현저한 이해관계</span>가 있는 사항에 관해 신문받을 때 선서 거부 가능</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item">
+                        <h4><span class="num-badge" style="background: var(--coral);">刑</span>형사소송</h4>
+                        <ul>
+                            <li>형사소송법에는 <strong>선서거부권에 관한 규정이 존재하지 않음</strong></li>
+                            <li>증언거부권(제148조, 제149조)과 고지의무(제160조) 규정만 존재</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
+            <!-- Card 2: Scope of Rights -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon coral-icon">🛡️</div>
+                    <div>
+                        <div class="card-title">2️⃣ 거부권 범위의 차이</div>
                     </div>
-                    <div class="section-title">민사소송 & 가압류</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h4><span class="num-badge" style="background: var(--cyan);">民</span>더 넓은 보호 범위</h4>
+                        <ul>
+                            <li>선서거부권은 <span class="badge">증언거부권보다 넓게 인정됨</span></li>
+                            <li>증언거부권이 없는 경우에도 선서거부권은 인정 가능</li>
+                            <li>자기 또는 친족, 후견인·피후견인이 현저한 이해관계를 가지는 사항에 관해서는 <strong>증언은 하되 선서만 거부 가능</strong></li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item">
+                        <h4><span class="num-badge" style="background: var(--coral);">刑</span>명문규정 부재</h4>
+                        <ul>
+                            <li>선서거부권에 관한 별도 규정이 없어 <strong>해석의 문제로 남음</strong></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
+            <!-- Card 3: Sanctions -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon purple-icon">⚖️</div>
+                    <div>
+                        <div class="card-title">3️⃣ 제재 수준의 차이</div>
                     </div>
-                    <div class="section-title">사해행위 취소</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h4><span class="num-badge" style="background: var(--cyan);">民</span>강력한 제재</h4>
+                        <ul>
+                            <li><strong>1차 제재:</strong> 소송비용 부담 + <span class="badge">500만원 이하 과태료</span> (제311조 제1항)</li>
+                            <li><strong>2차 제재:</strong> 과태료 받고도 다시 거부 시 <span class="badge">7일 이내 감치 가능</span> (제311조 제2항)</li>
+                            <li>단계적이고 강력한 이행강제 수단 보유</li>
+                        </ul>
                     </div>
-                    <div class="section-title">형사고소 검토</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
+                    <div class="comparison-item">
+                        <h4><span class="num-badge" style="background: var(--coral);">刑</span>상대적으로 약한 제재</h4>
+                        <ul>
+                            <li>정당한 이유 없이 선서나 증언 거부 시 <span class="badge badge-coral">50만원 이하 과태료</span> (제161조 제1항)</li>
+                            <li><strong>감치 등 추가 제재 수단 없음</strong></li>
+                            <li>이 결정에 대해 즉시항고 가능 (제161조 제2항)</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
-                </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
+        <div class="section-divider"></div>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
-            </div>
-        </div>
-
+        <!-- Footer -->
         <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
+            <div class="footer-title">🏛️ 조변호사의 머스트노우</div>
+            <div class="hashtags">
+                <span class="hashtag">#법률상식</span>
+                <span class="hashtag">#민사소송</span>
+                <span class="hashtag">#형사소송</span>
+                <span class="hashtag">#증인선서</span>
+                <span class="hashtag">#선서거부권</span>
+                <span class="hashtag">#법률정보</span>
+                <span class="hashtag">#변호사</span>
+            </div>
         </div>
     </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const cards = document.querySelectorAll('.card');
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+
+        // 3D Tilt Effect on Hover
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
 </body>
 </html>
