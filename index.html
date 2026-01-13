@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미수금 회수 법적 대응방안</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>상가임대차 기한 계산기</title>
     <style>
         * {
             margin: 0;
@@ -14,8 +12,8 @@
         }
 
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #1A2A57 0%, #0D5D56 100%);
+            font-family: 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
             color: #333;
@@ -25,495 +23,640 @@
             max-width: 900px;
             margin: 0 auto;
             background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            aspect-ratio: 1/1.7;
-            padding: 40px;
-            position: relative;
-            overflow-y: auto;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
 
         .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
             text-align: center;
-            margin-bottom: 35px;
-            position: relative;
         }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #FF5733, #D4AF37);
-            border-radius: 2px;
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        .main-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: #1A2A57;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
+        .header p {
             font-size: 16px;
-            color: #0D5D56;
-            font-weight: 500;
+            opacity: 0.95;
         }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
+        .content {
+            padding: 40px 30px;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid #e9ecef;
+        }
+
+        .input-group {
             margin-bottom: 25px;
         }
 
-        .section-card {
-            background: #ffffff;
-            border: 2px solid #f0f4f8;
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            border: 2px solid #dee2e6;
             border-radius: 8px;
-            padding: 20px;
-            position: relative;
             transition: all 0.3s ease;
+            font-family: inherit;
         }
 
-        .section-card:hover {
-            border-color: #17A2B8;
-            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.1);
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .section-header {
+        .button-group {
             display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f4f8;
-        }
-
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #FF5733, #D4AF37);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .section-title {
-            font-family: 'Pretendard', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .section-content {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #FFE55C 0%, #FFE55C 100%);
-            background-size: 100% 40%;
-            background-repeat: no-repeat;
-            background-position: 0 70%;
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #FF5733;
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .strategy-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            margin: 25px 0;
+            margin-top: 25px;
         }
 
-        .flow-step {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 2px solid #e9ecef;
+        .btn {
+            flex: 1;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
             border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
         }
 
-        .flow-step::after {
-            content: '→';
-            position: absolute;
-            right: -22px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #7D3C98;
-            font-weight: bold;
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
         }
 
-        .flow-step:last-child::after {
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .result-section {
             display: none;
+            margin-top: 30px;
         }
 
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #7D3C98, #17A2B8);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 8px;
-            font-size: 14px;
-        }
-
-        .step-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 4px;
-        }
-
-        .step-desc {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .priority-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .priority-item {
-            background: #f8f9fa;
-            border-left: 4px solid #FF5733;
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        .priority-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
-
-        .priority-icon {
-            margin-right: 8px;
-            font-size: 14px;
-        }
-
-        .priority-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .key-facts {
-            background: linear-gradient(135deg, #0D5D56, #1A2A57);
-            color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .key-facts-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .key-facts-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .fact-item {
-            text-align: center;
-        }
-
-        .fact-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: #D4AF37;
+        .result-section.active {
             display: block;
         }
 
-        .fact-label {
-            font-size: 12px;
-            margin-top: 4px;
-            opacity: 0.9;
+        .result-card {
+            background: #ffffff;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
 
-        .conclusion {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 6px solid #D4AF37;
-            margin: 20px 0;
+        .result-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .conclusion-title {
-            font-size: 16px;
+        .result-card.warning {
+            border-color: #ff6b6b;
+            background: #fff5f5;
+        }
+
+        .result-card.info {
+            border-color: #4ecdc4;
+            background: #f0fffe;
+        }
+
+        .result-title {
+            font-size: 20px;
             font-weight: 700;
-            color: #1A2A57;
-            margin-bottom: 10px;
+            color: #495057;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
+            gap: 10px;
         }
 
-        .conclusion-content {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #333;
+        .result-title.warning {
+            color: #c92a2a;
+        }
+
+        .result-title.info {
+            color: #0b7285;
+        }
+
+        .icon {
+            font-size: 24px;
+        }
+
+        .result-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #495057;
+        }
+
+        .date-range {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            font-size: 18px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .warning .date-range {
+            border-left-color: #ff6b6b;
+        }
+
+        .info .date-range {
+            border-left-color: #4ecdc4;
+        }
+
+        .alert-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 15px;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-box.danger {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .rent-list {
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .rent-item {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rent-item:last-child {
+            border-bottom: none;
+        }
+
+        .rent-item.upcoming {
+            background: #e7f5ff;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            border: 1px solid #74c0fc;
         }
 
         .footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
             text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f4f8;
-            font-size: 13px;
-            color: #666;
-            font-weight: 500;
+            font-size: 14px;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
         }
 
-        .footer-highlight {
-            color: #1A2A57;
-            font-weight: 700;
-        }
-
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .bold {
-            font-weight: 700;
-            color: #1A2A57;
-        }
-
-        .underline {
-            text-decoration: underline;
-            text-decoration-color: #FF5733;
-            text-decoration-thickness: 2px;
+        .hidden {
+            display: none;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-                aspect-ratio: 1/1.4;
-            }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .strategy-flow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .main-title {
+            .header h1 {
                 font-size: 24px;
             }
+
+            .header p {
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .input-section {
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .result-title {
+                font-size: 18px;
+            }
+
+            .date-range {
+                font-size: 16px;
+            }
+        }
+
+        /* 인쇄 스타일 */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .header {
+                background: #667eea !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .input-section,
+            .button-group {
+                display: none;
+            }
+
+            .result-section {
+                display: block !important;
+            }
+
+            .result-card {
+                page-break-inside: avoid;
+                border: 2px solid #000;
+            }
+
+            .footer {
+                page-break-before: avoid;
+            }
+        }
+
+        /* 스크롤바 스타일 */
+        .rent-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .rent-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .rent-list::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 4px;
+        }
+
+        .rent-list::-webkit-scrollbar-thumb:hover {
+            background: #5568d3;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="main-title">물품대금 미수금 회수 법적 대응방안</h1>
-            <p class="subtitle">총 3억원 미수금 회수를 위한 종합적 법률 전략</p>
+            <h1>🏪 상가임대차 기한 계산기</h1>
+            <p>상가건물 임대차보호법에 따른 주요 기한을 계산합니다</p>
         </div>
 
-        <!-- 핵심 사실관계 -->
-        <div class="key-facts">
-            <div class="key-facts-title">
-                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-                핵심 사실관계
-            </div>
-            <div class="key-facts-content">
-                <div class="fact-item">
-                    <span class="fact-number">3억원</span>
-                    <div class="fact-label">총 미수금액</div>
+        <div class="content">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="startDate">계약 시작일</label>
+                    <input type="date" id="startDate" required>
                 </div>
-                <div class="fact-item">
-                    <span class="fact-number">1억원</span>
-                    <div class="fact-label">보증보험 가입액</div>
-                </div>
-                <div class="fact-item">
-                    <span class="fact-number">2024.2월</span>
-                    <div class="fact-label">대금지급 중단</div>
-                </div>
-            </div>
-        </div>
 
-        <!-- 4단계 대응 전략 -->
-        <div class="strategy-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-title">초기 대응</div>
-                <div class="step-desc">내용증명 발송<br>보증보험 청구 준비<br>재산조사</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-title">법적 조치</div>
-                <div class="step-desc">가압류 신청<br>보증보험금 청구<br>소송 제기</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-title">추가 조치</div>
-                <div class="step-desc">사해행위 취소<br>형사고소 검토</div>
-            </div>
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-title">강제집행</div>
-                <div class="step-desc">승소 후<br>재산 강제집행<br>추심명령</div>
-            </div>
-        </div>
+                <div class="input-group">
+                    <label for="endDate">계약 종료일</label>
+                    <input type="date" id="endDate" required>
+                </div>
 
-        <!-- 주요 대응방안 -->
-        <div class="content-grid">
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-shield-alt"></i>
+                <div class="input-group">
+                    <label for="rentDay">월세 납부일 (1~31)</label>
+                    <input type="number" id="rentDay" min="1" max="31" placeholder="예: 5 (매월 5일)" required>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="calculate()">📊 계산하기</button>
+                    <button class="btn btn-secondary" onclick="reset()">🔄 새로 계산</button>
+                </div>
+            </div>
+
+            <div class="result-section" id="resultSection">
+                <!-- 계약갱신요구권 -->
+                <div class="result-card warning">
+                    <div class="result-title warning">
+                        <span class="icon">⚠️</span>
+                        계약갱신요구권 행사 기간
                     </div>
-                    <div class="section-title">보증보험 청구</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">최우선 진행사항</div><br>
-                    • <span class="highlight">1억원 보험금</span> 신속 회수<br>
-                    • 보증보험 약관 면밀 검토<br>
-                    • 상대방 방해행위 대응<br>
-                    • 필요 증빙서류 완비
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-gavel"></i>
+                    <div class="result-content">
+                        <div class="date-range" id="renewalPeriod"></div>
+                        <div class="alert-box danger">
+                            <span>⚠️</span>
+                            <span><strong>갱신요구권은 이 기간 내에만 행사 가능합니다!</strong> 기간이 지나면 권리가 소멸됩니다.</span>
+                        </div>
                     </div>
-                    <div class="section-title">민사소송 & 가압류</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">집행권원 확보</div><br>
-                    • <span class="underline">미수금 3억원</span> + 지연손해금 청구<br>
-                    • 채무자 재산 가압류 동시 진행<br>
-                    • 부동산·차량·예금계좌 압류<br>
-                    • 프랜차이즈 매출채권 확보
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-undo"></i>
+                <!-- 권리금 회수 -->
+                <div class="result-card info">
+                    <div class="result-title info">
+                        <span class="icon">💰</span>
+                        권리금 회수 신규임차인 주선 기간
                     </div>
-                    <div class="section-title">사해행위 취소</div>
-                </div>
-                <div class="section-content">
-                    <div class="bold">책임재산 회복</div><br>
-                    • <span class="highlight">거래구조 변경</span> 사해행위 입증<br>
-                    • 채무자 무자력 상태 증명<br>
-                    • 가공공장 직거래 원상회복<br>
-                    • 모든 채권자 이익 보장
-                </div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
+                    <div class="result-content">
+                        <div class="date-range" id="premiumPeriod"></div>
+                        <div class="alert-box">
+                            <span>⚠️</span>
+                            <span><strong>권리금 회수를 위해 신규임차인을 주선하세요!</strong> 임대인은 정당한 사유 없이 방해할 수 없습니다.</span>
+                        </div>
                     </div>
-                    <div class="section-title">형사고소 검토</div>
                 </div>
-                <div class="section-content">
-                    <div class="bold">심리적 압박</div><br>
-                    • 사기죄 성립요건 검토<br>
-                    • 거래량 급증시점 <span class="underline">기망행위</span> 입증<br>
-                    • 자발적 변제 유도 효과<br>
-                    • 보조적 수단으로 활용
-                </div>
-            </div>
-        </div>
 
-        <!-- 우선순위별 대응방안 -->
-        <div class="priority-grid">
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-star priority-icon" style="color: #FF5733;"></i>
-                    최우선 (즉시)
+                <!-- 월세 납부 예정일 -->
+                <div class="result-card">
+                    <div class="result-title">
+                        <span class="icon">📅</span>
+                        월세 납부 예정일
+                    </div>
+                    <div class="result-content">
+                        <div class="alert-box danger">
+                            <span>⚠️</span>
+                            <span><strong>2기 이상 연체 시 계약 해지 사유가 됩니다!</strong> 월세는 반드시 기한 내 납부하세요.</span>
+                        </div>
+                        <div class="rent-list" id="rentList"></div>
+                    </div>
                 </div>
-                <div class="priority-desc">보증보험 청구 + 가압류 신청 + 내용증명 발송</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-clock priority-icon" style="color: #D4AF37;"></i>
-                    단기 (1-2주)
-                </div>
-                <div class="priority-desc">물품대금 청구소송 제기 + 재산조사 완료</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-chart-line priority-icon" style="color: #7D3C98;"></i>
-                    중기 (상황따라)
-                </div>
-                <div class="priority-desc">사해행위 취소소송 + 형사고소 검토</div>
-            </div>
-            <div class="priority-item">
-                <div class="priority-title">
-                    <i class="fas fa-hammer priority-icon" style="color: #17A2B8;"></i>
-                    최종 (판결후)
-                </div>
-                <div class="priority-desc">강제집행 + 추심명령 + 전부명령</div>
-            </div>
-        </div>
 
-        <!-- 결론 -->
-        <div class="conclusion">
-            <div class="conclusion-title">
-                <i class="fas fa-lightbulb" style="margin-right: 8px; color: #D4AF37;"></i>
-                핵심 제언
-            </div>
-            <div class="conclusion-content">
-                <span class="bold">보증보험 청구와 가압류는 지체 없이 진행</span>하여 채무자의 재산 도피를 방지하고, 
-                <span class="underline">다각적 법적 대응</span>을 통해 미수금을 최대한 회수해야 합니다. 
-                특히 <span class="highlight">사해행위 취소소송</span>을 통한 책임재산 회복이 관건입니다.
+                <!-- 결과 복사 버튼 -->
+                <div class="button-group">
+                    <button class="btn btn-success" onclick="copyResults()">📋 결과 복사</button>
+                    <button class="btn btn-secondary" onclick="window.print()">🖨️ 인쇄하기</button>
+                </div>
             </div>
         </div>
 
         <div class="footer">
-            <div class="footer-highlight">작성 : 조우성 / 로펌 머스트노우 / law@mustknow.co.kr</div>
+            <p><strong>상가임대차 기한 계산기</strong> | 상가건물 임대차보호법 기준</p>
+            <p style="margin-top: 8px; font-size: 12px;">본 계산기는 참고용이며, 정확한 법률 자문은 전문가와 상담하시기 바랍니다.</p>
         </div>
     </div>
+
+    <script>
+        function calculate() {
+            // 입력값 가져오기
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const rentDay = parseInt(document.getElementById('rentDay').value);
+
+            // 유효성 검사
+            if (!startDate || !endDate || !rentDay) {
+                alert('모든 항목을 입력해주세요.');
+                return;
+            }
+
+            if (rentDay < 1 || rentDay > 31) {
+                alert('월세 납부일은 1~31 사이의 숫자를 입력해주세요.');
+                return;
+            }
+
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+
+            if (start >= end) {
+                alert('계약 종료일은 시작일보다 이후여야 합니다.');
+                return;
+            }
+
+            // 계약갱신요구권 행사 기간 계산 (종료일 - 6개월 ~ 종료일 - 1개월)
+            const renewalStart = new Date(end);
+            renewalStart.setMonth(renewalStart.getMonth() - 6);
+            const renewalEnd = new Date(end);
+            renewalEnd.setMonth(renewalEnd.getMonth() - 1);
+
+            document.getElementById('renewalPeriod').textContent =
+                `${formatDate(renewalStart)}부터 ${formatDate(renewalEnd)}까지`;
+
+            // 권리금 회수 신규임차인 주선 기간 (종료일 - 3개월 ~ 종료일)
+            const premiumStart = new Date(end);
+            premiumStart.setMonth(premiumStart.getMonth() - 3);
+
+            document.getElementById('premiumPeriod').textContent =
+                `${formatDate(premiumStart)}부터 ${formatDate(end)}까지`;
+
+            // 월세 납부 예정일 목록
+            generateRentList(rentDay, end);
+
+            // 결과 섹션 표시
+            document.getElementById('resultSection').classList.add('active');
+
+            // 결과로 스크롤
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generateRentList(rentDay, endDate) {
+            const rentList = document.getElementById('rentList');
+            rentList.innerHTML = '';
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const end = new Date(endDate);
+            let current = new Date(today);
+
+            // 현재 월의 납부일로 설정
+            current.setDate(rentDay);
+
+            // 이미 지난 경우 다음 달로
+            if (current < today) {
+                current.setMonth(current.getMonth() + 1);
+            }
+
+            const rentDates = [];
+
+            while (current <= end) {
+                const rentDate = new Date(current);
+
+                // 해당 월의 마지막 날보다 크면 마지막 날로 설정
+                const lastDay = new Date(rentDate.getFullYear(), rentDate.getMonth() + 1, 0).getDate();
+                if (rentDay > lastDay) {
+                    rentDate.setDate(lastDay);
+                }
+
+                rentDates.push(new Date(rentDate));
+                current.setMonth(current.getMonth() + 1);
+            }
+
+            if (rentDates.length === 0) {
+                rentList.innerHTML = '<div class="rent-item">남은 월세 납부일이 없습니다.</div>';
+                return;
+            }
+
+            // 가장 가까운 납부일 표시
+            const nextRent = rentDates[0];
+            const daysUntilRent = Math.ceil((nextRent - today) / (1000 * 60 * 60 * 24));
+
+            rentDates.forEach((date, index) => {
+                const item = document.createElement('div');
+                item.className = 'rent-item';
+
+                if (index === 0) {
+                    item.classList.add('upcoming');
+                    item.innerHTML = `<span style="font-weight: 700; color: #1971c2;">📌 ${formatDate(date)} (월세 납부) - ${daysUntilRent}일 후</span>`;
+                } else {
+                    item.innerHTML = `<span>📅 ${formatDate(date)} (월세 납부)</span>`;
+                }
+
+                rentList.appendChild(item);
+            });
+        }
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            return `${year}년 ${month}월 ${day}일`;
+        }
+
+        function reset() {
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            document.getElementById('rentDay').value = '';
+            document.getElementById('resultSection').classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function copyResults() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const rentDay = document.getElementById('rentDay').value;
+            const renewalPeriod = document.getElementById('renewalPeriod').textContent;
+            const premiumPeriod = document.getElementById('premiumPeriod').textContent;
+            const rentItems = document.querySelectorAll('.rent-item');
+
+            let rentListText = '';
+            rentItems.forEach(item => {
+                rentListText += item.textContent.replace(/📌|📅/g, '').trim() + '\n';
+            });
+
+            const text = `
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    상가임대차 기한 계산 결과
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 계약 정보
+• 계약 시작일: ${formatDate(new Date(startDate))}
+• 계약 종료일: ${formatDate(new Date(endDate))}
+• 월세 납부일: 매월 ${rentDay}일
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ 계약갱신요구권 행사 기간
+${renewalPeriod}
+
+※ 갱신요구권은 이 기간 내에만 행사 가능합니다!
+   기간이 지나면 권리가 소멸됩니다.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💰 권리금 회수 신규임차인 주선 기간
+${premiumPeriod}
+
+※ 권리금 회수를 위해 신규임차인을 주선하세요!
+   임대인은 정당한 사유 없이 방해할 수 없습니다.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📅 월세 납부 예정일
+${rentListText}
+※ 2기 이상 연체 시 계약 해지 사유가 됩니다!
+   월세는 반드시 기한 내 납부하세요.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+본 계산 결과는 참고용이며, 정확한 법률 자문은
+전문가와 상담하시기 바랍니다.
+
+상가임대차 기한 계산기
+상가건물 임대차보호법 기준
+            `.trim();
+
+            // 클립보드에 복사
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ 결과가 클립보드에 복사되었습니다!');
+            }).catch(() => {
+                // 폴백: textarea 사용
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('✅ 결과가 클립보드에 복사되었습니다!');
+            });
+        }
+
+        // 오늘 날짜를 기본값으로 설정
+        window.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('startDate').setAttribute('max', today);
+        });
+    </script>
 </body>
 </html>
