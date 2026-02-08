@@ -14,6 +14,9 @@
 
     # API 키 직접 지정 (기본: ANTHROPIC_API_KEY 환경변수)
     python run.py --file column.txt --api-key sk-ant-...
+
+    # 모의 테스트 모드 (API 키 없이 결과물 형태 미리보기)
+    python run.py --file column.txt --mock
 """
 
 import argparse
@@ -98,6 +101,11 @@ def main():
         default=None,
         help="사용할 모델 (기본: claude-sonnet-4-20250514)",
     )
+    parser.add_argument(
+        "--mock",
+        action="store_true",
+        help="모의 테스트 모드 (API 키 없이 결과물 형태 미리보기)",
+    )
 
     args = parser.parse_args()
 
@@ -116,8 +124,12 @@ def main():
     if args.model:
         config.model = args.model
 
-    # 오케스트레이터 실행
-    orchestrator = PodcastOrchestrator(api_key=args.api_key, config=config)
+    # 오케스트레이터 선택 (mock vs real)
+    if args.mock:
+        from podcast_agents.mock_orchestrator import MockOrchestrator
+        orchestrator = MockOrchestrator(config=config)
+    else:
+        orchestrator = PodcastOrchestrator(api_key=args.api_key, config=config)
 
     print("\n" + "=" * 60)
     print("  팟캐스트 콘텐츠 생성을 시작합니다")
