@@ -1,2 +1,2 @@
-ollama
+google-generativeai
 python-pptx

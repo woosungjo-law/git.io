@@ -1,12 +1,12 @@
 import os
 import sys
 import json
-import ollama
+import google.generativeai as genai
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 
-MODEL = "llama3"  # 변경 가능: mistral, gemma2, phi3 등
+MODEL = "gemini-1.5-flash"
 
 
 def read_txt_file(filepath: str) -> str:
@@ -23,7 +23,7 @@ def ask_slide_count() -> int:
         print("[AI]: 숫자로 입력해 주세요. (예: 5)")
 
 
-def generate_slides_content(text: str, slide_count: int) -> list[dict]:
+def generate_slides_content(model: genai.GenerativeModel, text: str, slide_count: int) -> list[dict]:
     print(f"\n[AI]: {slide_count}장 슬라이드 내용을 생성 중입니다...")
 
     prompt = f"""다음 텍스트를 분석하여 {slide_count}장의 PPT 슬라이드 내용을 만들어 주세요.
@@ -48,12 +48,8 @@ def generate_slides_content(text: str, slide_count: int) -> list[dict]:
 - 한국어로 작성
 - JSON만 반환, 다른 텍스트 없음"""
 
-    response = ollama.chat(
-        model=MODEL,
-        messages=[{"role": "user", "content": prompt}],
-    )
-
-    raw = response["message"]["content"].strip()
+    response = model.generate_content(prompt)
+    raw = response.text.strip()
 
     # JSON 블록 추출
     if "```" in raw:
@@ -113,12 +109,20 @@ def main():
         print(f"파일을 찾을 수 없습니다: {txt_path}")
         sys.exit(1)
 
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        print("GEMINI_API_KEY 환경변수를 설정해 주세요.")
+        print("예) export GEMINI_API_KEY=AIzaSy...")
+        sys.exit(1)
+
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel(MODEL)
+
     text = read_txt_file(txt_path)
     print(f"[AI]: '{txt_path}' 파일을 읽었습니다. ({len(text)}자)")
 
     slide_count = ask_slide_count()
-
-    slides = generate_slides_content(text, slide_count)
+    slides = generate_slides_content(model, text, slide_count)
 
     output_path = txt_path.replace(".txt", ".pptx")
     if output_path == txt_path:
