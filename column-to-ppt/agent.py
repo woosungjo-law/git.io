@@ -6,7 +6,7 @@ from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 
-MODEL = "gemini-1.5-flash"
+MODEL = "gemini-2.0-flash"
 
 
 def read_txt_file(filepath: str) -> str:
