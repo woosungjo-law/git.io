@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>우성바이오 법률 건강검진 — 종합 결과지 (샘플)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=SUIT:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+  :root{
+    --bg:#f5f1f2; --panel:#ffffff; --panel2:#faf6f7; --line:#ebe2e5; --line2:#ddccd2;
+    --ink:#2c1d26; --ink2:#56424c; --muted:#8a7b82; --faint:#b3a6ab;
+    --wine:#7a2e3a; --wine-d:#5a1f2b; --wine-l:#9c4456; --wine-tint:#f4e9ec; --wine-tint-ln:#ecd7dd;
+    --header-bg:#3a1525; --header-bg2:#4e1f32; --header-accent:#d4a0aa;
+    --rH:#c74a3c; --rH-tx:#fff; --rM-bg:#f8e4b8; --rM-tx:#7d520a; --rL-bg:#d6ecdb; --rL-tx:#287a54;
+    --amber:#b45309; --green:#287a54;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"SUIT","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .app{display:grid;grid-template-columns:214px 1fr;min-height:100vh;max-width:1090px;margin:0 auto;background:var(--panel);box-shadow:0 0 0 1px var(--line)}
+  .side{background:var(--panel2);border-right:1px solid var(--line);position:sticky;top:0;align-self:start;height:100vh;overflow:auto}
+  .brand{padding:18px;border-bottom:1px solid var(--line)}
+  .brand .eb{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--wine)}
+  .brand .n{font-size:15px;font-weight:700;color:var(--ink);margin-top:4px} .brand .c{font-size:11px;color:var(--muted);margin-top:2px}
+  .navlbl{font-size:11px;font-weight:700;letter-spacing:.02em;color:var(--faint);padding:18px 18px 7px}
+  .nav a{display:flex;align-items:center;gap:11px;padding:10px 18px;font-size:13.5px;color:var(--ink2);cursor:pointer;border-left:3px solid transparent;text-decoration:none}
+  .nav a i{font-size:16px;color:var(--muted);width:18px;text-align:center}
+  .nav a:hover{background:#f1e8eb;color:var(--ink)}
+  .nav a.active{background:var(--wine-tint);color:var(--wine-d);font-weight:500;border-left-color:var(--wine)} .nav a.active i{color:var(--wine)}
+  .nav a .bdg{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .side .ft{padding:18px;font-size:11px;color:var(--faint);line-height:1.65;border-top:1px solid var(--line);margin-top:8px}
+  .header{background:linear-gradient(135deg,var(--header-bg) 0%,var(--header-bg2) 100%);padding:18px 26px;display:flex;justify-content:space-between;align-items:flex-end}
+  .header .eb{font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--header-accent)}
+  .header h1{font-size:19px;font-weight:700;color:#f4eef0;margin:5px 0 0}
+  .header .meta{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.55);text-align:right;line-height:1.6}
+  .body{padding:22px 26px 44px}
+  .view{display:none} .view.active{display:block}
+  .secl{font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--muted);margin:0 0 13px;display:flex;align-items:center;gap:8px}
+  .secl::before{content:"";width:7px;height:15px;background:var(--wine);border-radius:3px}
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:22px}
+  .kpi{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+  .kpi .k{font-size:12px;color:var(--muted)} .kpi .v{font-size:24px;font-weight:800;margin-top:3px;letter-spacing:-.01em;color:var(--ink)}
+  .kpi .v small{font-size:12px;font-weight:500;color:var(--faint)} .kpi .v.g small{color:var(--green)} .kpi .v.w small{color:var(--amber)}
+
+  /* 5렌즈 히트맵 */
+  .lens-heatmap{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .lens-chip{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;font-size:13px;font-weight:500;flex:1;min-width:140px}
+  .lens-chip b{font-family:var(--mono);font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px;margin-left:auto}
+  .lens-h{background:#fceae8;border:1px solid #f0bdb6} .lens-h b{background:var(--rH);color:#fff}
+  .lens-m{background:#fef6e6;border:1px solid #f1cd8e} .lens-m b{background:var(--rM-bg);color:var(--rM-tx)}
+  .lens-l{background:#eef7f0;border:1px solid #a9ddc2} .lens-l b{background:var(--rL-bg);color:var(--rL-tx)}
+  .lens-ok{background:#eef7f0;border:1px solid #a9ddc2} .lens-ok b{background:var(--rL-bg);color:var(--rL-tx)}
+  .lens-note{font-size:11.5px;color:var(--muted);margin-bottom:18px}
+
+  .tri{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:0 11px 11px 0;padding:13px 16px;margin-bottom:8px}
+  .tri .bar{width:3px;align-self:stretch;border-radius:2px;flex-shrink:0} .tri.r .bar{background:var(--rH)} .tri.a .bar{background:var(--amber)} .tri.g .bar{background:var(--green)}
+  .tri .lvl{font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;white-space:nowrap}
+  .tri.r .lvl{background:var(--rH);color:#fff} .tri.a .lvl{background:var(--rM-bg);color:var(--rM-tx)} .tri.g .lvl{background:var(--rL-bg);color:var(--rL-tx)}
+  .tri .tt{font-size:15px;font-weight:500;color:var(--ink)} .tri .ds{font-size:13px;color:var(--ink2);display:block;margin-top:3px}
+  .tri .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+
+  .cols{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-top:22px}
+  .pnl{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .pnl .h{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:10px;display:flex;align-items:center;gap:8px} .pnl .h i{color:var(--wine);font-size:17px}
+  .pnl p{margin:0;font-size:14px;line-height:1.75;color:var(--ink2)} .pnl p b{color:var(--ink);font-weight:500} .pnl p .g{color:var(--green)} .pnl p .a{color:var(--amber)} .pnl p .r{color:var(--rH)}
+
+  .note{margin-top:16px;padding:14px 16px;background:var(--wine-tint);border:1px solid var(--wine-tint-ln);border-radius:12px;display:flex;gap:11px;align-items:flex-start}
+  .note i{font-size:18px;color:var(--wine);margin-top:1px} .note p{margin:0;font-size:13.5px;line-height:1.7;color:var(--ink2)} .note p b{color:var(--wine-d);font-weight:500}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  thead th{text-align:left;font-size:12px;font-weight:700;color:var(--wine-d);background:var(--panel2);padding:11px 12px}
+  thead th:first-child{border-radius:8px 0 0 8px} thead th:last-child{border-radius:0 8px 8px 0}
+  tbody td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+  tbody tr:hover{background:var(--panel2)}
+  .legend{font-size:11.5px;color:var(--muted);margin-top:10px}
+  .chip{display:inline-flex;align-items:center;justify-content:center;min-width:34px;font-family:var(--mono);font-size:11px;font-weight:500;border-radius:6px;padding:3px 8px}
+  .c-H{background:var(--rH);color:#fff} .c-M{background:var(--rM-bg);color:var(--rM-tx)} .c-L{background:var(--rL-bg);color:var(--rL-tx)}
+
+  /* Before/After */
+  .ba{margin-bottom:20px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .ba-title{font-size:14px;font-weight:700;color:var(--wine-d);padding:13px 16px;background:var(--panel2);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+  .ba-title .chip{margin-left:auto}
+  .ba-row{display:grid;grid-template-columns:1fr 1fr;min-height:1px}
+  .ba-cell{padding:16px;font-size:13.5px;line-height:1.7;color:var(--ink2)}
+  .ba-cell:first-child{border-right:1px solid var(--line);background:#fef8f8}
+  .ba-cell:last-child{background:#f4fbf6}
+  .ba-cell .lbl{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px;letter-spacing:.03em}
+  .ba-cell:first-child .lbl{color:var(--rH)}
+  .ba-cell:last-child .lbl{color:var(--green)}
+  .ba-cell blockquote{margin:0 0 8px;padding:8px 12px;background:rgba(0,0,0,.03);border-radius:6px;font-size:12.5px;font-family:var(--mono);line-height:1.6;color:var(--ink)}
+  .ba-cell .effect{font-size:12.5px;color:var(--ink2);font-style:italic}
+
+  /* 노출 */
+  .expo-total{text-align:center;padding:20px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;margin-bottom:16px}
+  .expo-total .big{font-size:32px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+  .expo-total .big small{font-size:14px;font-weight:500;color:var(--muted)}
+  .expo-breakdown{display:flex;justify-content:center;gap:28px;margin-top:10px;font-size:13px;color:var(--ink2)}
+  .expo-breakdown span{display:flex;align-items:center;gap:4px}
+  .expo-breakdown .dot-r{width:8px;height:8px;border-radius:50%;background:var(--rH)}
+  .expo-breakdown .dot-a{width:8px;height:8px;border-radius:50%;background:var(--amber)}
+  .expo-breakdown .dot-g{width:8px;height:8px;border-radius:50%;background:var(--green)}
+
+  /* 기한 타임라인 */
+  .tl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;font-family:var(--mono);font-size:12px;margin-top:6px}
+  .tl .n{padding-top:9px;color:var(--ink2)} .tl .n small{color:var(--muted);display:block;margin-top:3px;font-family:"SUIT",sans-serif}
+  .tl .n.a{border-top:3px solid var(--amber)} .tl .n.r{border-top:3px solid var(--rH)} .tl .n.g{border-top:3px solid var(--green)}
+
+  /* 체크리스트 */
+  .ckgrp{margin-bottom:20px} .ckgrp .gl{font-size:12px;font-weight:700;color:var(--amber);margin-bottom:9px}
+  .ck{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink2)}
+  .ck .box{width:16px;height:16px;border:1.5px solid var(--line2);border-radius:4px;margin-top:2px;flex-shrink:0}
+  .ck .tag{font-family:var(--mono);font-size:11px;color:var(--wine);background:var(--wine-tint);padding:2px 7px;border-radius:5px;margin-right:7px}
+
+  .doc{display:flex;gap:13px;align-items:flex-start;padding:13px 16px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+  .doc .i{font-family:var(--mono);color:var(--wine);font-size:13px;margin-top:1px}
+  .doc .t{font-size:14px;font-weight:500;color:var(--ink)} .doc .why{font-size:12.5px;color:var(--muted);display:block;margin-top:2px}
+
+  .disc{font-size:11.5px;color:var(--faint);line-height:1.7;text-align:center;margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
+
+  .sample-badge{position:fixed;top:12px;right:12px;background:var(--wine);color:#fff;font-size:11px;font-weight:700;padding:6px 14px;border-radius:8px;letter-spacing:.04em;z-index:999;box-shadow:0 2px 8px rgba(58,21,37,.3)}
+
+  @media (max-width:760px){
+    .app{grid-template-columns:1fr;box-shadow:none}
+    .side{position:static;height:auto}.nav{display:flex;flex-wrap:wrap}.nav a{border-left:none;border-bottom:3px solid transparent;flex:1;justify-content:center;font-size:12px;padding:8px 6px}.nav a.active{border-left:none;border-bottom-color:var(--wine)}.nav a .bdg{display:none}.navlbl,.side .ft{display:none}
+    .kpis{grid-template-columns:repeat(2,1fr)} .cols{grid-template-columns:1fr}
+    .lens-heatmap{flex-direction:column}
+    .ba-row{grid-template-columns:1fr} .ba-cell:first-child{border-right:none;border-bottom:1px solid var(--line)}
+    .tl{grid-template-columns:repeat(2,1fr);gap:8px}
+    thead{display:none} tbody td{display:block;border-bottom:0;padding:3px 0} tbody tr{display:block;border-bottom:1px solid var(--line);padding:11px 0}
+    td[data-l]::before{content:attr(data-l);display:block;font-size:11px;color:var(--muted);font-weight:700;margin-bottom:2px}
+    .expo-breakdown{flex-direction:column;gap:6px;align-items:center}
+  }
+</style>
+</head>
+<body>
+<div class="sample-badge">마케팅 샘플</div>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="eb">리스크레이더 · 종합검진</div><div class="n">우성바이오</div><div class="c">1차 검진 · 2026.06.26</div></div>
+    <div class="navlbl">검진 결과</div>
+    <nav class="nav">
+      <a data-v="ov" class="active"><i class="ti ti-stethoscope"></i>종합 현황</a>
+      <a data-v="ln"><i class="ti ti-eye"></i>5대 렌즈 결과<span class="bdg">5</span></a>
+      <a data-v="ba"><i class="ti ti-arrows-exchange"></i>정밀 분석<span class="bdg">3</span></a>
+      <a data-v="ex"><i class="ti ti-currency-won"></i>노출 요약</a>
+      <a data-v="dl"><i class="ti ti-calendar-due"></i>추적관찰<span class="bdg">4</span></a>
+      <a data-v="ac"><i class="ti ti-checklist"></i>처방전<span class="bdg">12</span></a>
+      <a data-v="dc"><i class="ti ti-files"></i>추가 요청 자료<span class="bdg">5</span></a>
+    </nav>
+    <div class="ft">이 리포트는 마케팅 샘플입니다<br>모든 회사·수치는 가상입니다<br>변호사 직접 진단 · 가명화 5단계</div>
+  </aside>
+
+  <div class="main">
+    <div class="header">
+      <div><div class="eb">리스크레이더 · 법률 건강검진 종합 결과지</div><h1 id="ttl">종합 현황</h1></div>
+      <div class="meta">㈜우성바이오 · 바이오·신약개발<br>임직원 약 130명 · 검진일 2026.06.26<br>대표 계약 5건 + 문진(5대 렌즈)</div>
+    </div>
+    <div class="body">
+
+      <!-- ═══ 종합 현황 ═══ -->
+      <section class="view active" id="v-ov">
+        <div class="secl">5대 렌즈 히트맵</div>
+        <div class="lens-heatmap">
+          <div class="lens-chip lens-h">L1 의무·책임 <b>중점</b></div>
+          <div class="lens-chip lens-h">L2 기한·조건 <b>중점</b></div>
+          <div class="lens-chip lens-h">L3 분쟁·해지·손배 <b>중점</b></div>
+          <div class="lens-chip lens-m">L4 규제·컴플라이언스 <b>관찰</b></div>
+          <div class="lens-chip lens-h">L5 IP·데이터·개인정보 <b>중점</b></div>
+        </div>
+        <div class="lens-note">수령 자료 범위 내 관리 우선순위 안내 · 확정적 법률효과 단정 안 함</div>
+
+        <div class="secl">리걸 지표</div>
+        <div class="kpis">
+          <div class="kpi"><div class="k">중점 관리 렌즈</div><div class="v">4 <small>/ 5</small></div></div>
+          <div class="kpi"><div class="k">관찰 렌즈</div><div class="v">1 <small>/ 5</small></div></div>
+          <div class="kpi"><div class="k">주요 발견 사항</div><div class="v w">14 <small>건</small></div></div>
+          <div class="kpi"><div class="k">추정 총 노출</div><div class="v w">280억 <small>원</small></div></div>
+          <div class="kpi"><div class="k">임박 기한</div><div class="v">1 <small>건 (D-91)</small></div></div>
+        </div>
+
+        <div class="secl">핵심 발견 3가지</div>
+        <div class="tri r"><div class="bar"></div><div style="flex:1"><div class="row"><span class="tt">해외 라이선스 계약 — 공동개발 IP가 상대방 단독 소유</span><span class="lvl">즉시 · 중점관리</span></div><span class="ds">NovaCure 계약상 Foreground IP 전부 상대 귀속. 우성 원천기술까지 넘어갈 소지. 추정 기술가치 약 200억 원이 묶여 있음</span></div></div>
+        <div class="tri r"><div class="bar"></div><div style="flex:1"><div class="row"><span class="tt">마일스톤 기한 비현실적 — 불이행 시 라이선스 회수</span><span class="lvl">즉시 · 중점관리</span></div><span class="ds">Phase 2 완료 기한 24개월(업계 통상 36~48개월). 미달 시 Claw-back + 업프론트 30억 반환 + 위약금</span></div></div>
+        <div class="tri a"><div class="bar"></div><div style="flex:1"><div class="row"><span class="tt">분쟁해결 조항 — 뉴욕 법원 전속관할</span><span class="lvl">이번 달 · 관찰</span></div><span class="ds">분쟁 시 한국 기업이 뉴욕 법원에서 영어 소송. 실질적으로 분쟁 자체를 포기하게 만드는 구조</span></div></div>
+
+        <div class="cols">
+          <div class="pnl">
+            <div class="h"><i class="ti ti-alert-triangle"></i>핵심 경고</div>
+            <p>해외 파트너와 체결한 계약 3건에서 <b>구조적으로 불리한 조항이 집중</b>되어 있습니다. 특히 NovaCure 라이선스 계약은 마일스톤 미달 → 라이선스 회수 → IP 상실의 <span class="r">연쇄 트리거</span>가 설계되어 있어, <b>한 번의 임상 지연이 핵심 파이프라인 전체를 위험에 빠뜨릴 수 있는 구조</b>입니다.</p>
+          </div>
+          <div class="pnl">
+            <div class="h"><i class="ti ti-bulb"></i>좋은 소식</div>
+            <p>지금은 임상 2상이 순조로워 트리거가 아직 발동하지 않았습니다. <b>"사고 전 단계"</b>인 지금이 재협상의 최적 타이밍입니다. <span class="g">핵심 3개 조항만 수정하면</span> 약 280억 원 노출의 상당 부분을 줄일 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="note"><i class="ti ti-stethoscope"></i><p><b>종합 소견.</b> 우성바이오의 기술력과 파이프라인 자체는 건실합니다. 문제는 그 가치를 보호하는 <b>계약 구조</b>입니다. 해외 계약 3건의 IP 귀속·마일스톤 기한·분쟁해결 조항을 지금 손보면, 기술 가치가 법적으로도 회사에 남는 구조를 만들 수 있습니다.</p></div>
+      </section>
+
+      <!-- ═══ 5대 렌즈 결과 ═══ -->
+      <section class="view" id="v-ln">
+        <div class="secl">5대 렌즈별 진단 결과</div>
+        <table>
+          <thead><tr><th style="width:120px">렌즈</th><th>발견 사항</th><th style="width:70px">위험도</th><th>한 줄 처방</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-l="렌즈"><b>L1</b><br><span style="color:var(--muted);font-size:12px">의무·책임</span></td>
+              <td data-l="발견">① NovaCure 계약 — 마일스톤 미달 시 라이선스 즉시 회수(Claw-back) + 업프론트 반환 의무<br>② BerlinBio API 공급 — 품질 하자 시 "일체의 손해" 무제한 배상, 제조물책임(PL)까지 우성 전액 부담<br>③ Sakura JDA — 공동개발 비용 6:4 분담이나 실패 시 손실은 우성만 부담</td>
+              <td data-l="위험도"><span class="chip c-H">중점</span></td>
+              <td data-l="처방">치유 기간(cure period) 확보 + 손배 상한 + PL 쌍방 분담</td>
+            </tr>
+            <tr>
+              <td data-l="렌즈"><b>L2</b><br><span style="color:var(--muted);font-size:12px">기한·조건</span></td>
+              <td data-l="발견">① Phase 2 완료 기한 24개월 — 업계 통상 36~48개월 대비 비현실적<br>② "First Commercial Sale" 정의 모호 → 로열티 기산점 분쟁 소지<br>③ BerlinBio 옵션 자동연장 — 사실상 영구 독점 공급 강제</td>
+              <td data-l="위험도"><span class="chip c-H">중점</span></td>
+              <td data-l="처방">기한 업계 표준 조정 + FCS 정의 명확화 + 자동연장 삭제</td>
+            </tr>
+            <tr>
+              <td data-l="렌즈"><b>L3</b><br><span style="color:var(--muted);font-size:12px">분쟁·해지·손배</span></td>
+              <td data-l="발견">① 준거법 뉴욕주법 + 뉴욕 법원 전속관할 (SIAC/ICC 중재 아님)<br>② 손배 상한(Cap) 부재 + Indemnification 우성에만 일방 적용<br>③ Change of Control — 인수합병·투자유치 시 상대 즉시 해지 가능<br>④ BerlinBio 계약 — 준거법 독일법, 함부르크 법원</td>
+              <td data-l="위험도"><span class="chip c-H">중점</span></td>
+              <td data-l="처방">싱가포르 SIAC 중재 전환 + Indemnification 상호화 + 손배 상한 + CoC 완화</td>
+            </tr>
+            <tr>
+              <td data-l="렌즈"><b>L4</b><br><span style="color:var(--muted);font-size:12px">규제·컴플라이언스</span></td>
+              <td data-l="발견">① 해외 임상 데이터의 식약처(MFDS) 브릿징 스터디 요구 미반영<br>② EU GDPR 적용 데이터 처리 조항 부재<br>③ 미국 FCPA 준수 조항 미비</td>
+              <td data-l="위험도"><span class="chip c-M">관찰</span></td>
+              <td data-l="처방">Regulatory Delay Clause + GDPR DPA 별도 체결 + FCPA 표준 문구</td>
+            </tr>
+            <tr>
+              <td data-l="렌즈"><b>L5</b><br><span style="color:var(--muted);font-size:12px">IP·데이터·개인정보</span></td>
+              <td data-l="발견">① Foreground IP 전부 NovaCure 단독 소유, 우성은 실시권만<br>② Background/Foreground IP 구분 불명확 — 원천기술 유출 소지<br>③ 개량특허 권리 전부 Sakura 귀속<br>④ 임상 데이터 소유권 NovaCure 귀속, 접근권 "합리적 요청" 시에만<br>⑤ 직무발명 보상규정과 해외 계약 IP 불일치</td>
+              <td data-l="위험도"><span class="chip c-H">중점</span></td>
+              <td data-l="처방">Foreground IP 공동 소유 + Background IP 정의 명확화 + 데이터 공동 소유·자유 접근</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="legend">위험도 — <span style="color:var(--rH);font-weight:700">중점관리</span> 우선 대응 · <span style="color:var(--rM-tx);font-weight:700">관찰</span> 모니터링 · <span style="color:var(--rL-tx);font-weight:700">경미</span> 참고. 수령 자료 범위 내 관리 우선순위 안내이며 확정적 법률효과를 단정하지 않습니다.</div>
+      </section>
+
+      <!-- ═══ 정밀 분석 (Before/After) ═══ -->
+      <section class="view" id="v-ba">
+        <div class="secl">유소견 항목 정밀 — 주요 위험 Before / After</div>
+
+        <div class="ba">
+          <div class="ba-title"><i class="ti ti-alert-triangle" style="color:var(--rH)"></i> L5 공동개발 IP — 상대방 단독 소유 <span class="chip c-H">중점</span></div>
+          <div class="ba-row">
+            <div class="ba-cell">
+              <div class="lbl">현재 조항 (BEFORE)</div>
+              <blockquote>"All Foreground Intellectual Property arising from the Collaboration shall be solely owned by NovaCure."</blockquote>
+              <div class="effect">→ 우성이 투입한 연구 인력·비용·원천기술로 만든 성과물이 전부 상대방 소유. 계약 종료 시 자사 기술도 쓸 수 없음. 추정 기술가치 약 200억 원이 묶임.</div>
+            </div>
+            <div class="ba-cell">
+              <div class="lbl">이렇게 바꾸면 (AFTER)</div>
+              <blockquote>"Foreground IP shall be jointly owned by both Parties. Each Party shall have the right to freely practice such Joint IP in its own territory without accounting to the other."</blockquote>
+              <div class="effect">→ 공동 소유 + 각자 영역 내 자유 실시. 우성의 핵심 기술자산 보호 + 협업 구조 유지.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ba">
+          <div class="ba-title"><i class="ti ti-gavel" style="color:var(--rH)"></i> L3 준거법·분쟁해결 — 뉴욕 법원 전속관할 <span class="chip c-H">중점</span></div>
+          <div class="ba-row">
+            <div class="ba-cell">
+              <div class="lbl">현재 조항 (BEFORE)</div>
+              <blockquote>"This Agreement shall be governed by the laws of the State of New York. Any dispute shall be subject to the exclusive jurisdiction of the courts located in New York County."</blockquote>
+              <div class="effect">→ 분쟁 시 한국 기업이 뉴욕에서 영어로 소송. 시간·비용·현지 불리함이 극대화되어 사실상 분쟁 자체를 포기하게 만드는 구조.</div>
+            </div>
+            <div class="ba-cell">
+              <div class="lbl">이렇게 바꾸면 (AFTER)</div>
+              <blockquote>"Any dispute shall be finally resolved by arbitration administered by the Singapore International Arbitration Centre (SIAC). The seat shall be Singapore. The tribunal shall consist of three arbitrators."</blockquote>
+              <div class="effect">→ 양측 중립 싱가포르 국제중재. 뉴욕 협약으로 한·미 양국 판정 집행 가능. 바이오 분쟁 국제 표준.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ba">
+          <div class="ba-title"><i class="ti ti-shield-off" style="color:var(--rH)"></i> L1 면책(Indemnification) — 우성에만 일방 적용 <span class="chip c-H">중점</span></div>
+          <div class="ba-row">
+            <div class="ba-cell">
+              <div class="lbl">현재 조항 (BEFORE)</div>
+              <blockquote>"Wooseong shall indemnify, defend and hold harmless NovaCure from any and all Losses arising out of or related to Wooseong's performance under this Agreement."</blockquote>
+              <div class="effect">→ 면책이 우성에만 일방 적용. NovaCure 과실 손해도 우성이 부담할 여지. 상한 금액 없이 무한 배상 가능.</div>
+            </div>
+            <div class="ba-cell">
+              <div class="lbl">이렇게 바꾸면 (AFTER)</div>
+              <blockquote>"Each Party shall indemnify the other against Losses arising from (a) breach of warranties, (b) negligence or willful misconduct, (c) violation of laws. Aggregate liability shall not exceed 2x total payments."</blockquote>
+              <div class="effect">→ 상호 면책 + 총액 상한. 각자 과실에 각자 책임, 무한 배상 방지. 바이오 라이선스 국제 관행 부합.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note"><i class="ti ti-info-circle"></i><p>위 Before/After는 대표적인 수정 방향을 보여주는 <b>예시</b>입니다. 실제 재협상에서는 계약 전문·거래 맥락·상대방 협상력을 종합해 맞춤형 문구를 설계합니다.</p></div>
+      </section>
+
+      <!-- ═══ 노출 요약 ═══ -->
+      <section class="view" id="v-ex">
+        <div class="secl">법적 노출 요약</div>
+        <div class="expo-total">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:4px">현재 총 법적 노출 (추정)</div>
+          <div class="big">약 280억 <small>원</small></div>
+          <div class="expo-breakdown">
+            <span><span class="dot-r"></span>회수불능 약 30억</span>
+            <span><span class="dot-a"></span>묶인 가치 약 200억</span>
+            <span><span class="dot-g"></span>줄일 수 있는 노출 약 50억</span>
+          </div>
+        </div>
+
+        <table>
+          <thead><tr><th style="width:30px">순위</th><th>리스크</th><th style="width:110px">최대 노출</th><th style="width:60px">확률</th><th>산정근거</th><th style="width:100px">줄일 수 있나</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-l="순위"><b>1</b></td>
+              <td data-l="리스크">공동개발 IP 상대방 단독 귀속 (L5)</td>
+              <td data-l="노출" style="font-weight:700;color:var(--rH)">약 200억 원</td>
+              <td data-l="확률"><span class="chip c-M">M</span></td>
+              <td data-l="근거">WS-201 파이프라인 기술가치 평가 기준, 계약 종료 시 실시권 상실</td>
+              <td data-l="줄일 수 있나" style="color:var(--green);font-weight:500">가능</td>
+            </tr>
+            <tr>
+              <td data-l="순위"><b>2</b></td>
+              <td data-l="리스크">마일스톤 미달 시 업프론트 반환 + 위약금 (L1)</td>
+              <td data-l="노출" style="font-weight:700;color:var(--rH)">약 50억 원</td>
+              <td data-l="확률"><span class="chip c-M">M</span></td>
+              <td data-l="근거">업프론트 수령분 + 계약상 위약 조항</td>
+              <td data-l="줄일 수 있나" style="color:var(--green);font-weight:500">가능</td>
+            </tr>
+            <tr>
+              <td data-l="순위"><b>3</b></td>
+              <td data-l="리스크">라이선스 회수 시 연간 매출 손실 (L1+L2)</td>
+              <td data-l="노출" style="font-weight:700;color:var(--amber)">약 30억 원/年</td>
+              <td data-l="확률"><span class="chip c-M">M</span></td>
+              <td data-l="근거">WS-201 예상 연 매출, 미국 시장 접근권 상실</td>
+              <td data-l="줄일 수 있나" style="color:var(--green);font-weight:500">가능</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="legend">노출 추정치는 공개 가능 정보와 업계 벤치마크 기준이며, 실제 손해액은 사실관계에 따라 달라집니다. 확정적 법률효과를 단정하지 않습니다.</div>
+      </section>
+
+      <!-- ═══ 추적관찰 ═══ -->
+      <section class="view" id="v-dl">
+        <div class="secl">추적관찰 일정 (불가역 기한)</div>
+        <div class="tl">
+          <div class="n a">2026.09.15<small>NovaCure Phase 2 중간보고 (D-81)</small></div>
+          <div class="n a">2026.11.01<small>BerlinBio 옵션 자동연장 해지통보 마감 (D-128)</small></div>
+          <div class="n r">2027.03.31<small>NovaCure Phase 2 완료 마일스톤 (D-278)</small></div>
+          <div class="n r">2027.06.30<small>Sakura JDA 1차 성과보고 (D-369)</small></div>
+        </div>
+
+        <div class="pnl" style="margin-top:22px">
+          <div class="h"><i class="ti ti-clock"></i>가장 가까운 기한</div>
+          <p><b>2026년 9월 15일</b> — NovaCure Phase 2 중간 보고. 이 보고에서 마일스톤 미달 판정이 나면 Claw-back 통지 절차가 시작됩니다. <span class="a">D-81일</span> 남았으므로, <b>지금부터 기한 연장 협상을 시작해야</b> 합니다.</p>
+        </div>
+
+        <div class="pnl" style="margin-top:10px">
+          <div class="h"><i class="ti ti-alert-triangle"></i>특히 주의할 기한</div>
+          <p><b>2026년 11월 1일</b> — BerlinBio 독점 공급 옵션 자동연장 해지 통보 마감. 이 날까지 해지를 통보하지 않으면 <span class="r">2년 자동연장</span>되어 다른 API 공급처를 찾을 자유가 사라집니다. 통보 여부를 <b>10월 중순까지 결정</b>해야 합니다.</p>
+        </div>
+      </section>
+
+      <!-- ═══ 처방전 ═══ -->
+      <section class="view" id="v-ac">
+        <div class="secl">처방전 (행동 권고)</div>
+        <div class="ckgrp"><div class="gl">즉시 · 7일 내 (~2026.07.03)</div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L2</span>NovaCure — Phase 2 마일스톤 기한 연장 협상 개시 (24개월 → 36개월)</div></div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L5</span>NovaCure — Foreground IP 귀속 재협상 의사 서면 통지</div></div>
+        </div>
+        <div class="ckgrp"><div class="gl">이번 달 (~2026.07.31)</div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L3</span>NovaCure — 준거법·분쟁해결 싱가포르 SIAC 중재 전환 초안</div></div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L1</span>NovaCure — Indemnification 상호화 + 손해배상 상한(Cap) 초안</div></div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L2</span>BerlinBio — 옵션 자동연장 해지 통보 여부 결정 + 독점 조건 재검토</div></div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L1</span>BerlinBio — 품질 하자 책임 상한 + PL 쌍방 분담 수정 요청</div></div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L4</span>전 계약 — GDPR DPA 별도 체결 추진</div></div>
+        </div>
+        <div class="ckgrp"><div class="gl">분기 내 (~2026.09.30)</div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L5</span>Sakura — 개량특허 공동 출원·공동 소유 재협상</div></div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L3</span>NovaCure — Change of Control 조항 완화 (동의 → 통지+거부제한)</div></div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L5</span>내부 — 직무발명 보상규정 ↔ 해외 계약 IP 정합성 점검</div></div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L5</span>내부 — 임상 데이터 접근권 Data Sharing Agreement 초안</div></div>
+          <div class="ck"><span class="box"></span><div><span class="tag">L1</span>Sakura — 공동개발 비용·손실 분담 불균형 시정</div></div>
+        </div>
+      </section>
+
+      <!-- ═══ 추가 요청 자료 ═══ -->
+      <section class="view" id="v-dc">
+        <div class="secl">추가 요청 자료 · 정밀 검진을 위해 필요한 것들</div>
+        <div class="doc"><span class="i">01</span><div><span class="t">NovaCure License & Collaboration Agreement 전문</span><span class="why">사유 — 현재 핵심 조항 요약만 확인, 부속합의·사이드레터 확인 필요</span></div></div>
+        <div class="doc"><span class="i">02</span><div><span class="t">BerlinBio API Supply Agreement 전문 + 품질계약(QA Agreement)</span><span class="why">사유 — PL 책임·품질기준·면책 조항 정밀 점검</span></div></div>
+        <div class="doc"><span class="i">03</span><div><span class="t">Sakura JDA 전문 + 공동출원 특허 목록</span><span class="why">사유 — 개량특허 범위·귀속·실시권 조건 정밀 확인</span></div></div>
+        <div class="doc"><span class="i">04</span><div><span class="t">우성바이오 직무발명 보상규정 + 연구원 표준 고용계약</span><span class="why">사유 — 해외 IP 조항과의 정합성 점검(직무발명법과 외국 계약 충돌 여부)</span></div></div>
+        <div class="doc"><span class="i">05</span><div><span class="t">WS-201 파이프라인 기술가치 평가 보고서</span><span class="why">사유 — 법적 노출 추정치 정밀화, IP 분쟁 시 손해액 산정 근거</span></div></div>
+      </section>
+
+      <div class="disc">
+        본 결과지는 일반적 위험 점검을 위한 참고 자료이며 개별 사안의 확정적 법률효과를 단정하지 않습니다<br>
+        등장하는 회사·계약 문구·위험도는 모두 <b>예시</b>이며 특정 기업·계약과 무관합니다<br>
+        다음 종합검진(분기): 2026-09-26 예정 · 담당 변호사 직접 진단 · 가명화 보안 5단계
+      </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.5.0/dist/tabler-icons.min.css">
+<script>
+  const titles={ov:"종합 현황",ln:"5대 렌즈 결과",ba:"유소견 정밀 분석",ex:"법적 노출 요약",dl:"추적관찰 일정",ac:"처방전",dc:"추가 요청 자료"};
+  document.querySelectorAll('.nav a').forEach(a=>{
+    a.addEventListener('click',()=>{
+      document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+      a.classList.add('active');
+      const v=a.dataset.v;
+      document.getElementById('v-'+v).classList.add('active');
+      document.getElementById('ttl').textContent=titles[v];
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>
